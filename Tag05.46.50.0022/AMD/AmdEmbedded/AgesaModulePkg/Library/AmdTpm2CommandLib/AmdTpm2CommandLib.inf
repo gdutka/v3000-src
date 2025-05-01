@@ -1,0 +1,27 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdTpm2CommandLib
+  FILE_GUID                      = A268096E-0545-4422-9177-F6A3C78F2411
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdTpm2CommandLib
+
+[Sources.common]
+  AmdTpm2CommandLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  IdsLib
+
+

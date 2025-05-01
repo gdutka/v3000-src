@@ -1,0 +1,58 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchSmmDiagDispatcher
+  FILE_GUID                      = 6bd1e7d5-8234-4894-951f-fee390c2eb6e
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = FchSmmDiagDispatcherEntry
+
+[sources]
+  FchSmmDiagDispatcher.c
+
+[sources.ia32]
+
+[sources.x64]
+
+[LibraryClasses]
+  FchSmmLibV9
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  BaseLib
+  DebugLib
+  FchSmmLibV9
+  UefiRuntimeServicesTableLib
+  UefiBootServicesTableLib
+  SmmServicesTableLib
+  DevicePathLib
+  MemoryAllocationLib
+  SmmMemLib
+
+[Guids]
+  gFchSmmDiagDispatchProtocolGuid
+
+[Protocols]
+  gEfiSmmConfigurationProtocolGuid          #CONSUMED
+  gEfiSmmBase2ProtocolGuid                  #CONSUMED
+  gEfiSmmCpuProtocolGuid                    #CONSUMED
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchSmiDiagEnable
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+
+[Depex]
+  gEfiSmmBase2ProtocolGuid
+  AND
+  gEfiSmmCpuProtocolGuid
+  AND
+  gAmdFchKTSmmDispacherDepexProtocolGuid

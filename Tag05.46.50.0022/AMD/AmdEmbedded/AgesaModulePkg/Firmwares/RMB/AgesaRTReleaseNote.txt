@@ -1,0 +1,90 @@
+----------------------------------------------------------------------------
+| ABL RT Delivery Release Notes
+|
+| Copyright 2021, Advanced Micro Devices, Inc.
+|
+| Version: ABL RT RABLRTRM1C017011 for Rembrandt
+|
+| Date:   Dec 1 2021
+|
+----------------------------------------------------------------------------
+
+Content:
+
+  Filename                                      AGESA V9 Destination Folder     Description
+  AblRtPostCode.h                               AgesaModulePkg\Firmwares\RMB\    ABL/ABL RT Post Code Definitions
+  AgesaRTReleaseNote.txt                        AgesaModulePkg\Firmwares\RMB\    This Release notes file
+  TypeId0x2D_AgesaRunTimeDrv_prod_RMB.sbin      AgesaModulePkg\Firmwares\RMB\    Main AGESA Runtime Driver
+
+Based On:
+  trunk_Rmb
+
+ABL RT Version String:
+  0x1C017011
+
+ABL RT Features and Fixes:
+  PLAT-94973: [RMB] update ABL runtime stack to SPL = 2
+
+Known Issue(s):
+
+----------------------------------------------------------------------------
+| ABL RT Delivery Release Notes
+|
+| Copyright 2021, Advanced Micro Devices, Inc.
+|
+| Version: ABL RT RABLRTRM1B167010 for Rembrandt
+|
+| Date:   Nov 16 2021
+|
+----------------------------------------------------------------------------
+
+Content:
+
+  Filename                                      AGESA V9 Destination Folder     Description
+  AblRtPostCode.h                               AgesaModulePkg\Firmwares\RMB\    ABL/ABL RT Post Code Definitions
+  AgesaRTReleaseNote.txt                        AgesaModulePkg\Firmwares\RMB\    This Release notes file
+  TypeId0x2D_AgesaRunTimeDrv_prod_RMB.sbin      AgesaModulePkg\Firmwares\RMB\    Main AGESA Runtime Driver
+
+Based On:
+  trunk_Rmb
+
+ABL RT Version String:
+  0x1B167010
+
+ABL RT Features and Fixes:
+  PLAT-93733 [RMB-FP7/FP7r2]System will hang EEC5000D after resume from s0i3 when FAR is enabled
+  PLAT-95519 [RMB] Remove ABL RT global build file dependency
+  FWDEV-5313 [RMB] Runtime ABL header doesn't have SocFwID and FwTypeLegacy
+
+Known Issue(s):
+
+----------------------------------------------------------------------------
+| ABL RT Delivery Release Notes
+|
+| Copyright 2020, Advanced Micro Devices, Inc.
+|
+| Version: ABL RT RABLRTRM09017010 for Rembrandt
+|
+| Date:   Aug 31 2020
+|
+----------------------------------------------------------------------------
+
+Content:
+
+  Filename                                      AGESA V9 Destination Folder     Description
+  AblRtPostCode.h                               AgesaModulePkg\Firmwares\RMB\    ABL/ABL RT Post Code Definitions
+  AgesaRTReleaseNote.txt                        AgesaModulePkg\Firmwares\RMB\    This Release notes file
+  TypeId0x2D_AgesaRunTimeDrv_prod_RMB.sbin      AgesaModulePkg\Firmwares\RMB\    Main AGESA Runtime Driver
+
+Based On:
+  Initial release from Rembrandt_E00X
+
+ABL RT Version String:
+  0x09017010
+
+ABL RT Features and Fixes:
+
+  Initial ABL RT Modern Standby support
+
+Known Issue(s):
+

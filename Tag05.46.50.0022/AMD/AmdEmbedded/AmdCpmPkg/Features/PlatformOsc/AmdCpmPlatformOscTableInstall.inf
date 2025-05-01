@@ -1,0 +1,56 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2017-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmPlatformOscTableInstall
+  FILE_GUID             = 4FB2F0D0-7183-4BFC-9E65-11A4031847D2
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmPlatformOscTableInstallEntryPoint
+
+[Sources.common]
+  AmdCpmPlatformOscTableInstall.c
+  Asl/PlatformOsc.asl
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[BuildOptions]
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  AmdCpmBaseLib
+  AmdBaseLib
+  PcdLib
+  AmdPbsConfigLib
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Protocols]
+  gAmdCpmTableProtocolGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable
+  gAmdCpmPkgTokenSpaceGuid.PcdUsb4PlatformOSCControl
+
+[Depex]
+  gAmdCpmTableProtocolGuid
+  AND
+  gEfiVariableArchProtocolGuid

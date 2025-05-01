@@ -1,0 +1,33 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2018-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPspMmioLib
+  FILE_GUID                      = 649e3478-ff0e-4cd6-814d-ffceec53f76f
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdPspMmioLib|DXE_SMM_DRIVER  COMBINED_SMM_DXE
+
+[Sources]
+  AmdPspMmioLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+
+[LibraryClasses]
+  AmdPspBaseLibV2
+  SysCallLib
+
+[Pcd]
+
+[Guids]

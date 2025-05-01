@@ -1,0 +1,36 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME             = AmdCpmPmfBoardDxe
+  FILE_GUID             = 2C20B724-C903-435D-A5E5-2899E291D94E
+  MODULE_TYPE           = DXE_DRIVER
+  ENTRY_POINT           = AmdCpmPmfDxeBoardEntry
+
+[Sources.common]
+  AmdCpmPmfBoardDxe.c
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  UefiDriverEntryPoint
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Protocols]
+  gAmdCpmTableProtocolGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Depex]
+  gAmdCpmTableProtocolGuid

@@ -1,0 +1,55 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdI3cMasterConsumerPei
+  FILE_GUID             = 8f50bc5e-5643-42f4-af97-8d6275902299
+  MODULE_TYPE           = PEIM
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = SpdI3cPeiEntryPoint
+
+[Sources.common]
+  AmdI3cMasterConsumerPei.c
+  AmdI3cMasterConsumerPei.h
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[LibraryClasses]
+  FchBaseLib
+  FchPeiLibV9
+  FchSongshanPeiLib
+
+  PeimEntryPoint
+  BaseLib
+  DebugLib
+  TimerLib
+  IoLib
+  PeiServicesLib
+  HobLib
+  AmdBaseLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdFchSNI3cPpiGuid          #CONSUMED
+  gSpdI3cPpiGuid               #PRODUCED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Songshan/FchSongshan.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag
+
+[Depex]
+  gAmdFchSNI3cPpiGuid

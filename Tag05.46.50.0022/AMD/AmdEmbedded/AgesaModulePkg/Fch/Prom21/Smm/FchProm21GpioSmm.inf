@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchProm21GpioSmm
+  FILE_GUID                      = BD4759AA-5104-42A3-BC64-785920E86C99
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.1
+  ENTRY_POINT                    = FchProm21GpioSmmEntryPoint
+
+[Sources]
+  FchProm21GpioSmm.c
+  FchProm21GpioSmm.h
+
+[LibraryClasses]
+  BaseLib
+  UefiDriverEntryPoint
+
+[Pcd]
+
+[Guids]
+
+[Protocols]
+  gEfiPromontoryGpioSmmProtocolGuid      #PRODUCED
+  gAmdFchProm21InitProtocolGuid          #CONSUMED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/Fch/Prom21/FchProm21ModulePkg.dec
+
+[Depex]
+  gAmdFchProm21InitProtocolGuid
+

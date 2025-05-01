@@ -1,0 +1,50 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdCpmABRecoverySmm
+  FILE_GUID                      = B2AB8AD0-5ED9-435F-B223-356B645D547B
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdCpmABRecoverySmmInit
+
+
+[Sources]
+  AmdCpmABRecoverySmm.c
+
+[LibraryClasses]
+  BaseLib
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  AmdCpmBaseLib
+  AmdBaseLib
+  AmdPspMboxLibV2
+  BaseMemoryLib
+  AmdHeapLib
+  IdsLib
+  ABRecoveryBaseLib
+
+[Guids]
+
+[Protocols]
+  gAmdCpmABRecoveryProtocolGuid    #PRODUCED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[Pcd]
+
+[Depex]
+  gAmdCpmTableSmmProtocolGuid
+  AND
+  gEfiSmmBase2ProtocolGuid
+

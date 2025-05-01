@@ -1,0 +1,73 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NbioIommuIvrsLib
+  FILE_GUID                      = 4C48BFD3-DEB6-4C11-A5D8-D1F67CA41A7A
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NbioIommuIvrsLib
+
+[Sources]
+  NbioIvrsTable.c
+  NbioIvrsLib.c
+  NbioIvmdLib.c
+  NbioIoapicInit.c
+  IvrsSbDevices.c
+  IvrsDebugDump.c
+  IvrsLibV2.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  PcdLib
+  PrintLib
+  BaseLib
+  DebugPrintErrorLevelLib
+  IdsLib
+  AmdBaseLib
+  GnbCommonLib
+  NbioIommuIvrsLib
+  AmdHeapLib
+  NbioHandleLib
+  GnbHeapLib
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  NbioRegisterAccLib
+  GnbLib
+  IvrsDeviceInfoLib
+  SmnAccessLib
+  AmdPspMboxLibV2
+
+[Guids]
+  gGnbPcieHobInfoGuid
+  gEfiHobListGuid
+
+[Protocols]
+  gAmdNbioPcieServicesProtocolGuid
+  gEfiAcpiTableProtocolGuid
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIvrsRelativeAddrNamesSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbIoapicId
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgFchIoapicId
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiTableHeaderOemId
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiIvrsTableHeaderOemTableId
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcDriverType
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdIvInfoDmaReMap
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDmaProtection
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIvrsExclusionRangePtr
+
+

@@ -1,0 +1,39 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = CcxResetTablesZen3V2Lib
+  FILE_GUID                      = B777060E-C45A-4AE0-AD88-1FCC5A7D9057
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CcxResetTablesLib
+
+[Sources.common]
+  CcxResetTablesZen3V2Lib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  IdsLib
+  CcxRolesLib
+  AmdTableLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+
+[Depex]
+
+

@@ -1,0 +1,26 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION           = 0x00010005
+  BASE_NAME             = FchKeithAml
+  MODULE_TYPE           = USER_DEFINED
+  FILE_GUID             = 8f5d27ab-81f6-4668-94ff-894c52e005ef
+  VERSION_STRING        = 1.0
+
+[sources.common]
+  FchKeithAsl.asl
+  AcDcTimer.asl
+  SataD3Cold.asl
+#  FchKeithUsb4Asl.asl   # USB4_BU_SUPPORT
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+
+
+

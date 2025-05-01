@@ -1,0 +1,41 @@
+## @file
+#  Provide xHCI controller initialize function
+#******************************************************************************
+#* Copyright (c) 2023, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XhciEralyInitLib
+  FILE_GUID                      = 291983B7-4238-4252-8C44-DEC5BC4A616B
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = XhciEralyInitLib
+
+[Sources]
+  XhciEralyInit.c
+  XhciEralyInit.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  IoLib
+  PciLib
+  DebugLib
+  BaseLib
+  NbioSmuV13Lib
+
+[Guids]
+
+[Pcd]

@@ -1,0 +1,560 @@
+## @file
+#  Chipset Package Declaration file
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = ChipsetPkg
+  PACKAGE_GUID                   = DF131C26-D59D-45c8-A8EB-2BFD518D8BA9
+  PACKAGE_VERSION                = 0.1
+
+[Includes]
+  Include
+
+[LibraryClasses]
+
+[PcdsFeatureFlag]
+  # Enable or Disable Nvidia HG Feature
+  # Default is False
+  gChipsetPkgTokenSpaceGuid.PcdHybridGraphicsSupported|FALSE|BOOLEAN|0x56000001
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaOptimusSupported|FALSE|BOOLEAN|0x56000002
+
+  ## Indicates if the platform can support Dynamic Display Switching (DDS) or not.
+  #   TRUE  - Supports DDS.
+  #   FALSE - Not supports DDS.
+  # @Prompt Enalbe DDS support.
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaDdsFeatureSupport|FALSE|BOOLEAN|0x56000005
+
+  #
+  # Manufacturer group enable/disable PCDs
+  #
+  gH2OFlashDeviceGuid.PcdMicronEnable|TRUE|BOOLEAN|0x02000009
+  gH2OFlashDeviceEnableGuid.PcdWinbondW25q256jwSpiEnable|TRUE|BOOLEAN|0x001960EF
+
+  gChipsetPkgTokenSpaceGuid.PcdH2ONbIoApicSupport|TRUE|BOOLEAN|0x10000001
+  gChipsetPkgTokenSpaceGuid.PcdH2OUmaBaseUpperThan4G|TRUE|BOOLEAN|0x10000002
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyFreeTiSupport|FALSE|BOOLEAN|0x10000004
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyFreeSupported|FALSE|BOOLEAN|0x10000006
+  # EC Shared Flahs support
+  gChipsetPkgTokenSpaceGuid.PcdH2OEcSharedFlashSupported|TRUE|BOOLEAN|0x10000007
+  # EC Re-Init after flash
+  gChipsetPkgTokenSpaceGuid.PcdH2OEcReInitAfterFlash|TRUE|BOOLEAN|0x10000008
+  gChipsetPkgTokenSpaceGuid.PcdH2OEcIdlePerWriteBlockSupported|FALSE|BOOLEAN|0x10000009
+
+  gChipsetPkgTokenSpaceGuid.PcdH2OFchAvalonSupport|FALSE|BOOLEAN|0x1000000A
+  gChipsetPkgTokenSpaceGuid.PcdH2OCrbOnlySupported|TRUE|BOOLEAN|0x1000000D
+  gChipsetPkgTokenSpaceGuid.PcdH2OXhciSupported|TRUE|BOOLEAN|0x1000000F
+  # Determine the SPI access method (1: MMIO / 0: IO Cycle)
+  gChipsetPkgTokenSpaceGuid.PcdH2OSpiMmioAccessSupported|TRUE|BOOLEAN|0x10000010
+  gChipsetPkgTokenSpaceGuid.PcdH2OBdsReoveryLongRunSupport|FALSE|BOOLEAN|0x10000015
+  gChipsetPkgTokenSpaceGuid.PcdH2OPreferDtpmBootSupported|TRUE|BOOLEAN|0x10000016
+  gChipsetPkgTokenSpaceGuid.PcdEcCapsuleUpdateSupported|TRUE|BOOLEAN|0x10000017
+  gChipsetPkgTokenSpaceGuid.PcdPeiGopSupported|FALSE|BOOLEAN|0x10000018
+  gChipsetPkgTokenSpaceGuid.PcdH2OGpioCfgSupported|FALSE|BOOLEAN|0x1000001A
+  
+  gChipsetPkgTokenSpaceGuid.PcdDashSupported|FALSE|BOOLEAN|0x10000014
+  gChipsetPkgTokenSpaceGuid.PcdH2OIhisiToolBackwardSupport|FALSE|BOOLEAN|0x1000001B
+
+  gChipsetPkgTokenSpaceGuid.PcdH2OBiosUpdateFlashSequenceEnabled|TRUE|BOOLEAN|0x100000A3
+  
+#[-start-220114-IB19600008-add]#
+  #
+  # Clean cmos load default setting
+  # Note:This feature need enable PcdH2OPeiCpForceVariableDefaultsSupported
+  #
+  gChipsetPkgTokenSpaceGuid.PcdH2OCmosLoadDefaultSupported|FALSE|BOOLEAN|0x4000005A
+#[-end-220114-IB19600008-add]#
+
+#[-start-220208-IB14740211-add]#
+  gChipsetPkgTokenSpaceGuid.PcdSpiMmioAccessEnable|FALSE|BOOLEAN|0x40000051
+
+  #
+  #  This Pcd is select SPI Rom is in the 3-Byte or 4-Byte Address mode
+  #    1. SPI Rom is in the 4-Byte Address mode = TRUE
+  #    2. SPI Rom is in the 3-Byte Address mode = FALSE
+  #
+  gChipsetPkgTokenSpaceGuid.PcdSpiRomEntry4ByteAddressMode|TRUE|BOOLEAN|0x40000001
+#[-end-220208-IB14740211-add]#
+
+[PcdsFixedAtBuild, PcdsPatchableInModule, PcdsDynamic]
+  gChipsetPkgTokenSpaceGuid.PcdH2OSpiOrLpcTPMSupported|1|UINT8|0x10000013
+
+[PcdsFixedAtBuild]
+#[-start-220126-IB14740206-add]#
+  gChipsetPkgTokenSpaceGuid.PcdPciExpressSizeMsrValue|0x21|UINT32|0x60000016
+  gChipsetPkgTokenSpaceGuid.PcdH2OMaxRbNum|0x01|UINT8|0x60000017
+#[-end-220126-IB14740206-add]#
+  #
+  # File GUIDs definition PCDs
+  #
+  # GUID Data Structure {UINT32  Data1; UINT16  Data2; UINT16  Data3; UINT8 Data4[8]}
+  # SLP20Pubkey.bin                      - 1A1E2341-A2FB-42C7-8D17-3073D08EB21D
+  # SLP20Marker.bin                      - DD6569A7-E455-4EE5-B2BA-ECDA84ACBC99
+  # Oa30MsdmData.bin                     - A9943829-A25A-4B94-AC0B-99DD37099F76
+  # LegacyAhciRom/AMDAHCI.BIN            - 52948E6F-137E-4adc-BBB7-D17DC0AD9EC4
+  gChipsetPkgTokenSpaceGuid.PcdH2OSlp20PubkeyFile|{GUID("1A1E2341-A2FB-42C7-8D17-3073D08EB21D")}|VOID*|0x60000075
+  gChipsetPkgTokenSpaceGuid.PcdH2OSlpP20MarkerFile|{GUID("DD6569A7-E455-4EE5-B2BA-ECDA84ACBC99")}|VOID*|0x60000076
+  gChipsetPkgTokenSpaceGuid.PcdH2OOa30MsdmDataFile|{GUID("A9943829-A25A-4B94-AC0B-99DD37099F76")}|VOID*|0x60000077
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyVideoRomFile|{GUID("8DFAE5D4-B50E-4C10-96E6-F2C266CACBB6")}|VOID*|0x60000078
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyRaidRomFile|{GUID("501737AB-9D1A-4856-86D3-7F1287FA5A55")}|VOID*|0x60000079
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyPxeRomFile|{GUID("4C316C9A-AFD9-4E33-AEAB-26C4A4ACC0F7")}|VOID*|0x60000080
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyAhciRomFile|{GUID("52948E6F-137E-4ADC-BBB7-D17DC0AD9EC4")}|VOID*|0x60000081
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyVideoRMBRomFile|{GUID("98E145D7-1BDC-4636-ABCF-7CBCEF7B668D")}|VOID*|0x60000082
+  gChipsetPkgTokenSpaceGuid.PcdH2OGopDriverFile|{GUID("A8DAFB9B-3529-4e87-8584-ECDB6A5B78B6")}|VOID*|0x60000090
+
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEcBase|0x00000000|UINT32|0x00000001
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEcSize|0x00000000|UINT32|0x00000002
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvSigBase|0x00000000|UINT32|0x00000005
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvSigSize|0x00000000|UINT32|0x00000006
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEc2Base|0x00000000|UINT32|0x00000007
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEc2Size|0x00000000|UINT32|0x00000008
+
+  # SmmAccess2Dxe
+  gChipsetPkgTokenSpaceGuid.PcdH2OMaximumSmramRanges|0x02|UINT8|0x00000012
+
+  # Reserved 64M for PCIe
+  gChipsetPkgTokenSpaceGuid.PcdH2OPciExpressSize|0x4000000|UINT32|0x60000015
+  # FchSmmLib
+  gChipsetPkgTokenSpaceGuid.PcdH2OSmmDataPort|0xb1|UINT16|0x00000014
+  gChipsetPkgTokenSpaceGuid.PcdH2OSmmActivationData|0x55|UINT8|0x00000015
+  gChipsetPkgTokenSpaceGuid.PcdH2ONvVariableFailDetect|TRUE|BOOLEAN|0x00000016
+
+  #
+  # ACPI
+  #
+  gChipsetPkgTokenSpaceGuid.PcdH2OWatchdogTimerBase|0xFEB00000|UINT32|0x00000017
+  gChipsetPkgTokenSpaceGuid.PcdH2ODsdtRevision|0x01|UINT8|0x00000018
+  #
+  # CMOS index/data
+  #
+  gChipsetPkgTokenSpaceGuid.PcdH2OCmosIndexPort|0x70|UINT8|0x00000019
+  gChipsetPkgTokenSpaceGuid.PcdH2OCmosDataPort|0x71|UINT8|0x00000020
+
+  ## SetSsidSvidDxe.c
+  #
+  # The PCD for SetSsidSvidDxe, used to distinguish add-in cards.
+  #
+  gChipsetPkgTokenSpaceGuid.PcdH2ONoBridgeDeviceSsid|FALSE|BOOLEAN|0x00000036
+
+  #
+  # Note: If change sizeof(SYSTEM_CONFIGURATION) in SetupConfig.h, must update really structure size in Project.dsc!!!
+  #
+  gChipsetPkgTokenSpaceGuid.PcdSetupConfigSize|700|UINT32|0x60000000
+
+  ## Sync up these 2 PCDs with PSP directory values
+  gChipsetPkgTokenSpaceGuid.PcdH2OBootFirmwareVolumeBase|0x09C00000|UINT32|0x00000040
+  gChipsetPkgTokenSpaceGuid.PcdH2OBootFirmwareVolumeSize|0x00200000|UINT32|0x00000041
+
+  ## A/B recovery use for two PEI.
+  gChipsetPkgTokenSpaceGuid.PcdFlashFvRecovery2PadBase|0x00000000|UINT32|0x00000048
+  gChipsetPkgTokenSpaceGuid.PcdFlashFvRecovery2PadSize|0x00000000|UINT32|0x00000049
+
+  gChipsetPkgTokenSpaceGuid.PcdH2OSecureFlashWakeFromS3Time|3|UINT8|0x20001001
+
+  #
+  # Limit protect size for Bios region lock.
+  #
+  gChipsetPkgTokenSpaceGuid.PcdH2OFchLimitProtectSizePerSet|0x1000000|UINT32|0x00000045
+
+  #
+  # T-SEG size
+  #
+  gChipsetPkgTokenSpaceGuid.PcdH2OTsegSize|0x01000000|UINT32|0x00000046
+
+  #
+  # For Support Sata Freeze feature
+  #
+  gChipsetPkgTokenSpaceGuid.PcdH2OSataFreezeByAslSupported|FALSE|BOOLEAN|0x00000047
+
+  #
+  # Provide OemHook to sync HW I2C SCL signal
+  #
+  gChipsetPkgTokenSpaceGuid.OemHookI2cSclSdaEnable|FALSE|BOOLEAN|0x60000037
+  gChipsetPkgTokenSpaceGuid.I2cIcSsSclHcnt|0x0285|UINT16|0x60000038
+  gChipsetPkgTokenSpaceGuid.I2cIcSsSclLcnt|0x0357|UINT16|0x60000039
+  gChipsetPkgTokenSpaceGuid.I2cIcSsSdaHold|0x48|UINT8|0x6000003a
+  gChipsetPkgTokenSpaceGuid.I2cIcFsSclHcnt|0x0087|UINT16|0x6000003b
+  gChipsetPkgTokenSpaceGuid.I2cIcFsSclLcnt|0x00F0|UINT16|0x6000003c
+  gChipsetPkgTokenSpaceGuid.I2cIcFsSdaHold|0x30|UINT8|0x6000003d
+  gChipsetPkgTokenSpaceGuid.I2cIcHsSclHcnt|0x0006|UINT16|0x6000003e
+  gChipsetPkgTokenSpaceGuid.I2cIcHsSclLcnt|0x0010|UINT16|0x6000003f
+  gChipsetPkgTokenSpaceGuid.I2cIcHsSdaHold|0x09|UINT8|0x60000040
+
+  #
+  # Please check PPR when setting
+  #
+  gChipsetPkgTokenSpaceGuid.I2cTotalControllerNumber|0x05|UINT8|0x60000041
+  gChipsetPkgTokenSpaceGuid.I2cGpioBase|0xFED81500|UINT32|0x60000042
+  gChipsetPkgTokenSpaceGuid.I2cBase|0xFEDC2000|UINT64|0x60000043
+
+  #
+  # Initialize the Hybrid Graphics Feature Configuration.
+  # ==========================================================================
+  # || Gpin Pin Name   || Gpio Pin   || Active  || In/Out || PCD Name        ||
+  # ==========================================================================
+  # || dGPU_RST        || 0x140      ||  HIGH   || OUTPUT || HgDgpuReset     ||
+  # || dGPU_PWR_EN     || 0x141      ||  HIGH   || OUTPUT || HgDgpuPwrEnable ||
+  # ==========================================================================
+  # GpioSupport - If project doesn't use any GPIO pin to control MXM dGPU,
+  #               it can set to FALSE to disable.
+  # Value  - GPIO pin Value, it should be set base on project GPIOs design.
+  # Active - FALSE(0):Low Active, TRUE(1):High Active
+  # Exist  - FALSE(0):This pin doesn't exist, TRUE(1):This pin exist.
+  #          CRB default has these pins, it can be disable base on project GPIOs design.
+  #
+  gChipsetPkgTokenSpaceGuid.PcdUseCrbHgDefaultSettings|TRUE|BOOLEAN|0x2000020d
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuGpioSupport|TRUE|BOOLEAN|0x2000020e
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPrsntGpioNo|526|UINT16|0x2000020f
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPrsntActive|FALSE|BOOLEAN|0x20000210
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPrsntExist|FALSE|BOOLEAN|0x20000211
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuResetGpioNo|0x8C|UINT16|0x20000212
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuResetActive|FALSE|BOOLEAN|0x20000213
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrEnableGpioNo|0x8D|UINT16|0x20000214
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrEnableActive|FALSE|BOOLEAN|0x20000215
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrOnGpioNo|0x8E|UINT16|0x20000216
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrOnActive|TRUE|BOOLEAN|0x20000217
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrGoodGpioNo|0x8F|UINT16|0x20000218
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrGoodActive|TRUE|BOOLEAN|0x20000219
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrGoodExist|FALSE|BOOLEAN|0x2000021a
+  gChipsetPkgTokenSpaceGuid.PcdDelayAfterReset|100000|UINT32|0x2000021b
+  gChipsetPkgTokenSpaceGuid.PcdDelayAfterPwrEnable|7000|UINT32|0x2000021c
+  gChipsetPkgTokenSpaceGuid.PcdHgPegBridgeBus|0|UINT8|0x2000021d
+  gChipsetPkgTokenSpaceGuid.PcdHgPegBridgeDevice|1|UINT8|0x2000021e
+  gChipsetPkgTokenSpaceGuid.PcdHgPegBridgeFunction|1|UINT8|0x2000021f
+  gChipsetPkgTokenSpaceGuid.PcdHgPcieBridgeBus|0|UINT8|0x20000220
+  #
+  # Set MXM SIS and HG SSDT GUID when need another MXM SIS or SSDT.
+  # File GUIDs definition PCDs (MasterMxm30.bin - 6135A10D-9126-4a7f-B07C-E157ADE9ACE1)
+  # AmdDiscreteSsdt          - 50F6366B-0BF7-4aab-89A5-A17AF863806B
+  # AmdPowerXpressSsdt       - 76AED82E-77DE-42ca-8C27-E9D71DF606C7
+  # AmdPowerUltXpressSsdt    - AB698DB2-8896-444e-A854-597C5B1879BB
+  # NvidiaOptimusSsdtN18     - 7E1CABE3-34D8-4f54-831C-9E1D52F48F8E
+  # NvidiaDiscreteSsdtN18    - 662D072E-70A0-4e14-901F-8DB301631647
+  # NvidiaUltOptimusSsdtN18  - 7A614C58-7DF7-4423-B243-094CD6125A44
+  # NvidiaUltDiscreteSsdtN18 - 5660b63b-2ed5-43f2-92ba-a74346d806be
+  # NvidiaOptimusSsdtN17     - 8E1CABE3-34D8-4f54-831C-9E1D52F48F8E
+  # NvidiaDiscreteSsdtN17    - 762D072E-70A0-4e14-901F-8DB301631647
+  # NvidiaUltOptimusSsdtN17  - 8A614C58-7DF7-4423-B243-094CD6125A44
+  # NvidiaUltDiscreteSsdtN17 - 6660b63b-2ed5-43f2-92ba-a74346d806be
+  # NvidiaOptimusSsdtN20     - 828c7930-d180-4a11-90a2-cac747b33918
+  # NvidiaDiscreteSsdtN20    - a761fee1-3847-4315-b74b-065762ba1bf5
+  # NvidiaUltOptimusSsdtN20  - c4e12756-6a74-4b39-8206-3ed6d3a590b0
+  # NvidiaUltDiscreteSsdtN20 - 5668caa7-a56e-45d3-a6f7-07f0c773c31d
+
+  gChipsetPkgTokenSpaceGuid.PcdHgModeMxmBinaryGuid|{ 0x0D, 0xA1, 0x35, 0x61, 0x26, 0x91, 0x7f, 0x4a, 0xB0, 0x7C, 0xE1, 0x57, 0xAD, 0xE9, 0xAC, 0xE1 }|VOID*|0x20000239
+  gChipsetPkgTokenSpaceGuid.PcdPegModeMasterMxmBinaryGuid|{ 0x0D, 0xA1, 0x35, 0x61, 0x26, 0x91, 0x7f, 0x4a, 0xB0, 0x7C, 0xE1, 0x57, 0xAD, 0xE9, 0xAC, 0xE1 }|VOID*|0x2000023a
+  gChipsetPkgTokenSpaceGuid.PcdPegModeSlaveMxmBinaryGuid|{ 0x0D, 0xA1, 0x35, 0x61, 0x26, 0x91, 0x7f, 0x4a, 0xB0, 0x7C, 0xE1, 0x57, 0xAD, 0xE9, 0xAC, 0xE1 }|VOID*|0x2000023b
+  gChipsetPkgTokenSpaceGuid.PcdAmdDiscreteSsdtGuid|{ 0x6B, 0x36, 0xF6, 0x50, 0xF7, 0x0B, 0xab, 0x4a, 0x89, 0xA5, 0xA1, 0x7A, 0xF8, 0x63, 0x80, 0x6B }|VOID*|0x2000023c
+  gChipsetPkgTokenSpaceGuid.PcdAmdPowerXpressSsdtGuid|{ 0x2E, 0xD8, 0xAE, 0x76, 0xDE, 0x77, 0xca, 0x42, 0x8C, 0x27, 0xE9, 0xD7, 0x1D, 0xF6, 0x06, 0xC7 }|VOID*|0x2000023d
+  gChipsetPkgTokenSpaceGuid.PcdAmdUltPowerXpressSsdtGuid|{ 0xB2, 0x8D, 0x69, 0xAB, 0x96, 0x88, 0x4E, 0x44, 0xA8, 0x54, 0x59, 0x7C, 0x5B, 0x18, 0x79, 0xBB }|VOID*|0x2000023e
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaOptimusSsdtN18Guid|{ 0xE3, 0xAB, 0x1C, 0x7E, 0xD8, 0x34, 0x54, 0x4f, 0x83, 0x1C, 0x9E, 0x1D, 0x52, 0xF4, 0x8F, 0x8E }|VOID*|0x2000023f
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaDiscreteSsdtN18Guid|{ 0x2E, 0x07, 0x2D, 0x66, 0xA0, 0x70, 0x14, 0x4e, 0x90, 0x1F, 0x8D, 0xB3, 0x01, 0x63, 0x16, 0x47 }|VOID*|0x20000240
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaUltOptimusSsdtN18Guid|{ 0x58, 0x4C, 0x61, 0x7A, 0xF7, 0x7D, 0x23, 0x44, 0xB2, 0x43, 0x09, 0x4C, 0xD6, 0x12, 0x5A, 0x44 }|VOID*|0x20000241
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaUltDiscreteSsdtN18Guid|{ 0x3b, 0xb6, 0x60, 0x56, 0xd5, 0x2e, 0xf2, 0x43, 0x92, 0xba, 0xa7, 0x43, 0x46, 0xd8, 0x06, 0xbe }|VOID*|0x2000024d
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaOptimusSsdtN17Guid|{ 0xE3, 0xAB, 0x1C, 0x8E, 0xD8, 0x34, 0x54, 0x4f, 0x83, 0x1C, 0x9E, 0x1D, 0x52, 0xF4, 0x8F, 0x8E }|VOID*|0x20000243
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaDiscreteSsdtN17Guid|{ 0x2E, 0x07, 0x2D, 0x76, 0xA0, 0x70, 0x14, 0x4e, 0x90, 0x1F, 0x8D, 0xB3, 0x01, 0x63, 0x16, 0x47 }|VOID*|0x20000244
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaUltOptimusSsdtN17Guid|{ 0x58, 0x4C, 0x61, 0x8A, 0xF7, 0x7D, 0x23, 0x44, 0xB2, 0x43, 0x09, 0x4C, 0xD6, 0x12, 0x5A, 0x44 }|VOID*|0x20000251
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaUltDiscreteSsdtN17Guid|{ 0x3b, 0xb6, 0x60, 0x66, 0xd5, 0x2e, 0xf2, 0x43, 0x92, 0xba, 0xa7, 0x43, 0x46, 0xd8, 0x06, 0xbe }|VOID*|0x20000252
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaOptimusSsdtN20Guid|{ 0x30, 0x79, 0x8c, 0x82, 0x80, 0xd1, 0x11, 0x4a, 0x90, 0xa2, 0xca, 0xc7, 0x47, 0xb3, 0x39, 0x18 }|VOID*|0x20000256
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaDiscreteSsdtN20Guid|{ 0xe1, 0xfe, 0x61, 0xa7, 0x47, 0x38, 0x15, 0x43, 0xb7, 0x4b, 0x06, 0x57, 0x62, 0xba, 0x1b, 0xf5 }|VOID*|0x20000257
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaUltOptimusSsdtN20Guid|{ 0x56, 0x27, 0xe1, 0xc4, 0x74, 0x6a, 0x39, 0x4b, 0x82, 0x06, 0x3e, 0xd6, 0xd3, 0xa5, 0x90, 0xb0 }|VOID*|0x20000258
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaUltDiscreteSsdtN20Guid|{ 0xa7, 0xca, 0x68, 0x56, 0x6e, 0xa5, 0xd3, 0x45, 0xa6, 0xf7, 0x07, 0xf0, 0xc7, 0x73, 0xc3, 0x1d }|VOID*|0x20000259
+
+  #
+  # nVIDIA detail related feature flag
+  #
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaOptimusDgpuHotPlugSupport|TRUE|BOOLEAN|0x20000221
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaOptimusDgpuPowerControlSupport|TRUE|BOOLEAN|0x20000222
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaGpsFeatureSupport|TRUE|BOOLEAN|0x20000223
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaVenturaFeatureSupport|FALSE|BOOLEAN|0x20000224
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaNbciFeatureSupport|FALSE|BOOLEAN|0x20000225
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaOptimusGc6FeatureSupport|FALSE|BOOLEAN|0x20000226
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaOptimusGc6NvsrFeatureSupport|FALSE|BOOLEAN|0x20000227
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaGC6FBEN|0|UINT32|0x20000228
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaGPUEvent|0|UINT32|0x20000229
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaDgpuCheckTable|{0}|VOID*|0x2000022a
+  ## Indicates if the platform can support NVPCF or not.
+  #   TRUE  - Supports NVPCF.
+  #   FALSE - Not supports NVPCF.
+  # @Prompt Enalbe NVPCF support.
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaNpcfFeatureSupport|FALSE|BOOLEAN|0x20000230
+  ## Indicates if the platform can support N20 NVCTGP or not.
+  #   TRUE  - Supports N20 NVCTGP.
+  #   FALSE - Not supports N20 NVCTGP.
+  # @Prompt Enalbe N20 NVCTGP support.
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaN20CTGPFeatureSupport|FALSE|BOOLEAN|0x20000231
+
+  #
+  # Nvidia DDS feature: GPIO for display switch MUX.
+  #
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaDDSMuxModePin|0|UINT32|0x20000254
+
+  #
+  # Nvidia DDS feature: GPIO for LCD force reset pin.
+  #
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaDDSLcdForceResetPin|0|UINT32|0x20000255
+
+  #
+  # Firmware capsule guid
+  #
+  gChipsetPkgTokenSpaceGuid.PcdWindowsEcFirmwareCapsuleGuid|{ 0xFA, 0x8A, 0x89, 0xA9, 0x58, 0xEF, 0xFE, 0x48, 0xB0, 0x9A, 0xF4, 0x76, 0xAF, 0xCE, 0x46, 0x7C }|VOID*|0x2000025A
+
+#[-start-220317-IB14740226-remove]#
+#[-start-210827-IB19520013-add]#
+  #
+  #  On AMD platform, the SMN address for each platform may be different.
+  #  Please refer to NbioSmuVxxLib.h to find the address suits your platform.
+  #
+#  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgMessageAddress|0x3B10528|UINT32|0x20000008
+#  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgResponseAddress|0x3B10564|UINT32|0x20000009
+#  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument0Address|0x3B10598|UINT32|0x2000000A
+#  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument1Address|0x3B1059C|UINT32|0x2000000B
+#  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument2Address|0x3B105A0|UINT32|0x2000000C
+#  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument3Address|0x3B105A4|UINT32|0x2000000D
+#  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument4Address|0x3B105A8|UINT32|0x2000000E
+#  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument5Address|0x3B105AC|UINT32|0x2000000F
+#  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdBiosSmcMsgTdpRequestId|0x36|UINT32|0x20000010
+#[-end-210827-IB19520013-add]#
+#[-end-220317-IB14740226-remove]#
+
+#[-start-220208-IB14740211-add]#
+  #
+  #  This Pcd is define BIOS physical position in SPI Rom
+  #    1.The BIOS rom physical position in Bottom 16MB(0MB-16MB) = TRUE
+  #    2.The BIOS rom physical position in Top 16MB(16MB-32MB)   = FALSE
+  #  Note : The Pcd only work with dual bios support
+  #
+  gChipsetPkgTokenSpaceGuid.PcdBiosImageInBottomSpiRom|TRUE|BOOLEAN|0x40000000
+#[-end-220208-IB14740211-add]#
+
+#[-start-230504-IB14740286-add]#
+  gChipsetPkgTokenSpaceGuid.PcdFdmHash|{GUID("EED0C6F1-504E-4277-8729-2D584D2C2F93")}|VOID*|0x40000002
+#[-end-230504-IB14740286-add]#
+
+#[-start-240911-IB20840092-add]#
+  gChipsetPkgTokenSpaceGuid.PcdH2ODefaultSupervisorPwSupported|FALSE|BOOLEAN|0x80000000
+  gChipsetPkgTokenSpaceGuid.PcdH2ODefaultSecureBootPwSupported|FALSE|BOOLEAN|0x80000001
+  gChipsetPkgTokenSpaceGuid.PcdH2ODefaultSupervisorPwString|{0}|VOID*|0x80000002
+#[-end-240911-IB20840092-add]#
+
+[PcdsDynamic, PcdsDynamicEx]
+  gH2ODeviceInfo2TokenSpaceGuid.PcdH2ODeviceInfoOnboradXhci0|{0}|VOID*|0x00000001
+  gH2ODeviceInfo2TokenSpaceGuid.PcdH2ODeviceInfoOnboradXhci1|{0}|VOID*|0x00000002
+  gH2ODeviceInfo2TokenSpaceGuid.PcdH2ODeviceInfoOnboradAhci0|{0}|VOID*|0x00000003
+  gH2ODeviceInfo2TokenSpaceGuid.PcdH2ODeviceInfoOnboradAhci1|{0}|VOID*|0x00000004
+  gH2ODeviceInfo2TokenSpaceGuid.PcdH2ODeviceInfoM2Nvme|{0}|VOID*|0x00000005
+
+  # @PcdTypeStruct LEGACY_MODIFY_PIR_TABLE {UINTN BridgeBus; UINTN BridgeDevice; UINTN BridgeFunction; UINT8 VirtualSecondaryBus;}
+  # @PcdTypeArray  LEGACY_MODIFY_PIR_TABLE VirtualBusTable[] "An array of PCI bridge"
+  # @PcdValueType  VirtualBusTable[]
+  gChipsetPkgTokenSpaceGuid.PcdH2OVirtualBusTable|{0}|VOID*|0x70000001
+  # @PcdTypeStruct EFI_LEGACY_PIRQ_ENTRY {UINT8 Pirq; UINT16 IrqMask;}
+  # @PcdTypeStruct EFI_LEGACY_IRQ_ROUTING_ENTRY {UINT8 Bus; UINT8 Device; EFI_LEGACY_PIRQ_ENTRY PirqEntry[4]; UINT8 Slot; UINT8 Reserved;}
+  # @PcdTypeArray  EFI_LEGACY_IRQ_ROUTING_ENTRY PcdH2OControllerDeviceIrqRoutingEntry[]; "An array of Controller device IRQ routing entry."
+  # @PcdValueType  PcdH2OControllerDeviceIrqRoutingEntry[]
+  gChipsetPkgTokenSpaceGuid.PcdH2OControllerDeviceIrqRoutingEntry|{0}|VOID*|0x70000002
+  # @PcdTypeArray  UINT8 PirqPriorityTable[]; "An array of PIRQ value."
+  # @PcdValueType  PirqPriorityTable[]
+  gChipsetPkgTokenSpaceGuid.PcdH2OPirqPriorityTable|{0}|VOID*|0x70000003
+  # @PcdTypeStruct EFI_LEGACY_IRQ_PRIORITY_TABLE_ENTRY {UINT8 Irq; UINT8 Used;}
+  # @PcdTypeArray  EFI_LEGACY_IRQ_PRIORITY_TABLE_ENTRY PirqPriorityTable[]; "An array of IRQ pool."
+  # @PcdValueType  IrqPriorityTable[]
+  gChipsetPkgTokenSpaceGuid.PcdH2OIrqPoolTable|{0}|VOID*|0x70000004
+  # @PcdTypeArray  UINT8 PirqLinkValueArray[]; "An array of PIRQ link Array."
+  # @PcdValueType  PirqLinkValueArray[]
+  gChipsetPkgTokenSpaceGuid.PcdH2OPirqLinkValueArray|{0}|VOID*|0x70000005
+
+  #
+  # WINBOND W25Q256JW 
+  #
+  gH2OFlashDeviceGuid.PcdWinbondW25q256jwSpi|{0}|VOID*|0x001960EF
+  gH2OFlashDeviceMfrNameGuid.PcdWinbondW25q256jwSpiMfrName|"WINBOND"|VOID*|0x001960EF
+  gH2OFlashDevicePartNameGuid.PcdWinbondW25q256jwSpiPartName|"W25Q256JW"|VOID*|0x001960EF
+  gH2OFlashDeviceConfigGuid.PcdWinbondW25q256jwSpiConfig|{0}|VOID*|0x001960EF
+ 
+  #
+  # Define CRB platform BoardId
+  #
+  # PcdDefaultBoardId
+  #   Mayan/Lilac                       = 0x04
+  #  For OEM MB
+  #   PcdDefaultBoardId                 = 0xFF
+  #   PcdDefaultBoardId = 0xFF,  PcdOemProjectReferenceAmdCrb must fill in a value that base on customer hardware.
+  #
+  #   N17:0xFF  N18:0x04  N20:0x16
+  gChipsetPkgTokenSpaceGuid.PcdDefaultBoardId|0x16|UINT8|0x7000000A
+
+  gChipsetPkgTokenSpaceGuid.PcdH2OTpmType|0x00|UINT8|0x70000006
+  gChipsetPkgTokenSpaceGuid.PcdH2OIhisiFbtsToolVersion|0x0000|UINT16|0x00000039
+
+  #
+  #PCD of each region base and size
+  #
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashAreaPeiBaseAddress|0x00000000|UINT32|0x00000052
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashAreaPeiSize|0x00000000|UINT32|0x00000053
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashAreaMainBaseAddress|0x00000000|UINT32|0x00000054
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashAreaMainSize|0x00000000|UINT32|0x00000055
+
+  gChipsetPkgTokenSpaceGuid.PcdH2OSvmEnable|0x0|UINT8|0x70000008
+  gChipsetPkgTokenSpaceGuid.PcdH2OSvmLock|0x0|UINT8|0x70000009
+
+  gH2OIgnoreDeviceListTokenSpaceGuid.PcdH2OIgnoredListTable1|{0}|VOID*|0x0000001
+  gH2OIgnoreDeviceListTokenSpaceGuid.PcdH2OIgnoredListTable2|{0}|VOID*|0x0000002
+
+#[-start-221003-IB14740265-add]#
+  gChipsetPkgTokenSpaceGuid.PcdUsbEfiTimerPolling|0|UINT8|0x70000015
+#[-end-221003-IB14740265-add]#
+
+  gChipsetPkgTokenSpaceGuid.PcdSmmProtectionFeature|TRUE|BOOLEAN|0x70000018
+  gChipsetPkgTokenSpaceGuid.PcdSmmIsolationSupport|FALSE|BOOLEAN|0x70000019
+
+[PcdsDynamicEx]
+
+#[-start-230206-IB14740276-remove]//
+#>>EnableAbove4GBMmio++
+  #
+  # Enable MMIO above 4G , its value is determined by SystemConfiguration.EnableAbove4GBMmio in SCU
+  #
+#  gChipsetPkgTokenSpaceGuid.PcdH2OMmioMem64Enable|0|UINT8|0x70000020
+#<<EnableAbove4GBMmio++
+#[-end-230206-IB14740276-remove]//
+
+  gChipsetPkgTokenSpaceGuid.PcdLowestSupportedEcVersion|0x0001|UINT16|0x70000021
+
+#[-start-220329-IB14740229-add]#
+  gChipsetPkgTokenSpaceGuid.PcdH2OChipsetPciePortSpeed|0xFFFFFFFFFFFFFFFF|UINT64|0x70000043
+#[-end-220329-IB14740229-add]#
+
+#[-start-220408-IB14740232-add]#
+  gChipsetPkgTokenSpaceGuid.PcdH2OChipsetPciePortAspm|0xFFFFFFFFFFFFFFFF|UINT64|0x70000044
+  gChipsetPkgTokenSpaceGuid.PcdH2OChipsetPciePortL1Sub|0xFFFFFFFFFFFFFFFF|UINT64|0x70000045
+#[-end-220408-IB14740232-add]#
+
+[Guids]
+  gChipsetPkgTokenSpaceGuid              = { 0x60b430f5, 0x409e, 0x4ea6, {0xb7, 0xe6, 0x65, 0x0d, 0x45, 0xde, 0xe9, 0xba} }
+  #
+  # Insyde Chipset Guids
+  #
+  gMtrrDataInfoGuid                      = { 0x15c57af9, 0x1db3, 0x4cb7, {0x81, 0x2b, 0x71, 0xC2, 0x9B, 0xc3, 0x80, 0x37} }
+  gHddPasswordModifiedGuid               = { 0xd7b8bbb1, 0xb27a, 0x486e, {0xaf, 0x59, 0xaf, 0x3d, 0x05, 0x07, 0xbc, 0xda} }
+  gNvVariableFailGuid                    = { 0x0E5CE58D, 0xE59B, 0x4F93, {0x90, 0x4A, 0x6E, 0xF2, 0xB9, 0x7A, 0x41, 0xD7} }
+
+  ## GUID used to store the Memory Ceiling value into an EFI Variable
+  # Include/Guid/MemoryCeilingVariable.h
+  gMemoryCeilingVariableGuid             = { 0xad22518b, 0x450a, 0x4857, {0x96, 0xc3, 0xd1, 0xe2, 0x2f, 0x20, 0x61, 0x29} }
+
+  #
+  # Insyde Cpu Guids
+  #
+  gUmaExistHobGuid                       = { 0xEB417550, 0xDA25, 0x4F07, {0xA5, 0xAE, 0xE7, 0x11, 0x90, 0x11, 0x0D, 0x02} }
+
+  #
+  # Platform Guids
+  #
+  gPeiBaseMemoryTestPpiGuid              = { 0xb6ec423c, 0x21d2, 0x490d, {0x85, 0xc6, 0xdd, 0x58, 0x64, 0xea, 0xa6, 0x74} }
+  gH2OHybridGraphicsVariableGuid         = { 0xb2b7c21f, 0x1786, 0x4a64, {0xbe, 0x69, 0x16, 0xce, 0xf7, 0x64, 0x73, 0x31 }}
+  gH2OHgInformationDataHobGuid           = { 0x648ce07b, 0xae5d, 0x4973, {0xbd, 0x3c, 0x8c, 0x91, 0x53, 0xc0, 0x5d, 0xc5 }}
+  gAmdMemoryContextSaveRestoreDataGuid   = { 0x966eb6fa, 0xeb61, 0x4f18, {0x87, 0x47, 0xe8, 0x27, 0x2e, 0xef, 0xa5, 0xbd} }
+  gAmdMemContextSaveRestoreVariableGuid  = { 0x52bc0af3, 0xbcb8, 0x4275, {0xbd, 0x96, 0x46, 0x6f, 0x55, 0xe4, 0x9d, 0x9c} }
+  #
+  # FCH Guids
+  #
+  gEfiLoadAmdAhciUefiDriverProtocolGuid  = { 0xe6a918dd, 0xc2ed, 0x485e, {0x91, 0x3d, 0xdd, 0xbf, 0xaf, 0x34, 0x9c, 0x6c} }
+  gSataControllerDriverGuid              = { 0x8f50dafb, 0xb373, 0x440b, {0x9e, 0xe2, 0x62, 0xb6, 0x65, 0xb6, 0x1d, 0x73} }
+  gSataRaidControllerGuid                = { 0x353e427b, 0xba1f, 0x4177, {0x8c, 0xa9, 0x44, 0xf0, 0x50, 0xc7, 0xe6, 0xae} }
+
+  gEfiTpmDeviceInstanceTpm20FtpmGuid     = { 0x0D2098C2, 0xBD29, 0x4fbc, {0xAB, 0xEC, 0x4E, 0x03, 0x8E, 0xFA, 0xA3, 0x58} }
+
+  #
+  # Definition of Setup Token GUID for Formset List
+  #
+  gLinkAdvancedTokenSpaceGuid            = { 0xc6d4769e, 0x7f48, 0x4d2a, {0x98, 0xe9, 0x87, 0xad, 0xcc, 0xf3, 0x5c, 0xcc} }
+  gLinkPowerTokenSpaceGuid               = { 0xa6712873, 0x925f, 0x46c6, {0x90, 0xb4, 0xa4, 0x0f, 0x86, 0xa0, 0x91, 0x7b} }
+
+  gVarableEditFunctionDisableGuid        = { 0xef0849b6, 0xfad0, 0x40e9, { 0x91, 0x7, 0x97, 0x4a, 0xeb, 0x87, 0x87, 0xa2 }}
+
+  #
+  # Check ExternalVgaCheck () present.
+  #
+  gH2OEnterExternalVgaCheckVariableGuid = { 0xd4498cf0, 0x0579, 0x4ff8, { 0x8e, 0x4b, 0x2f, 0x51, 0x64, 0x74, 0x02, 0x69 }}
+  gH2OBdsCpEnterExternalVgaCheckGuid    = { 0x9fb9393d, 0xafd9, 0x443e, { 0xb4, 0x41, 0xd6, 0x67, 0x39, 0xf6, 0x5a, 0x3c }}
+  gEfiSpiProtectionProgramHandleGuid    = { 0x4953ea2e, 0x3583, 0x40b8, { 0xb2, 0x53, 0x34, 0x73, 0xa0, 0xeb, 0x51, 0x3c }}
+
+  #
+  #
+  #
+  gChipsetCapsuleSignatureGuid          = {0x4F2CDD19, 0xBA92, 0xD7E4, {0x14, 0x3F, 0x85, 0xD0, 0x3A, 0x5B, 0x1D, 0x6F}}
+
+  #
+  # flashing protect for A/B recovery
+  #
+  gPreventFlashPowerLossGuid            = {0xA5A522C0, 0x431A, 0x45A3, {0xAC, 0xF4, 0x29, 0x9A, 0x5A, 0xAD, 0x74, 0xDF}}
+
+[Ppis]
+  #
+  # Insyde Chipset Ppis
+  #
+  gPeiBootScriptDonePpiGuid              = { 0xFD7C4665, 0x34BE, 0x426b, {0xB1, 0xF8, 0x3A, 0xB7, 0x53, 0xCE, 0x44, 0xB0} }
+  gFlashAccessPpiGuid                    = { 0x68412024, 0x80ca, 0x458c, {0x8d, 0x50, 0xa8, 0xa8, 0x72, 0x40, 0x99, 0xaf} }
+
+  #
+  # Insyde Cpu Ppis
+  #
+  gPeiCachePpiGuid                       = { 0xC153205A, 0xE898, 0x4C24, {0x86, 0x89, 0xA4, 0xB4, 0xBC, 0xC5, 0xC8, 0xA2} }
+
+  #
+  # Insyde Platform Ppis
+  #
+
+[Protocols]
+  #
+  # Insyde Chipset Protocols
+  #
+  gH2OHybridGraphicsEventProtocolGuid    = { 0xa9647a1c, 0x1814, 0x44d0, {0x8e, 0x75, 0x59, 0xa8, 0x26, 0xb2, 0x33, 0xe6} }
+  gH2OHybridGraphicsInfoProtocolGuid     = { 0x4d96c24c,  0xcb7, 0x4650, {0x91, 0x7c, 0x3b,  0xb, 0x70, 0xa6, 0x7f, 0xba} }
+  gEfiHybridGraphicsProtocolGuid         = { 0xa9647a1c, 0x1814, 0x44d0, {0x8e, 0x75, 0x59, 0xa8, 0x26, 0xb2, 0x33, 0xe6} }
+  gEfiGlobalNvsAreaProtocolGuid          = { 0x074e1e48, 0x8132, 0x47a1, {0x8c, 0x2c, 0x3f, 0x14, 0xad, 0x9a, 0x66, 0xdc} }
+
+  gEfiI2cPlatformSpecificProtocolGuid    = { 0xC4700DAB, 0x41B6, 0x4FDF, {0xBA, 0xF2, 0xFF, 0x36, 0x97, 0xE3, 0xAA, 0xCC} }
+
+  gEfiSecureFlashEspFlagProtocolGuid     = { 0x61E30B43, 0x1088, 0x4E07, {0xB4, 0x7F, 0xD1, 0xEE, 0x53, 0x10, 0x26, 0xE3} }
+
+  #
+  # Insyde Cpu Protocols
+  #
+  gEfiPlatformCpuProtocolGuid            = { 0xbd26cdc9, 0xa092, 0x462a, {0x87, 0x7a, 0x5a, 0xb6, 0xad, 0xce, 0x48, 0x12} }
+  gPiSmmBaseRelocProtocolGuid            = { 0xda5a04d4, 0x712f, 0x4075, { 0x92, 0xd6, 0x26, 0xf4, 0x9f, 0xe9, 0xb5, 0xd7} }
+  gEfiSmmCpuCounterProtocolGuid          = { 0x21f302ae, 0x6e95, 0x471a, { 0x84, 0xbc, 0xb1, 0x48, 0x00, 0x40, 0x3a, 0x1d }}
+
+  #
+  # Insyde Platform Protocol
+  #
+  gAllPciIoPrtclsInstlFinishedProtocolGuid = { 0x676D7012, 0x139B, 0x485A, {0x96, 0xF1, 0x98, 0x6F, 0xC4, 0x8A, 0x86, 0x4B} }
+  gEfiHgNvsAreaProtocolGuid                = { 0xbb210948, 0x3101, 0x4cef, {0x8d, 0x1d, 0x3f, 0xe5, 0x5e, 0x61, 0x53, 0xb4} }
+  gEfiSioPolicyProtocolGuid                = { 0x4940A33C, 0x13C6, 0x4CD8, {0xA7, 0xA7, 0x4A, 0x60, 0x20, 0xF4, 0xCC, 0x73} }
+
+  #
+  # SpiLock Smi Protocol
+  #
+  gEfiSpiLockSmiProtocolGuid            = { 0x815cd2a5, 0x80aa, 0x462f, {0xa9, 0x94, 0x37, 0xd9, 0xdf, 0xa9, 0xae, 0xa6} }
+
+  gH2OIhisiFbtsToolVersionProtocolGuid  = { 0x3b940abd, 0xc446, 0x448f, {0xb7, 0xe6, 0x89, 0x23, 0xef, 0x58, 0xc9, 0x3b} }
+
+  gEfiSmmLockEnablePointProtocolGuid     = {0x402522C1, 0x6264, 0x456F, { 0x8D, 0x79, 0xE7, 0x81, 0x04, 0x62, 0x00, 0x6A }}
+  gEfiNotLegacyBootProtocolGuid         = { 0x47c1e62, 0xd403, 0x4f17, { 0xb4, 0xe5, 0x7d, 0xb1, 0x3b, 0x95, 0x52, 0x78 } }
+  gPlatformNvmeInstalledProtocolGuid    = { 0xffd4675e, 0xfd03, 0x4951, { 0xa2, 0xca, 0x7, 0x17, 0xb9, 0x7a, 0x85, 0xf6 } }
+
+#[-start-220906-IB14740262-add]#
+  # APCB Sync Done Protocol
+  gH2OCbsApcbSyncDoneProtocolGuid      = { 0xa881187f, 0xb90a, 0x42be, { 0xab, 0x3a, 0xcd, 0xdf, 0x36, 0xc5, 0xcc, 0xb7 } }
+  gH2OAodApcbSyncDoneProtocolGuid      = { 0xb0d2348d, 0xe70d, 0x4709, { 0x87, 0x1a, 0x17, 0x2a, 0xb4, 0xd1, 0x32, 0xd8 } }
+#[-end-220906-IB14740262-add]#

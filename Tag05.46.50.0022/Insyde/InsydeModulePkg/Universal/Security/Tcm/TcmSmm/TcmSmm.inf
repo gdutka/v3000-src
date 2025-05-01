@@ -1,0 +1,69 @@
+## @file
+#  This driver implements TCM definition block in ACPI table and
+#  registers SMI callback functions for MemoryClear method.
+#
+#******************************************************************************
+#* Copyright (c) 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = TcmSmm
+  FILE_GUID                      = 71BE8B53-4E99-4d6d-B469-5610E4FA90D1
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = InitializeTcgSmm
+
+[Sources]
+  TcmSmm.c
+  TcmSmm.h
+  Tcm.asl
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SecurityPkg/SecurityPkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  UefiBootServicesTableLib
+  DebugLib
+  DxeServicesLib
+  VariableLib
+  PcdLib
+
+[Guids]
+  gEfiPhysicalPresenceGuid
+  gEfiMemoryOverwriteControlDataGuid
+  gEfiTpmDeviceInstanceTcmGuid
+
+[Protocols]
+  gEfiSmmSwDispatch2ProtocolGuid                # PROTOCOL ALWAYS_CONSUMED
+  gEfiAcpiTableProtocolGuid                     # PROTOCOL ALWAYS_CONSUMED
+  gEfiSmmVariableProtocolGuid
+  gEfiSmmCpuProtocolGuid
+  gEfiTcgProtocolGuid
+
+[Pcd]
+  gEfiSecurityPkgTokenSpaceGuid.PcdTpmInstanceGuid
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId  
+  gInsydeTokenSpaceGuid.PcdDxeTpmPolicy
+  gInsydeTokenSpaceGuid.PcdTpmHide
+  gInsydeTokenSpaceGuid.PcdSoftwareSmiPort
+
+[Depex]
+  gEfiAcpiTableProtocolGuid AND
+  gEfiSmmSwDispatch2ProtocolGuid AND
+  gEfiSmmVariableProtocolGuid AND
+  gEfiTcgProtocolGuid

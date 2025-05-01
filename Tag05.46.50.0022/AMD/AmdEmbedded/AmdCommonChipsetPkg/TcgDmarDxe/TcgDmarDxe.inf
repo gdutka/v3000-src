@@ -1,0 +1,52 @@
+## @file
+#  Component description file for Tcg Dmar DXE
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                              = 0x00010005
+  BASE_NAME                                = TcgDmarDxe
+  FILE_GUID                                = B5320E5F-0875-42BC-A5B7-15AF36CE87CF
+  MODULE_TYPE                              = DXE_DRIVER
+  PI_SPECIFICATION_VERSION                 = 0x0001000A
+  VERSION_STRING                           = 1.0
+  ENTRY_POINT                              = TcgDmarDxeEntryPoint
+
+[Sources]
+  TcgDmarDxe.c
+  TcgDmarDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SecurityPkg/SecurityPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  UefiRuntimeServicesTableLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  DebugLib
+  UefiLib
+  BaseLib
+  TpmMeasurementLib
+  PcdLib
+
+[Protocols]
+  
+[Guids]
+  gEfiEndOfDxeEventGroupGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDmaProtection
+
+[Depex]
+  TRUE

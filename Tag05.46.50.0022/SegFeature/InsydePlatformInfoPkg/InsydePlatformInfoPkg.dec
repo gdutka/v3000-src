@@ -1,0 +1,326 @@
+## @file
+# Insyde Platform Information package Declaration file
+#
+#******************************************************************************
+#* Copyright (c) 2023 - 2024, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = InsydePlatformInfoPkg
+  PACKAGE_GUID                   = 37B4645F-FA83-48FE-8249-0888E57E1DA1
+  PACKAGE_VERSION                = 1.0
+  TAG_VERSION                    = 01.01.06.0020
+
+[Includes]
+  Include
+
+[LibraryClasses]
+  BinarySearchExLib|Include/Library/BinarySearchExLib.h
+  BlockIoCapacityLib|Include/Library/BlockIoCapacityLib.h
+  DeviceInfoLookupDataLib|Include/Library/DeviceInfoLookupDataLib.h
+  HiiStringIdManageLib|Include/Library/HiiStringIdManageLib.h
+  UsbHandleRoutineLib|Include/Library/UsbHandleRoutineLib.h
+
+[Guids]
+  gInsydePlatformInfoTokenSpaceGuid    = { 0x927B5B9A, 0x46FC, 0x499D, { 0xAC, 0xD7, 0xD5, 0x23, 0x50, 0x63, 0x19, 0x84 } }
+  gH2ONvmeInfoFormsetGuid              = { 0x75A179A8, 0x0628, 0x49CA, { 0x84, 0x5A, 0x71, 0xF8, 0x1E, 0xF5, 0x3A, 0x10 } }
+  gH2OMemoryInfoFormsetGuid            = { 0x929C3D76, 0xE9CA, 0x4330, { 0x95, 0xA0, 0x95, 0x4B, 0xB4, 0x6E, 0x3D, 0x50 } }
+  gH2OCpuInfoFormsetGuid               = { 0x4B4B81A5, 0x4C87, 0x4DB1, { 0xA0, 0xAC, 0xFE, 0xDE, 0xC5, 0xC3, 0x12, 0x2F } }
+  gH2OSataDriveInfoSetupFormsetGuid    = { 0xA19C060D, 0xF46B, 0xD601, { 0x36, 0x6E, 0x62, 0x01, 0x69, 0x4A, 0xC0, 0xFF } }
+  gH2OUsbViewerFormsetGuid             = { 0x280C409D, 0xE5FB, 0x4337, { 0x87, 0x7F, 0x50, 0x4F, 0x5F, 0x50, 0x53, 0x7F } }
+  gH2OSDEmmcInfoSetupFormsetGuid       = { 0xa19cd60d, 0xfa6b, 0xdc01, { 0xb6, 0x6a, 0x6f, 0x0e, 0xd9, 0x48, 0x90, 0xfb } }
+  gH2OPciDeviceInfoSetupFormsetGuid    = { 0x4900baed, 0xe370, 0x4663, { 0x81, 0x05, 0xbf, 0x94, 0x12, 0xd5, 0xca, 0x57 } }
+
+  ## Include/Guid/MemoryInfoSetupUtilityHii.h
+  gH2OMemoryInfoSetupVarstoreGuid      = { 0xE0C8FF7D, 0xA3EC, 0x44F2, { 0x9A, 0xAE, 0x0B, 0xAB, 0xED, 0x2F, 0xD0, 0xD4 } }
+  ## Include/Guid/SataDriveInfoSetupUtilityHii.h
+  gH2OSataDriveInfoConfigurationGuid   = { 0x88e0a9aa, 0x37be, 0x4506, { 0x96, 0x50, 0xee, 0xad, 0x5e, 0xe9, 0x11, 0xb0 } }
+  ## Include/Guid/SDEmmcInfoSetupUtilityHii.h
+  gH2OSDEmmcInfoSetupVarstoreGuid      = { 0x6875C1B4, 0xC562, 0x407C, { 0xB5, 0x5F, 0x6F, 0x9E, 0x3C, 0xD2, 0x83, 0x2C } }
+  ## Include/Guid/PciDeviceInfoSetupUtilityHii.h
+  gH2OPciDeviceInfoConfigurationGuid   = { 0x3c632ccc, 0xa783, 0x4171, { 0xae, 0x20, 0x58, 0xfb, 0x85, 0x5c, 0x33, 0xb2 } }
+
+[Ppis]
+
+[Protocols]
+  ## Include/Protocol/H2OMemoryDeviceInfo.h
+  gH2OMemoryDeviceInfoProtocolGuid     = { 0x8588EB59, 0x3547, 0x46DD, { 0x93, 0xDE, 0x8F, 0x31, 0xB3, 0xE5, 0x04, 0xE5 } }
+  ## Include/Protocol/H2OPciLookupTable.h
+  gH2OPciLookupTableProtocolGuid       = { 0x4DDD6123, 0x8F4B, 0x4C22, { 0xA9, 0xDE, 0x39, 0x0B, 0x0C, 0xC9, 0x30, 0x86 } }
+  ## Include/Protocol/H2OCpuDeviceInfo.h
+  gH2OCpuDeviceInfoProtocolGuid        = { 0xC199E046, 0xDC95, 0x42E4, { 0x81, 0x46, 0x18, 0xB8, 0x78, 0x45, 0xD6, 0xC9 } }
+  ## Include/Protocol/H2OSataDriveInfo.h
+  gH2OSataDriveInfoProtocolGuid        = { 0x01050563, 0xf42c, 0x4d70, { 0x93, 0x45, 0x73, 0xc9, 0xcc, 0x0f, 0xd4, 0xc4 } }
+  ## Include/Protocol/H2OUsbTextLookup.h
+  gH2OUsbTextLookupProtocolGuid        = { 0x3d003d61, 0xf366, 0x4419, { 0xa1, 0xc4, 0xc5, 0x65, 0x33, 0xcd, 0x6e, 0xe4 } }
+  ## Include/Protocol/H2OConsoleBootMessage.h
+  gH2OConsoleBootMessageProtocolGuid   = { 0x7dbba8b9, 0xb670, 0x482e, { 0xbe, 0x71, 0x0a, 0x07, 0x89, 0xa5, 0x9c, 0x42 } }
+  ## Include/Protocol/H2ONvmeInfo.h
+  gH2ONvmeInfoProtocolGuid             = { 0x526ecbdf, 0xe628, 0x4c96, { 0xb2, 0xec, 0x30, 0xce, 0x45, 0x52, 0xba, 0x74 } }
+  ## Include/Protocol/H2ODeviceInfoLookup.h
+  gH2ODeviceInfoLookupProtocolGuid     = { 0xe92f90a6, 0x9098, 0x452d, { 0x95, 0xcd, 0x5c, 0xde, 0x3c, 0x69, 0xf9, 0xa2 } }
+  ## Include/Protocol/H2OSDEmmcInfo.h
+  gH2OSDEmmcInfoProtocolGuid           = { 0xab685acb, 0xb0f9, 0x42ca, { 0xcc, 0xb3, 0x3a, 0xef, 0x51, 0x95, 0x6e, 0x24 } }
+  ## Include/Protocol/H2OPciDeviceInfo.h
+  gH2OPciDeviceInfoProtocolGuid        = { 0x9c046d19, 0x8381, 0x4e23, { 0x93, 0x10, 0xa3, 0x64, 0x6b, 0x98, 0x33, 0x5d } }
+
+[PcdsFeatureFlag]
+  #
+  # The main feature switch, if that is disabled other feature will disable
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPlatformInfoSupported|TRUE|BOOLEAN|0x00000001
+  #
+  # The sub feature switch
+  # Note : The PcdH2OSetupMemoryInfoSupported depend on PcdH2OMemoryDeviceInfoSupported = TRUE
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OMemoryDeviceInfoSupported|TRUE|BOOLEAN|0x00000002
+  #
+  # The sub feature switch
+  # Note : The PcdH2OSetupPciDeviceInfoSupported depend on PcdH2OPciLookupTableSupported = TRUE
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciLookupTableSupported|TRUE|BOOLEAN|0x00000003
+  #
+  # The sub feature switch
+  # Note : The PcdH2OSetupCpuInfoSupported depend on PcdH2OCpuDeviceInfoSupported = TRUE
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OCpuDeviceInfoSupported|TRUE|BOOLEAN|0x00000004
+  #
+  # The sub feature switch
+  # Note : The PcdH2OSetupSataDriveInfoSupported depend on PcdH2OSataDriveInfoSupported = TRUE
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSataDriveInfoSupported|TRUE|BOOLEAN|0x00000005
+  #
+  # The sub feature switch
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OUsbTextLookupSupported|TRUE|BOOLEAN|0x00000006
+  #
+  # The sub feature switch
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciSkipTableSupported|TRUE|BOOLEAN|0x00000007
+  #
+  # The sub feature switch
+  # Note : The PcdH2OSetupNvmeInfoSupported depend on PcdH2ONvmeInfoSupported = TRUE
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ONvmeInfoSupported|TRUE|BOOLEAN|0x00000008
+  #
+  # The sub feature switch
+  # Note : The PcdH2OSetupSDEmmcInfoSupported depend on PcdH2OSDEmmcInfoSupported = TRUE
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSDEmmcInfoSupported|TRUE|BOOLEAN|0x00000009
+  #
+  # The sub feature switch
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OConsoleBootMessageSupported|TRUE|BOOLEAN|0x0000000A
+  #
+  # The sub feature switch
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciDeviceInfoSupported|TRUE|BOOLEAN|0x0000000B
+
+  #
+  # The setup info switch
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupNvmeInfoSupported|TRUE|BOOLEAN|0x00010001
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupMemoryInfoSupported|TRUE|BOOLEAN|0x00010002
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupPciDeviceInfoSupported|TRUE|BOOLEAN|0x00010003
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupCpuInfoSupported|TRUE|BOOLEAN|0x00010004
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupSataDriveInfoSupported|TRUE|BOOLEAN|0x00010005
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupUsbViewerSupported|TRUE|BOOLEAN|0x00010006
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupSDEmmcInfoSupported|TRUE|BOOLEAN|0x00010007
+
+  #
+  # Customized PcieLookUpTable Size Pcds
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciLookUpVendorIdTableSupported|TRUE|BOOLEAN|0x00020000
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciLookUpDeviceIdTableSupported|TRUE|BOOLEAN|0x00020001
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciLookUpClassCodeTableSupported|TRUE|BOOLEAN|0x00020002
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciLookUpCapabilityIdTableSupported|TRUE|BOOLEAN|0x00020003
+
+  #
+  # Customized supported PCI capability interpretation In PCI device information page
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciLookUpCapabilityIntnTableSupported|TRUE|BOOLEAN|0x00020004
+
+[PcdsFixedAtBuild]
+  ## Link To Formset GUID
+  #    GUID("C1E0B01A-607E-4B75-B8BB-0631ECFAACF2") # Main
+  #    GUID("C6D4769E-7F48-4D2A-98E9-87ADCCF35CCC") # Advance
+  #    GUID("5204F764-DF25-48A2-B337-9EC122B85E0D") # Security
+  #    GUID("A6712873-925F-46C6-90B4-A40F86A0917B") # Power
+  #    GUID("2D068309-12AC-45AB-9600-9187513CCDD8") # Boot
+  #    GUID("B6936426-FB04-4A7B-AA51-FD49397CDC01") # Exit
+  #    ...                                          # ...
+  #    GUID("XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX") # Other formset
+  # @Prompt Show setup options at setup utility -> position
+  # @PcdValueType GUID
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ONvmeInfoLinkToFormsetGuid|{0}|VOID*|0x10000001
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OMemoryInfoLinkToFormsetGuid|{0}|VOID*|0x10000002
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciDeviceInfoLinkToFormsetGuid|{0}|VOID*|0x10000003
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OCpuInfoLinkToFormsetGuid|{0}|VOID*|0x10000004
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSataDriveInfoLinkToFormsetGuid|{0}|VOID*|0x10000005
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OUsbViewerLinkToFormsetGuid|{0}|VOID*|0x10000006
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSDEmmcInfoLinkToFormsetGuid|{0}|VOID*|0x10000007
+
+  #
+  #  Setting The Memory Detail Info Form Display Item and Sequence
+  #  Number Define:
+  #   (0)Device Locator
+  #   (1)Bank Locator
+  #   (2)Manufacture
+  #   (3)Memory Type
+  #   (4)DRAM Type
+  #   (5)Serial Number
+  #   (6)Part Number
+  #   (7)Memory Size
+  #   (8)Maximum Capable Memory Speed
+  #   (9)Configured Memory Speed
+  #   (10)Configured Voltage
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OMemoryDetailDisplayList|{0}|VOID*|0x20000001
+  #
+  #  Setting The CPU Detail Info Form Display Item and Sequence
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OCpuDetailDisplayList|{0}|VOID*|0x20000002
+  #
+  #  Setting The Memory Hidden Not Install Item Default Value
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OHiddenNotInstalledMemory|FALSE|BOOLEAN|0x20000003
+  
+  #
+  # Null-terminated ASCII string. The name of the Device Info attribute that
+  # describes the display name of a device, controller, slot, etc.
+  #
+  # In addition to standard ASCII string values, InsydePlatformInfoPkg supports
+  # string tokens to be used as display names. For example, the PCDs below set
+  # the display names for a SATA port and an eMMC device.
+  #
+  # [PcdsDynamicExDefault]
+  #   gH2ODeviceInfo2TokenSpaceGuid.PcdH2ODeviceInfoSata0Port1|{ \
+  #     DEVICE_PATH("PciRoot(0x00)/Pci(0x08,0x01)/Pci(0x00,0x02)/Sata(0x01,0x00,0x00)"), \
+  #     "name=SATA 0 Port 1" \  # Standard ASCII string as display name.
+  #     }
+  #   
+  #   #
+  #   # Workaround that creates an ASCII string without null character.
+  #   #
+  #   DEFINE NAME_EQ = 'n', 'a', 'm', 'e', '='
+  #    
+  #   #
+  #   # String tokens are defined in .uni files, such as Project.uni.
+  #   #
+  #   gH2ODeviceInfo2TokenSpaceGuid.PcdH2ODeviceInfoEmmc0|{ \
+  #     DEVICE_PATH("PciRoot(0x00)/Pci(0x1A,0x00)/eMMC(0x00)/Ctrl(0x00)"), \
+  #     $(NAME_EQ), STRING_TOKEN(STR_DEVICE_NAME_EMMC_0), \
+  #     "type=emmc" \
+  #     }
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ODeviceInfoAttributeStr|{0}|VOID*|0x20000004
+
+  #
+  # Dummy PCD that ensures the StringsToIds table in AutoGen.c will always be
+  # generated.
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPlatformInfoDummyStrToken|{0}|VOID*|0x20000006
+  
+  #
+  # Setting the PCI/PCIe device item to skip in SCU
+  #
+  # Note:
+  #   Setting the PCI/PCIe device skip table, Device defined in this pcd will not
+  #   appear in SCU PCI/PCIe Information page, and it will only effect on SCU page.
+  #   When defined VID & DID all of device with same id will be skip.
+  #   If defined a Valid VID, and defined DID as 0xFFFF, all of device under this
+  #   Vendor will be skip
+  #
+  # Defined Sample:
+  #
+  #    Vendor Id   |   Device Id    |
+  # ===============|================|
+  # UINT16 (0x1002), UINT16 (0xFFFF), \ #skip all device under vendor:0x1002
+  # UINT16 (0x1022), UINT16 (0x15E3), \ #skip all device with VID:0x1022, DID:0x15E3
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciSkipDeviceTable|{0}|VOID*|0x20000007
+
+  #
+  #  Setting The SD/eMMC Detail Info Form Display Item and Sequence
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSDEmmcDetailDisplayList|{0}|VOID*|0x2000000A
+
+  #
+  #  Setting The NVMe Detail Info Form Display Item and Sequence
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ONvmeDetailDisplayList|{0}|VOID*|0x2000000B
+
+  #
+  # Table for setting the display name for the BMC Channel
+  #
+  # Example:
+  #------------------------------------------------------------------------
+  #| Channel Number | DisplayName                                         |
+  #------------------------------------------------------------------------
+  # gInsydePlatformInfoTokenSpaceGuid.PcdH2OBmcInfoDisplayNameForChannel| { \
+  #   UINT8(0x00),     L"Dedicated LAN Channel", \
+  #   UINT8(0x01),     L"Shared LAN Channel" \
+  # }
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OBmcInfoDisplayNameForChannel|{0}|VOID*|0x2001000B
+
+  #
+  # Table for setting the display capability id behavior
+  #
+  # Example:
+  # ---------------------------------------------------------------------------
+  # | IsPcieExtCapability        | CapabilityId        | DisplayControl       |
+  # ---------------------------------------------------------------------------
+  # | 0x00 = No (PCI Capability) | 0xXXXX = ID Value   | 0x00 = Default       |
+  # | 0x01 = Yes                 |                     | 0x01 = Hide          |
+  # | (PCIe Extended Capability) |                     | 0x02 = HideIntpnOnly |
+  # ---------------------------------------------------------------------------
+  # gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciCapabilityDisplayControl| { \
+  #   UINT8(0x00),                 UINT16(0x0010),       UINT8(0x02),      \ # PCI Capability (PCI Express)
+  #   UINT8(0x01),                 UINT16(0x0001),       UINT8(0x01),      \ # PCIe Extended Capability (Advanced Error Reporting)
+  #   UINT8(0x01),                 UINT16(0x000D),       UINT8(0x02),      \ # PCIe Extended Capability (Access Control Services)
+  #   UINT8(0x00),                 UINT16(0x0009),       UINT8(0x01),      \ # PCI Capability (Vendor Specific)
+  #   UINT8(0x00),                 UINT16(0x0011),       UINT8(0x00)       \ # PCI Capability (MSI-X)
+  # }
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciCapabilityDisplayControl|{0}|VOID*|0x2001000C
+
+[PcdsFixedAtBuild.X64]
+  #
+  # CPU TDP related pcd
+  #
+  #  On Intel platform, MSR offset could be change or not support on different platform.
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OIntelMsrRaplPwrUnitAddress|0x606|UINT16|0x20010000
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OIntelMsrPkgPwrLimitAddress|0x610|UINT16|0x20010001
+  #
+  #  On AMD platform, the SMN address for each platform may be different.
+  #  Please refer to NbioSmuVxxLib.h to find the address suits your platform.
+  #
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdBiosSmcMsgTdpRequestId|0x36|UINT32|0x20010002
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgMessageAddress|0x3B10528|UINT32|0x20010003
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgResponseAddress|0x3B10564|UINT32|0x20010004
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument0Address|0x3B10598|UINT32|0x20010005
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument1Address|0x3B1059C|UINT32|0x20010006
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument2Address|0x3B105A0|UINT32|0x20010007
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument3Address|0x3B105A4|UINT32|0x20010008
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument4Address|0x3B105A8|UINT32|0x20010009
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument5Address|0x3B105AC|UINT32|0x2001000A
+
+[PcdsFixedAtBuild, PcdsPatchableInModule, PcdsDynamic, PcdsDynamicEx]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OUsbViewerFormRefreshPeriod|1000|UINT32|0x20000005
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OConsoleBootMessageMarginBottom|0|UINT16|0x20000008
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OConsoleBootMessageMarginRight|0|UINT16|0x20000009
+
+[PcdsDynamicEx]
+  #
+  # This PCD provide SEG features showing the feature package name and version
+  #
+  gSegFeatureVerTokenSpaceGuid.PcdH2OInsydePlatformInfoPkg|"InsydePlatformInfoPkg:01.01.06.0020"|VOID*|0x10000001
+

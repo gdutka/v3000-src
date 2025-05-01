@@ -1,0 +1,39 @@
+## @file
+#  Component description file of CpuDeviceInfoLib.
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuDeviceInfoLib
+  FILE_GUID                      = 62F9DA92-0B54-48DF-9DEF-26332804D62C
+  MODULE_TYPE                    = UEFI_DRIVER
+  LIBRARY_CLASS                  = CpuDeviceInfoLib
+
+[Sources]
+  CpuDeviceInfoLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  PrintLib
+  CpuMiscLib
+
+[Protocols]

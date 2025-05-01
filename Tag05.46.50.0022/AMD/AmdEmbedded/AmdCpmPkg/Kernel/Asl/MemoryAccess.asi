@@ -1,0 +1,393 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+//
+//  Read Bixby SMN register
+//  Arg0 - Socket Number
+//  Arg1 - Die Number
+//  Arg2 - Bridge Number
+//  Arg3 - Smn Register
+//
+Mutex (CpmRwBxbSmnMutex, 0)
+
+Method (CpmReadBxbSmnRegister, 4, Serialized) {
+    Store (CpmReadTable (CpmMainTable, CpmBxbBusNumDetEn), Local0)
+    If (LEqual (Local0, 0)) {
+        Return (0xFFFFFFFF)
+    }
+    Add (CpmPcieMmioBaseAddr, ShiftLeft (Local0, 20), Local0)
+    Add (0xE0, Local0, Local0)
+    Acquire (CpmRwBxbSmnMutex, 0xFFFF)
+    OperationRegion (varM, SystemMemory, Local0, 0x8)
+    Field (varM, DWordAcc, NoLock, Preserve) {
+        Offset (0x0),
+        var1, 32,
+    }
+    BankField (varM, var1, Arg3, DwordAcc, NoLock, Preserve) {
+        Offset (0x4),
+        var2, 32,
+    }
+    Store (var1, Local1)
+    Store (var2, Local2)
+    Store (Local1, var1)
+    Release (CpmRwBxbSmnMutex)
+    CpmDebugPrint ("  KER-ASL-CpmReadBxbSmnRegister  (%d, %d, %d, 0x%X) = 0x%X\n", Arg0, Arg1, Arg2, Arg3, Local2, 0)
+    Return (Local2)
+}
+
+//
+//  Write Bixby SMN register
+//  Arg0 - Socket Number
+//  Arg1 - Die Number
+//  Arg2 - Bridge Number
+//  Arg3 - Smn Register
+//  Arg4 - Write Data
+//
+Method (CpmWriteBxbSmnRegister, 5, Serialized) {
+    Store (CpmReadTable (CpmMainTable, CpmBxbBusNumDetEn), Local0)
+    If (LNotEqual (Local0, 0)) {
+        CpmDebugPrint ("  KER-ASL-CpmWriteBxbSmnRegister (%d, %d, %d, 0x%X, 0x%X)\n", Arg0, Arg1, Arg2, Arg3, Arg4, 0)
+        Add (CpmPcieMmioBaseAddr, ShiftLeft (Local0, 20), Local0)
+        Add (0xE0, Local0, Local0)
+        Acquire (CpmRwBxbSmnMutex, 0xFFFF)
+        OperationRegion (varM, SystemMemory, Local0, 0x8)
+        Field (varM, DWordAcc, NoLock, Preserve) {
+            Offset (0x0),
+            var1, 32,
+        }
+        BankField (varM, var1, Arg3, DwordAcc, NoLock, Preserve) {
+            Offset (0x4),
+            var2, 32,
+        }
+        Store (var1, Local1)
+        Store (Arg4, var2)
+        Store (Local1, var1)
+        Release (CpmRwBxbSmnMutex)
+    }
+}
+
+//
+//  Read SMN register
+//  Arg0 - Socket Number
+//  Arg1 - Die Number
+//  Arg2 - Bridge Number
+//  Arg3 - Smn Register
+//
+Mutex (CpmRwSmnMutex, 0)
+
+Method (CpmReadSmnRegister, 4, Serialized) {
+    If (LEqual (Add (Add (Arg0, Arg1), Arg2), 0)) {
+        Store (0, Local0)
+    } Else {
+        Store (CpmGetMultiDieBusNumber (Arg0, Arg1, Arg2), Local0)
+    }
+    If (LEqual (Local0, 0xFFFFFFFF)) {
+        Return (0xFFFFFFFF)
+    }
+    Add (CpmPcieMmioBaseAddr, ShiftLeft (Local0, 20), Local0)
+    Add (0xB8, Local0, Local0)
+    If (CondRefOf (\_SB.AlibSmnMutex)) {
+        Acquire (\_SB.AlibSmnMutex, 0xFFFF)
+    } Else {
+        Acquire (CpmRwSmnMutex, 0xFFFF)
+    }
+    OperationRegion (varM, SystemMemory, Local0, 0x8)
+    Field (varM, DWordAcc, NoLock, Preserve) {
+        Offset (0x0),
+        var1, 32,
+    }
+    BankField (varM, var1, Arg3, DwordAcc, NoLock, Preserve) {
+        Offset (0x4),
+        var2, 32,
+    }
+    Store (var1, Local1)
+    Store (var2, Local2)
+    Store (Local1, var1)
+    If (CondRefOf (\_SB.AlibSmnMutex)) {
+        Release (\_SB.AlibSmnMutex)
+    } Else {
+        Release (CpmRwSmnMutex)
+    }
+    CpmDebugPrint ("  KER-ASL-CpmReadSmnRegister  (%d, %d, %d, 0x%X) = 0x%X\n", Arg0, Arg1, Arg2, Arg3, Local2, 0)
+    Return (Local2)
+}
+
+//
+//  Write SMN register
+//  Arg0 - Socket Number
+//  Arg1 - Die Number
+//  Arg2 - Bridge Number
+//  Arg3 - Smn Register
+//  Arg4 - Write Data
+//
+
+Method (CpmWriteSmnRegister, 5, Serialized) {
+    If (LEqual (Add (Add (Arg0, Arg1), Arg2), 0)) {
+        Store (0, Local0)
+    } Else {
+        Store (CpmGetMultiDieBusNumber (Arg0, Arg1, Arg2), Local0)
+    }
+    If (LNotEqual (Local0, 0xFFFFFFFF)) {
+        CpmDebugPrint ("  KER-ASL-CpmWriteSmnRegister (%d, %d, %d, 0x%X, 0x%X)\n", Arg0, Arg1, Arg2, Arg3, Arg4, 0)
+        Add (CpmPcieMmioBaseAddr, ShiftLeft (Local0, 20), Local0)
+        Add (0xB8, Local0, Local0)
+        If (CondRefOf (\_SB.AlibSmnMutex)) {
+            Acquire (\_SB.AlibSmnMutex, 0xFFFF)
+        } Else {
+            Acquire (CpmRwSmnMutex, 0xFFFF)
+        }
+        OperationRegion (varM, SystemMemory, Local0, 0x8)
+        Field (varM, DWordAcc, NoLock, Preserve) {
+            Offset (0x0),
+            var1, 32,
+        }
+        BankField (varM, var1, Arg3, DwordAcc, NoLock, Preserve) {
+            Offset (0x4),
+            var2, 32,
+        }
+        Store (var1, Local1)
+        Store (Arg4, var2)
+        Store (Local1, var1)
+        If (CondRefOf (\_SB.AlibSmnMutex)) {
+            Release (\_SB.AlibSmnMutex)
+        } Else {
+            Release (CpmRwSmnMutex)
+        }
+    }
+}
+
+//
+//  Read Memory
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Start Bit
+//  Arg3 - Bit Width
+//
+Method (CpmReadMem32, 4, Serialized) {
+    Add (Arg0, Arg1, Local0)
+    OperationRegion (varM, SystemMemory, Local0, 0x4)
+    Field (varM, DWordAcc, NoLock, Preserve) {
+        varR, 32,
+    }
+    Store (varR, Local1)
+    Store (0x7FFFFFFF, Local5)
+    Or (Local5, 0x80000000, Local5)
+    And (ShiftRight (Local1, Arg2), ShiftRight (Local5, Subtract (32, Arg3)), Local2)
+    CpmDebugPrint ("  KER-ASL-CpmReadMem32  (0x%X, 0x%X, %d, %d) = 0x%X\n", Arg0, Arg1, Arg2, Arg3, Local2, 0)
+    return (Local2)
+}
+
+//
+//  Write Memory
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Start Bit
+//  Arg3 - Bit Width
+//  Arg4 - Value
+//
+Method (CpmWriteMem32, 5, Serialized) {
+    CpmDebugPrint ("  KER-ASL-CpmWriteMem32 (0x%X, 0x%X, %d, %d, 0x%X)\n", Arg0, Arg1, Arg2, Arg3, Arg4, 0)
+    Add (Arg0, Arg1, Local0)
+    OperationRegion (varM, SystemMemory, Local0, 0x4)
+    Field (varM, DWordAcc, NoLock, Preserve) {
+        varR, 32,
+    }
+    Store (varR, Local1)
+
+    Store (0x7FFFFFFF, Local5)
+    Or (Local5, 0x80000000, Local5)
+    Add (Arg2, Arg3, Local2)
+    Subtract (32, Local2, Local2)
+    ShiftRight ( And (ShiftLeft (Local5, Local2), Local5), Local2, Local2)
+    ShiftLeft ( ShiftRight (Local2, Arg2), Arg2, Local2)
+    ShiftLeft ( Arg4, Arg2, Local3 )
+    Or ( And ( Local1, Xor (Local5, Local2) ), Local3, Local4)
+    Store (Local4, varR)
+}
+
+//
+//  Read Memory in Byte
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Start Bit
+//  Arg3 - Bit Width
+//
+Method (CpmReadMem8, 4, Serialized) {
+    Add (Arg0, Arg1, Local0)
+    OperationRegion (varM, SystemMemory, Local0, 0x1)
+    Field (varM, ByteAcc, NoLock, Preserve) {
+        varR, 8,
+    }
+    Store (varR, Local1)
+    And (ShiftRight (Local1, Arg2), ShiftRight (0xFF, Subtract (8, Arg3)), Local2)
+    CpmDebugPrint ("  KER-ASL-CpmReadMem8  (0x%X, 0x%X, %d, %d) = 0x%X\n", Arg0, Arg1, Arg2, Arg3, Local2, 0)
+    return (Local2)
+}
+
+//
+//  Write Memory in Byte
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Start Bit
+//  Arg3 - Bit Width
+//  Arg4 - Value
+//
+Method (CpmWriteMem8, 5, Serialized) {
+    CpmDebugPrint ("  KER-ASL-CpmWriteMem8 (0x%X, 0x%X, %d, %d, 0x%X)\n", Arg0, Arg1, Arg2, Arg3, Arg4, 0)
+    Add (Arg0, Arg1, Local0)
+    OperationRegion (varM, SystemMemory, Local0, 0x1)
+    Field (varM, ByteAcc, NoLock, Preserve) {
+        varR, 8,
+    }
+    Store (varR, Local1)
+
+    Add (Arg2, Arg3, Local2)
+    Subtract (8, Local2, Local2)
+    ShiftRight (And (ShiftLeft (0xFF, Local2), 0xFF), Local2, Local2)
+    ShiftLeft (ShiftRight (Local2, Arg2), Arg2, Local2)
+    ShiftLeft (Arg4, Arg2, Local3)
+    Or (And (Local1, Xor (0xFF, Local2)), Local3, Local4)
+    Store (Local4, varR)
+}
+
+//
+// Get Multi-Die Bus Number from AMD_CPM_CORE_TOPOLOGY_TABLE
+//  Arg0    - Socket Number
+//  Arg1    - Die Number
+//  Arg2    - Bridge Number
+//
+//  Return  - Bus Number
+//
+Method (CpmGetMultiDieBusNumber, 3, Serialized) {
+    If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP)) {
+        Store (CpmCoreTopologyTable, Local0)
+        If (Local0) {
+            Add (Local0, CpmTableHeaderSize, Local0)
+            Store (0, Local1)
+            Store (0, Local2)
+            While (LNotEqual (Local2, 0xFF)) {
+                Store (CpmReadMem8 (Add (Local0, Local1), CpmCoreTopologySocket, 0, 8), Local2)
+                Store (CpmReadMem8 (Add (Local0, Local1), CpmCoreTopologyDie, 0, 8), Local3)
+                Store (CpmReadMem8 (Add (Local0, Local1), CpmCoreTopologyBridge, 0, 8), Local4)
+                Store (CpmReadMem8 (Add (Local0, Local1), CpmCoreTopologyBus, 0, 8), Local5)
+                If (LAnd (LEqual (Local2, Arg0), LEqual (Local3, Arg1))) {
+                    If (LEqual (Local4, Arg2)) {
+                        Return (Local5)
+                    }
+                }
+                Add (Local1, CpmCoreTopologySize, Local1)
+            }
+        }
+    }
+    Return (0xFFFFFFFF)
+}
+
+//
+//  Read Table in Byte
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//
+Method (CpmReadTable, 2, Serialized) {
+    Store (0, Local0)
+    If (LNotEqual (Arg0, 0)) {
+        Add (Arg0, Arg1, Local0)
+        OperationRegion (varM, SystemMemory, Local0, 0x1)
+        Field (varM, ByteAcc, NoLock, Preserve) {
+            varR, 8,
+        }
+        Store (varR, Local0)
+    }
+    return (Local0)
+}
+
+//
+//  Read Table in Word
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//
+Method (CpmReadTable16, 2, Serialized) {
+    Store (0, Local0)
+    If (LNotEqual (Arg0, 0)) {
+        Add (Arg0, Arg1, Local0)
+        OperationRegion (varM, SystemMemory, Local0, 0x2)
+        Field (varM, WordAcc, NoLock, Preserve) {
+            varR, 16,
+        }
+        Store (varR, Local0)
+    }
+    return (Local0)
+}
+
+//
+//  Read Table in DWord
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//
+Method (CpmReadTable32, 2, Serialized) {
+    Store (0, Local0)
+    If (LNotEqual (Arg0, 0)) {
+        Add (Arg0, Arg1, Local0)
+        OperationRegion (varM, SystemMemory, Local0, 0x4)
+        Field (varM, DWordAcc, NoLock, Preserve) {
+            varR, 32,
+        }
+        Store (varR, Local0)
+    }
+    return (Local0)
+}
+
+//
+//  Write Table in Byte
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Data in Byte
+//
+Method (CpmWriteTable, 3, Serialized) {
+    If (LNotEqual (Arg0, 0)) {
+        Add (Arg0, Arg1, Local0)
+        OperationRegion (varM, SystemMemory, Local0, 0x1)
+        Field (varM, ByteAcc, NoLock, Preserve) {
+            varR, 8,
+        }
+        Store (Arg2, varR)
+    }
+}
+
+//
+//  Write Table in Word
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Data in Word
+//
+Method (CpmWriteTable16, 3, Serialized) {
+    If (LNotEqual (Arg0, 0)) {
+        Add (Arg0, Arg1, Local0)
+        OperationRegion (varM, SystemMemory, Local0, 0x2)
+        Field (varM, WordAcc, NoLock, Preserve) {
+            varR, 16,
+        }
+        Store (Arg2, varR)
+    }
+}
+
+//
+//  Write Table in DWord
+//  Arg0 - Base Address
+//  Arg1 - Offset
+//  Arg2 - Data in DWord
+//
+Method (CpmWriteTable32, 3, Serialized) {
+    If (LNotEqual (Arg0, 0)) {
+        Add (Arg0, Arg1, Local0)
+        OperationRegion (varM, SystemMemory, Local0, 0x4)
+        Field (varM, DWordAcc, NoLock, Preserve) {
+            varR, 32,
+        }
+        Store (Arg2, varR)
+    }
+}
+

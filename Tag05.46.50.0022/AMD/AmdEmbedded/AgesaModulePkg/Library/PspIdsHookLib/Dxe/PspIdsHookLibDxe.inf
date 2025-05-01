@@ -1,0 +1,41 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = PspIdsHookLibDxe
+  FILE_GUID                      = 697FE0FC-226A-41CA-9ACF-3D8AA64A9B6C
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PspIdsHookLibDxe
+
+[Sources.common]
+  PspIdsHookLibDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  AmdIdsDebugPrintLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[FeaturePcd]
+
+[Pcd]
+
+[Depex]
+  TRUE
+
+[BuildOptions]
+
+

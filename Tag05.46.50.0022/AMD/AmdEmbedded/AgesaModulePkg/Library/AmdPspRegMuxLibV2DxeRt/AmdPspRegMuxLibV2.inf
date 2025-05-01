@@ -1,0 +1,42 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2018-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPspRegMuxLibV2DxeRt
+  FILE_GUID                      = bd3e6ba3-f16e-4ed8-ab2b-0a6d07016f10
+  MODULE_TYPE                    = DXE_RUNTIME_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdPspRegMuxLibV2|DXE_RUNTIME_DRIVER
+  CONSTRUCTOR                    = AmdPspRegMuxLibV2Constructor
+
+[Sources]
+  AmdPspRegMuxLibV2.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  PrintLib
+  IoLib
+  PciLib
+  DebugLib
+  UefiBootServicesTableLib
+  DxeServicesTableLib
+  UefiRuntimeLib
+  AmdSocBaseLib
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspRomArmorSelection
+
+[Guids]
+  gEfiEventVirtualAddressChangeGuid     #CONSUMES #EVENT

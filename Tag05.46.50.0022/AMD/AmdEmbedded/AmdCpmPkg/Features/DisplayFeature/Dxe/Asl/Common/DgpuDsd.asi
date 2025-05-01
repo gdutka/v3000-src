@@ -1,0 +1,23 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2020-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+  Method (_DSD, 0, Serialized) {
+    // This is only for no SWUS/SWDS dGPU, ex: Ellesmere/Baffin/Iceland/Lexa.
+    Return (Package (6) {
+      ToUUID("6B4AD420-8FD3-4364-ACF8-EB94876FD9EB"),
+      Package (0) { },
+      ToUUID ("6211E2C0-58A3-4AF3-90E1-927A4E0C55A4"),
+      Package (1) {
+        Package (2) {"HotPlugSupportInD3", 1},
+      },
+      ToUUID("FDF06FAD-F744-4451-BB64-ECD792215B10"),
+      Package (1) {
+        Package (2) {"FundamentalDeviceResetTriggeredOnD3ToD0", 1},
+      }
+    })
+  }
+

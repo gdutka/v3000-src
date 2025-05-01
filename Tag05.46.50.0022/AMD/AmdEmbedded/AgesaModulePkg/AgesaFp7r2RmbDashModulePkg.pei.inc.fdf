@@ -1,0 +1,54 @@
+#;*******************************************************************************
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;****************************************************************************
+    INF AgesaModulePkg/Debug/AmdIdsDebugPrintPei/AmdIdsDebugPrintPei.inf
+
+    INF AgesaModulePkg/Psp/AmdPspPeiV2Rmb/AmdPspPeiV2.inf
+    INF AgesaModulePkg/Psp/AmdPspFtpmPei/AmdPspFtpmPei.inf
+    INF AgesaModulePkg/Psp/AmdHspFtpmPei/AmdHspFtpmPei.inf
+    INF AgesaModulePkg/Psp/ApobDrv/ApobRmbPei/ApobRmbPei.inf
+    INF AgesaModulePkg/Psp/AmdPspIntrusionDetection/AmdPspIntrusionDetectionPei.inf
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmPei/MpmPei.inf
+!endif
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmAsf/MpmAsfPei/MpmAsfPei.inf
+!endif
+
+#   ## MEM Pei Drivers
+    INF AgesaModulePkg/Mem/AmdMemFp7Pei/AmdMemFp7Pei.inf
+
+#   ## SOC Pei Drivers
+    INF AgesaModulePkg/Soc/AmdSocFp7r2RmbPei/AmdSocFp7r2RmbPei.inf
+    INF AgesaModulePkg/Nbio/EarlyPhase/AmdNbioEarlyPhaseRMBPei/AmdNbioEarlyPhaseRMBPei.inf
+    INF AgesaModulePkg/ErrorLog/AmdErrorLogPei/AmdErrorLogPei.inf
+
+#   ## DF Pei Drivers
+    INF AgesaModulePkg/Fabric/RMB/FabricRmbPei/AmdFabricRmbPei.inf
+
+#   ## Fch Pei Drivers
+    INF AgesaModulePkg/Fch/Keith/FchKeithPei/FchPei.inf
+    INF AgesaModulePkg/Fch/Keith/FchKeithSmbusPei/Smbus.inf
+
+#   ## GNb Pei Drivers
+    INF AgesaModulePkg/Nbio/GFX/RMB/PEI/AmdNbioGfxRMBPei.inf
+    INF AgesaModulePkg/Nbio/IOMMU/RMB/PEI/AmdNbioIOMMURMBPei.inf
+    INF AgesaModulePkg/Nbio/NbioBase/RMB/PEI/AmdNbioBaseRMBPei.inf
+    INF AgesaModulePkg/Nbio/PCIe/RMB/PEI/AmdNbioPcieRMBPei.inf
+    INF AgesaModulePkg/Nbio/SMU/RMB/PEI/SmuV13PeiRMB.inf
+
+#   ## Ccx Pei Drivers
+    INF AgesaModulePkg/Ccx/Zen3/Pei/Rmb/AmdCcxZen3RmbPei.inf
+
+#   ## Universal PEIM
+    INF AgesaModulePkg/Universal/Version/AmdVersionPei/AmdVersionPei.inf
+
+#   ## MEM PEIMs
+    INF AgesaModulePkg/Mem/AmdMemChanXLatDummyPei/MemChanXLatDummyPei.inf
+    INF AgesaModulePkg/Mem/AmdMemoryHobInfoPeimRmb/AmdMemoryHobInfoPeim.inf
+    INF AgesaModulePkg/Mem/AmdMemSmbiosV2RmbPei/MemSmbiosV2Pei.inf
+    INF AgesaModulePkg/Mem/AmdMemRestorePei/MemRestorePei.inf
+
+#   ## Usb4 PEIMs
+    INF AgesaModulePkg/Usb4/AmdUsb4Pei/AmdUsb4Pei.inf

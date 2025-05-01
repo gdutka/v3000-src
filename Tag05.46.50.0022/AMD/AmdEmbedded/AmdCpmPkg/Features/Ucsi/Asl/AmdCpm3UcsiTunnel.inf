@@ -1,0 +1,21 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmUcsiTunnel
+  FILE_GUID             = 1CBE7CAE-48C2-43D3-9FFD-3EE6BBEF2929
+  MODULE_TYPE           = USER_DEFINED
+  VERSION_STRING        = 1.0
+
+[Sources.common]
+  UcsiTunnel.asl
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec

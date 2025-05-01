@@ -1,0 +1,38 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = CcxApicZen3Lib
+  FILE_GUID                      = A10D686C-E457-4d4f-8040-36D647CEBAA7
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CcxApicZen3Lib
+
+[Sources.common]
+  CcxApicZen3Lib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  CcxBaseX86Lib
+  SmnAccessLib
+  FabricRegisterAccLib
+
+[Guids]
+
+[Protocols]
+  gAmdCoreTopologyServicesV2ProtocolGuid  #CONSUMED
+
+[Ppis]
+
+[Pcd]
+
+[Depex]

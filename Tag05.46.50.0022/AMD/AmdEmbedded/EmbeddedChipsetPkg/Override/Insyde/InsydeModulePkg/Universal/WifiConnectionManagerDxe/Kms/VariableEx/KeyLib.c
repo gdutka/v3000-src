@@ -1,0 +1,343 @@
+/*++
+  This file contains a 'Sample Driver' and is licensed as such
+  under the terms of your license agreement with Intel or your
+  vendor.  This file may be modified by the user, subject to
+  the additional terms of the license agreement
+--*/
+/** @file
+ The key lib implementation.
+
+Copyright (c) 2013 - 2017, Intel Corporation. All rights reserved.<BR>
+This software and associated documentation (if any) is furnished
+under a license and may only be used or copied in accordance
+with the terms of the license. Except as permitted by such
+license, no part of this software or documentation may be
+reproduced, stored in a retrieval system, or transmitted in any
+form or by any means without the express written consent of
+Intel Corporation.
+
+**/
+
+#include <Uefi.h>
+#include <Library/MemoryAllocationLib.h>
+#include <Library/DebugLib.h>
+#include <Library/BaseCryptLib.h>
+
+#include <Protocol/CryptoServices.h>
+
+#include "KeyLib.h"
+
+#define DEFAULT_AES_KEY_BIT_SIZE       256
+#define DEFAULT_PBKDF2_ITERATION_COUNT 15
+
+//
+// CryptoServices
+//
+CRYPTO_SERVICES_PBKDF2_CREATE_KEY  mPbkdf2CreateKey;
+
+/**
+  Generate Salt value.
+
+  @param[in, out]   SaltValue           Points to the salt buffer
+  @param[in]        SaltSize            Size of the salt buffer
+
+  @retval      TRUE           Salt is generated.
+  @retval      FALSE          Salt is not generated.
+**/
+BOOLEAN
+EFIAPI
+KeyLibGenerateSalt (
+  IN OUT UINT8  *SaltValue,
+  IN UINTN      SaltSize
+  )
+{
+  if (SaltValue == NULL) {
+    return FALSE;
+  }
+  RandomSeed(NULL, 0);
+  RandomBytes(SaltValue, SaltSize);
+  return TRUE;
+}
+
+/**
+  Hash the data.
+
+  @param[in]   HashType         Hash type
+  @param[in]   Key              Points to the key buffer
+  @param[in]   KeySize          Key buffer size
+  @param[in]   SaltValue        Points to the salt buffer
+  @param[in]   SaltSize         Size of the salt buffer
+  @param[out]  KeyHash          Points to the hashed result
+  @param[in]   KeyHashSize      Size of the hash buffer
+
+  @retval      TRUE           Hash the data successfully.
+  @retval      FALSE          Failed to hash the data.
+
+**/
+BOOLEAN
+EFIAPI
+KeyLibGenerateHash(
+  IN   UINT32              HashType,
+  IN   VOID                *Key,
+  IN   UINTN               KeySize,
+  IN   UINT8               *SaltValue,
+  IN   UINTN               SaltSize,
+  OUT  UINT8               *KeyHash,
+  IN   UINTN               KeyHashSize
+  )
+{
+  BOOLEAN                     Status;
+  VOID                        *Hash;
+
+  Status = FALSE;
+
+  if (HashType != HASH_TYPE_SHA256) {
+    return FALSE;
+  }
+  if (KeyHashSize != SHA256_DIGEST_SIZE) {
+    return FALSE;
+  }
+
+  if ((Key == NULL) || (SaltValue == NULL) || (KeyHash == NULL)) {
+    return FALSE;
+  }
+
+  Hash = AllocatePool (Sha256GetContextSize ());
+  if (Hash == NULL) {
+    goto Done;
+  }
+
+  Status = Sha256Init(Hash);
+  if (!Status) {
+    goto Done;
+  }
+
+  Status = Sha256Update(Hash, SaltValue, SaltSize);
+  if (!Status) {
+    goto Done;
+  }
+  Status = Sha256Update(Hash, Key, KeySize);
+  if (!Status) {
+    goto Done;
+  }
+
+  Status = Sha256Final(Hash, KeyHash);
+Done:
+  if (Hash != NULL) {
+    FreePool (Hash);
+  }
+  return Status;
+}
+
+/**
+  Encrypt the data.
+
+  InputDataSize must be block size aligned.
+
+  @param[in]   SymType        Symetric Encryption type
+  @param[in]   Key            Points to the key buffer
+  @param[in]   KeySize        Key buffer size
+  @param[in]   SaltValue      Points to the salt buffer
+  @param[in]   SaltSize       Size of the salt buffer
+  @param[in]   InputData      Points to the input data
+  @param[in]   InputDataSize  Size of the input data
+  @param[out]  OutputData     Points to the output data
+  @param[in]   OutputDataSize Size of the output data
+
+  @retval      TRUE           Encrypt the data successfully.
+  @retval      FALSE          Failed to encrypt the data.
+
+**/
+BOOLEAN
+EFIAPI
+KeyLibEncrypt(
+  IN   UINT32              SymType,
+  IN   VOID                *Key,
+  IN   UINTN               KeySize,
+  IN   UINT8               *SaltValue,
+  IN   UINTN               SaltSize,
+  IN   VOID                *InputData,
+  IN   UINTN               InputDataSize,
+  OUT  VOID                *OutputData,
+  IN   UINTN               OutputDataSize
+  )
+{
+  BOOLEAN                     Status;
+  UINT8                       KeyBuffer[(DEFAULT_AES_KEY_BIT_SIZE / 8) + AES_BLOCK_SIZE];
+  UINT8                       *Ivec;
+  VOID                        *AesCtx;
+
+  if (SymType != SYM_TYPE_AES) {
+    return FALSE;
+  }
+
+  if (((InputDataSize % AES_BLOCK_SIZE) != 0) || ((OutputDataSize % AES_BLOCK_SIZE) != 0)) {
+    return FALSE;
+  }
+  if (InputDataSize != OutputDataSize) {
+    return FALSE;
+  }
+
+  if ((Key == NULL) || (SaltValue == NULL) || (InputData == NULL) || (OutputData == NULL)) {
+    return FALSE;
+  }
+  if ((KeySize > MAX_UINTN) || (SaltSize > MAX_UINTN)) {
+    return FALSE;
+  }
+
+//
+//  Translate to Pbkdf2CreateKey, it provided by CryptoServices protocol.
+//
+//  Status = Pkcs5HashPassword (
+//             KeySize,
+//             Key,
+//             SaltSize,
+//             SaltValue,
+//             DEFAULT_PBKDF2_ITERATION_COUNT,
+//             SHA256_DIGEST_SIZE,
+//             sizeof (KeyBuffer),
+//             KeyBuffer
+//             );
+  Status = mPbkdf2CreateKey (
+             SaltValue,
+             SaltSize,
+             SHA256_WITH_RSA_ENCRYPTION,
+             DEFAULT_PBKDF2_ITERATION_COUNT,
+             Key,
+             KeySize,
+             sizeof (KeyBuffer),
+             KeyBuffer
+             );
+  if (!Status) {
+    return FALSE;
+  }
+
+  Ivec = KeyBuffer + (DEFAULT_AES_KEY_BIT_SIZE / 8);
+
+  AesCtx = AllocatePool (AesGetContextSize());
+  if (AesCtx == NULL) {
+    return FALSE;
+  }
+  Status = AesInit (AesCtx, KeyBuffer, DEFAULT_AES_KEY_BIT_SIZE);
+  if (!Status) {
+    goto Done;
+  }
+
+  Status = AesCbcEncrypt (
+             AesCtx,
+             InputData,
+             InputDataSize,
+             Ivec,
+             OutputData
+             );
+
+Done:
+  if (AesCtx != NULL) {
+    FreePool (AesCtx);
+  }
+  return Status;
+}
+
+/**
+  Decrypt the data.
+
+  InputDataSize must be block size aligned.
+
+  @param[in]   SymType        Symetric Encryption type
+  @param[in]   Key            Points to the key buffer
+  @param[in]   KeySize        Key buffer size
+  @param[in]   SaltValue      Points to the salt buffer
+  @param[in]   SaltSize       Size of the salt buffer
+  @param[in]   InputData      Points to the input data
+  @param[in]   InputDataSize  Size of the input data
+  @param[out]  OutputData     Points to the output data
+  @param[in]   OutputDataSize Size of the output data
+
+  @retval      TRUE           Decrypt the data successfully.
+  @retval      FALSE          Failed to decrypt the data.
+
+**/
+BOOLEAN
+EFIAPI
+KeyLibDecrypt(
+  IN   UINT32              SymType,
+  IN   VOID                *Key,
+  IN   UINTN               KeySize,
+  IN   UINT8               *SaltValue,
+  IN   UINTN               SaltSize,
+  IN   VOID                *InputData,
+  IN   UINTN               InputDataSize,
+  OUT  VOID                *OutputData,
+  IN   UINTN               OutputDataSize
+  )
+{
+  BOOLEAN                     Status;
+  UINT8                       KeyBuffer[(DEFAULT_AES_KEY_BIT_SIZE / 8) + AES_BLOCK_SIZE];
+  UINT8                       *Ivec;
+  VOID                        *AesCtx;
+
+  if (SymType != SYM_TYPE_AES) {
+    return FALSE;
+  }
+
+  if (((InputDataSize % AES_BLOCK_SIZE) != 0) || ((OutputDataSize % AES_BLOCK_SIZE) != 0)) {
+    return FALSE;
+  }
+  if (InputDataSize != OutputDataSize) {
+    return FALSE;
+  }
+
+  if ((Key == NULL) || (SaltValue == NULL) || (InputData == NULL) || (OutputData == NULL)) {
+    return FALSE;
+  }
+  if ((KeySize > MAX_UINTN) || (SaltSize > MAX_UINTN)) {
+    return FALSE;
+  }
+
+//
+//  Translate to Pbkdf2CreateKey, it provided by CryptoServices protocol.
+//
+//  Status = Pkcs5HashPassword (
+//             KeySize,
+//             Key,
+//             SaltSize,
+//             SaltValue,
+//             DEFAULT_PBKDF2_ITERATION_COUNT,
+//             SHA256_DIGEST_SIZE,
+//             sizeof (KeyBuffer),
+//             KeyBuffer
+//             );
+  Status = mPbkdf2CreateKey (
+             SaltValue,
+             SaltSize,
+             SHA256_WITH_RSA_ENCRYPTION,
+             DEFAULT_PBKDF2_ITERATION_COUNT,
+             Key,
+             KeySize,
+             sizeof (KeyBuffer),
+             KeyBuffer
+             );
+  if (!Status) {
+    return FALSE;
+  }
+
+  Ivec = KeyBuffer + (DEFAULT_AES_KEY_BIT_SIZE / 8);
+
+  AesCtx = AllocatePool (AesGetContextSize());
+  if (AesCtx == NULL) {
+    return FALSE;
+  }
+
+  Status = AesInit (AesCtx, KeyBuffer, DEFAULT_AES_KEY_BIT_SIZE);
+  if (!Status) {
+    goto Done;
+  }
+
+  Status = AesCbcDecrypt (AesCtx, InputData, InputDataSize, Ivec, OutputData);
+
+Done:
+  if (AesCtx != NULL) {
+    FreePool (AesCtx);
+  }
+  return Status;
+}

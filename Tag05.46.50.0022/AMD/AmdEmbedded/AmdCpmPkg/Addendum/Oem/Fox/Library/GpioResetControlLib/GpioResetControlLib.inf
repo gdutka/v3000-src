@@ -1,0 +1,41 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = GpioResetControlLib
+  FILE_GUID                      = 473A36C9-F8D8-432E-A47F-3FFBB049E763
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OemGpioResetControlLib
+
+[Sources]
+  GpioResetControlLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+
+[LibraryClasses]
+  OemGpioResetControlLib
+  AmdPbsConfigLib
+
+[Ppis]
+  gAmdCpmTablePpiGuid
+  gAmdNbioPcieComplexPpiGuid
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdRmbBoardSelect
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchMiscModernStanbyEnable
+  gAmdCpmPkgTokenSpaceGuid.PcdRmbDevPwrTblStageRestore
+
+[Depex]
+  TRUE

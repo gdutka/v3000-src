@@ -1,0 +1,109 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdNbioPcieDxe
+  FILE_GUID                      = 8A8A6221-E240-4E09-ABC3-B1DF3609B027
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdNbioPcieDxeEntry
+
+[Sources]
+  AmdNbioPcieDxe.c
+  AmdNbioPcieSris.c
+  AmdNbioPcieClkReq.c
+  AmdPsppRMB.c
+  AmdAPlusA.c
+  AmdNbioExitLatency.c
+  AmdNbioPcieDxe.h
+  AmdNbioPcieAspm.c
+  AmdNbioPcieAer.c
+  AmdNbioPcieAer.h
+  RASControl.c
+  ../Common/PcieStraps.c
+  ../Common/PcieStraps.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  IdsLib
+  UefiLib
+  HobLib
+  PcieMiscCommLib
+  NbioHandleLib
+  SmnAccessLib
+  PcieConfigLib
+  AmdIdsHookLib
+  NbioIdsHookRmbLibDxe
+  GnbPciAccLib
+  GnbPciLib
+  NbioTableBlastLib
+  NbioSmuV13Lib
+  AmdS3SaveLib
+  OemClkReqControlLib
+  SmnTableLib
+
+[Guids]
+  gGnbPcieHobInfoGuid
+  gEfiHobListGuid
+
+[Protocols]
+  gAmdNbioPcieServicesProtocolGuid
+  gEfiPciIoProtocolGuid
+  gAmdNbioPcieAerProtocolGuid
+  gAmdSocLogicalIdProtocolGuid
+  gEfiMpServiceProtocolGuid
+  gEfiPciEnumerationCompleteProtocolGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPsppPolicy
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgPeApmEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppTxClkDynPortGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppTxClkDynTrPortGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppTxClkRxpClkEnPortGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGfxTxClkDynPortGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGfxTxClkDynTrPortGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGfxTxClkRxpClkEnPortGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGfxPcieDynPortGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppPcieDynPortGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGfxPcieSdpControl
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppPcieSdpControl
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPCIeLTREnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPCIeClkReqMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgAEREnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPcieAerReportMechanism
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdEdpcEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMaskNbioSyncFlood
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioPoisonConsumption
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPcieSyncFloodOnFatal
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPcieEcrcSeverityFatal
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPcieEcrcEnablement
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioRASControlV2
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgPcieTbtSupport
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEgressPoisonSeverityHi
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEgressPoisonSeverityLo
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdEnableEgressPoisonSeverity
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioEgressPoisonMaskHi
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioEgressPoisonMaskLo
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioRASUcpMaskHi
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioRASUcpMaskLo
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSyshubWdtTimerInterval
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSyncFloodToApml
+
+[Depex]
+  gAmdNbioPcieRMBDxeDepexProtocolGuid AND
+  gAmdSocLogicalIdProtocolGuid
+
+

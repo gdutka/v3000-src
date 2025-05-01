@@ -1,0 +1,64 @@
+#/** @file
+#
+#  Component description file for H2O Form Panel driver.
+#
+#;******************************************************************************
+#;* Copyright (c) 2019 - 2021, Insyde Software Corporation. All Rights Reserved.
+#;*
+#;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#;* transmit, broadcast, present, recite, release, license or otherwise exploit
+#;* any part of this publication in any form, by any means, without the prior
+#;* written permission of Insyde Software Corporation.
+#;*
+#;******************************************************************************
+#*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = H2OFormPanelDxe
+  FILE_GUID                      = CAD981D7-5268-4D3C-8C1F-D43FCADBE6B5
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = H2OFormPanelDxeEntry
+
+[Sources]
+  H2OFormPanelDxe.c
+  H2OFormPanelStr.uni
+  H2OFormPanelImg.idf
+  H2OFormPanelVfr.vfr
+
+[Packages]
+  InsydeSetupPkg/InsydeSetupPkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  HiiLib
+  HiiExLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  VariableLib
+  UefiHiiServicesLib
+
+[Guids]
+  gEfiIfrTianoGuid
+
+[Protocols]
+  gEfiHiiConfigAccessProtocolGuid               ## PRODUCES
+  gH2OFormBrowserProtocolGuid                   ## CONSUMES
+  gEfiVariableArchProtocolGuid                  ## CONSUMES
+  gEdkiiVariableLockProtocolGuid                ## CONSUMES
+
+[Pcd]
+
+[Depex]
+  gEfiVariableArchProtocolGuid      AND
+  gEfiVariableWriteArchProtocolGuid AND
+  gEfiHiiDatabaseProtocolGuid
+

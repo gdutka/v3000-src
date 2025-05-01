@@ -1,0 +1,21 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmNvmeD3Asl
+  FILE_GUID             = 04105aad-f74d-464c-9685-cb0b7829ff29
+  MODULE_TYPE           = USER_DEFINED
+  VERSION_STRING        = 1.0
+
+[Sources.common]
+  NvmeD3.asl
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec

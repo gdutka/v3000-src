@@ -1,0 +1,87 @@
+## @file
+#  Implement the PEIM of CrisisMemoryInitPei.
+#  
+#  ***************************************************************************
+#  * Copyright (c) 2012-2018, Insyde Software Corp. All Rights Reserved.
+#  *
+#  * You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#  * transmit, broadcast, present, recite, release, license or otherwise exploit
+#  * any part of this publication in any form, by any means, without the prior
+#  * written permission of Insyde Software Corporation.
+#  *
+#  ******************************************************************************
+#  
+##
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = CrisisMemoryInitPei
+  FILE_GUID                 = EE9F26FB-D6DE-4fd3-9720-DC6CD3E337C1
+  MODULE_TYPE               = PEIM
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = CrisisMemoryInitPeiEntryPoint
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+#[-start-230331-IB14740281-add]#
+  AmdCbsPkg/AmdCbsPkg.dec
+#[-end-230331-IB14740281-add]#
+
+[Sources]
+  CrisisMemoryInitPei.c
+  InstallPeiMemory.c
+  InstallPeiMemoryInternal.h
+  ReportMemoryError.c
+  TurnOnSmram.c
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  BaseMemoryLib
+  PostCodeLib
+  DebugLib
+  BaseLib
+  PcdLib
+  HobLib
+#[-start-241122-IB20840109-add]#
+  LockBoxLib
+#[-end-241122-IB20840109-add]#
+
+[Ppis]
+  gPeiCapsulePpiGuid
+  gPeiSpeakerInterfacePpiGuid
+  gPeiPlatformMemorySizePpiGuid
+  gPeiPlatformMemoryRangePpiGuid
+  gAmdMemoryInfoHobPpiGuid
+#[-start-230331-IB14740281-add]#
+  gEfiPeiReadOnlyVariable2PpiGuid
+#[-end-230331-IB14740281-add]#
+
+[Guids]
+  gUmaExistHobGuid
+  gAcpiVariableSetGuid
+  gEfiAcpiVariableGuid
+  gEfiMemoryTypeInformationGuid
+  gEfiSmmPeiSmramMemoryReserveGuid
+  gAmdMemoryInfoHobGuid
+#[-start-230331-IB14740281-add]#
+  gCbsSystemConfigurationGuid
+#[-end-230331-IB14740281-add]#
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdUseFastCrisisRecovery
+  gChipsetPkgTokenSpaceGuid.PcdH2OUmaBaseUpperThan4G
+  gChipsetPkgTokenSpaceGuid.PcdH2OTsegSize
+
+[Depex]
+#[-start-230331-IB14740281-add]#
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+#[-end-230331-IB14740281-add]#
+  gAmdMemoryInfoHobPpiGuid

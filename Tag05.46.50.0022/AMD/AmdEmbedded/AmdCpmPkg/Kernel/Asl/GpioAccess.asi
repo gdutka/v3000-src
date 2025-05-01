@@ -1,0 +1,660 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+//
+//  Read Smbus GPIO pin Status
+//  Arg0 - Pin Number
+// SMBUS GPIO Setting for BIT[15:8] = 0x06.
+//                    BIT[31]:            The Smbus number. 0 = Smbus0, 1 = Smbus1.
+//                    BIT[30:27]:         Fixed address of Slave Address.
+//                    BIT[26:24]:         Programmable or HW Selectable address of Slave Address (A2/A1/A0).
+//                    BIT[23:16]:         Reserved
+// GPIO Controller Selection.
+//                    BIT[15:8] = 0x06:   SMBUS IO Expander GPIO Pin
+// SMBUS GPIO Pin Number for BIT[15:8] = 0x06.
+//                    BIT[7:6] = 0x0:     SMBUS IO Expander 8-bit Controller
+//                    BIT[7:6] = 0x1:     SMBUS IO Expander 16-bit Controller
+//                    BIT[5:4] = 0x0:     SMBUS IO Expander Port 0
+//                    BIT[5:4] = 0x1:     SMBUS IO Expander Port 1
+//                    BIT[3:0]:           SMBUS GPIO Pin Number
+//
+Method (CpmSmbusReadGpio, 1, Serialized) {
+    // Local0 = SmbusSelect
+    ShiftRight (Arg0, 31, Local0)
+    And (Local0, 1, Local0)
+
+    // Local1 = SmbusAddress
+    ShiftRight (Arg0, 24, Local1)
+    And (Local1, 0x7F, Local1)
+
+    // Local3 = Smbus IO Expander Port
+    ShiftRight (Arg0, 4, Local3)
+    And (Local3, 3, Local3)
+
+    // Local4 = Pin number
+    And (Arg0, 0x7, Local4)
+
+    // Read Input port register (00h)
+    Store (CpmReadSmbusByte (Local0, Local1, Local3), Local5)
+    ShiftRight (Local5, Local4, Local5)
+    And (Local5, 1, Local5)
+
+    return (Local5)
+}
+
+//
+//  Read I2C GPIO pin Status
+//
+//  Arg0 - Pin Number
+//  I2C GPIO Setting for BIT[15:8] = 0x07.
+//                    BIT[31]:            Reserved
+//                    BIT[30:27]:         Fixed address of Slave Address.
+//                    BIT[26:24]:         Programmable or HW Selectable address of Slave Address (A2/A1/A0).
+//                    BIT[23:21]:         The I2C number. 0 = I2C0, 1 = I2C1, 2 = I2C2, 3 = I2C3, 4 = I2C4, 5 = I2C5
+//                    BIT[23:16]:         Reserved
+//  GPIO Controller Selection.
+//                    BIT[15:8] = 0x07:   I2C IO Expander GPIO Pin
+//  I2C GPIO Pin Number for BIT[15:8] = 0x07.
+//                    BIT[7:6] = 0x0:     I2C IO Expander 8-bit Controller
+//                    BIT[7:6] = 0x1:     I2C IO Expander 16-bit Controller
+//                    BIT[5:4] = 0x0:     I2C IO Expander Port 0
+//                    BIT[5:4] = 0x1:     I2C IO Expander Port 1
+//                    BIT[3:0]:           I2C GPIO Pin Number
+//
+Method (CpmI2CReadGpio, 1, Serialized) {
+    // Local0 = SmbusSelect
+    ShiftRight (Arg0, 21, Local0)
+    And (Local0, 7, Local0)
+
+    // Local1 = SmbusAddress
+    ShiftRight (Arg0, 24, Local1)
+    And (Local1, 0x7F, Local1)
+
+    // Local3 = Smbus IO Expander Port
+    ShiftRight (Arg0, 4, Local3)
+    And (Local3, 3, Local3)
+
+    // Local4 = Pin number
+    And (Arg0, 0x7, Local4)
+
+    // Read Input port register (00h)
+    Store (CpmReadI2CByte (Local0, Local1, Local3), Local5)
+    ShiftRight (Local5, Local4, Local5)
+    And (Local5, 1, Local5)
+
+    return (Local5)
+}
+
+//
+//  Write Smbus GPIO pin
+//  Arg0 - Pin Number
+// SMBUS GPIO Setting for BIT[15:8] = 0x06.
+//                    BIT[31]:            The Smbus number. 0 = Smbus0, 1 = Smbus1.
+//                    BIT[30:27]:         Fixed address of Slave Address.
+//                    BIT[26:24]:         Programmable or HW Selectable address of Slave Address (A2/A1/A0).
+//                    BIT[23:16]:         Reserved
+// GPIO Controller Selection.
+//                    BIT[15:8] = 0x06:   SMBUS IO Expander GPIO Pin
+// SMBUS GPIO Pin Number for BIT[15:8] = 0x06.
+//                    BIT[7:6] = 0x0:     SMBUS IO Expander 8-bit Controller
+//                    BIT[7:6] = 0x1:     SMBUS IO Expander 16-bit Controller
+//                    BIT[5:4] = 0x0:     SMBUS IO Expander Port 0
+//                    BIT[5:4] = 0x1:     SMBUS IO Expander Port 1
+//                    BIT[3:0]:           SMBUS GPIO Pin Number
+//  Arg1 - GPIO level: 0: Low. 1: High
+//
+Method (CpmSmbusWriteGpio, 2, Serialized) {
+    // Local0 = SmbusSelect
+    ShiftRight (Arg0, 31, Local0)
+    And (Local0, 1, Local0)
+
+    // Local1 = SmbusAddress
+    ShiftRight (Arg0, 24, Local1)
+    And (Local1, 0x7F, Local1)
+
+    // Local2 = Smbus IO Expander Chip
+    ShiftRight (Arg0, 6, Local2)
+    And (Local2, 3, Local2)
+
+    // Local3 = Smbus IO Expander Port
+    ShiftRight (Arg0, 4, Local3)
+    And (Local3, 3, Local3)
+
+    // Local4 = Pin number
+    And (Arg0, 0x7, Local4)
+
+    // Read Output port register (01h)
+    Store (CpmReadSmbusByte (Local0, Local1, Add (Multiply (Add (Local2, 1), 1), Local3)), Local5)
+    Store (Local5, Local6)
+    And (Local5, Xor (0xFFFFFFFF, ShiftLeft (0x1, Local4)), Local5)
+    Or (Local5, ShiftLeft (And (Arg1, 1), Local4), Local5)
+
+    // Write Output port register (01h)
+    If (LNotEqual (Local5, Local6)) {
+        CpmWriteSmbusByte (Local0, Local1, Add (Multiply (Add (Local2, 1), 1), Local3), Local5)
+    }
+}
+
+//
+//  I2C Smbus GPIO pin
+//
+//  Arg0 - Pin Number
+// I2C GPIO Setting for BIT[15:8] = 0x07.
+//                    BIT[31]:            Reserved
+//                    BIT[30:27]:         Fixed address of Slave Address.
+//                    BIT[26:24]:         Programmable or HW Selectable address of Slave Address (A2/A1/A0).
+//                    BIT[23:21]:         The I2C number. 0 = I2C0, 1 = I2C1, 2 = I2C2, 3 = I2C3, 4 = I2C4, 5 = I2C5
+//                    BIT[20:16]:         Reserved
+// GPIO Controller Selection.
+//                    BIT[15:8] = 0x07:   I2C IO Expander GPIO Pin
+// I2C GPIO Pin Number for BIT[15:8] = 0x07.
+//                    BIT[7:6] = 0x0:     I2C IO Expander 8-bit Controller
+//                    BIT[7:6] = 0x1:     I2C IO Expander 16-bit Controller
+//                    BIT[5:4] = 0x0:     I2C IO Expander Port 0
+//                    BIT[5:4] = 0x1:     I2C IO Expander Port 1
+//                    BIT[3:0]:           I2C GPIO Pin Number
+//  Arg1 - GPIO level: 0: Low. 1: High
+//
+Method (CpmI2CWriteGpio, 2, Serialized) {
+    // Local0 = SmbusSelect
+    ShiftRight (Arg0, 21, Local0)
+    And (Local0, 7, Local0)
+
+    // Local1 = SmbusAddress
+    ShiftRight (Arg0, 24, Local1)
+    And (Local1, 0x7F, Local1)
+
+    // Local2 = Smbus IO Expander Chip
+    ShiftRight (Arg0, 6, Local2)
+    And (Local2, 3, Local2)
+
+    // Local3 = Smbus IO Expander Port
+    ShiftRight (Arg0, 4, Local3)
+    And (Local3, 3, Local3)
+
+    // Local4 = Pin number
+    And (Arg0, 0x7, Local4)
+
+    // Read Output port register (01h)
+    Store (CpmReadI2CByte (Local0, Local1, Add (Multiply (Add (Local2, 1), 1), Local3)), Local5)
+    Store (Local5, Local6)
+    And (Local5, Xor (0xFFFFFFFF, ShiftLeft (0x1, Local4)), Local5)
+    Or (Local5, ShiftLeft (And (Arg1, 1), Local4), Local5)
+
+    // Write Output port register (01h)
+    If (LNotEqual (Local5, Local6)) {
+        CpmWriteI2CByte (Local0, Local1, Add (Multiply (Add (Local2, 1), 1), Local3), Local5)
+    }
+}
+
+#define PT_GPIO_BAR 0xFEC30000
+// offset 0x00 - 0 input, 1 output
+// offset 0x04 - input value, output mode always get 0
+// offset 0x08 - output value
+
+//  Read PT GPIO pin Status
+//  Arg0 - Pin Number
+//
+Method (CpmPtReadGpio, 1, Serialized) {
+    // Input Mode - bit x=0
+    CpmWriteMem8 (PT_GPIO_BAR, 0x00, Arg0, 1, 0)
+
+    // Read GPIO - output mode always retrun 0
+    Store (CpmReadMem8 (PT_GPIO_BAR, 0x04, Arg0, 1), Local0)
+    return (Local0)
+}
+
+//
+//  Write PT GPIO pin
+//  Arg0 - Pin Number
+//  Arg1 - GPIO level: 0: Low. 1: High
+//
+Method (CpmPtWriteGpio, 2, Serialized) {
+    // Output Mode - bit x=1
+    CpmWriteMem8 (PT_GPIO_BAR, 0x00, Arg0, 1, 1)
+
+    // Write GPIO
+    CpmWriteMem8 (PT_GPIO_BAR, 0x08, Arg0, 1, Arg1)
+}
+
+//
+//  Read GPIO pin Status
+//  Arg0 - Pin Number
+// FCH/Bixby GPIO/Remote GPIO setting for BIT[15:8] = 0x00/0x01/0x04/0x05.
+//                    BIT[31]:            Multi Socket Number
+//                    BIT[30:29]:         Multi Die Number
+//                    BIT[28:27]:         Multi Bridge Number
+//                    BIT[26:16]:         Reserved
+// SMBUS GPIO Setting for BIT[15:8] = 0x06.
+//                    BIT[31]:            The Smbus number. 0 = Smbus0, 1 = Smbus1.
+//                    BIT[30:27]:         Fixed address of Slave Address.
+//                    BIT[26:24]:         Programmable or HW Selectable address of Slave Address (A2/A1/A0).
+//                    BIT[23:16]:         Reserved
+// I2C GPIO Setting for BIT[15:8] = 0x07.
+//                    BIT[31]:            Reserved
+//                    BIT[30:27]:         Fixed address of Slave Address.
+//                    BIT[26:24]:         Programmable or HW Selectable address of Slave Address (A2/A1/A0).
+//                    BIT[23:21]:         The I2C number. 0 = I2C0, 1 = I2C1, 2 = I2C2, 3 = I2C3, 4 = I2C4, 5 = I2C5
+//                    BIT[20:16]:         Reserved
+// GPIO Controller Selection.
+//                    BIT[15:8] = 0x00:   FCH GPIO Pin
+//                    BIT[15:8] = 0x01:   Remote FCH GPIO Pin
+//                    BIT[15:8] = 0x02:   ECRAM GPIO Pin on Reference Board
+//                    BIT[15:8] = 0x03:   Promontory GPIO Pin
+//                    BIT[15:8] = 0x04:   Bixby GPIO Pin
+//                    BIT[15:8] = 0x05:   Bixby Remote GPIO Pin
+//                    BIT[15:8] = 0x06:   SMBUS IO Expander GPIO Pin
+//                    BIT[15:8] = 0x07:   I2C IO Expander GPIO Pin
+//                    BIT[15:8] > 0x06:   Reserved
+// Non-SMBUS GPIO Pin Number for BIT[15:8] = 0x00 ~ 0x05
+//                    BIT[7:0]:           GPIO Pin Number
+// SMBUS GPIO Pin Number for BIT[15:8] = 0x06.
+//                    BIT[7:6] = 0x0:     SMBUS IO Expander 8-bit Controller
+//                    BIT[7:6] = 0x1:     SMBUS IO Expander 16-bit Controller
+//                    BIT[5:4] = 0x0:     SMBUS IO Expander Port 0
+//                    BIT[5:4] = 0x1:     SMBUS IO Expander Port 1
+//                    BIT[3:0]:           SMBUS GPIO Pin Number
+// I2C GPIO Pin Number for BIT[15:8] = 0x07.
+//                    BIT[7:6] = 0x0:     I2C IO Expander 8-bit Controller
+//                    BIT[7:6] = 0x1:     I2C IO Expander 16-bit Controller
+//                    BIT[5:4] = 0x0:     I2C IO Expander Port 0
+//                    BIT[5:4] = 0x1:     I2C IO Expander Port 1
+//                    BIT[3:0]:           I2C GPIO Pin Number
+//
+Method (CpmReadGpio, 1, Serialized) {
+    ShiftRight (Arg0, 8, Local0)
+    And (Local0, 0x7, Local0)
+    And (Arg0, 0xFF, Local1)
+    Store (0, Local2)
+    If (LOr (LEqual (Local0, 0), LEqual (Local0, 1))) {
+        // BIT[15:8] = 0x00:   FCH GPIO Pin
+        // BIT[15:8] = 0x01:   Remote FCH GPIO Pin
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ML)) {
+            If (LEqual (And (Arg0, 0xF8000000), 0)) {
+                If (LEqual (Local0, 0)) {
+                    Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (Local1, 4), 0, 1), Local2)
+                } Else {
+                    Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1202), Multiply (Local1, 4), 0, 1), Local2)
+                }
+            } Else {
+                ShiftRight (Arg0, 31, Local3)
+                And (Local3, 0x1, Local3)
+                ShiftRight (Arg0, 29, Local4)
+                And (Local4, 0x3, Local4)
+                ShiftRight (Arg0, 27, Local5)
+                And (Local5, 0x3, Local5)
+                If (LEqual (Local0, 0)) {
+                    Add (FchSmnGpio, Multiply (Local1, 4), Local6)
+                } Else {
+                    Add (FchSmnRemoteGpio, Multiply (Local1, 4), Local6)
+                }
+                Store (CpmReadSmnRegister (Local3, Local4, Local5, Local6), Local2)
+                ShiftRight (Local2, 16, Local2)
+                And (Local2, 0x1, Local2)
+            }
+        } Else {
+            Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x100), Local1, 7, 1), Local2)
+        }
+    } ElseIf (LOr (LEqual (Local0, 4), LEqual (Local0, 5))) {
+        // BIT[15:8] = 0x04:   Bixby GPIO Pin
+        // BIT[15:8] = 0x05:   Bixby Remote GPIO Pin
+        ShiftRight (Arg0, 31, Local3)
+        And (Local3, 0x1, Local3)
+        ShiftRight (Arg0, 29, Local4)
+        And (Local4, 0x3, Local4)
+        ShiftRight (Arg0, 27, Local5)
+        And (Local5, 0x3, Local5)
+        If (LEqual (Local0, 4)) {
+            Add (FchSmnGpio, Multiply (Local1, 4), Local6)
+        } Else {
+            Add (FchSmnRemoteGpio, Multiply (Local1, 4), Local6)
+        }
+        Store (CpmReadBxbSmnRegister (Local3, Local4, Local5, Local6), Local2)
+        ShiftRight (Local2, 16, Local2)
+        And (Local2, 0x1, Local2)
+    } ElseIf (LEqual (Local0, 2)) {
+        // BIT[15:8] = 0x02:   ECRAM GPIO Pin on Reference Board
+        If (LEqual (CpmReadTable (CpmMainTable, CpmEcSupport), 1)) {
+            Store (CpmKbcReadGpio (Add (Local1, 8)), Local2)
+        } Else {
+            Store (0xFF, Local2)
+        }
+    } ElseIf (LEqual (Local0, 3)) {
+        // BIT[15:8] = 0x03:   Promontory GPIO Pin
+        Store (CpmPtReadGpio (Local1), Local2)
+    } ElseIf (LEqual (Local0, 6)) {
+        // BIT[15:8] = 0x06:   SMBUS IO Expander GPIO Pin
+        Store (CpmSmbusReadGpio (Arg0), Local2)
+    } ElseIf (LEqual (Local0, 7)) {
+        // BIT[15:8] = 0x07:   I2C IO Expander GPIO Pin
+        Store (CpmI2CReadGpio (Arg0), Local2)
+    }
+    CpmDebugPrint ("  KER-ASL-CpmReadGpio  (0x%X) = 0x%X\n", Arg0, Local2, 0, 0, 0, 0)
+    return (Local2)
+}
+
+//
+//  Set GPIO pin
+//  Arg0 - Pin Number
+// FCH/Bixby GPIO/Remote GPIO setting for BIT[15:8] = 0x00/0x01/0x04/0x05.
+//                    BIT[31]:            Multi Socket Number
+//                    BIT[30:29]:         Multi Die Number
+//                    BIT[28:27]:         Multi Bridge Number
+//                    BIT[26:16]:         Reserved
+// SMBUS GPIO Setting for BIT[15:8] = 0x06.
+//                    BIT[31]:            The Smbus number. 0 = Smbus0, 1 = Smbus1.
+//                    BIT[30:27]:         Fixed address of Slave Address.
+//                    BIT[26:24]:         Programmable or HW Selectable address of Slave Address (A2/A1/A0).
+//                    BIT[23:16]:         Reserved
+// I2C GPIO Setting for BIT[15:8] = 0x07.
+//                    BIT[31]:            Reserved
+//                    BIT[30:27]:         Fixed address of Slave Address.
+//                    BIT[26:24]:         Programmable or HW Selectable address of Slave Address (A2/A1/A0).
+//                    BIT[23:21]:         The I2C number. 0 = I2C0, 1 = I2C1, 2 = I2C2, 3 = I2C3, 4 = I2C4, 5 = I2C5
+//                    BIT[20:16]:         Reserved
+// GPIO Controller Selection.
+//                    BIT[15:8] = 0x00:   FCH GPIO Pin
+//                    BIT[15:8] = 0x01:   Remote FCH GPIO Pin
+//                    BIT[15:8] = 0x02:   ECRAM GPIO Pin on Reference Board
+//                    BIT[15:8] = 0x03:   Promontory GPIO Pin
+//                    BIT[15:8] = 0x04:   Bixby GPIO Pin
+//                    BIT[15:8] = 0x05:   Bixby Remote GPIO Pin
+//                    BIT[15:8] = 0x06:   SMBUS IO Expander GPIO Pin
+//                    BIT[15:8] = 0x07:   I2C IO Expander GPIO Pin
+//                    BIT[15:8] > 0x06:   Reserved
+// Non-SMBUS GPIO Pin Number for BIT[15:8] = 0x00 ~ 0x05
+//                    BIT[7:0]:           GPIO Pin Number
+// SMBUS GPIO Pin Number for BIT[15:8] = 0x06.
+//                    BIT[7:6] = 0x0:     SMBUS IO Expander 8-bit Controller
+//                    BIT[7:6] = 0x1:     SMBUS IO Expander 16-bit Controller
+//                    BIT[5:4] = 0x0:     SMBUS IO Expander Port 0
+//                    BIT[5:4] = 0x1:     SMBUS IO Expander Port 1
+//                    BIT[3:0]:           SMBUS GPIO Pin Number
+// I2C GPIO Pin Number for BIT[15:8] = 0x07.
+//                    BIT[7:6] = 0x0:     I2C IO Expander 8-bit Controller
+//                    BIT[7:6] = 0x1:     I2C IO Expander 16-bit Controller
+//                    BIT[5:4] = 0x0:     I2C IO Expander Port 0
+//                    BIT[5:4] = 0x1:     I2C IO Expander Port 1
+//                    BIT[3:0]:           I2C GPIO Pin Number
+//  Arg1 - GPIO level: 0: Low. 1: High
+//
+Method (CpmWriteGpio, 2, Serialized) {
+    ShiftRight (Arg0, 8, Local0)
+    And (Local0, 0x7, Local0)
+    And (Arg0, 0xFF, Local1)
+    CpmDebugPrint ("  KER-ASL-CpmWriteGpio (0x%X, 0x%X)\n", Arg0, Arg1, 0, 0, 0, 0)
+    If (LOr (LEqual (Local0, 0), LEqual (Local0, 1))) {
+        // BIT[15:8] = 0x00:   FCH GPIO Pin
+        // BIT[15:8] = 0x01:   Remote FCH GPIO Pin
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ML)) {
+            If (LEqual (And (Arg0, 0xF8000000), 0)) {
+                If (LEqual (Local0, 0)) {
+                    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (Local1, 4), 6, 2, Or (2, Arg1))
+                } Else {
+                    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x1202), Multiply (Local1, 4), 6, 2, Or (2, Arg1))
+                }
+            } Else {
+                ShiftRight (Arg0, 31, Local3)
+                And (Local3, 0x1, Local3)
+                ShiftRight (Arg0, 29, Local4)
+                And (Local4, 0x3, Local4)
+                ShiftRight (Arg0, 27, Local5)
+                And (Local5, 0x3, Local5)
+                If (LEqual (Local0, 0)) {
+                    Add (FchSmnGpio, Multiply (Local1, 4), Local6)
+                } Else {
+                    Add (FchSmnRemoteGpio, Multiply (Local1, 4), Local6)
+                }
+                Store (CpmReadSmnRegister (Local3, Local4, Local5, Local6), Local2)
+                And (Local2, 0xCF3FFFFF, Local2)            // Clear Bit[29:28] and Bit[23:22]
+                Or (Local2,  0x00800000, Local2)            // Set Bit23
+                Or (Local2, ShiftLeft (Arg1, 22), Local2)   // Set Bit22 depends on Arg1
+                CpmWriteSmnRegister (Local3, Local4, Local5, Local6, Local2)
+            }
+        } Else {
+            CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x100), Local1, 6, 1, Arg1)
+            CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x100), Local1, 5, 1, 0)
+        }
+    } ElseIf (LOr (LEqual (Local0, 4), LEqual (Local0, 5))) {
+        // BIT[15:8] = 0x04:   Bixby GPIO Pin
+        // BIT[15:8] = 0x05:   Bixby Remote GPIO Pin
+        ShiftRight (Arg0, 31, Local3)
+        And (Local3, 0x1, Local3)
+        ShiftRight (Arg0, 29, Local4)
+        And (Local4, 0x3, Local4)
+        ShiftRight (Arg0, 27, Local5)
+        And (Local5, 0x3, Local5)
+        If (LEqual (Local0, 4)) {
+            Add (FchSmnGpio, Multiply (Local1, 4), Local6)
+        } Else {
+            Add (FchSmnRemoteGpio, Multiply (Local1, 4), Local6)
+        }
+        Store (CpmReadBxbSmnRegister (Local3, Local4, Local5, Local6), Local2)
+        And (Local2, 0xCF3FFFFF, Local2)            // Clear Bit[29:28] and Bit[23:22]
+        Or (Local2,  0x00800000, Local2)            // Set Bit23
+        Or (Local2, ShiftLeft (Arg1, 22), Local2)   // Set Bit22 depends on Arg1
+        CpmWriteBxbSmnRegister (Local3, Local4, Local5, Local6, Local2)
+    } ElseIf (LEqual (Local0, 2)) {
+        // BIT[15:8] = 0x02:   ECRAM GPIO Pin on Reference Board
+        If (LEqual (CpmReadTable (CpmMainTable, CpmEcSupport), 1)) {
+            CpmKbcWriteGpio (Add (Local1, 8), Arg1)
+        }
+    } ElseIf (LEqual (Local0, 3)) {
+        // BIT[15:8] = 0x03:   Promontory GPIO Pin
+        CpmPtWriteGpio (Local1, Arg1)
+    } ElseIf (LEqual (Local0, 6)) {
+        // BIT[15:8] = 0x06:   SMBUS IO Expander GPIO Pin
+        CpmSmbusWriteGpio (Arg0, Arg1)
+    } ElseIf (LEqual (Local0, 7)) {
+        CpmI2CWriteGpio (Arg0, Arg1)
+    }
+}
+
+//
+//  Read GEVENT pin Status
+//  Arg0 - Pin Number
+//
+Name (CpmGeventGpioMappingTable, Buffer (23) {
+  0x7E,         // GEVENT0 => GPIO126
+  0x81,         // GEVENT1 => GPIO129
+  0x03,         // GEVENT2 => GPIO3
+  0x16,         // GEVENT3 => GPIO22
+  0x04,         // GEVENT4 => GPIO4
+  0x15,         // GEVENT5 => GPIO21
+  0x0E,         // GEVENT6 => GPIO14
+  0x05,         // GEVENT7 => GPIO5
+  0x02,         // GEVENT8 => GPIO2
+  0x20,         // GEVENT9 => GPIO32
+  0x06,         // GEVENT10 => GPIO6
+  0x07,         // GEVENT11 => GPIO7
+  0x10,         // GEVENT12 => GPIO16
+  0x11,         // GEVENT13 => GPIO17
+  0x12,         // GEVENT14 => GPIO18
+  0x18,         // GEVENT15 => GPIO24
+  0x17,         // GEVENT16 => GPIO23
+  0x19,         // GEVENT17 => GPIO25
+  0x0B,         // GEVENT18 => GPIO11
+  0x01,         // GEVENT19 => GPIO1
+  0x0F,         // GEVENT20 => GPIO15
+  0x0D,         // GEVENT21 => GPIO13
+  0x09          // GEVENT22 => GPIO9
+})
+
+Name (CpmGeventGpioMappingTable2, Buffer (24) {
+  0x41,         // GEVENT0 => GPIO65
+  0x42,         // GEVENT1 => GPIO66
+  0x03,         // GEVENT2 => GPIO3
+  0x16,         // GEVENT3 => GPIO22
+  0x04,         // GEVENT4 => GPIO4
+  0x15,         // GEVENT5 => GPIO21
+  0x0E,         // GEVENT6 => GPIO14
+  0x05,         // GEVENT7 => GPIO5
+  0x02,         // GEVENT8 => GPIO2
+  0x44,         // GEVENT9 => GPIO68
+  0x06,         // GEVENT10 => GPIO6
+  0x07,         // GEVENT11 => GPIO7
+  0x10,         // GEVENT12 => GPIO16
+  0x11,         // GEVENT13 => GPIO17
+  0x12,         // GEVENT14 => GPIO18
+  0x18,         // GEVENT15 => GPIO24
+  0x17,         // GEVENT16 => GPIO23
+  0x45,         // GEVENT17 => GPIO69
+  0x0B,         // GEVENT18 => GPIO11
+  0x01,         // GEVENT19 => GPIO1
+  0x0F,         // GEVENT20 => GPIO15
+  0x0D,         // GEVENT21 => GPIO13
+  0x09,         // GEVENT22 => GPIO9
+  0x08          // GEVENT23 => GPIO8
+})
+
+Name (CpmGeventGpioMappingTableZP, Buffer (24) {
+  0x59,         // GEVENT0 => GPIO89
+  0x5A,         // GEVENT1 => GPIO90
+  0x03,         // GEVENT2 => GPIO3
+  0x16,         // GEVENT3 => GPIO22
+  0x04,         // GEVENT4 => GPIO4
+  0x15,         // GEVENT5 => GPIO21
+  0x5B,         // GEVENT6 => GPIO91
+  0x05,         // GEVENT7 => GPIO5
+  0x02,         // GEVENT8 => GPIO2
+  0x56,         // GEVENT9 => GPIO86
+  0x06,         // GEVENT10 => GPIO6
+  0x4C,         // GEVENT11 => GPIO7      // ZP = GPIO76
+  0x10,         // GEVENT12 => GPIO16
+  0x11,         // GEVENT13 => GPIO17
+  0x12,         // GEVENT14 => GPIO18
+  0x18,         // GEVENT15 => GPIO24
+  0x17,         // GEVENT16 => GPIO23
+  0x81,         // GEVENT17 => GPIO129
+  0x54,         // GEVENT18 => GPIO84
+  0x01,         // GEVENT19 => GPIO1
+  0x28,         // GEVENT20 => GPIO40
+  0x00,         // GEVENT21 => GPIO0
+  0x09,         // GEVENT22 => GPIO9
+  0x08          // GEVENT23 => GPIO8
+})
+
+Name (CpmGeventGpioMappingTableSSP, Buffer (24) { // SSP & MTS
+  0x59,         // GEVENT0 => GPIO89
+  0x5A,         // GEVENT1 => GPIO90
+  0x03,         // GEVENT2 => GPIO3
+  0x16,         // GEVENT3 => GPIO22
+  0x04,         // GEVENT4 => GPIO4
+  0x15,         // GEVENT5 => GPIO21
+  0x5B,         // GEVENT6 => GPIO91
+  0x05,         // GEVENT7 => GPIO5
+  0x02,         // GEVENT8 => GPIO2
+  0x56,         // GEVENT9 => GPIO86
+  0x06,         // GEVENT10 => GPIO6
+  0x4C,         // GEVENT11 => GPIO7      // SSP & MTS = GPIO76
+  0x10,         // GEVENT12 => GPIO16
+  0x11,         // GEVENT13 => GPIO17
+  0x1D,         // GEVENT14 => GPIO18     // SSP & MTS = GPIO29
+  0x1E,         // GEVENT15 => GPIO24     // SSP & MTS = GPIO30
+  0x17,         // GEVENT16 => GPIO23
+  0x81,         // GEVENT17 => GPIO129
+  0x54,         // GEVENT18 => GPIO84
+  0x01,         // GEVENT19 => GPIO1
+  0x28,         // GEVENT20 => GPIO40
+  0x00,         // GEVENT21 => GPIO0
+  0x09,         // GEVENT22 => GPIO9
+  0x08          // GEVENT23 => GPIO8
+})
+
+Name (CpmGeventGpioMappingTableRV, Buffer (24) {  // RV, RV2, RN & VN
+  0x59,         // GEVENT0 => GPIO89
+  0x5A,         // GEVENT1 => GPIO90
+  0x03,         // GEVENT2 => GPIO3
+  0x16,         // GEVENT3 => GPIO22
+  0x04,         // GEVENT4 => GPIO4
+  0x15,         // GEVENT5 => GPIO21
+  0x5B,         // GEVENT6 => GPIO91
+  0x05,         // GEVENT7 => GPIO5
+  0x02,         // GEVENT8 => GPIO2
+  0x56,         // GEVENT9 => GPIO86
+  0x06,         // GEVENT10 => GPIO6
+  0x07,         // GEVENT11 => GPIO7
+  0x10,         // GEVENT12 => GPIO16
+  0x11,         // GEVENT13 => GPIO17
+  0x12,         // GEVENT14 => GPIO18
+  0x18,         // GEVENT15 => GPIO24
+  0x17,         // GEVENT16 => GPIO23
+  0x81,         // GEVENT17 => GPIO129
+  0x54,         // GEVENT18 => GPIO84
+  0x01,         // GEVENT19 => GPIO1
+  0x28,         // GEVENT20 => GPIO40
+  0x00,         // GEVENT21 => GPIO0
+  0x09,         // GEVENT22 => GPIO9
+  0x08          // GEVENT23 => GPIO8
+})
+
+Name (CpmGeventGpioMappingTableRMB, Buffer (24) { // RMB
+  0x59,         // GEVENT0 => GPIO89
+  0x5A,         // GEVENT1 => GPIO90
+  0x03,         // GEVENT2 => GPIO3
+  0x16,         // GEVENT3 => GPIO22
+  0x04,         // GEVENT4 => GPIO4
+  0x0B,         // GEVENT5 => GPIO11
+  0x5B,         // GEVENT6 => GPIO91
+  0x05,         // GEVENT7 => GPIO5
+  0x02,         // GEVENT8 => GPIO2
+  0x1D,         // GEVENT9 => GPIO29
+  0x06,         // GEVENT10 => GPIO6
+  0x07,         // GEVENT11 => GPIO7
+  0x10,         // GEVENT12 => GPIO16
+  0x11,         // GEVENT13 => GPIO17
+  0x12,         // GEVENT14 => GPIO18
+  0x18,         // GEVENT15 => GPIO24
+  0x17,         // GEVENT16 => GPIO23
+  0x20,         // GEVENT17 => GPIO32
+  0x54,         // GEVENT18 => GPIO84
+  0x01,         // GEVENT19 => GPIO1
+  0x28,         // GEVENT20 => GPIO40
+  0x00,         // GEVENT21 => GPIO0
+  0x09,         // GEVENT22 => GPIO9
+  0x08          // GEVENT23 => GPIO8
+})
+
+Method (CpmReadGevent, 1, Serialized) {
+    If (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ML)) {
+        return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf (Index (CpmGeventGpioMappingTable, Arg0)), 4), 0, 1))
+    } ElseIf (LLess (CpmSbChipId, CPM_FCH_REVISION_ID_ML)) {
+        return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x160), Arg0, 7, 1))
+    } ElseIf (LAnd (LGreater (CpmSbChipId, CPM_FCH_REVISION_ID_ML), LLess (CpmSbChipId, CPM_FCH_REVISION_ID_ZP))) {
+        return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf (Index (CpmGeventGpioMappingTable2, Arg0)), 4), 0, 1))
+    } ElseIf (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP)) {
+        return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf (Index (CpmGeventGpioMappingTableZP, Arg0)), 4), 0, 1))
+    } ElseIf (LOr (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RV), LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RV2))) {
+        return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf (Index (CpmGeventGpioMappingTableRV, Arg0)), 4), 0, 1))
+    } ElseIf (LOr (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP), LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_MTS))) {
+        return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf (Index (CpmGeventGpioMappingTableSSP, Arg0)), 4), 0, 1))
+    } ElseIf (LOr (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RN), LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_VN))) {
+        return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf (Index (CpmGeventGpioMappingTableRV, Arg0)), 4), 0, 1))
+    } ElseIf (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RMB)) {
+        return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x1502), Multiply (DerefOf (Index (CpmGeventGpioMappingTableRMB, Arg0)), 4), 0, 1))
+    }
+}
+
+//
+//  Get GEVENT Trigger Type: 0: Active Low. 1: Active High
+//  Arg0 - Pin Number
+//
+Method (CpmReadGeventTriggerType, 1, Serialized) {
+    Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x240), Arg0, 0, 5), Local0)
+    return (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x208), Divide (Local0, 0x08), And (Local0, 0x07), 1))
+}
+
+//
+//  Set GEVENT Trigger Type
+//  Arg0 - Pin Number
+//  Arg1 - Trigger Type: 0: Active Low. 1: Active High
+//
+Method (CpmWriteGeventTriggerType, 2, Serialized) {
+    Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x240), Arg0, 0, 5), Local0)
+    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x208), Divide (Local0, 0x08), And (Local0, 0x07), 1, Arg1)
+}
+

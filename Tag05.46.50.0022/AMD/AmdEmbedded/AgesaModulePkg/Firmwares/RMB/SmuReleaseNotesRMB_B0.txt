@@ -1,0 +1,3056 @@
++--------------------------------------------+
+| SMU Firmware Release Notes - Rembrandt Fox |
++--------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 6.69.29.0   (B0) 6.69.29.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/11/24
+| * Changelist
+|    - b0c07b0b36 [EMBDEV-21020] LPC Bridge Device ID change 
+|                 NVME Raid device ID trap code removed and space used for the LPC Bridge Device ID support
+---------------------------------------------+
+| Version: (A0) 6.69.28.0   (B0) 6.69.28.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         30/10/24
+| * Changelist
+|    - a503f62825 [EMBDEV-20943] System hanged at PC 00000510 / B000AA09 while running DF_WDT warm reboot cycles
+|    - 2ccea753dd [EMBDEV-20595] System failed to hang after DRAM_UECC/NBIO fatal error injection with Syncflood after reset option disabled in BIOS
+---------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 6.69.27.0   (B0) 6.69.27.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         16/10/24
+| * Changelist
+|    - 4aff17c349 [EMBDEV-20767] V3000[EDK II]: SW27 Warm reset recovery failed after the hang when DRAM_UECC/NBIO fatal error injection with 'Syncflood after reset' option disabled
+|    - a2cc01c6d7 [EMBDEV-18504] V3000 - PMFW: APML Fails to report the valid MCA bank after the fatal Error Injection
+|    - afeca02ccc [EMBDEV-20655] -Failed to recover the SUT after PCIe ECRC-RX fatal error injection via SW27 button on resetCPUonSyncFlood disabled hang
+---------------------------------------------+
+| Version: (A0) 5.69.26.0   (B0) 6.69.26.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         17/09/24
+| * Changelist
+|    - 770e08ed34 [EMBDEV-20357] Exception handling based on ABL message
+---------------------------------------------+
+| Version: (A0) 5.69.25.0   (B0) 6.69.25.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         03/09/24
+| * Changelist
+|    - 91dffe08e9 [EMBDEV-20194] Recover SMN related control plane issue by doing cold reset
+|                 Update the AXI handler to do cold reset instead of hang to recover the system
+|    - 27af75d47a [EMBDEV-20192] Updated code to implement DF S3 entry check
+|    - 9fd1ee4c52 [EMBDEV-18957] HPE Aruba V1500, V3000 BIOS Options to set FCLK and LCLK
+---------------------------------------------+
+| Version: (A0) 5.69.24.0   (B0) 6.69.24.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         28/03/24
+| * Changelist
+|    - 4db6762637 [EMBDEV-18299] Enhance Scratchpad register set and get and enable for OS, BIOS and ABL interfaces
+|    - 722677a238 [EMBDEV-18298] Change NVMESelfRefresh command name to NVMSelfRefresh
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.23.0   (B0) 6.69.23.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         19/02/24
+| * Changelist
+|    - 853efc9853 [PMFW-14709] Compensate the PD controller with the missed DPM cycle when WhisperMode exit
+|    - 5f1dadf412 [PMFW-13582] Boot time increased 600ms by BIOSSMC_MSG_UsbInit with Type-C power source plug in flipped orientation in S4/S5 resume
+|    - 2e98d38391 [EMBDEV-16442] V3000:(Regression) CPU_WDT/DF_WDT cold reset verification fails, system stays at PC- EA00E090
+|DXIO FW Version 469.888.0
+| *  Changelist
+|    - c6af2dda20 FWDEV-72258 [RMB] Remove max port number check from dxio_fw_mp1_pcie_nextPortConfig
+|    - 448271b704 FWDEV-72252 [RMB] Revert check for engines to train
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.22.0   (B0) 6.69.22.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         27/11/23
+| * Changelist
+|    - df4ff00208 [EMBDEV-17396] Add iTemp support for new OPN
+|    - e6c0ef6889 [PLAT-132817] Dynamic boost do not work in API method
+|    - 187351e39a [PLAT-127975] Ignore SPL change when STT is enabled
+|    - 41b6471b6a [PMFW-12580] Port STB DRAM spill calculation fix from MDN
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.21.0   (B0) 6.69.21.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         24/8/23
+| * Changelist
+|    - 63c6152ce3 [EMBDEV-16572] Enabling Extended Range support on SBTSI Interface part causing Alert_L to be always low
+|    - 296d1df395 [EMBDEV-15480] [V3000][APML] ALERT_L signal doesn't toggle on MCE/fatal errors
+|    - 68cb35e8fd [PLAT-128335] [RMB][HP][GRG] AXI error during s0i3 resume part 2
+|    - c96f0905b4 [PMFW-12466] Integrate Kernel Version 13.10.241
+|    - 3bf6340e46 [PMFW-12415] S0i3 nbio nbif FSDL fixes on RMB
+|    - 42a9c561f0 [PLAT-126983] Low F/R FW internal error when running Youtube video on customer systems
+|    - e3318b5182 [PLAT-109503] - UMC MCA reporting disabled after S0i3 cycle
+|    - 340d56e4cc [PLAT-124251] Remove spurious GPIO interrupt for D3hot device during S0i3
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.20.0   (B0) 6.69.20.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         21/7/23
+| * Changelist
+|    - [EMBDEV-16488] V3000- APML- Negative temperature value failed to list via SB-TSI
+|    - EMBDEV-16499 V3000: Warm reset cycling is failing within 10 cycles
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.19.0   (B0) 6.69.19.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         22/6/23
+| * Changelist
+|    - EMBDEV-16114 | [V3000] [RAS] Core watchdog time out error doesn't log BERT
+|    - [EMBDEV-15660] [V3000] 2VRM SMU Firmware support for CISCO C8000 project.
+|    - [EMBDEV-15931] V3000 - Fmax value shows as 348MHz instead of Fmin when BIOS fmax cap set below 400MHz
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.18.0   (B0) 6.69.18.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         10/4/23
+| * Changelist
+|    - [EMBDEV-15810] V3000: Sync Flood fails and system fails to reboot after exit from PDM mode.
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.17.1   (B0) 6.69.17.1   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         3/4/23
+| * Changelist
+|    - Revert "[PMFW-11203] FSDL Update for issue DERMBRTL-1732 Host Unexpectedly wakes system in S3/S4 as a result of plug event"
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.17.0   (B0) 6.69.17.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         30/3/23
+| * Changelist
+|   -  [EMBDEV-14688] Enable APML for V3000 - MCA
+|   -  [EMBDEV-15663] EDC limits to be changed for V3000 OPN
+|   -  [EMBDEV-15799] Fix build and size issue after sync with client 4.69.58.0 PMFw
+|   -  [PMFW-11263] PHY Request is not one-hot when two USB4 link operations have collision.
+|   -  [PMFW-11302] FSDL Change Req: Prevent LL to request maxpclk when PHY is running with LP refclk
+|   -  [PLAT-116434] System abnormal restart when play 1080p video with LPDDR5500 doing s0i3 cycles in DC mode
+|   -  [PLAT-115221] System hang-up occurs when connecting Bluetooth mouse to system
+|   -  [PLAT-113879] Protection for STT interrupt period (update)
+|   -  [PMFW-11573] Fix random number calculation in uRand32()
+|   -  [PLAT-115217] Add delay to 4us for LPDDR5 after ForceZqCal()
+|   -  [PMFW-11140] Enable timeout provision in RMB Ddr5ThermalThrottlingByteSwap MR4 read operation
+|   -  [PMFW-11145] Update S0i3 NBIO nBIF FSDL
+|   -  [PMFW-11712] Clear USB4PHY bit for DP only config case
+|   -  [PLAT-118399] Fix dGPU device ID range to support NAVI3x
+|   -  [FWDEV-23510] DynamicBoost need command ID to read current value of power
+|   -  [PMFW-11095] Add Smartshift default behavior updates for NV3x
+|   -  [PMFW-8801] Set 1st VCN DPM request to DPM level 6 instead of 7 (update)
+|   -  [PMFW-11338] No C0 and GFX Busy metrics in SMU 4.69.54.00 or 4.69.55.0
+|   -  [PMFW-11749] Add bios interface to disable SSC of PLL5
+|   -  [PMFW-10778] Apply alpha filter to SMUMetrics gfx busy in PMF (update)
+|   -  [PMFW-11310] Makefile build default to Rembrandt B0
+|   -  [PMFW-11203] FSDL Update for issue DERMBRTL-1732 Host Unexpectedly wakes system in S3/S4 as a result of plug event
+|   -  [PMFW-11230] (RMB) cclk.c stability adjustments from HP Lockheed debug
+|   -  [PMFW-11265] Writeback cache to SRAM before invalidating cache
+|   -  [PLAT-118655] Set idlemask for disabled USB controllers
+|   -  [FWDEV-28575] Update external PCIe device FSDL - Skip accessing the NVMe device when resuming from S0i3
+|   -  [PMFW-10899] Bypass SSC needs to be re-enabled
+|   -  [PMFW-11055] optimize IsrBIFDoorbellFenceEvent()
+|   -  PMFW-10521 PMF Metrics Table needs higher alpha values than 0.0012
+|   -  PMFW-10778: Apply alpha filter to SMUMetrics gfx busy in PM
+|   -  [PLAT-111103] Update USB FSDL and revert PLAT-104180
+|
+|DXIO FW Version 469.885.0
+| *  Changelist
+|   -  DENBFW-2920 PLAT-109720 [RMB] GPIO 26&27 pinsts would not be programed after s0i3 if only SSD0 or SSD1 is enabled
+|   -  PLAT-103190   [RMB]B0 Enable Atomic Routing Supoort
+|   -  DENBFW-2557    RMB USB4 hot plug sequence change.
+|   -  DENBFW-2639   [WA] RE: RMB B1 USB4 PCIe exit sleep mode, PCIe tunneling lost.
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.16.0   (B0) 6.69.16.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         2/3/23
+| * Changelist
+|   -  [EMBDEV-15620] SVI3 communication error causing hang during reset testing
+|   -  [EMBDEV-14688] Enable APML for V3000 - Update driver interface
+|   -  [EMBDEV-15349] V3000 EDKII: System hangs at Postcode “00000000” during OS Reboot Stress.
+|
+|DXIO FW Version 469.881.4
+| *  Changelist
+|   -  [DENBFW-3334] [RMB EMB] Remove max port number check from dxio_fw_mp1_pcie_nextPortConfig
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.15.0   (B0) 6.69.15.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         6/1/23
+| * Changelist
+|   -  EMBDEV-15116: Implement Persistent Memory in V3000
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.14.0   (B0) 6.69.14.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         26/12/22
+| * Changelist
+|   -  EMBDEV-14857: V3000: System hang observed at POST code EA00E090 after triggering warm reset using SW27 button
+|   -  EMBDEV-14688: Enable APML for V3000 - DRAM Throttle Read and Write
+|   -  EMBDEV-12617: Warmreset/kbreset results in system hang, when ToggleAllPwrGoodOnCf9 is set to 0
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.13.1   (B0) 6.69.13.1   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         19/10/22
+| * Changelist
+|   - [EMBDEV-14675] V3000: System hangs at Postcode b000AA09 during reboot stress (EFI, OS, cold & warm)
++------------------------------------------+
+---------------------------------------------+
+| Version: (A0) 5.69.13.0   (B0) 6.69.13.0   |
++--------------------------------------------+---------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         06/10/22
+| * Changelist
+|   - EMBDEV-14770 : BIOSSMC_MSG_GetCoreBistPF not returning correct value
+|   - EMBDEV-14750 : Warm Reset Flow fix in PMFw
+|   - DENBFW-2747 : FOX System hang at Postcode b000AA09 during reboot stress
+|   - DENBFW-3088 : FOX: Update sequence for 0003 maiil box command as per ethernet mode sequence document.
+|   - DENBFW-3063 : FOX: Link stability issues in 10G/1G Backplane
++------------------------------------------+
+-------------------------------------------+
+| Version: (A0) 5.69.12.0   (B0) 6.69.12.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         05/09/22
+| * Changelist
+|   - Rebased to client 4.69.52.0
+|   - Merge RMB embedded branch DXIO to rmb_b0_469_881_0
+|   - DENBFW-3008 : V3000 : Revert the manual RX tuning changes for AIC2
++------------------------------------------+
+-------------------------------------------+
+| Version: (A0) 5.69.11.0   (B0) 6.69.11.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         22/07/22
+| * Changelist
+|   - 10G SFI mode(03 00) set the RX_BYP bit to 1
+|   - Other 10G modes the bit is set to 0
+|   - PhyPolling to be done only for AIC and not for onboard phy
+|   - DENBFW-2609: DENBFW-2921 : V3000: Tune the rx Adaption values for AIC1 (Retimer) and AIC2(10G PHY)
++------------------------------------------+
+| Version: (A0) 5.69.10.0   (B0) 6.69.10.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         15/07/22
+| * Changelist
+|   - DENBFW-2609: DENBFW-2921 : V3000: Tune the rx Adaption values for AIC1 (Retimer) and AIC2(10G PHY)
+|   - DENBFW-2890 : V3000: Clear the DWCE16MPLPPHYX2NS::RAWLANEAONN_DIG_ADPT_CTL_18 bit for 1G/2.5G speed selection
++----------------------------------------+
++----------------------------------------+
+| Version: (A0) 5.69.9.0   (B0) 6.69.9.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         29/06/22
+| * Changelist
+|   - [PLAT-106437] Update the Slew Rate on VDDCR
++----------------------------------------+
+| Version: (A0) 5.69.8.0   (B0) 6.69.8.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         20/05/22
+| * Changelist
+|   - 7ed562cc EMBDEV-13685 - V3C18i: Incorrect voltage behavior at -ve temp
++----------------------------------------+
+| Version: (A0) 5.69.7.0   (B0) 6.69.7.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         26/04/22
+| * Changelist
+|   - 0b1e1b3c5 [EMBDEV-13676] FOX System hang at Postcode b000AA09 during reboot stress
++----------------------------------------+
+| Version: (A0) 5.69.6.0   (B0) 6.69.6.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         22/04/22
+| * Changelist
+|   - 0b1e1b3c5 [EMBDEV-13676] FOX System hang at Postcode b000AA09 during reboot stress
++----------------------------------------+
+| Version: (A0) 5.69.5.0   (B0) 6.69.5.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         14/04/22
+| * Changelist
+|   - 949882d0d [EMBDEV-13986] Integrate updated DXIO with new AMD Ethernet Modes
++----------------------------------------+
+| Version: (A0) 5.69.4.0   (B0) 6.69.4.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         24/03/22
+| * Changelist
+|   - 81b9faeca [EMBDEV-13794] Integrate DXIO FW v469.876.0 into RMB B0 SMU 6.69.4.0
+| Version: (A0) 69.72.0   (B0) 4.69.36.0 |
+|   - 887c99670 [PMFW-9511] UMC Thermal Throttling Workaround doesn't work after resuming from S0i3
+|   - 3a6886e0e [PLAT-99625] Windows 11 stuck at spinning circle during restarting
+|   - 5f271dedc [PMFW-9505] Change Dram AC Activity Threshold from 40 to 25 on All Platforms
+|   - fd43a3c3c [PMFW-9507] USB FSDL files update
+| Version: (A0) 69.71.0   (B0) 4.69.35.0 |
+|   - b9f6c9047 [PMFW-9478] Add BIOS CBS Option for per Core PSM Margin
+|   - 721047545 [PMFW-9382] TESTSMC Message LCLK MIN MAX for Ryzen Master
+|   - 4c7e06383 [PLAT-101711] Average of IPC in DF P-States optimization is incorrect when core count reduces
+| Version: (A0) 69.70.0   (B0) 4.69.34.0 |
+|   - 0444f0420 [PMFW-9461] Allow CBS Core PSM Margin
+|   - 9b3f08c3d [PLAT-101694] Prevent high VID during FLL Boot Time Calibration
+| Version: (A0) 69.69.0   (B0) 4.69.33.0 |
+|   - d4b2b0c08 [PMFW-9430] Add GFX_DLDO pwrWake4Dly write
+|   - 9769c6e81 [PMFW-9428] Reading RLC_LX6_SCRATCH_DATA is adjusted
+|   - 7e9bd4e8b [PMFW-9305] Integrate DXIO FW v469.876.0 into B0
+|   - 5863ef0de Revert "[PLAT-100175] DC BTC: Scaled PSM values higher than expected on B1"
+|               This reverts commit 64c58700734999b3a84d1962cddbe978cdcaacbb.
+|   - 181cf944d [PLAT-94797] [PLAT-89348] Restore CLK frequencies after Z-states exit
+|   - 32968b44a [PLAT-81571] Update PSP Interface to support DDR Overclocking Range to DDR5-12000 for OTF
+|   - a6a1ec0a4 [PMFW-9276] Update REF_BYPCLK_600 struct
+| Version: (A0) 69.68.0   (B0) 4.69.32.0 |
+|   - 64c587007 [PLAT-100175] DC BTC: Scaled PSM values higher than expected on B1
+|   - c7b348641 [PMFW-8289] DC BTC: PSMs not tracking aging (Correction: add AllCoresPsm back)
+| Version: (A0) 69.67.0   (B0) 4.69.31.0 |
+|   - e35530796 [PMFW-9024] Add BIOS CBS Option to Change Slew Rates (Up and Down)
+|   - fa0344cb2 [PLAT-100212] Change AC activity threshold for Dram from 40 to 25 on FP7 H-Series
+|   - 5a78d3c4d [PLAT-96704] Messages to query and request setting trained DF Pstates profile
+|   - 6910541a9 [PMFW-9216] Print root Artifactory path for easier access
+| Version: (A0) 69.66.0   (B0) 4.69.30.0 |
+|   - 97d09e736 [PLAT-100016] Increase VDDOFF Voltage to 300mV
+|   - a5c0b4f20 [PMFW-9204] Change PSM En in GFX MON Region
+|   - f4d568e55 [PMFW-9136] Enable B1 USB4 FSDLs
+|   - 48bc9f044 [PLAT-93485] Combine USB3 and USB4 Initialization Messages
+|               No functional change. Publishing argument structures in the header file
+|   - 302d876dc [PMFW-9202] Startup VID Values Stored Improperly
+|   - b71edfbf2 Revert "[PLAT-93743] VBIOSSMC_MSG_TransferTableDram2Smu returns 0xFF during s0i3 resume"
+|               This reverts commit c51979832819078f6332861fc3e460f07220cdfd.
+|   - 7bfcc35e4 [PLAT-99904] Update PCIe S0i3 FSDL
+| Version: (A0) 69.65.0   (B0) 4.69.29.0 |
+|   - 729f4fbd0 [PMFW-8992] Create Makefile for building Doxygen Documentation
+|   - c51979832 [PLAT-93743] VBIOSSMC_MSG_TransferTableDram2Smu returns 0xFF during s0i3 resume
+|   - 4384269d0 [PLAT-80926] IOHC Trap to Clear USB4 0/1 HIA Interrupt Mask
+|   - 3f212faf3 [PMFW-8995] VDD_SOC setting for UCLK > 1800
+| Version: (A0) 69.64.0   (B0) 4.69.28.0 |
+|   - 7503e505f [PMFW-9024] Add BIOS CBS Option to Change Slew Rates
+| Version: (A0) 69.63.0   (B0) 4.69.27.0 |
+|   - fa490b3be [PMFW-9024] Add BIOS CBS Option to Change VDD Rail's Slew Rate
+|   - 6bb2b1800 [PMFW-8989] SLT Logging - GFX Min Logic
+|   - fb6b210ec [PMFW-9020] Palamida Fix to utility.mk
+|   - d5468a915 [PMFW-9015] Add Disallow Z9 Entry Option
+|   - f9a17165d [PLAT-93485] Combine USB3 and USB4 Initialization Messages
+|   - 7501b2189 [PLAT-99023] USB4 FSDL Update
+|   - 737eab393 [PLAT-96604] Powerdown PLL4 PLL6 during s0i3
+|   - 305db4c67 [PMFW-9008] Report Slave Error with SMN Address
+|   - 3d10c5bc4 [PLAT-98365] Use Type-c device flash BIOS, the system hangs after flashing
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 5.69.3.0   (B0) 6.69.3.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         23/02/22
+|
+| * Changelist
+|   - [EMBDEV-13714] FOX PMFW Release 6.69.3.0
+|   - Integrate DXIO 469_868_3
++-----------------------------------------------------------------------------------------------------------
++----------------------------------------+
+| Version: (A0) 5.69.2.0   (B0) 6.69.2.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         25/01/22
+|
+| * Changelist
+|   - 81b9faeca [EMBDEV-13585] RMB[Fox] IRM changes related to Embedded OPN
+| Client Version: (A0) 69.62.0   (B0) 4.69.26.0
+|   - 073c81807 [PLAT-98429] Maximum P3T limit is capped by EDC limit
+|   - 0c673d670 [PMFW-8973] Skip a DPM Cycle if there are many back to back DPMs
+|   - dbbb91713 [PMFW-8971] Enable Telemetry only for IOUT, VOUT, and TEMP1
+|   - 177a028c8 [PMFW-8977] Integrate DXIO FW v469.868.0 into B0
+|   - 638c9f325 [PLAT-97232] Failed with SendRlcMessage and RLC is halt
+| Client Version: (A0) 69.61.0   (B0) 4.69.25.0
+|   - 77f070a22 [PMFW-8344] Add Transient Guard Band to B10 and B12 OPNs
+|   - 24373592b [PLAT-97033] H-series Fclk DPM issue when set as "System Configuration 2"
+|   - 3fbaffdc4 [PLAT-98058] USB4 FSDL Update
+|   - 25dfe1f0a [PLAT-96276] Disallow PC6 and Zstates entry if PSP nacks the Z9 entry
+|   - 6f939b81a [PLAT-96881] Display corruption/flicker after S0i3 cycle with Z9
+|   - 411a0c9b0 [PMFW-8953] Put B0 test builds into Artifactory's 'Rembrandt' folder for papi2
+|   - dfe50fd17 [PLAT-97986] Removing Illegal Words from the Release Notes
+|   - 75fff84b5 [PMFW-8289] DC BTC: PSMs not tracking aging
+|   - 694ec6fb3 [PMFW-8617] Retain Memory DF Pstates functionality during Memory Overclock
+| Client Version: (A0) 69.60.0   (B0) 4.69.24.0
+|   - 085b5e3b7 [PMFW-8940] Check-in PLAT-94033 and PLAT-90926 related FSDL changes
+|   - 213b3077b [PMFW-8936] Integrate DXIO FW v469.867.0 into B0
+|   - c31954b63 [PLAT-97511] Fix FclkDiv1Mode settings when Ramp Profile set in OC
+|   - e6afd0f7e [PMFW-8642] Changes for latchup mitigation in regulation
+|   - 6eae5433b [PLAT-97638] AGM shows 2^32 PCIe LTR for all PCIe devices
+|   - 44989e929 [PMFW-8836] Update GFX DLDO Setting
+|   - ad46a89b6 [PMFW-8599] TDC Controller error_rate_coeff update
+|   - 660fbda2f [PMFW-6501] Add Power Cap and Cclk Fmax Cap for Dynamic Boost Requirement
+|   - 4bb3c38d5 [PMFW-8911] Do not disable xGBE SMN routers on Zstates exit
+|   - e302adb10 [PLAT-81571] Update PSP Interface to support DDR Overclocking Range to DDR5-12000
+|   - 99faf5d9b [PMFW-7363] Integrate DF PStates Optimization (with new MMPM bug fixes)
+|   - bf00b8d5f [PMFW-7565] Set or clear BeqCtrl1.DfiLpDatEn only if BeqCtrl1.DfiLpDatEn is set from ABL
++-----------------------------------------------------------------------------------------------------------
++----------------------------------------+
+| Version: (A0) 5.69.1.0   (B0) 6.69.1.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         16/12/21
+|
+| * Changelist
+|   - ddf31bfbe [DENBFW-2502] DXIO Tx/Rx/Boost Parameters implementation
+|   - c67f6136c [DENBFW-2495] RMB XGBE DXIO Common Programming sequence missing steps implementation
+|   - c350561de [DENBFW-2491] DXIO C16 ETH PHY FW update- FIX for EMBDEV-12973
+|   Important Notes:
+|   - This release branched out for Embedded, from Rembrandt SMU 4.69.23.0
++-----------------------------------------------------------------------------------------------------------
++----------------------------------------+
+| Version: (A0) 69.59.0   (B0) 4.69.23.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/12/21
+|
+| * Changelist
+|   - 04add25b5 Revert "[PLAT-94033] Need to provide BIOS PCD to adjust USB PD interrupt mode"
+|               This reverts commit e3e410149a6b40cb60cfbbf8238ade8b1cccc63a.
+|   - 2b3983e6c [PLAT-96316] BSOD with ACPI pending occur while running S-State Stress
+|   - 29f5d050a [PMFW-7627] STAPM not match fPPT when STT enable
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.58.0   (B0) 4.69.22.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         06/12/21
+|
+| * Changelist
+|   - e3e410149 [PLAT-94033] Need to provide BIOS PCD to adjust USB PD interrupt mode
+|   - 43556f585 [PMFW-8801] Set 1st VCN DPM request to DPM level 6 instead of 7
+|   - 59fe4d6ac [PLAT-96436] Add SetHardMinAclkByFreq Message to BIOS Port
+|   - f8b241232 [PMFW-8466] Add Ability For AVFS Level Voltage Margin when DLDOs are Bypassed
+|   - 91ee454cd [PLAT-94730] Stuck in CclkChangeClock() with ZState on WiFi
+|   - 11354b289 [PMFW-8802] Add a BIOS Option for Display Optimization Feature
+|   - 24d8bbe16 [PMFW-8800] Use ResetTimer() for Disabling MP1 Timers
+|   - 77ecd5998 Revert "[PLAT-91271] Revised seq to put PLL6 slices into refclk when in D3"
+|   - 43fe3c0ed [PMFW-8772] Palamida Fixes
+|   - b0a413bda [PMFW-8792] Integrate SMU13 Kernel 13.10.0
+|   - 568430995 [PMFW-8679] Add LTR interrupt handler for PCIe 2/3
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.57.0   (B0) 4.69.21.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         29/11/21
+|
+| * Changelist
+|   - d2cbd55b6 [PMFW-8646] Range check in fSMC_MSG_ConfigMemoryOverclockVoltage (Update)
+|   - f9f6af83c [PLAT-91271] Revised seq to put PLL6 slices into refclk when in D3
+|   - 54d769c8d [PMFW-8738] Correct GFX Target Voltage when in PLL Mode
+|   - dae9269b4 [PLAT-94556] Allow GFX Curve Optimizer to change VidMargin before Driver is loaded
+|   - 4243ea62b [PMFW-8732] Disable Non-Critical RDI To Fit TMON Read Time in 1ms
+|   - 608b174c3 [PLAT-94522] Put PHYE-C10PHY and other PHYs in proper power states after calibration done in USB FSDL
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.56.0   (B0) 4.69.20.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         22/11/21
+|
+| * Changelist
+|   - 4512926f3 [PMFW-8759] Enable AutoSMU to create tar.gz package
+|   - 4bd17ecca [PMFW-8672] Whisper Mode during Video Playback
+|   - 7e1d9d3fa [PLAT-95436] S0i3 Resume hitting AXI Error
+|   - 046ac7194 [PLAT-82128] The cursor of USB1.1 gaming mouse lags when keep moving it
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.55.0   (B0) 4.69.19.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         16/11/21
+|
+| * Changelist
+|   - e65aa2bf0 [PMFW-8740] Integrate the Latest B0 SATA FSDL
+|   - 479eaeeda [PMFW-8670] CPUOFF Exit Frequency Change
+|   - fa600f811 [PMFW-8718] P3T Limit Interface Comment
+|   - a3d0f3e96 [PLAT-91678] AXI Error when running Z9 + S4/Reboot
+|   - 0afb3d442 [PLAT-92889] Add Nack Option to Zstates Entry Message to PSP
+|   - 11c10a099 [PMFW-8716] Update USB FSDL
+|   - 7ff2bea5b [PLAT-94186] Remove PSR power optimization message to be enabled by default
+|   - ad692155b [PLAT-92462] No GFXOFF after Secure Unlock
+|   - a1698d4cf [PMFW-8615] Integrate the Latest B0 PCIe FSDL
+|   - 4964fb4f2 [PLAT-94752] Update Security Patch Level (SPL) to version 2
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.54.0   (B0) 4.69.18.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/11/21
+|
+| * Changelist
+|   - 3ae42dd4e [PMFW-8676] Fix signing issue for test_package
+|   - 5cb4bd6dd [PMFW-8548] Correct GFX PtoV Initialization to Correct SVI3 VID Step
+|   - 4033ba9a1 [PMFW-8600] Updated GFX EDC Weights, Scalars, Guardband
+|   - 2ede2a71b [PMFW-8616] Integrate the Latest B0 nBIF FSDL
+|   - 7dd60cda7 [PMFW-8592] DDR5 BW Calculation Error
+|   - e1113214e [LAT-93679] CLK FSDL Update for Zstates
+|   - d7bc7424a [PLAT-94511] Integrate the Latest B0 S0i3 IOHUB FSDL
+|   - 8a77a0972 [PMFW-8594] Integrate DXIO FW v69.863.0 into A0
+|   - 171d52186 [PMFW-8606] Add a way to distinguish between B0 and B1
+|   - 6a7866bc6 [PMFW-8646] Range check in fSMC_MSG_ConfigMemoryOverclockVoltage
+|   - 21b899586 [PMFW-8640] Enable/disable SMU features if not enabled/disabled
+|   - 75381e784 [PLAT-93714] Do not use VCN DS override
+|   - 708dc540b [PLAT-93125] Disable deep sleep override with Jpeg power up message too
+|   - cb0c38d6f [PLAT-90157] USB registers not programmed for native DP/HDMI on DP2 using J53
+|   - 587afe002 [PMFW-8577] P3T Updates - Calculation fixes and guardbanding
+|   - 55a3c3923 [PMFW-8607] Non core cac weights update v3 - Improves VDD_MEM correlation with fewer memory channels
+|   - f98e07c9b [PMFW-8647] Adjust MAX Allowed VID Check
+|   - 2eebc8d22 [PMFW-8625] Expand BIOS Option for PSI Decay Configuration
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.53.0   (B0) 4.69.17.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         29/10/21
+|
+| * Changelist
+|   - 8685b5a2e Revert "[PLAT-91271] USB4 related clocks blocking PLL bypass during D3"
+|               This reverts commit 988c08a9896a53bb52adde4517a55b8e73c96747.
+|   - 5322fa52b [PLAT-93774] Change Hyst2 and Hyst3 values for optimizing Zstate residencies
+|   - 4a68ccdbb [PMFW-8593] Integrate DXIO FW v469.865 into B0
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.52.0   (B0) 4.69.16.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         28/10/21
+|
+| * Changelist
+|   - affbdf173 [PLAT-94067] USB4 Platform Independent Registers Dram Save Restore Correction
+|   - 55505da60 [PLAT-93465] Backward Compatibility with SetWorkloadMask Message
+|   - a4fe0ce34 [PLAT-91767] SMU hang at SendRlcMessage and RLC cmd GFX_VMIN_VMAX incompleted
+|   - 37c5953e3 [PLAT-91434] Always Set SVI3 DOWN_SLEW_RATE
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.51.0   (B0) 4.69.15.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         26/10/21
+|
+| * Changelist
+|   - d6b76c91a [PLAT-93679] CLK FSDL Update for Zstates (temp solution until CLK FSDL is submitted)
+|   - ee617a789 [PLAT-92984] Add a specific string in release notes
+|   - 988c08a98 [PLAT-91271] USB4 related clocks blocking PLL bypass during D3
+|   - 24e0815a6 [PMFW-8580] CLKIDDMax calulcation is using an incorrect GFX Freq
+|   - 226bc3392 [PMFW-8584] USB4 FSDL update
+|   - 6dfb24b43 [PMFW-8579] Increase EXT4 Section and Add EXT5
+|   - 2b44be631 [PMFW-6134] Cache trained OC DF Pstates profiles for later use
+|   - 39800e548 [PMFW-8317] GFX Curve Optimizer is not working as expected
+|   - fa1877850 [PMFW-8575] Integrate SMU13 Kernel 13.9.0
+|   - c41151c19 [PMFW-8557] Lower top Aclk freq from 1028MHz to 900MHz
+|   - e5abde757 [PMFW-8520] Save USB platform dependent register requests into Dram
+|   - 6fcd18a6c [PMFW-8552] Remove redundant code in ChangePllPowerStatus
+|   - 08b5b23c9 Revert "[PMFW-7566] Request WA for RMB UMC bug DEUMCIPRTL-4198"
+|               This reverts commit 9d7abfbc1f2f402ad806b1443cf69771d49dd061.
+|   - c6c1e10ce [PMFW-8399] Use non-SSC for bypass clock output
+|   - f6ceff07c [PLAT-89200] Change THM PMIs to level and clear pin2 before asserting AlertL
+|   - a1a9dd84f [PMFW-8002] Coverity Fixes
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.50.0   (B0) 4.69.14.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         18/10/21
+|
+| * Changelist
+|   - cb10d8e2c [PLAT-89536] Check for PC6 exit pending on Z9 entry if PSP is not idle (improved)
+|   - e0a60af7d [PMFW-8304] Add silent (DC) profile to workload policy message
+|   - 362f344ad [PLAT-90219] LVP update for Zstate abort
+|   - 59a05aede [PLAT-92990] Remove GPIO40 for S0i3 NVMe PeRst
+|   - 99d509709 [PLAT-93001] External PCIe S0i3 FSDL update to correct PCIe RP number mapping
+|   - 34c534346 [PMFW-8538] Add a compilation flag for ECO Algorithm
+|   - 7501afedb [PMFW-8465] Integrate DXIO FW v469.862 into B0
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.49.0   (B0) 4.69.13.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         13/10/21
+|
+| * Changelist
+|   - f28dd1daa Revert "[PLAT-90058] S0i3 Resume hang with - Update MstateCtrl in ConfigSocRail"
+|               This reverts commit ad52f49d7fd0f963cfc5142c87cb7ee6ea94a21b.
+|   - 794118662 [PLAT-85010] Resolve IOHC Trapping of ROM2/3 MMIO Reads for RAv3
+|   - f29de91df [PMFW-8416] SLT PMM logging does not support GFX Disabled for harvested APUs on V3000 series (NPU/CPU only Die)
+|   - d9e618779 [PMFW-8317] GFX Curve Optimizer is not working as expected
+|   - 39745aca7 [PLAT-91838] USB3 FSDL update
+|   - d8e1971a0 [PMFW-8518] Enable SVI3 interrupts as the first step in initializing SVI3
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.48.0   (B0) 4.69.12.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         10/10/21
+|
+| * Changelist
+|   - 76b422fe3 [PMFW-8457] GFX Temp Dependent Vmin to Always Init Both Temps
+|   - 1cf98eb39 [PMFW-8490] Non core cac weights update v2 - Better correlation across all bandwidth
+|   - 0916de225 [PMFW-8471] Update DF Pstate Tuning Coefficients
+|   - 7dfeb05e5 [PLAT-89200] Change THM PMIs to level and clear pin2 before asserting AlertL
+|   - ab9a8ba2c [PLAT-91172] Modern Standby Log Corrections
+|   - 57b0367cf [PLAT-88018] USB2.0 drive strength cannot be adjusted
+|   - 897c38069 [PLAT-91950] Add CCP_BASE_ADDR_LO save/restore to S0i3 NBIO IOHub FSDL
+|   - b93762492 [PLAT-90588] System can't enter S0i3 with SATA HDD on B0
+|   - 33284e26c [PMFW-8404] Get retraining count per pstate
+|   - 9d7abfbc1 [PMFW-7566] Request WA for RMB UMC bug DEUMCIPRTL-4198
+|   - 4b08f4079 [PLAT-85689] ACLK / Audio PLL on Zstate entry/exit
+|   - 6ad64c112 [PMFW-8462] Remove C1e code to open space
+|   - 402541b1b [PMFW-8452] Save and restore NO_USB4_PLUGGED idle masks on S0i3 resume
+|   - ab2a2cb06 [PLAT-92159] FP7r2 Hseries DF Pstate Residency incorrect for GFX workloads
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.47.0   (B0) 4.69.11.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         04/10/21
+|
+| * Changelist
+|   - 79df6432b [PLAT-92042] TDC VDD limit is not correct after resuming from S0i3
+|   - 5ad455154 [PMFW-8299] Update DF Pstates for U-series and quiet mode (DDR5 15w 28w only)
+|   - ad52f49d7 [PLAT-90058] S0i3 Resume hang with - Update MstateCtrl in ConfigSocRail
+|   - 3cc1338c9 [PLAT-89964] XGBE into Static PG and shubclk and lclk into deep sleep (Zstates part fixed)
+|   - f68f8b55a [PMFW-8388] Fixed make autosmu function by sending correct shortform asic name
+|   - b64b82665 [PMFW-8411] Update Cclk range variable in SetCclkFmax Fmin message
+|   - 18b8b8ab7 [PLAT-89964] XGBE into Static PG and shubclk and lclk into deep sleep (Zstates part removed)
+|   - 0c0aa0637 [PLAT-88181] System hard hang at PC AA2A when resume from S3
+|   - e29c3bc9e [PLAT-89536] Check for PC6 exit pending on Z9 entry if PSP is not idle
+|   - 8202f7d1a [PLAT-91652] Invalidate DispClk and DppClk CurrDid variables on Z10 exit
+|   - db4db6a11 [PLAT-87844] Disable ATC_ENABLE Multicast to GC tile
+|   - f9d55d828 [PLAT-91864] Apply VDD domain isolation and reset to B0 AM5
+|   - 1519b5fa5 [PMFW-8335] P3T Optimization Updates
+|   - 96daf8ee9 [PLAT-90810] IOHC Trap for Aim-T workaround
+|   - ced988ed5 [PLAT-83179] Add UMC FSP OP Sync to S3 sequence
+|   - ca3470bfa [PMFW-8393] Make B0 as the default compilation firmware
+|   - 14229984c [PLAT-90716] BIF_FB_EN register needs restore after reset (Link reset, FLR)
+|   - d2dfb8714 [PLAT-91561] Wlan modules in approve list will resume to D0 uninitialize from S0i3 unexpectedly
+|   - bc95723e8 [PMFW-8389] Update AlphaDown value to 0.0005
+|   - 691a30c8a [PLAT-89964] XGBE into Static PG and shubclk and lclk into deep sleep
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.46.0   (B0) 4.69.10.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         27/09/21
+|
+| * Changelist
+|   - b85884d10 Revert "[PMFW-8314] Integrate DXIO FW v469.858 into B0"
+|               This reverts commit 4b5116a242e6006f52219ef2684aea5f623f5bd7.
+|   - a4d934c1a [DIAG-10926] VCN Decode CRC Mismatch
+|   - e63c5070b [PMFW-7814] STAPM Controller not converging to the limit
+|   - 7230ac161 [PLAT-87405] Release DfCstateExit interlock when RTOS requires paging
+|   - cdd5cd646 [PMFW-8061] SVI rail slave initialization based on the slave numbers
+|   - eccf68d52 [PLAT-89982] Provide DPM table to VCN and remove VCN idle mask for Zstates entry
+|   - 8f1dc51a4 [PMFW-8353] Control bypassDLDOn with DLDO Enablement / Update PC6 Restore Value to Match
+|   - 277cacbe1 [PLAT-90219] Improved Zstates VCN Restore Sequence
+|   - 1e0ae758f [PMFW-8355] Change Zstates hysteresis timers into tunable variables
+|   - 1a6e5f11a [PMFW-8293] Update B0 Core DLDO Setting
+|   - 3268387f6 [PMFW-7654] Add a message for adjusting VDD_MISC
+|   - 86255e13c [PLAT-89651] UMC RSMU PGFSM not configured for power gating in unused UMC channel
+|   - 8cb1b83b2 [PMFW-8213] TDC Controller parameter update
+|   - d1a30e927 [PLAT-78522] Skip GFX DLDO access during AB Recovery and move 'Wait for RLC auto-halt'
+|   - 974b47096 [PMFW-8293] Update B0 Core DLDO Setting
+|   - aea33dedb [PMFW-8351] Update CFSM Tuning Coefficient
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.45.0   (B0) 4.69.09.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         20/09/21
+|
+| * Changelist
+|   - fa6abb288 [PLAT-85689] Initialize USB4ROUTERCLK for ACP LPAP
+|   - e0ae6d416 [PMFW-8336] PM Log External Fields for SystemDeck/AGT (Round 2)
+|               [PMFW-8206] Enable external exposure of dGPU requested Priority Delta Gain
+|   - 61a43898f [PLAT-87139] Save and restore Fclk, Uclk, and MemClk frequencies during S0i3
+|   - 4cbc69c9c [PMFW-8255] Add USB4 Router PMI 12 for ADP_UPDOWN_BANDWIDTH_SWAP
+|   - 5b02372bf [PMFW-8299] Update DF Pstates for U-series and quiet mode
+|   - ad5abe46b [PMFW-8073] SmartShift Default Power Limits (AC & DC)
+|   - cbe57928e [PLAT-90058] S0i3 Resume hang with DC & AC Mode - AXI Error
+|   - 406aeaab2 [PMFW-7328] Update Cclk DPM Tuning Coefficients
+|   - 4b5116a24 [PMFW-8314] Integrate DXIO FW v469.858 into B0
+|   - 9c21fcfec [PLAT-90219] Restore VCN on all Zstates exit if VCN power was on
+|   - 55453ec07 [PLAT-79783] VRC_ACK latency higher than expected on Zstate exits
+|   - 0d76aea40 [PMFW-8243] Can't enter S0i3 after run VT encode test
+|   - e572f568a [PLAT-90749] Remove VCN DS override. VCN HW bug is fixed.
+|               [PLAT-90745] Assert SOC_GAP_PWROK before VCN TSC Sync on Zstates exit
+|   - 4ec078aea [PLAT-85010] Resolve IOHC Trapping of ROM2/3 MMIO Reads for RAv3
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.44.0   (B0) 4.69.08.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         10/09/21
+|
+| * Changelist
+|   - 644b7996b [PMFW-8310] Invalidate internal clk variables on Zstates exit
+|   - 4c32c70df [PLAT-90029] Revert FclkDpm save and restore in s0i3
+|   - dc9a5a9f0 [PLAT-89077] System hard hang if connect USB4/TBT3/USB3.1 device to USB4 in S0i3/S4/S5
+|   - 9b15e5a59 [PLAT-88370] USB4 Dstate sequence update for BSOD or Frozen screen. SMU hung with AXI Error
+|   - 22182b52c [PMFW-7325] Link CPPC EPP to Additional CCLK DPM Parameters
+|   - 8bd776a61 [PMFW-6741] Enable LCLK Frequency Adjustment and Overclocking
+|   - 38169c356 [PMFW-8271] Non-Core CAC Weights Update
+|   - d3fb3cae7 [PLAT-88855] SUT hang under OS once enter Z9/Z10 with MP2_Walle mode
+|   - 6998d0d41 [PMFW-8295] VCN Off Idle Mask
+|   - d5f0fa008 [PLAT-85716] MP1_C2PMSG_93 registry should be 1 While programming I2S master clock generation
+|   - 780b904eb [PMFW-8135] Add a Test Message to Enable/Disable Thermal Throttling
+|   - 8e4b1b814 [PMFW-7838] Add a message to control the Voltage Checker
+|   - a237b8d69 [PMFW-8056] Change MAX_ALLOWED_DID_DELTA from 0x2 to 0xA for B0
+|   - 4cc5ae555 [PMFW-8256] _PS3 routine for Sleep Event is looking for a wrong Enter_Sleep bit
+|   - 48fda127b Revert "[PLAT-85689] ACLK / Audio PLL on Zstate entry/exit"
+|               This reverts commit eda8f963119c4cb36131fd2deb6b41a13ff04946.
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.43.0   (B0) 4.69.07.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         30/08/21
+|
+| * Changelist
+|   - c2908a151 [PMFW-8183] Update PMFW with the latest USB FSDL
+|   - eda8f9631 [PLAT-85689] ACLK / Audio PLL on Zstate entry/exit
+|   - 2a27ee400 [PMFW-8248] Integrate DXIO FW v69.859 into A0 PMFW
+|               [PMFW-8249] Integrate DXIO FW v469.856 into B0 PMFW
+|   - 4efcd82a2 [PMFW-8053] Fclk 1800MHz for B0 45W DDR5 OPNs
+|   - 01ab7f847 [PLAT-87844] Disable ATC_ENABLE Multicast to GC tile
+|   - a908ade96 [PMFW-8251] Update CC6 Tuning Coefficients
+|   - 99cbc2743 [PLAT-89436] USB3_HC3/USB3_HC4/USB4_RT0/USB4_RT1 does not resume correctly by nBIF FSDL
+|   - 9d440d04a [PMFW-7860] Update P0 for DDR5-4800 to use FCLK=1600 for the 2 DfPstate table <45W
+|   - 952098665 [PLAT-86849] Low HWDRIP (14%) observed when it is going into MS - VBS enabled
+|   - 9cdacda7f [PMFW-7330] Update GFXCLK DPM Tuning Coefficients
+|   - 5842afd01 [PMFW-8162] Update CPPC Preferred Core Thermal Ranking Algorithm
+|   - cfe7db730 [PLAT-87870] Custom DfPstate VoltageIndex Review
+|   - b4ed3dcef [PLAT-89032] USB4 Router Port1 cannot function with the latest FSDL
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.42.0   (B0) 4.69.06.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         23/08/21
+|
+| * Changelist
+|   - eace974b8 [PLAT-89032] Move USB platform independent register programming to FSDL
+|   - 5cb1aa952 [PLAT-88753] System is not entering S0i3 if VBS is disabled in DC mode
+|   - e4a8f05c8 [PLAT-88763] System is not entering Z-States after resuming from S0i3
+|   - 93358e329 [PMFW-8209] P3T AGM field assignments
+|   - ffaa5020c [PMFW-8182] P3T case selection code update
+|   - c69df5027 [PLAT-88300} MP1 FW Chrono does not account for lost time during Z9/Z10
+|   - 9c80dd595 [PMFW-8155] Integrate DXIO FW v469.855 into B0 PMFW
+|   - 8584ac69c [PLAT-87189] Add General GPIO Config BIOS Interface for S0i3 and Zstates (Add B0 reg define)
+|   - 552faaf5d [PLAT-88374] GFX DLDO is disabled on RMB B0, should not be accessed
+|   - 1a6ff9100 [PMFW-8002] Coverity Fixes
+|   - b1b742a7d [PMFW-8205] Fix Usb4_Rt1_Route_State_restore coding bug
+|   - 3162d5cc4 [PMFW-8195] Integrate DXIO FW v69.858 into A0 PMFW
+|   - ffbac9588 [PLAT-87189] Add General GPIO Config BIOS Interface for S0i3 and Zstates
+|   - aa1e1dc0e [PLAT-86467] Add PCIe 0 D3 as a requirement for Zstates entry
+|   - 96ffe3be5 [PMFW-8173] Update IRM Tuning Coefficients
+|   - d0b046d64 [PMFW-8196] ATHUB PG_OFFDLY pg seqeunce update
+|   - e28639593 [PMFW-8192] Change B0 signed binary name
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.41.0   (B0) 4.69.05.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         16/08/21
+|
+| * Changelist
+|   - bad55bac3 [PLAT-88300} MP1 FW Chrono does not account for lost time during Z9/Z10
+|   - 37988a68f [PLAT-87970] Workaround for PC ea00e098
+|   - 3fb99a843 [PMFW-8183] Update PMFW with the latest USB FSDL
+|   - e1f9ffb36 [PLAT-87139] Save FclkDpm during s0i3 and Initialize GfxDpm in S0i3 Resume
+|   - 13975590e [PLAT-87724] VDDCR_VDD voltage higher on Z9 exits compared to Vddoff exits
+|   - e6cc35c9e [PMFW-8174] Remove Unused Code
+|   - 40aa1c9f3 [PMFW-8172] Add IPA Reduced FW and Floating Point Optimizations (disabled by default)
+|   - 2c5534ddf [PLAT-87817] VGA driver show yellow bang with STBlog disabled
+|   - ea5123cc2 [PLAT-86782] SMU Hang on SetCoreLDO/CclkChangeClock
+|   - 8771a8d3f [PLAT-83653] Add DXIO Load PHY FW Function
+|   - 00852cb83 [PLAT-88232] rembrandt_variables.rai file has a 32bit shift
+|   - 8af9d2402 [PLAT-85177] Hang at postcode EF000021 when enter S0i3 with SATA SSD as OS.
+|   - b331284c9 [PLAT-88026] D3 Exit Sequence Update
+|   - af449c92b [PMFW-7966] SMU messages returning incorrect outputs
+|   - 1625f927c [PMFW-8149] S0i3 Entry and Exit Timestamp Changes
+|   - fbb9b0351 [PLAT-87428] Update Security Patch Level (SPL) to Version 1
+|   - 8dacb3a46 [PMFW-8002] Coverity Fixes
+|   - 6cc6cc01e [PMFW-8132] Update VCO override setting for disp_pll to match fuse
+|   - 63bd5d7d9 [PLAT-82192] Enabled UVD_PG on Z-state entry
+|   - 343770647 [PMFW-8060] Display flashes heavily after exit from Z9
+|   - 903bc8d81 [PMFW-8031] Cleanup for Lint Errors
++-----------------------------------------------------------------------------------------------------------
+
++----------------------------------------+
+| Version: (A0) 69.40.0   (B0) 4.69.04.0 |
++----------------------------------------+------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         03/08/21
+|
+| * Changelist
+|   - 73c8abe64 Revert "[PMFW-7098] Enable Write AXI Error"
+|               This reverts commit bea3d88c6fc39471b2f6495643192d23c2772897.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 4.69.3.0  (B0)    |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         03/08/21
+|
+| * Changelist
+|   - 8b5a41ed2 [PLAT-87970] Workaround for PC ea00e098
+|   - 0c33df476 [PLAT-87700] Check UVD power status before accessing RSMU DPM register
+|   - 1eda7b748 [PMFW-8076] Fast PPT Controller Coefficients Update
+|   - ff22a4611 [PMFW-8077] Change Fast PPT Time Constant in SmartShift enabled case
+|   - 0a821f6b2 [PLAT-85686] Add an interface for ABL to support PR Interval setting
+|   - 1f3eb711e [PMFW-8072] SmartShift dGPU Pairing Device ID Updates
+|   - 2cac5b26b [PLAT-87562] Re-calculating IddMax upon GFXOFF Entry and Exit
+|   - 543de05f2 [PMFW-8002] Coverity Fixes
+|   - ed90fcf20 [PMFW-7922] SmartShift 2.0 - Pass current APU power to dGPU PMFW
+|   - 941d742dc [PLAT-86611] System failed to power off when running S4 after Z-States entry/exit
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.39.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         02/08/21
+|
+| * Changelist
+|   - 8b5a41ed2 [PLAT-87970] Workaround for PC ea00e098
+|   - 0c33df476 [PLAT-87700] Check UVD power status before accessing RSMU DPM register
+|   - 1eda7b748 [PMFW-8076] Fast PPT Controller Coefficients Update
+|   - ff22a4611 [PMFW-8077] Change Fast PPT Time Constant in SmartShift enabled case
+|   - 0a821f6b2 [PLAT-85686] Add an interface for ABL to support PR Interval setting
+|   - 1f3eb711e [PMFW-8072] SmartShift dGPU Pairing Device ID Updates
+|   - 2cac5b26b [PLAT-87562] Re-calculating IddMax upon GFXOFF Entry and Exit
+|   - 543de05f2 [PMFW-8002] Coverity Fixes
+|   - ed90fcf20 [PMFW-7922] SmartShift 2.0 - Pass current APU power to dGPU PMFW
+|   - 941d742dc [PLAT-86611] System failed to power off when running S4 after Z-States entry/exit
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 4.69.2.0  (B0)    |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         26/07/21
+|
+| * Changelist
+|   - 8304eedf5 [FUSEGOV-1378] New Fclk 1800 MHz Vid Offset
+|   - bea3d88c6 [PMFW-7098] Enable Write AXI Error
+|   - 899094d0e [PMFW-7978] GfxDpm should map to EmptyFunction during s0i3 resume (GFX is off)
+|   - 5f3f0f719 [PLAT-79867] Guarantee Lowest DF Pstate on S3 entry
+|   - d7883edc0 [PLAT-76470] SATA D3 Enablement
+|   - d12cc3e56 [PLAT-85010] eSPI Trap: Add PSP Resource and Modify PassThru
+|   - af464a8a2 [PMFW-8031] Cleanup for Lint Errors
+|   - abbe7fb44 [PMFW-8021] B0 SMUIO CLDO Fuse Offset
+|   - 890ca5c77 [PMFW-8011] Enable Makefile test_package generation for Rembrandt B0
+|   - e484463c4 [PMFW-8028] Create EXT4_SECTION for USB4 FSDL code
+|   - 3b240747d [PMFW-8025] Integrate DXIO FW v469.853 into B0
+|   - 29af77e36 [PMFW-7864] Fan Controller should use SB-TSI (Curtemp) as temperature input
+|   - ae0c837f2 Revert "[PMFW-7860] Update P0 for DDR5-4800 to use FCLK=1600 for the 2 DfPstate table, <45W"
+|   - 5547a32da [PMFW-7970] Update RAI script to check structure unalignment
+|   - bf1ab80e3 [PLAT-85182] Hang at postcode b000AA09 when do warm reset without SATA SSD connected
+|   - bc377c472 [PMFW-7987] Remove unused non-FSDL USB code
+|   - 61591d577 [PMFW-7773] PriorityDeltaGain values for PPT, STAPM not set properly when SmartShift enabled
+|   - 5a94eea73 [PLAT-86218] BIOS option GFX Curve Optimizer doesn't work
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.38.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         23/07/21
+|
+| * Changelist
+|   - 8304eedf5 [FUSEGOV-1378] New Fclk 1800 MHz Vid Offset
+|   - bea3d88c6 [PMFW-7098] Enable Write AXI Error
+|   - 899094d0e [PMFW-7978] GfxDpm should map to EmptyFunction during s0i3 resume (GFX is off)
+|   - 5f3f0f719 [PLAT-79867] Guarantee Lowest DF Pstate on S3 entry
+|   - d7883edc0 [PLAT-76470] SATA D3 Enablement
+|   - d12cc3e56 [PLAT-85010] eSPI Trap: Add PSP Resource and Modify PassThru
+|   - af464a8a2 [PMFW-8031] Cleanup for Lint Errors
+|   - 29af77e36 [PMFW-7864] Fan Controller should use SB-TSI (Curtemp) as temperature input
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.37.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         19/07/21
+|
+| * Changelist
+|   - af0e98117 [PMFW-8008] Integrate DXIO FW v69.857 into A0
+|   - 1540cd91e Revert "[PMFW-7860] Update P0 for DDR5-4800 to use FCLK=1600 for the 2 DfPstate table, <45W"
+|   - 5547a32da [PMFW-7970] Update RAI script to check structure unalignment
+|   - bf1ab80e3 [PLAT-85182] Hang at postcode b000AA09 when do warm reset without SATA SSD connected
+|   - bc377c472 [PMFW-7987] Remove unused non-FSDL USB code
+|   - 61591d577 [PMFW-7773] PriorityDeltaGain values for PPT, STAPM not set properly when SmartShift enabled
+|   - 5a94eea73 [PLAT-86218] BIOS option GFX Curve Optimizer doesn't work
+|   - b3edc20a0 Fixed smu_smuio_fsdl.c un-initilized local variable bug.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 4.69.1.0  (B0)    |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         14/07/21
+|
+| * Changelist
+|   - b3edc20a0 Fixed smu_smuio_fsdl.c un-initilized local variable bug.
+|   - c97cfbba8 [PMFW-7245] S0i3 eSPI FSDL execution during entry (B0 Definition)
+|   - 2ecf14452 [PMFW-7565] Save and restore number of enabled UMCs on S0i3
+|   - 5fb475942 [PMFW-7967] Do not compile DXIO .macros and .preproc files if ISS flag is not set
+|   - 04045ec86 [PMFW-7573] Workaround for UMC BUG DEUMCIPRTL-1519 to Enable DFCstates (Apply to DDR5 only)
+|   - d839e67be [PMFW-7950] Disable UMC Uclk gating before PPT and re-enable it after PPT
+|   - 347f57d1e [PMFW-7860] Update P0 for DDR5-4800 to use FCLK=1600 for the 2 DfPstate table, <45W
+|   - d2a0f2fe5 [PLAT-86389] STT parameter can't be restore after s0i3 resume
+|   - a48e46033 [PMFW-7861] Disable UMC PowerGating feature for DDR5
+|   - 97952b1fb [PMFW-7565] Workaround for DEUMCIPRTL-4231: DDR PHY data low power mode enabling with pstates enabled
+|   - e7c2c70e1 [PMFW-7921] FWError after boot with STT Sensor Reporting enabled in BIOS
+|   - 48578d45d [PMFW-7835] B0 USB4 Clocks and VCO needs overriding
+|   - 78f5317da [PLAT-81311] Calculate LTR if threshold_reqr is set
+|   - 6044ec149 [PMFW-7922] Smart Shift 2.0 support to pass current STAMP Limit to dGPU PMFW
+|   - d663ecbe8 [PLAT-84844] CLK ALLOW_DS bits not set after Z9 cycle (Adding DcfClk)
+|   - 4542e0dd6 [PMFW-7941] Erase DXIO .macros and .preproc files with "make myclean"
+|   - d861bf3e2 [PMFW-7363] Integrate DF PStates Optimization (fix agm EffFreq)
+|   - 6ab55726a [PLAT-83199] System hit HL during run VT-single test
+|   - 970b74581 [PLAT-81996] Windows stuck booting when Core count control is enabled (Correction)
+|   - 165773461 [PLAT-83963] S0i3 NBIO IOHUB FSDL Update - BSOD 0x101 when resume from S0i3 with VBS+HVCI enabled
+|   - faedf0658 [PLAT-81996] windows stuck booting when Core count control is enabled
+|   - 317d36ec0 [PMFW-7674] Add new bit in OverclockCap_t indicated for Memory OC capability
+|   - 085b93df9 [PMFW-7348] Dummy PState Update for DDR5 to include Relock & Retrain
+|   - 8872a2633 [PMFW-7863] GFX EDC CAC Weights & Parameters V2
+|   - 4844fc008 [PMFW-7855] GFX DEM Code Improvement
+|   - 6fef30dbe [PMFW-7363] Integrate DF PStates Optimization (fix CC6 idleness case)
+|   - 66040eae5 [PMFW-7844] Optimize FLL boot time calibration to 1 time
+|   - 4127916c0 [PMFW-7575] UMC Thermal Throttling Workaround
+|   - e656dbdb1 [PMFW-6887] Lower dGPU polling interval value for Smartshift to 5ms
+|   - 52b6d9bef [PMFW-7828] Restore FCH gppclkcntrol after S0i3 DXIO execution
+|   - 7cbc222e7 [PMFW-7368] New S0i3 FSDL for covering AGESA registers
+|   - 8804109ac [PMFW-7848] S0i3 Resume SATA Restoration
+|   - 961ec7bb2 [PMFW-7849] Initialize VDDm CLDOs on S0i3 resume for all packages
+|   - 3496d9483 [PMFW-6344] Fixed WAIT_NS/US macro which use wrong unit.
+|   - 78d74e192 [PLAT-82995] Farm reboot hang at ExitDfsBypass
+|   - 818266389 [PLAT-85010] Change IOHC Trap to PMI2 to handle traps as RTOS jobs
+|   - 55cadb73b [PMFW-7837] C1e Improvements
+|   - bdcb3077a [PLAT-78430] FCH SMI IP is being reset, need smireg_use_s5rst = 1 to persist state
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.36.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         13/07/21
+|
+| * Changelist
+|   - 2ecf14452 [PMFW-7565] Save and restore number of enabled UMCs on S0i3
+|   - 5fb475942 [PMFW-7967] Do not compile DXIO .macros and .preproc files if ISS flag is not set
+|   - 04045ec86 [PMFW-7573] Workaround for UMC BUG DEUMCIPRTL-1519 to Enable DFCstates (Apply to DDR5 only)
+|   - d839e67be [PMFW-7950] Disable UMC Uclk gating before PPT and re-enable it after PPT
+|   - 347f57d1e [PMFW-7860] Update P0 for DDR5-4800 to use FCLK=1600 for the 2 DfPstate table, <45W
+|   - d2a0f2fe5 [PLAT-86389] STT parameter can't be restore after s0i3 resume
+|   - a48e46033 [PMFW-7861] Disable UMC PowerGating feature for DDR5
+|   - 97952b1fb [PMFW-7565] Workaround for DEUMCIPRTL-4231: DDR PHY data low power mode enabling with pstates enabled
+|   - e7c2c70e1 [PMFW-7921] FWError after boot with STT Sensor Reporting enabled in BIOS
+|   - 48578d45d [PMFW-7835] B0 USB4 Clocks and VCO needs overriding
+|   - 78f5317da [PLAT-81311] Calculate LTR if threshold_reqr is set
+|   - 6044ec149 [PMFW-7922] Smart Shift 2.0 support to pass current STAMP Limit to dGPU PMFW
+|   - d663ecbe8 [PLAT-84844] CLK ALLOW_DS bits not set after Z9 cycle (Adding DcfClk)
+|   - 4542e0dd6 [PMFW-7941] Erase DXIO .macros and .preproc files with "make myclean"
+|   - d861bf3e2 [PMFW-7363] Integrate DF PStates Optimization (fix agm EffFreq)
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.35.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         30/06/21
+|
+| * Changelist
+|   - 6ab55726a [PLAT-83199] System hit HL during run VT-single test
+|   - 970b74581 [PLAT-81996] Windows stuck booting when Core count control is enabled (Correction)
+|   - 165773461 [PLAT-83963] S0i3 NBIO IOHUB FSDL Update - BSOD 0x101 when resume from S0i3 with VBS+HVCI enabled
+|   - faedf0658 [PLAT-81996] Windows stuck booting when Core count control is enabled
+|   - 317d36ec0 [PMFW-7674] Add new bit in OverclockCap_t indicated for Memory OC capability
+|   - 085b93df9 [PMFW-7348] Dummy PState Update for DDR5 to include Relock & Retrain
+|   - 8872a2633 [PMFW-7863] GFX EDC CAC Weights & Parameters V2
+|   - a05933b97 [PMFW-7245] S0i3 eSPI FSDL execution during entry
+|   - 4844fc008 [PMFW-7855] GFX DEM Code Improvement
+|   - 6fef30dbe [PMFW-7363] Integrate DF PStates Optimization (fix CC6 idleness case)
+|   - 66040eae5 [PMFW-7844] Optimize FLL boot time calibration to 1 time
+|   - 4127916c0 [PMFW-7575] UMC Thermal Throttling Workaround
+|   - e656dbdb1 [PMFW-6887] Lower dGPU polling interval value for Smartshift to 5ms
+|   - 52b6d9bef [PMFW-7828] Restore FCH gppclkcntrol after S0i3 DXIO execution
+|   - 7cbc222e7 [PMFW-7368] New S0i3 FSDL for covering AGESA registers
+|   - 8804109ac [PMFW-7848] S0i3 Resume SATA Restoration
+|   - 961ec7bb2 [PMFW-7849] Initialize VDDm CLDOs on S0i3 resume for all packages
+|   - 3496d9483 [PMFW-6344] Fixed WAIT_NS/US macro which use wrong unit
+|   - 78d74e192 [PLAT-82995] Farm reboot hang at ExitDfsBypass
+|   - 818266389 [PLAT-85010] Change IOHC Trap to PMI2 to handle traps as RTOS jobs
+|   - 55cadb73b [PMFW-7837] C1e Improvements
+|   - bdcb3077a [PLAT-78430] FCH SMI IP is being reset, need smireg_use_s5rst = 1 to persist state
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.34.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         23/06/21
+|
+| * Changelist
+|   - 68e51fe52 [PMFW-7823] Add B0 Package Type Definition
+|   - 33637abe0 [PLAT-85364] System hang with STT Sensor Reporting enabled
+|   - 67d8d8f24 [PMFW-6344] Avoid RTOS_Delay in WAIT_US/NS if timer stopped
+|   - 75f920209 [PLAT-78906] Need the parameters to change USB (Type-C) combo PHY settings
+|   - 4b0ca4ed1 [PLAT-85189] "RAIDXpert2 Configuration Utility" option in BIOS interface
+|   - 479d96063 [PMFW-7363] Integrate DF PStates Optimization with new MMPM bug fixes
+|   - df33917f4 [PLAT-85230] Rembrandt FP7r2 45W Stuck at DF-P1
+|   - 164eab5c3 [PMFW-7720] Defeature SOC ULV
+|   - 15242457b [PMFW-7666] Update Modern Standby Log with new Idle Masks
+|   - 4e8c15bc4 [PMFW-6344] Enhance WAIT_US/NS FSDL API
+|   - 6b542371d [PLAT-81784] Restore clock DS setting after Zstate abort.
+|   - 9bbe4b761 [PMFW-7676] Requesting ability to change GFXOFF Entry Hysteresis through PAPI2 FW Write
+|   - 5d668aaaa [PMFW-7689] Add Dstate Change Device and Function Numbers in FW Status
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 4.69.0.58 (B0)    |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         22/06/21
+|
+| * Changelist
+|   - d1088335a [PMFW-7824] Integrate DXIO FW v0.851 to B0
+|   - 68e51fe52 [PMFW-7823] Add B0 Package Type Definition
+|   - 33637abe0 [PLAT-85364] System hang with STT Sensor Reporting enabled
+|   - 67d8d8f24 [PMFW-6344] Avoid RTOS_Delay in WAIT_US/NS if timer stopped
+|   - 75f920209 [PLAT-78906] Need the parameters to change USB (Type-C) combo PHY settings
+|   - 4b0ca4ed1 [PLAT-85189] "RAIDXpert2 Configuration Utility" option in BIOS interface
+|   - 479d96063 [PMFW-7363] Integrate DF PStates Optimization with new MMPM bug fixes
+|   - df33917f4 [PLAT-85230] Rembrandt FP7r2 45W Stuck at DF-P1
+|   - 164eab5c3 [PMFW-7720] Defeature SOC ULV
+|   - d6bcef557 [PMFW-6669] xGbE FSDL include fix
+|   - 15242457b [PMFW-7666] Update Modern Standby Log with new Idle Masks
+|   - 4e8c15bc4 [PMFW-6344] Enhance WAIT_US/NS FSDL API
+|   - 6b542371d [PLAT-81784] Restore clock DS setting after Zstate abort
+|   - 9bbe4b761 [PMFW-7676] Requesting ability to change GFXOFF Entry Hysteresis through PAPI2 FW Write
+|   - 5d668aaaa [PMFW-7689] Add Dstate Change Device and Function Numbers in FW Status
+|   - 26eac2a73 [PMFW-7564] Global Fmax limiter not accounting for all arbiters
+|   - 2a3673a70 [PMFW-7352] P3T Controller Budget Calculation and Interpolation bug fixes
+|   - a0501e660 [PLAT-79415] System get stuck at PC_EA00E090 after enabling OC Mode
+|   - 65fa8c859 [PLAT-85010] Resolve IOHC Trapping of ROM2/3 MMIO Reads for RAv3
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.33.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         11/06/21
+|
+| * Changelist
+|   - 26eac2a73 [PMFW-7564] Global Fmax limiter not accounting for all arbiters
+|   - 2a3673a70 [PMFW-7352] P3T Controller Budget Calculation and Interpolation bug fixes
+|   - a0501e660 [PLAT-79415] System get stuck at PC_EA00E090 after enabling OC Mode
+|   - 65fa8c859 [PLAT-85010] Resolve IOHC Trapping of ROM2/3 MMIO Reads for RAv3
+|   - 425546171 [PMFW-7672] Integrate DXIO FW v0.849 with B0
+|   - 04d47229b Code space optimization
+|   - 708bea8fc Revert "Moved code to make space for B0 data section."
+|   - 7fe73907b [PLAT-84069] Shared PLL (CLK0) does not power down
+|   - 8c8f6eaa9 [PLAT-83497] Higher power on VDDIO_MEM_S3 (Lilac) and VDD_11 (Mayan)
+|   - 09fd32db2 [PLAT-83788] DBGU_CPC PC6 save and restore not as expected
+|   - ab6fb2768 [PMFW-7652] Integrate DCN FSDL with DP_REF_CLK_EN = 0
+|   - 30e14a037 [PMFW-7274] Update Thermal Test Mode with new parameters
+|   - 303148af4 [PLAT-83551] CBS Custom DF P-states option does not properly set MclkDiv1Mode
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 4.69.0.57 (B0)    |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         10/06/21
+|
+| * Changelist
+|   - 425546171 [PMFW-7672] Integrate DXIO FW v0.849 with B0
+|   - 04d47229b Code space optimization
+|   - 708bea8fc Revert "Moved code to make space for B0 data section."
+|               This reverts commit f0e60bc8c94d6a816d8271eec16c4f2a9e41a366.
+|   - 7fe73907b [PLAT-84069] Shared PLL (CLK0) does not power down
+|   - 8c8f6eaa9 [PLAT-83497] Higher power on VDDIO_MEM_S3 (Lilac) and VDD_11 (Mayan)
+|   - 09fd32db2 [PLAT-83788] DBGU_CPC PC6 save and restore not as expected
+|   - ab6fb2768 [PMFW-7652] Integrate DCN FSDL with DP_REF_CLK_EN = 0
+|   - dff033f33 [PMFW-7348] Dummy PState Update for DDR5 to include Relock & Retrain
+|   - 30e14a037 [PMFW-7274] Update Thermal Test Mode with new parameters
+|   - 303148af4 [PLAT-83551] CBS Custom DF P-states option does not properly set MclkDiv1Mode
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.32.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         04/06/21
+|
+| * Changelist
+|   - f4764be43 [PLAT-84403] C1e stalls boot across Reboot & S4 Cycles
+|   - 9cd3a1c8c [PMFW-7642] MP1CLK needs to be updated to 400Mhz for FP7r2
+|   - 92c026152 [PLAT-82888] Workaround for S0i3 resume hang with multiple DfPstates enabled
+|   - 6cdaf7dab [PLAT-84270] Z9/Z10 and Stutter Efficiency ZSC Residencies in PM log
+|   - df7cf8af4 [PLAT-79129] Scan matrix keyboard functionality lost after Z9 cycle
+|   - 6d04edbfd [PMFW-7114] AM5 Alpha filter implementation for SBTSI filtering
+|   - db9c7f0b6 [PMFW-7371] Define New GFX Vmin Offset Fuse
+|   - 3d40fa0f5 [PMFW-7584] Updated Core/L3 EDC weights and scalars
+|   - 643bd01a8 Optimize PID limit and value update
+|   - 97d66b92a B0 update: 1) DXIO v0.846 2) Added USB4 Host sleep message 3)updated DPIA function.
+|   - f9e1514c2 [PMFW-6499] Correlation Power Equation Fixes
+|   - f0e60bc8c Moved code to make space for B0 data section.
+|   - 0c1a181fd [PMFW-7346] Remove SYSHUB DS timer used for USB bug
+|   - b13274356 [PLAT-82700] 45W OPNs use 2 DF Pstates only (DF P0 and DF P3) by default
+|   - 098089d73 Fixed enablepde update for S3/S0i3 entry.
+|   - af775db06 ECO structure 64bit allignment in RAI
+|   - ba1cf179b GFX DLDO bypass message for overclocking
+|   - a37dd7804 [PMFW-6703] Add GFX Curve Optimizer Messages (Voltage Margin offset)
+|   - 51420ada3 [PMFW-7158] AGM display for SMU SKIP COUNTER is always 0
+|   - 8d428f82a Fixed P0 memory training failed when first memory training is for P0.
+|   - 0030dd89a Update ConfigSocMessage to include MpstateDisableInAbl, instead of reply on QueryNumberOfDfPstates message.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.31.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         27/05/21
+|
+| * Changelist
+|   - 8a156bff7 [PMFW-7348] Dummy PState Update for DDR5 to include Relock & Retrain
+|   - eb07e1c87 [PLAT-81604] Pass-in bit vector or structure for arguments for USB FSDL
+|   - 9961bd50f [PMFW-7263] Black screen after second Z10 + PSR
+|   - 757a1ffa6 [PLAT-83099] Change DeepCstateRdy interrupt to level triggered
+|   - 867b6cef8 [PLAT-83565] Clear ZSC SCRATCH_3.AudioPlayBackEnabled all the time
+|   - 2fd0d5169 [PMFW-7342] Remove unused Fclk MaxFreq and DDR Rate indexes
+|   - 44cbd2244 [PMFW-7088] DDR5 Extend FidDid Table to support Overclocking Range to DDR5-12000
+|   - f1542821a [PMFW-7267] Define msg parameter for StbLog.NumSamples
+|   - 744b9d69f [PMFW-7372] Set ChL3InitPkg2.PLLRelockForceCoreStrDis
+|   - 127c8c37f [PMFW-7366] S0i3 can not enter with SATA controller solution in FCH AGESA + DXIO
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.30.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         21/05/21
+|
+| * Changelist
+|   - 7a6e0444c [PMFW-7316] Integrate DXIO-FW 69.854
+|   - 7144b351f [PLAT-83683] DF is in P0 state preventing 2nd S0i3 entry
+|   - 34c08f3ce [PLAT-81557] Configure PD Interrupt (pin7)
+|   - fca3edf75 [PMFW-7357] Disable Slicegate
+|   - 47a60e3f5 [PMFW-7323] Skip BIOS message fSMC_MSG_EnableWalle when MP2 FW loading is skipped
+|   - ede495cf6 Fixed DF Pstate swicth hang with DDR5 1600/1200/2400 Pstate.
+|               - PMFW7324, PMFW7305
+|               - Updated DDR5 DDR4800 pstate table to POR table.
+|   - be2a912e3 Release CSTATE_BOOST resource in WarmReset entry
+|   - 99b409dfa [PMFW-7029] Reduce MP1 Clock to 400MHz
+|   - 83dbd53cc [PLAT-82655] Fix residency skewing from WhisperMode and Zstates
+|   - 713b0543d [PMFW-7321] Integrate optimized LAPIC FSDL
+|   - 2fd3e1847 Clear DeepCstateRdy PIC interrupt at Zstates Node4 exit only
+|   - dad28d51d [PMFW-7298] GFX Voltage Stuck at High Value
+|   - 6021ff67a [PMFW-7347] Modify the IOHC, PCIe, and nBIF restore order
+|   - d305f5aa9 BIOS interface table clean up
+|   - b5e81f03c [PLAT-82603] Convert BIOS GFX dependent Vmin from mV to V
+|   - 855660aab [PLAT-80470] Convert BIOS telemetry slope from uA to A
+|   - 86f151c11 [PMFW-7247] Smartshift power limit default behavior
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.29.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         17/05/21
+|
+| * Changelist
+|   - 2c366e59e [PLAT-82504] Add CLK resource to CalculateGfxData
+|   - 9326b8357 Clear clkdrvsth2.clkb_dp_refclk_driver_pwdn on every type of boot
+|   - d8b829864 [PLAT-83144] Use SVI3 Encoding for Overclocking Min VID Limit
+|   - 402f23cce Remove unused ShubClk messages
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.28.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         14/05/21
+|
+| * Changelist
+|   - 082290a33 GFX resource for WarmReset, and removing the force DfPstate0
+|   - 74ca6b086 Skip CPPC calculations if the request is the same as previous DPM cycle
+|   - 8701ebf61 GFX DLDO CGPG_wakedly Updates
+|   - df8563177 S0i3 Updates:
+|               - [PMFW-7130] Use LapicEcoEntryCheck instead of LapicEntryCheck for Zstates entry
+|               - [PMFW-7240] S0i3 Lapic FSDL changes
+|               - Set Display Off idle mask based on phy_ref_clk_off only (Workaround)
+|   - f1dc89738 Added USB4 RT port operation workaround and integrated latest RT FSDL
+|   - d3a87c109 [PLAT-80997] SOC ULV Optimization
+|   - 3caca66d0 DMCUB and VBIOS message corrections
+|   - ca8f672f7 [PMFW-7196] PMF driver Dynamic Power Slider related updates
+|   - a3d5d7b53 [PMFW-6767] Power Slider related updates
+|   - 568c058ce [PMFW-7217] RMB DDR5 workaround needed for SRSM bug
+|   - 981a93ce9 [PMFW-7273] Update FIT_CORE_RATIO to 0.6F
+|   - fbdeacd8a Move GFX DEM to TEXT section and remove pmi0 Sram buffer
+|   - c6249e3de [PMFW-7194] Optimize FCLK DS divider to /64 for >=800 MHz FCLK when in DF C1 residency
+|   - 3dc3890d8 [PMFW-5641] GCEA age based bank arb update
+|               1. updated bank_stay_away_cyclim field to 8-bit 255 clamp
+|               2. select dram timing values based out of MP0 - highest DPM level
+|   - 35f906d7b [PLAT-81861] Clear GFX CLDO band gap when in GFXOFF
+|   - 1b31f8078 [PMFW-6859] Add limiters to PPT, TDC and EDC - update Maxmax limit
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.27.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         11/05/21
+|
+| * Changelist
+|   - 884ef4952 Do not release RLC_MUTEX_RESOURCES when waiting for the mutex
+|   - 092b873be [PLAT-82161] System hang on S0i3 resume (OS level) with GFX DPM enabled
+|   - b025c30ad [PLAT-82603] GFX Temp Dependent Vmin
+|   - 4194decb5 [PLAT-78737] System hang during C1e enablement
+|   - 4c5dbc2ae [PMFW-7190] AGM does not work when GFX driver not installed
+|   - 9bdfb2c70 [PMFW-7195] Enter S0i3 in DF P3
+|   - 7ab5bf1c5 Fixed B0 USB4 RT1 related issue. Fixed B0 USB4 RT disable IDLE mask issue.
+|   - 35322ce60 [PMFW-7091] Use of fake PLL status for DEIPCSMU-4396
+|   - 2f08decd0 [PLAT-80391] Long term Z9 Hang Occurs - SMU Hung at RTOS_WaitForNextInterrupt
+|   - 7ab1b0365 Fixed USB4 PHY loading argument convention
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.26.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         30/04/21
+|
+| * Changelist
+|   - 68e50d1d9 [PLAT-82326] STB Log and S0i3 hang
+|   - 3ea18ad0f [PMFW-5271] Smartshift - Incorrect SmuMetrics_StapmOriginalLimit
+|   - 34d0a94a0 [PLAT-80470] Create BIOS entry to enter telemetry slope value when use custom scaling "000"
+|   - 6f444eea0 [PLAT-80427] NVMe RAID IOHC Trap
+|   - 2818a36ea [PLAT-82159] Hangs at PC2F11E when zstates are enabled
+|   - 95362762d [PLAT-82106] USB_OFF blocking HW DRIPS on 2nd S0i3 cycle
+|   - a5c8727a4 PC6 Save/Restore with Alias Addressing
+|   - 98971001f [PLAT-80998] DecayMode disable during gfx BTC and GC_FINE_GRAIN_SECURITY programing during PnP
+|   - 8839b0b09 Watermark Resource Deadlock
+|   - e19382203 [PLAT-80288] Rembrandt ComboPHY for Display DDI
+|   - a819c84bd [PMFW-7152] SBRMI mailbox usage sequence improvement
+|   - 394dd10f4 [PMFW-6382] Telemetry Msg Mailbox for reporting STB addr
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.25.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         23/04/21
+|
+| * Changelist
+|   - 862b0710e Clean up EnableGcRsmuResidencyCounter()
+|   - bc23eda67 Set GFXDLDOREG_CNTRL1.NrepFlopSel to 9
+|   - 26e3f5d1f Core DLDO Optimization
+|   - cfba022c5 Disable Core DLDO FDD BTC
+|   - 54b23588a Updated B0 fuses to Rembrandt_r1_24_soc_fuselist from fuse GOV.
+|   - 10b103950 Use FW_Error instead of dead loop when message port is busy
+|   - 22f5159a1 [PMFW-7132] Remove GFX PLL DeepSleep
+|   - 68e2d2e2b [PLAT-81655] Send P3T RLC voltage request only if GFX DPM is enabled
+|   - 5ab923fd7 Correct GFX target frequency reporting in PM log
+|   - 7c32ef4d0 Fixed DDR5 memory retraining issue (SkipToFreqAdjAckForBypass=0).
+|   - f489da1db Updated B0 USB3_0/1 FSDL update.
+|   - 567b6de42 Use fused Cclk Fmin for GFX BTC
+|   - 16ef58f76 [PLAT-81992] Add ProgramFllShunts() to CPUOFF Exit
+|   - 8b5671277 Fixed LPDDR5 retraining issue when relockonly=0.
+|   - 01f25b2ad [PLAT-81872] Reduce Cclk Fmax on Secure Parts
+|   - 0ef8a766f [PMFW-7123] L3 Ring workaround reduce Max Allowed DID delta from 10 to 2
+|   - 8a0981e8c [PLAT-81859] DTBCLK spread causing HFR1-45 compliance failures for FRL
+|   - 9d2a2bd48 [PLAT-81586] DF pstate is not switching naturally on Lilac
+|   - cbb636db5 [PLAT-78737] C1e Optimizations
+|   - fbf3cea8a Added back Disp Off setting.
+|   - d7fba6e22 [PLAT-79603] BIOS AOD PBO scalar option doesn't work. Add SetFitLimitScalar message.
+|   - 7527fe342 [PMFW-7060] P3T GFX table not populated at boot
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.24.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         16/04/21
+|
+| * Changelist
+|   - f0710f4d3 Remove InitDpref and InitDtbClk CLK Resources
+|   - 603538ee9 [PMFW-7080] Local signed binaries shall be compressed
+|   - 58a757364 Residency Calculation Correction
+|   - bab15ede5 S0i3 Updates:
+|                [PMFW-7070] S0i3: Shadow timer GPIO44 suppression
+|                [PLAT-81277] Partial-wake from S0i3 before configured sleeptime (HPET wake AMD Suspend)
+|                Code Cleanup
+|   - a4b1a8d2f [PMFW-7069] Integrate DXIO FW v69.847
+|   - 4c73ccb77 Seperated USB4 IDLE MASK for S0i3 and Zstate.
+|   - 6662b4cb0 [PMFW-7001] Integrate DF PStates Optimization.
+|   - ff8628565 [PMFW-7076] External DP/HDMI display no sound output after plugged in
+|   - 9788a14d7 Leave Voltage Checker Enabled in Therm Test Mode
+|   - 14b6fde41 Set GFXDLDOREG_CNTRL4.initialRefSource to 1 by default
+|   - 83cd48eca [PLAT-81071] Harvest_Bypass_Groups add to mode-2 RST
+|   - 7dec99303 GCUTCL2_HARVEST_BYPASS_GROUPS S/R add for Gfx Mode-2 RST
+|   - 4b802d80d [PMFW-6538] VDDOFF to 0V
+|   - cb0cc4609 Use generic Fmin in P3T InterpolateTable()
+|   - d6e1419de Updated B0 USB4 D3 entry/exit and 2 workarounds.
+|   - a313fa61e Updated audio PLL for B0, not slicegate.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.23.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         09/04/21
+|
+| * Changelist
+|   - 1c97a663f Remove ProgramFllShunts() from PC6 Exit
+|   - 2303e4273 Increase DfCstateDisable PSP message priority
+|   - 173b82536 [PMFW-6973] Update CAC Weight values - continue
+|   - 732c10de1 [PMFW-6973] Update CAC Weight values
+|   - c5324011b Changed P0 of DDR5 4800 pstate to 1200/1200/2400 from 1600/1200/2400.
+|   - fd34f60da [PLAT-79855] DDR5 PPT clarification for StartupDfPstate() and all memory Pstate requests.
+|   - 65adc0595 SmartShift 2.0 Socket Power
+|   - 77737243d Set GFXDLDOREG_CNTRL1.NrepFlopSel to 8 by default
+|   - a4afb55af [DERMBE-869] VCN Restore during Z9 Exit
+|   - 8e959c453 [PMFW-6056] LPDDR5 S3 enter routine doesnt enable the UMCCTRL.EnablePDE bit. Update for S0i3 too.
+|   - ca413f0ff [PMFW-7043] Integrate PMFW Kernel v13.07
+|   - 16c9b41aa Fixed the issue of VCN router disbaled after Zstate exit.
+|   - 5fbef1ec0 Fixed UMCCLK DS causes DF Pstate switch failure issue.
+|   - d9828ab81 Zstates Execution Time Improvement
+|   - 38925095a Add Navi2x to SmartShift supported dGPUs
+|   - 7c6676d9a [PMFW 6949] Add DDR speed to driver pmfw pstaste table
+|   - 072f7ebb7 [PMFW-6963] SmartShift optimization
+|   - abd1f06fe [PMFW-6964] SmartShift Power Limits Should Not be Reset on DC Transitions
+|   - 2764f3a5e [PMFW-7006] Configure DfCstateDisable bit when enabling DFCstate to match DF C State request
+|   - 1ce4b0f60 [PLAT-79652] [VCESWT-6230] Add MPM Clock and SmartShift 2.0's PDG to AGM
+|   - 40dd97613 Remove repeated SmnIf structure in RAI file
+|   - 718bf561a [PLAT-79592] Yellowbang code 43 observed after driver PNP test
+|   - 672291432 [PLAT-80550] FW_Error_Internal During Stress - SVI invalid Vid
+|   - df3b14c3c [PLAT-80563] EnableGfxoff rlcmsg send for AllowGfxoff after mode-2 rst
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.22.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         02/04/21
+|
+| * Changelist
+|   - 077c8e458 S0i3 GFXOFF exit flag correction
+|   - 59da09ecf Set GFXDLDOREG_CNTRL1.NrepFlopSel to 9
+|   - a21ed29d3 [PMFW-6988] Improved CGPG Exit Values
+|   - 89519fc57 [PMFW-6942] For Zstate Latency Optimization, program 40mV/uS slew rate for SVI3 rails
+|   - 72fde1cce [PMFW-6943] Need SVI Decay Mode programmed for SVI3 Regulators
+|   - 3c7642b79 P3T Updates
+|   - f0358f38c [PMFW-6853] GFX EDC CAC Weights & Parameters Initial Submission (Sparkman Baseline)
+|   - 151749cb0 [PMFW-6924] Lilac BIOS Hang at PC E098.
+|   - 6dbd4ecd3 Assert invalid VID FW_Error only if there's no force frequency
+|   - ba6762d85 [PMFW-6377] Delay STB init until bios sends StbLog.DRAM location
+|   - a1182f793 Made room for B0 data section.
+|   - 6f6045d37 Re-initialize GFX DPM on Mode 2 Reset
+|   - ef5232384 GCEA config bank_stay_away_cyclim bit_num fix
+|   - ee1cc9cd9 Voltage Checker: Round down the frequency to the nearest 25MHz
+|   - 2883607ba [DERMBE-869] VCN Restore during Z9 Exit
+|   - 86bd3d9ae [PLAT-79592] Yellowbang code 43 observed after driver PNP
+|   - 3a73091cb [DENBFW-1839] USB4 Normal Link Event:Pin6.
+|   - 45842d31d Put VDDCR_VDD Decay Mode in VDDOFF Enable
+|   - 5cb70f013 Add disable option to InitializeMpm message
+|   - 6636024be [PLAT-79574] MP1Clk to 600Mhz
+|   - 8fe4f50e1 Update MmHub FSDL and remove MmHub PG msg replay
+|   - c507af6d1 [PMFW-6983] Integrate DXIO-FW 0.845 to RMB-B0.
+|   - 44d7b574e Add S0i3 PCIe PME Restore
+|   - 9e9e21f5f [PMFW-6892] PBO and PBO_Advanced Fusing Controls
+|   - acd3fd516 [PLAT-70083] Overclock setting is cleared after resume from S0i3
+|   - 07dd66e71 [PMFW-5200] Overclocking state does not restore after S0i3
+|   - 56cf9dcab [PLAT-71683] OC settings not reset when switching from AC to DC while in S0i3
+|   - cbe2ebbb9 [PMFW-6860] Reset OC mode to default when entering DC Mode
+|   - 054b8dd4e [PMFW-6859] Add limiters to PPT TDC and EDC
+|   - 403ca560c [PLAT-80098] GFXCLK freq couldn't revert to original value when de-trigger prochot
+|   - 4f618846e Updated Doxygen files.
+|   - bfceb736b Updated mp2smc.h, rlcsmc.h, vbiossmc.h and vncsmc.h for doxygen format.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.21.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         26/03/21
+|
+| * Changelist
+|   - 121c6ffb2 [FWDEV-2079] SMU get eSPI_PM_INTR service ready from very beginning
+|   - c229d2286 [PLAT-80429] BSOD 116 - SMU Hung at FW_Error_Internal During Stress aka High Voltage Issue
+|   - f43627f4f [PLAT-79361] Reset cycles don't work with pllpwrdn
+|   - 70b0b93bb S0i3 NBIO nBIF FSDL Update
+|   - 8746e4c2d [PLAT-75915] GFX Mode-2 comprehensive SR list add
+|   - 9cfc470a2 Added USB4 IDLE MASK setting and update USB4 sleep Interrupt handler.
+|   - 68ae94e40 Updated DDR5 DF Pstate swicth without ASYNC WA.
+|               And set uclk_cgmcdis = 1.
+|   - d34b3880f VCN TSC Update
+|   - 030da74f9 [PMFW-6918] Update RMB GFX CAC Scalars to RMB Specific Data
+|   - 7805ca0c0 [PMFW-6758] Changed SMN DS divider to 64 to give 6.25M.
+|   - 2bf203a7a [PLAT-75915] Gfx Mode-2 DMA error fix and ISS test add
+|   - 956ff45a6 Updated ppssmc.h for doxygen format.
+|   - 10ef84404 Updated dmcubsmc.h for doxygen format.
+|   - 5d1428976 Updated ACPSMC.h for doxygen format.
+|   - 34fbfc573 Change SmartShift's PDG parameter to have 1 decimal place only to allow larger values
+|   - aa834aeef Remove Unused Funtions
+|   - 1c2c905a7 [PLAT-78189] Warm Reset Failed at SATA Offline
+|   - e1d557517 GfxDpm init GfxMaxVoltage fix
+|   - 48029edb5 ConfigGcea GCEA_DRAM_BANK_ARB fix
+|               [PLAT-75915] GCEA S/R DMA commands add
+|   - c1389f1f8 Moved code to EXT section.
+|   - f59cf4028 Latest S0i3 Changes: Add PSP sec msg, GfxOff save/restore, AtHub and EC restore moved, etc.
+|   - 23fcc7481 [PMFW-6838] Static Per WGP Clock Gating
+|   - f83778031 Reverted s0i3_mmhub.c to commit 63edfc7, commit 4ba480461 was accident.
+|   - e652d261c Restore MP1's BIOS Interface first thing on S0i3 resume
+|   - b4655ce45 Update S0i3 NBIO nBIF FSDL
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.20.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         19/03/21
+|
+| * Changelist
+|   - 19fd425fb Move GfxMode2SR Structure to DATA Section
+|   - d08844eca Add FW Error for high voltage requests
+|   - 33b01bdf5 [PMFW-6915] Update DLDO Setting
+|   - 064939ac8 Remove DXIO Calls from Zstates Entry and Exit
+|   - 4c683402d [PMFW-6911] CAC Ref Clock Updates
+|   - 5982b1787 Move a few messages to EXT section
+|   - 8b90c0bb4 [PMFW-6907] Update FIT COEFF_A
+|   - 519e345b6 Integrate S0i3 DMU FSDL
+|   - 970821fd6 [PLAT-78737] C1e Improvement
+|   - 2c9ad88d4 STB to Dram Improvement
+|   - 7fb24cc6f S0i3 NBIO nBIF FSDL update to version 2.4
+|   - da6f73c96 Updated biossmc.h for Doxygen format.
+|   - bb9843c9b [PLAT-75915] GFX Mode-2 Reset GCHUB programming
+                1. Moved GCEA ini and shadow reg programming done by vBIOS to PMFW to setup gcea properly after mode-2 reset
+                2. Moved UTCL2 ini and shadow reg programming done by vBIOS to PMFW to setip gcutcl2 properly after mode-2 reset
+                3. Added non-init non-shadow reg programming to S/R list after mode-2 reset
+|   - 0eccc7e7c Added DF/CCX VDCI3 work around.
+|   - a14ce366b [PLAT-79378] DF Light C State feature does not work with Pre-Sil default Hysteresis values.
+|   - a7f579d5d Clear PSP argument registers if the message doesn't have arguments
+|   - a7cca539f [PMFW-6894] S0i3 Resume hang - SMU PC stuck @ Disallow_DF_cstate function.
+|   - dd6540bdc [PMFW-6870] dGPU Mailbox read/write policy update
+|   - 8001455b5 Move InitEnabledCoresThreads to ConfigSocRail Message
+|   - e2eb643c2 Updated pspsmc.h for doxygen format, removed 2 unused psp messages.
+|   - 71b1809c2 [PMFW-6856] Update OPN Limit Lookup Table with new IRM Data
+|   - 268723a36 Integrated DP FSDL for USB4.
+|   - c205ca2ab Zstates DXIO Message Parameters
+|   - 90dd9eaca [PLAT-79381] Enable PME TurnOff support
+|   - 758b0accc [PLAT-78598] An SMU message to identify S0i3 resume state before unlock HDD password
+|   - 8749c8f93 Renamed usbxx_7_0 to usbxx_3_1 as FSDL comes.
+|   - 4ba480461 Updated latest FSDLs for USB4 B0 (verion9_march11).
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.19.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         12/03/21
+|
+| * Changelist
+|   - 5616d8add S0i3 Changes
+|   - 9fc0be1a3 Add NAVI2x to SmartShift Supported Devices
+|   - 8b6915dff Added workaround for SATA FSDL.
+|   - 53beff2c7 Moved code to ext section.
+|   - 3e0900371 [PMFW-6816] Run EDC Controller Immediately after EDC and P3T Limit Change
+|   - 0a0054070 GFX DPM Clock Sweep and Auto DPM
+|   - c127b8ffd [PLAT-79367] Fixed ACLK 0 freq issue after zstate exit.
+|   - 7714950c5 [PLAT-79504] SMUFW needs to only set TrainReq based on results of ConfigSocRail message.
+|   - 5ec12cec3 [PLAT-77250] Enable SW downcore S3 support
+|   - 6de41980c Moved display related message calls to ext region to save space.
+|   - 20b736611 Added Zstate allow/disalllow for Miracast.
+|   - 96386bbd2 [PLAT-76672] Derive WckRatio based on Ddr2MemclkRatio in Customized DfPstate
+|   - 5fe5e8a42 [PMFW-6830] Use Q8.8 Encoding for both Get and Set STT_C parameters
+|   - db1b835ad [PMFW-6379] [ENH] STB Spill to DRAM
+|   - 0e5170850 Config DF Pstate MemClk
+|   - 9e5f5ce38 utcl2/gcea config add for gfx mode-2 reset
+|   - ec9344395 [PMFW-6777] Report EffGfxFreq in MHz in SLT Logs
+|   - b8f37d0d2 [PMFW-6777] Change SLT Logging To Count GDFLL Counters
+|   - bd5eb8fd4 Do not Clear SVI Interrupt Register
+|   - 47b8506c7 Fixed VDDM turn on/off issue with CLDO bandgap, to just chnage Bit 6 for CCX VDDM.
+|   - b301bfaa3 Move ShubClk DPM to TEXT Section
+|   - cb4cddbc1 Updated B0 to SOC CL: 1403825.
+|   - f6e502a70 Added BIOS <=> PMFW interface for PS3 sleep event.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.18.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         05/03/21
+|
+| * Changelist
+|   - ce0c7abc5 APML Mailbox Commands
+|   - 7e3bdbd51 Removed unused function to save code space.
+|   - 3ab13e262 [PMFW-6781] Update Thermal Test Mode
+|   - 9cd80b1e0 [PMFW-6792] Integration of DXIO-FW 0.840 into RMB_B0 SMU.
+|   - 4d873549b [PMFW-6793] RMB B0 - Enable XGBE RSMU Interrupt.
+|   - ce5c4acce Update Sata FSDL (Remove 100MHz ref clock turn off)
+|   - 58e5c4853 NBIO IOHub FSDL Update
+|   - 15e7e2cd7 [PMFW-6796] Change PCIe PMIs to Level Trigger Interrupts
+|   - 3dffa066f Add the Latest SATA FSDL
+|   - 8c8f89d28 [PMFW-6743] DDR Phy SIDD variable initialization
+|   - 7239b80ae Cleared DPP Clk_stop bit after z10 exit.
+|   - a42a919ee [PMFW-6397] Provide means to disable gfx dldo regulation
+|   - 615374461 Remove unused message
+|   - 5126dc884 [PLAT-78769] System hang with memclk=800 at DisallowDfCstate
+|   - 2c3fff0b2 [PMFW-6783]Playback corruption when playing 4K AV1 clip.
+|   - daabfa02d Use FreqToDfllClkCnt() for ClkCnt in P3T
+|   - d552186a1 Move EnableMp0clkDpm() to Sram
+|   - a81e8a112 Cclk Controller Improvement
+|   - 5b81c77fa Added new USB4 init message and scheme.
+|   - c0d83b581 [PMFW-6719] Test Message to Wrap RLC "No Stretch" Clock Settings
+|   - 2710a367f [PMFW-6734] Integrate DXIO FW v69.842
+|   - 9a71fd5d1 Add Smnif Structure to RAI
+|   - e180c2938 Updated HC3/7 for D3 Entry using polling instead of interrupt.
+|   - 6cb31e639 To remove unused code in clocks.c.
+|   - 42e026f8f Make LTR and LAPIC Thresholds Variable
+|   - 0861ae0f2 Updated DXIO B0 to version 838(a154e28ef7).
+|   - e8216708e Set TrainingDone bit for S0i3 when receiving ConfigSocRail message.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.17.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         28/02/21
+|
+| * Changelist
+|   - 1a88b8e9a Updated USB3 (HC0/1/2) FSDL to version 25/25/19 and cleaned D3ISR related code.
+|   - 910d750a7 Add More Zstates Postcodes
+|   - ccb17815c Save CCXSEC_initiator_cfg.ordercontrol and skip for disabled cores
+|   - c44cc8e3f Added USB4 PCIE hotplug ISR.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.16.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         26/02/21
+|
+| * Changelist
+|   - ca507ac12 Allow Cclk and GfxClk Fmax Override
+|   - 6e5a96267 [PMFW-6719] [PMFW-6655] Test Message for DFLL Mode and VoltCode for Vid
+|   - a5fc532ae Release RLC_MUTEX_RESOURCES during GFX BTC
+|   - a9f00e149 Disable PCIE_CFG reset when doing PF_FLR_RST for GfxMode2Reset
+|   - 57df3ed3b Clear SMNIF_TLB_AWCACHE by Default
+|   - d7bfc5c7b Use DpmDelay instead of RTOS_Delay for GFX BTC
+|   - c52aceeda Added gc-rsmu fuse restore at end of Gfx mode-2 sequence
+|   - f47fbf7fb Add Zstates Entry as a Job to RTOS Queue
+|   - f8e0e1719 Split VDDOFF Exit into Two Functions
+|   - e4dc59ba1 Disconnect SMN Low Power Feature (Enabled by Default)
+|   - 64671f309 [PLAT-78529] SMU Hung at FW_Error_Internal during Reboot/Stress workload
+|   - eaa816bfa PC6 Exit Posted Writes
+|   - 8e20bbe90 Added ForcePhyPllRelock in Startup Pstate switch.
+|   - 08cf93f86 [PLAT-77581] WarmReset CCX after BIST
+|   - 0316ed08d [PMFW-6709] Port Cstate reference clock from VMR
+|   - 6551995ea [PLAT-76672] ConfigDfPstate Condition Check
+|   - 26f599745 [PMFW-6710] GFX DEM feature: bring up changes
+|   - 4320396ed Add Paging Structure to RAI
+|   - 173c85646 Debug Code Improvement
+|   - 41d895c54 [PMFW-6683] AGM PM Tab VCN Status JPEG always 0
+|   - bfaa0c213 Change VBIOS Address to MMHUB TLB and Virtual Type
+|   - 8f55d68cc Added 2nd TLB for RSMU and removed TLB for USB.
+|   - 57c29e2dc FSDL Read-Modify-Write Mask Correction
+|   - 5ef582a6f Add Default GFXDLDOREG_CNTRL3.rvddOffset = 0xB6
+|   - 94347692e [PMFW-6649] Send DFLL and GFX DLDO Scalar and Offset
+|   - 9325e5051 Allow VBIOS to Request DPM Tables
+|   - 7ef981ae8 PCIe LTR routine compiled with latest B0 SOC CL.
+|   - 0465f6799 Made FAN startup PWM to be a field in Fan data structure to allow PAPI to change it.
+|   - 63edfc726 Update FSDLs' Includes
+|   - b921d2988 [PLAT-78150] Core Performance Boost BIOS Option Not Functional
+|   - 24061613d Removed DMA_CL7_SHUBCLK_DEEPSLEEP_ALLOW_ENABLE programming.
+|   - 44e990dc4 Added B0 USB4 DState, Sleep, S0i3/S3/4/5 and host reset.
+|   - b3e0940bc [PLAT-77958] Core frequency limited by AFLL range
+|   - 673c325b3 Add Smnif Structure to RAI
+|   - 366ed7211 Added router enablement before accessing ZSC5/6_MSMU.
+|   - cd24b5e35 Read MP1_FW_CHRONO_LO to capture start of PC6 exit time
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.15.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         12/02/21
+|
+| * Changelist
+|   - 6c6612eb7 [PMFW-6619] GFX RLC Message - Define Signed Frequency Offset in MHz
+|   - 9c779caaf [PMFW-6581] Update DLDO default reg values to ensure true CGPG power removal (Apply with CBS Option)
+|   - 79646fbe8 DPM Code Clean Up
+|   - 7b48fe326 GFX AVFS Initialization
+|   - bad4f220f Removed VCN save/restore in S0i3 for B0 Emulation per Sriram's request.
+|   - f608958e4 Cleaned Coverity complains part 2.
+|   - 59244d65e Cleaned up Coverity complains.
+|   - 9b8608ab5 [PMFW-6659] EDC_CAC_TO_THRESHOLD_SLOPE_SCALAR to 9.0F
+|   - 442a76203 P3T Updates
+|   - 9911d281f [PMFW-6660] PMFW needs to restore MP2CLK for Zstate abort case.
+|   - 73e1467b5 Assert VDD Domain Iso and Reset in WarmReset after Putting GFX in Off State
+|   - ff3ca9578 Add PC6 Abort Condition in Zstates FSM
+|   - decce7696 [PMFW-6656] GFX CAC Collection
+|   - eb951e338 [PMFW-6543] Update 4 messages to support argument with negative temperature--continue
+|   - 4e7c20fca DisableGfxOff return ok_response if DISALLOW_GFXOFF is set already
+|   - fb676a443 Use xthal_dcache_all_writeback in FW Error Handler
+|   - 7e71929f4 [PLAT-77391] Hang at PC 3F01 while booting to OS.
+|   - a9d2f7615 [PLAT-77962] CPU base speed in Task Manager is not changed after changing overclock setting
+|   - d294ae4ae [PMFW-5993] Get FW logging implemented in Rembrandt
+|   - ebe9b7ad5 [PLAT-77644] Incorrect selection of Thread for CPPC EPP
+|   - 7fba9d010 Simplified ECO - Stop entry if timer is disabled
+|   - d54263dc7 Fix FSDL API DWord to Byte Conversion
+|   - 1e5201df2 [PMFW-6549] Program deep sleep divider for HSPCLK.
+|   - 9f955ae5d Clear ExitAfterZ9Z10 after 1st GfxOff Exit after Z9 Exit
+|   - fc9dcd128 [PMFW-6598] Integrate DXIO FW v69.839
+|   - 00fd64045 Setup I2S CLK to ref bypass instead of Did 0.
+|   - 396bbcc44 Added FASTSIM to skip USB4 RT1.
+|   - 83dd7364d Added PCIe1 link magement interrupt.
+|   - 6b75fe7f5 Invalidate ISR and DATA Sections Only on FW Errors
+|   - dd0afe750 Acquire IdlePower Resource before Calculating RSMU Busy
+|   - 6865000ef B0 usb4 RT integration updated.
+|   - e0413ae89 Claimed spared 512 bytes of SRAM space.
+|   - f9920898a [PMFW-6603] Patch Core HOT GB on PlatSi Parts
+|   - cc5d398b6 Update FDD_CAL_MID for FDD Calibration
+|   - b77a19b02 Enabled 4 DF Pstates for LPDDR5.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.14.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         05/02/21
+|
+| * Changelist
+|   - 26d6c949a [DEIPCSMU-3618] FLL Mode needs FreqJumpEn bit set
+|   - b06596756 Add FwError and AxiError Handlers
+|   - 74f42ca61 Enabled UMC Pwr gating (PwrGtEn = 1).
+|   - 2bae6a6db [DERMBE-758] S3 entry - MP1 initiated access to UVD RSMU register returns SLVERR.
+|   - 627eb4f3f Remove Pre-ZSC IP Idle Check
+|   - 579009fca Updated B0 DXIO update and version, release_notes.
+|   - 3ff1ae27b [PLAT-76005] Telemetry Slope and Offset are 0 for the SR Rail
+|   - e89250ea2 Use SVI3 VID code for GFX_VMAX_VID
+|   - a9aa358f2 Make all display clocks on 600M bypass before entering Z9.
+|   - 2ed9f51fb [PLAT-75915] Mode-2 EXT_SCRATCH change to PUB_SCRATCH for debug
+|   - f713f359a [PLAT-75915] RMB GFX mode-2 Reset debug
+|   - eedb95067 Added FCStateconfig bit for FCLK/UCLK DS and FCLK power down in DFCstate.
+|   - aff9d4952 Enable GFX DPM DFLL to PLL Switch
+|   - 455915c56 [PMFW-6504] Trap Sata PCI MSI_EN/MME value to correct Sata local MMC
+|   - 830c6b4f9 [PLAT-77031] Downcored OPNs do not boot into OS
+|   - 51d618bcd Allow GfxOff Enable/Disable when RLC is not loaded
+|   - 51e26b6e7 Changed sdpforceddisconnectondfmon to 0 per POR config.
+|   - 6acdd9c08 SVI in AM5 packages has 3 slaves
+|   - 1ae45086c [PMFW-6581] Update DLDO default reg values to ensure true CGPG power removal
+|   - 0fe115fa7 Updated ISS for B0 CL:1376734 alignment.
+|   - 524470da3 Made room for B0 data section.
+|   - d51dc3f20 Updated USB4 FSDL files to ensure DV standalone version is not changed.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.2.18 (B0)      |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         01/02/21
+| * Changelist
+|   - Updated PMFW/DXIO to CL:1376734
+|   - 0fe115fa7 Updated ISS for B0 CL:1376734 alignment.
+|   - 524470da3 Made room for B0 data section.
+|   - d51dc3f20 Updated USB4 FSDL files to ensure DV standalone version is not changed.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.13.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         29/01/21
+|
+| * Changelist
+|   - 8063cb65a [PMFW-6563] Integrate DXIO 69.838
+|   - d2e10e139 [PMFW-6389] CAC EDC GFX Clock Stretching Spec
+|   - 2896be9e9 [PMFW-6543] Update 4 messages to support argument with negative temperature
+|   - da69c764b Zstates ECO Latency Parameter Correction
+|   - 79b77b37b Skip CalculateRsmuBusy for ACP if ACP is off
+|   - 0c860e4d2 Program default core PMC_CPR0/1 registers
+|   - 61ad5123f Add IP Idle Check to Zstates Entry
+|   - 515d05ef8 Updated one mistake in usb.h (put EXT3_SECTION on one file properly).
+|   - 2950a9917 S0i3 Updates
+|   - b7446994f Updated for USB4 CL 1376734 alignment.
+|   - f9cb2ce2c [PMFW-6118] Pass Vmin, Vmax limits to RLC for Rembrandt
+|   - 7be76cdc9 [PMFW-6546] SMU Hang caused by CoreInCC6Prep stuck
+|   - 527ada74f Add GFX PLL to DFLL Allow Switch
+|   - 995025d73 Updated to make sure DISPLAY clock require proper bypass clocks.
+|   - 0f98505e3 GFXOFF and Zstates Postcodes
+|   - f98dea4d5 Updated MPM message with Doxygen format.
+|   - e81081c3c ECO Algorithm QuickSort fix
+|   - 1487030b3 Walle optimization DMA transfer processed data
+|   - 6aba86eb4 Added EXT3 to add USB4 RT1.
+|   - cce17baaa [PMFW-6540] eSPI FSDL Update
+|   - 7dbfe299d [PLAT-76625] Remove socclk mask bit HST_CL4_SOCCLK_DEEPSLEEP_ALLOW_ENABLE program
+|   - bf68544eb Clean up MPM messages.
+|   - 1aef72e5e [PMFW-6532] audioclk on VDDP_S5 rail needs perform additional init for SliceGate
+|   - e16ba3c2e [PMFW-5990][PMFW-6027] DLDO & DFLL scalar msg add
+|   - 69692c7a2 [PMFW-6156] Dynamic Preferred Core Infrastructure
+|   - a48d713dd P3T Resource Correction
+|   - 0663b9eb0 [PMFW-6535] Update DDRPHY CAC Weights
+|   - fb73e4b88 Fixed PMFW does not go higher DPM level issue.
+|   - 4a653ac4b Prevent adding PC6 Entry job to the RTOS Queue if it's already added
+|   - b26380fb6 DisableGfxOff return arg fix
+|   - 7184e50ab Update Logging with the latest from CZN
+|   - 5930cda86 [PMFW-6506] GPIO doesn't toggle during DRAM logs
+|   - 7c69d2ca9 [PMFW-6491] Request return DPM level FW interface.
+|   - 79e8c6fa3 [PMFW-6482] Actual Frequency VCLK = 0 when using AGM
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.12.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         21/01/21
+|
+| * Changelist
+|   - 78d206472 Add SR rail to AGM averaging
+|   - 6608f4bb8 Do not select 800MHZ for DISP clocks's bypass source.
+|   - b3bfc12da Update Calculate Core and L3 Common Data
+|   - e67e53146 [PMFW-6474] Integrate DXIO FW v69.836
+|   - 18086f3fd [PMFW-6475] Do not enable FCLK DPM if mem-pstate is disabled in ABL.
+|   - e3e4ee068 Handle PC6 Exit on Z9 Entry Abort
+|   - 845a374c1 rename GfxResetOnDriverUnload msg as PrepareMp1ForUnload
+|   - 1e5c5c5c6 Separate Port80 and STB Postcode Verbosity
+|   - f1ee864ec [PLAT-75215] Add VDD to SOC Isolation and Reset to VDDOFF
+|   - 0443c9dd2 [PMFW-6360] GfxResetOnDriverUnload update
+|   - ee72f79ad [PMFW-6465] Throttle Modification to Improve Gaming Performance + Preferred Core
+|   - b61ea7a9f [PLAT-71300] Set DelayedInitAutoEn to use L3 hardware telemetry
+|   - b3ef25b8a [PMFW-6470] Add SHUBCLK DPM GBE Level Parameter
+|   - 6cbe24f6b Take GFX DLDO control from RLC when SLT logging starts
+|   - 9c39e3eec [PMFW-6476] DF PState Table with two PStates when MP1_MAX_FCLK = 0x2 (15W OPN).
+|   - 7273cfa70 [PMFW-6469] Split Core C-States CC1 Hysteresis/Stutter Timer Between AM5 and FP7
+|   - 5a9d33911 [PLAT-75553] Update DF PGFSM settings
+|   - b55f542bf Add SetGfxDfllScalar Test Message
+|   - 732ba2858 added Doxygen and Sphinx support; generate bringup csv
+|   - b87652b9e Skip EnableCC6 on S0i3 Resume
+|   - 7b47b05fb [PLAT-74980] BIOS option to disable/enable ChIdxHashEn
+|   - 7df4cd4e1 [PMFW-6441] VCN V/DCLK Deep Sleep Control.
+|   - 8913d63ad Updated MP0 Requested freq change to be enabled by PSPSMC_MSG_EnableMp0ClkDpm too.
+|   - 0b2fdd851 [PMFW-6360] [PMFW-5984] Gfx Reset on Driver Unload
+|                1. Gfx Reset on Driver unload/PnP
+|                2. Stop RLC communication test msg
+|               [PLAT-75915] Gfx Mode-2 reset changes from MI200
+|   - 36bfe637d Removed UCLK <= FCLK restriction in AM5 OC Configuration.
+|   - 9f861eadf SMU to PSP Mailbox Improvement
+|   - efd8b5438 FW coefficient updates. Updated GFX DPM IdleFrequencyTable to include package type
+|   - 500581744 [SWDEV-268485] [IMP] Put all UVD tiles into PG state after first timre power up.
+|   - 55318a75e Removed unused C2PMSG registers under MPM interface.
+|   - 8164c2d7c Abort RLC Alive message if RLC status is not normal (= 0x3)
+|   - 77391b7ae Add MMPM (Perf) Counters' Config Parameters
+|   - 35721b61b FW Status RSMU PMI P2 Pending Count Correction
+|   - 7f7c4bac2 Update Peak Package Power (P3T)
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.11.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         15/01/21
+|
+| * Changelist
+|   - 3b2037f22 GFX DPM and RLC Messaging Improvements
+|   - e816218cf Add S0i3 NBIO Straps Save and Restore
+|   - 750bb641c [PMFW-6455] Signing process supports reading username/password from environment variables
+|   - f322ee303 [PLAT-71300] CCX L3: Delayed L3 Initialization
+|   - 4e4c876b5 [PLAT-71238] CCX L3: Fast PC6 Restore
+|   - 9d8c0972d Enhanced ConfigDfPstate message to skip customizing SOCVid.
+|   - d6534f36e [PLAT-75215] VDDOFF 0V results in hang on first entry
+|   - 601277ae0 [PMFW-4058]Allow ULV entry between frames during video playback
+|   - e4b672f46 GFX DPM, GFXOFF, and RLC Messaging Corrections and Improvements
+|   - 0dddd04e6 removed fVidtoV in SetSmuRlcFreq QueryVoltageForFreq
+|   - 66440b982 removing gfxoff_stress_doorbell to enable nightly regressions
+|   - e8a6df4e2 GCEA_MISC2 register updated for gfx devicedriver mode-2 test
+|   - fa0b5dc90 [PLAT-75778] Support S4 entry message from MP1 to MP2
+|   - c4d302ff0 [PMFW-5989] dsmref for gfx dldo voltage
+|   - b7d9e3b3f Take resources outside of ExecuteGfxOffExit()
+|   - c6560c77a Add more GFXOFF postcodes and code clean up
+|   - e8e62f7e8 Acquire RLC_MUTEX resource before calling QueryVoltageForFreq()
+|   - cdf5044b4 [PMFW-6412] RMB B0 - PMFW to move compile time emulation flag to runtime/fast sim option
+|   - 639a489b6 [PMFW-6399] UMC Register DramConfiguration_mp0.UclkGtFclk needs to be programmed
+|   - 07855ed46 Use Timestamp() for FW Residency Events
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.10.0           |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         11/01/21
+|
+| * Changelist
+|   - c76ff1d50 [PMFW-6414] CPOEN fuse write to RTAVFS
+|   - 42deeedd3 GFX PF-FLR sequence update to use mode-2 reset
+|   - 54b7b78b1 Update STB Source IDs in export/postcode.h
+|   - 306ccdf5d [PMFW-6404] Configured default slewrate of 20mv/us for all rails
+|               - This change can be removed once fuses are updated
+|   - 7d6db290b THREAD_CONFIGURATION.CoreCount should show number of enabled cores minus one
+|   - ac53b9e39 [PMFW-6250] SOC DPM Algorithm Update.
+|   - 367b885af Expose CC6 Structure in RAI
+|   - f0045d252 Fixed B0 data/bss out of space and NB SMN write function issue.
+|               Integrated DXIO v832 into B0.
+|   - 89c679315 [PMFW-6396] Put resource around FllBootTimeCalibration() routine
+|   - 0fff9792a Gfx Dldo OFF to BYPASS
+|   - e89b15639 [PMFW-6395] Make Arbiter ForceFreq and ForceEnabled volatile variables
+|   - 553268ce4 [PMFW-6373] GFXDLDO default values
+|   - cead9385e S0i3 Updates
+|   - 7fac4c699 Get Tnd Clear hrottle Reason Messages
+|   - 0c8f81f74 Call VddmExit_0V() on PC6 Exit CcxReset()
+|   - 2ca4614cf Add SetFllScalar and SetFllVoltageThreshold test messages
+|   - af1bba664 [PMFW-6373] Gfx Dldo defaultval update
+|   - 9cba8485d [PMFW-6391] [IMP] RMB STB FW Reinit
+|   - 2270e954b [DERMBE-679] MP1 should not execute DFPstateReq, ProgramVid and SetClockFrequency function on S0i3 resume
+|   - 3c24968b3 [PMFW-6372] Cannot read SBTSI/Curtemp
+|   - b0c42e32b [PMFW-6323] Change FW for VCN power up to avoid multiple power up issue.
+|               Updated MPM amd MP0 voltage level as RMB DPM spread sheet.
+|   - f60734c66 Updated for LP5 memory retraining.
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.9.0            |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         07/01/21
+|
+| * Changelist
+|   - 5305c4e4d Disable all interrupts on Sleep Entry
+|   - 1ee71e35a Code Clean Up
+|   - 3c044405c [PLAT-74581] CPUOFF results in BSOD after few cycles
+|   - 2d2669c09 Update Walle AGM rails
+|   - 71c820c78 [PMFW-6336] Integrate DXIO-FW v69.829
+|   - c54186c8c Configure PSI decay mode setting on SVI3 master for vol down slew rates
+|   - be6b0a8ad [PMFW-6353] Pick up core DLDO settings from CZN
+|   - e9ba7e62c Update Walle
+|   - f6a29072f [PMFW-6337] Update VDCI3 Control Register1 Definition
+|   - 1efbd44bf Increase MP1 Watchdog Timer to Maximum
+|   - 039e1dcb1 Added PLL spread spectrum enablement
+|   - 1d9fa72c4 [PMFW-6335] DPTC STT C parameters need to support higher values
+|   - a6c5d69a7 Integrate Kernel Version 13.05
+|   - 4a3e9b652 [PMFW-6330] AGM can't report PWM correctly when fan PWM is being forced
+|   - 2534efc34 [PMFW-6349] removed condition check for GC RM prog for gfxoff exit
+|   - 0de384450 [PMFW-6329] Update LoadStepHystCtl Parameters
+|   - 26adcb04d Disabled SMN router for default off IPs duirng cold boot and resets
+|               Added PSP amd TEST messages to enable routers for those IPs
+|   - 97ec25a2b AGM Table Update and Add WalleLite Calculations
+|   - 1ae5b13fd SR SB enablement for zstates
+|   - 8806f8cd0 Removed Load VCN_FW message when powerup VCN
+|               Updated MSMU clock gating FSDL
+|   - 41ae2e7d4 Add the latest Cclk changes from Cezanne
+|   - 688885345 LP memory PPT will not start until receiving enablePPT message from PSP
+|   - a4414a17c Add UpdateVcnStatus Function
+|   - 966abb795 Add GFX DEM Residency
+|   - c40691e8a Remove ZSC PostCode FIFO Message
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.8.0            |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         28/12/20
+|
+| * Changelist
+|   - 49b49cd7d Moved 3 memory retraining functions into text section
+|   - d5e8ff2af EDC Controller Code CleanUp
+|   - 5b5907f84 Remove stale Max Min VID Override and ThermTrip workarounds
+|   - cfec4e24b [PMFW-6305] LoadLine Resistance Missing
+|   - 094a638e4 [PMFW-6300] Implement CurTemp Filtering
+|   - 357d60074 Updated to fix coverity violations
+|   - c558714f2 Check MP2_FIRMWARE_FLAGS for CanMP2Handshake()
+|   - 83e745be6 Enter CstateBoost only if not in CPUOFF
+|   - 97dc1dd9f Correcting the coverity stream name
+|   - acb7ac3a7 RLC Shutdown and Doorbell Race Condition Fix for GFXOFF
+|   - cca1df651 [PLAT-71472] Updated ACLK to support up to 1028MHZ
+|   - 0b9505a8d Fixed Wck programming for different m-pstate
+|   - d530183ee Removed clear warm reset bit for FCLK and DISP PLL after fuse distribution
+|   - b50a53b5d Updated ISS files for B0 CL:1356865 alignment
+|   - 837c20cf8 Integrated B0 SOC CL:1356865 and new USB4 RT FSDLs
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.7.0            |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         22/12/20
+|
+| * Changelist
+|   - 49c733398 Remove DPTC Soft Min Arbiter (Not Used)
+|   - 7c0c39587 [PMFW-5971] Peak Package Power (P3T)
+|   - e7c1d719f Fixed USB2 Dstate change
+|   - c1daf2525 USB D3 Entry Semaphore ID Correction
+|   - 80e41af79 Force GC Power Off on WarmReset Entry
+|   - e02be7086 Used MP1_PUB_Scratch registers for debugging
+|   - 0dd173ffd Update DFPstate table per Memory team for BU
+|   - 6cc87b0f3 Clocks Code Clean Up
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.6.0            |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         18/12/20
+|
+| * Changelist
+|   - 6372eae0c Comment out SendGfxVminVmaxLimits(), RLC is not ready
+|   - 1292c6ef2 Respond FAIL to SetMinDeepSleepDcfclk if DcfClk DPM is not enabled
+|   - 543563f0d Posted Write TLB Setup
+|   - c8732dfe5 Add more interrupts to FW Status
+|   - c0b1ffe6f Update Remove Whitetale Script
+|   - 900791c68 ISS ADMA model change, whisper mode ISS test updated
+|   - 1425f90c1 Fixed VDDP voltage and its scale
+|   - 3ca77df99 Port controller settings from Cezanne
+|   - b9a0b2be9 Gfxoffentry hysterysis param define for EnableGfxoff msg
+|   - 261bcf2d8 Fix resource lock in power source change
+|   - 85c22d2cb Vdd11, Vdd18, and VddIoMem Package Correction
+|   - 1ed450c6a Change Gfx Dldo State to Bypass only if it's On
+|   - c51687ff2 Fixed USB type C DP Phy init integration
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.5.0            |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         13/12/20
+|
+| * Changelist
+|   - e88cb2577 Add GetSustainedPowerAndThmLimit message to BIOS port
+|   - 78cf50e86 De-couple GFXOFF from GFXDPM feature enablement
+|   - 95ab8d4b0 Fix Vdd18 Power Calculation
+|   - 34db1c3f4 Port the latest BTC changes from Cezanne
+|   - 504011bf0 Change MP1_VOLTAGE_STEP fuse to SVI3 decode
+|   - 1debe32fe Update timer tick threshold for CLK4_INST1
+|   - 87c7a2b69 Add DC Mode to WhisperMode Requirements
+|   - 7671a7550 Port the latest Cclk changes from Cezanne
+|   - 21b01d1fe Added SR Rail logging for SLT
+|   - 77edab298 [PMFW-6291] Integrate DXIO-FW 69.828
+|   - 0e7772d17 [PMFW-6290] [IMP] Add make test_package support
+|   - 848e5ed9e Change version.h format for Auto SMU Versioning
+|   - b248daca6 ISS test updates
+|   - d2d9b3b39 Release SVI Resource after VDDOFF Exit in PC6 Exit
+|   - 65ece5cbe Port Test Messages from Cezanne
+|   - 9eca336bd Split RDI DMA into two
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.4.0            |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         13/12/20
+|
+| * Changelist
+|   - 033ab7fb2 BringUp Workaround: Force Fclk to 400 for DfPstate0 if MAX_FCLK is 3 and DDR Rate is 3200
+|   - 6f949cc97 Add more debug info to FW Status (MP1_EXT_SCRATCH registers)
+|   - f9b75f564 Move IdleMask to MP1_EXT_SCRATCH5
+|   - 50d4a1891 [PMFW-6133] Improve CLDO VDDM Programming
+|   - 34596ae8e Organizing Scratch Registers
++-----------------------------------------------------------------------------------------------------------
+
++---------------------------+
+| Version 69.3.0            |
++---------------------------+-------------------------------------------------------------------------------
+| * Date (dd/mm/yy)
+|         11/12/20
+|
+| * Changelist
+|   - 62651a181 Release L3 Full Reset for WarmReset too.
+|   - baed74e19 [PMFW-5971] Peak Package Power (P3T)
++-----------------------------------------------------------------------------------------------------------
+
+
++---------------------------+
+| Version 69.0.36(A0)       |
++---------------------------+-------------------------------------------------------------------------------
+a2841b2f3 (HEAD -> dev/rembrandt-main, tag: rembrandt--pmfw--69.0.36, origin/dev/rembrandt-main) enhanced gc model and updated gfx/gfxoff testcases
+496bade5c Updated dispclk_basic test to fix nightly regression fails
+0d590f253 Updated release notes for 69.0.35.
+d1ef38b90 DF model updates and lua script updates
+
++---------------------------+
+| Version 69.0.35(A0)       |
++---------------------------+-------------------------------------------------------------------------------
+aff6af5a3 (HEAD -> dev/rembrandt-main, origin/dev/rembrandt-main) Fixed DPP clock change with dentist logic.
+11d2e7131 test fixes
+7344b85f3 69.0.34 release notes update.
+6345d2c83 Fixed a coverity complain in dxio helper routine.
+d79d423d2 Submitted 69.0.34 release notes.
+ea80bf6f8 whisper_mode test updated
+
++---------------------------+
+| Version 69.0.34(A0)       |
++---------------------------+-------------------------------------------------------------------------------
+
+448550100 (HEAD -> dev/rembrandt-main) [PMFW-6256] Added BU requested DF Pstates.
+870c5fff2 (origin/dev/rembrandt-main) Updated Makefile to suppress Wpadded for SOC HEADER files.
+8af3d2693 ulv test fix based on recent changes
+2f21eeef1 Fixing struct alignment issue.
+582b176d9 PPSMC ForceGfxPowerDown msg move and RLC_MSG_Mode cleanup
+f6c488049 Add DCLK effective freq in agm.
+6aebcb6f9 [PMFW-3829] C1e Updates
+e6660229b stutter rail, warm reset test fixes
+b666249f2 [PMFW-5372] SmartShift 2.0 - Add SocketPower and StapmOriginalLimit to Periodic Message
+f36b0ae20 Updated 69.2.13 version.h and release notes.
+37734c2da [PLAT-73390] [UTB] [RMB] No response from PMFW when sending GFX DISALLOW message
+05f46152d Fixed VDDOFF decay settings to not over-write PSI6 decay setting
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.34.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.34.tar.gz
+
++---------------------------+
+| Version 69.2.13(B0)       |
++---------------------------+-------------------------------------------------------------------------------
+05f46152d (HEAD -> dev/rembrandt-main) RMB release 69.1.13
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.2.13.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.2.13.tar.gz
+
++---------------------------+
+| Version 69.0.33(A0)       |
++---------------------------+-------------------------------------------------------------------------------
+e23ab149f (HEAD -> dev/rembrandt-main) [PMFW-6231] RMB release 69.0.33
+798379e26 (origin/dev/rembrandt-main) InitVoltageChecker & EnablePC6 move to EXT2
+ccaa822c8 SMC_RLC arg5 add
+c1c034fc6 Read DF Cstate from HW register for SetSmnclkFwDsForce()
+ba173cbd8 Use GPU_TLB for DF and Remove DREG (not used in SMU13)
+52307a846 [DERMBE-635] GFXDLDOREG_CNTRL2_DEFAULT update
+c78a89355 Modify PC6 Execution Timestamps
+50dbe55f6 fclk test fix based on latest FW changes
+c779d1076 Update Makefile to have B0 built in emulation flag and checked in release notes.
+f0877a65d Keep SMN_NB feature on for B0.
+f30b7cac3 CCX CLDO Fuse Distribution
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.33.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.33.tar.gz
+
++---------------------------+
+| Version 69.2.12(B0)       |
++---------------------------+-------------------------------------------------------------------------------
+f0877a65d (HEAD -> dev/rembrandt-main) [PMFW-6214] RMB release 69.2.12
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.2.12.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.2.12.tar.gz
++---------------------------+
+| Version 69.0.32(A0)       |
++---------------------------+-------------------------------------------------------------------------------
+cbbea3940 (HEAD -> dev/rembrandt-main) [PMFW-6214] RMB release 69.0.32
+e8d4d2b86 (origin/dev/rembrandt-main) Rlc BTC-Vmax arg3 update
+00cf9d0f6 Fixed a few typo in DF Pstate table.
+ab63d2649 [PMFW-5987] WR gfxdldo update and BIF doorbell enablement for GfxOff
+091fc01aa Ported over VDDQ constant and added USB2 scale for diff  power rail.
+d4ea15033 updated Makefile to support 'rsmu_regs_offset.h' change
+e30c20a7e Updated SATA bootup sequence with new FSDL update.
+5e5e2f533 implemented model changes in clk_model,gc_model, df_model, lua
+c9359182c fclk dpm test for DDR5 with latest table
+1e40074a7 GfxDpmArbiter clkcnt input fix for QueryVoltage
+43f9fa534 Gfx dldo default values updates from Miguel
+88a3c0149 [PMFW-6118][PMFW-5990][PMFW-6027] gfx rlc scalar/offset and Vmin-Vmax msg place holder
+92ff9d76c [PMFW-6204]Ported BIOS-PCD logging from CZN.
+e43cc88a4 [PMFW-6119] Enable SMU Features after Restoring DXIO on S0i3 Exit
+e31b56efe [PMFW-5948] Enter Whisper Mode after DPM task is done
+40a0a4888 Removed GFXDLDO reg access in data.
+3e59363c0 Add ZSC's Z9, Z10, and Stutter Efficiency to AGM
+a43c8bea3 Updated to latest DF Pstate table
+e806ddd00 Updated to Kernel v15: d9a8e661d5f9de5a2e574054a73f22222e2b4906.
+88f34f8f2 [DERMBE-581] VCN Zstates Save and Restore
+905d7cab8 svi3 slvaddr based on package and gfxdldo.h update
+c35fe8afc Updated to use A0 r46.45 fuses file from fusegov.
+568e7ec4e [PMFW-5971] Peak Package Power (P3T)
+72751e9c7 DF Cstate model and lua script updates
+dda9d1282 Mask MP2 signals for ZSC if MP2 is not loaded
+f294bda50 Use DpmDelay instead of RTOS_Delay to ensure DPM cycle is executed
+26697bae3 RlcMessageMode update
+caa1486b8 [DERMBE-430] WR ProgramRsmuHardResetBComing fix and coverity fix
+a3c5ec736 Code clean up and updated for customized pstate table.
+5fd6b8f20 [PMFW-6170] Core OC with S0i3 does not re-enable Core features
+09643731e Fixed Coverity one complaint and removed fuses_bak.h.
+e3d1abc53 [PMFW-6193] Clear bits [29:28] (wakests, interruptsts) of INT_SHDWSYSALARMFIRE on S0i3 exit
+a29ba9b0c Fixed FCLK voltage table.
+3e8fa706d Updated B0 to CL:1343072.
+008f7c2b4 [PMFW-6029] Force Gfx PowerDown
+dd34f98c9 [PMFW-4951][PMFW-4952][PMFW-5853][PMFW-4953] Implemented test messages.
+0db53d75c Cherry picked CZN:e769cf340a to add GFX HT Fmax Controller.
+e382fcb6d Updated release_notes and version for 69.0.31 and 69.2.10.
+2a5312ce7 [PMFW-6023] Add test message for SR rail.
+7a056a9ed Optimize CLDO code to remove duplicated code.
+537125dc3 [PMFW-5877] Add CBS option for SVI3 telemetry offset
+f2a1921b3 [PMFW-5921] Fix AXI Write Errors
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.32.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.32.tar.gz
+
++---------------------------+
+| Version 69.2.11(B0)  |
++---------------------------+-------------------------------------------------------------------------------
+Align to SOC header: CL 1343072.
+
++---------------------------+
+| Version 69.0.31(A0)/ Version 69.2.10(B0)  |
++---------------------------+-------------------------------------------------------------------------------
+61d166ab3(HEAD -> dev/rembrandt-main) Fixed DXIO get 0 time stamp issue. RMB release 69.0.31
+6cb0804ad Enable DF Cstate interrupt only for ULV entry
+7dec4dd72 Fixed RSMU CAC_WINDOW and MAX FCLK BW calculation
+4fa3b2fb2 Script to remove whitetales from an input file
+c4e0b9247 [PMFW-5372] SmartShift 2.0 - Add dGPU controlled PriorityDeltaGain (Removing extra variable)
+5a5d03351 [PMFW-6153] Disable DF Cstate when changing WM.
+25678e9fa Fixed dispclk to use 800MHZ bypass clk.
+3b69cf969 pdated LPDDR5 and DDR5 pstate table.
+026b43056 [PMFW-5372] SmartShift 2.0 - Add dGPU controlled PriorityDeltaGain
+a398ed899 Zstates ECO fix and Chrono 24Mhz
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.31.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.31.tar.gz
+
++---------------------------+
+| Version 69.2.9 (B0)       |
++---------------------------+-------------------------------------------------------------------------------
+09560407c -> Rebuilt 69.2.8 fixed wrong fuses.h been included issue.
+
++---------------------------+
+| Version 69.2.8 (B0)       |
++---------------------------+-------------------------------------------------------------------------------
+09560407c (HEAD -> dev/rembrandt-main) [PMFW-6132] RMB release 69.2.8
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.2.8.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.2.8.tar.gz
+
++---------------------------+
+| Version 69.0.30          |
++---------------------------+-------------------------------------------------------------------------------
+a6505329d (HEAD -> dev/rembrandt-main) [PMFW-6132] RMB release 69.0.30
+41e1cc082 [PMFW-6125] gfx rtvafs-btc min-max msg split
+b2612452a (origin/dev/rembrandt-main) Added back VDDM CLDO OVDet feature bit.
+5d970c0a6 fclk new test added
+ea55697a8 DXIO v0.827 update
+2bf499042 Use 3 DMA Queues for PC6
+ddf10179a Minor code update, comments and typo correction.
+b192b50a8 Restore CORE_PWRMGMT_INTR registers with DMA
+4219c829a Allow disp to use 800MHX bypass clk.
+c720150b0 [PMFW-6043] Gfx Voltage margin msg
+d2af1dc61 [PMFW-5988][PMFW-5863][PMFW-5642] Gfx Force target voltage msg & RTAVFS msgs add
+1d4f1a1ac [PMFW-5964]Add support IP harvesting for GFX, VCN, and XGBE.
+d5efdb0e4 Latest Prochot changes from Cezanne
+d5d5a24e7 Updated DF Pstate table per latest updates.
+503855ec1 Add Zstates Status to AGM
+87ab508a5 DF Cstate test
+318667dd6 Integrated Coverity from common pmfw depot. Commit:220f48a465b.
+3032a7d9a [PMFW-3368] RTAVFS BTC and fuse-transfer changes
+2ca5f3ebf Fixed coverity complaints.
+d3b5b41e7 Fixed USB.c array index.
+8f9edf70f [PMFW-5951] Add support for ABL to indicate whether PhyPLLBypass is enabled.
+b419a46b5 Updated 69.2.7 release notes.
+c8697933d Update 69.2.7 release notes.
+be0eeb04d Updated Mp1 fuses.VOLTAGE_BASE increased from 8 bits to 9 bits.
+decc1b019 Add MPM and Aclk to DPM test messages
+5cb0d102f Fixed USB4 PHY FW loading. Updated DF Pstate skip option.
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.30.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.30.tar.gz
+
++---------------------------+
+| Version 69.2.7          |
++---------------------------+-------------------------------------------------------------------------------
+5cb0d102 (HEAD -> dev/rembrandt-main) Fixed USB4 PHY FW loading. Updated DF Pstate skip option
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.2.7.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.2.7.tar.gz
+
++---------------------------+
+| Version 69.0.29          |
++---------------------------+-------------------------------------------------------------------------------
+1aaa21273 (HEAD -> dev/rembrandt-main) sideband enable check removed for voltage change
+d84d28a89 (origin/dev/rembrandt-main) Update Test Messages
+bff9bc338 Added emulation backdoor loading support
+0ca113e62 [PMFW-6049] NVMe RAID IOHC Traps
+41cf14d50 [DERMBE-571] Check WarmReset interrupt pending before restoring EC
+f198612b5 updates rembrant_preliminary_fuses_b0; added testcase
+e58584470 Minor Update for memory re-training.
+12b78890a Updated for VDDM and VDDP CLDO programming.
+5efa9b326 [PMFW-5830] Rembrandt B0 will have VDD default off and PMFW must bring voltage up
+9e41949bd Optimize L3 Save and Restore for CPUOFF
+ac4cc8ebb Update LPDDR5 memory re-training and SOC VF curve table.
+1c7d362e2 Fixed SOC voltage request bug and other update.
+b2245908e Latest DXIO Helper's changes from Cezanne
+ff546f55f Updated fuse param for RTAVFS.
+7ee81ef67 updated clk_model and fuse model
+244ecf4f1 Updated after code review.
+0978a3367 Updated version and release notes for 69.2.5.
+290320856 p2v voltage, IRM test added
+f89037935 Remove unused PPLib messages
+4b8245ef7 [DERMBE-424] Zstates exit SMN read to 0x2dc_5000 results in slave error
+ffc2f5328 [DERME-525] WR check dldo-access before clearing fiso
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.29.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.29.tar.gz
+
++---------------------------+
+| Version 69.2.5          |
++---------------------------+-------------------------------------------------------------------------------
+|568136844: Release B0 PMFW 69.2.5 with production key. The base FW is the same as  69.0.28.
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.2.5.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.2.5.tar.gz
+
++---------------------------+
+| Version 69.0.28          |
++---------------------------+-------------------------------------------------------------------------------
+b06128fa9 (HEAD -> dev/rembrandt-main, origin/dev/rembrandt-main) Updates for dispclk test.  Updates to models, libraries and fuses for SR voltage
+ed0d534ab Update release notes for B0 PMFW69.2.4.
+aba861916 update testcases for gfx suite
+c5a2c96ed Updated for USB4 integration.
+a161cc80d rlc Queue_Must_Add_ON flag and gfxdpm targetf_req MhzToGhz change
+6637b9022 Populate LTRs with a large number to be used to skip non-active links' LTR check
+b4b2722fc Updated USB3/4 interface with BIOS.
+55d1e0eac GfxDPM & Harvesting Register update
+e97afb65a [PMFW-5372] SmartShift 2.0 (Initial Draft)
+bb19b812d Zstates LTR Check
+279dd28e5 Production-Key FW Signing support add
+afa4453f8 Update OPN Tables
+6b6966fa7 Fixed 2 issues with clocks.c.
+8dac3d3fc tdc test updated
+8d85a95d6 Set S0I3_SAVE message pre-req when Mailbox Interface is initialized
+0efcfe18a [PMFW-5819] Implemented Fast power-up and power down for L2/L3 VDDM CLDO
+d0f6cb97e Zstates LTR Check
+f8c86fb5e [DERMBE-529] Skip WR ChXiCfg0 write when L3 in Reset
+995d4f60a [PMFW-5956] ChL3fCfg1 programming during CCX init
+504c3b005 Fixed a bug for gfx pwrmgt_status update
+bcfa36188 Zstates LTR Check
+5a08d76ae [PMFW-3368][PMFW-3258]GFX DPM & RTAVFS message id update
+7ee727665 Updated B0 for MP0_ENABLE_DDR_CLDO_REGULATION fuse issue.
+6eb1f7259 [PMFW-5294] and updated soc_fusedoc.csv to fix fuse missing in fuses.h issue.
+af531bc1d Updated to SOC CL: MTO_1322172.
+80cb23ab8 Zstates ISS Updates
+710108735 [PMFW-5827]Porting update from CZN for PBO_Enable.
+a2713fea5 Added check to avoid re-enabling the enabled features
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.28.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.28.tar.gz
+
+
++---------------------------+
+| Version 69.2.4          |
++---------------------------+-------------------------------------------------------------------------------
+|c5a2c96edd17cdd6c7fd731e2dd: B0 USB4 integration.
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.2.4.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.2.4.tar.gz
+
+
++---------------------------+
+| Version 69.0.27          |
++---------------------------+-------------------------------------------------------------------------------
+39aacfd14 (HEAD -> dev/rembrandt-main) [PMFW-5943] RMB 69.0.27 release
+6a28c2944 (origin/dev/rembrandt-main) Update ChangeCoreLdo for WlbVid
+a17bed1e2 [PMFW-5920] Added PSP query FCLK freq message.
+ca96606ce Standardizing FSDLs (Part 1)
+d5251391d Updated Mp1 local fuse file.
+d8b23e8a5 Prevent ULV and WhisperMode entry if Zstates ECO hysteresis is set
+998e92460 [PMFW-5857]Updated cldo new feature aftre code review with Ani, Michael and Keith.
+7b91420f6 Clear CstateControl.SmuSleepIntEn by default
+f0df44fd7 Update Cclk based on the latests changes from Cezanne
+c0317f7fb RMB B0 69.2.3 release
+0385079be Updated DP PHY FSDL.
+8544f9439 Updated gfxoff doorbell stress testcase
+286c63d59 Updated for USB4 FSDL integration.
+eee5b3166 Updated for VDDM and DDR CLDO feature.
+f4ef8a731 Gfx mode2 macro fix
+e396d7b74 updated testcase to add support for mode 2
+0fc95e309 Remove unused ACP messages
+7a1351d73 tdc test updated, clk model update
+98878df6a updated run_test.awk script; updated testcase and Makefiles
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.27.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.27.tar.gz
+
+
++---------------------------+
+| Version 69.0.26          |
++---------------------------+-------------------------------------------------------------------------------
+603710e53 [PMFW-5872] RMB 69.0.26 release
+63aafd5c3 link reset test added
+525363a86 Upadted b0 cfg file and keep USB4 related clock on during init.
+d8debcb80 (origin/dev/rembrandt-main) clkmodel update for DS
+5150b3a00 socclk dpm test modified
+9c83f93cb Updated Makefile for B0 and ISS/LUA/Model changes
+fbf323b9c flr reset test added
+2b1b721d9 update testcase instructure (Makefile, ste, run_test.awk)
+919d1f136 Integrated DP PHY FSDL.
+9cb1602a0 [PMFW-3516] GFX mode2 reset update
+1fb6ba404 [PLAT-67904] Apply SVI3 Decay Mode to VDDCR_VDD rail in VDDOFF
+70ec0cb42 FSDL Updates
+567a328ef clock model change
+2558bf186 clk model update
+3e647a7df Updated CLDO programming after sync with CZN.
+06a0d2069 Updated for B0 SOC CL:1327134.
+b8a034e69 [VCESWT-4885] AGM DF-Cstate residency update.
+e56722eb0 updated ISS model to support deep sleep for vcn/dclk/mpm
+1138d2214 [PLAT-65709] Implemented a work around for HW issue.
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.26.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.26.tar.gz
+
++---------------------------+
+| Version 69.0.25          |
++---------------------------+-------------------------------------------------------------------------------
+dabab51b2 (tag: rembrandt--pmfw--69.0.25) [PMFW-5828] RMB release 69.0.25
+560d4ef96 Remove unused PPLib messages
+cad9fb80f Updated MP1 fuses per CZN's new addition.
+a726c9567 [PMFW-4478] Program TSC register for 24M TSC sync
+b743739d0 Add Postcode and STB Verbosity to BiosInterfaceTable
+9c12126eb DXIO v0.821 update
+df215a557 Add Postcode and STB Verbosity to BiosInterfaceTable
+7ff5eeb3a [DERMBE-486] skip gfxdldo fiso write during warmreset before gfxpwrup
+78b3c9913 [DERMBE-424] Zstates exit SMN read to 0x2dc_5000 results in slave error
+47f0d0bd2 Wait for MP0 to be idle before sending Z9 entry to ZSC
+73cdd2a2a Updated test cases to include the CCLK feature
+a7b0f3861 Fixed VCN - DCLK/VCLK should be at 400MHZ after receiving power up message regardless of memory repair.
+39abedfde Fixed espi FSDL for B0 compilation.
+0464beac5 [PMFW-3492] [PMFW-3494] Adding Simplified ECO algorithms
+ef4dc4e60 [PMFW-3492] [PMFW-3494] Adding Simplified ECO algorithms
+2abd51442 cclkdpm added in cpu_off tests
+933d5d78f idle tests modified
+0b0a18ef5 [PMFW-3504] Dynamic Power & Thermal Control (DPTC)
+3fb51ac72 [PMFW-5190] Add DF Wake Request Aborts to PC6 Entry (Correction)
+578629697 Fixed DivToDid() to handle div > 62 cases
+c5005c409 Idle Power Vote Improvement
+575b1d51a lclk dpm test added
+91ce7dc6e [PMFW-4391] Disable router ports for disabled cores
+f9eac3852 [PMFW-5724] PCIe LTR Interrupt Handler
+0498740e4 adding support for telemetry voltage in the ISS model
+f7ec46820 [PMFW-5782] CCX Feature - Fast PC6 Restore
+c515a3020 [PMFW-3543] BIOS Table
+29667601f [PMFW-3541] CBS Options
+26e6bb7c9 [PMFW-5190] Add DF Wake Request Aborts to PC6 Entry
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.25.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.25.tar.gz
+
+
++---------------------------+
+| Version 69.0.24          |
++---------------------------+-------------------------------------------------------------------------------
+c9ac8fbee (tag: rembrandt--pmfw--69.0.24) [PMFW-5781] RMB release 69.0.24
+9315aadac (origin/dev/rembrandt-main) [PMFW-5642][PMFW-5641] Config GCEA
+cf6a0c971 [PMFW-4914] Port GN B0 SetCoreLdo Change
+6748b60b8 [PMFW-3228] Delayed L3 init (L3 bypass)
+20cea513f Capped dispclk DID to MAX_DID when targFreq < VCO/128.
+c96bbe509 [PLAT-70732] Add CBS option for Zstate IDLE, Wake Event Masks and ACK Mask for Zstate Debug
+aa1a1e449 S0i3 FSDLs update to use sr_groups.h
+52760964d Updates for zstates, also added new zstate tests
+a5c9f2929 Bug fixes over GFX overclocking voltage computing.
+c10166334 vcn test modified, mp2clk removed from regression
+54f9c2356 [PMFW-5721] add SATA soft reset in cold boot.
+7d2aea9ab Updated for new default off IP sequence.
+e3b211b7f Removed resource acquire in mp2 clk change since zstate entry holding the resources.
+ab7ab4136 [PMFW-3368] RTAVFS dldo and rtavfs cpo fuse update
+4d4d8fe57 [PMFW-5702] [IMP] Allow debug version override in test FW creation
+812ce7c35 Bug fixes and code clean up.
+88ab8fefc vclk dpm test ported and modified
+e60e6b587 [PMFW-2023] eSPI Support
+92e08bd7b [PMFW-5730] RMB release 69.0.23
+70a9640f5 additional tcs fixed related to vbios_PowerGfxUp to psp_PowerGfxUp
+c35ed488b updated testcases to support psp_PowerGfxUp
+7e36f57da Added Svi global to ISR data section
+a6b493254 Bug fixes and code clean up.
+3a7ed8b52 update tcs, rembrandt_preliminary_fuses and models for regression
+829387cbf [PMFW-5717]Turning DTNCLK off until DAL request it.
+3af3dc9cb idle mode switch test added
+bc30ba6f4 [PMFW-5711]Updated PMFW fuses, and upadte all VID to 9 bits, removed L3 CKS fuses.
+53d4f5e49 [PMFW-3550]Upadted for unmanaged over clocking.
+ba2014951 ExitAfterZ9Z10 flag for GFXOFF exit after z9
+b6a35b856 RMB-B0 nightly regression enable
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.24.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.24.tar.gz
+
++---------------------------+
+| Version 69.0.23          |
++---------------------------+-------------------------------------------------------------------------------
+92e08bd7b (tag: rembrandt--pmfw--69.0.23) [PMFW-5730] RMB release 69.0.23
+70a9640f5 (origin/dev/rembrandt-main) additional tcs fixed related to vbios_PowerGfxUp to psp_PowerGfxUp
+c35ed488b updated testcases to support psp_PowerGfxUp
+7e36f57da Added Svi global to ISR data section
+a6b493254 Bug fixes and code clean up.
+3a7ed8b52 update tcs, rembrandt_preliminary_fuses and models for regression
+829387cbf [PMFW-5717]Turning DTNCLK off until DAL request it.
+3af3dc9cb idle mode switch test added
+bc30ba6f4 [PMFW-5711]Updated PMFW fuses, and upadte all VID to 9 bits, removed L3 CKS fuses.
+53d4f5e49 [PMFW-3550]Upadted for unmanaged over clocking.
+ba2014951 ExitAfterZ9Z10 flag for GFXOFF exit after z9
+b6a35b856 RMB-B0 nightly regression enable
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.23.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.23.tar.gz
+
++---------------------------+
+| Version 69.0.22          |
++---------------------------+-------------------------------------------------------------------------------
+e45d2cf81 (HEAD -> dev/rembrandt-main) [PMFW-5696] RMB 69.0.22 release with DXIO v0.820
+1d16acf9c (origin/dev/rembrandt-main) [PMFW-3234] Cclk DPM - Add idle frequency for FP7r2 package
+0ad675b3b [PMFW-3496] Zstate - Set GfxOff.ExitAfterColdBoot after Z9/Z10 exit
+81ae365d5 Updated .gitignore and moved some function to extended region properly.
+e10a33e17 Icrease DXIO_EXT and S0I3 section sizes
+2e4f4b3c8 Revert "Made top 8k of EXT2 as DXIO_EXT1."
+19e70be53 Updating gnu_version to 40000
+f48af002c Updated kernel commit ID in b0 cfg file.
+444cdf2f0 [DERMBE-430] Ethernet-PCS skip resetb based on fuse for WarmReset
+b347dac95 S0i3 External PCIe FSDL update
+caa58f817 gfx dldo coverity fix
+916fb819b S0i3 External PCIe FSDL update
+9cff5242b Made top 8k of EXT2 as DXIO_EXT1.
+3ecaad6a0 [PMFW-3496] Zstate - Handle ZSC's postcode FIFO message inside FSM
+f0bf8c2a1 Removed clocks.c.swo.
+5be9431a8 Fixed Coverity complaints, #2.
+6a4c92a38 Fixed Coverity complaints.
+d9463c4bb [PMFW-3496] Zstate FSM workaround for invalid DeepCstateRdy interrupt (ver 3)
+9eeda82de Updated to new Kernel 67db464c3d5e4.
+c1633e414 Remove unused PC6 by MSMU code
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.22.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.22.tar.gz
+
++---------------------------+
+| Version 69.0.21          |
++---------------------------+-------------------------------------------------------------------------------
+6875a04a3 (HEAD -> dev/rembrandt-main) [PMFW-5643] RMB 69.0.21 release with DXIO v818
+4590ee751 (origin/dev/rembrandt-main) Uncomment enableTelemetry from InitSvi
+264c18c76 [PMFW-3496] Zstate FSM workaround for invalid DeepCstateRdy interrupt (ver 2)
+d89248e4d updated infrastructure to support multi configurations
+48dd6ea8b Updated CLK FSDL and Updated DXIO FW to commit: 3e5b1a87.
+ffda390dd [PMFW-3496] Zstate - Add VDD domain iso and resets release
+fa8172d62 Updated Mp1 local fuse param for GTRTAVFS Pre-proc values.
+873beccf2 Updated MPFW 6^?B0 69.2.1 release_notes.
+04780bff7 PMFW RMB B0 69.2.1 release. Updated DXIO to 3e5b1a87e.
+65ad0c764 [PMFW-4478] Program TSC register for 24M TSC sync (Move to before USB4RT clock turn off)
+d4e99a144 Uncomment enableTelemetry from InitSvi
+768fbc4ce sys hub model change and ulv,whisper mode exit added
+8d415060b [PMFW-3496] Zstate FSM workaround for invalid DeepCstateRdy interrupt
+440334d9e [PMFW-3389] Updated SOC, Core and GFX RDI mapping
+2ecf387f7 [PMFW-3494] ECO algorithm for Zstates - Remove DPM call-back
+64f2e6eaa Updated SOC header for rsmu_reg_offset.h.
+744ff555d [PMFW-3501] S0i3 Update (Skip AtHub, IH, SEM, HDP, and MmHub FSDLs if iGPU disabled)
+19d12a654 GFXOFF: sms_rsetb and bihr clear to avoid repair retrigger on CGPG exit
+ee177063d Skip warmreset GFXDLDO regaccess when Z9
+b3e2d2920 Updated for RMB B0.
+4b5c23cbe [PMFW-3227] CPUOFF improvement: add more invalidate cache
+b2844adab Integarted and fixed clock DS save and restore in zstate entry/exit.
+db548db7b [PMFW-3501] S0i3 Updates:
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.21.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.21.tar.gz
+
+
++-----------------------------------------+
+| SMU Firmware Release Notes - Rembrandt-B0  |
++-----------------------------------------+
++---------------------------+
+| Version 69.2.1          |
++---------------------------+-------------------------------------------------------------------------------
+* 04780bff7  (HEAD -> dev/rembrandt-main) [PMFW-5577] B0 firmware change list alignment - CL# 1308269 - PMFW
+* 04780bff7  DXIO update to: 3e5b1a87e976fbdd24f419bf951239b9ab92ecb4
+* Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.2.1.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.2.1.tar.gz
+
++---------------------------+
+| Version 69.0.20          |
++---------------------------+-------------------------------------------------------------------------------
+* 1bbc16241 (HEAD -> dev/rembrandt-main) [PMFW-5593] RMB 69.0.20 ww37 release
+* 54def66b4 (origin/dev/rembrandt-main) [DERMBE-381] Z9 Fast Exit DF SLVERR during Z9 Fast Exit
+* 6f07c2d9f Moved RSMU Cold/hard reset before power up MPM PGFSM.
+* 6b04f25f2 Zstates ISS test updates
+* 275cbf754 Change ZSC message argument definition
+* 409eafdd9 default_ip test basic added
+* 9be0a49fe Restore MP2 to 200MHZ when exit from Zstate.
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.20.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.20.tar.gz
+
++---------------------------+
+| Version 69.0.19          |
++---------------------------+-------------------------------------------------------------------------------
+bcc287079 (HEAD -> dev/rembrandt-main) [PMFW-5574] RMB 69.0.19 release
+eee242826 (origin/dev/rembrandt-main) updated gfxoff/gfx testcases; added ISS model support
+a9875a9f7 Updated SATA warm boot sequence per FSDL.
+277603a08 Update fsdl files to make sure they are indeed in ext section if defined in .h files.
+dfca7815a [PMFW-3492] [PMFW-3494] ECO algorithm updates
+095b150ad Moved MPM function to non-paged region.
+d8c8e322d Updates for VDDOFF test cases
+2f6d9f2b8 Updated CLK fuse distribution and USB4 turned off (byass to REF) after review with Yan Hu.
+4ab40ef25 Zstates FSM Update (Fast ReEntry With Hysteresis)
+0d1bb48c7 [PMFW-4478] Program TSC register for 24M TSC sync
+314e5cbca ulv test added
+b5e02249f Updates for basic test, mpm test and zstates_all_tests
+69d6f7fd5 Added a function for Zstate abort restore MP2CLK freq.
+4754b9eb7 [PMFW-3940] Zstates Exit SMUIO TSC Restore
+bdd1398d1 Updated DCFCLK DPM to 8 level as RN.
+d8b5338b2 Updated MPM message interface to have 6 argument for DXIO messages.
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.19.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.19.tar.gz
+
++---------------------------+
+| Version 69.0.18          |
++---------------------------+-------------------------------------------------------------------------------
+31a6d2465 (HEAD -> dev/rembrandt-main) [PMFW-5495] RMB 69.0.18 release
+9b5c723ff ISS ThreadBusy testmsg add
+5d4869597 (origin/dev/rembrandt-main) [DERMBE-345] Gfxoff Off2Bypass move before gfx domain deassert
+fad6c9272 [PMFW-5339] Update Driver Table
+49b1ee994 update gfx testcases
+c1bb2ce5e [DERMBE-330][DERMBE-341] GfxOff DLDO sec.policy restore move and MP1 data section re-alignment
+a0f2b2123 Update VDCI3 settings from cezanne.
+232000710 Gfx security restore combo msg and svi update
+cef8dc45b updated Makefile for sbin names ; added GFX-EDC testcase
+682e02e00 Updated MP1 local fuses for 8 cores.
+846b9858a Updates to the basic test to fix recent failures with usb clocks
+f4f1a23b2 [DERMBE-329] Move S0i3 Timer Data and PCIe Bus Structures out of S0i3 data section
+68bcac542 Enabled DF light Cstate FCLK DS.
+f7ac7a344 Add EXT2 Section
+bc4c92b85 whisper mode test added
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.18.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.18.tar.gz
+
++---------------------------+
+| Version 69.0.17           |
++---------------------------+-------------------------------------------------------------------------------
+d77864fd8 (tag: rembrandt--pmfw--69.0.17) [PMFW-5390] 69.0.17 release
+3ac404c3d Updated USB FSDLs.
+147a8946a Fixed MPM access RSMU register with wrong Macro.
+c91e6aac4 increase gerrit_sanity.ste speed
+eec8bf9bd GFXOFF with warm reset test
+a35c99e56 GFX on security policy via MSMU: move DLDO message before first DLDO access
+e6bfb3e51 Upadted default off IP power up sequence for Zstate exit.
+a8308c335 Updated USB4 clock to bypass to Refclk before setting DFS DID=0.
+1d0f4f5b4 warmreset when CPU OFF and VDDOFF test added
+97ba07fa3 [PMFW-3369] GFX-EDC GC_CAC_WEIGHT update
+e64dfa509 Updates for the basic bacause of changes to the MP2, DTB and DPREF clocks
+6f1770db5 [DERMBE-288][DERMBE-317] GFX MSMU update and BypassClk MHz2GHz conv
+d90a15421 Updated power calculation after review with Adam.
+727b059f0 shubclk test updated
+3f0cdf1c7 Updated MPM model
+bea0a5093 stutter rail test updated
+fa59a889d [PMFW-5340] Update Driver Messages
+ee3de7371 Updated socket power calculation for different package.
+213c5d3dd adding tests to stress gfxoff
+7c5de25c3 Gfx SoftMin Msg add
+eca9320bf Gfxdldo code cleanup and vbios gfxpwrup msg removal
+dff82aca9 socclk dpm test updated
+7ae648c41 Fixed MPM RSMU address issue.
+c129d5015 Fixed MPM powerup register.
+3d7497673 Disable PCS3, PC4, and XGBE SMN routers on Zstates exit
+3958a2268 [DERMBE-301] GFXPowerUp msg move from VBL to PSP
+9ebaba38f Added sending SMU_PSP_ENABLE_UVD_FINE_GRAIN message to PSP after VCN is powered up.
+4b4c0c43c Set/Reset VDDCR_SOC/VDD powerok overrides in HSP/MP_A on Z9 entry and exit
+ad0ce92e5 Added code to clear SMS fuse ready bit after default IP powered up.
+024e72672 [PMFW-3389] core RDI mapping update
+43237c4e7 Integrated SOC headers CL:1294576.
+de550deea Add CCX reset during first pc6 exit after Zstate exit
+b8501ae01 Enable CCX SMN rourer before invoking ZSC MSMU
+77635d15e Set FP7 idle mask for PF7r2 package too
+d061a541b [PMFW-3369] GFX-EDC update
+f3c82af27 updated features.lua and added support for ISS models / lua
+f363f2280 Remove repeated Set_CCX_PWROKRAW() from VddOffExit
+98c8f1851 stutter rail test updated
+18d6f11cf [PMFW-3829] C1e state support
+c5fe0e4e3 Updates for basic test and zstates test
+25584eb11 Rename VDDCR_VDD Rail
+374a72616 SR Rail support, SVI Init Sequence, Package Selection Updated
+4be638f7e Updated sbin file name in release package.
+ea0443bce Move core interrupt registers out of PC6 DMA
+bbd3ff108 Add DXIO FastSim to S0i3
+7108dfb0a [PMFW-3376] SMUIO_MCM_CONFIG package_type update
+d9edca840 [PMFW-3509][PMFW-3369] GFX PSM SLT update and GFX EDC
+4057bb091 Add CCX init done flag and use it in Warm Reset
+ce2468c25 Updated MPMCLK to be shut off during PMFW initializtion.
+ead8dcd4a updated CalculateClock; modified cclk basic and enhanced features
+a3e2417f6 [PMFW-5204] PCR1 shadow copy incorrect due to CPUOFF/PC6
+d1792498e Cleaned up per Coverity output.
+63bdbaece Updated data/power, EDC controller.
+eb68b2139 updated dat file for cru; updated zsc model; updated gfxoff testcases
+0598f65c7 MP0,MP2,I2S,ACLK Lua tests updated
+b909fce6e Fixed DID to be capped at 127.
+831b10443 Added save/restore CLK deep sleep settings when enter/exit Zstate.
+638b9df3f Added FASTSIM option to skip DXIO Zstate exit.
+8908f1f68 Updated AM5 DDR VDDP CLDO config.
+94cdb5a34 [PMFW-5185] GCEA tune basedon highest GFXCLK MCLK DPM
+c5fbda6c8 Add BIOS CBS for Disabling Z10
+3b7153bd3 Update DDR VDDP CLDO for AM5 package.
+573c3a0f7 [DERMBE-121] GFX MSMU TLB fix and InitVidThresholds add
+351c457d5 Use Voltage in InitVidThresholdPsm()
+2c4cc2f45 updated gfxoff testcases due to new timer
+ec4dd9ad7 S0i3 SATA FSDL version 2.3
+acc8d5e42 PC6 DMA Program Correction for Cores 1, 3, 5, and 7
+e93614f3e Fixed MPM issues after ISS test.
+2eb4bf482 Fixed issues reported from ISS test.
+4d6c42b23 removed dmac_model.cpp; fixed typo reference of vangoghmero
+9282f22c1 updated gfxoff testcases and ISS model for cru model and gc_model
+97bec99aa [PMFW-3511] Updated closest RDI mapping for ODPRs
+e04b5c7f4 Save CCX init packages for CPUOFF
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.17.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.17.tar.gz
+
++---------------------------+
+| Version 69.0.16           |
++---------------------------+-------------------------------------------------------------------------------
+71311e7fc (HEAD -> dev/rembrandt-main) [PMFW-5114] PMFW 69.0.16 release
+ba178f0a6 [DERMBE-236] GFXOFF RLC- DLDO macro fix and DXIO v0.811 integration with fastsim
+b92da5254 (origin/dev/rembrandt-main) FCLK DPM Test for DDR5, Refclk support of 500MHz  added
+7bd3186b9 updated PM_TIMER Dpm; cru_model using REFCLK_FREQ 24Mhz
+734a655c5 NBIO PCIe S0i3 FSDL Update
+a473acc0f [PMFW-3395] RMB Prochot updates
+7eedfa820 Fixed VDD voltage calculation to MAX_VOLT(CPU,GFX)
+2dcd4ae4b Coverity Fix
+fee4d92d9 Changed PACKAGE_TYPE_INVALID to macro (Data savings ~3.7k)
+707e9b0f9 [PMFW-3519] Gfx Mode-1 Reset
+d29fee7a5 Update ACLK with DPM.
+219734122 [DERMBE-135] WarmReset ChL3FullReset add and gfx_dldo coverity fix
+1935e395a fixed cpuoff.lua; added mmChL3FreqCtl default
+0a9ff6fd5 updated adma_model for NOPs; cru_model to generate 41.6ns (1/24Mhz)
+21e2f9449 PC6 DMA Program HOC and NOP Checker
+ad29a5709 [PMFW-3256] GfxDldo_HandleGfxDldoCntrlToRLC enablement
+d627488ac Updated for coverity checking.
+f84c7b257 Updated after coverity report burn down.
+a56b4853d [DERMBE-220] removed GfxOff.ExitAfterVddOff set after every gfxoff entry/exit
+23407473d [PMFW-3256] GFXOFF update: sync to fsdl 4412929
+4fe2153d2 DFPState all DDR Rate test for LPDDR5
+ce2773ec8 Updated DXIO FW to version 807.
+b953c8a0c [PMFW-3394] - Updated CUR_TEMP_RANGE_SEL to 1 to show +ve/-ve temperatures
+ffea21849 [PMFW-3513] PSPP update for PCIE GEN4
+fce09d862 Updated ISS/LUA to support core_enable changes; cpuoff changes
+cb03d869f [PMFW-3496] Zstates Support (ZSC_SCRATCH_2 Programming)
+f38dc1c1d [PMFW-3389] updated CAC instances
+04e92f53a [PMFW-3496][PMFW-3229] safevid programming for zsc_vddcr_vdd rail
+5e2879931 [PMFW-3394] Thermal controller updates (removed CVIP)
+bacd75d5b [DERMBE-196] CPUOFF entry results in firmware error
+01343031f DFPState clock model change and test for DDR6400 for LPDDR5
+b276af8a5 Fixed GFX/CPU PSI residency divided by zero issue.
+fe5fb6747 [PMFW-3376][PMFW-3229] ZSC SVI SB enablement
+c8e318faf [PMFW-4509] Add PostCode Parser Script
+6eb1a5ee3 Updated SVI controller resource for Stutter rail.
+b57653314 [PMFW-3242] Removed per-WGP CG related code
+ce2038721 Prevent register access for disabled cores in CPPC enablement and preferred cores
+65e3005f9 [PMFW-4976] STAPM Controller needs to use the MIN limit of OPN and MOC override
+86c6b1673 [PMFW-3230] - Added Core Count control feature support for MP1 to provide the number of logical cores to be idled info to OS
+90f9f9aae Initdepot changes to see if it helps the jenkins jobs.
+069cc9968 [PMFW-3368] GFXCLK RTAVFS
+2ac4cdfb0 Add more ISS CPUOFF test cases
+6f549fbc7 Remove NBIO idle check from idle power features
+f4014fb0d Updated usb.c for FSDL integration.
+29995598f Add support for coverity runs.
+e17e03fa4 Updated MP1 low power enablement.
+71837a2a8 Fixed UCLK register issue in DF Pstate setting.
+66d34a960 [PMFW-4910] Update PMC_PCR usage with union structures
+7dfc4a3fb Refined PMI Hash function
+a18a76525 [PMFW-4867] PwrMgtStatus should reflect CPU PwrOk and PwrOkRaw
+532757a22 [PMFW-3393] STAPM
+a8c3ddd1e update REFCLK in pic model, gfxoff/rsmu model, bootup_rmb
+8863c3adf Updated offical released USB FSDLs and make use USB FSDL by deafult.
+5000730b9 [PMFW-3398] Smart Shift (PeAPM / A+A)
+e9042d732 [PMFW-3260] Temp dependent Vmin for GFX
+9eea37fac Zstates ISS Corrections
+341854d02 [PMFW-3515] Acquired clock resource when updating workload type
+7da59c210 [PMFW 4215] Implemented DF light C-state
+a07112f4e [PMFW-3256] ClockPostDivTurnOff add and resource fix
+53190e9b2 Display Allows Z9 Entry by Default
+64ebc1789 Replace Driver port with VBIOS and DMCUB ports for Allow/Disallow Zstates
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.16.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.16.tar.gz
+
++---------------------------+
+| Version 69.0.15           |
++---------------------------+-------------------------------------------------------------------------------
+* 908524fc8 (HEAD -> dev/rembrandt-main) [PMFW-4956] PMFW 69.0.15 Release
+* aadf24659 (origin/dev/rembrandt-main) Removing FEATURE_DPPCLK_DPM_BIT
+* dae6c1c62 Optimize Fast DMA for CPUOFF
+* 95ee66868 Added FCLK/UCLK fractional FID enablement.
+* d8ee4d21f Updated USB PHY FW loading parameters.
+* 5f6ab6751 CCX Init FSDL Update
+* cffc92f51 Updated soc_fusedoc and fuses.h.
+* 741c7bf9d Finished up display related clocks. Implemented SR voltage rail.
+* 88700dad9 Fixed DDR55555 PState table mismatch.
+* ab03d752f Update to use Alias Address to read data transfered by ADMA.
+* 7b54b3256 Updated clock model
+* d48bbe85f mend
+* a39b9facb Updates made when updating the basic.lua testcase
+* e1ca92423 DFPState test with all DDR rates
+* 61a67a046 Optimize FastAdam transfer.
+* 06e5ea4ce [PMFW-4867] PwrMgtStatus should reflect CPU PwrOk and PwrOkRaw
+* 52b85bf04 Fixed LPDDR5 DF Pstate table config.
+* 43c706c40 [PMFW-4781] Remove PSR/1 reset to 0 on PC6 exit
+* 4f71108c9 Optimizing PC6's DMAs
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.15.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.15.tar.gz
+
++---------------------------+
+| Version 69.0.14           |
++---------------------------+-------------------------------------------------------------------------------
+cbe2b00ae (HEAD) [PMFW-4920] PMFW 69.0.14 release with SoC CL 1269420 and DXIO v805
+3f57287ff (origin/dev/rembrandt-main) Update DXIO to Version 805. Cleaned up data.c for fast dma transfer.
+03f71603f Update application fastdma to use short command.
+121c7332c [PMFW-3229] VDDOFF - Apply the Latest Power Delivery Topology
+c3a88c5f7 Move S0i3MiscTable to Data Section
+30bacf0a5 [PMFW-3391][PMFW-3392] - Updated PPT and TDC throttlers
+5c63090b4 DFPState test update
+db8609990 [PMFW-3376][PMFW-3506] SVI3 and RAPL update
+0ac620100 Updated AssignBypass function to be able to round up or round down.
+cf60091f8 [PMFW-3236] CPPC - Collaborative Processor Performance Control
+95d0211b6 Updated DF pstate switch.
+11a636c9e Update Core Cstates based on latest CZN code
+f0a82c686 ignore pyc scripts and updated fuse model (readFuse), lua DPMs_
+581c552d1 [PMFW-4396] updated signing script 0.0.5
+1f8f14349 DFPstate FW frequency table read tests
+a174b763f [PMFW-3257] GPO: DPM updates from MVG and CZN
+abf3610b5 [PMFW-4396] updated signing script, updated fuses, gfxoff updates
+4abded621 Execute CPUOFF in PMFW only (i.e. without MSMU)
+b8c647015 [PMFW-2131] CPPC preferred core enablement
+768994ced updating for basic test
+25fb9d3a6 Move S0i3 data to S0I3_DATA_SECTION
+fe312de4f Fixed PMFW version. Fixed clock PLL num. Fixed TLB setup routine in fsdl.c.
+d90b61657 SetupSmnAperture SMNTLB update
+52f95fd0d [PMFw-4396] updated sign script; preliminary fuses; cclk basic
+8ad341de2 Added 2 BIOS S0i3 message.Some code clean up.
+d12bdca57 warm reset lua test
+b8da9d781 Fixed SMNIF_GENERIC_TLB index to match PRG_TLB
+12e608f03 EMULATION_BUILD flag to skip few RSMUs for warmreset HardResetBComing
+869e6f440 SVI3 VID PollVidChangeDone add
+285fe2fc2 [PMFW-4516] Integrate MMHUB FSDL for S0i3 (Ver 2.1)
+7982f087a [PMFW-4517] Integrate NBIO PCIe FSDL for S0i3
+da50f8d38 [PMFW-4848] Integrate External PCIe FSDL for S0i3
+2227d0486 SOC header 1269420. New Kernal.
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.14.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.14.tar.gz
+
++---------------------------+
+| Version 69.0.13           |
++---------------------------+-------------------------------------------------------------------------------
+e35256097 (HEAD -> dev/rembrandt-main) [PMFW-4843] RMB PMFW 69.0.13 release
+610095f66 [DERMBSPCF-38] LSDv2 soc_msmu1 for GFX MSMU
+6dceb92d5 (origin/dev/rembrandt-main) [PMFW-3517] WarmReset Clk fuse distribution update
+1a42a6911 updated clock model , basic.lua, LUA libraries, preliminary fuses
+65149618f [PMFW-4510] Log error if a new message is sent to a busy message port
+28e49efdd [PLAT-64758] ULV Voltage Offset Being Overwritten
+e5597599f [PMFW-3505] SBI Features
+03122c80e [PMFW-4517] Integrate NBIO PCIe FSDL for S0i3 (2nd Draft)
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.13.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.13.tar.gz
+
++---------------------------+
+| Version 69.0.12           |
++---------------------------+-------------------------------------------------------------------------------
+d4b643d5a (tag: rembrandt--pmfw--69.0.12) [PMFW-4815] PMFW 69.0.12 release
+a6c288d5b DXIO v0.800 update
+0604df78e (origin/dev/rembrandt-main) Updated NBIO idleness.
+bc4a63382 Updated MP1 fuses with MIM-CAP parameters.
+f94e0aa3f Updated fuses with Mim-cap fuse parameters.
+09813be92 [PMFW-4797] Update GFXOFF FSDL for SMS repair offset issue
+195872c7d [DERMBE-105] MP1 asserting CPU_PWROK right after cpuoff entry
+6651281e5 Updated audio PLL for I2S-MCLK, updated clk_model too.
+03ea52e60 updated rsmu_addr_range.dat, generate_addr.py, directory structure
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.12.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.12.tar.gz
+
++---------------------------+
+| Version 69.0.11           |
++---------------------------+-------------------------------------------------------------------------------
+db241c987 (HEAD -> dev/rembrandt-main) [PMFW-4595] PMFW Release 69.0.11
+dedb88905 (origin/dev/rembrandt-main) S0i3 SATA FSDL Update (ver 2.1)
+013de16bf Added MPM DXIO test message for MPM PCIe early training.
+281f37deb Updated usb fsdl and integrated to usb.c
+07c7a109d SMU13 Kernel release 13.2.0 update
+dfba3199b ISS clock_model DFS_BYPASS fix for GFX_CLK
+e507cccb0 GFXOFF EMU issue fixes ported from MVG
+a484d39de Update ZSM ISS model to use MSMU jump table
+366c606c4 FSDL Update (CFG/IO and MMIO Access)
+0e4c1fb37 Update usb0 fsdl, dcfclk_dpm, vcn_dpm, lclk_dpm, socclk_dpm and shubclk_dpm.
+4d1080a98 [PMFW-3501] S0i3
+598049b08 Correction to CCX init's Fuse address
+8abf65a35 update preliminary fuses to add support to CCX, SMUIO, etc
+b5a9f7066 [DERMBE-43] Kernel update for AdmaCmdBuffer 32-byte alignment
+75168812b Separating Zstates Allow/Disallow Messages
+3892704a8 [PMFW-4512] Notify EC on S0i3 entry and exit
+7167f0c63 Integrate MSMU Jump Table for CPUOFF, GFXOFF, and Zstates
+fbb16d839 [PMFW-4523] Integrate USB FSDL for S0i3 (Draft)
+b1672fef3 [PMFW-4522] Integrate SATA FSDL for S0i3 (Draft)
+4dc481a41 Update FSDL API
+63adc4758 [PMFW-4519] Integrate NBIO nBIF FSDL for S0i3 (version 2.2)
+b5b3a8190 [PMFW-4516] Integrate MMHUB FSDL for S0i3
+89ce1606d GFX PLL_0 off removed and ChL3InitPkg1 StartupDid changed to default_8
+7689e008a [PMFW-4513] Integrate FCH FSDL for S0i3 (Draft)
+4a26a0172 [PMFW-4520] Integrate OSSSYS FSDL for S0i3
+0e2051460 [PMFW-4515] Integrate HDP FSDL for S0i3
+6e32c020e [PMFW-4514] Integrate ATHUB FSDL for S0i3
+cd27eba50 [PMFW-4518] Integrate NBIO Drv FSDL for S0i3 (Draft)
+25383d229 [PMFW-4517] Integrate NBIO PCIe FSDL for S0i3 (Draft)
+1683a45d3 Add and Modify STATIC/DYNAMIC flags for save and restore FSDLs
+4db396d2a [PMFW-4521] Integrate NBIO IOHUB FSDL for S0i3
+f668418ca [PMFW-4519] Integrate NBIO nBIF FSDL for S0i3
+a8feca0c7 [PMFW-4511] Integrate LAPIC FSDL for S0i3
+77850c531 [PMFW-3501] S0i3 (Initial Draft)
+49b187862 Move enable/disable functions to EXT1 section
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.11.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.11.tar.gz
+
++---------------------------+
+| Version 69.0.10           |
++---------------------------+-------------------------------------------------------------------------------
+c47078ff2 (tag: rembrandt--pmfw--69.0.10) Updated ADMA with Alias address.
+91334efc0 Remove CPUOFF idle mask in Zstates FSM if there's a PC6 exit
+496cd538f Update Cstate Boost with the latest changes from CZN
+ff538af54 Update Cclk Controller with the latest changes from VMR and CZN
+
++---------------------------+
+| Version 69.0.9           |
++---------------------------+-------------------------------------------------------------------------------
+* 6fa80d178 (HEAD -> dev/rembrandt-main) [PMFW-4484] PMFW 69.0.9 release
+* f3abfa976 (origin/dev/rembrandt-main) [PMFW-4477] Add DMCUB Message Port
+* 3a9ed4cfc Updated to SOC header : 1253921.
+* 35be7417f ISS jenkins failure tests fix
+* 82b511614 Add more Zstates ISS test cases
+* 595bb86c3 ISS GFXOFF testcase fix
+* 7d9633030 Add Zstates timestamps. Fix the timer interrupt in the ISS PIC Model
+* 71bded273 Added cache invalidation to FastDma transfer.
+* eae72c705 Send Zstates entry PSP message on Z9 fast re-entry and retry entery after abort
+* 23411112e Add TMON power down to THM model, Zstates ISS test, Zstates interrupt search PostCodes
+* 51d0f0428 [PLAT-63347] MP0clk DPM switching
+* e6a83df53 [DERMBE-48] SMUIO_MCM_CONFIG PKG_TYPE update
+* 0c16fd06f Enabled/tested complete Zstate entry in ISS.
+* e556bcda2 Add PC6 abort test and MP_A model, fix MSMU entry call, and check CPPC for enabled cores only
+* c8254dfcb Add Zstates Residency Counter
+* 8ca58d13e Added MPM DPM.if handler to dpm_hub.
+* e02f52340 Remove deprecated FSDL APIs
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.9.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.9.tar.gz
+
++---------------------------+
+| Version 69.0.8           |
++---------------------------+-------------------------------------------------------------------------------
+* f5fb67135 (HEAD -> dev/rembrandt-main) [PMFW-4388] PMFW release 69.0.8 E008
+* 8ff32dd49 (origin/dev/rembrandt-main) Add more Zstates PostCodes and Counters
+* 36b43e644 [PMFW-3256] GFXOFF and MSMU updates
+* f8ea02d21 Add Zstates PostCodes, CCX PC6 MSMU entry point, and USB3 to disable message
+* ba7104787 Added back MP1_MAX_FCLK fuse read.
+* b163b4012 Fixed FUSE_PUB_START/END address generation.
+* 0bb38e913 Enabled paging.
+* a8925685a ISS VDDOFF Test
+* 021237a0f FSDL API Update (Adding single and multi-queue burst)
+* 535906f07 ISS PC6 Test
+* 144475a76 Updated for ISS and app after init zstate test.
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.8.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.8.tar.gz
+
++---------------------------+
+| Version 69.0.7           |
++---------------------------+-------------------------------------------------------------------------------
+* 95df7454b (HEAD -> dev/rembrandt-main, origin/dev/rembrandt-main) PMFW 69.0.7 release for SMT enable with THREAD_ENABLE_intr mapping update
+* 8c61d7c78 Add TLBs for ZSC, CCX, and GFX MSMUs
+* fde0798dc ISS: MSMU address dat file add
+* 98a17c34a Update ZSC model to include CCX and GFX MSMU
+* f687db273 Move CCX's MSMU to MSMU7
+* 16f6bcfab [PMFW-3496] Zstates Support (enablement and code clean up)
+* e83016a46 Added Resource protection for FastDmaTransfer_Adma().
+* 85e8952a9 [PMFW-3234] CCLK DPM (Porting Cezanne's updates)
+* f21ee07bc Integrated SMU13 Kernel.
+* 5cfbcb6c4 ZSC model backdoor msg support add
+* d3572d73d ISS ADMA model add
+* 39f157ad9 [PMFW-3259][PMFW-3262] GFX DLDO FSDL updates
+* 5b9edd7f5 ZSC and MPM ISS dat file and model add
+* 0f8bd7532 Idle Power Masks Updates:
+* 6744fcbda Updated boot_up sequence for Zstate ISS test.
+* 19a6847d2 Integrated DXIO version v0.782.
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.7.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.7.tar.gz
+
++---------------------------+
+| Version 69.0.6           |
++---------------------------+-------------------------------------------------------------------------------
+* 5f6e6a435 (HEAD -> dev/rembrandt-main) PMFW 69.0.6 SMT mode fix release to E007
+* c32d5b204 Zstates and ECO algorithms updates:
+* 277e6006d Allow SW to change SMT mode
+* 8f54ec828 ZSC ISS: model and msg port support add
+* ace7b8e4a - [PMFW-3492] ECO algorithm for VDDOFF (Completed)
+* d63692af5 [PMFW-3492] ECO algorithm for VDDOFF
+* 2ce37e8ba [PMFW-3496] Zstates Support
+* a84d6a291 PMFW Section Management
+* 2f79cda02 Added clock fuse distribution.
+* d32fc46b9 Fix logical core numbers and core ID
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.6.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.6.tar.gz
+
++---------------------------+
+| Version 69.0.5           |
++---------------------------+-------------------------------------------------------------------------------
+|* Date (mm/dd/yy)
+|        4/16/20
+|* Changelist
+* ebf01393 (HEAD -> dev/rembrandt-main, tag: rembrandt--pmfw--69.0.5) PMFW 69.0.5 sync-B+ mid release for E007
+* 93c4c736 [DERMBE-24][PMFW-3256] VBIOSSMC_MSG_PowerUpGfx add to ISS bootup lua
+* d5592fbf [PMFW-3492] ECO algorithm for VDDOFF (Initial Draft)
+* 983d85d9 Updated to SATA power up.
+* 563fca0a Added SATA including SATA-PCS boot up.
+* 1406d122 [PMFW-3496] Zstates Support (Second Draft)
+* b15ccb5a [PMFW-3258][PMFW-3256] GFXOFF Gfx Domain Resets update from FSDL
+* 4b878f7c Implemented DefaultOffIP power up/initilaization.
+* bcc8e5fe [PMFW-3496] Zstates Support (Initial Draft)
+* dea3ba96 [PMFW-4108] CORE_ENABLE and THREAD_CONFIGURATION to be populated by PMFW
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.5.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.5.tar.gz
++---------------------------+
+| Version 69.0.4           |
++---------------------------+-------------------------------------------------------------------------------
+|* Date (mm/dd/yy)
+|        4/10/20
+|* Changelist
+* 3c85391e (tag: rembrandt--pmfw--69.0.4) PMFW 69.0.4 SMU2PSP MSG alignment and WARM_RESET_COMING msg add
+* 1c95871e [PMFW-3256][PMFW-3376] GFXOFF and PSI6 update
+* 7c652206 Idle Power clean up and Zstates initial coding
+* 46911b2b [PMFW-3382][PMFW-3479] updated ACLK and ACLK DS.
+* 6d80fc10 [PMFW-3378] PSI6 decay enable/disbale API add
+* bb21aa4f Integrated DXIO version 779.
+* 7e8c07c8 [PMFW-3235] AFLL Support for L3CLK
+* 6f5e0115 [PMFW-3233] Cstate Boost
+* f7a9a881 Add back ApccEnable for GFX EDC
+* b575d781 [PMFW-3239] Core EDC Control
+* 85c85e4a Updated BYPCLK 500M for DDR5.
+* 2a3c3d9e [PMFW-3229] VDDOFF (Add VddOffExit call to GfxOffExit)
+* 62549871 GFXOFF ISS update
+* 9113ed12 FSDL API Update (Add local read/write)
+* 260cd7f9 [PMFW-3229] VDDOFF
+* 80bea4da [PMFW-3238] Set default BTC voltage to 0.685V
+* a603eaa4 FSDL API Update
+* e970ee00 [PMFW-3238] Core compolex AVFS + BTC
+* 771d43c5 [PMFW-3227] CPUOFF
+* 03b100fa ISS update and enable gerrit_sanity 04-01-2020 SM
+* d3b879f2 FSDL API Update
++---------------------------+
+| Version 69.0.3           |
++---------------------------+-------------------------------------------------------------------------------
+|* Date (mm/dd/yy)
+|        3/30/20
+|* Changelist
+* be0f074d (HEAD -> dev/rembrandt-main, origin/dev/rembrandt-main) Update mp1 local fuse and iss lua library
+* 652ed8a6  [PMFW-3227] CPUOFF - Initial Coding
+* a9533687 [PMFW-3256] GFXOFF update Rev2
+* 31a602cf FSDL API Update
+* 67506fd6 Updated LPDDR5 DF pstate table.
+* 50dac21f Integrated DXIO version 0.778.
+* 993be428 [PMFW-3234] CCLK DPM
+* c79f37ba [PMFW-3369][PMFW-3258] GFX DPM and EDC update
+* 040207b0 Updated for SMU low power features.
+* 4b0bb505 Updated for SMU low power features.
+* 7f401118 Updated clk gating and DS for new MSMUs.
+* 25d7ef5b Enabled USB function and added WM programming function for Zstate.
+* a31eb226 [PMFW-3677] Update P-state requirements for CB-based SOCs
+* 7fe5f4b0 Added updated fuse files.
+* 0244dda3 Updated SOC_FUSEDOC and MP_LOCAL fuse parameter files for SOC CL1237066.
+* 3da2aec5 Updated with SOC CL:1237066.
+* eabd51dc Remove setting booten during ccx init
+* 84615b4c Updated DF PState table to have LPDDR5 2400 to be the P3.
+* f9e8722e Updated SATA, MMHUB and ATHUB power gating.
+* 8b01460b Updated ISS with Svi3 and Clk_model.
+* 3928a7e3 Added ConfigDfPstate message.
+* a1909c31 [PMFW-3256] GFXOFF update
+* adbf63ba [PMFW-3521] Boot Flow and Initialization (rev 2)
+* 04ee5341 Updated DF Pstate switch for both LPDDR5 and DDR5.
+* 6e963b63 [PMFW-3258][PMFW-3256] Ported MVG GFXDPM changes to MVG
+* 2bf78d34 [PMFW-3987] Split EXT section into EXT0 and EXT1
+* 14828a80 [PMFW-3234] CCLK DPM
+* 27a48854 ISS: msg_ports fix and fan basic add
+* 4843a2ad Updated DF Pstate switch with DDR PHY PCLK Bypass.
+* 7a05b82a Fixed L3_TLB_ADDR mapping and mmPMREG_THREADENSTAT_N macro
+* 51d9f7bf Updated  mp1_local_fusestrap_param.csv Secure-En section to NS
+* 720c957d Removed GFXOFF from DPM timer enumeration - no hysteresis for GFXOFF entry implemented in MP1 FW
+* a5a80578 [PMFW-1851] - Enable back-to-back (B2B) commands feature in SVI3 controller
+* b27396ba [PMFW-3372] DF CPU idle success monitor. Ported code from VGM.
+* af4c3889 [PMFW-3521] Boot Flow and Initialization
+* e5653d5c Updated DF PState switch. DDR5 and LPDDR5 DF Pstate table is not updated due to waiting for info.
+* 293a5f8f ISS model update
+* 3e3abece [PMFW-3603] [IMP] Integrate SMU Test FW Versioning tool into Makefile
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.3.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.3.tar.gz
+
++---------------------------+
+| Version 69.0.2           |
++---------------------------+-------------------------------------------------------------------------------
+|* Date (mm/dd/yy)
+|        2/18/20
+|* Changelist
+f56b5d2c ISS ccx related updates
+fa751fb8 Checking core enabled before writing to it in RSMU Init function.
+4558ac9b Removed redundant TLBs defined for CCX.
+dc412006 [PMFW-3376] SVI3 sideband interfacing and slave addr mapping update
+129975f6 rmb cfg file add to source initdepot in regression
+08f0a9db [PMFW-3521] Boot Flow and Initialization
+465db58f Updated CCX RSMU for 8 cores 1 CCX.
+63f51113 Updated SOC header commit ID.
+e46df08f PPDTOOL:SMU test versioning and artifact upload flow add
+c71838c2 [PMFW-3376] RMB SVI3 support add 02-11-2020
+2ba41e85 [PMFW-3224] Core C-states update 02-10-2020 SM
+af8fd304 Jenkinsfile-iss email notif enable
+5b8c0d98 RMB ISS regression enable
+35c822b1 Updated to SOC header 1219632, added rembrandt.cfg.
+a95b63fa Updated to SOC header 1219632.
+85f975af updated ISS for Rembrandt
+86bae402 Removed fuses for ISP, CVIP, A55CLK, NICLCLK, Q6CLK and C5CLK.
+24635166 Updated clocks and fuse generation flow in Makefile.
+726166b1 Updated fuses.h according to SOC CL 1213415 soc_fusedoc.csv.
+8007ef05 Built depot with rmb soc headers and initial smu13 kernel files.
+543be346 Enhanced initdepot & rembrandt.cfg to copy kernel in the cfg file.
+c175d138 Updated dev/rembrandt branch for rembrandt after created based on VGM 6c6e4b8041733.
+| * Files
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt.rev69.0.2.zip
+|   - \\atlvsmb1\smu_rel\smu13\rembrandt\pre-bringup-releases\rembrandt_sources.rev69.0.2.tar.gz
++-----------------------------------------------------------------------------------------------------------

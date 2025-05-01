@@ -1,0 +1,77 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2018, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = HybridGraphicsPei
+  FILE_GUID                      = E3E8BA35-541F-4ef1-BFB8-75F02A26CC75
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = HybridGraphicsPeiInitEntry
+
+[Sources]
+  HybridGraphicsPei.c
+  HybridGraphicsPei.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Lilac/AmdCpmOemPkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  BaseMemoryLib
+  PcdLib
+  IoLib
+  TimerLib
+  ChipsetConfigLib
+  AmdPbsConfigLib
+
+[Guids]
+  gH2OHgInformationDataHobGuid
+
+[Ppis]
+  gEfiPeiMemoryDiscoveredPpiGuid
+  gAmdCpmTablePpiGuid
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.PcdUseCrbHgDefaultSettings
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuGpioSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPrsntGpioNo
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPrsntActive
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPrsntExist
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuResetGpioNo
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuResetActive
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrEnableGpioNo
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrEnableActive
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrOnGpioNo
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrOnActive
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrGoodGpioNo
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrGoodActive
+  gChipsetPkgTokenSpaceGuid.PcdHgDgpuPwrGoodExist
+  gChipsetPkgTokenSpaceGuid.PcdDelayAfterReset
+  gChipsetPkgTokenSpaceGuid.PcdDelayAfterPwrEnable
+  
+[FeaturePcd]
+  gChipsetPkgTokenSpaceGuid.PcdHybridGraphicsSupported
+
+[BuildOptions]
+  DEBUG_*_IA32_CC_FLAGS = /Od
+
+[Depex]
+  gAmdCpmTablePpiGuid

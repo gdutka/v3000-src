@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright 2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DashMctpSmbusDxe
+  FILE_GUID                      = c8858b5a-7a6a-4193-9253-ca6ab5f1ea37
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = DxeEntry
+
+[Sources]
+  DashMctpSmbusDxe.c
+  DashMctpSmbusDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaFamily17ModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCommonPkg/AmdCommonPkg.dec
+
+[LibraryClasses]
+  SmbusLib
+  DashAsfBaseLib
+  DashAsfSmbusLib
+  UefiLib
+  DxeServicesLib
+  PcdLib
+  BaseMemoryLib
+  DebugLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  BaseLib
+  CommonSetupLib
+
+[Protocols]
+  gEfiSmbusHcProtocolGuid
+  gDashMctpIoProtocolGuid
+
+[Guids]
+
+[Depex]
+  gEfiSmbusHcProtocolGuid AND
+  gEfiVariableArchProtocolGuid

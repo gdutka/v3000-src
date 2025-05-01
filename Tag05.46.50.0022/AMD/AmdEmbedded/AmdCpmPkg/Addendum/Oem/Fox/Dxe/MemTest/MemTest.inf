@@ -1,0 +1,52 @@
+#;******************************************************************************
+#;   Copyright (C) 2022 Advanced Micro Devices, Inc. All rights reserved.
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MemTest
+  FILE_GUID                      = 4CA16857-A0C5-4E46-BE0f-98A4BB314E5D
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MemTestEntryPoint
+
+[Sources]
+  MemTest.h
+  MemTest.c
+  MemTestAlogrithm.c
+  AsmMemTest.nasm
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  UefiLib
+  IoLib
+  UefiLib
+  PrintLib
+  TimerLib
+  NbioSmuV13Lib
+  NbioHandleLib
+  SmnAccessLib
+
+[Guids]
+
+[Protocols]
+  gEfiMpServiceProtocolGuid
+
+[Pcd]
+
+[Depex]
+  gEfiMpServiceProtocolGuid AND
+  gEfiVariableArchProtocolGuid AND
+  gEfiVariableWriteArchProtocolGuid
+

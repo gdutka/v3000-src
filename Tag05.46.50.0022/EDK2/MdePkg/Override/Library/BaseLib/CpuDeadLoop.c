@@ -1,0 +1,76 @@
+/** @file
+  Base Library CPU Functions for all architectures.
+;******************************************************************************
+;* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+**/
+/** @file
+  Base Library CPU Functions for all architectures.
+
+  Copyright (c) 2006 - 2008, Intel Corporation. All rights reserved.<BR>
+  SPDX-License-Identifier: BSD-2-Clause-Patent
+
+**/
+
+#include <Base.h>
+#include <Library/BaseLib.h>
+#include <Library/DebugLib.h>
+
+#ifdef H2O_CPU_DEADLOOP
+
+/**
+  Executes an infinite loop.
+
+  Forces the CPU to execute an infinite loop. A debugger may be used to skip
+  past the loop and the code that follows the loop must execute properly. This
+  implies that the infinite loop must not cause the code that follow it to be
+  optimized away.
+
+  @param[in]  FileName          The pointer to the name of the source file that call CpuDeadLoop.
+  @param[in]  LineNumber        The line number in the source file that call CpuDeadLoop.
+**/
+VOID
+EFIAPI
+H2OCpuDeadLoop (
+  IN  CONST CHAR8  *FileName,
+  IN  UINTN        LineNumber
+  )
+{
+  volatile UINTN  Index;
+
+  DEBUG ((DEBUG_ERROR, "%a (Line: %d)\n", (FileName == NULL) ? "Unknown File" : FileName, LineNumber));
+  for (Index = 0; Index == 0;) {
+  }
+}
+
+#else
+
+/**
+  Executes an infinite loop.
+
+  Forces the CPU to execute an infinite loop. A debugger may be used to skip
+  past the loop and the code that follows the loop must execute properly. This
+  implies that the infinite loop must not cause the code that follow it to be
+  optimized away.
+
+**/
+VOID
+EFIAPI
+CpuDeadLoop (
+  VOID
+  )
+{
+  volatile UINTN  Index;
+
+  for (Index = 0; Index == 0;) {
+    CpuPause ();
+  }
+}
+
+#endif

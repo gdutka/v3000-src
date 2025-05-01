@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2018-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPspRegMuxLibV2Dxe
+  FILE_GUID                      = e8c72342-a36b-41d4-a0e8-8f0cac411e8f
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdPspRegMuxLibV2| DXE_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER  DXE_CORE
+  CONSTRUCTOR                    = AmdPspRegMuxLibV2Constructor
+
+[Sources]
+  AmdPspRegMuxLibV2.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  PrintLib
+  IoLib
+  PciLib
+  DebugLib
+  UefiBootServicesTableLib
+  AmdPspMmioLib
+  AmdSocBaseLib
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspRomArmorSelection
+
+[Guids]

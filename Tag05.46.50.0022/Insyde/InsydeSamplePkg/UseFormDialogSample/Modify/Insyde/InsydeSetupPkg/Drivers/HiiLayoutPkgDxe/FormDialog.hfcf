@@ -1,0 +1,152 @@
+/** @file
+  Layout definitions for Form Dialog
+
+;******************************************************************************
+;* Copyright (c) 2019, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+#include <Guid/H2OControlType.h>
+#include <Guid/H2OFormDialog.h>
+
+//
+// Use Popup Control Type
+//
+style .LmdePopup checkbox    property {control-type : H2O_CONTROL_TYPE_SETUP_LMDE_CHECKBOX_POPUP_GUID;    } endstyle;
+style .LmdePopup date        property {control-type : H2O_CONTROL_TYPE_SETUP_LMDE_DATE_POPUP_GUID;        } endstyle;
+style .LmdePopup oneof       property {control-type : H2O_CONTROL_TYPE_SETUP_LMDE_ONE_OF_POPUP_GUID;      } endstyle;
+style .LmdePopup orderedlist property {control-type : H2O_CONTROL_TYPE_SETUP_LMDE_ORDERED_LIST_POPUP_GUID;} endstyle;
+style .LmdePopup numeric     property {control-type : H2O_CONTROL_TYPE_SETUP_LMDE_NUMERIC_POPUP_GUID;     } endstyle;
+style .LmdePopup password    property {control-type : H2O_CONTROL_TYPE_SETUP_LMDE_PASSWORD_POPUP_GUID;    } endstyle;
+style .LmdePopup string      property {control-type : H2O_CONTROL_TYPE_SETUP_LMDE_STRING_POPUP_GUID;      } endstyle;
+style .LmdePopup time        property {control-type : H2O_CONTROL_TYPE_SETUP_LMDE_TIME_POPUP_GUID;        } endstyle;
+
+//
+// Use Form Panel
+//
+//style .LmdePopup checkbox    property {pop-up-form-id : H2O_FORM_DIALOG_FORM_ID_ROOT; pop-up-formset-id : H2O_FORM_DIALOG_FORMSET_ID_LMDE_CHECKBOX;    } endstyle;
+style .LmdePopup date        property {pop-up-form-id : H2O_FORM_DIALOG_FORM_ID_ROOT; pop-up-formset-id : H2O_FORM_DIALOG_FORMSET_ID_LMDE_DATE;        } endstyle;
+style .LmdePopup oneof       property {pop-up-form-id : H2O_FORM_DIALOG_FORM_ID_ROOT; pop-up-formset-id : H2O_FORM_DIALOG_FORMSET_ID_LMDE_ONE_OF;      } endstyle;
+style .LmdePopup orderedlist property {pop-up-form-id : H2O_FORM_DIALOG_FORM_ID_ROOT; pop-up-formset-id : H2O_FORM_DIALOG_FORMSET_ID_LMDE_ORDERED_LIST;} endstyle;
+style .LmdePopup numeric     property {pop-up-form-id : H2O_FORM_DIALOG_FORM_ID_ROOT; pop-up-formset-id : H2O_FORM_DIALOG_FORMSET_ID_LMDE_NUMERIC;     } endstyle;
+style .LmdePopup password    property {pop-up-form-id : H2O_FORM_DIALOG_FORM_ID_ROOT; pop-up-formset-id : H2O_FORM_DIALOG_FORMSET_ID_LMDE_PASSWORD;    } endstyle;
+style .LmdePopup string      property {pop-up-form-id : H2O_FORM_DIALOG_FORM_ID_ROOT; pop-up-formset-id : H2O_FORM_DIALOG_FORMSET_ID_LMDE_STRING;      } endstyle;
+style .LmdePopup time        property {pop-up-form-id : H2O_FORM_DIALOG_FORM_ID_ROOT; pop-up-formset-id : H2O_FORM_DIALOG_FORMSET_ID_LMDE_TIME;        } endstyle;
+
+//
+// location same as Help Text Panel
+//
+style .LmdeCommonQuestionDialog panel property {left : 65%; top : 23%; right : 0%; bottom : 13%;} endstyle;
+
+vfr
+  //
+  // Checkbox
+  //
+  formset
+    guid   = H2O_FORM_DIALOG_FORMSET_ID_LMDE_CHECKBOX;
+    style = .LmdeCommonQuestionDialog;
+
+    form
+      formid = H2O_FORM_DIALOG_FORM_ID_ROOT;
+      //modal = true;
+    endform;
+  endformset;
+
+  //
+  // Date
+  //
+  formset
+    guid   = H2O_FORM_DIALOG_FORMSET_ID_LMDE_DATE;
+    style = .LmdeCommonQuestionDialog;
+
+    form
+      formid = H2O_FORM_DIALOG_FORM_ID_ROOT;
+      //modal = true;
+    endform;
+  endformset;
+
+  //
+  // One Of
+  //
+  formset
+    guid   = H2O_FORM_DIALOG_FORMSET_ID_LMDE_ONE_OF;
+    style = .LmdeCommonQuestionDialog;
+
+    form
+      formid = H2O_FORM_DIALOG_FORM_ID_ROOT;
+      //modal = true;
+    endform;
+  endformset;
+
+  //
+  // Ordered List
+  //
+  formset
+    guid   = H2O_FORM_DIALOG_FORMSET_ID_LMDE_ORDERED_LIST;
+    style = .LmdeCommonQuestionDialog;
+
+    form
+      formid = H2O_FORM_DIALOG_FORM_ID_ROOT;
+      //modal = true;
+    endform;
+  endformset;
+
+  //
+  // Numeric
+  //
+  formset
+    guid   = H2O_FORM_DIALOG_FORMSET_ID_LMDE_NUMERIC;
+    style = .LmdeCommonQuestionDialog;
+
+    form
+      formid = H2O_FORM_DIALOG_FORM_ID_ROOT;
+      //modal = true;
+    endform;
+  endformset;
+
+  //
+  // Password
+  //
+  formset
+    guid   = H2O_FORM_DIALOG_FORMSET_ID_LMDE_PASSWORD;
+    style = .LmdeCommonQuestionDialog;
+
+    form
+      formid = H2O_FORM_DIALOG_FORM_ID_ROOT;
+      //modal = true;
+    endform;
+  endformset;
+
+  //
+  // String
+  //
+  formset
+    guid   = H2O_FORM_DIALOG_FORMSET_ID_LMDE_STRING;
+    style = .LmdeCommonQuestionDialog;
+
+    form
+      formid = H2O_FORM_DIALOG_FORM_ID_ROOT;
+      //modal = true;
+    endform;
+  endformset;
+
+  //
+  // Time
+  //
+  formset
+    guid   = H2O_FORM_DIALOG_FORMSET_ID_LMDE_TIME;
+    style = .LmdeCommonQuestionDialog;
+
+    form
+      formid = H2O_FORM_DIALOG_FORM_ID_ROOT;
+      //modal = true;
+    endform;
+  endformset;
+
+endvfr;
+

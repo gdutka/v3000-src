@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<DIRS>
+  <PSP_DIR AddressMode="0x1" Base="0x21000" Level="0x1" SpiBlockSize="0x10000">
+    <POINT_ENTRY Address="0x30000L" Size="0x0" Type="0x48"/>
+    <POINT_ENTRY Address="0x31000L" Size="0x0" Type="0x4a"/>
+  </PSP_DIR>
+  <PSP_DIR AddressMode="0x2" Base="0x80000" ImageBase="0x80000" Level="0x2" LevelType="A" Size="0x230000" SpiBlockSize="0x1000">
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex0_AmdPubKey.bin" Type="0x0"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex1_PspBootLoader.bin" Type="0x1"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex73_PspBl2.bin" Type="0x73"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex2_PspOs.bin" Type="0x2"/>
+    <POINT_ENTRY Address="0x22000L" AddressMode="0x1" Size="0x20000" Type="0x4"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex8_Smu.bin" Type="0x8"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex9_DbgKey.bin" Type="0x9"/>
+    <VALUE_ENTRY Type="0xb" Value="0x8001"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typexc_PspTrustlet.bin" Type="0xc"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex12_Smu2.bin" Type="0x12"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex13_PspEarlyUnlock.bin" Type="0x13"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex20_HwIpCfg.bin" Type="0x20"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex21_ikek.bin" Type="0x21"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex22_PspTokenUnlockData.bin" Type="0x22"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex24_SecureGasket.bin" Type="0x24"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex25_Mp2Fw.bin" Type="0x25"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex28_PspSystemDriver.bin" Type="0x28"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex2d_RtAbl.bin" Type="0x2d"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex30_PspAgesaBL0.bin" Type="0x30"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex3c_VbiosPreload.bin" Type="0x3c"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex45_tOS.bin" Type="0x45"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex44_UsbPhyFw.bin" Type="0x44"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex50_PspBlPubKey.bin" Type="0x50"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex51_PspTosPubKey.bin" Type="0x51"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex55_BLAntiRB.bin" Type="0x55"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex5a_MSMU0.bin" Type="0x5a"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex71_DMCUB_Ins.bin" Type="0x71"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex85_AMF1.bin" Type="0x85"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2A0_Typex86_AMF2.bin" Type="0x86"/>
+    <POINT_ENTRY Address="0x230000L" Size="0x400" Type="0x49"/>
+  </PSP_DIR>
+  <PSP_DIR AddressMode="0x2" Base="0x880000" ImageBase="0x880000" Level="0x2" LevelType="B" Size="0x230000" SpiBlockSize="0x1000">
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex0_AmdPubKey.bin" Type="0x0"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex1_PspBootLoader.bin" Type="0x1"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex73_PspBl2.bin" Type="0x73"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex2_PspOs.bin" Type="0x2"/>
+    <POINT_ENTRY Address="0x22000L" AddressMode="0x1" Size="0x20000" Type="0x4"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex8_Smu.bin" Type="0x8"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex9_DbgKey.bin" Type="0x9"/>
+    <VALUE_ENTRY Type="0xb" Value="0x8001"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typexc_PspTrustlet.bin" Type="0xc"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex12_Smu2.bin" Type="0x12"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex13_PspEarlyUnlock.bin" Type="0x13"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex20_HwIpCfg.bin" Type="0x20"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex21_ikek.bin" Type="0x21"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex22_PspTokenUnlockData.bin" Type="0x22"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex24_SecureGasket.bin" Type="0x24"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex25_Mp2Fw.bin" Type="0x25"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex28_PspSystemDriver.bin" Type="0x28"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex2d_RtAbl.bin" Type="0x2d"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex30_PspAgesaBL0.bin" Type="0x30"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex3c_VbiosPreload.bin" Type="0x3c"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex45_tOS.bin" Type="0x45"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex44_UsbPhyFw.bin" Type="0x44"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex50_PspBlPubKey.bin" Type="0x50"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex51_PspTosPubKey.bin" Type="0x51"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex55_BLAntiRB.bin" Type="0x55"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex5a_MSMU0.bin" Type="0x5a"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex71_DMCUB_Ins.bin" Type="0x71"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex85_AMF1.bin" Type="0x85"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/PspDirL2B0_Typex86_AMF2.bin" Type="0x86"/>
+    <POINT_ENTRY Address="0x230000L" Size="0x400" Type="0x49"/>
+  </PSP_DIR>
+  <BIOS_DIR AddressMode="0x2" Base="0x2b0000L" ImageBase="0x80000" Level="0x2" LevelType="A" Size="0x30000" SpiBlockSize="0x1000">
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex5_OemPubKey.bin" Type="0x5"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex60_Apcb.bin" Type="0x60"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex68_ApcbRec.bin" Type="0x68"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex68_ApcbRec_1.bin" Instance="0x8" Type="0x68"/>
+    <POINT_ENTRY AbsoluteAddr="0x1" Address="0x0" Destination="0x9f00000" Size="0x0" Type="0x61"/>
+    <POINT_ENTRY Address="0x6b0000L" AddressMode="0x3" Destination="0x9b00000" Size="0x300000" Type="0x62">
+      <TypeAttrib Compressed="0x1" Copy="0x1" ReadOnly="0x0" RegionType="0x0" ResetImage="0x1"/>
+    </POINT_ENTRY>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex63_ApobNv.bin" Type="0x63"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex64_PmuCode.bin" Instance="0x1" Type="0x64"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex65_PmuData.bin" Instance="0x1" Type="0x65"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex64_PmuCode_1.bin" Instance="0x2" Type="0x64"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex65_PmuData_1.bin" Instance="0x2" Type="0x65"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex66_UCodePatch.bin" Type="0x66"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2A0_Typex6a_Mp2Cfg.bin" Type="0x6a"/>
+  </BIOS_DIR>
+  <BIOS_DIR AddressMode="0x2" Base="0xab0000L" ImageBase="0x880000" Level="0x2" LevelType="B" Size="0x30000" SpiBlockSize="0x1000">
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex5_OemPubKey.bin" Type="0x5"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex60_Apcb.bin" Type="0x60"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex68_ApcbRec.bin" Type="0x68"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex68_ApcbRec_1.bin" Instance="0x8" Type="0x68"/>
+    <POINT_ENTRY AbsoluteAddr="0x1" Address="0x0" Destination="0x9f00000" Size="0x0" Type="0x61"/>
+    <POINT_ENTRY Address="0x6b0000L" AddressMode="0x3" Destination="0x9b00000" Size="0x300000" Type="0x62">
+      <TypeAttrib Compressed="0x1" Copy="0x1" ReadOnly="0x0" RegionType="0x0" ResetImage="0x1"/>
+    </POINT_ENTRY>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex63_ApobNv.bin" Type="0x63"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex64_PmuCode.bin" Instance="0x1" Type="0x64"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex65_PmuData.bin" Instance="0x1" Type="0x65"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex64_PmuCode_1.bin" Instance="0x2" Type="0x64"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex65_PmuData_1.bin" Instance="0x2" Type="0x65"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex66_UCodePatch.bin" Type="0x66"/>
+    <IMAGE_ENTRY File="D:\BV\NewPspKit\tmp/BiosDirL2B0_Typex6a_Mp2Cfg.bin" Type="0x6a"/>
+  </BIOS_DIR>
+  <ISH_HEADER Base="0x30000L" BootPriority="0xffffffffL" GlitchRetries="0x0L" Location="0x80000" PspId="0xbc0d0200L" Reserved_1="0xffffffffL" SlotMaxSize="0xffffffffL" UpdateRetries="0xf"/>
+  <ISH_HEADER Base="0x31000L" BootPriority="0x2" GlitchRetries="0x0L" Location="0x880000" PspId="0xbc0d0200L" Reserved_1="0xffffffffL" SlotMaxSize="0xffffffffL" UpdateRetries="0xf"/>
+</DIRS>

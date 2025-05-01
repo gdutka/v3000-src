@@ -1,0 +1,48 @@
+## @file
+#  Component description file for MemoryDataAnalysisDxe driver.
+#
+#******************************************************************************
+#* Copyright (c) 2018, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = MemoryDataAnalysisDxe
+  FILE_GUID                 = D7BC4475-64E6-418b-9DE4-ACFB4A625DD6
+  MODULE_TYPE               = DXE_DRIVER
+  VERSION_STRING            = 0.1
+  ENTRY_POINT               = MemoryDataAnalysisDxeEntryPoint
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeDebugAssistPkg/InsydeDebugAssistPkg.dec
+
+[Sources]
+  MemoryDataAnalysisDxe.c
+
+[LibraryClasses]
+  UefiLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  DevicePathLib
+  PrintLib
+  SerialPortLib
+  DebugLib
+  PeCoffGetEntryPointLib
+  BaseMemoryLib
+
+[Protocols]
+  gEfiLoadedImageProtocolGuid
+  gH2ODebugAssistMemoryDataAnalysisProtocolGuid
+
+[Depex]
+  TRUE
+  

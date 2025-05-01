@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BxbInitLibV1
+  FILE_GUID                      = BC509389-6A61-40CC-B832-14FDAF3AAC85
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BxbInitLibV1
+
+[Sources]
+  BxbInitLib.c
+  BxbComplexData.c
+  BxbUplinkSpeed.c
+  BxbComplexData.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  PrintLib
+  BaseLib
+  DebugPrintErrorLevelLib
+  IdsLib
+  AmdBaseLib
+  GnbCommonLib
+  BxbAccessLib
+  BxbSmuV11Lib
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdBxbSlotPowerLimit
+

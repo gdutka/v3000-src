@@ -1,0 +1,44 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = CcxPstatesZen3Lib
+  FILE_GUID                      = DA3E00FE-1B25-48d2-AE71-D0A25B478197
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CcxPstatesLib
+
+[Sources.common]
+  CcxPstatesZen3Lib.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdBaseLib
+  IdsLib
+  AmdSocBaseLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Setting
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Vid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Freq
+
+[Depex]
+
+

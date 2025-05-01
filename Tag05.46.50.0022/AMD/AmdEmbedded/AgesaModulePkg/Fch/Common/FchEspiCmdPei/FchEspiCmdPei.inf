@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2024 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+
+  INF_VERSION                   = 0x00010005
+  BASE_NAME                     = FchEspiCmdPei
+  FILE_GUID                     = 6470a429-20f8-4f17-a8c7-00eaec19fd0b
+  MODULE_TYPE                   = PEIM
+  VERSION_STRING                = 1.0
+  ENTRY_POINT                   = AmdFchEspiCmdPeiInit
+
+
+[Sources]
+  FchEspiCmdPei.c
+  FchEspiCmdPei.h
+
+[LibraryClasses]
+  PeimEntryPoint
+  BaseLib
+  DebugLib
+  PrintLib
+  FchBaseLib
+  FchEspiCmdLib
+  FchKeithPeiLib
+  HobLib
+
+[Guids]
+  gFchResetDataHobGuid
+[Protocols]
+
+[Ppis]
+  gAmdFchEspiCmdPpiGuid           #PRODUCED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag
+
+[Depex]
+  TRUE

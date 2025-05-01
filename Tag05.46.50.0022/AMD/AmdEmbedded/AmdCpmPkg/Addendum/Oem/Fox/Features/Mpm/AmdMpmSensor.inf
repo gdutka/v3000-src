@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  BASE_NAME                      = AmdMpmSensor
+  FILE_GUID                      = a6442a85-7e2a-4a4f-b26b-98e1e64c221f
+  MODULE_TYPE                    = DXE_DRIVER
+  INF_VERSION                    = 0x00010005
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MpmSensorAcpiEntry
+
+[Sources]
+  AmdMpmSensor.c
+  AmdMpmSensor.asl
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  PcdLib
+  UefiBootServicesTableLib
+  MpmMboxLib
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  MpmFuncLib
+  DxeServicesLib
+  MpmLib
+
+[Protocols]
+  gEfiAcpiTableProtocolGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Depex]
+  TRUE

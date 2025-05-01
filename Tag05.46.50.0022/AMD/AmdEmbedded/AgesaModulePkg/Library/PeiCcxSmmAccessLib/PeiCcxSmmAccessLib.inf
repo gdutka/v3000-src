@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CcxPeiSmmAccessLib
+  FILE_GUID                      = E8E59FE8-60F8-49F6-BD0F-29E4FE891EAF
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CcxPeiSmmAccessLib
+
+[Sources.common]
+  PeiCcxSmmAccessLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  CcxRolesLib
+  IdsLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  BaseLib
+  HobLib
+  AmdIdsHookLib
+  AmdPspBaseLibV2
+
+[Guids]
+  gEfiSmmPeiSmramMemoryReserveGuid
+
+
+[Ppis]
+  gEfiPeiMpServicesPpiGuid
+  gPeiSmmAccessPpiGuid
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSmmLock
+
+[Depex]
+
+

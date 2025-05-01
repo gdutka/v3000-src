@@ -1,0 +1,33 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BxbInitLibV1
+  FILE_GUID                      = A07BB60D-C4E7-4C5C-ABDF-BDE0E9663E31
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BxbInitLibV1
+
+[Sources]
+  BxbNullLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  PrintLib
+  BaseLib
+  DebugPrintErrorLevelLib
+  IdsLib
+  AmdBaseLib
+
+[Pcd]
+

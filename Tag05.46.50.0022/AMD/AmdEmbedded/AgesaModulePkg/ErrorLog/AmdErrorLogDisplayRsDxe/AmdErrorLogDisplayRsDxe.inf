@@ -1,0 +1,55 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdErrorLogDisplayRsDxe
+  FILE_GUID                      = DD6B41FC-6342-4E8A-943C-D3E004DB2407
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdErrorLogDisplayRsDxeInit
+
+[sources]
+  AmdErrorLogDisplayRsDxe.c
+  AmdErrorLogDisplayRsDxe.h
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DebugLib
+  AmdErrorLogLib
+  HobLib
+  PcdLib
+  AmdSocBaseLib
+
+[Guids]
+  gErrorLogHobGuid
+  gAmdMemPmuTrainingFailureHobGuid
+
+[Protocols]
+  gAmdErrorLogReadyProtocolGuid          #CONSUMED
+  gAmdErrorLogProtocolGuid               #PRODUCED
+  gAmdErrorLogServiceProtocolGuid        #PRODUCED
+  gAmdErrorLogFullProtocolGuid           #PRODUCED
+  gAmdErrorLogAvailableProtocolGuid      #PRODUCED
+  gAmdErrorLogDepexProtocolGuid          #CONSUMED
+  gAmdNbioIommuProtocolGuid              #CONSUMED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAgesaPrintEventLogToConsole
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintEnable
+
+[Depex]
+  gAmdErrorLogDepexProtocolGuid AND
+  gAmdErrorLogReadyProtocolGuid AND
+  gEfiPciEnumerationCompleteProtocolGuid
+ 
+[BuildOptions] 
+MSFT:*_*_*_CC_FLAGS = /D DISABLE_NEW_DEPRECATED_INTERFACES /W4 

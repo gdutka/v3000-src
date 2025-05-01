@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = ApcbHmacChecksumLibV3
+  FILE_GUID                      = E81E03E9-F0DD-4AB8-B855-AF15F09BFE66
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ApcbChecksumLibV3 | DXE_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER DXE_CORE SMM_CORE UEFI_DRIVER
+  CONSTRUCTOR                    = ApcbHmacChecksumLibConstructor
+
+[Sources.common]
+  ApcbHmacChecksumLibV3.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  AmdPspMboxLibV2
+  AmdSocBaseLib
+  ApcbVariableLibV3
+
+[Guids]
+
+
+[Protocols]
+  gEfiSmmBase2ProtocolGuid
+  gPspMboxSmmBufferAddressProtocolGuid
+  gEfiSmmReadyToLockProtocolGuid
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdApcbUseHmacChecksum
+
+[Depex]
+  TRUE
+
+

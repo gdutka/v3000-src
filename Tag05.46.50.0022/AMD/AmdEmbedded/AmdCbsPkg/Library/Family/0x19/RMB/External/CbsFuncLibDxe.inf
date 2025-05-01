@@ -1,0 +1,67 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CbsFuncLibDxe
+  FILE_GUID                      = 38B79B58-F18D-475C-BAFE-04AB90E570A6
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CbsDxeFuncLib|DXE_DRIVER
+
+[sources.common]
+  CbsFuncLib/Cbs.h
+  ../../../../../Build/ResourceRMB/AmdCbsVariable.h
+  ../../../../../Build/ResourceRMB/AmdCbsDefault.c
+  ../../../../../Build/ResourceRMB/CbsIdsNvRMB.c
+
+  CbsFuncLib/CbsHookDxeLib.c
+  CbsFuncLib/CbsHookDxeLib.h
+  CbsFuncLib/CbsDxeFuncTable.c
+  CbsFuncLib/CbsBaseLib.c
+
+  CbsFuncLib/IDS/CbsIDSCommonDxe.c
+  CbsFuncLib/IDS/CbsIDSCommonDxe.h
+
+  CbsFuncLib/FCH/CBSFchFunDXE.c
+  CbsFuncLib/FCH/CBSFchFunDXE.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  UefiLib
+  PcdLib
+  HobLib
+  AmdBaseLib
+
+[Guids]
+  gAmdCbsPkgTokenSpaceGuid
+  gEfiIfrTianoGuid                              ## CONSUMES ## Guid
+  gCbsSystemConfigurationGuid                   ## PRODUCES
+  gEfiHobListGuid
+  gAmdCbsVariableHobGuid
+
+[Protocols]
+  gCbsProtocolGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTDeviceEnableMap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchAl2AhbLegacyUartIoEnable
+

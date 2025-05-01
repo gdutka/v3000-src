@@ -1,0 +1,44 @@
+ #****************************************************************************
+ #
+#; Copyright (C) 2020-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+ #******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPspPsbDisablePei
+  FILE_GUID                      = E4CDF1A7-7659-491B-9079-B961E0E486FB
+
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdPspPsbDisableEntry
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  PeimEntryPoint
+  AmdPspMboxLibV2
+  AmdPspCommonLib
+
+[Sources]
+  AmdPspPsbDisablePei.c
+
+[Guids]
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspPsbDisable
+
+[Depex]
+  TRUE
+
+

@@ -1,0 +1,99 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2015-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdSocFp7RmbPei
+  FILE_GUID                      = 4717DA5F-E544-4B15-8D27-BACC292A832F
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdSocFp7RmbPeiInit
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  DebugLib
+  AmdSocBaseLib
+  AmdIdsHookLib
+  SocCmnIdsHookRmbLibPei
+  PeiSocLogicalIdServicesLib
+  PeiSocZen3ServicesLib
+  PeiSocBistLogging2Lib
+  FabricResourceInitLib
+  AmdPspApobLib
+  CcxSetMmioCfgBaseLib
+  PcdLib
+  AmdPspApobLib
+  AmdEmulationFlagLib
+  PresiliconControlLib
+  BaseMemoryLib
+  SmnAccessLib
+  HobLib
+
+[sources]
+  AmdSocFp7RmbPei.c
+  AmdSocFp7RmbPei.h
+  SocServiceRmbPei.c
+
+[Guids]
+  gSocCoreInfoGuid
+
+[Protocols]
+
+[Ppis]
+  gAmdErrorLogDepexPpiGuid         #PRODUCED
+  #FCH
+  gAmdFchKeithDepexPpiGuid         #PRODUCED
+  gAmdFchKTSmbusDepexPpiGuid       #PRODUCED
+  #PSP
+  gAmdPspPeiV2RmbDepexPpiGuid         #PRODUCED
+  #Memory
+  gAmdMemFp7PeimDepexPpiGuid       #PRODUCED
+  gAmdMemPeimDepexPpiGuid          #PRODUCED
+  gAmdMemChanXLatDummyDepexPpiGuid #PRODUCED
+  gAmdMemSmbiosV2Fp7PpiGuid        #PRODUCED
+  gAmdMemoryPeiHobFp7DepexPpiGuid  #PRODUCED
+  gAmdMemRestoreDepexPpiGuid       #PRODUCED
+  #NBIO
+  gAmdNbioRMBEarlyPhaseDepexPpiGuid #PRODUCED
+  gAmdNbioBaseRMBPeiDepexPpiGuid    #PRODUCED
+  gAmdNbioSmuV13PeiDepexPpiGuid    #PRODUCED
+  gAmdNbioPcieRMBPeiDepexPpiGuid    #PRODUCED
+  gAmdNbioIOMMURMBPeiDepexPpiGuid   #PRODUCED
+  #CCX
+  gAmdCcxZen3RmbDepexPpiGuid       #PRODUCED
+  #DF
+  gAmdFabricRmbDepexPpiGuid         #PRODUCED
+  #Agesa PCD configuration
+  gAmdPcdInitReadyPpiGuid          #PRODUCED
+  gAmdSocAgesaGroupIdentificationPpiGuid #CONSUMED
+  gAmdCcxPeiInitCompletePpiGuid    # CONSUMED
+  gApobRmbPeiDepexPpiGuid           # PRODUCED
+  gAmdMpmPeiDepexPpiGuid           # PRODUCED
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxEnabledFeatures
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPreSilCtrl0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPreSilCtrl1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdNewDownCoreSequence
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpPostcodeIp0SmnAddress
+
+[Depex]
+  TRUE
+
+

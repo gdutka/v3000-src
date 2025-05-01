@@ -1,0 +1,29 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdPspPsbFusingLib
+  FILE_GUID                      = A9BBAEFA-83B4-49BA-BDEC-2882CCC6A3ED
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdPspPsbFusingLib
+
+[Sources.common]
+  AmdPspPsbFusingLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  AmdPspMboxLibV2
+  AmdPspBaseLibV2
+
+
+

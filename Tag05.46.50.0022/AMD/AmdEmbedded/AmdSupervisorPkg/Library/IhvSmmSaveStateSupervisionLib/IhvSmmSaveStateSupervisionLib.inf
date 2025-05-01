@@ -1,0 +1,31 @@
+##
+#  Instance of AMD DRTM SMM SaveState supervision layer. This library provides
+#  supervision over SMM SaveState access
+#
+#  Copyright (c) Microsoft Corporation.
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = IhvSmmSaveStateSupervisionLib
+  FILE_GUID                      = 866d19f1-28bf-40d4-8f44-c6449a64e448
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = IhvSmmSaveStateSupervisionLib
+
+[Sources]
+  IhvSmmSaveStateSupervisionLib.c
+
+[LibraryClasses]
+  DebugLib
+  MemLogLib
+  BaseMemoryLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+  AmdSupervisorPkg/AmdSupervisorPkg.dec
+

@@ -1,0 +1,47 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdTableHookPeiLibV2
+  FILE_GUID                      = 893C7DDE-ABFA-468D-8D3F-250F718D1326
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdTableHookLib|PEIM
+
+[Sources.common]
+  AmdTableHookPeiLibV2.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdBaseLib
+  IdsLib
+  PeiServicesTablePointerLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdNbioSmuServicesPpiGuid          #CONSUME
+  gAmdFabricTopologyServices2PpiGuid  #CONSUME
+  gAmdSocLogicalIdPpiGuid             #CONSUME
+
+[Pcd]
+
+[Depex]
+  gAmdSocLogicalIdPpiGuid AND
+  gAmdNbioSmuServicesPpiGuid AND
+  gAmdFabricTopologyServices2PpiGuid
+

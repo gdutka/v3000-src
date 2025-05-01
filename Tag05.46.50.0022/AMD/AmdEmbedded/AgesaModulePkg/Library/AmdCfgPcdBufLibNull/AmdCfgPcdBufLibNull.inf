@@ -1,0 +1,34 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdCfgPcdBufLibNull
+  FILE_GUID                      = 8CE719B1-61C4-42ba-AC05-565A2320E059
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdCfgPcdBufLib
+
+[Sources]
+  AmdCfgPcdBufLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+
+
+[Pcd]
+
+
+[Guids]
+
+
+[BuildOptions]
+

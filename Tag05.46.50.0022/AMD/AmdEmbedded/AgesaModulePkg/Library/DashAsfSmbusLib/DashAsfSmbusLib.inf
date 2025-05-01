@@ -1,0 +1,38 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DashAsfSmbusLib
+  FILE_GUID                      = 1f41b4aa-17a1-551e-1ccb-c877aa4e15d1
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DashAsfSmbusLib
+
+[Sources.common]
+  DashAsfSmbusLib.c
+
+[LibraryClasses]
+  UefiLib
+  DxeServicesLib
+  PcdLib
+  BaseMemoryLib
+  DebugLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  BaseLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Protocols]
+
+[Guids]
+
+[Depex]

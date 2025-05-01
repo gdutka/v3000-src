@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdDirectoryBaseLib
+  FILE_GUID                      = 929B8B2F-546D-4f2d-823D-7A6580B938AE
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdDirectoryBaseLib
+
+[Sources.common]
+  AmdDirectoryBaseLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  AmdBaseLib
+  AmdHeapLib
+  PciLib
+  AmdSocBaseLib
+  FchBaseLib
+  FchSpiAccessLib
+  SmnAccessLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspRecoveryFlagDetectEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPspDirUsing16MAddress
+
+[Depex]
+

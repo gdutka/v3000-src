@@ -1,0 +1,78 @@
+#/** @file
+#
+#  Component description file for H2O Form Dialog DXE driver.
+#
+#;******************************************************************************
+#;* Copyright (c) 2020, Insyde Software Corporation. All Rights Reserved.
+#;*
+#;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#;* transmit, broadcast, present, recite, release, license or otherwise exploit
+#;* any part of this publication in any form, by any means, without the prior
+#;* written permission of Insyde Software Corporation.
+#;*
+#;******************************************************************************
+#*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = H2OFormDialogDxe
+  FILE_GUID                      = 11BFBEB0-FE77-4362-84FB-4F961E7BB2ED
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = H2OFormDialogEntry
+
+[Sources]
+  H2OFormDialogDxe.c
+  H2OFormDialogStr.uni
+  H2OFormDialogImg.idf
+
+  Format.hfr
+  DialogHeader.hfr
+  DialogLastForm.hfr
+  DialogOkCancel.hfr
+
+  H2OFormDialogFsCheckboxVfr.vfr
+  H2OFormDialogFsDateVfr.vfr
+  H2OFormDialogFsNumericVfr.vfr
+  H2OFormDialogFsOneOfVfr.vfr
+  H2OFormDialogFsOrderedListVfr.vfr
+  H2OFormDialogFsPasswordVfr.vfr
+  H2OFormDialogFsStringVfr.vfr
+  H2OFormDialogFsTimeVfr.vfr
+
+[Packages]
+  InsydeSetupPkg/InsydeSetupPkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  HiiLib
+  HiiExLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  VariableLib
+  UefiHiiServicesLib
+
+[Guids]
+  gEfiIfrTianoGuid
+
+[Protocols]
+  gEfiHiiConfigAccessProtocolGuid               ## PRODUCES
+  gH2OFormBrowserProtocolGuid                   ## CONSUMES
+  gEfiVariableArchProtocolGuid                  ## CONSUMES
+  gEdkiiVariableLockProtocolGuid                ## CONSUMES
+
+[Pcd]
+
+[Depex]
+  gEfiVariableArchProtocolGuid      AND
+  gEfiVariableWriteArchProtocolGuid AND
+  gEfiHiiDatabaseProtocolGuid       AND
+  gH2OFormBrowserProtocolGuid
+

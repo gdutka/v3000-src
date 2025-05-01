@@ -1,0 +1,39 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = ForceResetSystemLib
+  FILE_GUID                      = 0e5d03ad-465b-4867-8b04-f39569d18b1a
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ResetSystemLib
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  FchForceResetSystemLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PrintLib
+  IoLib
+  FchBaseLib
+
+[Protocols]
+
+[Guids]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchFullHardReset

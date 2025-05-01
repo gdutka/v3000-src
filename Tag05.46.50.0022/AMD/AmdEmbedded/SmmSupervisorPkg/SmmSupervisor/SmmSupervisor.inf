@@ -1,0 +1,119 @@
+## @file
+# CPU SMM driver.
+#
+# This SMM driver performs SMM initialization, deploy SMM Entry Vector,
+# provides CPU specific services in SMM.
+#
+# Copyright (c) 2009 - 2019, Intel Corporation. All rights reserved.<BR>
+# Copyright (c) 2020, AMD Incorporated. All rights reserved.<BR>
+# Copyright (C) Microsoft Corporation.
+#
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmSupervisor
+  FILE_GUID                      = D11C8E2A-3CD1-443C-AC09-63526DE7E170
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = SmmSupervisorEntry
+#[-start-220301-IB14740220-add]#
+  MODULE_AUTORUN_TOOL            = "$(WORKSPACE)/$(PROJECT_REL_PATH)/$(PROJECT_PKG)/SmmSupvBuild.$(FILE_EXTENSION)"
+  AUTORUN_PARAM                  = $(SMM_ISOLATION_SUPPORT) $(TARGET)
+#[-end-220301-IB14740220-add]#
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  SmmSupervisor.c
+  SmmSupervisor.h
+  SmmSupervisorProtocol.c
+  SmmExceptionHandler.c
+  SyscallDispatcher.c
+  SmmSupvGdt.c
+  SmmSupvCpuMemoryManagement.c
+  SyncTimer.c
+
+[Sources.X64]
+  SysCallEntry_msvc.nasm |MSFT
+  SmmSupvGdtTbl.nasm
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseLib
+  DebugLib
+  HobLib
+  SmmServicesTableLib
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  DxeServicesLib
+  SynchronizationLib
+  CpuLib
+  IoLib
+  SmmSupervisorExceptionHandlerLib
+  SmmSupervisorPageMgmtLib
+  SmmSupervisorMemMgmtLib
+  SmmSupervisorPolicyMgmtLib
+  SmmPolicyGateLib
+  MemLogLib
+  ErrorDataLogLib
+  SmmSupvTestPointLib
+  PciLib
+  IhvDrtmLib
+  SmmSupvEntryLocateLib
+  IhvPageProtectionLib
+  IhvPageSupervisionLib
+  IhvSmmSaveStateSupervisionLib
+
+[Protocols]
+  gEfiSmmReadyToLockProtocolGuid           ## NOTIFY
+  gSmmSupervisorProtocolGuid               ## PRODUCES
+  gEfiMpServiceProtocolGuid
+  gEfiSmmVariableProtocolGuid
+
+[Guids]
+  gSmmSupervisorPublicInfoTableGuid
+
+[FeaturePcd]
+  gSmmSupervisorPkgTokenSpaceGuid.SupportLegacyMemoryPolicy   ## CONSUMES
+
+[Pcd]
+  gSmmSupervisorPkgTokenSpaceGuid.PcdSmmIsolationEnable
+
+[Depex]
+  gEfiMpServiceProtocolGuid
+
+[UserExtensions.TianoCore."ExtraFiles"]
+  SmmSupervisorExtra.uni
+
+[BuildOptions.common]
+  #Subsystem version will be used as SmmSupervisor driver version
+  #SmmSupervisor driver version definition: version = Major.Minor.Patch.Flag
+  #Major: major version is one or two digits from 0 to 99
+  #Minor: minor version is two digits, from 00 to 99
+  #Patch: one digit, from 0 to 9
+  #Flag: one digit, from 0 to 9, 9 represents RELEASE version, 8 represents DEBUG version
+  #for example: 3.0109 means the major version is 3, minor version is 01, patch is 0, flag is 9
+  #Image version will be used as SmmSupervisor security patch level(SPL) value
+  #
+  #SPL value definition: SPL version = Major.Minor, SPL value = (Major << 16 | Minor)
+  #Major: major value is an UINT16 number in decimal from 0 to 65535
+  #Minor: minor value is an UINT16 number in decimal from 0 to 65535
+  #for example: Major=0 Minor=10, SPL=0x0000000A
+  MSFT:RELEASE_*_*_DLINK_FLAGS  = /DLL /SUBSYSTEM:EFI_BOOT_SERVICE_DRIVER,3.0269 /VERSION:0.1
+  MSFT:DEBUG_*_*_DLINK_FLAGS    = /DLL /SUBSYSTEM:EFI_BOOT_SERVICE_DRIVER,3.0268 /VERSION:0.1
+  MSFT:*_*_*_GENFW_FLAGS        = --keepoptionalheader

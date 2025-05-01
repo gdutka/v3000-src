@@ -1,0 +1,31 @@
+## @file
+#  Platform Package Flash Description File
+#
+#******************************************************************************
+#* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[FV.DXEFV]
+
+!if $(SMM_ISOLATION_SUPPORT) == YES
+!if $(SMMSUPV_SOURCE_BUILD) == YES
+  INF SmmSupervisorPkg/SmmSupervisor/SmmSupervisor.inf
+!else
+!if $(TARGET) == DEBUG
+  INF AmdSupervisorPkg/Binary/SmmSupervisor/Debug/SmmSupervisorBin.inf
+!else
+  INF AmdSupervisorPkg/Binary/SmmSupervisor/Release/SmmSupervisorBin.inf
+!endif
+!endif
+  INF SmmSupervisorPkg/SmmSupvErrorReport/SmmSupvErrorReport.inf
+
+  FILE FREEFORM = 83e1f409-21a3-491d-a415-b163a153776d {
+    SECTION RAW = $(WORKSPACE)/Build/$(PROJECT_PKG)/SmmSupv/Bin/SmmSupv.bin
+  }
+!endif

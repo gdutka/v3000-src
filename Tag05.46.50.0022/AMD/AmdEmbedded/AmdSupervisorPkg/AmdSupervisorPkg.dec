@@ -1,0 +1,21 @@
+# *******************************************************************************
+#
+# Copyright (C) 2020-2023 Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (c) Microsoft Corporation.
+#
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+# *******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AmdSupervisorPkg
+  PACKAGE_GUID          = A50ED516-67DD-4DB8-99AC-9D03E58844B9
+  PACKAGE_VERSION       = 0.1
+
+[Includes.common.Private]
+  Private/Include
+
+[LibraryClasses]
+  SmmSupvPspMmioLib|AmdSupervisorPkg/Private/Include/SmmSupvPspMmioLib.h
+  SmmSupvSmnLib|AmdSupervisorPkg/Private/Include/SmmSupvSmnLib.h

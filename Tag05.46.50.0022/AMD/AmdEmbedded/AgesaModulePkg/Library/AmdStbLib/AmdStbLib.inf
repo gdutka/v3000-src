@@ -1,0 +1,51 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdStbLib
+  FILE_GUID                      = a3ebf326-6507-4155-b951-285fb3cb7c0e
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdStbLib
+
+[Sources.common]
+  AmdStbLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  PciLib
+  AmdCfgPcdBufLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdGlobalStbVerbosityControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbBiosVerbosityControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbSmuVerbosityControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbPspVerbosityControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbSmnAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbFilterMaskEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpPostcodeIp0SmnAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpPostcodeConfigSmnAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbIbvSourceId
+
+[Depex]
+  TRUE
+
+[BuildOptions]
+
+

@@ -1,0 +1,58 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchProm21SsdtDxe
+  FILE_GUID                      = 34891F9C-54DA-44EA-8313-CAB8AAB1BD0C
+  MODULE_TYPE                    = DXE_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = FchProm21SsdtDxeInitEntry
+
+[Sources]
+  FchProm21SsdtDxe.c
+  FchProm21SsdtDxe.h
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  FchProm21BaseLib
+  AmdBaseLib
+
+[Guids]
+ gEfiEventReadyToBootGuid
+
+[Protocols]
+  gAmdFchProm21InitProtocolGuid         #CONSUMED
+  gEfiAcpiTableProtocolGuid             #CONSUMED
+  gEfiAcpiSdtProtocolGuid               #CONSUMED
+  gEfiFirmwareVolume2ProtocolGuid       #CONSUMED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/Fch/Prom21/FchProm21ModulePkg.dec
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciLock
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21GppPcieAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciSsid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciLock
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21GppPcieAddress
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiTableHeaderOemId
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiPtSsdtTableHeaderOemTableId
+
+[Depex]
+  gAmdFchProm21InitProtocolGuid
+  AND
+  gEfiAcpiTableProtocolGuid
+  AND
+  gEfiAcpiSdtProtocolGuid
+
+

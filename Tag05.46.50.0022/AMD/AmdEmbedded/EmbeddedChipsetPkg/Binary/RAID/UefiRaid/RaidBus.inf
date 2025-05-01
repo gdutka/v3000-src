@@ -1,0 +1,32 @@
+## @file
+#  Component description file for including binary AMD FCH SATA UEFI AHCI Driver
+#  module.
+#
+#*******************************************************************************
+#* Copyright (c) 2012 - 2018, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#*******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RAIDXpert2_F50_0x00
+  FILE_GUID                      = AFD69E65-1CB3-472C-BE63-0C98A2C0665C
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+  BINARY_VERSION                 = 9.03.00.63
+
+[Binaries]
+  PE32|RAIDXpert2_F50_0x00.efi|*
+
+[Packages]
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[Depex]
+  gEfiNotLegacyBootProtocolGuid AND
+  gUefiRaidOpromReadyGuid

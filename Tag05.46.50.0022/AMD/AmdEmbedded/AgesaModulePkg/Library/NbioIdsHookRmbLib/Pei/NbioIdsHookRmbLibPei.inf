@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = NbioIdsHookRmbLibPei
+  FILE_GUID                      = C34336FB-F69C-4F8A-AE71-514CE38E1B22
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NbioIdsHookRmbLibPei|PEIM
+
+[Sources.common]
+  NbioIdsHookRmbLibPei.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  AmdBaseLib
+  AmdIdsDebugPrintLib
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdcTDP
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgPPT
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgTDC
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgEDC
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocPBOLimitScalar
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocPPTLimit
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocTDCLimit
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocEDCLimit
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdBoostFmax
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIgpuContorl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgSystemConfiguration
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocGfxClockFrequency
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocGfxCoreVid
+
+[Depex]
+  TRUE
+
+[BuildOptions]
+
+

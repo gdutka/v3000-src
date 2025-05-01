@@ -1,0 +1,29 @@
+#;*****************************************************************************
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CcxMpServicePpiDepexLib
+  FILE_GUID                      = 9951E1A2-7987-4404-B3AB-532909E44E00
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NULL
+
+#
+#  VALID_ARCHITECTURES           = X64
+#
+
+[Sources]
+  CcxMpServicePpiDepexLib.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Depex]
+  gAmdCcxPeiInitCompletePpiGuid

@@ -1,0 +1,77 @@
+## @file
+#  Component description file for I2C DXE module
+#
+#******************************************************************************
+#* Copyright (c) 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+
+#
+# BINARY_VERSION = Year.Month-Day.I2C_Trunk_Revision.EDKversion
+#
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = I2cMasterDxe
+  FILE_GUID                      = 440C38B7-ED16-49ea-9669-317EF906635D
+  MODULE_TYPE                    = DXE_DRIVER
+  BINARY_VERSION                 = 18.12-26.075.02
+  ENTRY_POINT                    = InitializeI2cMasterEntry  
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources.common]
+  I2cMasterEntry.c
+  I2cMasterBusConfig.c
+  I2cMasterBusInternal.c
+
+[Sources.Ia32]
+
+[Sources.X64]
+  X64/Intr.asm
+  X64/Intr.nasm
+
+[Packages]
+  MdePkg/MdePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  IoLib
+  DebugLib
+  BaseMemoryLib
+  DxeServicesTableLib
+  MemoryAllocationLib
+  PcdLib
+  TimerLib
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+[Guids]
+  gI2cHidDeviceInfoGuid
+  
+[Protocols]
+  gEfiI2cMasterProtocolGuid
+  gEfiI2cEnumerateProtocolGuid
+  gEfiI2cBusConfigurationManagementProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiI2cPlatformSpecificProtocolGuid
+
+[Depex]
+  gEfiPciRootBridgeIoProtocolGuid     AND
+  gEfiI2cPlatformSpecificProtocolGuid
+  
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /Od

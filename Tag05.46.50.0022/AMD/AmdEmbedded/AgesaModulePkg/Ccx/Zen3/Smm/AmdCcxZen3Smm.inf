@@ -1,0 +1,64 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdCcxZen3Smm
+  FILE_GUID                      = 61631080-5573-4310-9AC5-0BAFC95E1C1B
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = AmdCcxZen3SmmDriverEntryPoint
+
+[Sources]
+  AmdCcxZen3Smm.c
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  AmdBaseLib
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  IdsLib
+  PciLib
+  AmdIdsHookLib
+  CcxZen3IdsHookLibSmm
+  CcxRolesLib
+  CcxSetMcaLib
+  HobLib
+
+[Protocols]
+  gFchSmmSwDispatch2ProtocolGuid   #CONSUME
+  gAmdPspResumeServiceProtocolGuid #CONSUME
+  gFchSmmSxDispatch2ProtocolGuid   #CONSUME
+
+[Guids]
+  gEfiAcpiVariableGuid
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxS3SaveSmi
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemBeforePciRestoreSwSmi
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspS3WakeFromSmm
+
+[Depex]
+  gAmdCcxZen3DepexSmmProtocolGuid AND
+  gAmdCapsuleSmmHookProtocolGuid AND
+  gFchSmmSwDispatch2ProtocolGuid AND
+  gFchSmmSxDispatch2ProtocolGuid
+
+

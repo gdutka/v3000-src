@@ -1,0 +1,193 @@
+/** @file
+
+;******************************************************************************
+;* Copyright (c) 2020, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+
+#ifndef _NVIDIA_COMMON_ASI_
+#define _NVIDIA_COMMON_ASI_
+
+//
+// ASL code common define about device
+//
+#define PCI_SCOPE                             \_SB.PCI0
+#define IGPU_SCOPE                            PCI_SCOPE.GP17
+#define EC_SCOPE                              PCI_SCOPE.LPC0.EC
+
+//
+// nVIDIA GPS and Ventura feature usage define
+//
+#define CPU0_SCOPE                            \_PR.C000
+#define CPU1_SCOPE                            \_PR.C001
+#define CPU2_SCOPE                            \_PR.C002
+#define CPU3_SCOPE                            \_PR.C003
+#define CPU4_SCOPE                            \_PR.C004
+#define CPU5_SCOPE                            \_PR.C005
+#define CPU6_SCOPE                            \_PR.C006
+#define CPU7_SCOPE                            \_PR.C007
+#define CPU8_SCOPE                            \_PR.C008
+#define CPU9_SCOPE                            \_PR.C009
+#define CPU10_SCOPE                           \_PR.C00A
+#define CPU11_SCOPE                           \_PR.C00B
+#define CPU12_SCOPE                           \_PR.C00C
+#define CPU13_SCOPE                           \_PR.C00D
+#define CPU14_SCOPE                           \_PR.C00E
+#define CPU15_SCOPE                           \_PR.C00F
+
+//
+// nVIDIA device's DID list
+//
+#define N13E_GS1_DID                          0x1212
+#define N13E_GE_DID                           0x0FD4
+#define N13E_GTX_DID                          0x11A0
+
+//
+// License define
+//
+#define TEST_LICENSE_VECTOR                   0x25, 0x1B, 0xA2, 0x44, 0x17, 0x62, 0x17, 0x46, 0xBF, 0xB7, 0x41, 0x51, 0x4C, 0xEA, 0xC2, 0x41
+#define N13E_GS1_LICENSE_VECTOR               TEST_LICENSE_VECTOR
+#define N13E_GE_LICENSE_VECTOR                TEST_LICENSE_VECTOR
+#define N13E_GTX_LICENSE_VECTOR               TEST_LICENSE_VECTOR
+
+//
+// nVIDIA return status code
+//
+#define STATUS_SUCCESS                        0x00000000 // Generic Success
+#define STATUS_ERROR_UNSPECIFIED              0x80000001 // Generic unspecified error code
+#define STATUS_ERROR_UNSUPPORTED              0x80000002 // Sub-Function not supported
+
+//
+// nVIDIA Optimus feature related function define
+//
+#define NVOP_FUNC_SUPPORT                     0x00
+#define NVOP_FUNC_DISPLAYSTATUS               0x05
+#define NVOP_FUNC_MDTL                        0x06
+#define NVOP_FUNC_GETOBJBYTYPE                0x10
+#define NVOP_FUNC_OPTIMUSCAPS                 0x1A
+#define NVOP_FUNC_OPTIMUSFLAGS                0x1B
+
+//
+// nVIDIA GPS feature related function define
+//
+#define GPS_FUNC_SUPPORT                      0x00
+#define GPS_FUNC_GETCALLBACKS                 0x13
+#define GPS_FUNC_PCONTROL                     0x1C
+#define GPS_FUNC_PSHARESTATUS                 0x20
+#define GPS_FUNC_GETPSS                       0x21
+#define GPS_FUNC_SETPPC                       0x22
+#define GPS_FUNC_GETPPC                       0x23
+#define GPS_FUNC_PSHAREPARAMS                 0x2A
+
+//
+// nVIDIA GC6 feature related function define
+//
+#define JT_REVISION_ID                        0x00000100
+#define JT_FUNC_SUPPORT                       0x00000000
+#define JT_FUNC_CAPS                          0x00000001
+#define JT_FUNC_POLICYSELECT                  0x00000002
+#define JT_FUNC_POWERCONTROL                  0x00000003
+#define JT_FUNC_PLATPOLICY                    0x00000004
+#define JT_FUNC_DISPLAYSTATUS                 0x00000005
+#define JT_FUNC_MDTL                          0x00000006
+
+
+//
+// nVIDIA NBCI feature related function define
+//
+#define NBCI_FUNC_SUPPORT                     0x00
+#define NBCI_FUNC_PLATCAPS                    0x01
+#define NBCI_FUNC_GETOBJBYTYPE                0x10
+#define NBCI_FUNC_GETBACKLIGHT                0x14
+#define NBCI_FUNC_GETLICENSE                  0x16
+
+//
+// nVIDIA PCF feature related function define
+//
+#define NVPCF_FUNC_GET_SUPPORTED              0x00
+#define NVPCF_FUNC_GET_STATIC_CONFIG_TABLES   0x01
+#define NVPCF_FUNC_UPDATE_DYNAMIC_PARAMS      0x02
+#define NVPCF_FUNC_GET_SET_CONTROL            0x03
+
+//
+// nVIDIA Ventura feature related function define
+//
+#define SPB_VEN_THERMAL_BUDGET                0x88B8
+#define SPB_FUNC_SUPPORT                      0x00
+#define SPB_FUNC_VENTURASTATUS                0x20
+#define SPB_FUNC_GETPSS                       0x21
+#define SPB_FUNC_SETPPC                       0x22
+#define SPB_FUNC_GETPPC                       0x23
+#define SPB_FUNC_CALLBACK                     0x24
+#define SPB_FUNC_SYSPARAMS                    0x2A
+#define VEN_SENSOR_HEADER_STRUC               0x0
+#define VEN_SENSOR_CPU_STRUC                  0x1
+#define VEN_SENSOR_GPU_STRUC                  0x2
+#define VEN_SENSOR_PARAM_STRUC                0x3
+#define VEN_VERSION_HEADER                    0x00010000
+#define VEN_NUM_SENSORS                       0x02
+#define VEN_VERSION_CPU                       0x00010001
+#define VEN_CPU_PARAM_A                       0x3E8
+#define VEN_CPU_PARAM_C                       0x258
+#define VEN_CPU_PARAM_D                       0x258
+#define VEN_CPU_PARAM_E                       0x258
+#define VEN_CPU_PARAM_G                       0x2CF
+#define VEN_CPU_PARAM_H                       0x311
+#define VEN_CPU_PARAM_X                       0x136
+#define VEN_CPU_PARAM_Y                       0x118
+#define VEN_CPU_PARAM_Z                       0x19A
+#define VEN_CPU_PARAM_K                       0x001
+#define VEN_CPU_PARAM_M                       0x001
+#define VEN_CPU_PARAM_N                       0x001
+#define VEN_CPU_PARAM_AL                      0x36B
+#define VEN_CPU_PARAM_BE                      0x13C
+#define VEN_CPU_PARAM_GA                      0x019
+#define VEN_CPU_PARAM_P                       0x000
+#define VEN_CPU_PARAM_DEL                     0x001
+#define VEN_VERSION_GPU                       0x00010000
+#define VEN_GPU_PARAM_W                       0x3E8
+#define VEN_GPU_PARAM_P                       0x2EE
+#define VEN_GPU_PARAM_Q                       0x2EE
+#define VEN_GPU_PARAM_R                       0x2EE
+#define VEN_GPU_PARAM_A                       0x001
+#define VEN_GPU_PARAM_B                       0x3E8
+#define VEN_GPU_PARAM_C                       0x001
+#define VEN_GPU_PARAM_D                       0x001
+#define VEN_GPU_PARAM_DE                      0x000
+#define VENSNS_CPU_SENSOR_TYPE                0x00
+#define VENSNS_CPU_I2C_PORT                   0x01
+#define VENSNS_CPU_I2C_ADDR                   0x80
+#define VENSNS_CPU_INA219_CFG_LOC             0x00
+#define VENSNS_CPU_INA219_CFG_VALUE           0x27FF
+#define VENSNS_CPU_INA219_CALIB_LOC           0x05
+#define VENSNS_CPU_INA219_CALIB_VALUE         0xA000
+#define VENSNS_CPU_INA219_POWER_LOC           0x03
+#define VENSNS_CPU_PMU_POLLING_FREQ           0x0F
+#define VENSNS_CPU_SENSE_RESISTOR             0x04
+#define VENSNS_GPU_SENSOR_TYPE                0x00
+#define VENSNS_GPU_I2C_PORT                   0x01
+#define VENSNS_GPU_I2C_ADDR                   0x8A
+#define VENSNS_GPU_INA219_CFG_LOC             0x00
+#define VENSNS_GPU_INA219_CFG_VALUE           0x27FF
+#define VENSNS_GPU_INA219_CALIB_LOC           0x05
+#define VENSNS_GPU_INA219_CALIB_VALUE         0xA000
+#define VENSNS_GPU_INA219_POWER_LOC           0x03
+#define VENSNS_GPU_PMU_POLLING_FREQ           0x0F
+#define VENSNS_GPU_SENSE_RESISTOR             0x04
+
+//
+// MXM Function define
+//
+#define MXM_FUNC_MXSS                         0x00
+#define MXM_FUNC_MXDP                         0x05
+#define MXM_FUNC_MDTL                         0x06
+#define MXM_FUNC_MXMS                         0x10
+#define MXM_FUNC_MXMI                         0x18
+#define MXM_FUNC_MXCB                         0x19
+#endif

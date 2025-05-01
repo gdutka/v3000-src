@@ -1,0 +1,49 @@
+## @file
+#  To override the network locker behavior.
+#
+#******************************************************************************
+#* Copyright (c) 2012 - 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ControlNetworkStackDxe
+  FILE_GUID                      = B6A47438-22F5-4b70-BF09-A600F36460B5
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = EntryPoint
+
+[sources.common]
+  ControlNetworkStack.h
+  ControlNetworkStack.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydeNetworkPkg/InsydeNetworkPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  MemoryAllocationLib
+
+[Protocols]
+  gNetworkLockerProtocolGuid
+  gEfiSimpleNetworkProtocolGuid
+
+[Guids]
+
+[Pcd]
+
+[Depex]
+  gNetworkLockerProtocolGuid

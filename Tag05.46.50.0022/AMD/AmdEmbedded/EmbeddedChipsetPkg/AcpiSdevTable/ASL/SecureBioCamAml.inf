@@ -1,0 +1,22 @@
+#;*****************************************************************************
+#;
+#;  ASL for Secure Biometrics Cameras
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION           = 0x00010005
+  BASE_NAME             = SecureBioCamAml
+  MODULE_TYPE           = USER_DEFINED    
+  FILE_GUID             = a2b0063d-9326-46f0-8365-25484896f51b
+  VERSION_STRING        = 1.0
+
+[sources.common]
+  SecureBioCam.asl
+
+[Packages]
+  MdePkg/MdePkg.dec
+
+
+
+

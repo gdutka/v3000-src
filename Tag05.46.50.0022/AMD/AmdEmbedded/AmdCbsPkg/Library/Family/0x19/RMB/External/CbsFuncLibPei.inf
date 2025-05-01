@@ -1,0 +1,74 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CbsFuncLibPei
+  FILE_GUID                      = 8DBF58E7-B61B-4827-907A-DFD5F80B6E21
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CbsPeiFuncLib|PEIM
+
+[sources.common]
+  CbsFuncLib/Cbs.h
+  ../../../../../Build/ResourceRMB/AmdCbsVariable.h
+  ../../../../../Build/ResourceRMB/AmdCbsDefault.c
+  ../../../../../Build/ResourceRMB/CbsIdsNvRMB.c
+
+  CbsFuncLib/CbsHookPeiLib.c
+  CbsFuncLib/CbsHookPeiLib.h
+  CbsFuncLib/CbsPeiFuncTable.c
+  CbsFuncLib/CbsBaseLib.c
+  CbsFuncLib/CbsComboFlag.c
+
+  CbsFuncLib/IDS/CbsIDSCommonPei.c
+  CbsFuncLib/IDS/CbsIDSCommonPei.h
+
+  CbsFuncLib/FCH/CBSFchFunPEI.c
+  CbsFuncLib/FCH/CBSFchFunPEI.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  PcdLib
+  HobLib
+  PeimEntryPoint
+  DebugLib
+  PeiServicesTablePointerLib
+  PeiServicesLib
+  AmdBaseLib
+  CbsSetAgesaPcdLib
+
+[Guids]
+  gAmdCbsPkgTokenSpaceGuid
+  gEfiIfrTianoGuid                              ## CONSUMES ## Guid
+  gCbsSystemConfigurationGuid                   ## PRODUCES
+  gAmdCbsVariableHobGuid
+
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gAmdCbsHookPpiGuid
+  gAmdPcdInitReadyPpiGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgSystemConfiguration
+  #PCie PSPP Power Policy
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPsppPolicy
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSataEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSataEnable2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetIdentifiedId
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetVisableFlag0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetVisableFlag1
+

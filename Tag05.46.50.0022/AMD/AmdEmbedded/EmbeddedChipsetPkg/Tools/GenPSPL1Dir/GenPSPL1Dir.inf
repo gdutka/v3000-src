@@ -1,0 +1,56 @@
+## @file
+# Auto Generate OemRomSig
+#
+#******************************************************************************
+#* Copyright (c) 2013, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GenPSPL1Dir
+  FILE_GUID                      = 6EAA044E-835E-471C-BDBF-D1096392F46B
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 0.1
+
+  MODULE_AUTORUN_TOOL            = $(BIN_DIR)\$(BASE_NAME)
+  AUTORUN_PARAM                  = $(BUILD_DIR)\FV\PSPL1Dir.fv
+
+[Sources]
+  GenPSPL1Dir.c
+  GenPSPL1Dir.h
+  Fletcher32.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  AmdPspFeaturePkg/AmdPspFeaturePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  DebugLib
+  PrintLib
+  BaseMemoryLib
+
+[Ppis]
+
+[Protocols]
+
+[Guids]
+
+[Pcd]
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashAbImageSlotNumbers
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashImageSlot1HdrBase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashImageSlot2HdrBase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashImageSlot3HdrBase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashImageSlot4HdrBase
+  gInsydeTokenSpaceGuid.PcdFlashAreaBaseAddress
+
+[BuildOptions]
+  MSFT:*_*_IA32_DLINK_FLAGS == /out:"$(BIN_DIR)\$(BASE_NAME).exe" /base:0x10000000 /NOLOGO /SUBSYSTEM:CONSOLE /NODEFAULTLIB /IGNORE:4086 /MAP /OPT:REF /DEBUG /MACHINE:I386 /LTCG Kernel32.lib libcmtd.lib libvcruntimed.lib libucrtd.lib Advapi32.lib
+  MSFT:*_*_*_CC_FLAGS = /wd4996 /D PLATFORM_NAME=$(PLATFORM_NAME)

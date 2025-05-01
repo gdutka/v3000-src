@@ -1,0 +1,13 @@
+[
+    {
+       "name": "GOP",
+       "version": "3.8.8",
+       "url": "http://gerrit-git.amd.com/admin/repos/amd/ec/uefigop/udk2018 Gop_Phx branch, AmdGopPkg folder only",
+       "binaries": ["AmdIa32GenericGop.efi" , "AmdX64GenericGop.efi"],
+       "legalScan": {
+            "schemaVersion": "1.2",
+            "contact": "dl.gait_srdc@amd.com",
+            "knownScanIssues": []
+        }
+    }
+]

@@ -1,0 +1,20 @@
+
+form
+  formid = H2O_FORM_DIALOG_FORM_ID_LAST, title = STRING_TOKEN(STR_BLANK);
+
+  subtitle text = STRING_TOKEN(STR_BLANK);
+
+  numeric
+    varid   = H2OFormDialogConfig.Empty,
+    questionid = KEY_EMPTY,
+    prompt  = STRING_TOKEN(STR_BLANK),
+    help    = STRING_TOKEN(STR_BLANK),
+    flags   = 0,
+    minimum = 0,
+    maximum = 0xff,
+    step    = 1,
+    default = 0,
+  endnumeric;
+
+endform;
+

@@ -1,0 +1,58 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2017-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmModernStandbyAcpiTableInstall
+  FILE_GUID             = F7787C3F-0CD5-4536-9354-0670EE22D7FD
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmModernStandbyAcpiTableInstallEntryPoint
+
+[Sources.common]
+  AmdCpmModernStandbyAcpiTableInstall.c
+  Asl/PlatformLpi.asl
+  Asl/PlatformLpiDis.asl
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[BuildOptions]
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  AmdSocBaseLib
+  AmdCpmBaseLib
+  AmdBaseLib
+  PcdLib
+
+[Guids]
+
+
+[Protocols]
+  gAmdCpmTableProtocolGuid
+  gAmdCpmOemModsSsdtTableProtocol
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtProcessorContainerName
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable
+  gAmdCpmPkgTokenSpaceGuid.PcdPlatformLpiEn
+
+[Depex]
+  gAmdCpmTableProtocolGuid AND
+  gAmdCpmOemModsSsdtTableProtocol

@@ -1,0 +1,57 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdNbioIOAPICPei
+  FILE_GUID                      = 497B3820-FE1C-4C5D-9126-EBF7C4BAE948
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdNbioIOAPICPeiEntry
+
+[Sources]
+  AmdNbioIoApic.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  IdsLib
+  PeimEntryPoint
+  PeiServicesLib
+  GnbCommonLib
+  PcdLib
+  HobLib
+  BaseMemoryLib
+  NbioHandleLib
+  FabricResourceManagerLib
+  GnbPciLib
+  GnbLib
+  GnbPciAccLib
+
+[Guids]
+  gGnbPcieHobInfoGuid
+  gAmdMemoryInfoHobGuid
+
+[Ppis]
+  gAmdNbioBaseServicesRmbPpiGuid
+  gAmdNbioPcieServicesPpiGuid
+  gAmdMemoryInfoHobPpiGuid
+
+[Pcd]
+
+[Depex]
+  gAmdNbioPcieServicesPpiGuid AND
+  gAmdFabricTopologyServices2PpiGuid AND
+  gAmdNbioIOAPICRMBPeiDepexPpiGuid
+
+
+

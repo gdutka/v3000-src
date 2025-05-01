@@ -1,0 +1,62 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2018-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdRasRmbDxe
+  FILE_GUID                      = 5DA5F0F7-4209-42E2-956C-BE6792C64A37
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdRasRmbDxeInit
+
+[sources]
+  AmdRasRmbDxe.c
+  AmdRasRmbDxe.h
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DebugLib
+  IdsLib
+  IoLib
+  BaseMemoryLib
+  RasRmbBaseLib
+  AmdPspApobLib
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCcxCfgPFEHEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMceSwSmiData
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMcaErrThreshEn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMcaErrThreshCount
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioCorrectedErrThreshEn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioCorrectedErrThreshCount
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioDeferredErrThreshEn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioDeferredErrThreshCount
+
+[Protocols]
+  gAmdRasInitDataProtocolGuid                   #PRODUCED
+  gAmdCoreTopologyServicesProtocolGuid          #CONSUME
+  gAmdCoreTopologyServicesV2ProtocolGuid        #CONSUME
+  gAmdFabricTopologyServices2ProtocolGuid       #CONSUME
+  gAmdFabricRmbDepexProtocolGuid                #CONSUME
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleRasPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+
+[Depex]
+  gAmdFabricTopologyServices2ProtocolGuid AND
+  gAmdFabricRmbDepexProtocolGuid AND
+  gAmdRasRmbDepexProtocolGuid
+

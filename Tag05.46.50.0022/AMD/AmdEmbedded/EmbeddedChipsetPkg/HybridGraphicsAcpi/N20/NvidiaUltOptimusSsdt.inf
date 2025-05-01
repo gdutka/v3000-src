@@ -1,0 +1,35 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2014 - 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NvidiaUltOptimusSsdt
+  FILE_GUID                      = c4e12756-6a74-4b39-8206-3ed6d3a590b0
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 1.0
+  EDK_RELEASE_VERSION            = 0x00020000
+  EFI_SPECIFICATION_VERSION      = 0x00020000
+
+[Sources.common]
+  NvidiaUltOptimus/NvidiaUltOptimus.asl
+
+[Packages]
+  MdePkg/MdePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaNpcfFeatureSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaOptimusGc6NvsrFeatureSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaVenturaFeatureSupport
+
+[FeaturePcd]
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaDdsFeatureSupport  

@@ -1,0 +1,32 @@
+##
+#  Supv Entry locate Library that could locate specific sub-entry from given
+#  Supv directory buffer.
+#
+#  Copyright (c) Microsoft Corporation.
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = SmmSupvEntryLocateLibAmd
+  FILE_GUID                      = B7E10DD3-BE5A-44A6-B1FF-779C31169E30
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SmmSupvEntryLocateLib
+
+[Sources]
+  SmmSupvEntryLocateLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+[LibraryClasses]
+  DebugLib
+  DxeServicesLib
+  MemoryAllocationLib
+  BaseMemoryLib

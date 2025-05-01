@@ -1,0 +1,54 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdMemFp7Pei
+  FILE_GUID                      = BE6D9471-C8BF-4B35-BEA7-7687CDF7E142
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdMemFp7Peim
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  AmdBaseLib
+  IdsLib
+  AmdPspApobLib
+  HobLib
+
+[sources]
+  AmdMemFp7Pei.c
+
+[Guids]
+  gMemDdr5DimmHubRegGuid
+  
+[Protocols]
+
+[Ppis]
+  gAmdMemoryInitCompletePpiGuid    #Publish
+  
+[Pcd]
+  
+
+[Depex]
+  gAmdMemFp7PeimDepexPpiGuid AND
+  gAmdCcxPeiInitCompletePpiGuid AND
+  gAmdPspCommonServicePpiGuid
+
+

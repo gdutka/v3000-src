@@ -1,0 +1,45 @@
+## @file
+#
+#******************************************************************************
+#* Copyright 2021 Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = UsbTextLookupDxe
+  FILE_GUID      = bbadff1e-b651-4014-b476-d42919a839d2
+  MODULE_TYPE    = DXE_DRIVER
+  VERSION_STRING = 1.0
+  ENTRY_POINT    = UsbTextLookupEntry
+
+[Sources]
+  H2OUsbClassCodeString.c
+  H2OUsbClassCodeString.h
+  H2OUsbClassCodeString.uni
+  UsbTextLookupDxe.c
+  UsbTextLookupDxe.h
+  UsbTextLookupDxe.uni
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  DebugLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  HiiLib
+  BinarySearchExLib
+
+[Protocols]
+  gH2OUsbTextLookupProtocolGuid ## PRODUCES
+
+[Depex]
+  TRUE

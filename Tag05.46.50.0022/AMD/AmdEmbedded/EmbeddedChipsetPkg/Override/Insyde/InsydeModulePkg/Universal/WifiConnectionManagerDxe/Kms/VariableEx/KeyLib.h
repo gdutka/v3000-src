@@ -1,0 +1,140 @@
+/*++
+  This file contains a 'Sample Driver' and is licensed as such
+  under the terms of your license agreement with Intel or your
+  vendor.  This file may be modified by the user, subject to
+  the additional terms of the license agreement
+--*/
+/** @file
+ The key lib function definitions.
+
+Copyright (c) 2013 - 2017, Intel Corporation. All rights reserved.<BR>
+This software and associated documentation (if any) is furnished
+under a license and may only be used or copied in accordance
+with the terms of the license. Except as permitted by such
+license, no part of this software or documentation may be
+reproduced, stored in a retrieval system, or transmitted in any
+form or by any means without the express written consent of
+Intel Corporation.
+
+**/
+
+
+#ifndef __KEY_LIB_H__
+#define __KEY_LIB_H__
+
+/**
+  Generate Salt value.
+
+  @param[in, out]   SaltValue           Points to the salt buffer
+  @param[in]        SaltSize            Size of the salt buffer
+
+  @retval      TRUE           Salt is generated.
+  @retval      FALSE          Salt is not generated.
+**/
+BOOLEAN
+EFIAPI
+KeyLibGenerateSalt(
+  IN OUT UINT8  *SaltValue,
+  IN UINTN      SaltSize
+  );
+
+#define HASH_TYPE_SHA256  0x000B
+#define SYM_TYPE_AES      0x0006
+
+#define SHA256_DIGEST_SIZE 32
+#define AES_BLOCK_SIZE     16
+
+/**
+  Hash the data.
+
+  @param[in]   HashType         Hash type
+  @param[in]   Key              Points to the key buffer
+  @param[in]   KeySize          Key buffer size
+  @param[in]   SaltValue        Points to the salt buffer
+  @param[in]   SaltSize         Size of the salt buffer
+  @param[out]  KeyHash          Points to the hashed result
+  @param[in]   KeyHashSize      Size of the hash buffer
+
+  @retval      TRUE           Hash the data successfully.
+  @retval      FALSE          Failed to hash the data.
+
+**/
+BOOLEAN
+EFIAPI
+KeyLibGenerateHash(
+  IN   UINT32              HashType,
+  IN   VOID                *Key,
+  IN   UINTN               KeySize,
+  IN   UINT8               *SaltValue,
+  IN   UINTN               SaltSize,
+  OUT  UINT8               *KeyHash,
+  IN   UINTN               KeyHashSize
+  );
+
+/**
+  Encrypt the data.
+
+  InputDataSize must be block size aligned.
+
+  @param[in]   SymType        Symetric Encryption type
+  @param[in]   Key            Points to the key buffer
+  @param[in]   KeySize        Key buffer size
+  @param[in]   SaltValue      Points to the salt buffer
+  @param[in]   SaltSize       Size of the salt buffer
+  @param[in]   InputData      Points to the input data
+  @param[in]   InputDataSize  Size of the input data
+  @param[out]  OutputData     Points to the output data
+  @param[in]   OutputDataSize Size of the output data
+
+  @retval      TRUE           Encrypt the data successfully.
+  @retval      FALSE          Failed to encrypt the data.
+
+**/
+BOOLEAN
+EFIAPI
+KeyLibEncrypt(
+  IN   UINT32              SymType,
+  IN   VOID                *Key,
+  IN   UINTN               KeySize,
+  IN   UINT8               *SaltValue,
+  IN   UINTN               SaltSize,
+  IN   VOID                *InputData,
+  IN   UINTN               InputDataSize,
+  OUT  VOID                *OutputData,
+  IN   UINTN               OutputDataSize
+  );
+
+/**
+  Decrypt the data.
+
+  InputDataSize must be block size aligned.
+
+  @param[in]   SymType        Symetric Encryption type
+  @param[in]   Key            Points to the key buffer
+  @param[in]   KeySize        Key buffer size
+  @param[in]   SaltValue      Points to the salt buffer
+  @param[in]   SaltSize       Size of the salt buffer
+  @param[in]   InputData      Points to the input data
+  @param[in]   InputDataSize  Size of the input data
+  @param[out]  OutputData     Points to the output data
+  @param[in]   OutputDataSize Size of the output data
+
+  @retval      TRUE           Decrypt the data successfully.
+  @retval      FALSE          Failed to decrypt the data.
+
+**/
+BOOLEAN
+EFIAPI
+KeyLibDecrypt(
+  IN   UINT32              SymType,
+  IN   VOID                *Key,
+  IN   UINTN               KeySize,
+  IN   UINT8               *SaltValue,
+  IN   UINTN               SaltSize,
+  IN   VOID                *InputData,
+  IN   UINTN               InputDataSize,
+  OUT  VOID                *OutputData,
+  IN   UINTN               OutputDataSize
+  );
+
+#endif

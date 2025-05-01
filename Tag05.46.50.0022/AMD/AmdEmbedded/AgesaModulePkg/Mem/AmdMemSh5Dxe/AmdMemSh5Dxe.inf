@@ -1,0 +1,42 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdMemSh5Dxe
+  FILE_GUID                      = 7171F76B-EDCD-4F00-A7E5-559F71B8A00D
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdMemSh5Dxe
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+
+[LibraryClasses.common.DXE_DRIVER]
+  BaseLib 
+  UefiLib
+  #HobLib
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+
+[sources]
+  AmdMemSh5Dxe.c
+
+[Guids]
+  #gAmdMemoryInitCompleteHobGuid    #Consume
+  #gEfiHobListGuid                  #Consume
+  
+[Pcd]
+
+[Protocols]
+
+[Depex]
+  gAmdMemFp8DxeDepexProtocolGuid
+

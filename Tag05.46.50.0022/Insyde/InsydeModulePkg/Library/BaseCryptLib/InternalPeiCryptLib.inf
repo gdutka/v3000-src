@@ -1,0 +1,53 @@
+## @file
+# BaseCryptLib library instance for PEI
+#
+#;******************************************************************************
+#;* Copyright (c) 2023, Insyde Software Corp. All Rights Reserved.
+#;*
+#;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#;* transmit, broadcast, present, recite, release, license or otherwise exploit
+#;* any part of this publication in any form, by any means, without the prior
+#;* written permission of Insyde Software Corporation.
+#;*
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = InternalPeiCryptLib
+  FILE_GUID                      = E4AB0AAC-7591-418D-AFCC-178F9BBBE77D
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = InternalBaseCryptLib
+
+
+[Binaries.Ia32]
+!if $(GCC)==Gcc
+  LIB|Ia32/GccInternalPeiCryptLib.lib
+!else
+  LIB|Ia32/InternalPeiCryptLib.lib
+!endif
+[Binaries.X64]
+!if $(GCC)==Gcc
+  LIB|X64/GccInternalPeiCryptLib.lib
+!else
+  LIB|X64/InternalPeiCryptLib.lib
+!endif
+[Binaries.Arm]
+  LIB|Arm/InternalPeiCryptLib.lib
+
+[Binaries.AArch64]
+  LIB|AArch64/InternalPeiCryptLib.lib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  DebugLib
+  IoLib
+  PrintLib
+  IntrinsicLib
+

@@ -1,0 +1,49 @@
+## @file
+#  Component description file for DASH module.
+#
+# ***************************************************************************
+# * Copyright (c) 2014, Insyde Software Corp. All Rights Reserved.
+# *
+# * You may not reproduce, distribute, publish, display, perform, modify, adapt,
+# * transmit, broadcast, present, recite, release, license or otherwise exploit
+# * any part of this publication in any form, by any means, without the prior
+# * written permission of Insyde Software Corporation.
+# *
+# ******************************************************************************
+##
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MctpSmbusDxe
+  FILE_GUID                      = 1361DEC9-A270-4013-9701-A540F56C58C9
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MctpSmbusDxeEntryPoint
+
+[Sources]
+  MctpSmbusDxe.c
+  MctpSmbusDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  UefiLib
+
+[Protocols]
+  gDashIoCfgProtocolGuid
+  gEfiMetronomeArchProtocolGuid
+  gMctpSmbusProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+
+[Depex]
+  gEfiMetronomeArchProtocolGuid AND
+  gEfiCpuIo2ProtocolGuid AND
+  gEfiPciRootBridgeIoProtocolGuid AND
+  gDashIoCfgProtocolGuid

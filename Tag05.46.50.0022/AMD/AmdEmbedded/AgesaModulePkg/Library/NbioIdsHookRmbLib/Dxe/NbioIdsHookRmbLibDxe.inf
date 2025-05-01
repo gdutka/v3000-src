@@ -1,0 +1,54 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = NbioIdsHookRmbLibDxe
+  FILE_GUID                      = 9F20D163-6646-4B70-8158-F07B226F46B3
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NbioIdsHookRmbLibDxe|DXE_DRIVER
+
+[Sources.common]
+  NbioIdsHookRmbLibDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  AmdBaseLib
+  AmdIdsDebugPrintLib
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmuFeatureControlDefines
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmuFeatureControlDefinesExt
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStapmTimeConstant
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSustainedPowerLimit
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgSystemConfiguration
+  #Fan table control
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdForceFanPwmEn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdForceFanPwm
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableOverride
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableHysteresis
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableTempLow
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableTempMed
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableTempHigh
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTableTempCritical
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTablePwmLow
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTablePwmMed
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTablePwmHigh
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTablePwmFreq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFanTablePolarity
+
+[Depex]
+  TRUE
+
+[BuildOptions]
+
+

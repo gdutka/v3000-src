@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdCfgPcdBufLibPei
+  FILE_GUID                      = 9368ED43-CCAC-424b-9C07-4069A964F679
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdCfgPcdBufLib|PEIM PEI_CORE
+
+[Sources]
+  AmdCfgPcdBufLibPei.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  IdsLib
+  PcdLib
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAgesaTestPointEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAgesaTestPointWidth
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdIdsDebugPort
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAgesaAssertEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAgesaTestPointToStb
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdGlobalStbVerbosityControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbBiosVerbosityControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbSmuVerbosityControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbPspVerbosityControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbSmnAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbFilterMaskEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpPostcodeIp0SmnAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpPostcodeConfigSmnAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbIbvSourceId
+
+[Guids]
+
+
+[BuildOptions]
+

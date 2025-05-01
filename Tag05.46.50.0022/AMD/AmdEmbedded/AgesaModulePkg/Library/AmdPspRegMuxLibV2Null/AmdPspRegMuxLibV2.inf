@@ -1,0 +1,36 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2018-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPspRegMuxLibV2Null
+  FILE_GUID                      = 3b57714c-f673-4f5c-900b-c6d7681784e1
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdPspRegMuxLibV2|PEIM
+
+[Sources]
+  AmdPspRegMuxLibV2.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PrintLib
+  IoLib
+  PciLib
+  DebugLib
+  AmdSocBaseLib
+
+
+[Pcd]
+
+[Guids]

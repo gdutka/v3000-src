@@ -1,0 +1,225 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033\deflangfe1033{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\fmodern\fprq1\fcharset0 Courier New;}{\f2\fswiss\fprq2\fcharset0 Calibri;}{\f3\fnil Calibri;}{\f4\fnil\fcharset2 Symbol;}}
+{\colortbl ;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.18362}{\*\mmathPr\mdispDef1\mwrapIndent1440 }\viewkind4\uc1 
+\pard\widctlpar\f0\fs24 Copyright 2019 ADVANCED MICRO DEVICES, INC. All Rights Reserved. \par
+\b\par
+AMD RAID controller RAID UEFI Driver distribution list\par
+
+\pard\widctlpar\li720 Revision : \b0 9.03.00.63\b\par
+Built date: \b0 11/06/2019\b\par
+
+\pard\widctlpar\tab Platform : \tab\b0 Picasso-AM4, Matisse, Celadon\par
+\par
+\b AMD-RAID binary file name:\par
+
+\pard\widctlpar\fi-360\li1440\b0 -\tab License Level 10 supports RAID 0,1,5,10, RAIDABLE and Volume\par
+
+\pard\widctlpar\fi-360\li2160\f1 o\tab\f0 RAIDXpert2_F10_0x00.efi\par
+\f1 o\tab\f0 AFD69E65-1CB3-472C-BE63-0C98A2C0665C-RAIDCore_F10_0x00.DXE\par
+\f1 o\tab\f0 AFD69E65-1CB3-472C-BE63-0C98A2C0665C-RAIDCore_F10_0x00.DXE.ORG\par
+\f1 o\tab\f0 AFD69E65-1CB3-472C-BE63-0C98A2C0665C-RAIDCore_F10_0x00.DXE.ORG.ffs\par
+
+\pard\widctlpar\fi720\par
+
+\pard\widctlpar\fi-360\li1440 -\tab Shell command line utility for array management\par
+
+\pard\widctlpar\fi-360\li2160\f1 o\tab\f0 RCADM.EFI \par
+
+\pard\widctlpar\par
+\b Here are the valid configurations:\par
+\par
+For Picasso-AM4, Matisse\b0 :\b\par
+\par
+\trowd\trgaph30\trleft-30\trrh290\trpaddl30\trpaddr30\trpaddfl3\trpaddfr3
+\cellx1775\cellx3871\cellx5965\cellx7232\cellx8545 
+\pard\intbl\nowidctlpar\cf1\b0\f2\fs22 SATA on SOC (M.2 & Standard SATA)\cell SATA on Promontory (Standard SATA)\cell NvMe RAID Mode (M.2 & PCIe Add-in card)\cell SATA RAID Support\cell NVMe RAID Support\cell\row\trowd\trgaph30\trleft-30\trrh290\trpaddl30\trpaddr30\trpaddfl3\trpaddfr3
+\cellx1775\cellx3871\cellx5965\cellx7232\cellx8545 
+\pard\intbl\nowidctlpar RAID\cell RAID\cell Enabled\cell Yes\cell Yes\cell\row 
+\pard\widctlpar\cf0\b\f0\fs24\par
+For Celadon (only RAID0):\par
+\b0\par
+\trowd\trgaph30\trleft-30\trrh290\trpaddl30\trpaddr30\trpaddfl3\trpaddfr3
+\cellx4434\cellx6464 
+\pard\intbl\cf1\f3\fs22 NvMe RAID Mode (M.2 & PCIe Add-in card)\cell NVMe RAID Support\cell\row\trowd\trgaph30\trleft-30\trrh290\trpaddl30\trpaddr30\trpaddfl3\trpaddfr3
+\cellx4434\cellx6464 
+\pard\intbl Enabled\cell Yes\cell\row 
+\pard\widctlpar\cf0\b\f0\fs24\par
+Maximum Supported Controllers:\par
+
+\pard{\pntext\f4\'B7\tab}{\*\pn\pnlvlblt\pnf4\pnindent0{\pntxtb\'B7}}\nowidctlpar\fi-360\li720\b0 7 NVMe + 4-SoC when x570/590 is set to RAID in the BIOS\par
+{\pntext\f4\'B7\tab}8-NVMe + 2-SoC + 1-PT when set to RAID in the BIOS \par
+{\pntext\f4\'B7\tab}10-NVMe when SoC and PT are Disabled in the BIOS \par
+{\pntext\f4\'B7\tab}10-NVMe + 1-PT when SoC is Disabled in the BIOS \par
+{\pntext\f4\'B7\tab}9-NVMe + 2-SoC when PT is Disabled in the BIOS \b\par
+
+\pard{\*\pn\pnlvlcont\pnf4\pnindent0{\pntxtb\'B7}}\par
+Known issues\b0\par
+
+\pard{\pntext\f4\'B7\tab}{\*\pn\pnlvlblt\pnf4\pnindent0{\pntxtb\'B7}}\nowidctlpar\fi-360\li720 transformation with IO taking long time\par
+{\pntext\f4\'B7\tab}Quick Start Guide & User Guide is under review process \par
+{\pntext\f4\'B7\tab}no support for 2 ODDs on the same port of 2 different controllers.\par
+{\pntext\f4\'B7\tab}With 11 PCIe NVMe SSD's system boot to OS may fail\par
+
+\pard\widctlpar\par
+\b Revision History\par
+\par
+\b0 9.3.0.0063\par
+\tab -\tab AMD DID B000 Fix for Nvme Devices using Nvme trap mechanism from SMU\par
+\b\par
+\b0 9.3.0.0058\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Minor RAIDXpert UWP app fixes\par
+-\tab Fix rcadm.efi, rcadm.exe to display NVMe Gen # and lane count in port speed\par
+
+\pard\widctlpar\tab -     HII Array Size input field from text to numeric decimal\par
+\tab -     UWP popup detection added\par
+\tab -     Fix NVMe Speed Mode current Speed/lanes instead of using capabilities\par
+\tab -     Package 64bit rcadm in the installer\par
+\tab -     Fix Raidxpert2 Setup.exe rebooting the system abruptly\par
+\par
+9.3.0.038\par
+\tab -\tab updated version number\par
+\par
+9.3.0.019\par
+\tab -\tab RAID 5 Support added\par
+\par
+9.2.0.0127\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Change HII::Array Management::Create Array::Size input field from text to numeric decimal\b\par
+
+\pard\widctlpar\par
+\b0 9.2.0.0120\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Fixed fatal error when max NVMe controller count exceeded\par
+-\tab Fix issue with BIOS not being able to determine CD/DVD drive name\par
+
+\pard\widctlpar\b\par
+\b0 9.2.0.0105\par
+
+\pard\widctlpar\fi-360\li1080 -\tab None\par
+
+\pard\widctlpar\b\par
+\b0 9.2.0.0087\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Fix user from being able to enter letters for the array size in HII\par
+-\tab Removed Legacy from the Initialize Disks page in HII\par
+-\tab HII- Cancel Disk Init returns to Disk Ops menu not Ctrlr Mngmt\par
+
+\pard\widctlpar\b\tab\par
+\b0 9.2.0.0070\par
+
+\pard\widctlpar\fi-360\li1080 -\tab HII-Tranforming Array Disk details are inconsistent/misleading\par
+
+\pard\widctlpar\tab -     Update Ata/Scsi PassThru to properly support spanned controllers\par
+\tab -     Add NVMe support to DiskInfo protocol. \par
+\tab -     Fix spanning issue with protocol.\par
+\tab -     rcadm.efi | Remove Cache disk attribure from rcadm.efi\par
+\tab -     Fix issue with NVMe and correctly determining BytesPerSector size\par
+\tab -     Fix issue with trying to coerce drive size smaller than user data offset size\par
+\tab -     Revert UEFI license level from F60 back to F10.\par
+\b\par
+\b0 9.2.0.0041\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Fix COMRESET issue with HP CH20L BD ROM device.\par
+
+\pard\widctlpar\tab -     Remove Clear Metadata option from HII. \par
+\tab -     Fix issue with 1MB IO to ATAPI device. \par
+\b\par
+\b0 9.2.0.0023\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Clear HII loaded flag when Stop()'ing w/Dual Boot BIOS\par
+-\tab Fix issue with PeriodicTimer and resetting BlockIo interfaces\par
+-\tab Fix for UEFI issue with Intel 750 NVMe adapters going offline\par
+-\tab Rcadm.efi remove commands :  smart poll & scan array\par
+-\tab Merge HII CTS changes from 910 to 920.\par
+-\tab HII cleanup of RAID10's mention of License Level\par
+
+\pard\widctlpar\par
+9.2.0.0009\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Add 7905 Device id for Bristol support\par
+
+\pard\widctlpar\b\par
+\b0 9.2.0.0005\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Add 7916 Device id for white haven support\par
+-\tab Unified RAID support for ZP family platforms\par
+
+\pard\widctlpar\b\par
+\b0 9.1.0.0018\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Push missing code for HII and CTS value with LEGACY array\par
+
+\pard\widctlpar\b\par
+\b0 9.1.0.0014\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Backout latest changes -- offline devices and missing info seen during QA\par
+-\tab Fix tools to display "NA" instead of "Err" for CTS on Legacy array\par
+-\tab Refactor code to (try) reduce start up discovery time\par
+
+\pard\widctlpar\b\par
+\b0 9.1.0.0009\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Fix to limit to 10/11 controllers, 14 devices\par
+-\tab Fix Startup delay issue\par
+-\tab Fix issue with incorrect exit\par
+
+\pard\widctlpar\b\par
+\b0 9.1.0.0007\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Partial (uefi) fix for detecting more than 14 devices\par
+-\tab UEFI: Fix issue where value could be used as array index and exceed bounds\par
+
+\pard\widctlpar\b\par
+\b0 9.1.0.0003\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Beta build for 9.1 branch support\par
+-\tab Implement Cache Tag Size\par
+
+\pard\widctlpar\par
+9.0.0.00088\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Fix Windows driver support for AMD_RAID BIOS Config setting\par
+-\tab NVMe disks are listing to create an array even when there is no space available in disk\par
+
+\pard\widctlpar\b\par
+\b0 9.0.0.00084\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Clean up code for during rescan\par
+
+\pard\widctlpar\b\par
+\b0 9.0.0.00082\par
+
+\pard\widctlpar\fi-360\li1080 -\tab Enhancement : Change NVM_ReqCallbacks to be dynamically allocated\par
+
+\pard\widctlpar\b\par
+\b0 9.0.0.00076\par
+\tab -    Fix BIOS hang and NVMe add-in Offline issues\par
+\tab -     Fix ODD name display issue in uefi mode\par
+\b\par
+\b0 9.0.0.00072\par
+\tab -    Support for Nvme RAID enable/disable BIOS option\par
+\b\par
+\b0 9.0.0.00071\par
+
+\pard\widctlpar\li720 -     Change Cache options Strings for uniformity across Raid applications\par
+-     Code to handle UEFI 2.6 Browser submitted actions\par
+-     Fix for UEFI: After converting to Legacy, disk appears as unknown\par
+\b\par
+
+\pard\widctlpar\b0 9.0.0.00063\par
+
+\pard\widctlpar\li720 -     Beta test release for Summit-Sp3\par
+
+\pard\widctlpar\b\par
+\b0 9.0.0.00023\par
+
+\pard\widctlpar\li720 -     Beta Test release for Summit SP3\par
+-     Fixed Nvme detection and array creation in efi shell\par
+
+\pard\widctlpar\b\par
+\b0 9.0.0.00015\par
+
+\pard\widctlpar\li720 -     Beta Test release for Summit SP3\par
+}
+ 

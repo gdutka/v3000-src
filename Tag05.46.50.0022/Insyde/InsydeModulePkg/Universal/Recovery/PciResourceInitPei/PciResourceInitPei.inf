@@ -1,0 +1,70 @@
+## @file
+#  Component description file for PciResourceInitPei PEIM.
+#
+#******************************************************************************
+#* Copyright (c) 2019, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PciResourceInitPei
+  FILE_GUID                      = B0ACD066-C5A6-4fbe-B4D4-5A264E45AF1C
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PeimInitializePciResourceInit
+
+[Sources]
+  PciResourceInitPei.c
+  XhciInit.c
+  AhciInit.c
+  NvmeInit.c
+  SdInit.c
+  UfsInit.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  MemoryAllocationLib
+  PeimEntryPoint
+  PeiServicesLib
+  IoLib
+  PciLib
+  PciSegmentLib
+  PcdLib
+  DebugLib
+  HobLib
+  TimerLib
+  H2OCpLib
+  DeviceInfo2Lib
+
+[Ppis]
+  gEfiEndOfPeiSignalPpiGuid
+  gEfiPciCfg2PpiGuid
+  gPeiUsbControllerPpiGuid
+  gPeiAhciControllerPpiGuid
+  gPeiNvmeControllerPpiGuid
+  gPeiSdControllerPpiGuid
+  gPeiUfsControllerPpiGuid
+
+[Guids]
+  gH2OPeiStorageHobGuid
+  gH2OPeiCpPciEnumUpdateDevResourcesGuid
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gInsydeTokenSpaceGuid.PcdH2OPeiCpPciEnumUpdateDevResourcesSupported
+  gH2ODeviceInfo2TokenSpaceGuid
+
+[Depex]
+  gEfiPeiMemoryDiscoveredPpiGuid AND
+  gEfiPciCfg2PpiGuid

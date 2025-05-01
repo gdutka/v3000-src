@@ -1,0 +1,68 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdIdsDebugPrintLib
+  FILE_GUID                      = E87ACE1F-52DE-417C-BD23-C06A92354917
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdIdsDebugPrintLib
+  CONSTRUCTOR                    = AmdIdsDebugPrintLibConstructor
+
+[Sources.common]
+  AmdIdsDebugPrintLib.c
+  AmdIdsDebugPrintLocal.h
+  AmdIdsDpRedirectIo.c
+  AmdIdsDpSerial.c
+  AmdIdsDpUartLib.c
+
+[Sources.IA32]
+
+[Sources.X64]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdBaseLib
+  PrintLib
+  PcdLib
+  AmdHeapLib
+  CcxRolesLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[FeaturePcd]
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintFilter
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdIdsDebugPort
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintRedirectIOEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintSerialPortEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintSerialPort
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintSerialPortDetectCableConnection
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsUartInitialize
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsUartClock
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsUartBaudRate
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsUartLineControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsUartFifoControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintSerialPortHardwareFlowControl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintEmulationAutoDetect
+
+[Depex]
+  TRUE
+
+
+

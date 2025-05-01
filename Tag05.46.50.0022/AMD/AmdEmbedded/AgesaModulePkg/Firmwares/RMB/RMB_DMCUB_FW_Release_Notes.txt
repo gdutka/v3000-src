@@ -1,0 +1,947 @@
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.15.47
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0   DID: 0x1681
+Build date: 6/06/2022 11:50:10
+Base Source:
+commit db9cf8b86d2ef6e28a89d7743fbbcda03d2bde71 (HEAD -> vbios/dmu_rmb_preos, origin/vbios/dmu_rmb_preos)
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+
+1.  According to Minghua's suggestion, for AUX over I2C retry,
+    If we want to re-send any I2C command, we should send stop command first.
+
++-------------------------------------------------------------------------------------------------------------+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.15.43
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0   DID: 0x1681
+Build date: 26/04/2022 11:58:58
+Base Source:
+commit 7143aa3f20c01546890c26a77cbe3037c80de3b0 (HEAD -> vbios/dmu_rmb_preos, origin/vbios/dmu_rmb_preos)
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. PLAT-102149 [RMB_FP7/FP7r2][SSV_Farm] 
+   SMU hang CclkChangeClock/SetCoreLdo +DMCUB in reset state during ACPI
++-------------------------------------------------------------------------------------------------------------+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.15.42
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0   DID: 0x1681
+Build date: 01/04/2022 15:31:20
+Base Source:
+commit 44b16b12ee6de59fc72308b00f42f95ec4517c78 (HEAD -> vbios/dmu_rmb_preos, origin/vbios/dmu_rmb_preos)
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. Fix to the PLAT-103102:
+   Display switching fail between "Touched" eDP and external monitor HDMI in pre-OS.
+2. The same change fixes a customer logo hang issue too
++-------------------------------------------------------------------------------------------------------------+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.15.41
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0   DID: 0x1681
+Build date: 21/03/2022 11:24:30
+Base Source:
+commit b38ed65a99b24ce2279be79e81b1aa96a80b0797 (HEAD -> vbios/dmu_rmb_preos, origin/vbios/dmu_rmb_preos)
+
+Sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+The script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. SWDEV-3 - vbios: fix the OLED not turn on issue
++-------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.14.41
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0   DID: 0x1681
+Build date: 24/02/2022
+base Source:
+commit 0dd27fb815f55c5883db210bedd83a500df79b2f (branch: hotfix/rmb/rmb_4.0.20.0)
+
+sign script:fw-sign with pkey (fw-sign_09-28-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. (TIC-90870) [Y570P/Y570_ARH_FVT_E3/E6_H/D]Stress_WB_System occur hang up at Legion logo(1/59units,1/13804cycles)
++-------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.12.40
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0 0x1681
+Build date:   07/02/2022 17:17:18
+base Source:
+commit 4a6604a0a919a19360232e7273585c24309579bf (HEAD -> ip/dmu_rmb, origin/ip/dmu_rmb)
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. Fix to PLAT-100781 [RMB_FP7r2][SSV_Farm] No display output after flash BIOS(RRL1000E_PatchBWL366). F/R:4/10. 
+2. Fix to PLAT-100435 [FP7&FP7r2] Display lost after setting SUT to Pluton fTPM+Level3
++-------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.0F.40
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0 0x1681
+Build date:   20/01/2022 00:07:18
+base Source:
+commit 3468d93ca96acaba1f25dacb1dc9cd9eb8f79cb2 (HEAD -> ip/dmu_rmb, origin/ip/dmu_rmb)
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+fix to PLAT-99175 LG27UL850 DP monitor DP link training fail when S4 resume
++-------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.0E.40
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0 0x1681
+Build date:   13/01/2022 18:56:57
+base Source:
+commit 96b3acda135afd262907953e838674989fc2a471 (HEAD -> ip/dmu_rmb, origin/ip/dmu_rmb)
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+SWDEV-3 - vbios: switch display between eDP and HDMI
++-------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.11.67
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0 0x1681
+Build date:   2021/12/24
+base Source:
+commit 35a27c42f72a1e80b95cfd24ec3f5658bba67095 (branch: hotfix/rmb/rmb_4.0.11.0)
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+SWDEV-3 - vbios: Add vendor specific LTTPR workarounds for DCN31
++-------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.11.64
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0 0x1681
+Build date:   2021/12/06
+base Source:
+commit a4c837318f2fb49ec13f398bdfc769c428112006 (HEAD -> ip/dmu_rmb, origin/ip/dmu_rmb)
+
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+SWDEV-314038 - dmu: Not light up after S4 resume with TB3 Monitor
+SWDEV-3 - dmu: adding 16ms delay in CR and EQ phase for KD re-timer
++-------------------------------------------------------------------------------------------------------------+
+
+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.0A.40
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0 0x1681
+Build date:   28/11/2021 22:52:51
+base Source:
+commit 640985d177ff08012e71a5d564869071ac27c9a6 
+ (HEAD -> ip/dmu_rmb, origin/ip/dmu_rmb)
+
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+PLAT-89704 - [RMB_FP7_B0]
+[DP Alt mode] USB-C DP Alt mode display on C20 PHY no output during POST
++-------------------------------------------------------------------------------------------------------------+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 04.00.07.40
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0 0x1681
+Build date:   15/11/2021 09:05:55
+base Source:
+commit bf59443d337bc5c161a1b985a68e1514f41a1196 
+(HEAD -> ip/dmu_rmb, origin/ip/dmu_rmb)
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+SWDEV-310063 - driver: Fix VBIOS HPD event process
++-------------------------------------------------------------------------------------------------------------+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++---------------------------------------------+
+| Version 00.00.91.42
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0 0x1681
+Build date:   03/11/2021 14:21:38
+base Source:
+commit 2720d729580cd86185c24fec86276dd4bfc9f149 (HEAD -> dmu_stg)
++ Commit: 8d33c39959d6e53315cb676e12220e798e44dfa6 [8d33c39]
++ Commit: ad995d616347448db87117a5dfaec97dc389a16b [ad995d6]
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+Reverse the
+SWDEV-301735 - dmu: Enable reduced lanes for PSR PHY routines
+SWDEV-301735 - dmu: Enable P0 power saving 
+to fix the ( blocking 0.81 need urgent support - PLAN ) 
+   RE: SWDEV-309839/PLAT-94251 - [RMB B0]SUT hang under OS 
+   with 1920*1080P eDP connected.
++-------------------------------------------------------------------------------------------------------------+
+
+
+
++---------------------------------------------+
+| DMCUB Firmware Release Notes - REMBRANDT B0
++-----------------------------------------+
+| Version 00.00.91.41
++-------------------------------------------------------------------------------------------------------------+
+Rembrandt B0 0x1681
+Build date:   29/10/2021 20:49:28
+base Source:
+Commit: 058d37915974d027f7285bccd2ed9815d1cd5db7 [058d379] (HEAD -> dmu_stg, origin/dmu_stg, origin/HEAD)
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. SWDEV-3 - vbios: eDP panel backlight duty cyle and control update
+2. SWDEV-3 - vbios: fix EDID reading sequence
+3. SWDEV-3 - vbios: fix ucEDIDBlockNum value for none eDP
++-------------------------------------------------------------------------------------------------------------+
+
+============================ Rembrandt B0 0.0.91.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.91.40
+Rembrandt B0 0x1681
+Build date:   2021/10/27
+base Source:
+commit ad995d616347448db87117a5dfaec97dc389a16b (HEAD -> dmu_stg, origin/dmu_stg, origin/HEAD)
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. SWDEV-307815 - dmu: Display fails after hibernate with USB4 dock (bug fix for PLAT-93088)
+
+============================ Rembrandt B0 0.0.89.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.89.40
+Rembrandt B0 0x1681
+Build date:   2021/10/11
+base Source:
+commit 2d264aff1583bdd07ba08be1a8f7aa3c712e5af9 (HEAD -> dmu_stg)
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. SWDEV-3 - dmu: Support RMB Mayan_KD Re-timer in VBIOS (PLAT-92412)
+
+============================ Rembrandt B0 0.0.87.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.87.40
+Rembrandt B0 0x1681
+Build date:   01/10/2021 09:46:56
+base Source:
+Commit: 9e831b4a9050367f540532ed6c3ddb72a5ff2a56 [9e831b4](HEAD -> dmu_stg)
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. Fix to PLAT-89763 [IQE][RMB][Cobalt-22000.160][B0 ASIC ] -No display or POST from OLED edp
+2. Fix to PLAT-91129  BOE NE156QHM-NZ2 V8.0 2560x1440 eDP display corruption when pre-OS
+3. implementation RMBT-CR-88: Ask to support 165 Hz panels with no EDID block workaround at TCON
+4. Fix to PLAT-82592 [DP2.0] No pre OS post on DP2.0 display after system reboot.
+
+============================ Rembrandt B0 0.0.74.69 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.74.69
+Rembrandt B0 0x1681
+Build date:   15/09/2021
+base Source:
+commit ab0c5a1a1f475303747d2e805a98b2759117a69f (HEAD -> rmb_b0_bringup)
++ https://github.amd.com/AMD-Radeon-Driver/DMU/pull/54 
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. Fix to PLAT-89108 - [RMB B0][USB4] Yellow Bang on USB4 Device Routers with Secure Part
+
+============================ Rembrandt B0 0.0.74.68 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.74.68
+Rembrandt B0 0x1681
+Build date:   25/08/2021 19:52:03
+Source:
+commit b36ed49f9fbaccb3f1f598502c9971da555b6e45 (HEAD -> rmb_b0_bringup)
+
+sign script:fw-sign with pkey (fw-sign_08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. Fix to PLAT-88851 - B0 System hang at IBV logo with HG enabled
+
+
+============================ Rembrandt B0 0.0.74.46 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.74.46
+Rembrandt B0 0x1681
+Build date:   23/08/2021 15:57:45
+Source:
+commit cbf7886ff8ab64a2d0b1792ea65c5072d73f6a79 (HEAD -> rmb_b0_bringup, origin/rmb/rmb_b0_bringup)
+
+sign script:the embedded fw-sign script with pkey.
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. Sync to commit cbf7886ff8ab64a2d0b1792ea65c5072d73f6a79 (HEAD -> rmb/rmb_b0_bringup, origin/rmb/rmb_b0_bringup)
+2. Fix to PLAT-88064 [RMB B0 USB4] DP tunneling in pre-OS
+
+============================ Rembrandt B0 0.0.74.45 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.74.45
+Rembrandt B0 0x1681
+Build date:   18/08/2021 21:18:16
+Source:
+commit commit 3ebb448be2442d0303a277a6f7ded7239be82d22 (HEAD -> rmb/rmb_b0_bringup, origin/rmb/rmb_b0_bringup)
+
+sign script:fw-sign with pkey (fw-sign_03-01-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. Sync to commit 3ebb448be2442d0303a277a6f7ded7239be82d22 (HEAD -> rmb/rmb_b0_bringup, origin/rmb/rmb_b0_bringup)
+2. SPL = 1 (SPL: securitypatchlevel) 
+
+============================ Rembrandt B0 0.0.74.44 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.74.44
+Rembrandt B0 0x1681
+Build date:   09/08/2021 17:55:28
+Source:
+commit 6f6217d746c2ce7dd465917796b43cef14f579db (HEAD -> rmb_b0_bringup, origin/rmb/rmb_b0_bringup)
+
+sign script:fw-sign with pkey (fw-sign_03-01-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. Code sync to commit 6f6217d746c2ce7dd465917796b43cef14f579db (HEAD -> rmb_b0_bringup, origin/rmb/rmb_b0_bringup) 
+
+============================ Rembrandt B0 0.0.74.43 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.74.43
+Rembrandt B0 0x1681
+Build date:   27/07/2021
+Source:
+commit 00c372775934211689bda732541354d6befaf7ed (HEAD -> rmb/rmb_b0_bringup, origin/rmb/rmb_b0_bringup)
+
+sign script:fw-sign with pkey (fw-sign_07-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x171. 
+
+Change List:
+  SWDEV-296496 - dmu: Modify Interrupt Handler to clear all pending events
+  SWDEV-296353 - dmu: Bring Up - Response DP cmd anywhere
+  SWDEV-295110 - dmu: Add debug trace log
+
+============================ Rembrandt B0 0.0.74.42 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.74.42
+Rembrandt B0 0x1681
+Build date:   21/07/2021
+Source:
+git: commit 7312c37187d391f57e76bda39e54cd665b16e6f1 (HEAD -> rmb/rmb_b0_bringup, origin/rmb/rmb_b0_bringup)
+
+sign script:fw-sign with pkey (fw-sign_07-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. fix hang issue when GDB setting update
+2. SWDEV-295107 - dmu: Implement DPIA Cap BIST
+3. update the register header files to CL2297586
+4. move RDPCSPIPE0_RDPCSPIPE_MSGBUS_ACK_CTRL programming to defer init phase
+
+============================ Rembrandt B0 0.0.74.41 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.74.41
+Rembrandt B0 0x1681
+Build date:   19/07/2021
+Source:
+git: commit 1fea565aaeec1b8b619a30df3211c132ac789564 (HEAD -> rmb/rmb_b0_bringup)
+
+sign script:fw-sign with pkey (fw-sign_07-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x171. 
+
+Major changes:
+1. Switch to branch rmb_b0_bringup 0.0.74.41
+2. edp low backlight issue fix
+3. NOVA HDMI not work issue fix
+
+============================ Rembrandt B0 0.0.74.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.74.40
+Rembrandt B0 0x164D
+Build date:   16/07/2021 11:28:33
+Source:
+git: commit 1f60acd947b0815e9a75c3862f80a6cc7ea44849 (HEAD -> rmb_b0_bringup, origin/rmb/rmb_b0_bringup)
+
+sign script:fw-sign with pkey (2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. Switch to branch rmb_b0_bringup 0.0.74.40
+
+============================ Rembrandt A0 0.0.50.49 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.50.49
+Rembrandt B0 0x164D
+Build date:   16/07/2021 01:11:56
+Source:
+git: commit ea599d20dfd89f0573b0e2829346276b967b222f (HEAD -> rmb/rmb_bringup_vbios)
+or http://gerrit-git.amd.com/c/amd/ec/dmu/+/550825
+
+sign script:fw-sign with pkey (2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. SWDEV-291510 - dmu: [DQE][RMB][OLED] OLED eDP black screen on boot and after S4 (Revised)
+2. PLAT-86212 [RMB] RMB VDD11: Display (eDP) PHY consuming more power than target
+
+============================ Rembrandt B0 0.0.73.43 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.73.43
+Rembrandt B0 0x164D
+Build date:   16/07/2021 00:53:31
+Source:
+git: commit efdbf844dbf9c09d2867f1806ebf592b95922159 (HEAD -> rmb_b0_bringup_vbios)
+or http://gerrit-git.amd.com/c/amd/ec/dmu/+/550800
+
+sign script:fw-sign with pkey (2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. Sync to dmu_stg 0.0.73.43
+2. implement below settings in Rembrandt B0 DMCUB FW.
+    DCCG_GATE_DISABLE_CNTL4, INIT, 0x007FFFFF
+    PHYCSYMCLK_CLOCK_CNTL, INIT, 0x10
+    PHYDSYMCLK_CLOCK_CNTL, INIT, 0x10
+    SYMCLKC_CLOCK_ENABLE, INIT, 0x20
+    SYMCLKD_CLOCK_ENABLE, INIT, 0x20
+    DCIO_SPLIT_SEL, INIT, 0x600C
+    RDPCSPIPE_MSGBUS_ACK_CTRL, INIT, 0x1E0
+    DPIA_MU_MICROSECOND_REF_CTRL, INIT, 0x18
+
+============================ Rembrandt B0 0.0.73.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.73.40
+Rembrandt B0 0x164D
+Build date:   30/06/2021 23:25:25
+Source:
+git: commit 515de9138add18ba8f4cbaa2290050dc5badee4c (HEAD -> rmb_b0_bringup_vbios, origin/rmb/rmb_b0_bringup_vbios)
+
+sign script:fw-sign with pkey (2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. Sync to dmu_stg 0.0.73.0
+
+
+============================ Rembrandt A0 0.0.50.48 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.50.48
+Rembrandt B0 0x164D
+Build date:   30/06/2021 17:47:47     30/06/2021 23:25:25(B0)
+Source:
+git: commit 4430660caa890da1fac74bcb465ad06867bee92e (HEAD -> rmb/rmb_bringup_vbios)
+or http://gerrit-git.amd.com/c/amd/ec/dmu/+/545314
+
+sign script:fw-sign with pkey (2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. SWDEV-291510 - dmu: [DQE][RMB][OLED] OLED eDP black screen on boot and after S4
+2. IPSE requested to set DCHUBBUB_ARB_HOSTVM_CNTL::DISABLE_HOSTVM_FORCE_ALLOW_PSTATE=0x1
+   to fix the BSOD 20001 with : PrepstateReq = 0x1 + SMSTATE1= 0x2.
+
+
+============================ Rembrandt A0 0.0.50.47 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.50.47
+Rembrandt B0 0x164D
+Build date:  19/06/2021 00:49:31
+Source:
+git: commit 967a64e94120f3e60e634f35bd57e18f1bdd8e42 (HEAD -> rmb/rmb_bringup_vbios, origin/rmb/rmb_bringup_vbios)
+
+sign script:fw-sign with pkey (2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+bug fix: 
+  1. SWDEV-290164 - dmu: Fix link training VSVID param in Pre-OS
+
+============================ Rembrandt A0 0.0.50.46 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.50.46
+Rembrandt B0 0x164D
+Build date:  27/05/2021 02:39:17
+Source:
+git: commit 60d1ee6bae9589f04ead11913ab66af339544585 (HEAD -> rmb/rmb_bringup_vbios, origin/rmb/rmb_bringup_vbios)
+or http://gerrit-git.amd.com/c/amd/ec/dmu/+/530226
+
+sign script:fw-sign with pkey (2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+bug fix: 
+  1. PLAT-82592 [DP2.0] No pre OS post on DP2.0 display after system reboot
+
+============================ Rembrandt A0 0.0.50.45 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.50.45
+Rembrandt B0 0x164D
+Build date: 05/14/2021 10:42
+Source:
+git: commit   (HEAD -> rmb/rmb_bringup_vbios) efd5bbada072b111c3a618ec6c5e7f29d4c3002c
+
+sign script:fw-sign with pkey (2021-05-10 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+bug fix: 
+  1. DP not stable on Mayan. (EDKII-1288 [EDK2][RMB]Lilac/Mayan no DP output from Nova board)
+  2. PLAT75434 - black strip at top of screen
+
+============================ Rembrandt A0 0.0.50.44 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.50.44
+Rembrandt B0 0x164D
+Build date: 05/12/2021 12:15
+Source:
+git: commit 4947bbc997652bc4c4b8dcfa313d8f4bc3acb333 (HEAD -> rmb/rmb_bringup_vbios)
+or http://gerrit-git.amd.com/c/amd/ec/dmu/+/523028 
+
+sign script:fw-sign with pkey (2021-05-10 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+bug fix: PLAT-75939 eDP is not working on DP1 port with eDP Nova.
+
+============================ Rembrandt A0 0.0.50.43 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.50.43
+Rembrandt B0 0x164D
+Build date:   10/04/2021 19:11:32
+Source:
+git: commit bdf27869aa367bacd3ed46f5b06ea1f84e353095 (HEAD -> rmb/rmb_bringup_vbios)
+or http://gerrit-git.amd.com/c/amd/ec/dmu/+/508921 
+
+sign script:fw-sign with pkey (2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+Support Dedicated display over Combo PHY
+
+============================ Rembrandt A0 0.0.50.42 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.50.42
+Rembrandt B0 0x164D
+Build date:   25/03/2021 00:25:59
+Source:
+git: commit ff8d53b3c890ca0f9ea3f3f9c6890c5ce9fc9e11 (HEAD -> rmb/rmb_bringup_vbios)
+or http://gerrit-git.amd.com/c/amd/ec/dmu/+/501977 
+
+sign script:fw-sign with pkey (2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+Golden settings update from IPSE on March 16, 2021
+
+1. DCN GDB
+We updated Rembrandt A0 GDB based on display_init.c version 12.
+Please review and implement on your VBIOS.
+http://atlbiostoolv2/gdb/
+
+2. PHY setting data table
+We updated PHY settings according to discussion with SI team and Hoss.
+See attached file AmdCpmDisplayPhySettings_0223.c
+Please review and help us integrate it into sBIOS.
+
+Plus the bug fix to: PLAT-79068 [RMB_FP7][SSV_Stress]
+System occur BSOD 0X20001 with Enable VBS+HVCI +GPU Translation Cache (Enable)
+which sets the HUBP_BLANK_EN bit  to 1 for the unused pipes.
+
+
+============================ Rembrandt A0 0.0.50.41 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.50.41
+Rembrandt B0 0x164D
+Build date:   12/03/2021 1:28:30
+Source:
+git: commit 849a0b30b5c1d123e7d9a4e037a77f53d39817b8 (HEAD -> rmb/rmb_bringup_vbios)
+
+sign script:fw-sign with pkey (2020-12-17 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. Code sync to dmu_stg@commit 6444c02e7897b932861cbf9250b2d188478993f0 (origin/dmu_stg)
+2. Bug fixes:
+   a. SWDEV-273378 CR and EQ wait time logic need to modify in DMCUB.
+   b. PLAT-77515 [Rembrandt FP7]DISPLAY_QUALITY: eDP BL-PWM freq is abnormal
+   c. PLAT-76493 [RMB_FP7][DCN] 1080p@300Hz eDP panel black screen in Pre-OS and OS w/o GFX driver
+
+============================ Rembrandt B0 0.0.57.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.57.40
+Rembrandt B0 0x164D
+Build date:   15/03/2021 23:30:36
+Source:
+git: dmu_stg@commit 8b5abc8093a34a017c26d6ef338d7563c12d8822 (HEAD -> dmu_stg, origin/dmu_stg)
+
+sign script:fw-sign with pkey (2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. PLAT-79002 [RMB] B0 LSD change list alignment CL# 1403823 - DMCUb
+
+============================ Rembrandt B0 0.0.50.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.50.40
+Rembrandt B0 0x164D
+Build date:   30/01/2021 00:06:42
+Source:
+Perforce: //depot/stg/atombios/bios/dmcub/dmub_rmb/...@2251899
+
+sign script:fw-sign with pkey (2020-12-17 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. PLAT-76648[RMB] E.B.3.0 B0 firmware change list alignment CL# 1376734 - DMCUb
+
+============================ Rembrandt 0.0.40.47 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.48.40
+Rembrandt A0 0x164D
+Build date:   22/01/2021 18:24:59
+Source:
+git: rmb_bringup_vbios@http://gerrit-git.amd.com/c/amd/ec/dmu/+/470971
+commit 954405d59e08a968d0b67ba682dfdd1218330076 (HEAD -> rmb/rmb_bringup_vbios)
+
+sign script:fw-sign with pkey (2020-12-17 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. Code base sync to dmu_stg@commit a554de799a866b5442056b45d0fb06669c6379aa (HEAD -> dmu_stg, origin/dmu_stg)
+2. Enable DP SSC
+3. Fix to PLAT-72933 [RMB] [FW_Verif] [BTS] DIO module failure
+4. Fix to PLAT-75458 [RMB_FP7][DCN] Panel ATNA56WR07 UHD OLED eDP panel no output in Pre-OS and OS
+5. Fix to PLAT-76188 [RMB_FP7][DCN] USBC display no output in Pre-OS when connected on USBC4/DP4 port 
+
+============================ Rembrandt 0.0.40.47 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.40.47
+Rembrandt A0 0x164D
+Build date:   08/01/2021 19:54:35
+Source:
+git: rmb_bringup_vbios@http://gerrit-git.amd.com/c/amd/ec/dmu/+/464426
+
+sign script:fw-sign with pkey (2020-12-17 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. (PLAT-74910) (Comment Edited) [RMB_FP7][SSV_Stress]No output(No signal) when trying to 
+   enter BIOS interface with Nova-HDMI or Nova-DP+DP to HDMI dongle
+
+============================ Rembrandt B0 0.0.47.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.47.40
+Rembrandt B0 0x164D
+Build date:   05/01/2021 22:32:57
+Source:
+git: rmb_stg@http://gerrit-git.amd.com/c/amd/ec/dmu/+/462835
+
+sign script:fw-sign with pkey (2020-12-17 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. PLAT-74649 [RMB] E.B.2.0 B0 firmware change list alignment CL# 1356865 - DMCUb
+
+============================ Rembrandt 0.0.40.46 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.40.46
+Rembrandt A0 0x164D
+Build date:   05/01/2021 19:06:45
+Source:
+git: rmb_bringup_vbios@http://gerrit-git.amd.com/c/amd/ec/dmu/+/462809
+
+sign script:fw-sign with pkey (2020-12-17 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. SWDEV-3 - dmu: USBC is missing scratch setting for usbc mode
+2. PLAT-72933 [RMB] [FW_Verif] [BTS] DIO module failure
+
+============================ Rembrandt 0.0.40.45 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.40.45
+Rembrandt A0 0x164D
+Build date:   15/12/2020 11:08 AM
+Source:
+git: rmb_bringup_vbios@commit commit 76233a4f60f754b693f8e42dc84617ee39de276e (HEAD -> rmb/rmb_bringup_vbios)
+
+sign script:fw-sign with pkey (2020-11-30 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. enable USB-C alt mode.
+
+============================ Rembrandt 0.0.40.44 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.40.44
+Rembrandt A0 0x164D
+Build date:   10/12/2020 10:44:41
+Source:
+git: rmb_bringup_vbios@commit 2d2a9179c991a63e2d3260833871fbbdf770815c (HEAD -> rmb/rmb_bringup_vbios)
+
+sign script:fw-sign with pkey (2020-11-30 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. Reverted back to commit 758e887ae9482975666caeabd883f8816a3f7186.
+2. Update the PHY PLL settings to match 24Mhz reference clock. http://gerrit-git.amd.com/c/amd/ec/dmu/+/453566
+
+============================ Rembrandt 0.0.40.43 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.40.43
+Rembrandt A0 0x164D
+Build date:   08/12/2020 02:04:40
+build Source: Perforce: //depot/stg/atombios/bios/dmcub/rmb_bringup_vbios/ @CL2218474
+git repo: dmu: commit fdb24ce89eb6f5e46741199aec638557dcb2dccc (HEAD -> rmb/rmb_bringup_vbios)
+
+sign script:fw-sign with pkey (2020-11-30 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. Build from rmb_bringup_vbios branch.
+2. Update the PHY PLL settings to match 24Mhz reference clock.
+3. Fix PLAT-72933 [RMB] [FW_Verif] [BTS] DIO module failure 
+
+============================ Rembrandt B0 0.0.44.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.44.40
+Rembrandt B0 0x164D
+Build date:   27/11/2020 00:12:50
+build Source: Perforce: //depot/stg/atombios/bios/dmcub/dmub_fw/ @CL2211249
+git repo: dmu_stg - commit 0604da0a862c606b1de8f2bb02f0c9c7492519cd (HEAD -> dmu_stg, origin/dmu_stg)
+
+sign script:fw-sign with pkey (2020-10-27 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-68701
+
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the PSP signed with ID 0x71 for RMB B0. 
+
+Major changes:
+1. PLAT-72798 [RMB] E.B.1.1a B0 firmware change list alignment CL# 1343072 - DMCUb 
+
+============================ Rembrandt 0.0.40.41 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.40.41
+Rembrandt A0 0x164D
+Build date:   25/11/2020 16:32:37
+build Source: Perforce: //depot/stg/atombios/bios/dmcub/dmub_rmb/ @CL2210380
+
+sign script:fw-sign with pkey (2020-10-27 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-68701
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major changes:
+1. Code base switched to dmu_rmb for RMB bring up. 
+
+
+============================ Rembrandt 0.0.40.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.40.40
+Rembrandt A0 0x164D
+Build date:   05/11/2020 10:48:58
+build Source: Perforce: //depot/stg/atombios/bios/dmcub/dmub_fw/ @CL2196691
+
+sign script:fw-sign with pkey.
+the script is from http://ontrack-internal.amd.com/browse/PLAT-68701
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+The TypeId0x71_DmcubFw_RMB_B0.sbin is the DMCUB FW for RMB B0
+
+Major changes:
+1. PLAT-71185 - [RMB] A0 firmware MTO change list /rmb_MTO_1322172 alignment - DMCUb -
+2. PLAT-71315 - [RMB] E.B.0.6 firmware change list alignment for B0 - CL# 1327134 - DMCUb
+3. Code base switched to dmu_stg for RMB bring up. 
+4. RMB B0 register spec from CL #1327134
+
+============================ Rembrandt 0.0.28.42 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.28.42
+Rembrandt A0 0x164D
+Build date:   22/10/2020 11:39:37
+build Source: http://git.amd.com:8080/gitweb?p=amd/ec/dmu.git;a=commit;h=f4393a16ffcf8645d219f05dcd9ea1b98ebf7364
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. sign script:fw-sign Yakkob, Abraheem sent on Oct-8  
+
+Major changes:
+1. PLAT-71185 - [RMB] A0 firmware MTO change list /rmb_MTO_1322172 alignment - DMCUb - 
+
+
+============================ Rembrandt 0.0.28.41 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.28.41
+Rembrandt A0 0x164D
+Build date:  14/09/2020 00:11:35
+build Source: http://git.amd.com:8080/c/amd/ec/dmu/+/412803
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. sign script:fw-sign Yakkob, Abraheem sent on Aug-10  
+
+Major changes:
+1. only change the pkey sign to tkey sign
+
+============================ Rembrandt 0.0.28.40 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 0.0.28.40
+Rembrandt A0 0x164D
+Build date:  10/09/2020 13:49:42
+build Source: git hash commit 43fd76bdcecbdec60edeee843297f16a2d1bcbc2 (HEAD -> pemu)
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major feature:
+1. Change the revision number to 0.0.28.40 to align with DAL feature/pemu branch.
+2. update the Rembrandt PHY firmwware.
+3. add disable idle optimization to boot sequence. 
+4. Fix PWRSEQ0 access using interceptb
+
+============================ Rembrandt 20.11.0.11 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 20.11.0.11
+Rembrandt A0 0x164D
+Build date:  01/09/2020 18:53:09
+Code Base: Perforce CL2166135 
+reference to git hash commit f236535dc98728a406b03cec54b6d099428f1602 (HEAD -> pemu, origin/feature/pemu)
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major feature:
+1. enable the PHY for PEMU emulating rembrandt PHY.
+2. DP0 hardcoded to eDP for PEMU Z9/Z10 test. 
+
+============================ Rembrandt 20.11.0.8 DMCUB FW release  ========================================
+Rembrandt generic  DMCUB FW 20.11.0.8
+Rembrandt A0 0x164D
+Build date:  12/08/2020 16:13:33
+Code Base: Perforce CL2157330 - [RMB][DMCUB]Rembrandt Per-IP headers for SOC CL #CL1294576 
+git hash 0f2e56129a0047fd6f77ec30382591dec69675be (HEAD -> pemu)
+http://git.amd.com:8080/c/amd/ec/dmu/+/400105
+
+The TypeId0x71_DmcubFw_RMB.sbin is the PSP signed with ID 0x71. 
+
+Major feature:
+1. PLAT-67800 - [RMB][DMCUB]Rembrandt Per-IP headers for SOC CL #CL1294576
+2. DP0 hardcoded to eDP for PEMU Z9/Z10 test. 

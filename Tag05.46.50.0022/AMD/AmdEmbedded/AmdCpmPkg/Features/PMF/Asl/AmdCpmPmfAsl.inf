@@ -1,0 +1,21 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmPmfAsl
+  FILE_GUID             = 662E317E-1E42-49ED-819D-970408BAEF72
+  MODULE_TYPE           = USER_DEFINED
+  VERSION_STRING        = 1.0
+
+[Sources.common]
+  AmdCpmPmf.asl
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec

@@ -1,0 +1,4871 @@
+//#;*****************************************************************************
+//#;
+//#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+//#;
+//#;******************************************************************************
+
+#include "AmdPbsConfig.h"
+#include "AmdPbsSetupDxeStrDefs.h"
+
+formset
+  guid     = AMD_PBS_SETUP_FORMSET_GUID,
+  title    = STRING_TOKEN(STR_AMD_PBS_SETUP_TITLE),
+  help     = STRING_TOKEN(STR_AMD_PBS_SETUP_TITLE_HELP),
+  class    = AMD_PBS_SETUP_CLASS,
+  subclass = AMD_PBS_SETUP_SUB_CLASS,
+
+  //
+  // Define a Buffer Storage (EFI_IFR_VARSTORE)
+  //
+  varstore AMD_PBS_SETUP_OPTION,                          // This is the data structure type
+    name  = AMD_PBS_SETUP,                                // Define referenced name in vfr
+    guid  = AMD_PBS_SETUP_GUID;                           // GUID of this buffer storage
+
+  form formid = AMD_PBS_SETUP_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_SETUP_FORM_TITLE);  // Form title
+
+    goto AMD_PBS_FWVER_FORM_ID,
+      prompt      = STRING_TOKEN(STR_AMD_PBS_FWVER_FORM_TITLE),
+      help        = STRING_TOKEN(STR_AMD_PBS_FWVER_FORM_HELP);
+
+    goto AMD_PBS_PCIE_CONFIG_FORM_ID,
+       prompt = STRING_TOKEN(STR_AMD_PBS_PCIE_CONFIG_FORM_TITLE),
+       help = STRING_TOKEN(STR_AMD_PBS_PCIE_CONFIG_FORM_HELP);
+
+    goto AMD_PBS_POWER_SAVING_CONFIG_FORM_ID,
+      prompt = STRING_TOKEN(STR_AMD_PBS_POWER_SAVING_CONFIG_FORM_TITLE),
+      help = STRING_TOKEN(STR_AMD_PBS_POWER_SAVING_CONFIG_FORM_HELP);
+
+    goto AMD_PBS_GRAPHICS_CONFIG_FORM_ID,
+      prompt = STRING_TOKEN(STR_AMD_PBS_GRAPHICS_CONFIG_FORM_TITLE),
+      help = STRING_TOKEN(STR_AMD_PBS_GRAPHICS_CONFIG_FORM_HELP);
+
+    goto AMD_PBS_DISPLAY_CONFIG_FORM_ID,
+       prompt = STRING_TOKEN(STR_AMD_PBS_DISPLAY_CONFIG_FORM_TITLE),
+       help = STRING_TOKEN(STR_AMD_PBS_DISPLAY_CONFIG_FORM_HELP);
+
+    goto AMD_PBS_USBTBT_CONFIG_FORM_ID,
+       prompt = STRING_TOKEN(STR_AMD_PBS_USBTBT_CONFIG_FORM_TITLE),
+       help = STRING_TOKEN(STR_AMD_PBS_USBTBT_CONFIG_FORM_HELP);
+
+    goto AMD_PBS_AUDIO_CONFIG_FORM_ID,
+       prompt = STRING_TOKEN(STR_AMD_PBS_AUDIO_CONFIG_FORM_TITLE),
+       help = STRING_TOKEN(STR_AMD_PBS_AUDIO_CONFIG_FORM_HELP);
+
+    goto AMD_PBS_I2C_CONFIG_FORM_ID,
+      prompt = STRING_TOKEN(STR_AMD_PBS_I2C_CONFIG_FORM_TITLE),
+      help = STRING_TOKEN(STR_AMD_PBS_I2C_CONFIG_FORM_HELP);
+
+    goto AMD_PBS_THERMAL_CONFIG_FORM_ID,
+      prompt = STRING_TOKEN(STR_AMD_PBS_THERMAL_CONFIG_FORM_TITLE),
+      help = STRING_TOKEN(STR_AMD_PBS_THERMAL_CONFIG_FORM_HELP);
+
+    goto AMD_PBS_MP2_CONFIG_FORM_ID,
+      prompt = STRING_TOKEN(STR_AMD_PBS_MP2_CONFIG_FORM_TITLE),
+      help = STRING_TOKEN(STR_AMD_PBS_MP2_CONFIG_FORM_HELP);
+
+    goto AMD_PBS_DEBUG_CONFIG_FORM_ID,
+      prompt = STRING_TOKEN(STR_AMD_PBS_DEBUG_CONFIG_FORM_TITLE),
+      help = STRING_TOKEN(STR_AMD_PBS_DEBUG_CONFIG_FORM_HELP);
+
+    goto AMD_PBS_PMF_FORM_ID,
+      prompt      = STRING_TOKEN(STR_AMD_PBS_PMF_FORM_TITLE),
+      help        = STRING_TOKEN(STR_AMD_PBS_PMF_FORM_HELP);
+
+    goto AMD_PBS_RAS_FORM_ID,
+      prompt = STRING_TOKEN(STR_RAS_FORM),
+      help = STRING_TOKEN(STR_RAS_FORM_HELP);
+
+    suppressif NOT ideqval AMD_PBS_SETUP.PBSPlatformSel == 0x31
+           AND NOT ideqval AMD_PBS_SETUP.PBSPlatformSel == 0x20
+           AND NOT ideqval AMD_PBS_SETUP.PBSPlatformSel == 0x45
+           AND NOT ideqval AMD_PBS_SETUP.PBSPlatformSel == 0x46;
+      oneof
+        varid       = AMD_PBS_SETUP.SLTCheck,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_EN_SLTCHECK_PROMPT),
+        help        = STRING_TOKEN(STR_AMD_PBS_EN_SLTCHECK_PROMPT),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),                    value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),                     value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_AMD_PBS_EN_SLTCHECK_FORCE_HALT),   value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+
+      endoneof;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.Above4GBMmioLimit,
+      prompt      = STRING_TOKEN(STR_ABOVE_4G_LIMIT_STRING),
+      help        = STRING_TOKEN(STR_ABOVE_4G_LIMIT_HELP),
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_35),  value = 35, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_36),  value = 36, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_37),  value = 37, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_38),  value = 38, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_39),  value = 39, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_40),  value = 40, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_41),  value = 41, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_42),  value = 42, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_43),  value = 43, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_44),  value = 44, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_45),  value = 45, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_46),  value = 46, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_47),  value = 47, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ABOVE_4G_LIMIT_48),  value = 48, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+//    oneof
+//      varid       = AMD_PBS_SETUP.HdtBreakPointBoot,
+//      prompt      = STRING_TOKEN(STR_AMD_HDTBREAKPOINTBOOT_STRING),
+//      help        = STRING_TOKEN(STR_AMD_HDTBREAKPOINTBOOT_HELP),
+//      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+//      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+//    endoneof;
+
+//    oneof
+//      varid       = AMD_PBS_SETUP.HdtBreakPointS3,
+//      prompt      = STRING_TOKEN(STR_AMD_HDTBREAKPOINTS3_STRING),
+//      help        = STRING_TOKEN(STR_AMD_HDTBREAKPOINTS3_HELP),
+//      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+//      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+//    endoneof;
+
+
+   suppressif ideqval AMD_PBS_SETUP.PlatformId == 1;
+    oneof
+      varid       = AMD_PBS_SETUP.S5_5V,
+      prompt      = STRING_TOKEN(STR_5V_S5_STRING),
+      help        = STRING_TOKEN(STR_5V_S5_HELP),
+      option text = STRING_TOKEN(STR_5V_S5_506V_TEXT),   value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_5V_S5_512V_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_5V_S5_516V_TEXT),   value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+   endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.AmdPspKvmMouseProtocol,
+      prompt      = STRING_TOKEN(STR_AMD_KVM_MOUSE_PROTOCOL_STRING),
+      help        = STRING_TOKEN(STR_AMD_KVM_MOUSE_PROTOCOL_HELP),
+      option text = STRING_TOKEN(STR_AMD_KVM_ABSOLUTE_PROTOCOL),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_AMD_KVM_SIMPLE_PROTOCOL),    value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_AUTO_TEXT),                  value = 3, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.ProcessorAggregatorDevice,
+      prompt      = STRING_TOKEN(STR_PROCESSOR_AGGREGATOR_DEVICE_PROMPT),
+      help        = STRING_TOKEN(STR_PROCESSOR_AGGREGATOR_DEVICE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.ProcessorAggregatorDevice == 0;
+      oneof
+        varid       = AMD_PBS_SETUP.CoreCountControl,
+        prompt      = STRING_TOKEN(STR_CORE_COUNT_CONTROL_PROMPT),
+        help        = STRING_TOKEN(STR_CORE_COUNT_CONTROL_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+    endif;
+
+   suppressif ideqval AMD_PBS_SETUP.ProcessorAggregatorDevice == 0 OR ideqval AMD_PBS_SETUP.CoreCountControl == 0;
+      numeric
+        varid       = AMD_PBS_SETUP.CoreCountSwSciGpeId,
+        prompt      = STRING_TOKEN(STR_CORE_COUNT_SW_SCI_GPE_ID_PROMPT),
+        help        = STRING_TOKEN(STR_CORE_COUNT_SW_SCI_GPE_ID_HELP),
+        minimum     = 0,
+        maximum     = 31,
+        step        = 0,
+        default     = 25,
+      endnumeric;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.APICSwEnable,
+      prompt      = STRING_TOKEN(STR_APIC_SOFTWARE_ENABLE_PROMPT),
+      help        = STRING_TOKEN(STR_APIC_SOFTWARE_ENABLE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED ;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.DynamicP3TLimitEnable,
+      prompt      = STRING_TOKEN(STR_DYNAMIC_P3T_LIMIT_STRING),
+      help        = STRING_TOKEN(STR_DYNAMIC_P3T_LIMIT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_FOR_PURE_DC_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+#if defined(INTERNAL_IDS)
+    oneof
+      varid       = AMD_PBS_SETUP.PdFwUpdate,
+      prompt      = STRING_TOKEN(STR_PD_FW_UPDATE_PROMPT),
+      help        = STRING_TOKEN(STR_PD_FW_UPDATE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+#else
+    oneof
+      varid       = AMD_PBS_SETUP.PdFwUpdate,
+      prompt      = STRING_TOKEN(STR_PD_FW_UPDATE_PROMPT),
+      help        = STRING_TOKEN(STR_PD_FW_UPDATE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+#endif
+
+    oneof
+      varid = AMD_PBS_SETUP.AmdCpmSrisModeDebug,
+      prompt = STRING_TOKEN(STR_SRIS_MODE_DEBUG),
+      help = STRING_TOKEN(STR_SRIS_MODE_DEBUG_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid = AMD_PBS_SETUP.SpiCs3,
+      prompt = STRING_TOKEN(STR_SPI_CS3),
+      help = STRING_TOKEN(STR_SPI_CS3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    grayoutif ideqval AMD_PBS_SETUP.XgbePssOutputPort1 == 1;
+      oneof
+        varid = AMD_PBS_SETUP.Agpio32ResetL,
+        prompt = STRING_TOKEN(STR_AGPIO32_RESET_L),
+        help = STRING_TOKEN(STR_AGPIO32_RESET_L_HELP),
+        option text = STRING_TOKEN(STR_AUTO_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT), value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+    endif;
+
+  endform;
+
+  //
+  //  Form AMD_PBS_FWVER_FORM_ID: Firmware Version
+  //
+  form formid = AMD_PBS_FWVER_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_FWVER_FORM_TITLE);  // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_FWVER_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_AGESA_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_AGESA_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PSP_BOOT_LOADER_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PSP_BOOT_LOADER_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PSP_TRUSTED_OS_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PSP_TRUSTED_OS_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_ABL_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_ABL_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_APCB_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_APCB_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_APOB_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_APOB_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_UCODE_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_UCODE_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_SMU_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_SMU_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_ZSC_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_ZSC_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_DXIO_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_DXIO_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_MP2_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_MP2_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_KVM_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_KVM_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_XHCI_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_XHCI_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_VBIOS_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_VBIOS_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_GOP_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_GOP_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_EC_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_EC_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    //
+    // PD0 INFO
+    //
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PD_VERSION_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PD_VERSION_VALUE),
+      flags       = 0,
+      key         = 0;
+
+    text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PDA_VERSION_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PDA_VERSION_VALUE),
+      flags       = 0,
+      key         = 0;
+    
+    //
+    // VRM INFO
+    //
+//    text
+//      help        = STRING_TOKEN(STR_BLANK_STRING),
+//      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_VRM_STRING),
+//      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_VRM_VALUE),
+//      flags       = 0,
+//      key         = 0;
+
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+      text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_AIMT_FW_PART1_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_AIMT_FW_PART1_VALUE),
+      flags       = 0,
+      key         = 0;
+
+      text
+      help        = STRING_TOKEN(STR_BLANK_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_AIMT_FW_PART2_STRING),
+      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_AIMT_FW_PART2_VALUE),
+      flags       = 0,
+      key         = 0;
+//
+// PLAT-76499, Just Keep PD0 Retimer Info.
+//
+
+//    text
+//      help        = STRING_TOKEN(STR_BLANK_STRING),
+//      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PD1_RETIMER_STRING),
+//      text        = STRING_TOKEN(STR_AMD_PBS_FWVER_PD1_RETIMER_VALUE),
+//      flags       = 0,
+//      key         = 0;
+  endform;
+
+  //
+  //  Form AMD_PBS_PCIE_CONFIG_FORM_ID
+  //
+  form formid = AMD_PBS_PCIE_CONFIG_FORM_ID,
+    title  = STRING_TOKEN(STR_AMD_PBS_PCIE_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_PCIE_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    //
+    // Customize timeout value for PCIe training
+    //
+    oneof
+      varid       = AMD_PBS_SETUP.PbsDbgGnbDxioTimingControlEnable,
+      prompt      = STRING_TOKEN (AMD_PBS_STR_PCIE_DXIO_TIMING_CONTROLENABLE),
+      help        = STRING_TOKEN (AMD_PBS_STR_PCIE_DXIO_TIMING_CONTROLENABLE_HELP),
+      option text = STRING_TOKEN (STR_AUTO_TEXT),               value = 0xf,  flags = DEFAULT | RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_ENABLED_TEXT),            value = 1,    flags = 0 | RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_DISABLED_TEXT),           value = 0,    flags = 0 | RESET_REQUIRED;
+    endoneof;
+
+    suppressif NOT ideqval AMD_PBS_SETUP.PbsDbgGnbDxioTimingControlEnable == 1;
+      // PCIE Link Receiver Detection Polling
+      // ex; 200000 micro second
+      numeric
+        varid       = AMD_PBS_SETUP.PbsDbgGnbPcieLinkReceiverDetectionPolling,
+        prompt      = STRING_TOKEN (AMD_PBS_STR_PCIE_LINK_RECEIVER_DETECTION_POLLING),
+        help        = STRING_TOKEN (AMD_PBS_STR_PCIE_LINK_RECEIVER_DETECTION_POLLING_HELP),
+        flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 0,
+        default     = 0,
+      endnumeric;
+    endif;
+
+    suppressif NOT ideqval AMD_PBS_SETUP.PbsDbgGnbDxioTimingControlEnable == 1;
+      // PCIE Link L0 Polling
+      // ex; 200000 micro second
+      numeric
+        varid       = AMD_PBS_SETUP.PbsDbgGnbPcieLinkL0Polling,
+        prompt      = STRING_TOKEN (AMD_PBS_STR_PCIE_LINK_L0_POLLING),
+        help        = STRING_TOKEN (AMD_PBS_STR_PCIE_LINK_L0_POLLING_HELP),
+        flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 0,
+        default     = 0,
+      endnumeric;
+    endif;
+
+    //
+    //  Internal MUX selection.
+    //
+    oneof
+      varid       = AMD_PBS_SETUP.PcieSlot1,
+      prompt      = STRING_TOKEN(STR_PCIE_SLOT_1_PROMPT),
+      help        = STRING_TOKEN(STR_PCIE_SLOT_1_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),     value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),      value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+    suppressif ideqval AMD_PBS_SETUP.PcieSlot1 == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.XgbePathSelect,
+        questionid  = KEY_XGBE_PATH_SELECT,
+        prompt      = STRING_TOKEN(STR_ENET_CARD_SELECT_PROMPT),
+        help        = STRING_TOKEN(STR_ENET_CARD_SELECT_HELP),
+        option text = STRING_TOKEN(STR_ENET_ON_BOARD_CARD),     value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENET_ADD_IN_CARD),       value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENET_CARD_DISABLE),      value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+
+      suppressif NOT ideqval AMD_PBS_SETUP.XgbePathSelect == 1;
+         oneof
+           varid       = AMD_PBS_SETUP.Port0TypeSwitch,
+           questionid  = KEY_XGBE_PORT0_TYPE_SWITCH,
+           prompt      = STRING_TOKEN(STR_ENET_PORT0_PHY_SELECT_PROMPT),
+           help        = STRING_TOKEN(STR_ENET_PORT0_PHY_SELECT_HELP),
+           option text = STRING_TOKEN(STR_ENET_PORT0_RJ45),     value = 0, flags = INTERACTIVE | RESET_REQUIRED ;
+           option text = STRING_TOKEN(STR_ENET_PORT0_SFP),      value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+         endoneof;
+
+         oneof
+           varid       = AMD_PBS_SETUP.Port0ModeSel,
+           questionid  = KEY_XGBE_PORT0_MODE_SEL,
+           prompt      = STRING_TOKEN(STR_XGBE_PORT0_MODE_SELECT_STRING),
+           help        = STRING_TOKEN(STR_XGBE_PORT0_MODE_SELECT_HELP),
+           suppressif NOT ideqval AMD_PBS_SETUP.Port0TypeSwitch == 1;
+            option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF1),     value = 1, flags = INTERACTIVE | RESET_REQUIRED ;
+            option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF2),      value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+           endif;
+           suppressif  ideqval AMD_PBS_SETUP.Port0TypeSwitch == 1;
+             option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF6),      value = 6, flags = INTERACTIVE | RESET_REQUIRED;
+           endif;
+           suppressif NOT ideqval AMD_PBS_SETUP.Port0TypeSwitch == 1;
+             option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF8),      value = 8, flags = INTERACTIVE | RESET_REQUIRED| DEFAULT;
+             option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF9),      value = 9, flags = INTERACTIVE | RESET_REQUIRED ;
+           endif;
+         endoneof;
+
+         oneof
+           varid       = AMD_PBS_SETUP.Port0SpeedSel,
+           prompt      = STRING_TOKEN(STR_XGBE_PORT0_SPEED_SELECT_STRING),
+           help        = STRING_TOKEN(STR_XGBE_PORT0_SPEED_SELECT_HELP),
+           suppressif ideqval AMD_PBS_SETUP.Port0ModeSel == 2;
+             option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_1G),      value = 4, flags = INTERACTIVE | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_10G),     value = 16, flags = INTERACTIVE | RESET_REQUIRED;
+             suppressif ideqval AMD_PBS_SETUP.Port0ModeSel == 9;
+               option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_ALL),     value = 20, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+             endif;
+            suppressif ideqval AMD_PBS_SETUP.Port0ModeSel == 1 OR  ideqval AMD_PBS_SETUP.Port0ModeSel == 9;
+             option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_100M),    value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_10M),     value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+            endif;
+         endif;
+         suppressif ideqval AMD_PBS_SETUP.Port0ModeSel == 1 OR  ideqval AMD_PBS_SETUP.Port0ModeSel == 9 OR  ideqval AMD_PBS_SETUP.Port0ModeSel == 8;
+           option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_2_5G),    value = 8, flags = INTERACTIVE | RESET_REQUIRED;
+         endif;
+           suppressif NOT ideqval AMD_PBS_SETUP. Port0ModeSel == 6;
+            option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_ALL_2_5G),    value = 28, flags = INTERACTIVE | RESET_REQUIRED;
+           endif;
+         endoneof;
+
+         oneof
+           varid       = AMD_PBS_SETUP.XgbePssOutputPort0,
+           prompt      = STRING_TOKEN(STR_ENET_PORT0_PSS_OUTPUT),
+           help        = STRING_TOKEN(STR_ENET_PORT0_PSS_OUTPUT_HELP),
+           option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+           option text = STRING_TOKEN(STR_ENABLED_TEXT),  value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+         endoneof;
+
+         grayoutif ideqval AMD_PBS_SETUP.Agpio32ResetL == 1;
+          oneof
+            varid       = AMD_PBS_SETUP.XgbePssOutputPort1,
+            prompt      = STRING_TOKEN(STR_ENET_PORT1_PSS_OUTPUT),
+            help        = STRING_TOKEN(STR_ENET_PORT1_PSS_OUTPUT_HELP),
+            option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+            option text = STRING_TOKEN(STR_ENABLED_TEXT),  value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+          endoneof;
+         endif;
+
+         oneof
+           varid       = AMD_PBS_SETUP.Port1TypeSwitch,
+           questionid  = KEY_XGBE_PORT1_TYPE_SWITCH,
+           prompt      = STRING_TOKEN(STR_ENET_PORT1_PHY_SELECT_PROMPT),
+           help        = STRING_TOKEN(STR_ENET_PORT1_PHY_SELECT_HELP),
+           option text = STRING_TOKEN(STR_ENET_PORT1_RJ45),     value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_ENET_PORT1_SFP),      value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+         endoneof;
+
+         oneof
+           varid       = AMD_PBS_SETUP.Port1ModeSel,
+           questionid  = KEY_XGBE_PORT1_MODE_SEL,
+           prompt      = STRING_TOKEN(STR_XGBE_PORT1_MODE_SELECT_STRING),
+           help        = STRING_TOKEN(STR_XGBE_PORT1_MODE_SELECT_HELP),
+          suppressif NOT ideqval AMD_PBS_SETUP.Port1TypeSwitch == 1;
+           option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF1),      value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF2),      value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+          endif;
+          suppressif  ideqval AMD_PBS_SETUP.Port1TypeSwitch == 1;
+           option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF6),      value = 6, flags = INTERACTIVE | RESET_REQUIRED;
+          endif;
+          suppressif NOT ideqval AMD_PBS_SETUP.Port1TypeSwitch == 1;
+           option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF8),      value = 8, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+           option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF9),      value = 9, flags = INTERACTIVE | RESET_REQUIRED;
+          endif;
+        endoneof;
+
+         oneof
+           varid       = AMD_PBS_SETUP.Port1SpeedSel,
+           prompt      = STRING_TOKEN(STR_XGBE_PORT1_SPEED_SELECT_STRING),
+           help        = STRING_TOKEN(STR_XGBE_PORT1_SPEED_SELECT_HELP),
+           suppressif ideqval AMD_PBS_SETUP.Port1ModeSel == 2;
+             option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_1G),      value = 4, flags = INTERACTIVE | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_10G),     value = 16, flags = INTERACTIVE | RESET_REQUIRED;
+             suppressif ideqval AMD_PBS_SETUP.Port1ModeSel == 9;
+              option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_ALL),     value = 20, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+             endif;
+             suppressif ideqval AMD_PBS_SETUP.Port1ModeSel == 1 OR  ideqval AMD_PBS_SETUP.Port1ModeSel == 9;
+              option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_100M),    value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+              option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_10M),     value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+             endif;
+           endif;
+           suppressif ideqval AMD_PBS_SETUP.Port1ModeSel == 1 OR  ideqval AMD_PBS_SETUP.Port1ModeSel == 9 OR  ideqval AMD_PBS_SETUP.Port1ModeSel == 8;
+             option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_2_5G),    value = 8, flags = INTERACTIVE | RESET_REQUIRED;
+           endif;
+           suppressif NOT ideqval AMD_PBS_SETUP. Port1ModeSel == 6;
+             option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_ALL_2_5G),    value = 28, flags = INTERACTIVE | RESET_REQUIRED;
+           endif;
+         endoneof;
+       endif;
+
+       suppressif NOT ideqval AMD_PBS_SETUP.XgbePathSelect == 2;
+         oneof
+           varid       = AMD_PBS_SETUP.AicTypeSwitch,
+           questionid  = KEY_XGBE_AIC_TYPE_SWITCH,
+           prompt      = STRING_TOKEN(STR_ENET_AIC_PORT_PHY_SELECT_PROMPT),
+           help        = STRING_TOKEN(STR_ENET_AIC_PORT_PHY_SELECT_HELP),
+           option text = STRING_TOKEN(STR_ENET_AIC_1_INPHI_PHY),     value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+           option text = STRING_TOKEN(STR_ENET_AIC_2_MARVEL_PHY),    value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_ENET_AIC_3_BCM_PHY),       value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+         endoneof;
+         suppressif NOT ideqval AMD_PBS_SETUP.AicTypeSwitch == 2;
+           oneof
+             varid       = AMD_PBS_SETUP.Aic3RevSel,
+             prompt      = STRING_TOKEN(STR_ENET_AIC3_REV_SELECT_PROMPT),
+             help        = STRING_TOKEN(STR_ENET_AIC3_REV_SELECT_SELECT_HELP),
+             option text = STRING_TOKEN(STR_ENET_AIC3_REVA),    value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENET_AIC3_REVB),    value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+           endoneof;
+         endif;
+         suppressif NOT ideqval AMD_PBS_SETUP.AicTypeSwitch == 0;
+           oneof
+             varid       = AMD_PBS_SETUP.Aic1TypeSel,
+             prompt      = STRING_TOKEN(STR_ENET_AIC1_PORT_PHY_SELECT_PROMPT),
+             help        = STRING_TOKEN(STR_ENET_AIC1_PORT_PHY_SELECT_HELP),
+             option text = STRING_TOKEN(STR_ENET_AIC1_INPHI),     value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+             option text = STRING_TOKEN(STR_ENET_AIC1_RETIMER),    value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+           endoneof;
+         endif;
+
+         suppressif NOT ideqval AMD_PBS_SETUP.AicTypeSwitch == 1;
+           oneof
+             varid       = AMD_PBS_SETUP.Aic2TypeSel,
+             questionid  = KEY_XGBE_AIC2_TYPE_SEL,
+             prompt      = STRING_TOKEN(STR_ENET_AIC2_PORT_PHY_SELECT_PROMPT),
+             help        = STRING_TOKEN(STR_ENET_AIC2_PORT_PHY_SELECT_HELP),
+             option text = STRING_TOKEN(STR_ENET_AIC2_10GPHY),     value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+             option text = STRING_TOKEN(STR_ENET_AIC2_1GPHY),      value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+           endoneof;
+         endif;
+
+         suppressif NOT ideqval AMD_PBS_SETUP.AicTypeSwitch == 2;
+           oneof
+             varid       = AMD_PBS_SETUP.Aic3TypeSel,
+             questionid  = KEY_XGBE_AIC3_TYPE_SEL,
+             prompt      = STRING_TOKEN(STR_ENET_AIC3_PORT_PHY_SELECT_PROMPT),
+             help        = STRING_TOKEN(STR_ENET_AIC3_PORT_PHY_SELECT_HELP),
+             option text = STRING_TOKEN(STR_ENET_AIC3_10GPHY),     value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+             option text = STRING_TOKEN(STR_ENET_AIC3_1GPHY),      value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+           endoneof;
+         endif;
+
+         oneof
+           varid       = AMD_PBS_SETUP.AICModeSel,
+           questionid  = KEY_XGBE_AIC_MODE_SEL,
+           prompt      = STRING_TOKEN(STR_XGBE_AIC_MODE_SELECT_STRING),
+           help        = STRING_TOKEN(STR_XGBE_AIC_MODE_SELECT_HELP),
+           suppressif  ideqval AMD_PBS_SETUP.Aic2TypeSel == 0 OR ideqval AMD_PBS_SETUP.Aic3TypeSel == 0 ;
+             option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF3),     value = 3, flags = INTERACTIVE | RESET_REQUIRED;
+           endif;
+          suppressif  ideqval AMD_PBS_SETUP.Aic2TypeSel == 1 OR ideqval AMD_PBS_SETUP.AicTypeSwitch == 0 OR ideqval AMD_PBS_SETUP.Aic3TypeSel == 1 ;
+             option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF6),     value = 6, flags = INTERACTIVE | RESET_REQUIRED;
+           endif;
+           suppressif NOT ideqval AMD_PBS_SETUP.AicTypeSwitch == 0 ;
+             option text = STRING_TOKEN(STR_XGBE_PORT_PLAT_CONF8),     value = 8, flags = INTERACTIVE | RESET_REQUIRED| DEFAULT;
+           endif;
+        endoneof;
+
+         oneof
+           varid       = AMD_PBS_SETUP.AICSpeedSel,
+           prompt      = STRING_TOKEN(STR_XGBE_AIC_SPEED_SELECT_STRING),
+           help        = STRING_TOKEN(STR_XGBE_AIC_SPEED_SELECT_HELP),
+           option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_1G),      value = 04, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT ;
+           suppressif  ideqval AMD_PBS_SETUP.AICModeSel == 3;
+           option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_10G),     value = 16, flags = INTERACTIVE | RESET_REQUIRED ;
+           endif;
+           option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_100M),    value =  2, flags = INTERACTIVE | RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_10M),     value =  1, flags = INTERACTIVE | RESET_REQUIRED;
+            suppressif  ideqval AMD_PBS_SETUP.AICModeSel == 3;
+           option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_ALL),     value = 20, flags = INTERACTIVE | RESET_REQUIRED;
+           suppressif  ideqval AMD_PBS_SETUP.AICModeSel == 8;
+           option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_2_5G),    value =  8, flags = INTERACTIVE | RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_XGBE_PORT_SPEED_ALL_2_5G),    value = 28, flags = INTERACTIVE | RESET_REQUIRED;
+           endif;
+           endif;
+         endoneof;
+       endif;
+       suppressif  ideqval AMD_PBS_SETUP.XgbePathSelect == 0;
+         oneof
+           varid       = AMD_PBS_SETUP.PxeBoot,
+           prompt      = STRING_TOKEN(STR_PXE_BOOT_SELECT_STRING),
+           help        = STRING_TOKEN(STR_PXE_BOOT_SELECT_HELP),
+           option text = STRING_TOKEN(STR_PXE_BOOT_PORT_0),         value = 1,  flags = INTERACTIVE | RESET_REQUIRED ;
+           option text = STRING_TOKEN(STR_PXE_BOOT_PORT_1),         value = 2,  flags = INTERACTIVE | RESET_REQUIRED ;
+           option text = STRING_TOKEN(STR_PXE_BOOT_BOTH_PORTS),     value = 3,  flags = INTERACTIVE | RESET_REQUIRED ;
+           option text = STRING_TOKEN(STR_DISABLED_TEXT),           value = 0,  flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+         endoneof;
+       endif;
+     endif;
+    
+    oneof
+      varid       = AMD_PBS_SETUP.PCIE2X8,
+      prompt      = STRING_TOKEN(STR_PCIE_2X8_SLOT_SELECT_PROMPT),
+      help        = STRING_TOKEN(STR_PCIE_2X8_SLOT_SELECT_HELP),
+      option text = STRING_TOKEN(STR_PCIE_2X8_SLOT_SELECT_DISABLE),    value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_PCIE_2X8_SLOT_SELECT_ENABLE),     value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+    
+    suppressif ideqval AMD_PBS_SETUP.PCIE2X8 == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.M2PcieSlotSelect,
+        prompt      = STRING_TOKEN(STR_M2_OR_PCIE_SLOT_SELECT_PROMPT),
+        help        = STRING_TOKEN(STR_M2_OR_PCIE_SLOT_SELECT_HELP),
+        option text = STRING_TOKEN(STR_M2_OR_PCIE_SLOT_SELECT_M2_NVME_X4),     value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_M2_OR_PCIE_SLOT_SELECT_M2_NVME_X2),     value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_M2_OR_PCIE_SLOT_SELECT_PCIE_SLOT),      value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+    endif;
+    
+     oneof
+       varid       = AMD_PBS_SETUP.GppHotPlugEnable,
+       prompt      = STRING_TOKEN(STR_GPP_PCIE_SLOT_HOTPLUG_ENABLE_PROMPT),
+       help        = STRING_TOKEN(STR_GPP_PCIE_SLOT_HOTPLUG_ENABLE_HELP),
+       option text = STRING_TOKEN(STR_PCIE_SLOT_HOTPLUG_DISABLE),    value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+       option text = STRING_TOKEN(STR_PCIE_SLOT_HOTPLUG_ENABLE),     value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+     endoneof;
+
+     oneof
+       varid       = AMD_PBS_SETUP.dGpuHotPlugEnable,
+       prompt      = STRING_TOKEN(STR_DGPU_PCIE_SLOT_HOTPLUG_ENABLE_PROMPT),
+       help        = STRING_TOKEN(STR_DGPU_PCIE_SLOT_HOTPLUG_ENABLE_HELP),
+       option text = STRING_TOKEN(STR_PCIE_SLOT_HOTPLUG_DISABLE),    value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+       option text = STRING_TOKEN(STR_PCIE_SLOT_HOTPLUG_ENABLE),     value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+     endoneof;
+
+     oneof
+       varid       = AMD_PBS_SETUP.PromSupportEnable,
+       prompt      = STRING_TOKEN(STR_PROM_SUPPORT_ENABLE_PROMPT),
+       help        = STRING_TOKEN(STR_PROM_SUPPORT_ENABLE_HELP),
+       option text = STRING_TOKEN(STR_PROM_SUPPORT_DISABLE),    value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+       option text = STRING_TOKEN(STR_PROM_SUPPORT_ENABLE),     value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+     endoneof;
+
+     numeric
+       varid       = AMD_PBS_SETUP.DelayBeforePcieSlotReset,
+       prompt      = STRING_TOKEN (STR_DELAY_BEFORE_PCIE_SLOT_RESET_TEXT),
+       help        = STRING_TOKEN (STR_DELAY_BEFORE_PCIE_SLOT_RESET_HELP),
+       flags       = RESET_REQUIRED,
+       minimum     = 0,
+       maximum     = 0xffff,
+       step        = 0,
+       default     = 0,
+     endnumeric;
+
+  endform;
+
+  //
+  //  Form AMD_PBS_POWER_SAVING_CONFIG_FORM_ID
+  //
+  form formid = AMD_PBS_POWER_SAVING_CONFIG_FORM_ID,
+    title  = STRING_TOKEN(STR_AMD_PBS_POWER_SAVING_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_POWER_SAVING_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+
+    grayoutif ideqval AMD_PBS_SETUP.SecurityLvl3SetupDxe == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.ModernStandbyEn,
+        questionid  = KEY_MODERN_STANDBY_SETTING,
+        prompt      = STRING_TOKEN(STR_MODERN_STANDBY_STRING),
+        help        = STRING_TOKEN(STR_MODERN_STANDBY_HELP),
+        option text = STRING_TOKEN(STR_S3_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_MS_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif ideqval AMD_PBS_SETUP.ModernStandbyEn == 0 OR ideqval AMD_PBS_SETUP.CpuType == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.ModernStandbyType,
+        prompt      = STRING_TOKEN(STR_MODERN_STANDBY_TYPE_STRING),
+        help        = STRING_TOKEN(STR_MODERN_STANDBY_TYPE_HELP),
+        option text = STRING_TOKEN(STR_MODERN_STANDBY_TYPE_S0I2_TEXT),   value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_MODERN_STANDBY_TYPE_S0I3_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_MODERN_STANDBY_TYPE_S0I2_S0I3_TEXT),   value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+
+      suppressif TRUE;
+        oneof
+          varid       = AMD_PBS_SETUP.ReduceHardwareEn,
+          questionid  = KEY_REDUCE_HARDWARE_SETTING,
+          prompt      = STRING_TOKEN(STR_REDUCE_HARDWARE_STRING),
+          help        = STRING_TOKEN(STR_REDUCE_HARDWARE_HELP),
+          option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+          option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      oneof
+        varid       = AMD_PBS_SETUP.UsbCrsEnable,
+        prompt      = STRING_TOKEN(STR_USB_CRS_ENABLE_STRING),
+        help        = STRING_TOKEN(STR_USB_CRS_ENABLE_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),   value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | DEFAULT;
+      endoneof;
+
+    endif;
+
+    suppressif ideqval AMD_PBS_SETUP.ModernStandbyEn == 0;
+
+       oneof
+         varid       = AMD_PBS_SETUP.NvmeD3cold,
+         prompt      = STRING_TOKEN(STR_NVME_D3COLD_STRING),
+         help        = STRING_TOKEN(STR_NVME_D3COLD_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      endoneof;
+
+      suppressif ideqval AMD_PBS_SETUP.NvmeD3cold == 0;
+        numeric
+          varid       = AMD_PBS_SETUP.Tpvperl,
+          prompt      = STRING_TOKEN(STR_T_PVPERL_STRING),
+          help        = STRING_TOKEN(STR_T_PVPERL_HELP),
+          minimum     = 50,
+          maximum     = 1000,
+          step        = 0,
+          default     = 50,
+        endnumeric;
+
+        numeric
+          varid       = AMD_PBS_SETUP.Trstcfg,
+          prompt      = STRING_TOKEN(STR_T_RST_CFG_STRING),
+          help        = STRING_TOKEN(STR_T_RST_CFG_HELP),
+          minimum     = 100,
+          maximum     = 1000,
+          step        = 0,
+          default     = 100,
+        endnumeric;
+       endif;
+
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.WakeOnPME,
+      prompt      = STRING_TOKEN(STR_WAKE_ON_PME_STRING),
+      help        = STRING_TOKEN(STR_WAKE_ON_PME_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = INTERACTIVE;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = INTERACTIVE|DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.IntPcieGpp0D3,
+      prompt      = STRING_TOKEN(STR_INTERNAL_PCIE_GPP_0_D3_STRING),
+      help        = STRING_TOKEN(STR_INTERNAL_PCIE_GPP_0_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SocGpuD3,
+      prompt      = STRING_TOKEN(STR_SOC_GPU_D3_STRING),
+      help        = STRING_TOKEN(STR_SOC_GPU_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SocHdAudioD3,
+      prompt      = STRING_TOKEN(STR_SOC_HD_AUDIO_D3_STRING),
+      help        = STRING_TOKEN(STR_SOC_HD_AUDIO_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SocUsb31D3,
+      prompt      = STRING_TOKEN(STR_SOC_USB31_D3_STRING),
+      help        = STRING_TOKEN(STR_SOC_USB31_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SocAcpD3,
+      prompt      = STRING_TOKEN(STR_SOC_ACP_D3_STRING),
+      help        = STRING_TOKEN(STR_SOC_ACP_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SocAzaliaD3,
+      prompt      = STRING_TOKEN(STR_SOC_AZALIA_D3_STRING),
+      help        = STRING_TOKEN(STR_SOC_AZALIA_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.IntPcieGpp2D3,
+      prompt      = STRING_TOKEN(STR_INTERNAL_PCIE_GPP_2_D3_STRING),
+      help        = STRING_TOKEN(STR_INTERNAL_PCIE_GPP_2_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SocUsb20D3,
+      prompt      = STRING_TOKEN(STR_SOC_USB20_D3_STRING),
+      help        = STRING_TOKEN(STR_SOC_USB20_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SocUsb31ForUsb4D3,
+      prompt      = STRING_TOKEN(STR_SOC_USB31_FOR_USB4_D3_STRING),
+      help        = STRING_TOKEN(STR_SOC_USB31_FOR_USB4_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SocUsb4D3,
+      prompt      = STRING_TOKEN(STR_SOC_USB4_D3_STRING),
+      help        = STRING_TOKEN(STR_SOC_USB4_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.IntUsb4PcieTunnelingD3,
+      prompt      = STRING_TOKEN(STR_SOC_USB4_PCIE_TUNNELING_D3_STRING),
+      help        = STRING_TOKEN(STR_SOC_USB4_PCIE_TUNNELING_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SocUsb4PcieEndpointD3,
+      prompt      = STRING_TOKEN(STR_SOC_USB4_PCIE_ENDPOINT_D3_STRING),
+      help        = STRING_TOKEN(STR_SOC_USB4_PCIE_ENDPOINT_D3_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 4, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.UnusedGppClkOff,
+      prompt      = STRING_TOKEN(STR_UNUSED_GPPCLK_OFF_STRING),
+      help        = STRING_TOKEN(STR_UNUSED_GPPCLK_OFF_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.ClockRequest0,
+      prompt      = STRING_TOKEN(STR_CLKREQ_0_STRING),
+      help        = STRING_TOKEN(STR_CLKREQ_0_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.ClockRequest1,
+      prompt      = STRING_TOKEN(STR_CLKREQ_1_STRING),
+      help        = STRING_TOKEN(STR_CLKREQ_1_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+      oneof
+        varid       = AMD_PBS_SETUP.ClockRequest2,
+        prompt      = STRING_TOKEN(STR_CLKREQ_2_STRING),
+        help        = STRING_TOKEN(STR_CLKREQ_2_STRING),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      endoneof;
+
+      oneof
+        varid       = AMD_PBS_SETUP.ClockRequest3,
+        prompt      = STRING_TOKEN(STR_CLKREQ_3_STRING),
+        help        = STRING_TOKEN(STR_CLKREQ_3_STRING),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.ClockRequest4,
+      prompt      = STRING_TOKEN(STR_CLKREQ_4_STRING),
+      help        = STRING_TOKEN(STR_CLKREQ_4_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.ClockRequest5,
+      prompt      = STRING_TOKEN(STR_CLKREQ_5_STRING),
+      help        = STRING_TOKEN(STR_CLKREQ_5_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.ClockRequest6,
+      prompt      = STRING_TOKEN(STR_CLKREQ_6_STRING),
+      help        = STRING_TOKEN(STR_CLKREQ_6_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.NonZ10CapPcieZstateSupport,
+      prompt      = STRING_TOKEN(STR_NON_Z10_PCIE_ZSTATE_SUPPORT_STRING),
+      help        = STRING_TOKEN(STR_NON_Z10_PCIE_ZSTATE_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+  endform;
+
+  //
+  // Form AMD_PBS_USBTBT_CONFIG_FORM_ID
+  //
+  form formid = AMD_PBS_USBTBT_CONFIG_FORM_ID,
+    title  = STRING_TOKEN(STR_AMD_PBS_USBTBT_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_USBTBT_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    oneof
+      varid       = AMD_PBS_SETUP.PdUsb4PlatfromControl,
+      prompt      = STRING_TOKEN(STR_PD_USB4_CONTROL_ENABLE_STRING),
+      help        = STRING_TOKEN(STR_PD_USB4_CONTROL_ENABLE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    numeric
+      varid       = AMD_PBS_SETUP.Usb4BusReserved,
+      prompt      = STRING_TOKEN(STR_USB4_BUS_RESERVED_STRING),
+      help        = STRING_TOKEN(STR_USB4_BUS_RESERVED_HELP),
+      minimum     = 0,
+      maximum     = 255,
+      step        = 0,
+      default     = 112,
+    endnumeric;
+
+    numeric
+      varid       = AMD_PBS_SETUP.Usb4NonPrefetchMemoryReserved,
+      prompt      = STRING_TOKEN(STR_USB4_NON_PREFETCH_MEMORY_RESERVED_STRING),
+      help        = STRING_TOKEN(STR_USB4_NON_PREFETCH_MEMORY_RESERVED_HELP),
+      minimum     = 0,
+      maximum     = 0xFFFF,
+      step        = 0,
+      default     = 384,
+    endnumeric;
+
+    numeric
+      varid       = AMD_PBS_SETUP.Usb4NonPrefetchMemoryAlign,
+      prompt      = STRING_TOKEN(STR_USB4_NON_PREFETCH_MMIO_ALIGN_STRING),
+      help        = STRING_TOKEN(STR_USB4_NON_PREFETCH_MMIO_ALIGN_STRING),
+      minimum     = 0,
+      maximum     = 0xFFFF,
+      step        = 0,
+      default     = 64,
+    endnumeric;
+
+    numeric
+      varid       = AMD_PBS_SETUP.Usb4PrefetchMemoryReserved,
+      prompt      = STRING_TOKEN(STR_USB4_PREFETCH_MEMORY_RESERVED_STRING),
+      help        = STRING_TOKEN(STR_USB4_PREFETCH_MEMORY_RESERVED_HELP),
+      minimum     = 0,
+      maximum     = 0xFFFF,
+      step        = 0,
+      default     = 640,
+    endnumeric;
+
+    numeric
+      varid       = AMD_PBS_SETUP.Usb4PrefetchMemoryReservedAlign,
+      prompt      = STRING_TOKEN(STR_USB4_PREFETCH_MMIO_ALIGN_STRING),
+      help        = STRING_TOKEN(STR_USB4_PREFETCH_MMIO_ALIGN_STRING),
+      minimum     = 0,
+      maximum     = 0xFFFF,
+      step        = 0,
+      default     = 256,
+    endnumeric;
+
+    oneof
+      varid       = AMD_PBS_SETUP.UsbCameraPowerEn,
+      prompt      = STRING_TOKEN(STR_USBCAMERA_POWER_CONTROL_STRING),
+      help        = STRING_TOKEN(STR_USBCAMERA_POWER_CONTROL_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.UsbFprPwrEn,
+      prompt      = STRING_TOKEN(STR_USB_FPR_POWER_CONTROL_STRING),
+      help        = STRING_TOKEN(STR_USB_FPR_POWER_CONTROL_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.UcsiEn,
+      prompt      = STRING_TOKEN(STR_UCSI_STRING),
+      help        = STRING_TOKEN(STR_UCSI_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.UcsiEn == 0;
+      oneof
+        varid       = AMD_PBS_SETUP.UcsiLocation,
+        prompt      = STRING_TOKEN(STR_UCSI_LOCATION_STRING),
+        help        = STRING_TOKEN(STR_UCSI_LOCATION_HELP),
+        option text = STRING_TOKEN(STR_UCSI_LOCATION_ECRAM_TEXT), value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_UCSI_LOCATION_MMIO_TEXT),  value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      endoneof;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.UsbPortHwDisable,
+      prompt      = STRING_TOKEN(STR_USB_PORT_HW_DISABLE_STRING),
+      help        = STRING_TOKEN(STR_USB_PORT_HW_DISABLE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.ReconfigRebalanceResources,
+      prompt      = STRING_TOKEN(STR_RECONFIG_RESOURCE_STRING),
+      help        = STRING_TOKEN(STR_RECONFIG_RESOURCE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.PdTBT3AltMode,
+      prompt      = STRING_TOKEN(STR_PD_TBT3_ALT_MODE_STRING),
+      help        = STRING_TOKEN(STR_PD_TBT3_ALT_MODE_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_TEXT), value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.Usb4DepSupport,
+      prompt      = STRING_TOKEN(STR_USB4_DEP_SUPPORT_STRING),
+      help        = STRING_TOKEN(STR_USB4_DEP_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+  endform;
+
+  form formid = AMD_PBS_GRAPHICS_CONFIG_FORM_ID,
+    title  = STRING_TOKEN(STR_AMD_PBS_GRAPHICS_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_GRAPHICS_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    suppressif ideqval AMD_PBS_SETUP.ChgByPassEn == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.EvalSlotPowerEnable,
+        prompt      = STRING_TOKEN(STR_EVAL_SLOT_POWER_ENABLE_STRING),
+        help        = STRING_TOKEN(STR_EVAL_SLOT_POWER_ENABLE_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      endoneof;
+    endif;
+
+//    grayoutif ideqval AMD_PBS_SETUP.TouchPanel == 2 OR ideqval AMD_PBS_SETUP.TouchPad == 2 OR
+//      ideqval AMD_PBS_SETUP.NfcSensor == 2 OR ideqval AMD_PBS_SETUP.amdLightSensor == 2;
+      oneof
+        varid       = AMD_PBS_SETUP.EvalCardTdiodeRoutingSelect,
+        prompt      = STRING_TOKEN(STR_EVALCARD_TDIODE_ROUTING_SELECT_STRING),
+        help        = STRING_TOKEN(STR_EVALCARD_TDIODE_ROUTING_SELECT_HELP),
+        option text = STRING_TOKEN(STR_EC_TEXT),         value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_APU_SMBUS0_TEXT), value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+//    endif;
+
+    grayoutif TRUE;
+    oneof
+      varid       = AMD_PBS_SETUP.SpecialVgaFeature,
+      questionid  = KEY_SPECIAL_VGA_FEATURE_SETTING,
+      prompt      = STRING_TOKEN(STR_SPECIAL_VGA_FEATURE_STRING),
+      help        = STRING_TOKEN(STR_SPECIAL_VGA_FEATURE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_HG_TEXT),        value = 4, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.D3ColdSupport,
+      questionid  = KEY_D3_COLD_SUPPORT_SETTING,
+      prompt      = STRING_TOKEN(STR_D3COLD_SUPPORT_PROMPT),
+      help        = STRING_TOKEN(STR_D3COLD_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),     value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),      value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DUMMY_D3COLD_TEXT), value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.D3ColdSupport == 0;
+      oneof
+        varid       = AMD_PBS_SETUP.DgpuHotPlugMode,
+        prompt      = STRING_TOKEN(STR_DGPU_HOTPLUG_MODE_STRING),
+        help        = STRING_TOKEN(STR_DGPU_HOTPLUG_MODE_HELP),
+        option text = STRING_TOKEN(STR_BASIC_TEXT),       value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENHANCED_TEXT),    value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_NON_HOTPLUG_TEXT), value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+
+      oneof
+        varid       = AMD_PBS_SETUP.DgpuD3ColdHpdSupport,
+        prompt      = STRING_TOKEN(STR_DGPU_D3COLD_HPD_STRING),
+        help        = STRING_TOKEN(STR_DGPU_D3COLD_HPD_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+
+      oneof
+        varid       = AMD_PBS_SETUP.PmeTurnOffSupport,
+        prompt      = STRING_TOKEN(STR_PME_TURN_OFF_SUPPORT_PROMPT),
+        help        = STRING_TOKEN(STR_PME_TURN_OFF_SUPPORT_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      endoneof;
+
+      oneof
+        varid       = AMD_PBS_SETUP.D3ColdGen1Support,
+        prompt      = STRING_TOKEN(STR_D3COLD_GEN1_SUPPORT_PROMPT),
+        help        = STRING_TOKEN(STR_D3COLD_GEN1_SUPPORT_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+
+      numeric
+        varid       = AMD_PBS_SETUP.TimeSlotPwrToPwrEn,
+        prompt      = STRING_TOKEN(STR_SLOTPWR_TO_PWREN_STRING),
+        help        = STRING_TOKEN(STR_SLOTPWR_TO_PWREN_HELP),
+        minimum     = 0,
+        maximum     = 30,
+        step        = 0,
+        default     = 30,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.TimePwrEnToPeRst,
+        prompt      = STRING_TOKEN(STR_PWREN_TO_PERST_STRING),
+        help        = STRING_TOKEN(STR_PWREN_TO_PERST_HELP),
+        minimum     = 0,
+        maximum     = 32,
+        step        = 0,
+        default     = 32,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.TimePeRstToWakeL23,
+        prompt      = STRING_TOKEN(STR_PERST_TO_WAKEL23_STRING),
+        help        = STRING_TOKEN(STR_PERST_TO_WAKEL23_HELP),
+        minimum     = 1,
+        maximum     = 30,
+        step        = 0,
+        default     = 10,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.TimeDlActToCfgAcc,
+        prompt      = STRING_TOKEN(STR_DLACTIVE_TO_CFGACCESS_STRING),
+        help        = STRING_TOKEN(STR_DLACTIVE_TO_CFGACCESS_HELP),
+        minimum     = 1,
+        maximum     = 100,
+        step        = 0,
+        default     = 100,
+      endnumeric;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.NVDgpuPowerEnable,
+      prompt      = STRING_TOKEN(STR_DGPU_POWER_ENABLE_PROMPT),
+      help        = STRING_TOKEN(STR_DGPU_POWER_ENABLE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.DgpuDsmFunASupport,
+      prompt      = STRING_TOKEN(STR_DGPU_DSM_FUN_A_PROMPT),
+      help        = STRING_TOKEN(STR_DGPU_DSM_FUN_A_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.DgpuDsmFunBSupport,
+      prompt      = STRING_TOKEN(STR_DGPU_DSM_FUN_B_PROMPT),
+      help        = STRING_TOKEN(STR_DGPU_DSM_FUN_B_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.NonEvalDgpuSupport,
+      prompt      = STRING_TOKEN(STR_NON_EVAL_DGPU_SUPPORT_STRING),
+      help        = STRING_TOKEN(STR_NON_EVAL_DGPU_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.DgpuHpdCircuitry,
+      prompt      = STRING_TOKEN(STR_DGPU_HPD_CIRCUITRY_STRING),
+      help        = STRING_TOKEN(STR_DGPU_HPD_CIRCUITRY_HELP),
+      option text = STRING_TOKEN(STR_OR_CIRCUITRY_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_PULSE_CIRCUITRY_TEXT), value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.DgpuAudio,
+      prompt      = STRING_TOKEN(STR_DGPU_AUDIO_STRING),
+      help        = STRING_TOKEN(STR_DGPU_AUDIO_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_HW_DEFAULT_TEXT),  value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.DgpuUsbPort,
+      prompt      = STRING_TOKEN(STR_DGPU_USB_PORT_STRING),
+      help        = STRING_TOKEN(STR_DGPU_USB_PORT_HELP),
+      option text = STRING_TOKEN(STR_DEFAULT_SETTING_TEXT), value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),        value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.DgpuSsidSvid,
+      questionid  = KEY_DGPU_SSID_SETTING,
+      prompt      = STRING_TOKEN(STR_DGPU_SSID_SVID_STRING),
+      help        = STRING_TOKEN(STR_DGPU_SSID_SVID_HELP),
+      option text = STRING_TOKEN(STR_DEFAULT_SETTING_TEXT),   value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PROGRAM_BY_VENDOR_TEXT), value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.DgpuSsidSvid == 0;
+      numeric
+        varid   = AMD_PBS_SETUP.AmdPcdCpmDgpuSsid,
+        prompt  = STRING_TOKEN(STR_VENDOR_VGA_SSID_STRING),
+        help    = STRING_TOKEN(STR_VENDOR_VGA_SSID_HELP),
+        flags   = DISPLAY_UINT_HEX | NUMERIC_SIZE_4 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 0xFFFFFFFF,
+        default = 0,
+      endnumeric;
+
+      numeric
+        varid   = AMD_PBS_SETUP.AmdPcdCpmDgpuAudioSsid,
+        prompt  = STRING_TOKEN(STR_VENDOR_AUDIO_SSID_STRING),
+        help    = STRING_TOKEN(STR_VENDOR_AUDIO_SSID_HELP),
+        flags   = DISPLAY_UINT_HEX | NUMERIC_SIZE_4 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 0xFFFFFFFF,
+        default = 0,
+      endnumeric;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.DgpuMaco,
+      questionid  = KEY_DGPU_MACO_SETTING,
+      prompt      = STRING_TOKEN(STR_DGPU_MACO_STRING),
+      help        = STRING_TOKEN(STR_DGPU_MACO_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.DgpuMaco == 0;
+      numeric
+        varid       = AMD_PBS_SETUP.TimeMacoUpPwrDn,
+        prompt      = STRING_TOKEN(STR_MACO_UP_PWR_DOWN_STRING),
+        help        = STRING_TOKEN(STR_MACO_UP_PWR_DOWN_HELP),
+        minimum     = 10,
+        maximum     = 255,
+        step        = 0,
+        default     = 10,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.TimePwrDnRstDn,
+        prompt      = STRING_TOKEN(STR_PWR_DOWN_RST_DOWN_STRING),
+        help        = STRING_TOKEN(STR_PWR_DOWN_RST_DOWN_HELP),
+        minimum     = 1,
+        maximum     = 255,
+        step        = 0,
+        default     = 20,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.TimePwrUpRstUp,
+        prompt      = STRING_TOKEN(STR_PWR_UP_RST_UP_STRING),
+        help        = STRING_TOKEN(STR_PWR_UP_RST_UP_HELP),
+        minimum     = 1,
+        maximum     = 255,
+        step        = 0,
+        default     = 20,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.TimeRstUpMacoDn,
+        prompt      = STRING_TOKEN(STR_RST_UP_MACO_DOWN_STRING),
+        help        = STRING_TOKEN(STR_RST_UP_MACO_DOWN_HELP),
+        minimum     = 1,
+        maximum     = 255,
+        step        = 0,
+        default     = 1,
+      endnumeric;
+    endif;
+
+    grayoutif ideqval AMD_PBS_SETUP.DgpuMaco == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.AmdBlinkLed,
+        prompt      = STRING_TOKEN(STR_AMD_BLINK_LED_STRING),
+        help        = STRING_TOKEN(STR_AMD_BLINK_LED_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_GPIO11_LOW_TEXT),  value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_GPIO11_HIGH_TEXT), value = 3, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.AtifNotifyCommandCode,
+      prompt      = STRING_TOKEN(STR_ATIF_NOTIFY_COMMAND_CODE_STRING),
+      help        = STRING_TOKEN(STR_ATIF_NOTIFY_COMMAND_CODE_HELP),
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0X81_TEXT), value = 0,    flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0XD0_TEXT), value = 0xD0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0XD1_TEXT), value = 0xD1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0XD2_TEXT), value = 0xD2, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0XD3_TEXT), value = 0xD3, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0XD4_TEXT), value = 0xD4, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0XD5_TEXT), value = 0xD5, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0XD6_TEXT), value = 0xD6, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0XD7_TEXT), value = 0xD7, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0XD8_TEXT), value = 0xD8, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_NOTIFY_VGA_0XD9_TEXT), value = 0xD9, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.AtifFun21Support,
+      prompt      = STRING_TOKEN(STR_ATIF_FUNCTION21_SUPPORT_STRING),
+      help        = STRING_TOKEN(STR_ATIF_FUNCTION21_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AtifFun21Support == 0;
+      oneof
+        varid       = AMD_PBS_SETUP.AtifFun21ExternalGfxPort,
+        prompt      = STRING_TOKEN(STR_EXTERNAL_GFX_PORT_STRING),
+        help        = STRING_TOKEN(STR_EXTERNAL_GFX_PORT_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+
+      oneof
+        varid       = AMD_PBS_SETUP.AtifFun21HideXConnectGui,
+        prompt      = STRING_TOKEN(STR_HIDE_XCONNECT_GUI_STRING),
+        help        = STRING_TOKEN(STR_HIDE_XCONNECT_GUI_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+
+      oneof
+        varid       = AMD_PBS_SETUP.AtifFun21RunTimePMandD3,
+        prompt      = STRING_TOKEN(STR_RUNTIME_PM_AND_D3_STRING),
+        help        = STRING_TOKEN(STR_RUNTIME_PM_AND_D3_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+
+      oneof
+        varid       = AMD_PBS_SETUP.AtifFun21SupportAtifAtpx,
+        prompt      = STRING_TOKEN(STR_SUPPORT_ATIF_ATPX_STRING),
+        help        = STRING_TOKEN(STR_SUPPORT_ATIF_ATPX_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.AtifFun22Support,
+      prompt      = STRING_TOKEN(STR_ATIF_FUNCTION22_SUPPORT_STRING),
+      help        = STRING_TOKEN(STR_ATIF_FUNCTION22_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_UNDEFINED_TEXT), value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_IGPU_TEXT),      value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DGPU_TEXT),      value = 3, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AtifFun22Support == 0;
+      numeric
+        varid   = AMD_PBS_SETUP.AtifFun22Value,
+        prompt  = STRING_TOKEN(STR_ATIF_FUNCTION22_DWORD_STRING),
+        help    = STRING_TOKEN(STR_ATIF_FUNCTION22_DWORD_HELP),
+        flags   = DISPLAY_UINT_HEX | NUMERIC_SIZE_4 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 0xFFFFFFFF,
+        default = 0,
+      endnumeric;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.AtifFunction23Support,
+      prompt      = STRING_TOKEN(STR_ATIF_FUNCTION23_SUPPORT_STRING),
+      help        = STRING_TOKEN(STR_ATIF_FUNCTION23_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AtifFunction23Support == 0;
+      numeric
+        varid       = AMD_PBS_SETUP.VariBrightMaxPerformance,
+        prompt      = STRING_TOKEN(STR_VARI_BRIGHT_MAXIMUM_PERF_STRING),
+        help        = STRING_TOKEN(STR_VARI_BRIGHT_MAXIMUM_PERF_HELP),
+        minimum     = 0,
+        maximum     = 4,
+        step        = 0,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.VariBrightBetterPerformance,
+        prompt      = STRING_TOKEN(STR_VARI_BRIGHT_BETTER_PERF_STRING),
+        help        = STRING_TOKEN(STR_VARI_BRIGHT_BETTER_PERF_HELP),
+        minimum     = 0,
+        maximum     = 4,
+        step        = 0,
+        default     = 1,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.VariBrightBetterBattery,
+        prompt      = STRING_TOKEN(STR_VARI_BRIGHT_BETTER_BATTERY_STRING),
+        help        = STRING_TOKEN(STR_VARI_BRIGHT_BETTER_BATTERY_HELP),
+        minimum     = 0,
+        maximum     = 4,
+        step        = 0,
+        default     = 3,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.VariBrightBatterySaver,
+        prompt      = STRING_TOKEN(STR_VARI_BRIGHT_BATTERY_SAVER_STRING),
+        help        = STRING_TOKEN(STR_VARI_BRIGHT_BATTERY_SAVER_HELP),
+        minimum     = 0,
+        maximum     = 4,
+        step        = 0,
+        default     = 3,
+      endnumeric;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.PrimaryVideoAdaptor,
+      prompt      = STRING_TOKEN(STR_PRIMARY_VIDEO_ADAPTOR_PROMPT),
+      help        = STRING_TOKEN(STR_PRIMARY_VIDEO_ADAPTOR_HELP),
+      option text = STRING_TOKEN(STR_INT_GRAPHICS),       value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_EXT_PCIE_GRAPHICS),  value = 2, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SmartMuxAcpiControl,
+      prompt      = STRING_TOKEN(STR_SMART_MUX_ACPI_CONTROL_PROMPT),
+      help        = STRING_TOKEN(STR_SMART_MUX_ACPI_CONTROL_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),        value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_NO_DEP_TEXT),  value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),         value = 3, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    numeric
+      varid       = AMD_PBS_SETUP.DisplayPanelMultiplexer,
+      prompt      = STRING_TOKEN(STR_DISPLAY_PANEL_MULTIPLEXER_STRING),
+      help        = STRING_TOKEN(STR_DISPLAY_PANEL_MULTIPLEXER_HELP),
+      minimum     = 0,
+      maximum     = 7,
+      step        = 0,
+      default     = 0,
+    endnumeric;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SmartMuxHIDSelection,
+      prompt      = STRING_TOKEN(STR_SMART_MUX_HID_SELECTION_PROMPT),
+      help        = STRING_TOKEN(STR_SMART_MUX_HID_SELECTION_HELP),
+      option text = STRING_TOKEN(STR_SMUX1234_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_MSFT0005_TEXT),  value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SmartMuxMDMSupportLevel,
+      prompt      = STRING_TOKEN(STR_SMART_MUX_MDM_SUPPORT_LEVEL_PROMPT),
+      help        = STRING_TOKEN(STR_SMART_MUX_MDM_SUPPORT_LEVEL_HELP),
+      option text = STRING_TOKEN(STR_NO_SUPPORT_TEXT),            value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_DEVELOPMENT_SUPPORT_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_EXPERIMENTAL_SUPPORT_TEXT),  value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_FULL_SUPPORT_TEXT),          value = 3, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SmartMuxFirstConnectedGPU,
+      prompt      = STRING_TOKEN(STR_SMART_MUX_FIRST_CONNECTED_GPU_PROMPT),
+      help        = STRING_TOKEN(STR_SMART_MUX_FIRST_CONNECTED_GPU_HELP),
+      option text = STRING_TOKEN(STR_IGPU_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_DGPU_TEXT),  value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SmartMuxAcpiMethodLocation,
+      prompt      = STRING_TOKEN(STR_SMART_MUX_ACPI_METHOD_LOCATION_PROMPT),
+      help        = STRING_TOKEN(STR_SMART_MUX_ACPI_METHOD_LOCATION_HELP),
+      option text = STRING_TOKEN(STR_UNDER_MUX_TEXT),       value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_UNDER_DGPU_TEXT),      value = 2, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+  endform;
+
+  //
+  //  Form AMD_PBS_DISPLAY_CONFIG_FORM_ID
+  //
+  form formid = AMD_PBS_DISPLAY_CONFIG_FORM_ID,
+    title  = STRING_TOKEN(STR_AMD_PBS_DISPLAY_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_DISPLAY_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+     oneof
+      varid       = AMD_PBS_SETUP.DP[0],
+      prompt      = STRING_TOKEN(STR_DP0_STRING),
+      help        = STRING_TOKEN(STR_DP0_HELP),
+      option text = STRING_TOKEN(STR_DXIO_DDI_DP0_DEFAULT_TEXT), value = 0, flags = INTERACTIVE | DEFAULT;
+      option text = STRING_TOKEN(STR_DXIO_DDI_DP_TEXT),          value = 2, flags = INTERACTIVE;
+      option text = STRING_TOKEN(STR_DXIO_DDI_HDMI_TEXT),        value = 3, flags = INTERACTIVE;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AdjustDdi1 == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.DP[1],
+        prompt      = STRING_TOKEN(STR_DP1_STRING),
+        help        = STRING_TOKEN(STR_DP1_HELP),
+        option text = STRING_TOKEN(STR_DXIO_DDI_DP1_DEFAULT_TEXT), value = 0, flags = INTERACTIVE | DEFAULT;
+        option text = STRING_TOKEN(STR_DXIO_DDI_EDP_TEXT),         value = 1, flags = INTERACTIVE;
+        option text = STRING_TOKEN(STR_DXIO_DDI_DP_TEXT),          value = 2, flags = INTERACTIVE;
+      endoneof;
+    endif;
+
+    //
+    // 0xFFFFFFFF will not override gEfiAmdAgesaPkgTokenSpaceGuid.PcdDisplayCapDdi1
+    //
+    suppressif ideqval AMD_PBS_SETUP.AdjustDdi1 == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.AdjustDdi1, 
+        questionid  = KEY_DP1_CAPS_ADJUST_SETTING,
+        prompt      = STRING_TOKEN(STR_DP_CAPS_ADJUST_STRING),
+        help        = STRING_TOKEN(STR_DP2_DISPLAY_CAPS_HELP),
+        option text = STRING_TOKEN(STR_DP_CAPS_DEFAULT_STRING),   value = 0, flags = INTERACTIVE | DEFAULT;
+        option text = STRING_TOKEN(STR_DP_CAPS_USER_STRING),      value = 1, flags = INTERACTIVE;
+      endoneof;
+    endif;
+    suppressif TRUE;
+    suppressif ideqval AMD_PBS_SETUP.AdjustDdi1 == 0;
+    numeric
+      varid       = AMD_PBS_SETUP.DP1DisplayCaps,
+      questionid  = KEY_DP1_CAPS_NUM_SETTING,
+      prompt      = STRING_TOKEN (STR_DP1_DISPLAY_CAPS),
+      help        = STRING_TOKEN (STR_DP1_DISPLAY_CAPS_HELP),
+      flags       = DISPLAY_UINT_HEX | RESET_REQUIRED | INTERACTIVE,
+      minimum     = 0x0,
+      maximum     = 0xFFFFFFFF,
+      step        = 0,
+      default     = 0xFFFFFFFF,
+    endnumeric;
+    endif;
+    endif;
+
+    suppressif ideqval AMD_PBS_SETUP.AdjustDdi2 == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.DP[2],
+        prompt      = STRING_TOKEN(STR_DP2_STRING),
+        help        = STRING_TOKEN(STR_DP2_HELP),
+        option text = STRING_TOKEN(STR_DXIO_DDI_DP2_DEFAULT_TEXT),      value = 0, flags = INTERACTIVE | DEFAULT;
+        option text = STRING_TOKEN(STR_DXIO_DDI_EDP_TEXT),              value = 1, flags = INTERACTIVE;
+        option text = STRING_TOKEN(STR_DXIO_DDI_HDMI_TEXT),             value = 3, flags = INTERACTIVE;
+        option text = STRING_TOKEN(STR_DXIO_DDI_DP_WITH_TYPEC_TEXT),    value = 4, flags = INTERACTIVE;
+        option text = STRING_TOKEN(STR_DXIO_DDI_DP_WITHOUT_TYPEC_TEXT), value = 5, flags = INTERACTIVE;
+      endoneof;
+    endif;
+
+    //
+    // 0xFFFFFFFF will not override gEfiAmdAgesaPkgTokenSpaceGuid.PcdDisplayCapDdi2
+    //
+    suppressif ideqval AMD_PBS_SETUP.AdjustDdi2 == 1;
+      oneof
+        varid       = AMD_PBS_SETUP.AdjustDdi2,
+        questionid  = KEY_DP2_CAPS_ADJUST_SETTING,
+        prompt      = STRING_TOKEN(STR_DP_CAPS_ADJUST_STRING),
+        help        = STRING_TOKEN(STR_DP2_DISPLAY_CAPS_HELP),
+        option text = STRING_TOKEN(STR_DP_CAPS_DEFAULT_STRING),   value = 0, flags = INTERACTIVE | DEFAULT;
+        option text = STRING_TOKEN(STR_DP_CAPS_USER_STRING),      value = 1, flags = INTERACTIVE;
+      endoneof;
+    endif;
+    suppressif ideqval AMD_PBS_SETUP.AdjustDdi2 == 0;
+    numeric
+      varid       = AMD_PBS_SETUP.DP2DisplayCaps,
+      questionid  = KEY_DP2_CAPS_NUM_SETTING,
+      prompt      = STRING_TOKEN (STR_DP2_DISPLAY_CAPS),
+      help        = STRING_TOKEN (STR_DP2_DISPLAY_CAPS_HELP),
+      flags       = DISPLAY_UINT_HEX | RESET_REQUIRED | INTERACTIVE,
+      minimum     = 0x0,
+      maximum     = 0xFFFFFFFF,
+      step        = 0,
+      default     = 0xFFFFFFFF,
+    endnumeric;
+    endif;
+
+  oneof
+    varid       = AMD_PBS_SETUP.DP[3],
+    prompt      = STRING_TOKEN(STR_DP2_OVER_USB_C2_STRING),
+    help        = STRING_TOKEN(STR_DP2_OVER_USB_C2_HELP),
+    option text = STRING_TOKEN(STR_DXIO_DDI_DP3_DEFAULT_TEXT),      value = 0, flags = INTERACTIVE;
+    option text = STRING_TOKEN(STR_DXIO_DDI_DP_WITH_TYPEC_TEXT),    value = 4, flags = INTERACTIVE | DEFAULT;
+    option text = STRING_TOKEN(STR_DXIO_DDI_DP_WITHOUT_TYPEC_TEXT), value = 5, flags = INTERACTIVE;
+  endoneof;
+
+  oneof
+    varid       = AMD_PBS_SETUP.DP[4],
+    prompt      = STRING_TOKEN(STR_DP3_HDMI1_USB6_STRING),
+    help        = STRING_TOKEN(STR_DP3_HDMI1_USB6_HELP),
+    option text = STRING_TOKEN(STR_DXIO_DDI_DP4_DEFAULT_TEXT),      value = 0, flags = INTERACTIVE;
+    option text = STRING_TOKEN(STR_DXIO_DDI_DP_TEXT),               value = 2, flags = INTERACTIVE;
+    option text = STRING_TOKEN(STR_DXIO_DDI_HDMI_TEXT),             value = 3, flags = INTERACTIVE;
+    option text = STRING_TOKEN(STR_DXIO_DDI_USB_TEXT),              value = 6, flags = INTERACTIVE | DEFAULT;
+  endoneof;
+
+  endform;
+
+  //
+  //  Form AMD_PBS_AUDIO_CONFIG_FORM_ID
+  //
+  form formid = AMD_PBS_AUDIO_CONFIG_FORM_ID,
+    title  = STRING_TOKEN(STR_AMD_PBS_AUDIO_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_AUDIO_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    oneof
+      varid       = AMD_PBS_SETUP.WoV,
+      questionid  = KEY_WOV_SETTING,
+      prompt      = STRING_TOKEN(STR_WOV_PROMPT),
+      help        = STRING_TOKEN(STR_WOV_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),       value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),        value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+
+    oneof
+      varid       = AMD_PBS_SETUP.AcpPowerGating,
+      prompt      = STRING_TOKEN(STR_ACP_POWER_GATING_PROMPT),
+      help        = STRING_TOKEN(STR_ACP_POWER_GATING_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),       value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),        value = 1, flags = RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.AcpClockGating,
+      prompt      = STRING_TOKEN(STR_ACP_CLOCK_GATING_PROMPT),
+      help        = STRING_TOKEN(STR_ACP_CLOCK_GATING_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),       value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),        value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SoundWireSsdtSupport,
+      prompt      = STRING_TOKEN(STR_SOUND_WIRE_SSDT_PROMPT),
+      help        = STRING_TOKEN(STR_SOUND_WIRE_SSDT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED  | DEFAULT;
+      option text = STRING_TOKEN(STR_AGGREGATION_CONFIG),   value = 1, flags = INTERACTIVE | RESET_REQUIRED ;
+      option text = STRING_TOKEN(STR_NON_AGGREGATION_CONFIG),   value = 2, flags = INTERACTIVE | RESET_REQUIRED ;
+    endoneof;
+    
+    oneof
+      varid       = AMD_PBS_SETUP.Tdm2_din_PullUp,
+      prompt      = STRING_TOKEN(STR_TDM2_DIN_PULLUP_PROMPT),
+      help        = STRING_TOKEN(STR_TDM2_DIN_PULLUP_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+  endform;
+
+
+  form formid = AMD_PBS_I2C_CONFIG_FORM_ID,
+    title  = STRING_TOKEN(STR_AMD_PBS_I2C_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_I2C_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    oneof
+      varid       = AMD_PBS_SETUP.MITTWITTControl,
+      prompt      = STRING_TOKEN(STR_PSP_MITTWITT_STRING),
+      help        = STRING_TOKEN(STR_PSP_MITTWITT_STRING),
+      option text = STRING_TOKEN(STR_PSP_MITT_STRING),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PSP_WITT_STRING),  value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PSP_NONE_STRING),  value = 2, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+  endform;
+
+  form formid = AMD_PBS_THERMAL_CONFIG_FORM_ID,
+    title  = STRING_TOKEN(STR_AMD_PBS_THERMAL_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_THERMAL_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    oneof
+      varid       = AMD_PBS_SETUP.ApuProcHotSetting,
+      prompt      = STRING_TOKEN(STR_CHG_PROCHOT_STRING),
+      help        = STRING_TOKEN(STR_CHG_PROCHOT_HELP),
+      option text = STRING_TOKEN(STR_CHG_PROCHOT_DISABLE),             value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CHG_PROCHOT_ENABLE_IN_PURE_DC),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_CHG_PROCHOT_ENABLE_IN_PURE_AC),   value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_CHG_PROCHOT_ENABLE_IN_BOTH_CASE), value = 3, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.AmdDptcControl,
+      prompt      = STRING_TOKEN(STR_AMD_DPTC_CTRL_STRING),
+      help        = STRING_TOKEN(STR_AMD_DPTC_CTRL_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SttSensorsRpt,
+      prompt      = STRING_TOKEN(STR_STT_SENSOR_REPORT_STRING),
+      help        = STRING_TOKEN(STR_STT_SENSOR_REPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),              value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_STT_ONBOARD_SENSOR_TEXT),    value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_STT_ONBOARD_EVALCARD_TEXT),  value = 2, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+  endform;
+
+  form formid = AMD_PBS_MP2_CONFIG_FORM_ID,
+    title  = STRING_TOKEN(STR_AMD_PBS_MP2_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_MP2_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+#if defined(INTERNAL_IDS)
+    oneof
+      varid       = AMD_PBS_SETUP.PowerSensorsRoutingSelect,
+      questionid  = KEY_PWR_SENSORS_ROUTING_SELECT,
+      prompt      = STRING_TOKEN(STR_POWERSENSOR_ROUTING_SELECT_STRING),
+      help        = STRING_TOKEN(STR_POWERSENSOR_ROUTING_SELECT_HELP),
+      option text = STRING_TOKEN(STR_WALLE_LITE_PDT_TEXT), value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_WALLE_LITE_PM_LOG_TEXT), value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    grayoutif ideqval AMD_PBS_SETUP.PowerSensorsRoutingSelect == 0;
+      oneof
+        varid       = AMD_PBS_SETUP.Mp2FwSelection,
+        questionid  = KEY_MP2_FW_SELECT,
+        prompt      = STRING_TOKEN(STR_MP2_FW_SELECTION_STRING),
+        help        = STRING_TOKEN(STR_MP2_FW_SELECTION_HELP),
+        option text = STRING_TOKEN(STR_MP2_SFH_TEXT), value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_MP2_WALLE_LITE_TEXT), value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      endoneof;
+    endif;
+#else
+    oneof
+      varid       = AMD_PBS_SETUP.PowerSensorsRoutingSelect,
+      questionid  = KEY_PWR_SENSORS_ROUTING_SELECT,
+      prompt      = STRING_TOKEN(STR_POWERSENSOR_ROUTING_SELECT_STRING),
+      help        = STRING_TOKEN(STR_POWERSENSOR_ROUTING_SELECT_HELP),
+      option text = STRING_TOKEN(STR_WALLE_LITE_PDT_TEXT), value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_WALLE_LITE_PM_LOG_TEXT), value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    grayoutif ideqval AMD_PBS_SETUP.PowerSensorsRoutingSelect == 0;
+      oneof
+        varid       = AMD_PBS_SETUP.Mp2FwSelection,
+        questionid  = KEY_MP2_FW_SELECT,
+        prompt      = STRING_TOKEN(STR_MP2_FW_SELECTION_STRING),
+        help        = STRING_TOKEN(STR_MP2_FW_SELECTION_HELP),
+        option text = STRING_TOKEN(STR_MP2_SFH_TEXT), value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_MP2_WALLE_LITE_TEXT), value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+    endif;
+#endif
+
+    oneof
+      varid       = AMD_PBS_SETUP.TurnOffXtalS3S5,
+      prompt      = STRING_TOKEN(STR_TURN_OFF_XTAL_S3_S5_PROMPT),
+      help        = STRING_TOKEN(STR_TURN_OFF_XTAL_S3_S5_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.SensorFusionEn,
+      prompt      = STRING_TOKEN(STR_SENSORFUSION_STRING),
+      help        = STRING_TOKEN(STR_SENSORFUSION_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.Allocate100KBForMP2,
+      prompt      = STRING_TOKEN (STR_ALLOCATE_100KB_FOR_MP2_CUSTOMIZE_REQUEST),
+      help        = STRING_TOKEN (STR_ALLOCATE_100KB_FOR_MP2_CUSTOMIZE_REQUEST_HELP),
+      option text = STRING_TOKEN (STR_AUTO_TEXT),               value = 0xf,  flags = DEFAULT | RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_ENABLED_TEXT),            value = 1,    flags = 0 | RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_DISABLED_TEXT),           value = 0,    flags = 0 | RESET_REQUIRED;
+    endoneof;
+
+    oneof
+      varid       = AMD_PBS_SETUP.WakeOnHpdWa,
+      prompt      = STRING_TOKEN (STR_WAKE_ON_HUMAN_PRESENCE_DETECTION_WA_STRING),
+      help        = STRING_TOKEN (STR_WAKE_ON_HUMAN_PRESENCE_DETECTION_WA_HELP),
+      option text = STRING_TOKEN (STR_ENABLED_TEXT),            value = 1, flags = 0 | RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_DISABLED_TEXT),           value = 0, flags = 0 | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+  endform;
+
+  form formid = AMD_PBS_DEBUG_CONFIG_FORM_ID,
+    title  = STRING_TOKEN(STR_AMD_PBS_DEBUG_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_DEBUG_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    oneof
+      varid       = AMD_PBS_SETUP.SerialDbgMsgUnderOs,
+      prompt      = STRING_TOKEN(STR_SERIAL_DEBUG_MESSAGE_UNDER_OS_STRING),
+      help        = STRING_TOKEN(STR_SERIAL_DEBUG_MESSAGE_UNDER_OS_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+#if defined(INTERNAL_IDS)
+    oneof
+      varid       = AMD_PBS_SETUP.DbgPrintInAsl,
+      prompt      = STRING_TOKEN(STR_DEBUG_PRINT_IN_ASL_STRING),
+      help        = STRING_TOKEN(STR_DEBUG_PRINT_IN_ASL_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+#else
+    oneof
+      varid       = AMD_PBS_SETUP.DbgPrintInAsl,
+      prompt      = STRING_TOKEN(STR_DEBUG_PRINT_IN_ASL_STRING),
+      help        = STRING_TOKEN(STR_DEBUG_PRINT_IN_ASL_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+#endif
+
+    oneof
+      varid       = AMD_PBS_SETUP.iLaTraceMemoryEn,
+      prompt      = STRING_TOKEN(STR_AMD_PBS_ILA_TRACEMEM_EN_PROMPT),
+      help        = STRING_TOKEN(STR_AMD_PBS_ILA_TRACEMEM_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    grayoutif TRUE;
+      text
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        text        = STRING_TOKEN(STR_AMD_PBS_ILA_TRACEMEM_EN_MMIO_ADDR_STRING),
+        text        = STRING_TOKEN(STR_AMD_PBS_ILA_TRACEMEM_EN_MMIO_ADDR_VALUE),
+        flags       = 0,
+        key         = 0;
+    endif;
+
+    oneof
+      varid       = AMD_PBS_SETUP.StallForUnlock,
+      prompt      = STRING_TOKEN(STR_AMD_STALLFORUNLOCK_STRING),
+      help        = STRING_TOKEN(STR_AMD_STALLFORUNLOCK_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+  endform;
+
+
+  //
+  //  Form AMD_PBS_PMF_FORM_ID
+  //
+  form formid = AMD_PBS_PMF_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_PMF_FORM_TITLE);  // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_PMF_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+    oneof
+      varid       = AMD_PBS_SETUP.AmdPmfSupport,
+      prompt      = STRING_TOKEN(STR_AMD_PBS_PMF_SUPPORT_PROMPT),
+      help        = STRING_TOKEN(STR_AMD_PBS_PMF_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AmdPmfSupport == 0;
+
+      goto AMD_PBS_APMF_FN_1_FORM_ID,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_APMF_FN_1_FORM_TITLE),
+        help        = STRING_TOKEN(STR_AMD_PBS_APMF_FN_1_FORM_HELP);
+
+      goto AMD_PBS_APMF_FN_3_FORM_ID,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_APMF_FN_3_FORM_TITLE),
+        help        = STRING_TOKEN(STR_AMD_PBS_APMF_FN_3_FORM_HELP);
+
+      goto AMD_PBS_APMF_FN_4_FORM_ID,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_APMF_FN_4_FORM_TITLE),
+        help        = STRING_TOKEN(STR_AMD_PBS_APMF_FN_4_FORM_HELP);
+
+      goto AMD_PBS_APMF_FN_5_FORM_ID,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_APMF_FN_5_FORM_TITLE),
+        help        = STRING_TOKEN(STR_AMD_PBS_APMF_FN_5_FORM_HELP);
+
+      goto AMD_PBS_APMF_FN_6_FORM_ID,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_APMF_FN_6_FORM_TITLE),
+        help        = STRING_TOKEN(STR_AMD_PBS_APMF_FN_6_FORM_HELP);
+
+      goto AMD_PBS_APMF_FN_9_FORM_ID,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_APMF_FN_9_FORM_TITLE),
+        help        = STRING_TOKEN(STR_AMD_PBS_APMF_FN_9_FORM_HELP);
+
+      goto AMD_PBS_APMF_FN_11_FORM_ID,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_APMF_FN_11_FORM_TITLE),
+        help        = STRING_TOKEN(STR_AMD_PBS_APMF_FN_11_FORM_HELP);
+
+      goto AMD_PBS_APMF_FN_12_FORM_ID,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_APMF_FN_12_FORM_TITLE),
+        help        = STRING_TOKEN(STR_AMD_PBS_APMF_FN_12_FORM_HELP);
+
+      goto AMD_PBS_APMF_FN_13_FORM_ID,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_APMF_FN_13_FORM_TITLE),
+        help        = STRING_TOKEN(STR_AMD_PBS_APMF_FN_13_FORM_HELP);
+
+      goto AMD_PBS_APMF_FN_14_FORM_ID,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_APMF_FN_14_FORM_TITLE),
+        help        = STRING_TOKEN(STR_AMD_PBS_APMF_FN_14_FORM_HELP);
+    endif;
+
+  endform;
+
+  form formid = AMD_PBS_APMF_FN_1_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_APMF_FN_1_FORM_TITLE);      // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_APMF_FN_1_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn1_HeartbeatTimeInterval,
+        prompt      = STRING_TOKEN(STR_AMD_PBS_PMF_HEARTBEAT_TIME_INTERVAL),
+        help        = STRING_TOKEN(STR_AMD_PBS_PMF_HEARTBEAT_TIME_INTERVAL_HELP),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 60,
+      endnumeric;
+  endform;
+
+  form formid = AMD_PBS_APMF_FN_3_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_APMF_FN_3_FORM_TITLE);      // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_APMF_FN_3_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+     oneof
+      varid       = AMD_PBS_SETUP.AmdPmfFn3_Enable,
+      prompt      = STRING_TOKEN(STR_APMF_FUNCTION3_EN_STRING),
+      help        = STRING_TOKEN(STR_APMF_FUNCTION3_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AmdPmfFn3_Enable == 0;
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_AC_Best_Performance_Limit,
+        prompt      = STRING_TOKEN(STR_AC_BEST_PERFORMANCE_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_Fan_ID_AC_Best_Performance_Limit,
+        prompt      = STRING_TOKEN(STR_FAN_ID_AC_BEST_PERFORMANCE_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_AC_Better_Performance_Limit,
+        prompt      = STRING_TOKEN(STR_AC_BETTER_PERFORMANCE_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_Fan_ID_AC_Better_Performance_Limit,
+        prompt      = STRING_TOKEN(STR_FAN_ID_AC_BETTER_PERFORMANCE_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_AC_Better_Battery_Limit,
+        prompt      = STRING_TOKEN(STR_AC_BETTER_BATTERY_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_Fan_ID_AC_Better_Battery_Limit,
+        prompt      = STRING_TOKEN(STR_FAN_ID_AC_BETTER_BATTERY_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_DC_Best_Performance_Limit,
+        prompt      = STRING_TOKEN(STR_DC_BEST_PERFORMANCE_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_Fan_ID_DC_Best_Performance_Limit,
+        prompt      = STRING_TOKEN(STR_FAN_ID_DC_BEST_PERFORMANCE_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_DC_Better_Performance_Limit,
+        prompt      = STRING_TOKEN(STR_DC_BETTER_PERFORMANCE_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_Fan_ID_DC_Better_Performance_Limit,
+        prompt      = STRING_TOKEN(STR_FAN_ID_DC_BETTER_PERFORMANCE_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_DC_Better_Battery_Limit,
+        prompt      = STRING_TOKEN(STR_DC_BETTER_BATTERY_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_Fan_ID_DC_Better_Battery_Limit,
+        prompt      = STRING_TOKEN(STR_FAN_ID_DC_BETTER_BATTERY_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_DC_Battery_Saver_Limit,
+        prompt      = STRING_TOKEN(STR_DC_BATTERY_SAVER_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn3_Fan_ID_DC_Battery_Saver_Limit,
+        prompt      = STRING_TOKEN(STR_FAN_ID_DC_BATTERY_SAVER_LIMIT),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+    endif;
+
+  endform;
+
+  form formid = AMD_PBS_APMF_FN_4_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_APMF_FN_4_FORM_TITLE);      // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_APMF_FN_4_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+     oneof
+      varid       = AMD_PBS_SETUP.AmdPmfFn4_Enable,
+      prompt      = STRING_TOKEN(STR_APMF_FUNCTION4_EN_STRING),
+      help        = STRING_TOKEN(STR_APMF_FUNCTION4_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+  endform;
+
+  form formid = AMD_PBS_APMF_FN_5_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_APMF_FN_5_FORM_TITLE);      // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_APMF_FN_5_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+     oneof
+      varid       = AMD_PBS_SETUP.AmdPmfFn5_Enable,
+      prompt      = STRING_TOKEN(STR_APMF_FUNCTION5_EN_STRING),
+      help        = STRING_TOKEN(STR_APMF_FUNCTION5_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AmdPmfFn5_Enable == 0;
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_T_Balanced_to_Perf,
+        prompt      = STRING_TOKEN(STR_T_BALANCED_TO_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_T_Perf_to_Balanced,
+        prompt      = STRING_TOKEN(STR_T_PERF_TO_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_T_Quiet_to_Balanced,
+        prompt      = STRING_TOKEN(STR_T_QUIET_TO_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_T_Balanced_to_Quiet,
+        prompt      = STRING_TOKEN(STR_T_BALANCED_TO_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_Pfloor_Perf,
+        prompt      = STRING_TOKEN(STR_PFLOOR_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_Pfloor_Balanced,
+        prompt      = STRING_TOKEN(STR_PFLOOR_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_Pfloor_Quiet,
+        prompt      = STRING_TOKEN(STR_PFLOOR_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_P_delta_Balanced_to_Perf,
+        prompt      = STRING_TOKEN(STR_P_DELTA_BALANCED_TO_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_P_delta_Perf_to_Balanced,
+        prompt      = STRING_TOKEN(STR_P_DELTA_PERF_TO_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_P_delta_Quiet_to_Balanced,
+        prompt      = STRING_TOKEN(STR_P_DELTA_QUIET_TO_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_P_delta_Balanced_to_Quiet,
+        prompt      = STRING_TOKEN(STR_P_DELTA_BALANCED_TO_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STT_SkinTempLimit_APU_Perf_on_Lap,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STT_SkinTempLimit_HS2_Perf_on_Lap,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STT_SkinTempLimit_APU_Perf,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STT_SkinTempLimit_HS2_Perf,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STT_SkinTempLimit_APU_Balanced,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STT_SkinTempLimit_HS2_Balanced,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STT_SkinTempLimit_APU_Quiet,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STT_SkinTempLimit_HS2_Quiet,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STTMinLimit_Perf_on_lap,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STTMinLimit_Perf,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STTMinLimit_Balanced,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_STTMinLimit_Quiet,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_FPPT_Perf_on_lap,
+        prompt      = STRING_TOKEN(STR_FPPT_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPPT_Perf_on_lap,
+        prompt      = STRING_TOKEN(STR_SPPT_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPL_Perf_on_lap,
+        prompt      = STRING_TOKEN(STR_SPL_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPPT_APUOnly_Perf_on_Lap,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_FPPT_Perf,
+        prompt      = STRING_TOKEN(STR_FPPT_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPPT_Perf,
+        prompt      = STRING_TOKEN(STR_SPPT_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPL_Perf,
+        prompt      = STRING_TOKEN(STR_SPL_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPPT_APUOnly_Perf,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_FPPT_Balanced,
+        prompt      = STRING_TOKEN(STR_FPPT_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPPT_Balanced,
+        prompt      = STRING_TOKEN(STR_SPPT_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPL_Balanced,
+        prompt      = STRING_TOKEN(STR_SPL_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPPT_APUOnly_Balanced,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_FPPT_Quiet,
+        prompt      = STRING_TOKEN(STR_FPPT_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPPT_Quiet,
+        prompt      = STRING_TOKEN(STR_SPPT_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPL_Quiet,
+        prompt      = STRING_TOKEN(STR_SPL_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_SPPT_APUOnly_Quiet,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_Fan_ID_Perf,
+        prompt      = STRING_TOKEN(STR_FAN_ID_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_Fan_ID_Balanced,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn5_Fan_ID_Quiet,
+        prompt      = STRING_TOKEN(STR_FAN_ID_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+    endif;
+  endform;
+
+  form formid = AMD_PBS_APMF_FN_6_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_APMF_FN_6_FORM_TITLE);      // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_APMF_FN_6_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+     oneof
+      varid       = AMD_PBS_SETUP.AmdPmfFn6_Enable,
+      prompt      = STRING_TOKEN(STR_APMF_FUNCTION6_EN_STRING),
+      help        = STRING_TOKEN(STR_APMF_FUNCTION6_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AmdPmfFn6_Enable == 0;
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_ConditionTemp_In_Bag_Policy,
+        prompt      = STRING_TOKEN(STR_CONDITIONTEMO_IN_BAG_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_ConditionTemp_In_Bag_S4_Policy,
+        prompt      = STRING_TOKEN(STR_CONDITIONTEMO_IN_BAG_S4_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_FPPT_In_Bag_Policy,
+        prompt      = STRING_TOKEN(STR_FPPT_IN_BAG_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_SPPT_In_Bag_Policy,
+        prompt      = STRING_TOKEN(STR_SPPT_IN_BAG_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_SPPT_ApuOnly_In_Bag_Policy,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_IN_BAG_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_SPL_In_Bag_Policy,
+        prompt      = STRING_TOKEN(STR_SPL_IN_BAG_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_STTMinLimit_In_Bag_Policy,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_IN_BAG_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_STT_SkinTempLimit_APU_In_Bag_Policy,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_IN_BAG_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_STT_SkinTempLimit_HS2_In_Bag_Policy,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_IN_BAG_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_Fan_ID_In_Bag_Policy,
+        prompt      = STRING_TOKEN(STR_FAN_ID_IN_BAG_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_FPPT_In_Bag_Exit_Policy,
+        prompt      = STRING_TOKEN(STR_FPPT_IN_BAG_EXIT_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_SPPT_In_Bag_Exit_Policy,
+        prompt      = STRING_TOKEN(STR_SPPT_IN_BAG_EXIT_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_SPPT_ApuOnly_In_Bag_Exit_Policy,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_IN_BAG_EXIT_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_SPL_In_Bag_Exit_Policy,
+        prompt      = STRING_TOKEN(STR_SPL_IN_BAG_EXIT_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_STTMinLimit_In_Bag_Exit_Policy,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_IN_BAG_EXIT_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_STT_SkinTempLimit_APU_In_Bag_Exit_Policy,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_IN_BAG_EXIT_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn6_STT_SkinTempLimit_HS2_In_Bag_Exit_Policy,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_IN_BAG_EXIT_POLICY_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+    endif;
+  endform;
+
+  form formid = AMD_PBS_APMF_FN_9_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_APMF_FN_9_FORM_TITLE);      // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_APMF_FN_9_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+     oneof
+      varid       = AMD_PBS_SETUP.AmdPmfFn9_Enable,
+      prompt      = STRING_TOKEN(STR_APMF_FUNCTION9_EN_STRING),
+      help        = STRING_TOKEN(STR_APMF_FUNCTION9_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AmdPmfFn9_Enable == 0;
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_fPPT_BestPerfAC,
+        prompt      = STRING_TOKEN(STR_FPPT_BESTPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_BestPerfAC,
+        prompt      = STRING_TOKEN(STR_SPPT_BESTPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_APUOnlyBestPerfAC,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLTBESTPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_SPL_BestPerfAC,
+        prompt      = STRING_TOKEN(STR_SPL_BESTPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STTMinLimit_BestPerfAC,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_BESTPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_APU_BestPerfAC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_BESTPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_HS2_BestPerfAC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_BESTPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_Fan_ID_BestPerfAC,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BESTPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_fPPT_BetterPerfAC,
+        prompt      = STRING_TOKEN(STR_FPPT_BETTERPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_BetterPerfAC,
+        prompt      = STRING_TOKEN(STR_SPPT_BETTERPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_APUOnlyBetterPerfAC,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLYBETTERPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_SPL_BetterPerfAC,
+        prompt      = STRING_TOKEN(STR_SPL_BETTERPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STTMinLimit_BetterPerfAC,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_BETTERPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_APU_BetterPerfAC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_BETTERPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_HS2_BetterPerfAC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_BETTERPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_Fan_ID_BetterPerfAC,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BETTERPERFAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_fPPT_BetterBatteryAC,
+        prompt      = STRING_TOKEN(STR_FPPT_BETTERBATTERYAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_BetterBatteryAC,
+        prompt      = STRING_TOKEN(STR_SPPT_BETTERBATTERYAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_APUOnlyBetterBatteryAC,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLYBETTERBATTERYAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_SPL_BetterBatteryAC,
+        prompt      = STRING_TOKEN(STR_SPL_BETTERBATTERYAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STTMinLimit_BetterBatteryAC,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_BETTERBATTERYAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_APU_BetterBatteryAC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMOLIMIT_APU_BETTERBATTERYAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_HS2_BetterBatteryAC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMOLIMIT_HS2_BETTERBATTERYAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_Fan_ID_BetterBatteryAC,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BETTERBATTERYAC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_fPPT_BestPerfDC,
+        prompt      = STRING_TOKEN(STR_FPPT_BESTPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_BestPerfDC,
+        prompt      = STRING_TOKEN(STR_SPPT_BESTPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_APUOnlyBestPerfDC,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLYBESTPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_SPL_BestPerfDC,
+        prompt      = STRING_TOKEN(STR_SPL_BESTPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STTMinLimit_BestPerfDC,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_BESTPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_APU_BestPerfDC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_BESTPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_HS2_BestPerfDC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_BESTPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_Fan_ID_BestPerfDC,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BESTPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_fPPT_BetterPerfDC,
+        prompt      = STRING_TOKEN(STR_FPPT_BETTERPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_BetterPerfDC,
+        prompt      = STRING_TOKEN(STR_SPPT_BETTERPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_APUOnlyBetterPerfDC,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLYBETTERPEEFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_SPL_BetterPerfDC,
+        prompt      = STRING_TOKEN(STR_SPL_BETTERPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STTMinLimit_BetterPerfDC,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_BETTERPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_APU_BetterPerfDC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_BETTERPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_HS2_BetterPerfDC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_BETTERPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_Fan_ID_BetterPerfDC,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BETTERPERFDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_fPPT_BetterBatteryDC,
+        prompt      = STRING_TOKEN(STR_FPPT_BETTERBATTERYDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_BetterBatteryDC,
+        prompt      = STRING_TOKEN(STR_SPPT_BETTERBATTERYDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_APUOnlyBetterBatteryDC,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLYBETTERBATTERYDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_SPL_BetterBatteryDC,
+        prompt      = STRING_TOKEN(STR_SPL_BETTERBATTERTDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STTMinLimit_BetterBatteryDC,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_BETTERBATTERYDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_APU_BetterBatteryDC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_BETTERBATTERYDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_HS2_BetterBatteryDC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_BETTERBATTERYDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_Fan_ID_BetterBatteryDC,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BETTERBATTERYDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_fPPT_BatterySaverDC,
+        prompt      = STRING_TOKEN(STR_FPPT_BATTERYSAVERDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_BatterySaverDC,
+        prompt      = STRING_TOKEN(STR_SPPT_BATTERYSAVERDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_sPPT_APUOnlyBetterBatterySaverDC,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLYBETTERBATTERYSAVERDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_SPL_BatterySaverDC,
+        prompt      = STRING_TOKEN(STR_SPL_BATTERYSAVERDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STTMinLimit_BatterySaverDC,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_BATTERYSAVERDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_APU_BatterySaverDC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_BATTERYSAVERDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_STT_SkinTempLimit_HS2_BatterySaverDC,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_BATTERYSAVERDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn9_Fan_ID_BatterySaverDC,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BATTERYSAVERDC),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+    endif;
+  endform;
+
+  form formid = AMD_PBS_APMF_FN_11_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_APMF_FN_11_FORM_TITLE);      // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_APMF_FN_11_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+     oneof
+      varid       = AMD_PBS_SETUP.AmdPmfFn11_Enable,
+      prompt      = STRING_TOKEN(STR_APMF_FUNCTION11_EN_STRING),
+      help        = STRING_TOKEN(STR_APMF_FUNCTION11_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AmdPmfFn11_Enable == 0;
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_Flags,
+        prompt      = STRING_TOKEN(STR_FLAGS),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_T_Perf_to_Turbo,
+        prompt      = STRING_TOKEN(STR_T_PERF_TO_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_T_Balanced_to_Perf,
+        prompt      = STRING_TOKEN(STR_T_BALANCED_TO_PERF),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_T_Quiet_to_Balanced,
+        prompt      = STRING_TOKEN(STR_T_QUIET_TO_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_T_Balanced_to_Quiet,
+        prompt      = STRING_TOKEN(STR_T_BALANCED_TO_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_T_Perf_to_Balanced,
+        prompt      = STRING_TOKEN(STR_T_PERF_TO_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_T_Turbo_to_Perf,
+        prompt      = STRING_TOKEN(STR_T_TURBO_TO_PERF),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_Pfloor_Turbo,
+        prompt      = STRING_TOKEN(STR_PFLOOR_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_FPPT_Turbo,
+        prompt      = STRING_TOKEN(STR_FPPT_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPPT_Turbo,
+        prompt      = STRING_TOKEN(STR_SPPT_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPPT_APUOnly_Turbo,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPL_Turbo,
+        prompt      = STRING_TOKEN(STR_SPL_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_MinLimit_Turbo,
+        prompt      = STRING_TOKEN(STR_STT_MINLIMIT_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_SkinTempAPU_Turbo,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPAPU_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_SkinTempHS2_Turbo,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPHS2_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_Fan_ID_Turbo,
+        prompt      = STRING_TOKEN(STR_FAN_ID_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_Pfloor_Performance,
+        prompt      = STRING_TOKEN(STR_PFLOOR_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_FPPT_Performance,
+        prompt      = STRING_TOKEN(STR_FPPT_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPPT_Performance,
+        prompt      = STRING_TOKEN(STR_SPPT_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPPT_APUOnly_Performance,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPL_Performance,
+        prompt      = STRING_TOKEN(STR_SPL_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_MinLimit_Performance,
+        prompt      = STRING_TOKEN(STR_STT_MINLIMIT_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_SkinTempAPU_Performance,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPAPU_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_SkinTempHS2_Performance,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPHS2_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_Fan_ID_Performance,
+        prompt      = STRING_TOKEN(STR_FAN_ID_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_Pfloor_Balanced,
+        prompt      = STRING_TOKEN(STR_PFLOOR_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_FPPT_Balanced,
+        prompt      = STRING_TOKEN(STR_FPPT_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPPT_Balanced,
+        prompt      = STRING_TOKEN(STR_SPPT_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPPT_APUOnly_Balanced,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPL_Balanced,
+        prompt      = STRING_TOKEN(STR_SPL_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_MinLimit_Balanced,
+        prompt      = STRING_TOKEN(STR_STT_MINLIMIT_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_SkinTempAPU_Balanced,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPAPU_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_SkinTempHS2_Balanced,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPHS2_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_Fan_ID_Balanced,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_Pfloor_Quiet,
+        prompt      = STRING_TOKEN(STR_PFLOOR_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_FPPT_Quiet,
+        prompt      = STRING_TOKEN(STR_FPPT_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPPT_Quiet,
+        prompt      = STRING_TOKEN(STR_SPPT_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPPT_APUOnly_Quiet,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_SPL_Quiet,
+        prompt      = STRING_TOKEN(STR_SPL_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_MinLimit_Quiet,
+        prompt      = STRING_TOKEN(STR_STT_MINLIMIT_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_SkinTempAPU_Quiet,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPAPU_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_STT_SkinTempHS2_Quiet,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPHS2_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn11_Fan_ID_Quiet,
+        prompt      = STRING_TOKEN(STR_FAN_ID_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+    endif;
+  endform;
+
+  form formid = AMD_PBS_APMF_FN_12_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_APMF_FN_12_FORM_TITLE);      // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_APMF_FN_12_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+     oneof
+      varid       = AMD_PBS_SETUP.AmdPmfFn12_Enable,
+      prompt      = STRING_TOKEN(STR_APMF_FUNCTION12_EN_STRING),
+      help        = STRING_TOKEN(STR_APMF_FUNCTION12_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AmdPmfFn12_Enable == 0;
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_Flags,
+        prompt      = STRING_TOKEN(STR_FLAGS),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_T_Perf_to_Turbo,
+        prompt      = STRING_TOKEN(STR_T_PERF_TO_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_T_Balanced_to_Perf,
+        prompt      = STRING_TOKEN(STR_T_BALANCED_TO_PERF),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_T_Quiet_to_Balanced,
+        prompt      = STRING_TOKEN(STR_T_QUIET_TO_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_T_Balanced_to_Quiet,
+        prompt      = STRING_TOKEN(STR_T_BALANCED_TO_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_T_Perf_to_Balanced,
+        prompt      = STRING_TOKEN(STR_T_PERF_TO_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_T_Turbo_to_Perf,
+        prompt      = STRING_TOKEN(STR_T_TURBO_TO_PERF),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_Pfloor_Turbo,
+        prompt      = STRING_TOKEN(STR_PFLOOR_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_FPPT_Turbo,
+        prompt      = STRING_TOKEN(STR_FPPT_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPPT_Turbo,
+        prompt      = STRING_TOKEN(STR_SPPT_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPPT_APUOnly_Turbo,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPL_Turbo,
+        prompt      = STRING_TOKEN(STR_SPL_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_MinLimit_Turbo,
+        prompt      = STRING_TOKEN(STR_STT_MINLIMIT_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_SkinTempAPU_Turbo,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPAPU_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_SkinTempHS2_Turbo,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPHS2_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_Fan_ID_Turbo,
+        prompt      = STRING_TOKEN(STR_FAN_ID_TURBO),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_Pfloor_Performance,
+        prompt      = STRING_TOKEN(STR_PFLOOR_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_FPPT_Performance,
+        prompt      = STRING_TOKEN(STR_FPPT_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPPT_Performance,
+        prompt      = STRING_TOKEN(STR_SPPT_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPPT_APUOnly_Performance,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPL_Performance,
+        prompt      = STRING_TOKEN(STR_SPL_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_MinLimit_Performance,
+        prompt      = STRING_TOKEN(STR_STT_MINLIMIT_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_SkinTempAPU_Performance,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPAPU_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_SkinTempHS2_Performance,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPHS2_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_Fan_ID_Performance,
+        prompt      = STRING_TOKEN(STR_FAN_ID_PERFORMANCE),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_Pfloor_Balanced,
+        prompt      = STRING_TOKEN(STR_PFLOOR_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_FPPT_Balanced,
+        prompt      = STRING_TOKEN(STR_FPPT_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPPT_Balanced,
+        prompt      = STRING_TOKEN(STR_SPPT_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPPT_APUOnly_Balanced,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPL_Balanced,
+        prompt      = STRING_TOKEN(STR_SPL_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_MinLimit_Balanced,
+        prompt      = STRING_TOKEN(STR_STT_MINLIMIT_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_SkinTempAPU_Balanced,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPAPU_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_SkinTempHS2_Balanced,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPHS2_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_Fan_ID_Balanced,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BALANCED),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_Pfloor_Quiet,
+        prompt      = STRING_TOKEN(STR_PFLOOR_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_FPPT_Quiet,
+        prompt      = STRING_TOKEN(STR_FPPT_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPPT_Quiet,
+        prompt      = STRING_TOKEN(STR_SPPT_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPPT_APUOnly_Quiet,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_SPL_Quiet,
+        prompt      = STRING_TOKEN(STR_SPL_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_MinLimit_Quiet,
+        prompt      = STRING_TOKEN(STR_STT_MINLIMIT_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_SkinTempAPU_Quiet,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPAPU_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_STT_SkinTempHS2_Quiet,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPHS2_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn12_Fan_ID_Quiet,
+        prompt      = STRING_TOKEN(STR_FAN_ID_QUIET),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+    endif;
+  endform;
+
+  form formid = AMD_PBS_APMF_FN_13_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_APMF_FN_13_FORM_TITLE);      // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_APMF_FN_13_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+     oneof
+      varid       = AMD_PBS_SETUP.AmdPmfFn13_Enable,
+      prompt      = STRING_TOKEN(STR_APMF_FUNCTION13_EN_STRING),
+      help        = STRING_TOKEN(STR_APMF_FUNCTION13_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval AMD_PBS_SETUP.AmdPmfFn13_Enable == 0;
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_T_Balanced_to_Perf,
+        prompt      = STRING_TOKEN(STR_T_BALANCED_TO_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_T_Perf_to_Balanced,
+        prompt      = STRING_TOKEN(STR_T_PERF_TO_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_T_Quiet_to_Balanced,
+        prompt      = STRING_TOKEN(STR_T_QUIET_TO_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_T_Balanced_to_Quiet,
+        prompt      = STRING_TOKEN(STR_T_BALANCED_TO_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_Pfloor_Perf,
+        prompt      = STRING_TOKEN(STR_PFLOOR_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_Pfloor_Balanced,
+        prompt      = STRING_TOKEN(STR_PFLOOR_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_Pfloor_Quiet,
+        prompt      = STRING_TOKEN(STR_PFLOOR_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_P_delta_Balanced_to_Perf,
+        prompt      = STRING_TOKEN(STR_P_DELTA_BALANCED_TO_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_P_delta_Perf_to_Balanced,
+        prompt      = STRING_TOKEN(STR_P_DELTA_PERF_TO_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_P_delta_Quiet_to_Balanced,
+        prompt      = STRING_TOKEN(STR_P_DELTA_QUIET_TO_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_P_delta_Balanced_to_Quiet,
+        prompt      = STRING_TOKEN(STR_P_DELTA_BALANCED_TO_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STT_SkinTempLimit_APU_Perf_on_Lap,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STT_SkinTempLimit_HS2_Perf_on_Lap,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STT_SkinTempLimit_APU_Perf,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STT_SkinTempLimit_HS2_Perf,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STT_SkinTempLimit_APU_Balanced,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STT_SkinTempLimit_HS2_Balanced,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STT_SkinTempLimit_APU_Quiet,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_APU_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STT_SkinTempLimit_HS2_Quiet,
+        prompt      = STRING_TOKEN(STR_STT_SKINTEMPLIMIT_HS2_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STTMinLimit_Perf_on_lap,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STTMinLimit_Perf,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STTMinLimit_Balanced,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_STTMinLimit_Quiet,
+        prompt      = STRING_TOKEN(STR_STTMINLIMIT_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_FPPT_Perf_on_lap,
+        prompt      = STRING_TOKEN(STR_FPPT_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPPT_Perf_on_lap,
+        prompt      = STRING_TOKEN(STR_SPPT_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPL_Perf_on_lap,
+        prompt      = STRING_TOKEN(STR_SPL_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPPT_APUOnly_Perf_on_Lap,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_PERF_ON_LAP_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_FPPT_Perf,
+        prompt      = STRING_TOKEN(STR_FPPT_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPPT_Perf,
+        prompt      = STRING_TOKEN(STR_SPPT_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPL_Perf,
+        prompt      = STRING_TOKEN(STR_SPL_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPPT_APUOnly_Perf,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_FPPT_Balanced,
+        prompt      = STRING_TOKEN(STR_FPPT_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPPT_Balanced,
+        prompt      = STRING_TOKEN(STR_SPPT_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPL_Balanced,
+        prompt      = STRING_TOKEN(STR_SPL_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPPT_APUOnly_Balanced,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_FPPT_Quiet,
+        prompt      = STRING_TOKEN(STR_FPPT_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPPT_Quiet,
+        prompt      = STRING_TOKEN(STR_SPPT_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPL_Quiet,
+        prompt      = STRING_TOKEN(STR_SPL_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_SPPT_APUOnly_Quiet,
+        prompt      = STRING_TOKEN(STR_SPPT_APUONLY_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_Fan_ID_Perf,
+        prompt      = STRING_TOKEN(STR_FAN_ID_PERF_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_Fan_ID_Balanced,
+        prompt      = STRING_TOKEN(STR_FAN_ID_BALANCED_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+
+      numeric
+        varid       = AMD_PBS_SETUP.ApmfFn13_Fan_ID_Quiet,
+        prompt      = STRING_TOKEN(STR_FAN_ID_QUIET_STRING),
+        help        = STRING_TOKEN(STR_BLANK_STRING),
+        minimum     = 0,
+        maximum     = 0xFFFFFFFF,
+        step        = 1,
+        default     = 0,
+      endnumeric;
+    endif;
+  endform;
+
+  form formid = AMD_PBS_APMF_FN_14_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AMD_PBS_APMF_FN_14_FORM_TITLE);      // Form title
+
+    subtitle text = STRING_TOKEN(STR_AMD_PBS_APMF_FN_14_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_BLANK_STRING);
+
+     oneof
+      varid       = AMD_PBS_SETUP.AmdPmfFn14_Enable,
+      prompt      = STRING_TOKEN(STR_APMF_FUNCTION14_EN_STRING),
+      help        = STRING_TOKEN(STR_APMF_FUNCTION14_EN_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),  value = 0, flags = INTERACTIVE | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),   value = 1, flags = INTERACTIVE | RESET_REQUIRED;
+    endoneof;
+  endform;
+
+  form formid = AMD_PBS_RAS_FORM_ID,
+       title = STRING_TOKEN(STR_RAS_FORM);
+
+    numeric
+      varid   = AMD_PBS_SETUP.AmdCpmPcieRpCorrErrMask,
+      prompt  = STRING_TOKEN(STR_PCIE_RP_CORR_ERR_MASK),
+      help    = STRING_TOKEN(STR_PCIE_RP_CORR_ERR_MASK_HELP),
+      flags   = DISPLAY_UINT_HEX | NUMERIC_SIZE_4 | RESET_REQUIRED,
+      minimum = 0,
+      maximum = 0xFFFFFFFF,
+      default = 0,
+    endnumeric;
+
+    numeric
+      varid   = AMD_PBS_SETUP.AmdCpmPcieRpUnCorrErrMask,
+      prompt  = STRING_TOKEN(STR_PCIE_RP_UNCORR_ERR_MASK),
+      help    = STRING_TOKEN(STR_PCIE_RP_UNCORR_ERR_MASK_HELP),
+      flags   = DISPLAY_UINT_HEX | NUMERIC_SIZE_4 | RESET_REQUIRED,
+      minimum = 0,
+      maximum = 0xFFFFFFFF,
+      default = 0,
+    endnumeric;
+
+    numeric
+      varid   = AMD_PBS_SETUP.AmdCpmPcieRpUnCorrectedErrorSev,
+      prompt  = STRING_TOKEN(STR_PCIE_RP_UNCORR_ERR_SEV),
+      help    = STRING_TOKEN(STR_PCIE_RP_UNCORR_ERR_SEV_HELP),
+      flags   = DISPLAY_UINT_HEX | NUMERIC_SIZE_4 | RESET_REQUIRED,
+      minimum = 0,
+      maximum = 0xFFFFFFFF,
+      default = 0x07EF6030,
+    endnumeric;
+
+    numeric
+      varid   = AMD_PBS_SETUP.AmdCpmPcieDevCorrErrMask,
+      prompt  = STRING_TOKEN(STR_PCIE_DEV_CORR_ERR_MASK),
+      help    = STRING_TOKEN(STR_PCIE_DEV_CORR_ERR_MASK_HELP),
+      flags   = DISPLAY_UINT_HEX | NUMERIC_SIZE_4 | RESET_REQUIRED,
+      minimum = 0,
+      maximum = 0xFFFFFFFF,
+      default = 0,
+    endnumeric;
+
+    numeric
+      varid   = AMD_PBS_SETUP.AmdCpmPcieDevUnCorrErrMask,
+      prompt  = STRING_TOKEN(STR_PCIE_DEV_UNCORR_ERR_MASK),
+      help    = STRING_TOKEN(STR_PCIE_DEV_UNCORR_ERR_MASK_HELP),
+      flags   = DISPLAY_UINT_HEX | NUMERIC_SIZE_4 | RESET_REQUIRED,
+      minimum = 0,
+      maximum = 0xFFFFFFFF,
+      default = 0x00100000,
+    endnumeric;
+
+    numeric
+      varid   = AMD_PBS_SETUP.AmdCpmPcieDevUnCorrErrorSev,
+      prompt  = STRING_TOKEN(STR_PCIE_DEV_UNCORR_ERR_SEV),
+      help    = STRING_TOKEN(STR_PCIE_DEV_UNCORR_ERR_SEV_HELP),
+      flags   = DISPLAY_UINT_HEX | NUMERIC_SIZE_4 | RESET_REQUIRED,
+      minimum = 0,
+      maximum = 0xFFFFFFFF,
+      default = 0x07EF6030,
+    endnumeric;
+  endform;  // AMD_PBS_RAS_FORM_ID
+
+endformset;

@@ -1,0 +1,48 @@
+/** @file
+
+  CPU Information DXE VFR implementation for Config page.
+
+;******************************************************************************
+;* Copyright (c) 2021, Insyde Software Corporation. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+
+#include <VfrCompatMacros.h>
+
+#include "CpuInfoFormset.h"
+
+formset
+  guid      = H2O_CPU_INFO_FORMSET_GUID,
+  title     = STRING_TOKEN (STR_CPU_INFO_FORMSET),
+  help      = STRING_TOKEN (STR_CPU_INFO_FORMSET_HELP),
+  classguid = VFR_GUID_FROM_PCD (PcdGetPtr (PcdH2OCpuInfoLinkToFormsetGuid)),
+
+  //
+  // Form H2O_CPU_INFO_FORM_ID
+  //
+  form
+    formid = H2O_CPU_INFO_FORM_ID, title = STRING_TOKEN (STR_CPU_INFO_FORMSET);
+
+    subtitle  text = STRING_TOKEN (STR_CPU_INFO_FORMSET);
+
+    grayoutif  TRUE;
+      text
+        help = STRING_TOKEN (STR_BLANK_STRING),
+        text = STRING_TOKEN (STR_NUMBER_OF_CPU_INSTALLED_STRING),
+        flags  = INTERACTIVE,
+        key    = H2O_CPU_INFO_TOTAL_CPU_QUESTION_ID;
+    endif;
+
+    label H2O_CPU_INFO_LABEL_START;
+    label H2O_CPU_INFO_LABEL_END;
+
+  endform;
+
+endformset;
+

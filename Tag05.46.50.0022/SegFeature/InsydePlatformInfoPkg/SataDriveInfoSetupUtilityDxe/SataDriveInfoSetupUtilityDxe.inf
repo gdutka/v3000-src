@@ -1,0 +1,75 @@
+## @file
+#  Component description file of SataDriveInfoSetupUtilityDxe.
+#
+#******************************************************************************
+#* Copyright (c) 2024, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION       = 0x00010005
+  BASE_NAME         = SataDriveInfoSetupUtilityDxe
+  FILE_GUID         = 43e7d039-eea6-4c08-b741-096d39447845
+  MODULE_TYPE       = DXE_DRIVER
+  VERSION_STRING    = 1.0
+  ENTRY_POINT       = SataDriveInfoSetupUtilityDxeEntryPoint
+
+[Sources]
+  SataDriveInfoSetupUtilityDxe.c
+  SataDriveInfoSetupUtilityDxe.h
+  SataDriveInfoVfr.vfr
+  SataDriveInfoSetupUtilityDxe.uni
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+  SegFeaturePkg/SegFeaturePkg.dec
+
+[Guids]
+  gEfiDiskInfoAhciInterfaceGuid
+  gEfiIfrTianoGuid
+  gH2OSataDriveInfoConfigurationGuid
+  gH2OSataDriveInfoSetupFormsetGuid
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  HiiLib
+  HiiExLib
+  MemoryAllocationLib
+  PcdLib
+  PrintLib
+  SataDriveInfoLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+  UefiRuntimeServicesTableLib
+  VariableLib
+  DeviceInfoLookupDataLib
+  SetupVariableLib
+
+[Protocols]
+  gEfiAtaPassThruProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiHiiConfigAccessProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiSetupUtilityApplicationProtocolGuid
+  gH2OPciLookupTableProtocolGuid
+  gH2OSataDriveInfoProtocolGuid
+
+[Pcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSataDriveInfoLinkToFormsetGuid
+
+[Depex]
+  gEfiHiiConfigRoutingProtocolGuid    AND
+  gEfiVariableArchProtocolGuid        AND
+  gEfiVariableWriteArchProtocolGuid

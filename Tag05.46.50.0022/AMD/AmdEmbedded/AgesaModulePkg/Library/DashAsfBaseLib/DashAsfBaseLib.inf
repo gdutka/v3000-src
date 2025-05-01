@@ -1,0 +1,37 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DashAsfBaseLib
+  FILE_GUID                      = a12d58dd-f5a0-5b06-5a4d-e18653bbb5c1
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DashAsfBaseLib
+
+[Sources.common]
+  DashAsfBaseLib.c
+
+[LibraryClasses]
+  IoLib
+  UefiLib
+  DxeServicesLib
+  PcdLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  BaseLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Protocols]
+
+[Guids]
+
+[Depex]

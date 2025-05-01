@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2020-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NbioServicesLibDxe
+  FILE_GUID                      = A9C0FF7F-03F3-4D84-A4FD-FE43351C85FF
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NbioServicesLibDxe
+
+[Sources]
+  NbioServicesLibDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+
+[LibraryClasses]
+  IdsLib
+  BaseFabricTopologyLib
+
+[Guids]
+
+[Protocols]
+  gAmdNbioServicesProtocolGuid    # PRODUCED
+
+[Ppis]
+
+[Pcd]
+
+[Depex]
+
+

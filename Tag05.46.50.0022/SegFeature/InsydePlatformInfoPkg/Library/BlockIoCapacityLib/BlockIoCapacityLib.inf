@@ -1,0 +1,30 @@
+## @file
+#
+#******************************************************************************
+#* Copyright 2021 Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = BlockIoCapacityLib
+  FILE_GUID      = 5a766747-9437-4dcb-979e-1dd857566ded
+  MODULE_TYPE    = BASE
+  VERSION_STRING = 1.0
+  LIBRARY_CLASS  = BlockIoCapacityLib
+
+[Sources]
+  BlockIoCapacityLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  DebugLib
+  PrintLib

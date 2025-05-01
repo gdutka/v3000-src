@@ -1,0 +1,59 @@
+/** @file
+
+  Help Text panel test VFR file
+
+;******************************************************************************
+;* Copyright (c) 2015, Insyde Software Corporation. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+
+  form
+    formid = VFR_APP_FORM_HELP_TEXT_PANEL,
+    title  = STRING_TOKEN(STR_FORM_HELP_PANEL_TITLE);
+
+    oneof
+      varid       = VfrAppVar.HelpTextPanelOneOf0001,
+      prompt      = STRING_TOKEN(STR_HELP_TEXT_PANEL_QUESTION_ONE_LINE_PROMPT),
+      help        = STRING_TOKEN(STR_HELP_TEXT_PANEL_QUESTION_ONE_LINE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = 0;
+    endoneof;
+
+    oneof
+      varid       = VfrAppVar.HelpTextPanelOneOf0002,
+      prompt      = STRING_TOKEN(STR_HELP_TEXT_PANEL_QUESTION_MULTI_LINE_PROMPT),
+      help        = STRING_TOKEN(STR_HELP_TEXT_PANEL_QUESTION_MULTI_LINE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = 0;
+    endoneof;
+
+    oneof
+      varid       = VfrAppVar.HelpTextPanelOneOf0003,
+      prompt      = STRING_TOKEN(STR_HELP_TEXT_PANEL_QUESTION_WITH_LINE_FEED_PROMPT),
+      help        = STRING_TOKEN(STR_HELP_TEXT_PANEL_QUESTION_WITH_LINE_FEED_LINE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = 0;
+    endoneof;
+
+    oneof
+      varid       = VfrAppVar.HelpTextPanelOneOf0004,
+      prompt      = STRING_TOKEN(STR_HELP_TEXT_PANEL_QUESTION_TWO_PAGES_PROMPT),
+      help        = STRING_TOKEN(STR_HELP_TEXT_PANEL_QUESTION_TWO_PAGES_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = 0;
+    endoneof;
+
+    oneof
+      varid       = VfrAppVar.HelpTextPanelOneOf0005,
+      prompt      = STRING_TOKEN(STR_HELP_TEXT_PANEL_QUESTION_THREE_PAGES_PROMPT),
+      help        = STRING_TOKEN(STR_HELP_TEXT_PANEL_QUESTION_THREE_PAGES_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT),    value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),     value = 1, flags = 0;
+    endoneof;
+  endform;

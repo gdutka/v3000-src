@@ -1,0 +1,89 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = JedecNvdimm
+  FILE_GUID                      = A318A838-CF30-4d86-A545-DEA3523BC538
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = JedecNvdimmEntryPoint
+
+[Sources]
+  JedecNvdimm.c
+  JedecNvdimmAcpi.h
+  JedecNvdimmAcpi.c
+  JedecNvdimmArs.c
+  JedecNvdimmDsm.h
+  JedecNvdimmDsm.c
+  JedecNvdimmSmbus.c
+  JedecNvdimmSmbus.h
+
+[Sources.x64]
+  x64/Clzero.asm
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/Fch/Huashan/FchHuashan.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  HobLib
+  BaseLib
+  AmdBaseLib
+  PcdLib
+  PrintLib
+  AmdPspMboxLibV2
+  BaseMemoryLib
+  SmmMemLib
+
+[Protocols]
+  gEfiSmmBase2ProtocolGuid
+  gEfiSmmSwDispatch2ProtocolGuid
+  gEfiAcpiTableProtocolGuid
+  gAmdFabricTopologyServices2ProtocolGuid
+  gAmdAcpiDxeInitCompleteProtocolGuid
+  gAmdSmbiosDxeInitCompleteProtocolGuid
+  gAmdFabricAcpiSratServicesProtocolGuid
+  gEfiSmbiosProtocolGuid
+  gEfiAcpiSdtProtocolGuid
+  gEfiMetronomeArchProtocolGuid
+  gAmdJedecNvdimmProtocolGuid
+  gAmdJedecNvdimmSmmProtocolGuid
+  gAmdJedecNvdimmArsSmmProtocolGuid
+  gAmdApcbSmmServiceProtocolGuid
+  gPspMboxSmmBufferAddressProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+
+[Guids]
+  gEfiHobListGuid
+  gAmdNvdimmInfoHobGuid
+  gAmdNvdimmSpdInfoHobGuid
+  gJedecNvdimmClaimDsmRegionGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiTableHeaderOemId
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiTableHeaderOemTableId
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCompliantEdkIIAcpiSdtProtocol
+
+[Depex]
+  gEfiSmmBase2ProtocolGuid AND
+  gEfiSmmSwDispatch2ProtocolGuid AND
+  gEfiAcpiTableProtocolGuid AND
+  gAmdFabricTopologyServices2ProtocolGuid AND
+  gEfiSmbiosProtocolGuid AND
+  gEfiAcpiSdtProtocolGuid AND
+  gPspMboxSmmBufferAddressProtocolGuid
+

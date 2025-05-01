@@ -1,0 +1,53 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdI3cMasterConsumerDxe
+  FILE_GUID             = 98ba1a5c-daf7-451f-829e-698d08abc065
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = SpdI3cDxeEntryPoint
+
+[Sources.common]
+  AmdI3cMasterConsumerDxe.c
+  AmdI3cMasterConsumerDxe.h
+
+[LibraryClasses.common.DXE_DRIVER]
+  BaseLib
+  UefiLib
+  HobLib
+  PrintLib
+
+[LibraryClasses]
+  FchDxeLibV9
+  FchSongshanDxeLib
+
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  AmdBaseLib
+
+[Guids]
+
+[Protocols]
+  gAmdFchSNI3cProtocolGuid          #CONSUMED
+  gSpdI3cProtocolGuid               #PRODUCED
+
+[Ppis]
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Songshan/FchSongshan.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag
+
+[Depex]
+  gAmdFchSNI3cProtocolGuid

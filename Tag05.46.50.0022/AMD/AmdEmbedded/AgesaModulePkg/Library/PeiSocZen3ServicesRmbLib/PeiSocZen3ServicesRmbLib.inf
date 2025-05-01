@@ -1,0 +1,36 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2019-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PeiSocZen3ServicesRmbLib
+  FILE_GUID                      = FD57955D-00C5-4F41-B826-1A6CDCF51587
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PeiSocZen3ServicesLib
+
+[Sources]
+  SocZen3ServicesRmbPei.c
+  SocZen3ServicesRmbPei.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdSocZen3ServicesPpiGuid      #PRODUCED
+  gAmdNbioSmuServicesPpiGuid      #CONSUMED
+
+[Pcd]
+
+[Depex]

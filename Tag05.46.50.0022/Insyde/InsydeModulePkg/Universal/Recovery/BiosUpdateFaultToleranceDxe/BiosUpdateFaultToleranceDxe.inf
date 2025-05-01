@@ -1,0 +1,75 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2020, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BiosUpdateFaultToleranceDxe
+  FILE_GUID                      = 2D513AE1-714B-4f93-A57A-0A0CDDF48ECC
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = BiosUpdateFaultToleranceDxeEntryPoint
+
+[Sources]
+  BiosUpdateFaultToleranceDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  DebugLib
+  BaseLib
+  BaseMemoryLib
+  UefiRuntimeServicesTableLib
+  UefiDriverEntryPoint
+  HobLib
+  PcdLib
+  BaseCryptLib
+  VariableLib
+  H2OCpLib
+  SeamlessRecoveryLib
+  DevicePathLib
+  PrintLib
+  FdSupportLib
+  FlashRegionLib
+  PostCodeLib
+  GenericBdsLib
+
+[Guids]
+  gEfiFileInfoGuid
+  gEfiEndOfDxeEventGroupGuid
+  gH2OBdsCpEndOfDxeBeforeGuid
+  gH2OBdsCpReadyToBootBeforeGuid
+  gH2OSeamlessRecoveryGuid
+  gH2OSeamlessRecoveryDigestGuid
+
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gEfiSimpleFileSystemProtocolGuid
+  gEfiSwapAddressRangeProtocolGuid
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpEndOfDxeBeforeSupported
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpReadyToBootBeforeSupported
+  gInsydeTokenSpaceGuid.PcdFirmwareResourceMaximum
+  gInsydeTokenSpaceGuid.PcdH2OBiosUpdateFaultToleranceEnabled
+  gInsydeTokenSpaceGuid.PcdH2OBiosUpdateFaultToleranceResiliencyEnabled
+  gInsydeTokenSpaceGuid.PcdFlashPbbRBase
+  gInsydeTokenSpaceGuid.PcdFlashPbbBase
+  gInsydeTokenSpaceGuid.PcdFlashPbbSize
+  gInsydeTokenSpaceGuid.PcdFlashSbbBase
+  gInsydeTokenSpaceGuid.PcdFlashSbbSize
+
+[Depex]
+  gEfiVariableWriteArchProtocolGuid AND
+  gEfiVariableArchProtocolGuid

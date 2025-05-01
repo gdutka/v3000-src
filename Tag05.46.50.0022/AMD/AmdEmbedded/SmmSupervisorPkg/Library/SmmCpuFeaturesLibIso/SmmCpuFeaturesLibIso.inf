@@ -1,0 +1,28 @@
+#;*****************************************************************************
+#; Copyright (C) 2017-2023 Advanced Micro Devices, Inc. All rights reserved.
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmCpuFeaturesLibIso
+  FILE_GUID                      = 14686D9B-784A-4CDD-94EA-7EA6B8719F4F
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SmmCpuFeaturesLib
+  CONSTRUCTOR                    = SmmCpuFeaturesLibConstructor
+
+[Sources]
+  SmmCpuFeaturesLibIso.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  MemoryAllocationLib
+  DebugLib
+  SysCallLib
+  SmmSupervisorFeatureLib

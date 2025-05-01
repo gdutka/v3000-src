@@ -1,0 +1,49 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ *******************************************************************************
+ */
+## @file
+#  Null implementation for SmmErrorReportOemLib
+#
+#  Copyright (C) Microsoft Corporation.
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmErrorReportOemLib
+  FILE_GUID                      = 2B815ED8-675A-426E-BACA-E26C2D078ED4
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 0.1
+  LIBRARY_CLASS                  = SmmErrorReportOemLib
+  CONSTRUCTOR                    = SmmErrorReportOemLibConstructor
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  SmmErrorReportOemLib.c
+
+
+[LibraryClasses]
+  SmmServicesTableLib
+  DebugLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+#[-start-221104-IB14740270-modify]#
+  AgesaModulePkg/Universal/AmdTestPkg/AmdTestPkg.dec
+#[-start-221104-IB14740270-modify]#
+
+[Protocols]
+  gSmmTestViolationAndExceptionInfoProtocolGuid
+
+[Depex]
+  gSmmTestViolationAndExceptionInfoProtocolGuid

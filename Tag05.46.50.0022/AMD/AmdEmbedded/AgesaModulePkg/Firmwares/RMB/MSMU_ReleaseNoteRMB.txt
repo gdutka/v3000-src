@@ -1,0 +1,905 @@
++------------------------------------------+
+| ZSC Firmware Release Notes - Rembrandt   |
++------------------------------------------+
++---------------------------+
+| Version 255.69.41.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         10/15/21
+|
+| * Changelist
+|   - 5209548 [PLAT-90955] PCIE2/3 CORE and PORT FSDL update
+|   - 5205755 [PLAT-82192] UMC DebugMisc check on Z-state entry
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.40.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         10/01/21
+|
+| * Changelist
+|   - 5202065 [PLAT-89749] LPAP Update.  AudioPLL set to REFCLK on exit
+|   - 5178428 [PLAT-89207] CDFX FSDL update to disable USB4 CG
+|   - 5172098 [PLAT-90968] PCS FSDL to re-engage DXIO CG on interim Z9 cycles
+|   - 5167203 [PLAT-90760] Suppress dummy interrupt from IH
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.39.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         09/02/21
+|
+| * Changelist
+|   - 5154774 [PLAT-89904] Fix for restoring AGESA FSDL after Z9 cycle
+|   - 5150667 [PLAT-85689] CLK FSDL update for z10 audio playback support
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.38.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         08/30/21
+|
+| * Changelist
+|   - 5144966 [PLAT-85689] Fix ACP LPAP hang in Z9
+|   - 5144541 [PLAT-89680] Updated PCIE and AGESA FSDL files
+|   - 5134362 [PLAT-89297] Invoke AGESA FSDL on every z-state cycle
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.37.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         08/17/21
+|
+| * Changelist
+|   - 5121715 [PLAT-88922] Fix bit mask typo in PCIE FSDL
+|   - 5121306 [PLAT-86104] Integrate AGESA PCIE FSDL
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.36.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         08/10/21
+|
+| * Changelist
+|   - 5106208 Revert CLK FSDL due to screen flicker
+|   - 5088521 [PLAT-87427] Update MSMU Security Patch Level
+|   - 5065075 [PLAT-84570] Fix CPU Fan Full Speed entering Z9
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.35.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         07/09/21
+|
+| * Changelist
+|   - 5056978 [PMFW-7949] Additional 30us delay for PSI6 exit in low power mode
+|   - 5056570 [PLAT-78287] Incorrect use of RMW in GFXOFF FSDL
+|   - 5055212 Add additional APIs to MSMU compiler
+|   - 5051718 [PLAT-81170] Updated GFXOFF FSDL security policy functions
+|   - 5035642 [DEZSCFW-283] CLK FSDL update for clk assertion issue of df clk
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.34.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         06/18/21
+|
+| * Changelist
+|   - 5012750 [PLAT-84416] ZSC Versioning Update
+|   - 4983592 Added breakpoint to ZSCFW compiler
+|   - 4980714 Added fw-sign to ZSCFW compiler
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.33.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         05/27/21
+|
+| General Changes
+|  - GFX_DLDO.Rmb.SecPolicy.fsdl update                        PLAT-83024/81170
+|  - Updated GFXOFF SecurityPolicy to use MP0_FW_INTF_alt_1    PLAT-83024/81170
+|  - CLK BB IP Update for DDR5 to zsc_clock_bb.h#3                    CL4935778 
+|  - zsc_counters.c GP_CNT_CONTROL fix from 0.1.32.7
+|  - zsc_segment.pl RSMU update
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.32.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         04/16/21
+|
+| General Changes
+|  - VRC Change                                                     (CL4894822)
+|  - Program VDD VID on z10 entry 
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+
+| Version 0.1.31.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         04/01/21
+|
+| General Changes
+|  - UMC FSDL Update                                                 (CL4865748)
+|  - Clock FSDL Update for Z10 Exit                                 (PLAT-79599)
+|  - VRC FSDL Update for Latency tuning                              (CL4866715)
+|  - RSMU FSDL Update to remove static command                       (CL4867334)
+|  - VR Latency Tuning changes on exit
+|  - Move PCS0 to soc_msmu6 for latency improvement
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.30.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         03/19/21
+|
+| General Changes
+|  - msmu compiler updates                                           (CL4831546)
+|  - RSMU FSDL update to align with bootcode                         (CL4821160)
+|  - IOHC FSDL Update                                                (CL4822779)
+|  - Fix USB save hang by correcting  pgfsm.c                    (DERMBVRF-1165)
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+
+| Version 0.1.29.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         03/02/21
+|
+| General Changes
+|  - using latest GC.SecurityPolicy#3                                (CL4775854)
+|  - using UMC IP FSDL zx_umc*.c#4                                   (CL4785809)
+|  - updated breakpoint implementation for flexible resetting        (CL4799826)
+|  - fix inverted while loop condition in pgfsm.c                (DERMBVRF-1165)
+|  - added postcodes and breakpoint to zx_usb<#>.c
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.28.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         02/12/21
+|
+| General Changes
+|  - updated CLK IP FSDL to zsc_clk.c#3                              (CL4765346)
+|  - updated GFXOFF IP FSDL from //sysip/pmw/rembrandt/fsdl/gfxoff   (CL4772690)
+|  - iomux slave-access adated to 32 bits rd/wr
+|  - GPIO27 setup moved to stage3_stage4 (right after PONR)
+|    - no debug postcodes ported over from 0.1.27.4
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.27.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         02/11/21
+|
+| General Changes
+|  - updated CLK IP FSDL to zx_clk.c#6                               (CL4758911)
+|  - zsc_setEntryBreakpoint implementation from 0.1.26.16            (CL4762333)
+|  - updated UMC IP FSDL to zx_umc*.c#3                              (CL4771505)
+|  - AGPIO27_PCIE_RST1_L output value change                    (DEFCHFCHC-2517)
+|  - updated PCIE0 FSDL to zx_pcie0.c#2                             (PLAT-68216)
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.26.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         01/26/21
+|
+| General Changes
+|  - MP0/MP1 out of Sync on ZSC abort at IDLE check in Windows      (PLAT-76169)
+|  - Moved TSC sequence from STU wake to STU-to-NonSTU wake         (PLAT-75408)
+|  - Fixed headers for zsc_clk.c
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.25.0          |
++---------------------------+---------------------------------------------------
+| * LSD.7
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         01/11/21
+|
+| General Changes
+|  - Releasing LSD.6 again with RSMU FSDL CL 4579616               (DEZSCFW-2XX)
+|  - move USB flow to stage3_4                                     (DEZSCFW-248)
+|  - move USB4 PHY and USB4 RT to the same MSMU                    (DEZSCFW-249)
+|  - AEB sequence (both SOC and SR rails)                          (DEZSCFW-251)
+|  - Reduced ZSC_HANG_TIMEOUT to 10s from 1m30s
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.24.0          |
++---------------------------+---------------------------------------------------
+| * LSD.7
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         01/04/21
+|
+| General Changes
+|  - PC FIFO Clearing at end of iram_save
+|  - ZSCFW_VERSION logging at end of iram_save
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.23.0          |
++---------------------------+---------------------------------------------------
+| * LSD.7
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         12/17/20
+|
+| General Changes
+|  - AEB FSDL update cpl_aeb_reset latency to 10us
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.22.0          |
++---------------------------+---------------------------------------------------
+| * LSD.7
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         12/14/20
+|
+| General Changes
+|  - GFXOFF FSDL update 
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.21.0          |
++---------------------------+---------------------------------------------------
+| * LSD.7
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         12/13/20
+|
+| General Changes
+|  - z_segN_gen.c bug-fix due to a zsc_segment.pl bug            (DEIPCSMU-3467)
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.20.0          |
++---------------------------+---------------------------------------------------
+| * LSD.7
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         12/11/20
+|
+| General Changes
+|  - Releasing LSD.6 again with RSMU FSDL CL 4579616               (DEZSCFW-2XX)
+|  - MSMU FSM halt for decode error                                (DEZSCFW-199)
+|  - MSMU0_MSMU_PUB_SCRATCH1 to ZSC_SCRATCH_17                     (DEZSCFW-229)
+|  - Move SMN_COPY ZSC_SCRATCH regs to MSMU0_PUB_SCRATCH           (DEZSCFW-230)
+|  - Make POSTCODES NON_POSTED at end of each stage                (DEZSCFW-231)
+|  - Change WARM reset and NORMAL wake detect IP_FENCE_ACK poll    (DEZSCFW-232)
+|    timeout to HANG
+|  - Integrate new VRC function to reduce req->ack delay for VRC   (DEZSCFW-233)
+|  - Save ZSC_IP_IDLE/ZSC_WAKE_EVENT/ZSCP_IP_FENCE_ACK_STATUS      (DEZSCFW-234)
+|    in ZSC_SCRATCH registers
+|  - Changes to one time setup of masks during entry               (DEZSCFW-235)
+|  - add EFF end postcode signature for abort and wake             (DEZSCFW-236)
+|  - remove postcode FIFO dump message to MP1                      (DEZSCFW-237)
+|  - Fake power down                                               (DEZSCFW-238)
+|  - DFI Clock gating, D32 qualified by UMC instance               (DEZSCFW-239)
+|  - Comment writing to MSMU0_MSMU_PUB_SCRATCH in umc_key_destroy  (DEZSCFW-242)
+|  - Remove clearing MSMU0_MSMU_PUB_SCRATCH1 during entry          (DEZSCFW-243)
+|  - Moving copying of top/src, ip/, rsmu_fsdl and chip_offset_byte(DEZSCFW-244)
+|    in build_pkg.pl
+|  - Mask vcn_fence_ack = 0 in Normal and Warm Wake Detect         (DEZSCFW-245)
+|  - ZSC postcode fifo pointer reset and watermark value change    (DEZSCFW-246)
+|  - USB FSDL location moves beyond PONR                           (DEZSCFW-247)
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_7/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.19.0          |
++---------------------------+---------------------------------------------------
+| * LSD.6
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         10/29/20
+|
+| General Changes
+|  - Releasing LSD.6 again with RSMU FSDL CL 4579616               (DEZSCFW-2XX)
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_6/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.18.0          |
++---------------------------+---------------------------------------------------
+| * LSD.6
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         09/30/20
+|
+| General Changes
+|  - Mp0_zsc_exit programming relocation                           (DEZSCFW-210)
+|  - MP2 C2PMSG for fence req (Integrate from PEMU Patch)          (DEZSCFW-218)
+|  - Move FCH chicken bit programming from common entry 
+|    to zsc entry (Integrate from PEMU Patch)                      (DEZSCFW-219)
+|  - Clear stutter wake before stutter re-entry                    (DEZSCFW-220)
+|  - Send wakex86 allowed after df fence ack = 0                   (DEZSCFW-221)
+|  - SMUIO Reg list Update                                         (DEZSCFW-222)
+|  - Align DDR Mode save restore registers between 
+|    ZSC and CLKIP FSDL                                            (DEZSCFW-2xx)	
+|  - Compiler update integration                                   (DEZSCFW-2xx)
+|  - Absorbing RSMU FSDL updates (Deprecated)                        
+|  - Absorbing PCS0 FSDL update from ip/LSD_5                      (DEZSCFW-2xx) 
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_6/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.17.0          |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         09/01/20
+|
+| General Changes
+|  - Absorbing RSMU FSDL updates
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.16.0          |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/31/20
+|
+| General Changes
+|  - USB4 related clkip fsdl change                                (DEZSCFW-206)
+|  - VDDZ VDCI reset - new sideband usage                          (DEZSCFW-207)
+|  - Ensure all powerok/powerokraw/reset/isolation                 (DEZSCFW-208) 
+|    programming are non-posted
+|  - FCH chicken bit programming for extended reset                (DEZSCFW-209)
+|  - Mp0_zsc_exit programming move up by few steps                 (DEZSCFW-210)
+|  - Warm reset postcode change                                    (DEZSCFW-211)
+|  - ZSC Msg Bug: Convert all WR_SMN_REG to NON_POSTED             (DEZSCFW-213)
+|  - Non-Stutter exiting Z9 bug fix                                (DEZSCFW-214) 
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.15.0          |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/20/20
+|
+| General Changes
+|  - Integrating latest GFXOFF FSDL changes CL @ 4471657           (DEZSCFW-217)
+|  - Added Stutter wake clear in entry stage 2 before              (DEZSCFW-216) 
+|    final idle check
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.14.0          |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/19/20
+|
+| General Changes
+|  - Adding msmu_gfxoff_copy_bl_addr_size inside jump table        (DEZSCFW-205) 
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.13.0          |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/19/20
+|
+| General Changes
+|  - Absorbing USB0,1,2 changes                                    (DEZSCFW-215) 
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.12.0          |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/18/20
+|
+| General Changes
+|  - Bug fix for DRAM_START_ADDR                                   (DEZSCFW-201)
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.11.0          |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/14/20
+|
+| General Changes
+|  - Bug fix in VDDZ TSC sync                                      (DEZSCFW-204)
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.10.0          |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/13/20
+|
+| General Changes
+|  - RSMU FSDL SMS fuse sequence update                            (DEZSCFW-191)
+|    dio
+|  - AEB Programming updates                                       (DEZSCFW-203)
+|  - VDDZ TSC sync                                                 (DEZSCFW-204)
+|  - Removed XGBE SMN router disable                               (DEZSCFW-200)
+|  - Warm reset qualification updates                              (DEZSCFW-202)  
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.9.0           |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/12/20
+|
+| General Changes
+|  - Ccxsec smn router enable/disable - Commented in this release  (DEZSCFW-189)
+|  - RSMU FSDL SMS fuse sequence update                            (DEZSCFW-191)
+|    dio, usb<3,4>
+|  - SMN Clock gating issue - feedback from DEMU                   (DEZSCFW-192)
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.8.0           |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/11/20
+|
+| General Changes
+|  - Mmhub FSDL changes 
+|  - Removed Segment clk disable from zsc_clk.c                    (DEZSCFW-188)
+|  - Ccxsec smn router enable/disable                              (DEZSCFW-189)
+|  - Poll for CCX MSMU FSM DONE before MP1 notification            (DEZSCFW-190)
+|    for 95% PC6 exit
+|  - RSMU FSDL SMS fuse sequence update                            (DEZSCFW-191)
+|    pcie<0,2,3>, pcs0, usb4phy<0,1>, usb4rt<0,1>
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.7.0           |
++---------------------------+---------------------------------------------------
+| * LSD.5
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         07/30/20
+|
+| General Changes
+|  
+|  - MP2 Smart Trace Buffer postcodes                              (DEZSCFW-170)
+|  - For HDT: Dummy reset and powerdown based on SCRATCH           (DEZSCFW-171)
+|  - For HDT: Insert breakpoints via scratch                       (DEZSCFW-172)
+|  - Dcfclk deep sleep exit                                        (DEZSCFW-182)
+|  - Mask SmuWake after mp1 sends zstate entry notification to zsc (DEZSCFW-183)
+|  - SOC Power OK Override. Implemented but commented until        (DEZSCFW-184)
+|    RTL bug fix
+|  - Clear DCN ZSC wakeup just before powerdown for Z10            (DEZSCFW-185)
+|  - UMC clock stop                                                (DEZSCFW-186)
+|  - Integrate GFX OFF FSDL from                                   (DEZSCFW-187)
+|    //sysip/pma/rembrandt/fsdl/gfxoff/...@4444477
+|  - Moved dfi programming to just before the clkip programming
+|    in zsc_common_entry.c
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_5/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.6.0           |
++---------------------------+---------------------------------------------------
+| * LSD.4
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         07/01/20
+|
+| General Changes
+|  
+|  - Add union structure to ZSC registers                          (DEZSCFW-111)
+|  - Vrc Entry Ack related SVC timing change                       (DEZSCFW-164)
+|  - Poll for mp0 and mp1 fence ack=0 wherever we are dropping     (DEZSCFW-166)
+|    them during exit 
+|  - PMUX wake logic fix                                           (DEZSCFW-167)
+|  - DFX RSMU needs to be restored before CDFX FSDL execution      (DEZSCFW-168)
+|    during exit 
+|  - SMN clock switching from 400 to 48MHz moved to after pmux     (DEZSCFW-169)
+|    switch during entry                         
+|  - D32En programming to avoid Zstate exit hang due to UMC not    (DEZSCFW-174)
+|    asserting InDstate back to DF 
+|  - DFI clock gating; Stop clock after PHY enters LP2             (DEZSCFW-175)
+|  - Autogenerate Scratch Register Done Definitions
+|  - Removed CPUOFF from config.yaml and jump table
+|  - Added gfxoff entry points; 
+|        - msmu_gfxoff_copy_bl_addr_size (to be removed in future release)
+|        - msmu_gfxoff_exit_init_rsmu_gfx_dldo (added to jump table)
+|  - Added wake clear during entry stage 1                         (DEZSCFW-19)
+|  - Moved soc_msmu7 back to segment6
+|  - Moved soc_msmu0 back to segment5
+| 
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_4/src
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.5.1           |
++---------------------------+---------------------------------------------------
+| * LSD.3 Latency Optimization
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         06/23/20
+|
+| General Changes
+|  - Moved soc_msmu7 from segment6 to segment3
+|  - Moved soc_msmu0 from segment5 to segment4
+|  - Absorbed changes related to segment clock enable/disable shelve: 4393258  
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.5.0           |
++---------------------------+---------------------------------------------------
+| * LSD.3
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         04/06/20
+|
+| General Changes
+|  - Integrate ZSC top/LSD changes from Model-1                     (DEZSCFW-156)
+|    (Latency Improvements)
+|  - Build process clean-up and automation
+|  - ZSC Main Postcode generation automation
+|  - PHY PG FSDL Integration (Power Improvements)                   (DEZSCFW-105) 
+|  - FCH, SATA0 and SST0 RSMU restore moved to S2NS                 (DEZSCFW-127)
+|    Bug Fix: Added rsmu restore back to NS restore                 (DEZSCFW-128)
+|  - 50-50 duty cycle and turning on CGPLL earlier to               (DEZSCFW-130) 
+|    change SMNCLK (Latency Improvements)
+|  - Fix/ remove WritePostcode error                                (DEZSCFW-133) 
+|  - Fix hang time out issues (Latency Improvements)                (DEZSCFW-134) 
+|  - Wait and poll nano-seconds scrubbed                            (DEZSCFW-135)  
+}    for 300MHz SMN CLK (Latency Improvements)
+|  - Repurpose Cpl_Z10_exit for isolation control                   (DEZSCFW-137) 
+|  - Add POSTED and NON_POSTED macros                               (DEZSCFW-138) 
+|  - UMC msmu sram reduction                                        (DEZSCFW-139) 
+|  - Postcodes for BAD execution situations                         (DEZSCFW-146) 
+|  - ZSC_PWROK_ASSERT_TO_RESET_WAIT_TIME should wait                (DEZSCFW-147) 
+|    5us @ 48MHz clk
+|  - Add a wait of 100us for PSI ack                                (DEZSCFW-150) 
+|  - Move MSMU RSMU Restore inside segment code                     (DEZSCFW-151) 
+|  - Change ip_fence_ack_timeout to 350us                           (DEZSCFW-152) 
+|    (smnclk is 400mhz, 2.5ns)
+|  - Add WAIT_NS() for restore just like save                       (DEZSCFW-153)
+|    (Deprecated. See below)
+|  - MMHUB stutter latency (Latency Improvements)                   (DEZSCFW-157) 
+|  - Replicate poll segment done for IP and RSMU                    (DEZSCFW-159) 
+|    restore done
+|  - Virtual channel code for WAIT_NS                               (DEZSCFW-161) 
+|  - Modify SMUIO timing registers update for latency               (DEZSCFW-162) 
+|  - Added DF/UMC FSM done POLL
+|  - Added IP/SOC MSMU FSM done POLL 
+|  - Removed WAIT_NS() in save and restore for IP and SOC
+|    MSMU
+|  - ZSC_SCRATCH_3 and DDR_MODE copied to PUB_SCRATCH14 and
+|    15 resp, for all segments and soc_msmu5
+|  - sst1 rsmu restore now part of NS and S2NS restore only
+|  - Added DispClk 24MHz in NS exit sequence
+|  - Integrated CLKIP FSDL postcodes
+|  
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_3/src
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.4.0           |
++---------------------------+---------------------------------------------------
+| * LSD.2
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         07/05/20
+|
+| General Changes
+|  - Cleaned up Postcodes
+|  - Moved GFX FSDL from soc_msmu3 to soc_msmu1                     (DEZSCFW-140)
+|  - Updated build_pkg.pl and config.yaml
+|  - Updated header file paths for entry points
+|  
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD_2/src
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.3.0           |
++---------------------------+---------------------------------------------------
+| * LSD.1
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         08/04/20
+|
+| General Changes
+|  - Clock FSDL to program clocks during entry, exit and for          (DEPMA-152)
+|    in-state residency and Include clock changes after 
+|    entry-stage2 - DCFCLK deep sleep and other clock settings
+|  - Force warm reset if DF_fence_ack = 0                            (DEZSCFW-13)
+|  - MMHUB PG on stutter                                             (DEZSCFW-14)
+|  - Remove decay mode enable calls in ZSC top-level functions       (DEZSCFW-23)
+|  - Jump table support for ZSC entry-point                           (DEZSCFW-7)
+|                                                                  (DEIPCSMU-744)
+|  - Potential ZSC changes for Z9+video playback+audio                (DEZSCFW-9)
+|    CLKIP FSDL and ZSC_SCRATCH introduced for this
+|  - Register controls for msmu_core clock off/on:                   (DEZSCFW-32)
+|    Functions integrated in ZSC FW 
+|  - Rename powerok/reset functions to be more explicit about        (DEZSCFW-39)
+|    transitions
+|  - Document all SCRATCH registers                                  (DEZSCFW-99)
+|    //sysip/pma/rembrandt/doc/ZSC_MSMU_SCRATCH_register_definition.xlsx
+|  - If save segment fails, hang indefinitely                       (DEZSCFW-122)
+|  - Restore USB for stutter                                        (DEZSCFW-123)
+|  - Move FCH and SATA0 RSMU restore to S2NS                        (DEZSCFW-127)
+|                                                                   (DEZSCFW-128)
+|  - New abort (1.5) for IP-fence ack timeout. Log into a ZSC       (DEZSCFW-129)
+|    scratch for debug and hang
+|  - Bug: Postcode overlap between postcode_gen.h and postcodes.h   (DEZSCFW-130)
+|  - Move Cpl_Z9 exit UMC ISO deassertion from ZSC FW to UMC FSDL   (DEZSCFW-131)
+|  - Modified zsc_segment.pl. Replaced "-" with "*" for CLK and DBGU
+|  - Update config.yaml to include all jump tables 
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD/
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.2.0           |
++---------------------------+---------------------------------------------------
+| * LSD
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         20/03/20
+|
+| General Changes
+|  - MP1-ZSC mailbox definition                          (DEZSCFW-49, DEZSCFW-50)
+|  - RSMU TSC sync                                                    (DEPMA-203)
+|  - DFX flow for IP clock gating                         (DEZSCFW-11, DEPMA-194)
+|  - Add AEB reset changes                                           (DEZSCFW-51)
+|  - Get MSMU iRAM and dRAM address #define       (DEZSCFW-12, DEIPCSM-1482,1483)
+|    values from msmu_features.h  
+|  - USB Sx entry/exit sequences                          (DEZSCFW-57, DEPMA-107)
+|  - rIOMMU fault propagation disable                                (DEZSCFW-58)
+|  - DCN handshaking                                                 (DEZSCFW-59)
+|  - MP2 handshaking                                                 (DEZSCFW-60)
+|  - Move ioapic restore after fch fence_ack                         (DEZSCFW-61)
+|  - Move rsmu and gtsc tsc fsdl to before rsmus are                 (DEZSCFW-62)
+|    restored and resets are released  
+|  - Increase Fence-ack-timeout to 100usec. Need to add a            (DEZSCFW-63)
+|    forced-wake-up (in case we see no wake up event for 
+|    10sec, longest poll time)  
+|  - Enable interrupt dis and arbiter dis during abort               (DEZSCFW-64)
+|    after fence_req  
+|  - Clear PSP_lock bit at the end of the sequence                    (DEZSCFW-4)
+|  - Move GPIO isolation disable to after FCH restore                (DEZSCFW-65)
+|  - Add SMN router idle checks before committing to entry           (DEZSCFW-66)
+|  - Cold reset and HSP Powerok raw related changes                  (DEZSCFW-67)
+|  - Abort3 sequence                                                 (DEZSCFW-69)
+|  - Debug FSDLs (Postcodes throughout ZSC FW)                       (DEZSCFW-71)
+|  - XGBE/PCS3/PCS4 SMN router port disable right before             (DEZSCFW-73)
+|    RSMU restore  
+|  - BUG: Fix warm reset handler issue                               (DEZSCFW-74)
+|  - BUG: if (~stutter_re-entry) ZSC signals VRC to enable           (DEZSCFW-75)
+|    PSI6 on VDDCR_VDD. - zsc_z9_vrc_entry_sequence needs 
+|    to qualify vdd psi6 entry with NOT exiting from stutter   
+|  - BUG: Abort if timeout for SMN router idle checks                (DEZSCFW-76)
+|  - Poll for MP1 message response to PC6 exit- use 10us for         (DEZSCFW-77)
+|    timeout  
+|  - In abort sequence write ZSC_STATE and disable segment           (DEZSCFW-78)
+|    and postcode clocks and put postcode ram into deep sleep  
+|  - BUG: Fix writing into segment Scratch only after segment        (DEZSCFW-79)
+|    clocks are up. Move segment clock enable prior to writing  
+|  - Move disable segment clocks to just before ZSC_STATE.           (DEZSCFW-80)
+|  - Re-use clear functions on zsc segment msmu restore              (DEZSCFW-81)
+|    function for stutter to non-stutter exit  
+|  - Integrate MMHUB fsdl.                                           (DEZSCFW-82)   
+|  - Zsc_segment.pl change#1: Seg5 code generation                   (DEZSCFW-83)
+|  - Zsc_segment.pl change#2: Code optimization                      (DEZSCFW-84)
+|  - Zsc code optimization to reduce size                            (DEZSCFW-85)
+|  - Zsc code integration  vrc, clocks, tsc                          (DEZSCFW-86)
+|  - Move espi to mp1                                                (DEZSCFW-87)
+|  - CCP keys restore                                                (DEZSCFW-88)
+|  - Stutter counters                                                (DEZSCFW-17)
+|  - AGMUX (Anti Glitch Mux) control for using blink clk src         (DEZSCFW-18)
+|    from bypass pll  
+|  - cpl_z9/z10  move to entry for ddr phy reset gater                (DEZSCFW-5)
+|  - Release Wake Clear after asserting it (to prevent toggling)     (DEZSCFW-89)
+|  - Use ZSC_SCRATCH_16 in stutter_to_non_stutter and non_stutter    (DEZSCFW-20)
+|    before MSMU_STOP and Postcode FIFO  
+|  - malloc for umc encryption keys destroy                          (DEZSCFW-21)
+|  - Postcode fifo full notify to MP1                                 (DEZSCFW-6)
+|  - Check ZSC_STATE mask and make it consistent                     (DEZSCFW-90)
+|  - Merge LSC.1 updated shelf (TSC split into SR/SoC functions,     (DEZSCFW-91)
+|    RSMU fuse restore split)  
+|  - Implement Disable_Z10 check                                     (DEZSCFW-24)
+|  - Move DCN Allow Z10 to an earlier location (before stage2)       (DEZSCFW-25)
+|  - MSMU config.json file changes for LSD SRAM sizes                (DEZSCFW-26)
+|  - Read zsc_scratch_2 for VDD safe VID programming during restore  (DEZSCFW-92)
+|  - Clear FCH S5 reset status bit                                   (DEZSCFW-93)
+|  - Update PowerOK Reset to match latest sequence                   (DEZSCFW-29)
+|  - Create new entry point in Segment MSMUs containing UMC          (DEZSCFW-96)
+|  - Abort2b, Abort3 and Abort4 should call new segment MSMU         (DEZSCFW-97)
+|    entry points to destroy UMC keys  
+|  - Modify zsc_segment.pl to handle UMC key save and destroy        (DEZSCFW-30)
+|  - Drop MP1 fence req before sending wake message                  (DEZSCFW-31)
+|  - Using MSMU0_MSMU_PUB_SCRATCH_14 for boolean logic               (DEZSCFW-34)
+|  - Add wake checks to stage 1 IP idle checks                       (DEZSCFW-38)
+|  - USB FSDL Integration for Stutter and Non-Stutter                (DEZSCFW-98)
+|  - Rename FCH_AOAC_SOI3_CONTROL to mmacpi_s0i3_ctrl               (DEZSCFW-100)
+|  - Remove redundant clearing of scratch registers in segment      (DEZSCFW-113)
+     FSDLs  
+|  - After writing 0 to POSTCODE_FIFO_RAM_DS, wait for 32           (DEZSCFW-102)
+|    cycles before any access to POSTCODE FIFO  
+|  - Enable HW postcodes in ZSC FW                                  (DEZSCFW-103)
+|  - Change wait time for all POLL and WAIT instructions to         (DEZSCFW-104)
+|    cycles  
+|  - GPIO powergood macro sequence check                            (DEZSCFW-106)
+|  - Compiler definitions of MSMU base address                      (DEZSCFW-107)
+|  - Msg definition for Postcode FIFO full notification             (DEZSCFW-108)
+|  - ZSC_CONTROL change WR_SMN_REG to RMW_SMN_REG in some           (DEZSCFW-109)
+|    places
+|  - Separate RSMU and IP restore entry points                      (DEZSCFW-110)
+|  - Ordering of PSI6 exit and safe VID change request for 
+|    VDD rail in ns and s2ns sequence  
+|  - ZSC_DF_STATUS_TIMEOUT - max poll time is 0xFFFFFFFF   
+|  - Move #define ZSC_WAIT_RESETN_TO_ISOLATION_ON to zsc.h 
+|    from zsc_common_entry.h  
+|  - Create separate entry points for RSMU and IP in segment 
+|    and SoC MSMUs  
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSD/
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.1.0           |
++---------------------------+---------------------------------------------------
+| * LSC.1
++---------------------------+---------------------------------------------------
+| * Date (dd/mm/yy)
+|         24/01/20
+|
+| General changes
+|   - Added a header file for every source file - similar to PMFW
+|  - Reorganized some function definitions and declarations in header files
+|  - Added local code building support inside /top/
+|  - Modified config.yaml to reflect new MP1 to ZSC interface (single entry 
+|      point)
+|  - Updated zsc_segment.pl reorganizes IP distribution between MSMUs
+|  
+| zsc_main.c
+|  - ZSC Firmware Versioning added
+|  - MP1 - ZSC communication through zsc_entry() only
+|  - ZSC enters Z7.1 or Z9 by reading MSMU0_MSMU_PUB_SCRATCH0 register
+|  - Added Enable/Disable Postcode FIFO clock
+|  - Moved C2PMSG code to zsc_msg.c/h
+|
+| zsc_entry.c
+|  - Added Enable/Disable Postcode FIFO clock
+|  - Updated df_stage_2_idle check to use ZSC_AGGR_STATUS[12]
+|  - Updated abort_1 and abort_2 for Z7.1 and Z9
+|  - Added IOAPIC unmasking inside abort_2
+|  - Removed dead / unused code
+|  
+| zsc_common_entry.c
+|  - Moved old dead code to bottom of file - to be removed later
+|  
+| zsc_common_exit.c
+|  - Added IOAPIC unmasking in exit stage 2
+|  - Added Warm Reset handling in exit stage 2
+|  - Added helper functions for warm reset handling, RSMU done and segment 
+|      done scratch registers
+|  - Moved IP MSMU restore code to individual restore source files
+|  - RSMU Done reporting interface updated
+|  
+| zsc_non_stutter_exit.c
+|  - Added IP MSMU restore code from common_exit
+|  - Added Enable/Disable Postcode FIFO clock
+|  
+| zsc_stutter_exit_reentry.c
+|  - Added IP MSMU restore code from common_exit
+|  - Added Enable/Disable Postcode FIFO clock
+|  
+| zsc_stutter_to_non_stutter_exit.c
+|  - Added IP MSMU restore code from common_exit
+|  - Added Enable/Disable Postcode FIFO clock
+|
+| zsc_msg.c/h
+|  - Moved MP1-ZSC communication code from zsc_main to zsc_msg.c/h
+|  - Updated C2PMSG IDs
+|  - Added a new postcode to distinguish between abort_1 and abort_2
+|
+| * Files
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/top/LSC_1/
+|  - //sysip/smu/smu-13/zsc_msmu/main/fsdl/snapshot/LSC_1/
++---------------------------+---------------------------------------------------

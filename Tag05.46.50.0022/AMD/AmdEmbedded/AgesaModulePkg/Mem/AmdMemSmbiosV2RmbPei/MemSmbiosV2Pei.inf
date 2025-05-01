@@ -1,0 +1,47 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdMemSmbiosV2RmbPei
+  FILE_GUID                      = 633EF394-8950-4544-8AA3-E6B0B72014D8
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PeiAmdMemSmbiosV2Entry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PeimEntryPoint
+  AmdBaseLib
+  AmdPspApobLib
+  AmdMemSmbiosV2Lib
+  FchBaseLib
+  AmdCapsuleLib
+
+[Sources]
+  MemSmbiosV2Pei.h
+  MemSmbiosV2Pei.c
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdMemChanXLatPpiGuid             #Consume
+
+[Pcd]
+
+[Depex]
+  gAmdMemSmbiosV2Fp7PpiGuid AND
+  gAmdMemChanXLatPpiGuid
+
+

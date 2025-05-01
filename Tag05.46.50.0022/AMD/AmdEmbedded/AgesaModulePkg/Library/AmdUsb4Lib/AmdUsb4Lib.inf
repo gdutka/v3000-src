@@ -1,0 +1,58 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdUsb4BaseLib
+  FILE_GUID                      = 55316BCC-7908-47FE-A91F-6A1B01259E90
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdUsb4BaseLib
+
+[Sources.common]
+  Common.c
+  Core.c
+  HostInterface.c
+  Router.c
+  Adapter.c
+  Counters.c
+  Drom.c
+  Path.c
+  PcieTunneling.c
+  Port.c
+  DpTunneling14.c
+  DpTunneling20.c
+  Usb3Tunneling.c
+  Bandwidth.c
+  Flows.c
+  Tbt3.c
+  Tmu.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleUsb4Pkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  AmdBaseLib
+  IdsLib
+  SmnAccessLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdUsb4TimeoutPacketNumber
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintEnable
+
+[Depex]
+

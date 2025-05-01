@@ -1,0 +1,22 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+#
+# This DEC file is for things that are only used internally to FchKernModulePkg
+# and will not be exposed publicly.  Use FchPkg.dec to produce public definitions
+#
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = FchKeith
+  PACKAGE_GUID          = 5df7df50-1ccb-46f3-9625-af69448c3f89
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  FchKeithCore/
+  FchKeithCore/Common/
+  FchKeithCore/Keith/
+
+[LibraryClasses]

@@ -1,0 +1,51 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME               = MpmAsfDxe
+  MODULE_TYPE             = DXE_DRIVER
+  FILE_GUID               = 06ecaf57-1a95-44dd-ae09-ab9b9bd681e9
+  ENTRY_POINT             = MpmAsfDxeEntry
+
+[Sources]
+  MpmAsfDxe.c
+  MpmAsfDxe.h
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  DebugLib
+  HobLib
+  BaseMemoryLib
+  PrintLib
+  SerialPortLib
+  MpmLib
+  IdsLib
+
+[Protocols]
+  gEfiRscHandlerProtocolGuid
+  gEfiSimpleTextInProtocolGuid
+  gEfiSimpleTextInputExProtocolGuid
+
+[Guids]
+  gEfiGlobalVariableGuid
+  gEfiHobListGuid
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdProgressCodeOsLoaderStart
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Depex]
+  gAmdMpmDepexProtocolGuid

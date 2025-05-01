@@ -1,0 +1,53 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME               = DashPldmBcc
+  MODULE_TYPE             = DXE_DRIVER
+  FILE_GUID               = 6e6f55f6-8f74-4f71-8264-f11ba0581441
+  ENTRY_POINT             = DashPldmBccEntry
+
+[Sources]
+  DashPldmBcc.h
+  DashPldmBcc.c
+  BiosStringTable.h
+  BiosStringTable.c
+  BiosAttributeTable.h
+  BiosAttributeTable.c
+  BiosAttributeValueTable.h
+  BiosAttributeValueTable.c
+  BiosAttributePendingValueTable.h
+  BiosAttributePendingValueTable.c
+  SetBiosTablesTags.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCommonPkg/AmdCommonPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  DebugLib
+  PrintLib
+  IdsLib
+  CommonSetupLib
+
+[Protocols]
+  gAmdDashPldmProtocolGuid
+  gEfiVariableArchProtocolGuid
+
+[Guids]
+  gEfiGlobalVariableGuid
+
+[Depex]
+  gAmdDashPldmProtocolGuid AND
+  gEfiVariableArchProtocolGuid

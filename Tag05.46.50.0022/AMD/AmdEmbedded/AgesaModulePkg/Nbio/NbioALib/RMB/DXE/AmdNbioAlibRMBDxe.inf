@@ -1,0 +1,58 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdNbioAlibRMBDxe
+  FILE_GUID                      = BC93AC24-BBAA-49DE-8EB5-2396F87929E0
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdNbioAlibRMBDxeEntry
+
+[Sources]
+  AmdNbioAlibCallback.c
+  AmdNbioAlibCallback.h
+  AmdNbioALibRMBDxe.c
+  AlibSsdtRMB.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdBaseLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  IdsLib
+  UefiLib
+  BaseMemoryLib
+  PcdLib
+  NbioRegisterAccLib
+  GnbLib
+  GnbHeapLib
+  AmdHeapLib
+  PcieConfigLib
+
+[Guids]
+
+[Protocols]
+  gEfiAcpiTableProtocolGuid
+  gAmdNbioALibServicesProtocolGuid
+  gAmdNbioPcieServicesProtocolGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiTableHeaderOemId
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiTableHeaderOemTableId
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgPeApmEnable
+
+[Depex]
+  gAmdNbioALIBRMBDxeDepexProtocolGuid AND
+  gAmdNbioPcieServicesProtocolGuid
+
+

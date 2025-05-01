@@ -1,0 +1,98 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+#;*****************************************************************************
+#;
+#; This software package can be used to enable the Overclocking of certain
+#; AMD processors and its use is subject to the terms and conditions of the
+#; AMD Overclocking Waiver. Enabling overclocking through use of the low-level
+#; routines included in this package and operating an AMD processor outside of
+#; the applicable AMD product specifications will void any AMD warranty and can
+#; result in damage to the processor or the system into which the processor has
+#; been integrated. The user of this software assumes, and AMD disclaims, all
+#; risk, liability, costs and damages relating to or arising from the overclocking
+#; of AMD processors.
+#;
+#;******************************************************************************
+
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AodSocLibRpl
+  FILE_GUID                      = DF5566D5-38CD-4048-9FF6-F6B7F95B9E02
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NULL|PEIM
+  CONSTRUCTOR                    = PeiAodRplConstructor
+
+[Sources]
+  AodSocLibPei.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaModulePkg/AgesaFamily15ModulePkg.dec
+
+
+[LibraryClasses]
+  PcdLib
+  DebugLib
+  AodBaseLib
+  HobLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  BaseLib
+  ApobCommonServiceLib
+  AmdSocBaseLib
+  PeiServicesTablePointerLib
+  PrintLib
+
+[Guids]
+  gSocCoreInfoGuid
+
+[Ppis]
+
+[DEPEX]
+  TRUE
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Setting
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Freq
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Vid
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmtMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocPPTLimit
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocTDCLimit
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocEDCLimit
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocSocTDCLimit
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocSocEDCLimit
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocPBOLimitScalar
+  gAmdCpmPkgTokenSpaceGuid.PcdActualCoreNumber
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgCoreDldoPsmArray
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCpuBoostClockOverride
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFMaxFrequency
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMocTjMax
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmuGfxPsmMarginControl
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmuGfxPsmMarginValue
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFastPptLimit
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSlowPptLimit
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVrmMaximumCurrentLimit
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVrmSocMaximumCurrentLimit
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVrmCurrentLimit
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdVrmSocCurrentLimit
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMsgSetSustainedPowerLimit
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgLclkFrequencyRange
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdVddMiscVoltage
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgCcdFrequencyArray

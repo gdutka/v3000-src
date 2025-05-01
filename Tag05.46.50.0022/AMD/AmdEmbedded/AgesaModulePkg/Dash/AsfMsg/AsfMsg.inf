@@ -1,0 +1,55 @@
+#
+# FILENAME.
+#       AsfDxe.inf - SecureCore Tiano(TM) ASF Description File.
+#
+#       $PATH
+#
+#;*****************************************************************************
+#;
+#; Copyright 2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  BASE_NAME                      = AsfMsg
+  FILE_GUID                      = 697e6ee3-2eaf-41cc-ac6e-f4efdfe93e6d
+  INF_VERSION                    = 0x00010005
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AsfMsgEntry
+
+[Sources]
+  AsfMsg.c
+  AsfMsg.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCommonPkg/AmdCommonPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  PcdLib
+  BaseLib
+  DebugLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  PciLib
+  IoLib
+  CommonSetupLib
+  DashAsfBaseLib
+  DashAsfSmbusLib
+
+[Protocols]
+  gEfiSmbusHcProtocolGuid
+  gEfiPciEnumerationCompleteProtocolGuid
+
+[Guids]
+  gEfiEventExitBootServicesGuid
+
+[Depex]
+  gEfiSmbusHcProtocolGuid AND
+  gEfiVariableArchProtocolGuid

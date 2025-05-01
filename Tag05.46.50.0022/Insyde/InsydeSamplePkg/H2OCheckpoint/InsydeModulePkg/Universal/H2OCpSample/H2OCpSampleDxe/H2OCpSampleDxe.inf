@@ -1,0 +1,56 @@
+## @file
+#  Component description file for H2OCpSampleDxe Driver.
+#
+#******************************************************************************
+#* Copyright (c) 2017, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = H2OCpSampleDxe
+  FILE_GUID                      = 4B829801-840E-4f2b-BC63-0010CB1FAC6C
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = H2OCpSampleDxeEntryPoint
+
+[Sources]
+  H2OCpSampleDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  UefiLib
+  DebugLib
+  BaseLib
+  BaseMemoryLib
+  UefiDriverEntryPoint
+  PcdLib
+#[-start-H2OCpSampleDxe-add]#
+  H2OCpLib
+#[-end-H2OCpSampleDxe-add]#
+
+[Guids]
+#[-start-H2OCpSampleDxe-add]#
+  gH2ODxeCpXxxYyyZzzGuid
+#[-end-H2OCpSampleDxe-add]#
+
+
+[FeaturePcd]
+#[-start-H2OCpSampleDxe-add]#
+  gInsydeTokenSpaceGuid.PcdH2ODxeCpXxxYyyZzzSupported
+#[-end-H2OCpSampleDxe-add]#
+
+[Depex]
+  TRUE
+

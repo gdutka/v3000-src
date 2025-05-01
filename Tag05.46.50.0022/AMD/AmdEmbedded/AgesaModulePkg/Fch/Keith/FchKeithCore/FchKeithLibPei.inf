@@ -1,0 +1,87 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  LIBRARY_CLASS         = FchKeithPeiLib | PEIM
+  BASE_NAME             = FchKeithPeiLib
+  INF_VERSION           = 0x00010006
+  FILE_GUID             = 660988e1-9379-4e09-8a86-54d167282c4f
+  MODULE_TYPE           = BASE
+  VERSION_STRING        = 1.0
+
+[Sources]
+  FchPage.h
+  FchPlatform.h
+  Common/AcpiLib.c
+  Common/AcpiLib.h
+  Common/FchAoacLib.c
+  Common/FchCommon.c
+  Common/FchCommonCfg.h
+  Common/FchCommonSmm.c
+  Common/FchDef.h
+  Common/FchInterface.h
+  Common/FchLib.c
+  Common/FchPeLib.c
+ # Common/FchSmnLib.c
+  Common/MemLib.c
+  Common/PciLib.c
+  Keith/ResetDefKT.c
+  Keith/KTHwAcpi/KTHwAcpiReset.c
+  Keith/KTHwAcpi/KTSSService.c
+  Keith/KTInterface/KTFchInitReset.c
+  Keith/KTInterface/KTFchTaskLauncher.c
+  Keith/KTInterface/KTFchTaskLauncher.h
+  Keith/KTPcie/KTAbReset.c
+  Keith/KTPcie/KTAbResetService.c
+  Keith/KTSata/KTSataReset.c
+  Keith/KTSata/KTSataResetService.c
+  Keith/KTSata/KTSataLib.c
+  Keith/KTSata/KTSataD3Lib.c
+  Keith/KTSd/KTSdResetService.c
+  Keith/KTLpcSpi/KTLpcReset.c
+  Keith/KTLpcSpi/KTLpcResetService.c
+  Keith/KTLpcSpi/KTLpcEnvService.c
+  Keith/KTLpcSpi/KTLpcEnv.c
+  Keith/KTLpcSpi/KTSpiReset.c
+  Keith/KTLpcSpi/KTSpiEnv.c
+  Keith/KTEspi/KTEspiReset.c
+  Keith/KTEspi/KTEspiLib.c
+  Keith/KTUsb/KTUsbReset.c
+  Keith/KTUsb/KTXhciReset.c
+  Keith/KTUsb/KTXhciResetService.c
+  Keith/KTUsb/KTXhciService.c
+  Keith/KTUsb/KTCioReset.c
+  Keith/KTUsb/KTCioService.c
+  Keith/KTWifi/KTWifiReset.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  IoLib
+  AmdCapsuleLib
+  FchBaseLib
+  NbioSmuV13Lib
+
+[LibraryClasses.common.PEIM]
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+
+[BuildOptions]
+
+
+

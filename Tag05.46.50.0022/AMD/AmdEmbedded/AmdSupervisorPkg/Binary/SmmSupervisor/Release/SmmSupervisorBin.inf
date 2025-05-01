@@ -1,0 +1,48 @@
+## @file
+# CPU SMM driver.
+#
+# This SMM driver performs SMM initialization, deploy SMM Entry Vector,
+# provides CPU specific services in SMM.
+#
+# Copyright (c) 2009 - 2019, Intel Corporation. All rights reserved.<BR>
+# Copyright (C) 2020-2023 Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (C) Microsoft Corporation.
+#
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmSupervisorBinRelease
+  FILE_GUID                      = D11C8E2A-3CD1-443C-AC09-63526DE7E170
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = SmmSupervisorEntry
+#[-start-220301-IB14740220-add]#
+  MODULE_AUTORUN_TOOL            = "$(WORKSPACE)/$(PROJECT_REL_PATH)/$(PROJECT_PKG)/SmmSupvBuild.$(FILE_EXTENSION)"
+  AUTORUN_PARAM                  = $(SMM_ISOLATION_SUPPORT) $(TARGET)
+#[-end-220301-IB14740220-add]#
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = X64
+#
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+[PcdEx.common]
+  gSmmSupervisorPkgTokenSpaceGuid.PcdSmmIsolationEnable
+
+[Binaries.X64]
+  PE32|SmmSupervisor.efi
+  SMM_DEPEX|SmmSupervisor.depex
+
+[UserExtensions.TianoCore."ExtraFiles"]
+  SmmSupervisorExtra.uni

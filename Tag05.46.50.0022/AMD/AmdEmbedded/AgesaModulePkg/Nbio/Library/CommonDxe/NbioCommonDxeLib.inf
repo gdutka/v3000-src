@@ -1,0 +1,42 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NbioCommonDxeLib
+  FILE_GUID                      = 1BF93335-5D55-46D9-99D9-5D962F039829
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NbioCommonDxeLib
+
+[Sources]
+  DxeLibFunctions.c
+  DxeGetPciResources.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  PcdLib
+  PrintLib
+  IdsLib
+  BaseLib
+  DebugPrintErrorLevelLib
+  AmdBaseLib
+  GnbCommonLib
+  DebugLib
+
+[Pcd]
+
+[Guids]
+  gGnbPcieHobInfoGuid
+  gEfiHobListGuid
+

@@ -1,0 +1,66 @@
+#** @file
+#
+#Brief description of file's purpose. Detailed description of file's purpose.
+#
+#;******************************************************************************
+#;* Copyright (c) 2014, Insyde Software Corporation. All Rights Reserved.
+#;*
+#;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#;* transmit, broadcast, present, recite, release, license or otherwise exploit
+#;* any part of this publication in any form, by any means, without the prior
+#;* written permission of Insyde Software Corporation.
+#;*
+#;******************************************************************************
+#
+#
+#other copy right statement
+##
+## @file
+#  TODO: Brief Description of UEFI Driver DriverArpServiceDxe
+#  
+#  TODO: Detailed Description of UEFI Driver DriverArpServiceDxe
+#
+#  TODO: Copyright for UEFI Driver DriverArpServiceDxe
+#  
+#  TODO: License for UEFI Driver DriverArpServiceDxe
+#  
+##
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = DriverArpServiceDxe
+  FILE_GUID                 = a65432cf-2100-11e4-be7a-9439e561613a
+  MODULE_TYPE               = UEFI_DRIVER
+  VERSION_STRING            = 0.1
+  ENTRY_POINT               = DriverArpServiceDxeDriverEntryPoint
+  UNLOAD_IMAGE              = DriverArpServiceDxeUnload
+
+[Packages]
+  MdePkg/MdePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydeDebugAssistPkg/InsydeDebugAssistPkg.dec
+
+[Sources]
+  DriverArpServiceDxe.h
+  DriverArpServiceDxe.c
+  Tree.h
+  Tree.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  BaseLib
+  UefiLib
+  DevicePathLib
+  DebugLib
+  DxeServicesLib
+
+[Protocols]
+  gEfiLoadedImageProtocolGuid
+#  gEfiFirmwareVolume2ProtocolGuid
+  gH2ODebugAssistDriverArpServiceProtocolGuid  ## Product
+
+[Guids]
+

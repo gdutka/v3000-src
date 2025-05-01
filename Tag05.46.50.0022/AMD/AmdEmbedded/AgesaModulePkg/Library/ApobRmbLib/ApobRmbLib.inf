@@ -1,0 +1,35 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = ApobRmbLib
+  FILE_GUID                      = 3449664f-9b2f-4c0c-94ac-ca3f8a0e3aeb
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ApobRmbLib
+
+[Sources.common]
+  ApobRmbLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  AmdPspApobLib
+
+[Guids]
+
+[Protocols]
+
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspApcbRecoveryEnable
+

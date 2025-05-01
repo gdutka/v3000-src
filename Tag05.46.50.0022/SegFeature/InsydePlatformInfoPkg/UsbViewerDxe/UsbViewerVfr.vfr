@@ -1,0 +1,251 @@
+/** @file
+  H2O USB Viewer VFR.
+
+;******************************************************************************
+;* Copyright (c) 2024, Insyde Software Corporation. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corp.
+;*
+;******************************************************************************
+*/
+
+#include <VfrCompatMacros.h>
+
+#include <Uefi/UefiMultiPhase.h>
+
+#include "UsbViewerSetup.h"
+
+formset
+  guid      = H2O_USB_VIEWER_FORMSET_GUID,
+  title     = STRING_TOKEN (STR_H2O_USB_VIEWER_FORMSET),
+  help      = STRING_TOKEN (STR_H2O_USB_VIEWER_FORMSET_HELP),
+  classguid = VFR_GUID_FROM_PCD (PcdGetPtr (PcdH2OUsbViewerLinkToFormsetGuid)),
+
+  varstore H2O_USB_VIEWER_VIEW_OPTION,
+    name = H2OUsbViewerViewOption,
+    guid = H2O_USB_VIEWER_FORMSET_GUID;
+
+  form
+    formid = H2O_USB_VIEWER_ENTRY_FORM_ID,
+    title = STRING_TOKEN (STR_H2O_USB_VIEWER_FORMSET);
+
+    subtitle text = STRING_TOKEN (STR_H2O_USB_VIEWER_FORMSET);
+    subtitle text = STRING_TOKEN (0x0000);
+
+    checkbox
+      varid      = H2OUsbViewerViewOption.FlatView,
+      questionid = H2O_USB_VIEWER_FLAT_VIEW_QUESTION_ID,
+      prompt     = STRING_TOKEN (STR_FLAT_VIEW),
+      help       = STRING_TOKEN (STR_FLAT_VIEW_HELP),
+      flags      = CHECKBOX_DEFAULT | INTERACTIVE,
+      default    = TRUE,
+    endcheckbox;
+
+    suppressif TRUE;
+      action
+        questionid = H2O_USB_VIEWER_ENTRY_REFRESH_QUESTION_ID,
+        prompt     = STRING_TOKEN (STR_REFRESH_ACTION),
+        help       = STRING_TOKEN (STR_REFRESH_ACTION_HELP),
+        flags      = INTERACTIVE,
+        config     = STRING_TOKEN (0x0000),
+      endaction;
+
+      checkbox
+        varid      = H2OUsbViewerViewOption.ShowHubInformation,
+        questionid = H2O_USB_VIEWER_SHOW_HUB_INFO_HIDDEN_QUESTION_ID,
+        prompt     = STRING_TOKEN (STR_USB_SHOW_HUB_INFORMATION),
+        help       = STRING_TOKEN (STR_USB_SHOW_HUB_INFORMATION),
+        flags      = 0,
+      endcheckbox;
+    endif;
+
+    label H2O_USB_VIEWER_LABEL_START;
+    //
+    // These options are left so that "offline" Setup config editors like
+    // H2OEZE and H2OUVE can parse them. Form contents between labels will be
+    // removed after the Callback function call.
+    //
+    subtitle text = STRING_TOKEN (STR_FORM_CALLBACK_REQUIRED);
+
+	checkbox
+      varid      = H2OUsbViewerViewOption.ShowHubInformation,
+      questionid = 0x8001,
+      prompt     = STRING_TOKEN (STR_USB_SHOW_HUB_INFORMATION),
+      help       = STRING_TOKEN (STR_USB_SHOW_HUB_INFORMATION),
+      flags      = 0,
+    endcheckbox;
+    label H2O_USB_VIEWER_LABEL_END;
+  endform;
+
+  //
+  // Host controller (Tier 1)
+  //
+  form
+    formid = H2O_USB_VIEWER_HOST_CONTROLLER_FORM_ID,
+    title = STRING_TOKEN (STR_USB_HOST_CONTROLLER_FORM);
+
+    subtitle text = STRING_TOKEN (STR_USB_DEVICE_FORM_SUBTITLE);
+    subtitle text = STRING_TOKEN (0x0000);
+
+    suppressif TRUE;
+      action
+        questionid = H2O_USB_VIEWER_HC_REFRESH_QUESTION_ID,
+        prompt     = STRING_TOKEN (STR_REFRESH_ACTION),
+        help       = STRING_TOKEN (STR_REFRESH_ACTION_HELP),
+        flags      = INTERACTIVE,
+        config     = STRING_TOKEN (0x0000),
+      endaction;
+    endif;
+
+    label H2O_USB_VIEWER_LABEL_START;
+    label H2O_USB_VIEWER_LABEL_END;
+  endform;
+
+  //
+  // Depth 0 (Tier 2)
+  //
+  form
+    formid = H2O_USB_VIEWER_DEPTH_0_DEVICE_FORM_ID,
+    title = STRING_TOKEN (STR_USB_DEPTH_0_DEVICE_FORM);
+
+    subtitle text = STRING_TOKEN (STR_USB_DEVICE_FORM_SUBTITLE);
+    subtitle text = STRING_TOKEN (0x0000);
+
+    suppressif TRUE;
+      action
+        questionid = H2O_USB_VIEWER_DEPTH_0_REFRESH_QUESTION_ID,
+        prompt     = STRING_TOKEN (STR_REFRESH_ACTION),
+        help       = STRING_TOKEN (STR_REFRESH_ACTION_HELP),
+        flags      = INTERACTIVE,
+        config     = STRING_TOKEN (0x0000),
+      endaction;
+    endif;
+
+    label H2O_USB_VIEWER_LABEL_START;
+    label H2O_USB_VIEWER_LABEL_END;
+  endform;
+
+  //
+  // Depth 1 (Tier 3)
+  //
+  form
+    formid = H2O_USB_VIEWER_DEPTH_1_DEVICE_FORM_ID,
+    title = STRING_TOKEN (STR_USB_DEPTH_1_DEVICE_FORM);
+
+    subtitle text = STRING_TOKEN (STR_USB_DEVICE_FORM_SUBTITLE);
+    subtitle text = STRING_TOKEN (0x0000);
+
+    suppressif TRUE;
+      action
+        questionid = H2O_USB_VIEWER_DEPTH_1_REFRESH_QUESTION_ID,
+        prompt     = STRING_TOKEN (STR_REFRESH_ACTION),
+        help       = STRING_TOKEN (STR_REFRESH_ACTION_HELP),
+        flags      = INTERACTIVE,
+        config     = STRING_TOKEN (0x0000),
+      endaction;
+    endif;
+
+    label H2O_USB_VIEWER_LABEL_START;
+    label H2O_USB_VIEWER_LABEL_END;
+  endform;
+
+  //
+  // Depth 2 (Tier 4)
+  //
+  form
+    formid = H2O_USB_VIEWER_DEPTH_2_DEVICE_FORM_ID,
+    title = STRING_TOKEN (STR_USB_DEPTH_2_DEVICE_FORM);
+
+    subtitle text = STRING_TOKEN (STR_USB_DEVICE_FORM_SUBTITLE);
+    subtitle text = STRING_TOKEN (0x0000);
+
+    suppressif TRUE;
+      action
+        questionid = H2O_USB_VIEWER_DEPTH_2_REFRESH_QUESTION_ID,
+        prompt     = STRING_TOKEN (STR_REFRESH_ACTION),
+        help       = STRING_TOKEN (STR_REFRESH_ACTION_HELP),
+        flags      = INTERACTIVE,
+        config     = STRING_TOKEN (0x0000),
+      endaction;
+    endif;
+
+    label H2O_USB_VIEWER_LABEL_START;
+    label H2O_USB_VIEWER_LABEL_END;
+  endform;
+
+  //
+  // Depth 3 (Tier 5)
+  //
+  form
+    formid = H2O_USB_VIEWER_DEPTH_3_DEVICE_FORM_ID,
+    title = STRING_TOKEN (STR_USB_DEPTH_3_DEVICE_FORM);
+
+    subtitle text = STRING_TOKEN (STR_USB_DEVICE_FORM_SUBTITLE);
+    subtitle text = STRING_TOKEN (0x0000);
+
+    suppressif TRUE;
+      action
+        questionid = H2O_USB_VIEWER_DEPTH_3_REFRESH_QUESTION_ID,
+        prompt     = STRING_TOKEN (STR_REFRESH_ACTION),
+        help       = STRING_TOKEN (STR_REFRESH_ACTION_HELP),
+        flags      = INTERACTIVE,
+        config     = STRING_TOKEN (0x0000),
+      endaction;
+    endif;
+
+    label H2O_USB_VIEWER_LABEL_START;
+    label H2O_USB_VIEWER_LABEL_END;
+  endform;
+
+  //
+  // Depth 4 (Tier 6)
+  //
+  form
+    formid = H2O_USB_VIEWER_DEPTH_4_DEVICE_FORM_ID,
+    title = STRING_TOKEN (STR_USB_DEPTH_4_DEVICE_FORM);
+
+    subtitle text = STRING_TOKEN (STR_USB_DEVICE_FORM_SUBTITLE);
+    subtitle text = STRING_TOKEN (0x0000);
+
+    suppressif TRUE;
+      action
+        questionid = H2O_USB_VIEWER_DEPTH_4_REFRESH_QUESTION_ID,
+        prompt     = STRING_TOKEN (STR_REFRESH_ACTION),
+        help       = STRING_TOKEN (STR_REFRESH_ACTION_HELP),
+        flags      = INTERACTIVE,
+        config     = STRING_TOKEN (0x0000),
+      endaction;
+    endif;
+
+    label H2O_USB_VIEWER_LABEL_START;
+    label H2O_USB_VIEWER_LABEL_END;
+  endform;
+
+  //
+  // Depth 5 (Tier 7) (Function device only. No hub allowed.)
+  //
+  form
+    formid = H2O_USB_VIEWER_DEPTH_5_DEVICE_FORM_ID,
+    title = STRING_TOKEN (STR_USB_DEPTH_5_DEVICE_FORM);
+
+    subtitle text = STRING_TOKEN (STR_USB_DEVICE_FORM_SUBTITLE);
+    subtitle text = STRING_TOKEN (0x0000);
+
+    suppressif TRUE;
+      action
+        questionid = H2O_USB_VIEWER_DEPTH_5_REFRESH_QUESTION_ID,
+        prompt     = STRING_TOKEN (STR_REFRESH_ACTION),
+        help       = STRING_TOKEN (STR_REFRESH_ACTION_HELP),
+        flags      = INTERACTIVE,
+        config     = STRING_TOKEN (0x0000),
+      endaction;
+    endif;
+
+    label H2O_USB_VIEWER_LABEL_START;
+    label H2O_USB_VIEWER_LABEL_END;
+  endform;
+
+endformset;

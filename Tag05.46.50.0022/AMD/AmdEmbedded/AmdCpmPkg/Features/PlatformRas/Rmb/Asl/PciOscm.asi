@@ -1,0 +1,90 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2018-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ * ***************************************************************************
+ */
+
+
+  //
+  //This is for reference only code, the sample code is from 
+  //ACPI 6.2 section 6.2.11.4 ASL Sample
+  //POSC is field from OscApei.asi OperationRegion(RASD) for change PCI/PCI-E device _OSC firmware return value on-fly.
+  //POSS is field from OscApei.asi OperationRegion(RASD) for save _OSC support field.
+  //
+  External (POSS, FieldUnitObj)
+  External (POSC, FieldUnitObj)
+  Name(SUPP,0) // PCI _OSC Support Field value
+  Name(CTRL,0) // PCI _OSC Control Field value
+
+  Method(_OSC,4)
+  { // Check for proper UUID
+    If(LEqual(Arg0,ToUUID("33DB4D5B-1FF7-401C-9657-7441C03DD766")))
+    {
+      // Create DWord-adressable fields from the Capabilities Buffer
+      CreateDWordField(Arg3,0,CDW1)
+      CreateDWordField(Arg3,4,CDW2)
+      CreateDWordField(Arg3,8,CDW3)
+      // Save Capabilities DWord2 & 3
+      Store(CDW2,SUPP)
+      Store(CDW3,CTRL)
+      // Only allow native hot plug control if OS supports:
+      // * ASPM
+      // * Clock PM
+      // * MSI/MSI-X
+      If(LNotEqual(And(SUPP, 0x16), 0x16))
+      {
+        And(CTRL,0x1E,CTRL) // Mask bit 0 (and undefined bits)
+      }
+      // Always allow native PME, AER (no dependencies)
+      // Never allow SHPC (no SHPC controller in this system)
+      And(CTRL,0x1D,CTRL)
+      If(LNot(And(CDW1,1))) // Query flag clear?
+      { // Disable GPEs for features granted native control.
+        If(And(CTRL,0x01)) // Hot plug control granted?
+        {
+          Store(0,HPCE) // clear the hot plug SCI enable bit
+          Store(1,HPCS) // clear the hot plug SCI status bit
+        }
+        If(And(CTRL,0x04)) // PME control granted?
+        {
+        Store(0,PMCE) // clear the PME SCI enable bit
+        Store(1,PMCS) // clear the PME SCI status bit
+        }
+        If(And(CTRL,0x10)) // OS restoring PCIe cap structure?
+        { // Set status to not restore PCIe cap structure
+          // upon resume from S3
+          Store(1,S3CR)
+        }
+      }
+      If(LNotEqual(Arg1,One))
+      { // Unknown revision
+        Or(CDW1,0x08,CDW1)
+      }
+      //AMD start
+      //Update CTRL (DWORD 3) from Platform RASD
+      //
+      And(CTRL,POSC,CTRL)
+      //
+      //AMD end
+
+      If(LNotEqual(CDW3,CTRL))
+      { // Capabilities bits were masked
+        Or(CDW1,0x10,CDW1)
+      }
+      // Update DWORD3 in the buffer
+      Store(CTRL,CDW3)
+
+      //AMD start
+      //
+      //Update to RASD oreration region.
+      Store(SUPP, POSS) //Store SUPP (DWORD 2) to Platform RASD
+      //
+      //AMD end
+
+      Return(Arg3)
+    } Else {
+      Or(CDW1,4,CDW1) // Unrecognized UUID
+      Return(Arg3)
+    }
+  } // End _OSC

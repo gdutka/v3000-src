@@ -1,0 +1,63 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdHspFtpmDxe
+  FILE_GUID                      = 851D895C-2212-4D81-8316-18D7C13E5F60
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdHspfTPMDxeDriverEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  AmdBaseLib
+  AmdHspFtpmLib
+  AmdPspCommonLib
+  UefiDriverEntryPoint
+  AmdHeapLib
+  SmnAccessLib
+  HspLib
+
+[Sources]
+  AmdHspFtpmDxe.c
+
+[Protocols]
+  gAmdFtpmProtocolGuid                          ## Publish
+  gAmdHspAcpiProtocolGuid                       ## Publish
+  gEfiPciEnumerationCompleteProtocolGuid        ## CONSUMES
+  gEfiPciIoProtocolGuid                         ## CONSUMES
+  gEfiAcpiTableProtocolGuid                     ## CONSUMES
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspMmioBase
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspBDF
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspUpBridgeBDF
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspAcpiFenceEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspCoreEnable
+
+[Guids]
+  gEfiEventReadyToBootGuid                       ## CONSUMES
+  gEfiEventLegacyBootGuid
+  gEfiEndOfDxeEventGroupGuid
+  gAmdHspPciCfgS3SaveUefiVariableGuid
+
+[Depex]
+  TRUE
+

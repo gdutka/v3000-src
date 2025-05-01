@@ -1,0 +1,83 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmDisplayFeatureDxe
+  FILE_GUID             = 57E9EEE9-EB7D-4453-BBF7-6C138BF06458
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmDisplayFeatureDxeEntryPoint
+
+[Sources.common]
+  Asl/AtpxAtifSsdt/AtpxAtifDGpu1.asl
+  Asl/AtpxAtifSsdt/AtpxAtifDGpu2.asl
+  Asl/AtpxAtifSsdt/AtpxAtifIGpu1.asl
+  Asl/AtpxAtifSsdt/AtpxAtifIGpu2.asl
+  Asl/Common/ATCS.asi
+  Asl/Common/ATIF.asi
+  Asl/Common/ATPX.asi
+  Asl/Common/ATRM.asi
+  Asl/Common/DgpuDsd.asi
+  Asl/Common/DgpuDsdGppx.asi
+  Asl/Common/DgpuDsdSwds.asi
+  Asl/Common/DgpuDsm.asi
+  Asl/DGpuSsdt/DGpuConnectEvent.asl
+  Asl/DGpuSsdt/DGpuD3Cold.asl
+  Asl/DGpuSsdt/DGpuOverTemperature.asl
+  Asl/DGpuSsdt/DGpuScope1.asl
+  Asl/DGpuSsdt/DGpuScope2.asl
+  Asl/IGpuSsdt/IGpuGlobalMethod1.asl
+  Asl/IGpuSsdt/IGpuGlobalMethod2.asl
+  Asl/IGpuSsdt/IGpuGlobalMethod3.asl
+  Asl/IGpuSsdt/IGpuGlobalMethod4.asl
+  Asl/IGpuSsdt/IGpuGlobalMethod5.asl
+  Asl/SmartMuxSsdt/SmartMux.asl
+  AmdCpmDisplayFeatureDxe.c
+  AmdCpmDisplayFeatureInitLate.c
+  AmdCpmDisplayFeatureInitMid.c
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  UefiDriverEntryPoint
+  AmdCpmBaseLib
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Protocols]
+  gAmdCpmTableProtocolGuid
+  gAmdCpmNvDataProtocolGuid
+  gEfiPciIoProtocolGuid
+  gAmdCpmDisplayFeatureProtocolGuid
+  gAmdCpmAllPciIoProtocolsInstalledProtocolGuid
+  gBootTimeRecordProtocolGuid
+
+[Ppis]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.AcpiDisableDgpuAudioSwSmi
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmDgpuSsid
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmDgpuAudioSsid
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSetS0i3PmeTurnOffDelay
+  gAmdCpmPkgTokenSpaceGuid.NonZ10CapPcieZstateSupport
+
+[Depex]
+  gAmdCpmTableProtocolGuid
+  AND
+  gAmdCpmNvDataProtocolGuid
+

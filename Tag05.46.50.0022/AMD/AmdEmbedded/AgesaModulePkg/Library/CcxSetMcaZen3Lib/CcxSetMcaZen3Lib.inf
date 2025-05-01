@@ -1,0 +1,38 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = CcxSetMcaZen3Lib
+  FILE_GUID                      = 63B24306-ABFC-4491-B9A5-B353EDF970A0
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CcxSetMcaLib
+
+[Sources.common]
+  CcxSetMcaZen3Lib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  IdsLib
+  CcxRolesLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+
+[Depex]
+
+

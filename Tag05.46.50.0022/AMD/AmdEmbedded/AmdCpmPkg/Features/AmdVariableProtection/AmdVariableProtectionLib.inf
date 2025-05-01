@@ -1,0 +1,44 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2022-2023 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdVariableProtectionLib
+  FILE_GUID                      = 5779D622-696A-48CB-A3D5-F3A28411D23C
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.1
+  LIBRARY_CLASS                  = AmdVariableProtectionLib | DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER
+
+[Sources]
+  AmdVariableProtectionLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  BaseMemoryLib
+  DebugLib
+  PcdLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  VariablePolicyHelperLib
+
+[Guids]
+  gAmdVariableProtectionVariableGuid                    ## CONSUMES
+  gEfiEventVirtualAddressChangeGuid
+
+[Protocols]
+  gEdkiiVarCheckProtocolGuid
+  gEdkiiVariablePolicyProtocolGuid
+
+[Depex]
+  gEfiVariableWriteArchProtocolGuid
+

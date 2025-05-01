@@ -1,0 +1,45 @@
+## @file
+#  The CPU specific programming for PiSmmCpuDxeSmm module.
+#
+#  Copyright (c) 2009 - 2016, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmCpuFeaturesLib
+  MODULE_UNI_FILE                = SmmCpuFeaturesLib.uni
+  FILE_GUID                      = FC3DC10D-D271-422a-AFF3-CBCF70344431
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SmmCpuFeaturesLib
+  CONSTRUCTOR                    = SmmCpuFeaturesLibConstructor
+
+[Sources]
+  CpuFeaturesLib.h
+  SmmCpuFeaturesLib.c
+  SmmCpuFeaturesLibCommon.c
+  SmmCpuFeaturesLibNoStm.c
+  TraditionalMmCpuFeaturesLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+#[-start-221104-IB14740270-add]#
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+#[-end-221104-IB14740270-add]#
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  MemoryAllocationLib
+  DebugLib
+#[-start-221104-IB14740270-add]#
+  !if $(SMM_ISOLATION_SUPPORT) == YES
+  SmmSupervisorFeatureLib
+  !endif
+#[-end-221104-IB14740270-add]#
+
+[Pcd]
+  gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber        ## SOMETIMES_CONSUMES

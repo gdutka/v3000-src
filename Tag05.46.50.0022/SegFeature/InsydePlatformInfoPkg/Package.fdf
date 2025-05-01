@@ -1,0 +1,78 @@
+## @file
+#  Insyde Platform Information package Flash Description File
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+[FV.RECOVERYFV]
+
+[FV.DXEFV]
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OPlatformInfoSupported
+
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OMemoryDeviceInfoSupported
+  INF InsydePlatformInfoPkg/MemoryDeviceInfoDxe/MemoryDeviceInfoDxe.inf
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupMemoryInfoSupported
+  INF InsydePlatformInfoPkg/MemoryInfoSetupUtilityDxe/MemoryInfoSetupUtilityDxe.inf
+!endif
+!endif
+
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2ONvmeInfoSupported
+  INF InsydePlatformInfoPkg/NvmeInfoDxe/NvmeInfoDxe.inf
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupNvmeInfoSupported
+  INF InsydePlatformInfoPkg/NvmeInfoSetupUtilityDxe/NvmeInfoSetupUtilityDxe.inf
+!endif
+!endif
+
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciLookupTableSupported
+  INF InsydePlatformInfoPkg/PciLookupDxe/PciLookupDxe.inf
+!endif
+
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciDeviceInfoSupported
+  INF InsydePlatformInfoPkg/PciDeviceInfoDxe/PciDeviceInfoDxe.inf
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupPciDeviceInfoSupported && gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciLookupTableSupported
+  INF InsydePlatformInfoPkg/PciDeviceInfoSetupUtilityDxe/PciDeviceInfoSetupUtilityDxe.inf
+!endif
+!endif
+
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OCpuDeviceInfoSupported
+  INF InsydePlatformInfoPkg/CpuDeviceInfoDxe/CpuDeviceInfoDxe.inf
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupCpuInfoSupported
+  INF InsydePlatformInfoPkg/CpuInfoSetupUtilityDxe/CpuInfoSetupUtilityDxe.inf
+!endif
+!endif
+
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OSataDriveInfoSupported
+  INF InsydePlatformInfoPkg/SataDriveInfoDxe/SataDriveInfoDxe.inf
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupSataDriveInfoSupported
+  INF InsydePlatformInfoPkg/SataDriveInfoSetupUtilityDxe/SataDriveInfoSetupUtilityDxe.inf
+!endif
+!endif
+
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OUsbTextLookupSupported
+  INF InsydePlatformInfoPkg/UsbTextLookupDxe/UsbTextLookupDxe.inf
+!endif
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupUsbViewerSupported
+  INF InsydePlatformInfoPkg/UsbViewerDxe/UsbViewerDxe.inf
+!endif
+
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OConsoleBootMessageSupported
+  INF InsydePlatformInfoPkg/ConsoleBootMsgDxe/ConsoleBootMsgDxe.inf
+  INF InsydePlatformInfoPkg/PlatformInfoBootMsgDxe/PlatformInfoBootMsgDxe.inf
+!endif
+
+  INF InsydePlatformInfoPkg/DeviceInfoLookupDxe/DeviceInfoLookupDxe.inf
+
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OSDEmmcInfoSupported
+  INF InsydePlatformInfoPkg/SDEmmcInfoDxe/SDEmmcInfoDxe.inf
+!if gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupSDEmmcInfoSupported
+  INF InsydePlatformInfoPkg/SDEmmcInfoSetupUtilityDxe/SDEmmcInfoSetupUtilityDxe.inf
+!endif
+!endif
+
+!endif

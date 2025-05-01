@@ -1,0 +1,42 @@
+## @file
+#  CPU Exception Handler library instance for SMM modules.
+#
+#  Copyright (c) 2013 - 2018, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmSupervisorPageMgmtLib
+  FILE_GUID                      = E7290CD8-58AC-455E-A6E9-8DECD3F792A9
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.1
+  LIBRARY_CLASS                  = SmmSupervisorPageMgmtLib|DXE_SMM_DRIVER
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+
+[Sources]
+  SmmSupervisorPageMgmtLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  SmmSupervisorMemMgmtLib
+  SmmSupervisorPolicyMgmtLib
+  ErrorDataLogLib
+
+[FeaturePcd]
+  gSmmSupervisorPkgTokenSpaceGuid.SupportLegacyMemoryPolicy         ## CONSUMES

@@ -1,0 +1,179 @@
+/** @file
+  VFR of PciDeviceInfoSetupUtilityDxe.
+
+;******************************************************************************
+;* Copyright (c) 2023, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corp.
+;*
+;******************************************************************************
+*/
+
+#include <VfrCompatMacros.h>
+
+#include <Guid/PciDeviceInfoSetupUtilityHii.h>
+
+#include "PciDeviceInfoSetupNVDataStruc.h"
+
+formset
+  guid      = PCI_DEVICE_INFO_SETUP_FORMSET_GUID,
+  title     = STRING_TOKEN (STR_ROOT_FORM_TITLE),
+  help      = STRING_TOKEN (STR_ROOT_FORM_TITLE),
+  classguid = VFR_GUID_FROM_PCD (PcdGetPtr (PcdH2OPciDeviceInfoLinkToFormsetGuid)),
+
+  varstore PCI_DEVICE_INFO_CONFIGURATION,
+    varid = PCI_DEVICE_INFO_CONFIGURATION_VARSTORE_ID,
+    name  = PciDeviceInfoSetupConfig,
+    guid  = PCI_DEVICE_INFO_CONFIGURATION_GUID;
+
+  form
+    formid = H2O_PCI_DEVICE_INFO_ROOT_FORM_ID,
+    title  = STRING_TOKEN (STR_ROOT_FORM_TITLE);
+
+    checkbox varid = PciDeviceInfoSetupConfig.ShowActualDeviceName,
+      prompt   = STRING_TOKEN (STR_SHOW_ACTUAL_DEVICE_NAME_PROMPT),
+      help     = STRING_TOKEN (STR_SHOW_ACTUAL_DEVICE_NAME_HELP),
+      flags    = INTERACTIVE,
+      key      = H2O_PCI_DEVICE_INFO_SHOW_ACTUAL_DEVICE_NAME_QUESTION_ID,
+      default  = 1,
+    endcheckbox;
+
+    checkbox varid = PciDeviceInfoSetupConfig.ShowDeviceTree,
+      prompt   = STRING_TOKEN (STR_SHOW_DEVICE_TREE_PROMPT),
+      help     = STRING_TOKEN (STR_SHOW_DEVICE_TREE_HELP),
+      flags    = INTERACTIVE,
+      key      = H2O_PCI_DEVICE_INFO_SHOW_DEVICE_TREE_QUESTION_ID,
+      default  = 1,
+    endcheckbox;
+
+    oneof varid = PciDeviceInfoSetupConfig.FilteringMode,
+      questionid  = H2O_PCI_DEVICE_INFO_FILTERING_MODE_QUESTION_ID,
+      prompt      = STRING_TOKEN (STR_FILTERING_MODE_PROMPT),
+      help        = STRING_TOKEN (STR_FILTERING_MODE_HELP),
+      option text = STRING_TOKEN (STR_FILTERING_MODE_ALL_DEVICE),       value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN (STR_FILTERING_MODE_PCI_DEVICE_ONLY),  value = 1, flags = 0;
+      option text = STRING_TOKEN (STR_FILTERING_MODE_PCIE_DEVICE_ONLY), value = 2, flags = 0;
+    endoneof;
+
+    suppressif TRUE;
+      checkbox varid = PciDeviceInfoSetupConfig.FormRefresh,
+        prompt   = STRING_TOKEN (STR_FORM_REFRESH_PROMPT),
+        help     = STRING_TOKEN (STR_FORM_REFRESH_HELP),
+        flags    = INTERACTIVE,
+        key      = H2O_PCI_DEVICE_INFO_FORM_REFRESH_QUESTION_ID,
+        default  = 0,
+      endcheckbox;
+    endif;
+
+    subtitle text = STRING_TOKEN (STR_EMPTY);
+
+    label H2O_PCI_DEVICE_INFO_DEVICE_LIST_LABEL_START;
+    label H2O_PCI_DEVICE_INFO_DEVICE_LIST_LABEL_END;
+  endform;
+
+  form
+    formid = H2O_PCI_DEVICE_INFO_DEVICE_INFO_FORM_ID,
+    title  = STRING_TOKEN (STR_SUBFORM_TITLE);
+
+    text
+      help    = STRING_TOKEN(STR_DEVICE_PATH_HELP),
+      text    = STRING_TOKEN(STR_DEVICE_PATH_TEXT),
+      text    = STRING_TOKEN(STR_DEVICE_PATH_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_DEVICE_PATH_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_PCI_LOCATION_HELP),
+      text    = STRING_TOKEN(STR_PCI_LOCATION_TEXT),
+      text    = STRING_TOKEN(STR_PCI_LOCATION_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_PCI_LOCATION_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_SLOT_NAME_HELP),
+      text    = STRING_TOKEN(STR_SLOT_NAME_TEXT),
+      text    = STRING_TOKEN(STR_SLOT_NAME_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_SLOT_NAME_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_VENDOR_ID_HELP),
+      text    = STRING_TOKEN(STR_VENDOR_ID_TEXT),
+      text    = STRING_TOKEN(STR_VENDOR_ID_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_VENDOR_ID_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_DEVICE_ID_HELP),
+      text    = STRING_TOKEN(STR_DEVICE_ID_TEXT),
+      text    = STRING_TOKEN(STR_DEVICE_ID_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_DEVICE_ID_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_HEADER_TYPE_HELP),
+      text    = STRING_TOKEN(STR_HEADER_TYPE_TEXT),
+      text    = STRING_TOKEN(STR_HEADER_TYPE_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_HEADER_TYPE_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_CLASS_CODE_HELP),
+      text    = STRING_TOKEN(STR_CLASS_CODE_TEXT),
+      text    = STRING_TOKEN(STR_CLASS_CODE_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_CLASS_CODE_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_MAX_LINK_WIDTH_HELP),
+      text    = STRING_TOKEN(STR_MAX_LINK_WIDTH_TEXT),
+      text    = STRING_TOKEN(STR_MAX_LINK_WIDTH_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_MAX_LINK_WIDTH_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_CURRENT_LINK_WIDTH_HELP),
+      text    = STRING_TOKEN(STR_CURRENT_LINK_WIDTH_TEXT),
+      text    = STRING_TOKEN(STR_CURRENT_LINK_WIDTH_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_CURRENT_LINK_WIDTH_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_MAX_LINK_SPEED_HELP),
+      text    = STRING_TOKEN(STR_MAX_LINK_SPEED_TEXT),
+      text    = STRING_TOKEN(STR_MAX_LINK_SPEED_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_MAX_LINK_SPEED_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_CURRENT_LINK_SPEED_HELP),
+      text    = STRING_TOKEN(STR_CURRENT_LINK_SPEED_TEXT),
+      text    = STRING_TOKEN(STR_CURRENT_LINK_SPEED_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_PCI_DEVICE_INFO_CURRENT_LINK_SPEED_QUESTION_ID;
+
+#if FeaturePcdGet (PcdH2OPciLookUpCapabilityIntnTableSupported)
+    subtitle text = STRING_TOKEN (STR_EMPTY);
+    checkbox varid = PciDeviceInfoSetupConfig.DisplayCapabilityIntpn,
+      prompt      = STRING_TOKEN (STR_DISPLAY_CAP_INTPN_PROMPT),
+      help        = STRING_TOKEN (STR_DISPLAY_CAP_INTPN_HELP),
+      flags       = INTERACTIVE,
+      key         = H2O_PCI_DEVICE_INFO_DISPLAY_CAPABILITY_INTPN_QUESTION_ID,
+      default     = 0,
+    endcheckbox;
+#endif
+
+    subtitle text = STRING_TOKEN (STR_EMPTY);
+    subtitle text = STRING_TOKEN (STR_PCI_CAPABILITIES);
+
+    label H2O_PCI_DEVICE_INFO_PCI_CAPABILITY_LIST_LABEL_START;
+    label H2O_PCI_DEVICE_INFO_PCI_CAPABILITY_LIST_LABEL_END;
+
+    label H2O_PCI_DEVICE_INFO_PCIE_CAPABILITY_LIST_LABEL_START;
+    label H2O_PCI_DEVICE_INFO_PCIE_CAPABILITY_LIST_LABEL_END;
+  endform;
+
+endformset;

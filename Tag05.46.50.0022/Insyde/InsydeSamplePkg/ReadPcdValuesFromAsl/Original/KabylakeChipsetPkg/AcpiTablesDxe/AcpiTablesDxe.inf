@@ -1,0 +1,191 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c)2012 -2016, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+### @file
+#  Component information file for the ACPI tables
+#
+# @copyright
+#  INTEL CONFIDENTIAL
+#  Copyright 1999 - 2016 Intel Corporation.
+#
+#  The source code contained or described herein and all documents related to the
+#  source code ("Material") are owned by Intel Corporation or its suppliers or
+#  licensors. Title to the Material remains with Intel Corporation or its suppliers
+#  and licensors. The Material may contain trade secrets and proprietary and
+#  confidential information of Intel Corporation and its suppliers and licensors,
+#  and is protected by worldwide copyright and trade secret laws and treaty
+#  provisions. No part of the Material may be used, copied, reproduced, modified,
+#  published, uploaded, posted, transmitted, distributed, or disclosed in any way
+#  without Intel's prior express written permission.
+#
+#  No license under any patent, copyright, trade secret or other intellectual
+#  property right is granted to or conferred upon you by disclosure or delivery
+#  of the Materials, either expressly, by implication, inducement, estoppel or
+#  otherwise. Any license under such intellectual property rights must be
+#  express and approved by Intel in writing.
+#
+#  Unless otherwise agreed by Intel in writing, you may not remove or alter
+#  this notice or any other notice embedded in Materials by Intel or
+#  Intel's suppliers or licensors in any way.
+#
+#  This file contains a 'Sample Driver' and is licensed as such under the terms
+#  of your license agreement with Intel or your vendor. This file may be modified
+#  by the user, subject to the additional terms of the license agreement.
+#
+# @par Specification Reference:
+#
+# Defines Section - statements that will be processed to create a Makefile.
+#
+# @par Glossary:
+###
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AcpiTablesDxe
+  FILE_GUID                      = 7E374E25-8E01-4FEE-87F2-390C23C606CD
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 1.0
+
+[Sources]
+  Fadt/Fadt.act
+  Facs/Facs.act
+  Hpet/Hpet.act
+  Madt/Madt.act
+  Mcfg/Mcfg.act
+!if $(GCC)==Gcc
+!else
+  Dsdt/DSDT.ASL
+!endif
+  SsdtSata/SsdtSata0Ide.asl
+  #
+  # AdvancedFeaturesBegin
+  #
+  SsdtRvp/THERMAL.ASL 
+#  SsdtSds/ThermalSds.ASL
+  SsdtRtd3/SdsRtd3.asl
+  SsdtRtd3/Rvp10Rtd3.asl
+  SsdtRtd3/Rvp3Rtd3.asl
+  SsdtRtd3/Rvp3Sku31Rtd3.asl
+  SsdtRtd3/Rvp7Rtd3.asl
+  SsdtRtd3/Rvp11Rtd3.asl
+  SsdtRtd3/SdlBrkRtd3.asl
+!if $(GCC)==Gcc
+!else
+  SsdtXhci/UsbPortXhciSds.asl
+  SsdtXhci/UsbPortXhciRvp3.asl
+  SsdtXhci/UsbPortXhciRvp7.asl
+!endif
+  SsdtXhci/UsbPortXhciRvp8.asl
+  SsdtXhci/UsbPortXhciRvp10.asl
+  SsdtXhci/UsbPortXhciRvp11.asl
+  SsdtXhci/UsbPortXhciRvp16.asl
+  SsdtXhci/UsbPortXhciKblSDdr4Udimm.asl
+  #
+  # AdvancedFeaturesEnd
+  #
+  Asf/Asf.act
+  Aspt/Aspt.act
+  Aspt/Aspt.h
+  Boot/Boot.act
+  Boot/Boot.h
+  Dbgp/Dbgp.act
+  Dbgp/Dbgp.h
+  Slic/Slic.act
+  Slic/Slic.h
+  Spcr/Spcr.act
+  Spcr/Spcr.h
+
+[Binaries.X64]
+!if $(GCC)==Gcc
+  ASL|Dsdt/DSDT.aml
+  ASL|SsdtXhci/UsbPortXhciSds.aml
+  ASL|SsdtXhci/UsbPortXhciRvp3.aml
+  ASL|SsdtXhci/UsbPortXhciRvp7.aml
+!endif
+
+################################################################################
+#
+# Package Dependency Section - list of Package files that are required for
+#                              this module.
+#
+################################################################################
+[Packages]
+  MdePkg/MdePkg.dec
+#  KabylakePlatSamplePkg/PlatformPkg.dec
+#  ClientCommonPkg/ClientCommonPkg.dec
+#  KabylakeSiliconPkg/SiPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  $(CHIPSET_REF_CODE_PKG)/SiPkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  PerformancePkg/PerformancePkg.dec
+
+################################################################################
+#
+# Library Class Section - list of Library Classes that are required for
+#                         this module.
+#
+################################################################################
+
+[LibraryClasses]
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress ## CONSUMES
+  gSiPkgTokenSpaceGuid.PcdPciExpressRegionLength    ## CONSUMES
+  gPerformancePkgTokenSpaceGuid.PcdPerfPkgAcpiIoPortBaseAddress
+  gChipsetPkgTokenSpaceGuid.PcdCmosIndexPort
+  gChipsetPkgTokenSpaceGuid.PcdCmosDataPort
+  gInsydeTokenSpaceGuid.PcdSoftwareSmiPort
+  gChipsetPkgTokenSpaceGuid.PcdPchGpioBaseAddress
+  gChipsetPkgTokenSpaceGuid.PcdPciExpressMaxBusNumber
+  gChipsetPkgTokenSpaceGuid.PcdGpe0BlkOffset
+  gChipsetPkgTokenSpaceGuid.PcdGpe0BlkLen
+  gChipsetPkgTokenSpaceGuid.PcdPlatformDebugPort
+  gChipsetPkgTokenSpaceGuid.PcdH2OPort80DebugEnable
+  gChipsetPkgTokenSpaceGuid.PcdEfiPort80DebugEnable
+  gChipsetPkgTokenSpaceGuid.PcdDsdtRevision
+  gChipsetPkgTokenSpaceGuid.PcdDebugSizeMask
+  gChipsetPkgTokenSpaceGuid.PcdDebugSize
+  gChipsetPkgTokenSpaceGuid.PcdXtuControlIdBuffersize
+  gChipsetPkgTokenSpaceGuid.PcdXtuControlIdBuffersizeInBits
+  gChipsetPkgTokenSpaceGuid.PcdXmpDataBuffersize
+  gChipsetPkgTokenSpaceGuid.PcdXmpDataBuffersizeHalfInBits
+  gChipsetPkgTokenSpaceGuid.PcdThunderBoltSupported
+  gChipsetPkgTokenSpaceGuid.PcdSgAslCodeForWptLynxPointLp
+  gChipsetPkgTokenSpaceGuid.PcdSwitchableGraphicsSupported
+
+[FixedPcd]
+  gSiPkgTokenSpaceGuid.PcdAcpiBaseAddress           ## CONSUMES
+  gSiPkgTokenSpaceGuid.PcdTcoBaseAddress            ## CONSUMES
+  gPlatformModuleTokenSpaceGuid.PcdApicLocalAddress ## CONSUMES
+  gPlatformModuleTokenSpaceGuid.PcdApicIoAddress    ## CONSUMES
+  gPlatformModuleTokenSpaceGuid.PcdAcpiEnableSwSmi  ## CONSUMES
+  gPlatformModuleTokenSpaceGuid.PcdAcpiDisableSwSmi ## CONSUMES
+  gPlatformModuleTokenSpaceGuid.PcdApicIoIdPch      ## CONSUMES
+
+  gPlatformModuleTokenSpaceGuid.PcdApicLocalMmioSize
+  gPlatformModuleTokenSpaceGuid.PcdApicIoMmioSize
+
+[FeaturePcd]
+  gChipsetPkgTokenSpaceGuid.PcdApacSupport
+################################################################################
+#
+# Protocol C Name Section - list of Protocol and Protocol Notify C Names
+#                           that this module uses or produces.
+#
+################################################################################
+[Protocols]
+
+[PPIs]
+
+[Guids]
+
+[Depex]

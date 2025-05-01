@@ -1,0 +1,35 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CbsIdsHookExtLibDxe
+  FILE_GUID                      = DE89A0D9-483F-47DC-B17E-4C8D941FD8C4
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdIdsHookExtLib|DXE_DRIVER
+
+[sources.common]
+  CbsIdsLib/CbsIdsExtHookLibDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiBootServicesTableLib
+  UefiLib
+
+[Guids]
+
+[Protocols]
+  gCbsProtocolGuid
+
+[DEPEX]
+  gCbsProtocolGuid
+

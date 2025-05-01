@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchDxeLegacyInterruptLib
+  FILE_GUID                      = 65ADDA45-79F3-496F-B965-96CE2F7272EB
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LegacyInterruptLib
+  CONSTRUCTOR                    = FchDxeLegacyInterruptLibConstructor
+
+
+[sources.common]
+  FchDxeLegacyInterruptLib.c
+
+[sources.ia32]
+
+[sources.x64]
+
+[LibraryClasses.common.DXE_DRIVER]
+  BaseLib
+  UefiLib
+  HobLib
+  PrintLib
+
+[LibraryClasses]
+  FchDxeLibV9
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+
+[Guids]
+
+[Protocols]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Songshan/FchSongshan.dec
+  AgesaPkg/AgesaPkg.dec
+
+[Depex]
+ gAmdFchSongshanDepexProtocolGuid
+
+

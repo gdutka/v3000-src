@@ -1,0 +1,65 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchProm21SmmInit
+  FILE_GUID                      = 30A5E718-39CA-441C-BED3-F4A3A931458D
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.1
+  ENTRY_POINT                    = FchProm21SmmEntryPoint
+
+[Sources]
+  FchProm21Smm.c
+  FchProm21Smm.h
+  FchProm21SmmBTSwPatch.c
+  FchProm21SmmCf9ResetSmi.c
+  FchProm21SmmPowerButtonSmi.c
+  FchProm21SmmSwSmi.c
+  FchProm21SmmSxSmi.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  BaseLib
+  IoLib
+  PciLib
+  UefiBootServicesTableLib
+  FchBaseLib
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21GppPcieAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemAfterPciRestoreSwSmi
+
+[Guids]
+
+[Protocols]
+  gFchSmmMiscDispatchProtocolGuid        #CONSUMED
+  gFchSmmSxDispatch2ProtocolGuid         #CONSUMED
+  gFchSmmPwrBtnDispatch2ProtocolGuid     #CONSUMED
+  gFchSmmSwDispatch2ProtocolGuid         #CONSUMED
+  gAmdFchProm21InitProtocolGuid          #CONSUMED
+  gFchProm21SmmInitProtocolGuid          #PRODUCED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/Fch/Prom21/FchProm21ModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+
+[Depex]
+  gFchSmmSxDispatch2ProtocolGuid
+  AND
+  gFchSmmSwDispatch2ProtocolGuid
+  AND
+  gFchSmmPwrBtnDispatch2ProtocolGuid
+  AND
+  gFchSmmMiscDispatchProtocolGuid
+  AND
+  gAmdFchProm21InitProtocolGuid
+

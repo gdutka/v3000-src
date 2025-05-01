@@ -1,0 +1,142 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  LIBRARY_CLASS         = FchKeithDxeLib | DXE_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER
+  BASE_NAME             = FchKeithDxeLib
+  INF_VERSION           = 0x00010006
+  FILE_GUID             = d6376a09-0674-4a7c-86da-e3b21e128583
+  MODULE_TYPE           = BASE
+  VERSION_STRING        = 1.0
+
+[Sources]
+  FchPage.h
+  FchPlatform.h
+  FchAoacLinkListData.h
+  Common/AcpiLib.c
+  Common/AcpiLib.h
+  Common/FchAoacLib.c
+  Common/FchAoacLib.h
+  Common/FchCommon.c
+  Common/FchCommonCfg.h
+  Common/FchCommonSmm.c
+  Common/FchDef.h
+  Common/FchInterface.h
+  Common/FchLib.c
+  Common/FchPeLib.c
+  #Common/FchSmnLib.c
+  Common/MemLib.c
+  Common/PciLib.c
+  Keith/EnvDefKT.c
+  Keith/ResetDefKT.c
+  Keith/KTEspi/KTEspiLib.c
+  Keith/KTHwAcpi/KTHwAcpiEnv.c
+  Keith/KTHwAcpi/KTHwAcpiEnvService.c
+  Keith/KTHwAcpi/KTHwAcpiReset.c
+  Keith/KTHwAcpi/KTSSService.c
+  Keith/KTInterface/KTFchInitEnv.c
+  Keith/KTInterface/KTFchTaskLauncher.c
+  Keith/KTInterface/KTFchTaskLauncher.h
+  Keith/KTPcie/KTAbEnv.c
+  Keith/KTPcie/KTAbEnvService.c
+  Keith/KTPcie/KTAbReset.c
+  Keith/KTPcie/KTAbResetService.c
+  Keith/KTPcie/KTAbService.c
+  Keith/KTSata/KTAhciEnv.c
+  Keith/KTSata/KTAhciLib.c
+  Keith/KTSata/KTRaidEnv.c
+  Keith/KTSata/KTRaidLib.c
+  Keith/KTSata/KTSataEnv.c
+  Keith/KTSata/KTSataEnvLib.c
+  Keith/KTSata/KTSataEnvService.c
+  Keith/KTSata/KTSataLib.c
+  Keith/KTSata/KTSataD3Lib.c
+  Keith/KTSata/KTSataReset.c
+  Keith/KTSata/KTSataResetService.c
+  Keith/KTSd/KTSdEnv.c
+  Keith/KTSd/KTSdEnvService.c
+  Keith/KTSd/KTSdResetService.c
+  Keith/KTLpcSpi/KTLpcEnv.c
+  Keith/KTLpcSpi/KTLpcEnvService.c
+  Keith/KTLpcSpi/KTLpcReset.c
+  Keith/KTLpcSpi/KTLpcResetService.c
+  Keith/KTLpcSpi/KTSpiEnv.c
+  Keith/KTLpcSpi/KTSpiReset.c
+  Keith/KTUsb/KTUsbEnv.c
+  Keith/KTUsb/KTUsbReset.c
+  Keith/KTUsb/KTXhciEnv.c
+  Keith/KTUsb/KTXhciRecovery.c
+  Keith/KTUsb/KTXhciReset.c
+  Keith/KTUsb/KTXhciResetService.c
+  Keith/KTWifi/KTWifiEnv.c
+  Keith/KTWifi/KTWifiMid.c
+  Keith/KTWifi/KTWifiLate.c
+
+  Keith/KTHwAcpi/KTHwAcpiLate.c
+  Keith/KTHwAcpi/KTHwAcpiLateService.c
+  Keith/KTHwAcpi/KTHwAcpiMid.c
+  Keith/KTHwAcpi/KTHwAcpiMidService.c
+  Keith/KTInterface/KTFchInitLate.c
+  Keith/KTInterface/KTFchInitMid.c
+  Keith/KTInterface/KTFchInitS3.c
+  Keith/KTPcie/KTAbLate.c
+  Keith/KTPcie/KTAbMid.c
+  Keith/KTSata/KTAhciLate.c
+  Keith/KTSata/KTAhciMid.c
+  Keith/KTSata/KTRaidLate.c
+  Keith/KTSata/KTRaidMid.c
+  Keith/KTSata/KTSataLate.c
+  Keith/KTSata/KTSataMid.c
+  Keith/KTSata/KTSataService.c
+  Keith/KTSd/KTSdLate.c
+  Keith/KTSd/KTSdMid.c
+  Keith/KTSd/KTSdService.c
+  Keith/KTLpcSpi/KTLpcLate.c
+  Keith/KTLpcSpi/KTLpcMid.c
+  Keith/KTLpcSpi/KTSpiLate.c
+  Keith/KTLpcSpi/KTSpiMid.c
+  Keith/KTUsb/KTUsbLate.c
+  Keith/KTUsb/KTUsbMid.c
+  Keith/KTUsb/KTXhciLate.c
+  Keith/KTUsb/KTXhciMid.c
+  Keith/KTUsb/KTXhciService.c
+
+  Keith/KTXgbe/KTXgbeEnv.c
+  Keith/KTXgbe/KTXgbeLate.c
+  Keith/KTXgbe/KTXgbeLib.c
+  Keith/KTXgbe/KTXgbeMid.c
+  Keith/KTXgbe/KTXgbeReset.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  FabricResourceManagerLib
+  AmdCapsuleLib
+  FchBaseLib
+  NbioSmuV13Lib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0Led1Gpio
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0Led2Gpio
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1Led1Gpio
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1Led2Gpio
+
+[BuildOptions]
+
+
+

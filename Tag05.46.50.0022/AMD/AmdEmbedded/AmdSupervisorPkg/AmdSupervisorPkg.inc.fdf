@@ -1,0 +1,17 @@
+# *******************************************************************************
+#
+# Copyright (C) 2022-2023 Advanced Micro Devices, Inc. All rights reserved.
+#
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+# *******************************************************************************
+!if $(SMMSUPV_SOURCE_BUILD) == TRUE
+  INF  SmmSupervisorPkg/SmmSupervisor/SmmSupervisor.inf
+!else
+  !if $(SMMSUPV_BIN_DEBUG_VERSION) == TRUE
+    INF  AmdSupervisorPkg/Binary/SmmSupervisor/Debug/SmmSupervisorBin.inf
+  !else
+    INF  AmdSupervisorPkg/Binary/SmmSupervisor/Release/SmmSupervisorBin.inf
+  !endif
+!endif
+  INF SmmSupervisorPkg/SmmSupvErrorReport/SmmSupvErrorReport.inf

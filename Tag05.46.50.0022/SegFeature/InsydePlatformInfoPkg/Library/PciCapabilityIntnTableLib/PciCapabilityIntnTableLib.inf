@@ -1,0 +1,46 @@
+## @file
+#  Component description file of PciCapabilityIdTableLib.
+#
+#******************************************************************************
+#* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PciCapabilityIntnTableLib
+  FILE_GUID                      = 5914980B-1613-481A-9E4A-F87E49CE3240
+  MODULE_TYPE                    = UEFI_DRIVER
+  LIBRARY_CLASS                  = PciCapabilityIntnTableLib
+
+[Sources]
+  PciCapabilityIntnTableLib.c
+  PciCapabilityIntnStruc.c
+  PciCapabilityIntnStr.uni
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DevicePathLib
+  PrintLib
+  PciSegmentLib
+  HiiLib
+  UefiLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  PciCapabilityIntnTableLib
+
+[Protocols]
+  gEfiPciIoProtocolGuid

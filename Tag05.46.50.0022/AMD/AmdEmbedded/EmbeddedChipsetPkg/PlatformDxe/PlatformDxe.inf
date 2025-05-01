@@ -1,0 +1,102 @@
+## @file
+#  Component description file for the DXE driver of DxePlatform.
+#
+#*******************************************************************************
+#* Copyright (c) 2015 - 2020, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#*******************************************************************************
+
+[Defines]
+   INF_VERSION                    = 0x00010005
+   BASE_NAME                      = DxePlatform
+   FILE_GUID                      = 94EDD12A-419B-447F-9434-9B3B70783903
+   MODULE_TYPE                    = DXE_DRIVER
+   ENTRY_POINT                    = DxePlatformEntryPoint
+
+[Sources]
+  Platform.c
+  Platform.h
+  PlatformRegTable.c
+  KeyboardSetup.c
+  UsbLegacy.c
+  UsbLegacy.h
+  ../../AmdCbsPkg/Build/ResourceRMB/AmdCbsVariable.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydeOemServicesPkg/InsydeOemServicesPkg.dec
+  $(PROJECT_PKG)/Project.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AmdCpmPkg/Addendum/Oem/$(PLATFORM_NAME)/AmdCpmOemPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  PciExpressLib
+  IoLib
+  TimerLib
+  PostCodeLib
+  KernelConfigLib
+  ChipsetConfigLib
+  EfiRegTableLib
+  HobLib
+  DxeOemSvcChipsetLib
+  DxeServicesTableLib
+  PcdLib
+  MemRestoreLib
+  
+[Protocols]
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiPciEnumerationCompleteProtocolGuid
+  gEfiGlobalNvsAreaProtocolGuid
+  gEfiPs2PolicyProtocolGuid
+  gEfiHiiStringProtocolGuid
+  gEfiUsbLegacyPlatformProtocolGuid
+  gEfiIsaIoProtocolGuid
+  gEfiNotLegacyBootProtocolGuid
+  gPlatformNvmeInstalledProtocolGuid  
+  gEfiSmbiosProtocolGuid                        #CONSUME
+  gAmdSmbiosDxeInitCompleteProtocolGuid         #CONSUME 
+
+[Guids]
+  gEfiLoadAmdAhciUefiDriverProtocolGuid
+  gEfiEventExitBootServicesGuid
+  gCbsSystemConfigurationGuid
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdPlatformKeyList
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyFreeSupported
+  gInsydeTokenSpaceGuid.PcdFlashAreaSize
+  gInsydeTokenSpaceGuid.PcdH2ODdtSupported
+  gAmdCpmPkgTokenSpaceGuid.PcdNvmeRaid
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable
+  gInsydeTokenSpaceGuid.PcdH2OIommuMapping
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdScpcLevel
+#[-start-221003-IB14740265-add]#
+  gChipsetPkgTokenSpaceGuid.PcdUsbEfiTimerPolling
+#[-end-221003-IB14740265-add]#
+
+[FeaturePcd]
+
+[Depex] 
+  gEfiPciRootBridgeIoProtocolGuid AND
+  gEfiVariableArchProtocolGuid  AND
+  gEfiVariableWriteArchProtocolGuid AND
+  gEfiHiiDatabaseProtocolGuid
+

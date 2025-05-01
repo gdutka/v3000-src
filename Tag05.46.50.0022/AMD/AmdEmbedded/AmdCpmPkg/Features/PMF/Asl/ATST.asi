@@ -1,0 +1,87 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+//***************************************************************************
+//
+//  ATST.asi - ACPI ATST Method
+//
+//***************************************************************************
+
+    Name(CpmAtstBuffer0, Buffer(255){})
+
+    Method (ATST, 2 ,Serialized)
+    {
+        Switch (Arg0)
+        {
+           Case (0)
+           {
+              ATS0()
+              Return (CpmAtstBuffer0)
+           }
+
+           Case (1)
+           {
+              ATS1(Arg1)
+           }
+        }
+    }
+
+    Method (ATS0, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.ATST Function 0\n", 0, 0, 0, 0, 0, 0)
+        CreateWordField(CpmAtstBuffer0, 0, CpmStructureSize)                          // Structure size field
+        CreateWordField(CpmAtstBuffer0, 2, CpmInterfaceVersion)                       // Interface field
+        CreateDWordField(CpmAtstBuffer0, 4, CpmSupportedNotificationsMask)            // Supported Notifications Mask
+        CreateDWordField(CpmAtstBuffer0, 8, CpmSupportedFunctionsBitVector)           // Supported Functions Bit Vector
+        Store(12, CpmStructureSize)
+        Store(1, CpmInterfaceVersion)
+        Store(CpmApmfSupportedNotificationsMask, CpmSupportedNotificationsMask)
+        Store(CpmApmfSupportedFunctionsBitVector, CpmSupportedFunctionsBitVector)
+    }
+
+    Method (ATS1, 1, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.ATST Function 1\n", 0, 0, 0, 0, 0, 0)
+        CreateWordField  (Arg0,  0, CpmStructureSize)                               // Structure size field
+        CreateDWordField (Arg0,  2, CpmAtstPendingSystemBIOSRequests)               // PMF Driver Requests
+        CreateByteField  (Arg0,  7, CpmAtstDytcCqlEvent)                            // DYTC CQL Event
+        CreateByteField  (Arg0,  8, CpmAtstDytcAmtEvent)                            // DYTC AMT Event
+        CreateDWordField (Arg0,  9, CpmAtstUpdatePowerLimitsfPPT)                   // Update Power Limits fPPT
+        CreateDWordField (Arg0, 13, CpmAtstUpdatePowerLimitssPPT)                   // Update Power Limits sPPT
+        CreateDWordField (Arg0, 17, CpmAtstUpdatePowerLimitssPPTAPUOnly)            // Update Power Limits sPPT_APUOnly
+        CreateDWordField (Arg0, 21, CpmAtstUpdatePowerLimitsSPL)                    // Update Power Limits SPL
+        CreateDWordField (Arg0, 25, CpmAtstUpdatePowerLimitsSTTMinLimit)            // Update Power Limits STTMinLimit
+        CreateByteField  (Arg0, 29, CpmAtstUpdatePowerLimitsSTTSkinTempLimitAPU)    // Update Power Limits STT_SkinTempLimit_APU
+        CreateByteField  (Arg0, 30, CpmAtstUpdatePowerLimitsSTTSkinTempLimitHS2)    // Update Power Limits STT_SkinTempLimit_HS2
+        CreateByteField  (Arg0, 31, CpmAtstEnableDisableCnQF)                       // Enable/Disable CnQF
+        CreateDWordField (Arg0, 32, CpmAtstCustomPolicyInput1)                      // Customize a BIOS input event in Smart PC Solutions.
+        CreateDWordField (Arg0, 36, CpmAtstCustomPolicyInput2)                      // Customize a BIOS input event in Smart PC Solutions.
+
+        Store (CpmAtstPendingSystemBIOSRequests, CpmPmfPendingSystemBIOSRequests)
+        Store (CpmAtstDytcCqlEvent, CpmPmfPendingDytcCqlEvent)
+        Store (CpmAtstDytcAmtEvent, CpmPmfPendingDytcAmtEvent)
+        Store (CpmAtstUpdatePowerLimitsfPPT, CpmPmfPendingUpdatePowerLimitsfPPT)
+        Store (CpmAtstUpdatePowerLimitssPPT, CpmPmfPendingUpdatePowerLimitssPPT)
+        Store (CpmAtstUpdatePowerLimitssPPTAPUOnly, CpmPmfPendingUpdatePowerLimitssPPTAPUOnly)
+        Store (CpmAtstUpdatePowerLimitsSPL, CpmPmfPendingUpdatePowerLimitsSPL)
+        Store (CpmAtstUpdatePowerLimitsSTTMinLimit, CpmPmfPendingUpdatePowerLimitsSTTMinLimit)
+        Store (CpmAtstUpdatePowerLimitsSTTSkinTempLimitAPU, CpmPmfPendingUpdatePowerLimitsSTTSkinTempLimitAPU)
+        Store (CpmAtstUpdatePowerLimitsSTTSkinTempLimitHS2, CpmPmfPendingUpdatePowerLimitsSTTSkinTempLimitHS2)
+        Store (CpmAtstEnableDisableCnQF, CpmPmfPendingEnableDisableCnQF)
+        Store (CpmAtstCustomPolicyInput1, CpmPmfPendingCustomPolicyInput1)
+        Store (CpmAtstCustomPolicyInput2, CpmPmfPendingCustomPolicyInput2)
+
+        // Sending notification to PMF
+        If (LEqual(CpmApmfPmfNotifyCommandCode, 0x81))
+        {
+          Notify (\_SB.PMF, CpmApmfPmfNotifyCommandCode)
+        }
+        ElseIf (LAnd (LGreaterEqual(CpmApmfPmfNotifyCommandCode, 0xD0), LLessEqual(CpmApmfPmfNotifyCommandCode, 0xD9)))
+        {
+          Notify (\_SB.PMF, CpmApmfPmfNotifyCommandCode)
+        }
+    }

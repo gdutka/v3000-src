@@ -1,0 +1,41 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME               = MpmBatteryInfoDxe
+  MODULE_TYPE             = DXE_DRIVER
+  FILE_GUID               = 23f0f40f-686d-45e4-b28e-11f9f245cf62
+  ENTRY_POINT             = MpmBatteryInfoEntry
+
+[Sources]
+  MpmBatteryInfo.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  DebugLib
+  MpmLib
+  IdsLib
+
+[Protocols]
+  gAmdMpmGetBatteryInfoProtocol
+
+[Guids]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Depex]
+  gAmdMpmDepexProtocolGuid

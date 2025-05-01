@@ -1,0 +1,44 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuMpDxe
+  FILE_GUID                      = 40BEAB40-CECE-4909-B133-20A413AE19E9
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CpuMpDxeEntry
+
+[Sources]
+  CpuMpDxe.c
+  CpuMpDxe.h
+  SVM.c
+  SVM.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  UefiCpuPkg/UefiCpuPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.PcdH2OSvmEnable
+  gChipsetPkgTokenSpaceGuid.PcdH2OSvmLock
+
+[Protocols]
+  gEfiMpServiceProtocolGuid                     # CONSUMED
+
+[Depex]
+  gEfiMpServiceProtocolGuid

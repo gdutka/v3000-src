@@ -1,0 +1,106 @@
+/** @file
+
+  Memory Information DXE VFR implementation for Config page.
+
+;******************************************************************************
+;* Copyright (c) 2021, Insyde Software Corporation. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+
+#include <VfrCompatMacros.h>
+
+#include "MemoryInfoFormset.h"
+
+formset
+  guid      = H2O_MEMORY_INFO_FORMSET_GUID,
+  title     = STRING_TOKEN(STR_MEMORY_INFO_FORMSET),
+  help      = STRING_TOKEN(STR_MEMORY_INFO_FORMSET_HELP),
+  classguid = VFR_GUID_FROM_PCD (PcdGetPtr (PcdH2OMemoryInfoLinkToFormsetGuid)),
+
+  //
+  // Define a Buffer Storage (EFI_IFR_VARSTORE)
+  //
+  varstore MEMORY_INFO_SETUP,                     // This is the data structure type
+    varid = MEMORY_INFO_VARSTORE_ID,              // Optional VarStore ID
+    name  = MemoryInfoSetup,                      // Define referenced name in vfr
+    guid  = H2O_MEMORY_INFO_SETUP_VARSTORE_GUID;  // GUID of this buffer storage
+
+  //
+  // Form H2O_MEMORY_INFO_DIMM_LIST_FORM_ID
+  //
+  form
+    formid = H2O_MEMORY_INFO_DIMM_LIST_FORM_ID, title = STRING_TOKEN(STR_MEMORY_INFO_FORMSET);
+
+    subtitle  text = STRING_TOKEN(STR_MEMORY_INFO_FORMSET);
+    grayoutif TRUE;
+      text
+        help   = STRING_TOKEN (STR_BLANK_STRING),
+        text   = STRING_TOKEN (STR_TOTAL_OF_MEMORY_SLOT_STRING),
+        flags  = INTERACTIVE,
+        key    = H2O_MEMORY_INFO_TOTAL_MEMORY_QUESTION_ID;
+
+      text
+        help   = STRING_TOKEN(STR_BLANK_STRING),
+        text   = STRING_TOKEN(STR_NUMBER_OF_MEMORY_INSTALLED_STRING),
+        flags  = INTERACTIVE,
+        key    = H2O_MEMORY_INFO_INSTALLED_MEMORY_QUESTION_ID;
+      text
+        help   = STRING_TOKEN (STR_BLANK_STRING),
+        text   = STRING_TOKEN (STR_NUMBER_OF_MEMORY_UNINSTALL_STRING),
+        flags  = INTERACTIVE,
+        key    = H2O_MEMORY_INFO_UNINSTALL_MEMORY_QUESTION_ID;
+    endif;
+
+    subtitle  text = STRING_TOKEN(STR_BLANK_STRING);
+
+    checkbox
+      varid      = MemoryInfoSetup.HiddenNotInstalledMemory,
+      questionid = H2O_MEMORY_INFO_HIDDEN_UNINSTALL_MEMORY_QUESTION_ID,
+      prompt     = STRING_TOKEN(STR_HIDDEN_NOT_INSTALLED_MEMORY_PROMPT),
+      help       = STRING_TOKEN(STR_HIDDEN_NOT_INSTALLED_MEMORY_HELP),
+      flags      = 0,
+      default    = PcdGetBool (PcdH2OHiddenNotInstalledMemory),
+    endcheckbox;
+
+    text
+      help   = STRING_TOKEN (STR_ECC_TYPE_HELP),
+      text   = STRING_TOKEN (STR_ECC_TYPE_PROMPT),
+      text   = STRING_TOKEN (STR_ECC_TYPE_STRING),
+      flags  = INTERACTIVE,
+      key    = H2O_MEMORY_INFO_ECC_TYPE_QUESTION_ID;
+
+    text
+      help   = STRING_TOKEN (STR_TOTAL_MEMORY_SIZE_HELP),
+      text   = STRING_TOKEN (STR_TOTAL_MEMORY_SIZEE_PROMPT),
+      text   = STRING_TOKEN (STR_TOTAL_MEMORY_SIZE_STRING),
+      flags  = INTERACTIVE,
+      key    = H2O_MEMORY_INFO_TOTAL_MEMORY_SIZE_QUESTION_ID;
+
+    subtitle  text = STRING_TOKEN(STR_BLANK_STRING);
+
+    label H2O_MEMORY_INFO_LABEL_START;
+    label H2O_MEMORY_INFO_LABEL_END;
+
+  endform;
+
+  //
+  // Form H2O_MEMORY_INFO_DIMM_INFO_FORM_ID
+  //
+  form
+   formid = H2O_MEMORY_INFO_DIMM_INFO_FORM_ID, title = STRING_TOKEN(STR_MEMORY_DETAIL_INFO_FORMSET);
+
+    subtitle  text = STRING_TOKEN(STR_MEMORY_LOCATOR_TITLE);
+    subtitle  text = STRING_TOKEN(STR_BLANK_STRING);
+
+    label H2O_MEMORY_DETAIL_LABEL_START;
+    label H2O_MEMORY_DETAIL_LABEL_END;
+  endform;
+
+endformset;
+

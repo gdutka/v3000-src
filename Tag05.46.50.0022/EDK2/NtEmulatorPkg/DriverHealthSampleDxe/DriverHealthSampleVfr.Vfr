@@ -1,0 +1,31 @@
+/** @file
+
+;******************************************************************************
+;* Copyright (c) 2017, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+
+#define DRIVER_HEALTH_SAMPLE_FORMSET_GUID         { 0xAD291DF9, 0x4DB4, 0x42f8, { 0xbe, 0x35, 0x06, 0x7b, 0x09, 0xb8, 0xfc, 0x84 } }
+#define EFI_HII_DRIVER_HEALTH_FORMSET_GUID        { 0xf22fc20c, 0x8cf4, 0x45eb, { 0x8e, 0x06, 0xad, 0x4e, 0x50, 0xb9, 0x5d, 0xd3 } }
+
+formset
+  guid      = DRIVER_HEALTH_SAMPLE_FORMSET_GUID,
+  title     = STRING_TOKEN(STR_DRIVER_HEALTH_SAMPLE_FORMSET_TITLE),
+  help      = STRING_TOKEN(STR_DRIVER_HEALTH_SAMPLE_FORMSET_HELP),
+  classguid = EFI_HII_DRIVER_HEALTH_FORMSET_GUID,
+
+  form formid = 1,
+       title  = STRING_TOKEN(STR_DRIVER_HEALTH_SAMPLE_FORM_TITLE);
+
+    text
+      help  = STRING_TOKEN(STR_DRIVER_HEALTH_SAMPLE_TEXT),
+      text  = STRING_TOKEN(STR_DRIVER_HEALTH_SAMPLE_TEXT);
+  endform;
+endformset;
+

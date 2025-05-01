@@ -1,0 +1,32 @@
+## @file
+#  Component description file of PciDeviceIdTableLib.
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PciDeviceIdTableLib
+  FILE_GUID                      = 9B6CDE26-2338-403F-B385-E58067BF0F30
+  MODULE_TYPE                    = UEFI_DRIVER
+  LIBRARY_CLASS                  = PciDeviceIdTableLib
+
+[Sources]
+  PciDeviceIdTableLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+

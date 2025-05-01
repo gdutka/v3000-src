@@ -1,0 +1,81 @@
+## @file
+#  Component description file of PciDeviceInfoSetupUtilityDxe.
+#
+#******************************************************************************
+#* Copyright (c) 2024, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION       = 0x00010005
+  BASE_NAME         = PciDeviceInfoSetupUtilityDxe
+  FILE_GUID         = e21b0336-9b81-4743-b033-6d7405734e3c
+  MODULE_TYPE       = DXE_DRIVER
+  VERSION_STRING    = 1.0
+  ENTRY_POINT       = PciDeviceInfoSetupUtilityDxeEntry
+
+[Sources]
+  PciDeviceInfoSetupUtilityDxe.c
+  PciDeviceInfoSetupUtilityDxe.h
+  PciDeviceInfoVfr.vfr
+  PciDeviceInfoSetupUtilityDxe.uni
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+  SegFeaturePkg/SegFeaturePkg.dec
+
+[Guids]
+  gEfiIfrTianoGuid
+  gH2OPciDeviceInfoConfigurationGuid
+  gH2OPciDeviceInfoSetupFormsetGuid
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  HiiLib
+  HiiExLib
+  MemoryAllocationLib
+  PcdLib
+  PrintLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+  UefiRuntimeServicesTableLib
+  VariableLib
+  DeviceInfoLookupDataLib
+  PciSegmentLib
+  PciCapabilityIntnTableLib
+  SetupVariableLib
+
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gEfiHiiConfigAccessProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiSetupUtilityApplicationProtocolGuid
+  gH2OPciDeviceInfoProtocolGuid
+  gH2OPciLookupTableProtocolGuid
+
+[FeaturePcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciLookUpCapabilityIntnTableSupported
+
+[Pcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciDeviceInfoLinkToFormsetGuid
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciSkipDeviceTable
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciCapabilityDisplayControl
+
+[Depex]
+  gEfiHiiConfigRoutingProtocolGuid    AND
+  gEfiVariableArchProtocolGuid        AND
+  gEfiVariableWriteArchProtocolGuid   AND
+  gH2OPciLookupTableProtocolGuid

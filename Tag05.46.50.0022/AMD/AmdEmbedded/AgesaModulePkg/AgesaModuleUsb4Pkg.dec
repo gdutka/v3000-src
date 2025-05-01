@@ -1,0 +1,38 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaUsb4Pkg
+  PACKAGE_GUID          = 4F85FC73-192E-4E6E-BABE-5366A617EF57
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+
+[LibraryClasses]
+  AmdUsb4Lib|Include/Library/AmdUsb4Lib.h
+
+[Guids]
+
+[Protocols]
+  gAmdUsb4ProtocolGuid = {0x9fabd1b7, 0x7ce7, 0x4cfa, {0xbe, 0x0d, 0x48, 0xe2, 0x75, 0x65, 0xbc, 0xc9}}
+
+[Ppis]
+
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+
+[PcdsDynamic]
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdUsb4CmEnable|TRUE|BOOLEAN|0x00B40000  #TRUE:  Enable
+  #                                                                                #FALSE: Disable
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdUsb4TimerPeriod|100|UINT32|0x00B40001
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdUsb4TimeoutPacketNumber|4096|UINT32|0x00B40002
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdUsb4DelayBeforePreOSCM|1|UINT32|0x00B40003
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdUsb4WaitCL0TBT3|2500000|UINT32|0x00B40004
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdUsb4WaitCL0USB4|1500000|UINT32|0x00B40005

@@ -1,0 +1,45 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = MpmLib
+  FILE_GUID                      = 4d67105d-6fdb-43da-840d-8083c38deb39
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MpmLib
+
+[Sources.common]
+  MpmLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdBaseLib
+  AmdHeapLib
+  MpmFuncLib
+
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+ gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmEnable
+
+[Depex]
+
+
+
+

@@ -1,0 +1,31 @@
+##
+#  AMD implementation of IHV DRTM abstraction layer.
+#
+#  Copyright (C) 2020-2023 Advanced Micro Devices, Inc. All rights reserved.
+#  Copyright (c) Microsoft Corporation.
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = IhvPageProtectionLib
+  FILE_GUID                      = BBBD9D27-219F-4215-918C-E6EFA1087CC0
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = IhvPageProtectionLib
+
+[Sources]
+  IhvPageProtectionLib.c
+
+[LibraryClasses]
+  DebugLib
+  MemoryAllocationLib
+  PciLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+

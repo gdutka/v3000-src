@@ -1,0 +1,53 @@
+## @file
+#  Library Implementation for SpiAccessLib
+#
+#******************************************************************************
+#* Copyright 2020 Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SpiAccessLib
+  FILE_GUID                      = BE0248D7-A861-4FF8-B7E9-878945CBDEDE
+  MODULE_TYPE                    = BASE
+  LIBRARY_CLASS                  = SpiAccessLib
+#[-start-220905-IB14740261-add]#
+  CONSTRUCTOR                    = SpiAccessLibInit
+#[-end-220905-IB14740261-add]#
+
+[Sources]
+  SpiAccessLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+
+[LibraryClasses]
+  BaseLib
+  IoLib
+  PciLib
+  BaseMemoryLib
+  FchMmioSpiAccessLib
+  RomArmorSpiAccessLib
+#[-start-220905-IB14740261-add]#
+  SpiAccessInitLib
+#[-end-220905-IB14740261-add]#
+
+[Pcd]
+#[-start-230914-IB20840023-add]#
+  gInsydeTokenSpaceGuid.PcdFlashAreaSize
+#[-end-230914-IB20840023-add]#
+
+[Guids]
+
+[FeaturePcd]
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /Od

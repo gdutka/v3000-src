@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DxeFabricSocSpecificServicesLib
+  FILE_GUID                      = 59AD7997-0116-494A-9F04-4F98D9C74FF8
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DxeFabricSocSpecificServicesLib
+
+[Sources]
+  DxeFabricSocSpecificServicesSspLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseFabricTopologyLib
+  SmnAccessLib
+  IdsLib
+
+[Guids]
+
+[Protocols]
+  gAmdFabricSocSpecificServicesProtocolGuid # PRODUCED
+
+[Ppis]
+
+[Pcd]
+
+[Depex]
+
+

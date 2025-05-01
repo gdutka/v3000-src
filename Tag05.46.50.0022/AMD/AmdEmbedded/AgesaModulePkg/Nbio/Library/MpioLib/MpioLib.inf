@@ -1,0 +1,42 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MpioLib
+  FILE_GUID                      = bdfcaaf6-a6c5-48e3-8826-288575d0feb4
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MpioLib
+
+
+[Sources]
+  MpioLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  CpuLib
+  PcdLib
+  PrintLib
+  BaseLib
+  DebugPrintErrorLevelLib
+  IdsLib
+  AmdBaseLib
+  NbioRegisterAccLib
+  AmdS3SaveLib
+  MpioLib
+  SmnAccessLib
+
+[Pcd]
+
+
+

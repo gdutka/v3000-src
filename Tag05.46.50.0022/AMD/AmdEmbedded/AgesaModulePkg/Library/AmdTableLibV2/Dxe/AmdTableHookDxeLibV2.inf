@@ -1,0 +1,46 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdTableHookDxeLibV2
+  FILE_GUID                      = 2FE8046D-40A7-4998-BB42-862708847CE6
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdTableHookLib|DXE_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER
+
+[Sources.common]
+  AmdTableHookDxeLibV2.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdBaseLib
+  IdsLib
+
+[Guids]
+
+[Protocols]
+  gAmdNbioSmuServicesProtocolGuid         #CONSUME
+  gAmdFabricTopologyServices2ProtocolGuid #CONSUME
+  gAmdSocLogicalIdProtocolGuid            #CONSUME
+
+[Ppis]
+
+[Pcd]
+
+[Depex]
+  gAmdSocLogicalIdProtocolGuid AND
+  gAmdNbioSmuServicesProtocolGuid AND
+  gAmdFabricTopologyServices2ProtocolGuid
+
+

@@ -1,0 +1,261 @@
++-----------------------------------------+
+| PROM21 Firmware Release Notes
++-----------------------------------------+
++----------------------------------------------------------------------------------------------
+| Version 230215_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Update PROM21L.4 Maxports to 14 ports.
+|   b. Align PROM21 USB 3.2 SI setting registers for customer control as porting note.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 221223_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched ASMEDIA-760 [PT21-A2-USB] USB mouse plugin lavender, and it is in nontolerant mode
+|      even the mouse was in non-active (ex. the USB mouse keep still). Expected tolerant mode.
+|   b. Patched ASMEDIA-734: AMD WinDBG can't connect on PT21 USB3.2 ports after resuming from S4/S5/Restart.
+|   c. Implement PROM21L.4 port mapping setting and USB configuration.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 221103_A0_01_84
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched ASMEDIA-709 [STP USB] Second cycle plugging VxA VL717 device will cause
+|      PT21 3.2 USB port only work as high speed or can't detect device when enabled force Gen1
+|      function in AMD CBS.
+|   b. Patched Ext-76069: USB3.2 GEN2x2 Device: K_i_n_g_s_t_o_n XS2000 connected to PT21 USB3.2 GEN2
+|      port has read and write speed problems.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 221014_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched ASMEDIA-720/ EXT-74297: EGGPLANT/FENNEL: U32G2x2 20G down speed to 10G, A/B side
+|      may have different results (F/R : 1%).
+|   b. Patched EXT-74633: OKRA MP USB3.2 Gen2x1 10G down to USB2.0.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220928_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched ASMEDIA-725/ EXT-74471: PCIE Gen4 card at PT21 down to PCIE Gen1.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220907_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched ASMEDIA-720/ EXT-74297: EGGPLANT/FENNEL: PT21 test with factory test fixture
+|      occurs U32G2x2 20G down speed to 10G.
+|   b. Patched ASMEDIA-708/ EXT-73560: Two defective boards, the M.2_4 slot cannot catch the device.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220831_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched ASMEDIA-667/ EXT-72369: [P2][PT21] plugged in RTL8852 WIFI card cannot
+|      wake up (F/R : 100%).
+|   b. Patched ASMEDIA-699/ EXT-72995: [P2][PT21][BIJOU & AEGO] Crucial X6 4TB Portable SSD is not
+|      recognized in PT21 USB_SSP_port0 with default auto (F/R : 100%).
+|   c. Patched ASMEDIA-712/ EXT-73292: Ironclad PVT encounters USB3.0 down to USB2.0 under PT21,
+|      fail rate 4/200.
+|   d. Patched ASMEDIA-681 [PT21-A2] SATA SI settings will be invalid after the system restarts.
+|   e. Patched ASMEDIA-681 [P1][PT21] [OKRA] still encounters USB3.1 down to USB2.0 after importing
+|      the latest customized PT21 firmware (F/R : 4.5%).
+|   f. Patched ASMEDIA-705 PIMS-154044 System hang with front USB full loading, can't detect
+|      keyboard and mouse.
+|   g. Patched [AMD 600-Series PROM21]-USB WIFI issue. (AX56-AX1800 USB WI-FI ADAPTER).
+|   h. Improved power efficiency.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220812_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched ASMEDIA-694 [P2][PT21][X670E Txichi & X670E Stxxl Legend]SATA or M.2 NVME function
+|      issue w/ PI1001 Patch D PT21 FW, but PASS w/ PI1001 Patch B PT21 FW(F/R : 100%)
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220805_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched ASMEDIA-672/ EXT-72487 [PT21] [Nobel] USB3.1 (10Gbps) down to USB3.0 (5Gpbs) (F/R: 6%).
+|   b. Patched ASMEDIA-654/ EXT-72116 [Ironclad] IP version PT21 run reboot & device check
+|      encountered onboard LAN lost.
+|   c. Patched ASMEDIA-659/ EXT-72065 IP version PT21 still encounters SATA controller
+|      ASM1061(PCIe to 2 SATA) lost issue.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220728_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched ASMEDIA-656/TIC-99004/EXT-72175 AM5 PVT encountered PT21 USB3.1 (10Gbps) drop to
+|      USB2.0 (480Mbp) issue.
+|   b. Patched ASMEDIA-655/ EXT-72115: [Artichoke] IP version PT21 encounters SATA3 lost.
+|   c. Patched ASMEDIA-653/ EXT-72164: AM5 platform aging S3 FAIL, LAN no function.
+|   d. Patched ASMEDIA-658/ EXT-72184: [WEGO] IP version PT21 encounters SATA6G_2(GPP7) lost.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220712_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Enable xHCI LTR function.
+|   b. Add DSP PCIe configuration to improve power consumption.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220617_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched ASMEDIA-603 [PT21] No video hang PC: EF005142, second PT lost while running S4.
+|   b. Patched ASMEDIA-605 [PT21] No video hang PC: EF005142, single PT M.2 GEN4 slot NVMe SSD lost
+|      while running S4 test.
+|   c. Patched ASMEDIA-573 [PT21 A2 USB] The VIA VL716 and VL715 devices will downgrade to HS
+|      after restart on USB3.2 port when Force Gen1 function in CBS.
+|   d. Patched ASMEDIA-611 Artichoke B650 Strix USB Port 3 read performance under 20MB.
+|   e. Patched ASMEDIA-612 Artichoke B650 Strix PROM21 USB_SSP_0/1 configured as GEN2X2 affects
+|      USB_SSP_2 performance
+|   f. Patched ASMEDIA-613 Artichoke B650 Strix PT21 individual USB WIFI cannot connect to the Internet.
+|   g. Fixed FW modify xHCI DID behavior.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220524_A0_01_84
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Patched [ASMEDIA-583] [PT21-A2-USB] I_n_t_e_l WIFI AX200/210 Bluetooth randomly lost while
+|      running S4. F/R: 2/2.
+|   b. Patched [ASMEDIA-595] [PT21-A2-PCIE] Single PT hang B2022098 while reboot with 0414 PTFW.
+|   c. Fixed [ASMEDIA-588] [PT21-A2-PCIE]: PT will assert PEWAKE when S0i3 enabled.
+|   d. Enable circuit low power feature.
+|   e. Fixed retrain would fail when using dual PT after programing SI value by BIOS side.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220318_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Fixed [ASMEDIA-574] [PT21 A2 USB] USB3.2 Gen2/Gen2x2 hubs will downgrade when plugged
+|      in S3 then resume on Type-C ports.
+|   b. Fixed [ASMEDIA-514] [PT21 A2 USB] [Prom21] [Linux] USB webcam detects intermittently on
+|      Lavender Prom21 A0 PCIe Add-in card.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 220218_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Fixed [ASMEDIA-543] [PT21 A1 USB] USB3.2 Gen1 device will downgrade to HS or lost
+|      when the 2nd plugging USB Gen1 device on the same port after plugging Gen2 device
+|      on USB3.2 Type-A port.
+|   b. Fixed [ASMEDIA-557] [PT21 A1 USB]System will stuck when unplugging USB 3.2 device from
+|      Type-A port with WinDBG cable plugged into one orientation of Type-C.
+|   c. Fixed [ASMEDIA-550] [PT21-A1-PCIE] The upstream cannot enter into L1/L1ss if enabling
+|      LAN on PT21.
+|   d. Fixed GIGABYTE report MB bring up hang code at AF07 while connect PROM21.
+|   e. Fixed [ASMEDIA-541] [PT21 A1 USB] BSOD occurred when run xHCI Loopback test.
+|   f. Fixed [ASMEDIA-543] [PT21 A1 USB] USB3.2 Gen1 device will downgrade to HS or lost
+|      when the 2nd plugging USB Gen1 device on the same port after plugging Gen2 device
+|      on USB3.2 Type-A port.
+|   g. Fixed L0s compatibility be enable after S3.
+|   h. Update PROM21 SI setting.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 211216_A0_01_82
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Improve L1ss change speed and width issue. (JIRA ID 526/532).
+|   b. Support USB Debug port test at USB3.2 Gen2x2.
+|   c. Update PROM21 SI setting fine tune PCIe.
+|   d. Patch ASMEDIA-491 [PT21] PCIE CV test fail.
+|   e. Disable/Enable FW Program SI suggested values by update flag in programming note.
+|      (Programming note update in 20211220 add the function).
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 211203_A0_01_81
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Update PROM21 A1 SI setting fix USB Rx LFPS issue.
+|   b. Patch ASMEDIA-501[PT21 USB Logo Gating] The USB Windbg cannot connect on USB3.2 ports.
+|   c. Patch when PPON=0 WOL function fail issue.
+|   d. Patch ASMEDIA-517 DataTraveler MicroDuo 3C USB Flash Drive is getting lost after Reboot when
+|      connected to USB-A/USB-C Prom21 Ports.
+|   e. Open SI setting modification access for BIOS.
+|   f. Disable L0s capability.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 211122_A0_01_81
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Update PROM21 A1 SI setting.
+|   b. Patch ASMEDIA-514 [Prom21] [Linux] USB webcam detects intermittently on Lavender Prom21 A0
+|      PCIe Add-in card.
+|   c. ECO#7 Enable USB_HSD[1] when USB3.2 Gen2x2 enable.
+|
+| * Known issue: N/A.
++----------------------------------------------------------------------------------------------
+| Version 211116_A0_01_81
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. A1 first version
+|   b. Patch ASMEDIA-494 SBIOS Slot Power issue.
+|   c. Fix ASMEDIA-501, [PT21 USB Logo Gating] The USB Windbg cannot connect on USB3.2 ports.
+|   d. Fix ASMEDIA-510[PT21 USB]Gen2x2 function cannot work when changing back USB port 0 from Gen2x1
+|      to Gen2x2 in AMD CBS(the CBS option works when put board to G3.
+|
+| * Known issue:
+|   a. ASMEDIA-514 [Prom21] [Linux] USB webcam detects intermittently on Lavender Prom21 A0 PCIe
+|      Add-in card.
+|   b. PCIe/USB/SATA optimize SI setting still need to fine tune.
+|      - Electrical items would randomly fail.
+|      - Burn-in not stable.
+|   c. PCIe L1 setting need to fine tune
+|      - Burn-in not stable.
+|   d. ECO#7 need FW enable the port
+|      - USB_HSD[1] not work with this FW version.
++----------------------------------------------------------------------------------------------
+| Version 210924_AX_01_XX
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Enable L1.2 function.
+|   b. Fix ASMEDIA-490, Overcurrent Behaving not as Expected or Causing Controller to Drop on EVB01.
+|   c. Fix ASMEDIA- 495, PROM21 USB LOGO Gating Monitor behind displaylink cannot be lighted up and
+|      show yellow bang in DM when connecting USB3.2 Gen1 IOP Tree to USB port2/3/4.
+|   d. Fix ASMEDIA-489, [PROM21 USB Logo Gating] USB3 Hub show YB and USB3 device cannot be enumerated
+|      when connect Gen1 IOP Tree to PROM21 USB port2/4.
+|   e. Fix the WLAN can't enter L1: upstream can't enter L1 w/ wlan module connected(USB BT + PCIE WIFI).
+|   f. Fix Gen2x2 function cannot work when changing back USB port 0 from Gen2x1 to Gen2x2 in AMD CBS
+|      (Need to program with latest programming note v0.5).
+|   g. Fix ASMEDIA-501[PT21 USB Logo Gating] The USB Windbg cannot connect on USB3.2 ports. -> port6
+|      pass on Lavender and ASM EVB, port2~5 fail, the usb3 hub will YB.
+|   h. Optimize the SI setting to improve ASMEDIA-505 [PT21 USB] After Performing Several S3 with Asmedia
+|      AT2080 Drive connected to Port 1, Controller Unable to Enumerate Anything on Port 1.
+|
+| * Known issue: N/A
++----------------------------------------------------------------------------------------------
+| Version 210907_AX_01_XX
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Update SI setting to improve PCIe Lane8/9 link and PCIe SI measure.
+|
+| *Known issue: N/A
++----------------------------------------------------------------------------------------------
+| Version 210827_AX_01_XX
++----------------------------------------------------------------------------------------------
+| * Fix and Code Revision History
+|   a. Update SI setting to improve PCIe link quality.
+|
+| * Known issue: N/A
++----------------------------------------------------------------------------------------------

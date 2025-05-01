@@ -1,0 +1,64 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MpioLibInit
+  FILE_GUID                      = aed34507-95dc-439d-aeab-284e1efd59eb
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MpioLibInit
+
+
+[Sources]
+  MpioInitFlow.c
+  MpioAncDataV1.c
+  MpioParser.c
+  MpioDebugOut.c
+  MpioMappingResults.c
+  MpioTrainingResults.c
+  MpioSupportFunctions.c
+  MpioUbmTopology.c
+  MpioLibLocal.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  PcdLib
+  PrintLib
+  BaseLib
+  DebugPrintErrorLevelLib
+  IdsLib
+  AmdBaseLib
+  NbioRegisterAccLib
+  OemGpioResetControlLib
+
+[Ppis]
+  gAmdPcieAuthenticationGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAfterResetDelay
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCfgExposeUnusedPciePorts
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSrisEnableMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSrisSkipInterval
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSrisCfgType
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSrisLowerSkpOsGenSup
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSrisLowerSkpOsRcvSup
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSrisSkpIntervalSel
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSrisAutoDetectMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSrisAutodetectFactor
+
+[BuildOptions]
+MSFT:*_*_*_CC_FLAGS = /D DISABLE_NEW_DEPRECATED_INTERFACES /W4
+
+

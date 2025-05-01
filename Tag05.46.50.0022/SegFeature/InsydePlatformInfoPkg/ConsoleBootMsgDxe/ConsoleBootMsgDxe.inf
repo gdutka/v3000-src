@@ -1,0 +1,64 @@
+## @file
+#  Component description file of ConsoleBootMsgDxe.
+#
+#******************************************************************************
+#* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                          = 0x00010005
+  BASE_NAME                            = ConsoleBootMsgDxe
+  FILE_GUID                            = 47c1ac56-67da-4bb0-bdfd-c4db6cb9eeab
+  MODULE_TYPE                          = DXE_DRIVER
+  VERSION_STRING                       = 1.0
+  ENTRY_POINT                          = ConsoleBootMsgDxeEntry
+
+[Sources]
+  ConsoleBootMsgDxe.c
+  ConsoleBootMsgDxe.h
+  ConsoleBootMsgProtocol.c
+  ConsolePrintRoutines.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  MemoryAllocationLib
+  PcdLib
+  PrintLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+  HiiLib
+  H2OCpLib
+  KernelConfigLib
+
+[Guids]
+  gH2OBdsCpDisplayBeforeGuid
+  gH2OBdsCpDisplayStringBeforeGuid
+
+[Protocols]
+  gEfiSimpleTextOutProtocolGuid       ## CONSUMES
+  gH2OConsoleBootMessageProtocolGuid  ## PRODUCES
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpDisplayBeforeSupported
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpDisplayStringBeforeSupported
+
+[Pcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OConsoleBootMessageMarginBottom
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OConsoleBootMessageMarginRight
+
+[Depex]
+  TRUE

@@ -1,0 +1,25 @@
+##
+#  Null instance of IHV DRTM abstraction layer.
+#
+#  Copyright (c) Microsoft Corporation.
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = IhvPageProtectionLibNull
+  FILE_GUID                      = 793D0334-D585-41F5-9B5F-83BCC42B3999
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = IhvPageProtectionLib
+
+[Sources]
+  IhvPageProtectionLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+

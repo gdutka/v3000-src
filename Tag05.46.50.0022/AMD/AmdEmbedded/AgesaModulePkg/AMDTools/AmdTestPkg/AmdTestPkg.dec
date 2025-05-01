@@ -1,0 +1,14 @@
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AmdTestPkg
+  PACKAGE_GUID          = 5DF0DDB8-52BA-4AE0-B579-DAB37E7FBAC6
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+
+[Protocols]
+  gSmmTestViolationAndExceptionInfoProtocolGuid = {0xc003fa03, 0x711, 0x4113, {0x82, 0x13, 0xa6, 0xcd, 0x87, 0xe9, 0xf5, 0x49}}
+
+[Guids]
+  gSmmProtectionsTestGuid = {0x78722054, 0x434b, 0x447a, {0xa5, 0x99, 0xb0, 0xee, 0xf, 0xc6, 0x51, 0x78}}

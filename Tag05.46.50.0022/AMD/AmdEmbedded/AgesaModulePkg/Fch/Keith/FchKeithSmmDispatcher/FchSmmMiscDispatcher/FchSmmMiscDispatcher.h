@@ -1,0 +1,39 @@
+/******************************************************************************
+*
+ * Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+*******************************************************************************
+**/
+
+#ifndef _FCH_SMM_MISC_DISPATCHER_H_
+#define _FCH_SMM_MISC_DISPATCHER_H_
+
+
+#include "FchSmmDispatcher.h"
+
+#include <Protocol/FchSmmMiscDispatch.h>
+
+extern  FCH_SMM_MISC_DISPATCH_PROTOCOL gFchSmmMiscDispatchProtocol;
+
+
+EFI_STATUS
+EFIAPI
+FchSmmMiscDispatchHandler (
+  IN      EFI_HANDLE     SmmImageHandle,
+  IN OUT  VOID           *CommunicationBuffer OPTIONAL,
+  IN OUT  UINTN          *SourceSize OPTIONAL
+  );
+
+///
+/// MISC SMI Node
+///
+typedef struct _FCH_SMM_MISC_NODE {
+  EFI_HANDLE                               DispatchHandle;         ///< Dispatch Hangle
+  FCH_SMM_MISC_REGISTER_CONTEXT            Context;                ///< Register context
+  FCH_SMM_MISC_HANDLER_ENTRY_POINT         CallBackFunction;       ///< SMM handler entry point
+  struct _FCH_SMM_MISC_NODE                *FchMiscNodePtr;        ///< pointer to next node
+} FCH_SMM_MISC_NODE;
+
+extern  FCH_SMM_MISC_NODE                   *HeadFchSmmMiscNodePtr;
+#endif
+

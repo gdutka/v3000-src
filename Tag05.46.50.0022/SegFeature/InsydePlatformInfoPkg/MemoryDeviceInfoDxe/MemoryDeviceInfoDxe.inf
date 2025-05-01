@@ -1,0 +1,60 @@
+## @file
+#  Memory Device Info Protocol Module Information File.
+#
+#******************************************************************************
+#* Copyright (c) 2024, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                          = 0x00010005
+  BASE_NAME                            = MemoryDeviceInfoDxe
+  FILE_GUID                            = F605503E-9870-4DA5-BE65-CCAA85004EE2
+  MODULE_TYPE                          = DXE_DRIVER
+  VERSION_STRING                       = 1.0
+  ENTRY_POINT                          = MemoryDeviceInfoEntry
+
+[Sources]
+  MemoryDeviceInfoDxe.c
+  MemoryDeviceInfoString.uni
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  BaseLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  PrintLib
+  DebugLib
+  H2OCpLib
+  SmbiosCommonLib
+  HiiLib
+
+[Guids]
+  gH2OBdsCpDisplayBeforeGuid
+
+[Protocols]
+  gEfiSmbiosProtocolGuid
+  gH2OMemoryDeviceInfoProtocolGuid
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpDisplayBeforeSupported
+
+[Pcd]
+
+[FixedPcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSmbiosVersion
+
+[Depex]
+  TRUE

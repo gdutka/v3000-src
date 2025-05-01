@@ -1,0 +1,112 @@
+## @file
+#
+#
+#******************************************************************************
+#* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                          = 0x00010005
+  BASE_NAME                            = PlatformInfoBootMsgDxe
+  FILE_GUID                            = f1297746-69d5-4013-84cc-0feb09ccd5c3
+  MODULE_TYPE                          = DXE_DRIVER
+  VERSION_STRING                       = 1.0
+  ENTRY_POINT                          = PlatformInfoBootMsgDxeEntry
+
+[Sources]
+  BasicSystemInfo.c
+!ifdef $(INSYDEIPMIPKG_IMPORTED)
+  BmcInfo.c
+!endif
+  BmcInfo.uni
+  CpuInfo.c
+  CpuInfo.uni
+  InputDeviceInfo.c
+  InputDeviceInfo.uni
+  MemoryInfo.c
+  MemoryInfo.uni
+  NvmeInfo.c
+  NvmeInfo.uni
+  PlatformInfoBootMsgDxe.c
+  PlatformInfoBootMsgDxe.uni
+  SataDriveInfo.c
+  SataDriveInfo.uni
+  SdEmmcInfo.c
+  SdEmmcInfo.uni
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+!ifdef $(INSYDEIPMIPKG_IMPORTED)
+  SegFeaturePkg/SegFeaturePkg.dec
+  InsydeIpmiPkg/InsydeIpmiPkg.dec
+!endif
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  MemoryAllocationLib
+  PrintLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+  HiiLib
+  GenericBdsLib
+  VariableLib
+  BlockIoCapacityLib
+  BmcInfoLib
+  CpuDeviceInfoLib
+  DeviceInfoLookupDataLib
+  MemoryDeviceInfoLib
+  NvmeInfoLib
+  SataDriveInfoLib
+  SmbiosCommonLib
+  UsbHandleRoutineLib
+  SDEmmcInfoLib
+  PcdLib
+!ifdef $(INSYDEIPMIPKG_IMPORTED)
+  IpmiGeneralCommandLib
+  IpmiOemFeatureLib
+!endif
+
+[Protocols]
+  gEfiDevicePathProtocolGuid          ## SOMETIMES_CONSUMES
+  gEfiNvmExpressPassThruProtocolGuid  ## SOMETIMES_CONSUMES
+  gEfiPciIoProtocolGuid               ## SOMETIMES_CONSUMES
+  gEfiSimpleTextOutProtocolGuid       ## CONSUMES
+  gH2OConsoleBootMessageProtocolGuid  ## CONSUMES
+  gH2OCpuDeviceInfoProtocolGuid
+  gH2OMemoryDeviceInfoProtocolGuid
+  gH2ONvmeInfoProtocolGuid            ## SOMETIMES_CONSUMES
+  gH2OSataDriveInfoProtocolGuid
+  gH2OSDEmmcInfoProtocolGuid
+
+[Pcd]
+!ifdef $(INSYDEIPMIPKG_IMPORTED)
+  gH2OIpmiPkgTokenSpaceGuid.PcdH2OIpmiEnable
+  gH2OIpmiSupervyseTokenSpaceGuid.PcdH2OIpmiSupervyseExist
+!endif
+
+[FeaturePcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OCpuDeviceInfoSupported
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OMemoryDeviceInfoSupported
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSataDriveInfoSupported
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ONvmeInfoSupported
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSDEmmcInfoSupported
+
+[FixedPcd]
+  gInsydeTokenSpaceGuid.PcdH2OCcbVersion
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OBmcInfoDisplayNameForChannel
+
+[Depex]
+  gH2OConsoleBootMessageProtocolGuid

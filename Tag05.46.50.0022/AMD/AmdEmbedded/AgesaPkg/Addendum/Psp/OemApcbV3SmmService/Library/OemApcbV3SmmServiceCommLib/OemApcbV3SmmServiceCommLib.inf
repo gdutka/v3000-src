@@ -1,0 +1,41 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OemApcbV3SmmServiceCommLib
+  FILE_GUID                      = 66B49535-8765-4431-924E-2B4DD550AED2
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OemApcbV3SmmServiceCommLib|DXE_DRIVER DXE_SMM_DRIVER
+
+[sources.common]
+  OemApcbV3SmmServiceCommLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+
+[Guids]
+  gOemApcbV3SmmServiceCommHandleGuid  #CONSUMES
+
+[Protocols]
+  gEfiSmmCommunicationProtocolGuid    #CONSUMES
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdOemSmmCommunicationAddress

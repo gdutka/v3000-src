@@ -1,0 +1,60 @@
+## @file
+#  Component description file of PciDeviceInfoDxe.
+#
+#******************************************************************************
+#* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                          = 0x00010005
+  BASE_NAME                            = PciDeviceInfoDxe
+  FILE_GUID                            = 8d07b6fb-3c1a-4aa9-a736-7039c8529bdd
+  MODULE_TYPE                          = DXE_DRIVER
+  VERSION_STRING                       = 1.0
+  ENTRY_POINT                          = PciDeviceInfoDxeEntry
+
+[Sources]
+  PciDeviceInfoDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  DebugLib
+  DeviceInfoLookupDataLib
+  DevicePathLib
+  H2OCpLib
+  MemoryAllocationLib
+  PciSegmentLib
+  PrintLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+
+[Guids]
+  gH2OBdsCpConnectAllAfterGuid
+
+[Protocols]
+  gEfiDevicePathProtocolGuid              ## CONSUMES
+  gEfiPciEnumerationCompleteProtocolGuid  ## CONSUMES
+  gEfiPciIoProtocolGuid                   ## CONSUMES
+  gEfiPciRootBridgeIoProtocolGuid         ## SOMETIMES_CONSUMES
+  gH2OPciDeviceInfoProtocolGuid           ## PRODUCES
+
+[Pcd]
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpConnectAllAfterSupported
+
+[Depex]
+  TRUE

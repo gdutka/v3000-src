@@ -1,0 +1,29 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = CcxNonSmmResumeSecLib
+  FILE_GUID                      = 9CC153A5-168C-4B56-BE02-22E047115FC1
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CcxNonSmmResumeSecLib
+
+[Sources]
+  CcxNonSmmResumeSec.c
+
+[LibraryClasses]
+  BaseLib
+  CcxRolesLib
+  FchBaseLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+

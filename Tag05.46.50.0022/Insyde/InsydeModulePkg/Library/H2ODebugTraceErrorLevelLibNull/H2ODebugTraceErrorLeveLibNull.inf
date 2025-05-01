@@ -1,0 +1,32 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = H2ODebugTraceErrorLevelLibNull
+  FILE_GUID                      = D42F533D-542C-4EE8-A469-D9DEE8E9349C
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = H2ODebugTraceErrorLevelLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 EBC
+#
+
+[Sources]
+  H2ODebugTraceErrorLevelLibNull.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec

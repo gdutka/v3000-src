@@ -1,0 +1,42 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CbsBaseDxeRMB
+  FILE_GUID                      = B5F53C73-3A8B-49E3-A428-B7D15A2FD994
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CbsBaseDxeEntry
+
+[Sources]
+  CbsBaseDxe.c
+  CbsBaseDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  PrintLib
+  UefiLib
+  CbsDxeFuncLib
+
+[Guids]
+  gCbsSystemConfigurationGuid                   ## CONSUMES
+
+[Depex]
+  TRUE
+

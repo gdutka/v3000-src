@@ -1,0 +1,105 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2018 - 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = HybridGraphicsDxe
+  FILE_GUID                      = 697CFA95-B1F2-4ed7-A0D2-7AC6E47B3C99
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = HybridGraphicsDxeInitEntry
+
+[Sources]
+  HybridGraphicsDxe.c
+  HybridGraphicsDxe.h
+
+[Packages]
+  InsydeModulePkg/InsydeModulePkg.dec
+  MdePkg/MdePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  $(PROJECT_PKG)/Project.dec
+
+[LibraryClasses]
+  AcpiPlatformLib
+  BaseMemoryLib
+  CommonPciLib
+  DxeServicesLib
+  HobLib
+  IoLib
+  MemoryAllocationLib
+  PciExpressLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+  UefiRuntimeServicesTableLib
+  DebugLib
+
+[Guids]
+  gEfiHobListGuid
+  gH2OHgInformationDataHobGuid
+  gH2OHybridGraphicsVariableGuid
+  gSystemConfigurationGuid
+  
+[Protocols]
+  gEfiAcpiTableProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+#  gPlatformNvsAreaProtocolGuid
+  gEfiLegacyBiosProtocolGuid
+  gEfiLegacyRegion2ProtocolGuid
+  gEfiPciIoProtocolGuid
+  gH2OHybridGraphicsInfoProtocolGuid
+  gH2OHybridGraphicsEventProtocolGuid
+  gEfiHgNvsAreaProtocolGuid
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.PcdHgPegBridgeBus
+  gChipsetPkgTokenSpaceGuid.PcdHgPegBridgeDevice
+  gChipsetPkgTokenSpaceGuid.PcdHgPegBridgeFunction
+  gChipsetPkgTokenSpaceGuid.PcdHgPcieBridgeBus
+#  gChipsetPkgTokenSpaceGuid.PcdHgPcieBridgeDevice
+#  gChipsetPkgTokenSpaceGuid.PcdHgPcieBridgeFunction
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaOptimusDgpuHotPlugSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaOptimusDgpuPowerControlSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaGpsFeatureSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaVenturaFeatureSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaNbciFeatureSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaOptimusGc6FeatureSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaOptimusGc6NvsrFeatureSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgModeMxmBinaryGuid
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaNpcfFeatureSupport
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaN20CTGPFeatureSupport  
+  gChipsetPkgTokenSpaceGuid.PcdPegModeMasterMxmBinaryGuid
+  gChipsetPkgTokenSpaceGuid.PcdPegModeSlaveMxmBinaryGuid
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaDiscreteSsdtN20Guid
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaOptimusSsdtN20Guid  
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaDiscreteSsdtN18Guid
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaOptimusSsdtN18Guid
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaOptimusSsdtN17Guid
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaDiscreteSsdtN17Guid
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaGC6FBEN
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaGPUEvent
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaDDSMuxModePin
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaDDSLcdForceResetPin  
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaDgpuCheckTable
+  gChipsetPkgTokenSpaceGuid.PcdDefaultBoardId
+
+[FeaturePcd]
+  gChipsetPkgTokenSpaceGuid.PcdHybridGraphicsSupported
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaOptimusSupported
+  gChipsetPkgTokenSpaceGuid.PcdHgNvidiaDdsFeatureSupport
+
+#[BuildOptions]
+#  DEBUG_*_X64_CC_FLAGS = /Od
+
+[Depex]
+  TRUE

@@ -1,0 +1,48 @@
+#;*****************************************************************************
+#; Copyright (C) 2020-2023 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#; SPDX-License-Identifier: BSD-2-Clause-Patent
+#;*****************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmSupervisorFeatureLib
+  FILE_GUID                      = AF2A6D9B-784A-4CDD-94EA-7EA6B8719F4F
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SmmSupervisorFeatureLib
+  CONSTRUCTOR                    = SmmSupervisorFeatureLibConstructor
+
+[Sources]
+  SmmSupervisorFeatureLib.c
+
+[Sources.X64]
+  X64/SmiRendezvous.nasm
+
+[Packages]
+  MdePkg/MdePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  MemoryAllocationLib
+  DebugLib
+  SmmServicesTableLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DxeServicesLib
+
+[Protocols]
+  gEfiLoadedImageProtocolGuid                                   ## CONSUMES
+  gEfiFirmwareVolume2ProtocolGuid                               ## CONSUMES
+  gSmmSupervisorProtocolGuid                                    ## CONSUMES
+
+[Pcd]
+  gSmmSupervisorPkgTokenSpaceGuid.PcdTurnOnSmmIsolationEvent    ## CONSUMES
+  gSmmSupervisorPkgTokenSpaceGuid.PcdSmmIsolationEnable         ## CONSUMES
+
+[Depex]
+  gSmmSupervisorProtocolGuid AND
+  gEfiMpServiceProtocolGuid

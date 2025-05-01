@@ -1,0 +1,37 @@
+#;*******************************************************************************
+#;
+#;Copyright (C) 2020-2023 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;SPDX-License-Identifier: BSD-2-Clause-Patent
+#;
+#;*******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = ErrorDataLogLib
+  FILE_GUID                      = AAC5FC0B-E8C4-4444-86DD-7B8EA3527312
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ErrorDataLogLib
+
+[Sources]
+  ErrorDataLogLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+[LibraryClasses]
+  IoLib
+  DebugLib
+  ResetSystemLib
+  SmmSupvTestPointLib
+
+[Guids]
+
+[Protocols]
+
+[Pcd]
+
+[Depex]

@@ -1,0 +1,430 @@
+11/05/2021
+| Version 1.0.2.B
+
+Changes since 1.0.2.A:
+  DEDFRTL-11299: Mask HWA15 in all CS instances
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+      GET_UMC_BURST_LENGTH_ON_CHANNEL_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+      IS_VC8_TOK_ALLOC_FOR_DRAM_TRACE_EN_BOOLEAN_ID
+      IS_UMC_BURST_LENGTH_FIXED_ON_CHANNEL_BOOLEAN_ID
+      IS_UMC_X8CHIPKILLMODE_ON_CHANNEL_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+Requires FSDL-1.0.0.1+.
+
+------------------------------------------------------------------
+
+09/27/2021
+| Version 1.0.2.A
+
+Changes since 1.0.2.9:
+  PLAT-87496: [RMB] ComboAM5 0061 RC2 DF registers init value fail
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+      GET_UMC_BURST_LENGTH_ON_CHANNEL_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+      IS_VC8_TOK_ALLOC_FOR_DRAM_TRACE_EN_BOOLEAN_ID
+      IS_UMC_BURST_LENGTH_FIXED_ON_CHANNEL_BOOLEAN_ID
+      IS_UMC_X8CHIPKILLMODE_ON_CHANNEL_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+Requires FSDL-1.0.0.1+.
+
+------------------------------------------------------------------
+
+08/06/2021
+| Version 1.0.2.8
+
+Changes since 1.0.2.7:
+  PLAT-82896: RMB[FP7][FP7r2] CCM Graded Request throttling settings change
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+      GET_UMC_BURST_LENGTH_ON_CHANNEL_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+      IS_VC8_TOK_ALLOC_FOR_DRAM_TRACE_EN_BOOLEAN_ID
+      IS_UMC_BURST_LENGTH_FIXED_ON_CHANNEL_BOOLEAN_ID
+      IS_UMC_X8CHIPKILLMODE_ON_CHANNEL_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+Requires FSDL-1.0.0.1+.
+
+------------------------------------------------------------------
+
+07/22/2021
+| Version 1.0.2.7
+
+Changes since 1.0.2.6:
+  Resolved an issue with DisDramAcc32ByteMode when burstlength is 16
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+      * - GET_UMC_BURST_LENGTH_ON_CHANNEL_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+      IS_VC8_TOK_ALLOC_FOR_DRAM_TRACE_EN_BOOLEAN_ID
+      * - IS_UMC_BURST_LENGTH_FIXED_ON_CHANNEL_BOOLEAN_ID
+      * - IS_UMC_X8CHIPKILLMODE_ON_CHANNEL_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+Requires FSDL-1.0.0.1+.
+
+------------------------------------------------------------------
+
+07/06/2021
+| Version 1.0.2.6
+
+Changes since 1.0.2.5:
+  PLAT-85804: [RMB][DDR5] DisDramAcc32ByteMode setting mismatch from UMC
+  DEDFRTL-10392: [RMB] DF RIB update to enable SPF Light Sleep by default.
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+      * - GET_UMC_BURST_LENGTH_ON_CHANNEL_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+      IS_VC8_TOK_ALLOC_FOR_DRAM_TRACE_EN_BOOLEAN_ID
+      * - IS_UMC_BURST_LENGTH_FIXED_ON_CHANNEL_BOOLEAN_ID
+      * - IS_UMC_X8CHIPKILLMODE_ON_CHANNEL_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+Requires FSDL-1.0.0.1+.
+
+------------------------------------------------------------------
+
+05/24/2021
+| Version 1.0.2.5
+
+Changes since 1.0.2.4:
+  DEDFRTL-9990: [RMB] DF RIB update
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+      IS_VC8_TOK_ALLOC_FOR_DRAM_TRACE_EN_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+Requires FSDL-1.0.0.1+.
+
+------------------------------------------------------------------
+
+05/19/2021
+| Version 1.0.2.4
+
+Changes since 1.0.2.3:
+  PLAT-83339: [RMB] ForceSdpEncryptEn bit not set when TSME is enabled on PRO part
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+      IS_VC8_TOK_ALLOC_FOR_DRAM_TRACE_EN_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+Requires FSDL-1.0.0.1+.
+
+------------------------------------------------------------------
+
+04/09/2021
+| Version 1.0.2.3
+
+Changes since 1.0.2.2:
+  DEDFRTL-9669: [RMB] DF RIB Update - D18F6x1FC
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+      IS_VC8_TOK_ALLOC_FOR_DRAM_TRACE_EN_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+Requires FSDL-1.0.0.1+.
+
+------------------------------------------------------------------
+
+03/10/2021
+| Version 1.0.2.2
+
+Changes since 1.0.2.0:
+  DEDFRTL-9514: [RMB] DF RIB Update - Set CoherentSlaveConfigB1 [DisDramWrDecBuddyHitCnt] = 0x1 for all CS instances
+  PLAT-76175: [RMB-A0] MP1 needs to program APICTMRZSTATECFG.ALARMCLOCKOFFSET
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+      IS_VC8_TOK_ALLOC_FOR_DRAM_TRACE_EN_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+Requires FSDL-1.0.0.1+.
+
+------------------------------------------------------------------
+
+02/14/2021
+| Version 1.0.2.0
+
+Changes since 1.0.1.5:
+  DEDFRTL-9347: [RMB] Update Trace to DRAM VC8 token allocations
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+      IS_VC8_TOK_ALLOC_FOR_DRAM_TRACE_EN_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+Due to interface change, ABL should update to FSDL-1.0.0.1+.
+
+------------------------------------------------------------------
+
+02/09/2021
+| Version 1.0.2.5
+
+Changes since 1.0.1.4:
+  DEDFRTL-9308: [RMB] Mask PIE HWAssert 25
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.
+
+------------------------------------------------------------------
+
+02/04/2021
+| Version 1.0.2.4
+
+Changes since 1.0.1.3:
+  DEDFRTL-9282: [RMB] RIB update based on DEDFRTL-6719
+
+Requirements:
+  Callouts:
+    Numeric
+      GET_NUMBER_OF_ENABLED_SYSTEM_THREADS_NUMERIC_ID
+      GET_ENABLED_PHYSICAL_CORE_BIT_MAP_NUMERIC_ID
+    Boolean
+      IS_TSME_BOOLEAN_ID
+      IS_ECC_ENABLED_BOOLEAN_ID
+      IS_UMC_DISDATMSK_SET_ON_CHANNEL_BOOLEAN_ID
+      IS_DATA_POISONING_BOOLEAN_ID
+      IS_LPDDR5_BOOLEAN_ID
+      IS_SMT_BOOLEAN_ID
+      ARE_SYS_RD_DATA_ERRORS_MASKED_BOOLEAN_ID
+      DIS_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_EXT_IP_SYNC_FLOOD_PROP_BOOLEAN_ID
+      DIS_IMM_SYNC_FLOOD_ON_FATAL_ERR_BOOLEAN_ID
+    Action
+      HOOK_BEFORE_CREDIT_RELEASE_ACTION_ID
+
+  Timepoints:
+    RMB_DfFsdlAfterMemoryMapInitialization
+
+RIB is not enabling miscellaneous clients prior to releasing
+credits.  ABL has committed to handling them in the RIB callout.

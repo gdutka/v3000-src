@@ -1,0 +1,51 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                   = 0x00010005
+  BASE_NAME                     = FchProm21GpioPei
+  FILE_GUID                     = 630FBB44-65DE-43BD-B503-8DE5914536B5
+  MODULE_TYPE                   = PEIM
+  VERSION_STRING                = 1.0
+  ENTRY_POINT                   = FchProm21GpioPeiInit
+
+[Sources]
+  FchProm21GpioPei.c
+  FchProm21GpioPei.h
+
+[LibraryClasses]
+  PeimEntryPoint
+  BaseLib
+  FchProm21BaseLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdFchProm21InitPpiGuid              #CONSUMED
+  gEfiPeiPromotoryGpioPpiGuid           #PRODUCED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/Fch/Prom21/FchProm21ModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21GpioID
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21GppPcieAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciID
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21IohcBridgeCntl
+
+[Depex]
+  gAmdNbioPcieTrainingDonePpiGuid
+  AND
+  gAmdFchProm21InitPpiGuid
+  AND
+  gAmdFchProm21FwLoadingPassPpiGuid
+

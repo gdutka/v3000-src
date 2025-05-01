@@ -1,0 +1,64 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2017-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmModernStandbyInitDxe
+  FILE_GUID             = DACF6769-C3D5-4EFF-A181-FA0988E1D9B4
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmModernStandbyInitDxeEntryPoint
+
+[Sources.common]
+  AmdCpmModernStandbyInitDxe.c
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[BuildOptions]
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  AmdCpmBaseLib
+  AmdPbsConfigLib
+  AmdPspMboxLibV2
+  AmdPspBaseLibV2
+
+[Guids]
+  gEfiEventReadyToBootGuid
+  gAmdModernStandbyResourceCheckVariableGuid
+
+[Protocols]
+  gAmdCpmTableProtocolGuid
+  gAmdCpmDisplayFeatureProtocolGuid
+  gAmdApcbDxeServiceProtocolGuid
+  gPspFlashAccSmmCommReadyProtocolGuid
+
+[Ppis]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIgpuContorl
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable
+
+[Depex]
+  gAmdCpmTableProtocolGuid
+  AND
+  gEfiVariableArchProtocolGuid
+

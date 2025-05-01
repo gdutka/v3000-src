@@ -1,0 +1,43 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmPmfBoardPeim
+  FILE_GUID             = 55F10D34-4F05-426A-9A72-613EA8544DE0
+  MODULE_TYPE           = PEIM
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmPmfBoardPeimEntryPoint
+
+[Sources.common]
+  AmdCpmPmfBoardPeim.c
+
+[LibraryClasses]
+  BaseLib
+  PeimEntryPoint
+  PeiServicesLib
+  BaseMemoryLib
+  DebugLib
+  AmdBaseLib
+  AmdPbsConfigLib
+
+[Guids]
+
+[Ppis]
+  gAmdCpmTablePpiGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+
+[Depex]
+  gAmdCpmTablePpiGuid
+  AND
+  gEfiPeiReadOnlyVariable2PpiGuid

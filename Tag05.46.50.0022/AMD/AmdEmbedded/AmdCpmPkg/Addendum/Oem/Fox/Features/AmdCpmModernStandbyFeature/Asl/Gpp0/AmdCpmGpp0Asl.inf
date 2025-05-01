@@ -1,0 +1,21 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmGpp0Asl
+  FILE_GUID             = 55537793-fdb1-46e7-a48c-7d0736bd26eb
+  MODULE_TYPE           = USER_DEFINED
+  VERSION_STRING        = 1.0
+
+[Sources.common]
+  Gpp0.asl
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec

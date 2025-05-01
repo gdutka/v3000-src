@@ -1,0 +1,92 @@
+/** @file
+ brief description of file's purpose.
+
+ detailed description of file's purpose
+
+;******************************************************************************
+;* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corp.
+;*
+;******************************************************************************
+*/
+
+#include <Guid/SDEmmcInfoSetupUtilityHii.h>
+#include "SDEmmcInfoFormPolicy.h"
+
+formset
+  guid      = SD_EMMC_INFO_SETUP_FORMSET_GUID,
+  title     = STRING_TOKEN (STR_SD_EMMC_INFO_TITLE),
+  help      = STRING_TOKEN (STR_SD_EMMC_INFO_TITLE_HELP),
+  classguid = {PcdGetPtr (PcdH2OSDEmmcInfoLinkToFormsetGuid)},
+
+  varstore SD_EMMC_SETUP_CONFIGURATION,
+    varid = SD_EMMC_INFO_VARSTORE_ID,
+    name  = SDeMMCInfoSetupConfig,
+    guid  = SD_EMMC_INFO_SETUP_VARSTORE_GUID;
+
+  form
+    formid = H2O_SD_EMMC_INFO_LIST_FORM_ID,
+    title  = STRING_TOKEN (STR_SD_EMMC_INFO_TITLE);
+
+    suppressif TRUE;
+      numeric varid = SDeMMCInfoSetupConfig.NumberOfOemPorts,
+            prompt  = STRING_TOKEN(STR_EMPTY),
+            help    = STRING_TOKEN(STR_EMPTY),
+            flags   = READ_ONLY,
+            minimum = 0,
+            maximum = 0xFF,
+            step    = 1,
+            default = 0,
+      endnumeric;
+    endif;
+
+    grayoutif ideqval SDeMMCInfoSetupConfig.NumberOfOemPorts == 0;
+      oneof varid = SDeMMCInfoSetupConfig.DisplayMode,
+        questionid  = H2O_SD_EMMC_INFO_DISPLAY_MODE_QUESTION_ID,
+        prompt      = STRING_TOKEN (STR_SD_EMMC_DISPLAY_MODE_PROMPT),
+        help        = STRING_TOKEN (STR_SD_EMMC_DISPLAY_MODE_HELP),
+        flags       = INTERACTIVE,
+        option text = STRING_TOKEN (STR_SD_EMMC_DISPLAY_MODE_BY_TYPE),     value = 0, flags = DEFAULT;
+        option text = STRING_TOKEN (STR_SD_EMMC_DISPLAY_MODE_BY_OEM_NAME), value = 1, flags = 0;
+      endoneof;
+    endif;
+
+    subtitle text = STRING_TOKEN (STR_DEVICE_CHANGING_STAT);
+    subtitle text = STRING_TOKEN (STR_EMPTY);
+
+    label H2O_SD_EMMC_INFO_DEVICE_LIST_LABEL_START;
+    label H2O_SD_EMMC_INFO_DEVICE_LIST_LABEL_END;
+
+  endform;
+
+  form
+    formid = H2O_SD_EMMC_INFO_SD_DEVICE_INFO_FORM_ID,
+    title  = STRING_TOKEN (STR_EMPTY);
+
+    subtitle text = STRING_TOKEN (STR_SD_EMMC_SUB_FORM_TITLE);
+    subtitle text = STRING_TOKEN (STR_DEVICE_CHANGING_STAT);
+    subtitle text = STRING_TOKEN (STR_EMPTY);
+
+    label H2O_SD_EMMC_INFO_SD_DEVICE_INFO_LABEL_START;
+    label H2O_SD_EMMC_INFO_SD_DEVICE_INFO_LABEL_END;
+
+  endform;
+
+  form
+    formid = H2O_SD_EMMC_INFO_EMMC_DEVICE_INFO_FORM_ID,
+    title  = STRING_TOKEN (STR_EMPTY);
+
+    subtitle text = STRING_TOKEN (STR_SD_EMMC_SUB_FORM_TITLE);
+    subtitle text = STRING_TOKEN (STR_DEVICE_CHANGING_STAT);
+    subtitle text = STRING_TOKEN (STR_EMPTY);
+
+    label H2O_SD_EMMC_INFO_EMMC_DEVICE_INFO_LABEL_START;
+    label H2O_SD_EMMC_INFO_EMMC_DEVICE_INFO_LABEL_END;
+
+  endform;
+
+endformset;

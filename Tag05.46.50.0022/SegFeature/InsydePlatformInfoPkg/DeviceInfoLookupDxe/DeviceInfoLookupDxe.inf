@@ -1,0 +1,59 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2021 - 2024, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = DeviceInfoLookupDxe
+  FILE_GUID      = d99d0269-592d-4618-a36c-fa8007331cbc
+  MODULE_TYPE    = DXE_DRIVER
+  VERSION_STRING = 1.0
+  ENTRY_POINT    = DeviceInfoLookupDxeEntryPoint
+  UNLOAD_IMAGE   = DeviceInfoLookupDxeUnload
+
+[Sources]
+  DeviceInfoLookupDxe.c
+  DeviceInfoLookupDxe.h
+  DisplayNameString.c
+  UsbPortLookup.c
+  DeviceInfoLookupDxe.uni
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  HiiExLib
+  HiiLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+  SortLib
+  BinarySearchExLib
+  DeviceInfoLookupDataLib
+
+[Protocols]
+  gH2ODeviceInfoLookupProtocolGuid  ## PRODUCES
+
+[FixedPcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPlatformInfoDummyStrToken
+  
+[FeaturePcd]
+
+[Depex]
+  TRUE

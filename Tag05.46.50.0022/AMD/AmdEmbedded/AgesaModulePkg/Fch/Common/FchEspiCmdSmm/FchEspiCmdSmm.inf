@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2024 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+
+  INF_VERSION                   = 0x00010005
+  BASE_NAME                     = FchEspiCmdSmm
+  FILE_GUID                     = 99846a70-614d-4062-820e-2473e4e128e3
+  MODULE_TYPE                   = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION      = 0x0001000A
+  VERSION_STRING                = 1.0
+  ENTRY_POINT                   = AmdFchEspiCmdSmmInit
+
+
+[Sources]
+  FchEspiCmdSmm.c
+  FchEspiCmdSmm.h
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  DebugLib
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiBootServicesTableLib
+  FchBaseLib
+  FchEspiCmdLib
+
+[Guids]
+
+[Protocols]
+  gAmdFchEspiCmdSmmProtocolGuid           #PRODUCED
+
+[Ppis]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+
+[Depex]
+  TRUE

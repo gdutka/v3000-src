@@ -1,0 +1,325 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+  // This device PCIe Mmio Address
+  Name (DADR, 0xEEEEEEEE)
+
+  // This device present detect status.
+  //    0x00 - This device is not present.
+  //    0x0F - This device is present.
+  //    0xEE - This device status is unknow.
+  Name (DSTA, 0xEE)
+
+  // This device PCI Bus number.
+  Name (DBUS, 0xEEEE)
+
+  // This device PCI_Config space visibility.
+  //    0x00 - This device PCI_Config space is not visible.
+  //    0x01 - This device PCI_Config space is visible.
+  Name (PCSA, 0x00)
+
+  // This device Power State.
+  //    0xD0 - This device is in D0 State.
+  //    0xD3 - This device is in D3 State.
+  Name (PWST, 0xD3)
+
+  // Child present detect status.
+  //    0x00 - This device is not present.
+  //    0x0F - This device is present.
+  //    0xEE - This device status is unknow.
+  Name (ESTA, 0xEE)
+
+  // Child device PCI Bus number.
+  Name (EBUS, 0xEEEE)
+
+  // The Power State of PowerResource PWRS
+  Name (PW3S, 0x00)
+
+  // Read this device PCIe Registers through PCIe MMIO space.
+  //  Arg0 - PCIe Mmio Address.
+  //  Arg1 - Byte number form 1 to 4.
+  Method (RPRM, 2) {
+    Store (Arg0, Local0)
+
+    OperationRegion (varM, SystemMemory, Local0, 0x4)
+    Field (varM, AnyAcc, NoLock, Preserve) {
+      varR, 32,
+    }
+    Store (varR, Local1)
+
+    If (LEqual (Arg1, 0x01)) {
+      And (Local1, 0xFF, Local1)
+    } ElseIf (LEqual (Arg1, 0x02)) {
+      And (Local1, 0xFFFF, Local1)
+    } ElseIf (LEqual (Arg1, 0x03)) {
+      And (Local1, 0xFFFFFF, Local1)
+    }
+
+    CpmDebugPrint ("  OEM-ASL-PCIe Address (0x%X).RPRM (0x%X 0x%X) = 0x%X\n", DADR, Arg0, Arg1, Local1, 0, 0)
+    return (Local1)
+  }
+
+  // Write this device PCIe Registers through PCIe MMIO space.
+  //  Arg0 - PCIe Mmio Address.
+  //  Arg1 - Byte number form 1 to 4.
+  //  Arg2 - Write data.
+  Method (WPRM, 3) {
+    Store (Arg0, Local0)
+
+    If (LEqual (Arg1, 0x01)) {
+      OperationRegion (varA, SystemMemory, Local0, 0x1)
+      Field (varA, AnyAcc, NoLock, Preserve) {
+        varE, 8,
+      }
+      Store (Arg2, varE)
+    } ElseIf (LEqual (Arg1, 0x02)) {
+      OperationRegion (varB, SystemMemory, Local0, 0x2)
+      Field (varB, AnyAcc, NoLock, Preserve) {
+        varF, 16,
+      }
+      Store (Arg2, varF)
+    } ElseIf (LEqual (Arg1, 0x03)) {
+      OperationRegion (varC, SystemMemory, Local0, 0x3)
+      Field (varC, AnyAcc, NoLock, Preserve) {
+        varG, 24,
+      }
+      Store (Arg2, varG)
+    } Else {
+      OperationRegion (varD, SystemMemory, Local0, 0x4)
+      Field (varD, AnyAcc, NoLock, Preserve) {
+        varH, 32,
+      }
+      Store (Arg2, varH)
+    }
+
+    CpmDebugPrint ("  OEM-ASL-PCIe Address (0x%X).WPRM (0x%X 0x%X 0x%X)\n", DADR, Arg0, Arg1, Arg2, 0, 0)
+  }
+
+  // Search PCIe Downstream Ports
+  //  Arg0 - Bus number of Downstream Ports
+  Method (SPDP, 1) {
+    Store (0x7FFFFFFF, Local5)
+    Or (Local5, 0x80000000, Local5)
+    Store (0, Local2)
+    Store (0, Local0)                       // Device Number    0x0 ~ 0x1F
+    While (LLessEqual (Local0, 0x1F)) {     // Device Number    0x0 ~ 0x1F
+      Store (0, Local1)                     // Function Number  0x0 ~ 0x7
+      While (LLessEqual (Local1, 0x7)) {    // Function Number  0x0 ~ 0x7
+        Or (And (ShiftLeft (Arg0, 20), 0xFF00000), And (ShiftLeft (Local0, 15), 0xF8000), Local3)
+        Or (Local3, And (ShiftLeft (Local1, 12), 0x7000), Local3)
+        Store (RPRM (Add (CpmPcieMmioBaseAddr, Local3), 4), Local4)
+        If (LAnd (LNotEqual (Local4, Local5), LNotEqual (Local4, 0x0))) {
+          Or (Local2, ShiftLeft (0x1, Local0), Local2)
+        } ElseIf (LEqual (Local1, 0x0)) {
+          Break
+        }
+        Increment (Local1)
+      }
+      Increment (Local0)
+    }
+    CpmDebugPrint ("  OEM-ASL-PCIe Address (0x%X).SPDP (0x%X) = 0x%X\n", DADR, Arg0, Local2, 0, 0, 0)
+    return (Local2)
+  }
+
+  // Search PCIe Capability Header.
+  //  Arg0 - PCIe Mmio Address.
+  //  Arg1 - PCIe Capability ID.
+  Method (SPCH, 2) {
+    Store (0, Local0)
+    Store (RPRM (Add (Arg0, 0x34), 1), Local1)
+
+    While (LNotEqual (Local1, 0)) {
+        Store (RPRM (Add (DADR, Local1), 1), Local2)
+        If (LOr (LEqual (Local2, 0x00), LEqual (Local2, 0xFF))) {
+            Break
+        }
+
+        If (LEqual (Local2, Arg1)) {
+            Store (Local1, Local0)
+            Break
+        }
+
+        Store (RPRM (Add (DADR, Add (Local1, 1)), 1), Local1)
+    }
+    CpmDebugPrint ("  OEM-ASL-PCIe Address (0x%X).SPCH (0x%X, 0x%X) = 0x%X\n", DADR, Arg0, Arg1, Local0, 0, 0)
+    return (Local0)
+  }
+
+  Method (_STA, 0, Serialized) {
+    If (Lor (LEqual (DSTA, 0xEE), LEqual (ESTA, 0xEE))) {
+      If (LEqual (DBUS, 0xEEEE)) {
+        If (CondRefOf (^^EBUS)) {
+          Store (^^EBUS, DBUS)
+        } else {
+          Store (0x00, DBUS)
+        }
+      }
+      If (LNotEqual (DBUS, 0xEEEE)) {
+        If (LEqual (DADR, 0xEEEEEEEE)) {
+          Or (And (ShiftLeft (_ADR, 12), 0x7000), And (ShiftRight (_ADR, 1), 0xF8000), Local0)
+          Or (And (ShiftLeft (DBUS, 20), 0xFF00000), Local0, Local0)
+          Add (CpmPcieMmioBaseAddr, Local0, DADR)
+        }
+        Store (0x7FFFFFFF, Local0)
+        Or (Local0, 0x80000000, Local0)
+        Store (RPRM (Add (DADR, 0x00), 4), Local1)
+        If (Lor (LEqual (Local1, Local0), LEqual (Local1, 0x0))) {
+          Store (0x00, DSTA)
+          Store (0x00, ESTA)
+          If (LNotEqual (DBUS, 0x00)) {
+            Store (^^SPCH (^^DADR, 0x10), Local2)
+            // Check Hotplug Capable - 0 = Not Supported
+            //                         1 = Supported
+            If (LEqual (And (^^RPRM (Add (^^DADR, Add (Local2, 0x14)), 1), 0x40), 0x40)) {
+              Store (0x0F, DSTA)
+              Store (0xEE, ESTA)
+            }
+          }
+        // Check Base Class and Sub Class - 0604h = PCI Express Bridge
+        } ElseIf (LEqual (RPRM (Add (DADR, 0x0A), 2), 0x0604)) {
+          Store (RPRM (Add (DADR, 0x19), 1), EBUS)
+          Store (SPCH (DADR, 0x10), Local2)
+          // Check Device Type - 0h = PCI Express Endpoint
+          //                     4h = Root Port of PCI Express Root Complex
+          //                     5h = Upstream Port of PCI Express Switch
+          //                     6h = Downstream Port of PCI Express Switch
+          If (LEqual (And (ShiftRight (RPRM (Add (DADR, Add (Local2, 2)), 1), 4), 0x0F), 0x05)) {
+            // Upstream Port of PCI Express Switch
+            If (LEqual (EBUS, 0x0)) {
+              Store (0x0F, DSTA)
+              Store (0xEE, ESTA)
+            } Else {
+              If (LEqual (SPDP (EBUS), 0x0)) {
+                Store (0x00, DSTA)
+                Store (0x00, ESTA)
+              } Else {
+                Store (0x0F, DSTA)
+                Store (0x0F, ESTA)
+              }
+            }
+          } Else {
+            // Downstream Port of PCI Express Switch
+            // Check Presence Detect State - 0 = Adapter not Present
+            //                               1 = Adapter Present
+            If (LEqual (And (RPRM (Add (DADR, Add (Local2, 0x1A)), 1), 0x40), 0x00)) {
+              // Check Hotplug Capable - 0 = Not Supported
+              //                         1 = Supported
+              If (LEqual (And (RPRM (Add (DADR, Add (Local2, 0x14)), 1), 0x40), 0x00)) {
+                Store (0x00, DSTA)
+                Store (0x00, ESTA)
+              } Else {
+                Store (0x0F, DSTA)
+                Store (0xEE, ESTA)
+              }
+            } Else {
+              If (LEqual (EBUS, 0x0)) {
+                Store (0x0F, DSTA)
+                Store (0xEE, ESTA)
+              } Else {
+                Store (0x0F, DSTA)
+                Store (0x0F, ESTA)
+              }
+            }
+          }
+        } Else {
+          Store (0x0F, DSTA)
+          Store (0x00, ESTA)
+        }
+      } Else {
+        Store (0x00, DSTA)
+        Store (0xEE, ESTA)
+      }
+    }
+
+    If (LAnd (LAnd (LEqual (PCSA, 0x1), LEqual (PWST, 0xD3)), LEqual (PW3S, 0x1))) {
+      Store (0xD0, PWST)
+    }
+
+    If (LAnd (LAnd (LEqual (PCSA, 0x0), LEqual (PWST, 0xD0)), LEqual (PW3S, 0x0))) {
+      Store (0xD3, PWST)
+    }
+
+    If (CondRefOf (SSTA)) {
+      SSTA ()
+    }
+
+    CpmDebugPrint ("  OEM-ASL-PCIe Address (0x%X)._STA = 0x%X  PWST = 0x%X  DBUS = 0x%X  ESTA = 0x%X  EBUS = 0x%X\n", DADR, DSTA, PWST, DBUS, ESTA, EBUS)
+    Return (DSTA)
+  }
+
+  Method (_INI, 0, Serialized) {
+    Store (0x7FFFFFFF, Local0)
+    Or (Local0, 0x80000000, Local0)
+    Store (RPRM (Add (DADR, 0x00), 4), Local1)
+    If (Lor (LEqual (Local1, Local0), LEqual (Local1, 0x0))) {
+      Store (0x00, PCSA)
+      Store (0xD3, PWST)
+      Store (0x00, PW3S)
+    } Else {
+      Store (0x01, PCSA)
+      Store (0xD0, PWST)
+      Store (0x01, PW3S)
+    }
+    CpmDebugPrint ("  OEM-ASL-PCIe Address (0x%X)._INI  PCSA = 0x%X  PWST = 0x%X  PW3S = 0x%X\n", DADR, PCSA, PWST, PW3S, 0, 0)
+    If (CondRefOf (SINI)) {
+      SINI ()
+    }
+  }
+
+  Method (_REG, 2, Serialized) {
+    // Connect PCI_Config OperationRegion
+    If (LAnd (LEqual (Arg0, 2), LEqual (Arg1, 1))) {
+      If (LEqual (DSTA, 0x0F)) {
+        If (LEqual (And (RPRM (Add (DADR, 0x04), 1), 0xFC), 0x04)) {
+          Store (0x1, PCSA)
+        }
+      }
+    }
+
+    // Disconnect PCI_Config OperationRegion
+    If (LAnd (LEqual (Arg0, 2), LEqual (Arg1, 0))) {
+      Store (0x0, PCSA)
+    }
+
+    If (CondRefOf (SREG)) {
+      SREG (Arg0, Arg1)
+    }
+
+    CpmDebugPrint ("  OEM-ASL-PCIe Address (0x%X)._REG (%d %d)  PCSA = %d\n", DADR, Arg0, Arg1, PCSA, 0, 0)
+  }
+
+
+  PowerResource (PWRS, 0, 0) {
+    Method (_STA, 0, Serialized) {
+      CpmDebugPrint ("  OEM-ASL-PCIe Address (0x%X).PWRS._STA = 0x%X\n", DADR, PW3S, 0, 0, 0, 0)
+      If (CondRefOf (PSTA)) {
+        PSTA ()
+      }
+      Return (PW3S)
+    }
+
+    Method (_ON, 0, Serialized) {
+      If (LEqual (PW3S, 0x00)) {
+        Store (0x01, PW3S)
+        CpmDebugPrint ("  OEM-ASL-PCIe Address (0x%X).PWRS._ON = 0x%X\n", DADR, PW3S, 0, 0, 0, 0)
+        If (CondRefOf (P_ON)) {
+          P_ON ()
+        }
+      }
+    }
+
+    Method (_OFF, 0, Serialized) {
+      If (LEqual (PW3S, 0x01)) {
+        Store (0x00, PW3S)
+        CpmDebugPrint ("  OEM-ASL-PCIe Address (0x%X).PWRS._OFF = 0x%X\n", DADR, PW3S, 0, 0, 0, 0)
+        If (CondRefOf (P_OF)) {
+          P_OF ()
+        }
+      }
+    }
+  } // End of PowerResource (PWRS, 0, 0)
+

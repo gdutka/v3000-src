@@ -1,0 +1,56 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ActDxe
+  FILE_GUID                      = e6fea4aa-575c-48fc-99ce-1724dbdc1ff2
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = ActDxeDriverEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  BaseMemoryLib
+  AmdBaseLib
+  IdsLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiDriverEntryPoint
+  DxeServicesTableLib
+  AmdHeapLib
+  AgesaConfigLib
+
+[Sources]
+  ActDxe.c
+
+[Guids]
+  gAgesaConfigDbPointerVariableGuid
+
+[Protocols]
+
+
+[Pcd]
+
+
+[Depex]
+  gEfiVariableArchProtocolGuid
+
+
+
+ 
+[BuildOptions] 
+MSFT:*_*_*_CC_FLAGS = /D DISABLE_NEW_DEPRECATED_INTERFACES /W4 

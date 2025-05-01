@@ -1,0 +1,53 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmABRecoveryPeim
+  FILE_GUID             = EE911B88-39E3-4F56-B94C-64FFF5B53A3B
+  MODULE_TYPE           = PEIM
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmABRecoveryEntryPoint
+
+[Sources.common]
+  AmdCpmABRecoveryPeim.c
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[LibraryClasses]
+  BaseLib
+  PeimEntryPoint
+  AmdCpmBaseLib
+  AmdBaseLib
+  AmdPspMboxLibV2
+  AmdPspBaseLibV2
+  MemoryAllocationLib
+  AmdSocBaseLib
+  PeiServicesLib
+  AmdPspFlashAccLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdPspRecoveryDetectPpiGuid
+  gAmdCpmTablePpiGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdSkipSelfHealing
+
+[Depex]
+  gAmdPspRecoveryDetectPpiGuid

@@ -1,0 +1,715 @@
+Copyright 2023 Synopsys, Inc.
+This Synopsys IP and all associated documentation are proprietary to
+Synopsys, Inc. and may only be used pursuant to the terms and conditions
+of a written license agreement with Synopsys, Inc. All other use,
+reproduction, modification, or distribution of the Synopsys IP or the
+associated documentation is strictly prohibited.
+Inclusivity & Diversity - Read the Synopsys Statement on Inclusivity and Diversity at 
+https://solvnetplus.synopsys.com/s/article/Synopsys-Statement-on-Inclusivity-and-Diversity
+------------------------------------------------------------------
+DDR54 PHY Training Firmware
+
+Version F-2023.06-T-321209
+August 15, 2023
+
+Changes from version F-2023.06
+(recommended)
+
+
+Notes
+-----
+ - The training firmware binaries included in this release are identical to the ones inside release F-2023.06.
+   The enhancements listed below therefore also apply to release F-2023.06
+ - There is no special message block field to set in order to use the new features of PUB 4.22a_banarasB0_final.
+   The training firmware automatically detects it at run-time and enables the features specific to that PUB version.
+ - DDR4 and DDR5 LRDIMM functionality is only supported with the DWC DDR5/4 PHY LRDIMM Add-On- Product Code: F967-0
+
+
+Enhancements
+------------
+Training Firmware:
+ - PMU Revision: 0x0016 (same as F-2023.06)
+ - Updated DDR5 read 2D training for PUB 4.22a_banarasB0_final
+   - Added support for 8-bit VrefDAC range
+   - Updated 2D eye extraction and trained VrefDAC calculations to take into account VrefDAC set selection
+     for every trained rank (specified in CSR VrefDACSelCtrl)
+ - Initial DDR5 PHY VrefDAC setting specified in 'PhyVref' message block field is unchanged:
+   Receiver Vref = VDDQ*PhyVref[6:0]/128
+
+
+Minimum Required Versions
+-------------------------
+ - Phyinit: F-2023.06
+ - PUB: 4.22a_banarasB0_final
+
+
+----------------------------------------
+Version F-2023.06
+July 10, 2023
+
+Changes from version F-2023.01
+(recommended)
+
+
+Note:
+---------
+- DDR4 and DDR5 LRDIMM functionality is only supported with the DWC DDR5/4 PHY LRDIMM Add-On- Product Code: F967-0
+
+
+Bug Fixes
+---------
+ - STAR 4739926 - DDR5: Fix MR3 setting at the end of WL for x16 ECC byte (DBytes 8 and 9).
+ - STAR 4837951 - DDR5: Fix usage of option ReservedF6[7] for which in some cases the eyes
+                        extracted during rd2D DFE could have been slightly corrupted.
+
+
+Enhancements
+------------
+Training Firmware:
+ - PMU Revision: 0x0016
+ - DDR4: When HdtCtrl <= 4, report in the log all the MRS commands, except for those used to sweep
+         the values for a trained MR/RCW/BCW; only report the final trained value. If required, all
+         MRS commands can be reported when HdtCtrl is set to 3 or less for debug purpose.
+ - DDR4/DDR5: Reduce size of string files by removing those related with level below 4
+ - DDR5: Avoid resetting PllLockPhSel (keep the value as-is)
+ - DDR5: (RDIMM/LRDIMM) New option Reserved7D2[0], when set to 1, a modified MemReset sequence is
+         used during DevInit to work around RDIMM reset issues observed with some RCD parts
+ - DDR5: Disable RTT_NOM_* during DQ swizzle discovery
+ - DDR5: New option Reserved7D2[1], when set to 1, update RTT_PARK to value Reserved7D2[4:2]
+         during PDA enumeration
+ - DDR5: Cover full range of TAP4 coefficient values during wr2D DFE
+ - DDR5: Remove dummy read before starting RxEn training
+ - DDR5: Skip ECC bytes during x16 byte swap detection step (ECC bytes cannot be swapped)
+ - DDR5: Update setting of DfeCtrl during rd2D DFE training (applies to PHY with 4-TAP DFE variant)
+ - DDR5: Demote to level 4 the debug messages related with MRW/MPC/VrefCS/VrefCA commands (was level 5)
+ - DDR5: Add new option D5Misc[7], when set to 1, at the end of MRL training, the trained values for
+         both channels will be set to the same value, corresponding to the maximum between both channels
+ - DDR5: Improve execution speed of data acquisition step during wr2D training using first a
+         coarse search approach to extract tighter range limits for both Vref and Delay dimensions
+ - DDR5: New option Reserved7D0[1:0] to improve execution speed of wr2D DFE; when this field is
+         set to a value K > 0, wr2D DFE will iterate up to K times, starting with bias-step mode up to
+         K larger than the one requested in TX2D_DFE_Misc[3:2] in order to extract a tighter range of
+         coefficients used to limit the search at the next iteration (similar to a zoom-in approach)
+ - DDR5: Update the existing Rx/Tx eye filtering mechanism based on Reserved1E5 and Reserved1E6 to be
+         independent per direction (see details in respective message block comments)
+ - DDR5: Add new option Reserved7D0[2], when set to 1, extend by 16x the bit sequence length
+         configured for the data acquisition step during wr2D training
+ - DDR5: Add new experimental option Reserved7D0[7:6], Reserved7D0[5:4], Reserved7D1[7:6] and
+         Reserved7D1[5:4] to configure the weight function used during the optimization of
+         VrefDQ (MR10), TxDqDly, VrefDAC, and RxClkDly, respectively. The supported values are:
+           0 => width*width (i.e., legacy mode, no change)
+           1 => width
+           2 => square_root(width)
+           3 => cube_root(width)
+ - DDR5: Add new option D5Misc[5], when set to 1, read training will be executed again after
+         write training, but this time using the PRBS23 pattern since writes are now trained;
+         in such case, if rd2D DFE option is also enabled, it is not executed during the first
+         iteration of read training (before write training), unless ReservedF6[4] is set to 1
+ - DDR5: Some message block comment updates
+ - DDR5: New option ReservedF6[6] to set individual (per DRAM) RTT CK/CS/CA during DevInit before DRAM
+         CS/CA training; when this option is set to 1, the message block fields MR32R*Nib*, resp.
+         MR3R*Nib*, are used as inputs to provide the RTT CK/CS (resp. CA) values, per DRAM, using
+         same format as used in MR32 (resp. MR33); note that MR3*Nib* message block fields were
+         already existing but were only used as outputs, hence they are now used as input using
+         MR33 format for RTT CA, but only for this new option. As usual, in case of DDIMM, only
+         the value for even ranks are significant, yet it remains recommended as for any other
+         setting to set to the same value the corresponding fields of the corresponding odd rank.
+ - DDR5: When reporting in the log all the MRW/MPC/VrefCS/VrefCA commands (new feature introduced in
+         2023.01 release), avoid reporting the MRW used to sweep the values for a trained MR/RW;
+         only report the final trained values, otherwise this may create a log too large (all the MRW
+         can still be reported when HdtCtrl is set to 3 or less for debug purpose if required).
+ - DDR5: (RDIMM/LRDIMM) PhyCfg[1:0] is now used to control setup/hold time of QCA during QCS/QCA training
+         in SDR mode; the control is similar to how it is already supported in DDR5 UDIMM
+         case for CA training in 2N mode:
+           PhyCfg[1:0] 2N/SDR mode CA setup/hold time setting w.r.t. CK capturing CS assertion at
+                       DRAM interface (This setting is only applicable if D5Misc[6] is set to 1, and
+                       in case of RDIMM/LRDIMM if SequenceCtrl[14] is set to 1)
+           00 = 2UI setup time, 2UI hold time (Recommended: CK rising edge center in CA eye)
+           01 = 3UI setup time, 1UI hold time (CK/CS/CA timing similar with RCD SDR1 mode)
+           10 = 1UI setup time, 3UI hold time (CK/CS/CA timing similar with RCD SDR2 mode)
+           11 = Reserved
+ - DDR5: Support CA swizzle for older PUB versions using D5Misc[3]:
+           Backward compatibility option only for PUB versions not supporting CSR field PhyConfigCX;
+           must be set to 1 if and only if the value of DWC_DDRPHY_CAXBAR is defined in the RTL and
+           PhyConfigCX is not supported (must be 0 otherwise)
+ - DDR5: (RDIMM) Improve 2D CA eye contour display in the log for SDR mode
+ - DDR5: (UDIMM) Improve reported VrefCS margins following 2D CS training
+ - DDR5: (RDIMM/LRDIMM) Improve reported VrefCA margins following RCD CA DFE training
+ - DDR5: (RDIMM/LRDIMM) Remove CATrainOpt[6] introduced in 2023.01, because this option is useless;
+         users can set any QCK delay using message block fields associated with the RW that control
+         QCK delays.
+ - DDR5: (RDIMM/LRDIMM) Extend QCA training delay range by one tCK in case of SDR1 mode to cover
+         the case where the right edge of the eye was missed
+
+
+Limitations
+-----------
+ - DDR5: Post optimization of RxClkC and the option to avoid VrefDAC training counters during rd2D cannot be both enabled
+         if rd2D DFE is disabled. That is, setting ReservedF6[3:0] to a non-zero value, while setting ReservedF6[5] to 1
+         and RX2D_TrainOpt[0] to 0 will result in a training failure.
+
+
+Minimum Required Versions
+-------------------------
+ - Phyinit: F-2023.06
+ - PUB: 1.01*, 2.42*, 2.44*, 3.00*, 3.30*, 3.31*, 3.40*, 3.50*, 3.51*, 3.60*, 4.10*, 4.11*, 4.20*, 4.21*, 4.22*, 4.30*
+   Note: * = {a,b,c,...} and indicates a non-functional change which does not impact firmware
+
+
+----------------------------------------
+Version F-2023.01
+January 13, 2023
+
+Changes from version F-2022.06
+(mandatory)
+
+
+Note:
+---------
+- DDR4 and DDR5 LRDIMM functionality is only supported with the DWC DDR5/4 PHY LRDIMM Add-On- Product Code: F967-0
+
+
+Bug Fixes
+---------
+- STAR 4325054 - DDR5: Fix some wrong x16 DFE MR setting during wr2D
+- STAR 4405963 - DDR5 RDIMM: Fix too pessimistic CS margin reported for odd ranks
+- STAR 4450879 - DDR5: Support CA Swizzle option
+- STAR 3698450 - Fix the spurious PHY CK signals during devinit
+
+Enhancements
+------------
+Training Firmware:
+ - PMU Revision : 0x0010
+ - DDR5: Use a more robust pattern for write DM TxDqDly training
+ - DDR5: Remove D5Misc[5] option, rd2D single-pass, which was a non-recommended option
+         (If the option is enable, it is ignored and the recommended two passes
+         rd2D training is executed, but customers are recommended to not set this bit
+         which is now reserved)
+ - DDR5: Improve write DM DFE training; instead of executing a 1D delay sweep, the TAP
+         DFE related MR values of the DM are set to the median of the corresponding TAP
+         DFE MR of the DQ associated with DM
+ - DDR5: New option CATrainOpt[0], when set to 1, execute 2D Vref*delay CA training
+         instead of 1D only (also for UDIMM, see detail in training FW application note)
+ - DDR5: New option CATrainOpt[5], when set to 1, execute 2D Vref*delay CS training
+         instead of 1D only (also for UDIMM, see detail in training FW application note)
+ - DDR5: New option PhyCfg[7], when set to 1, detect byte swapping for x16 device
+         (PhyCfg[3] must also be set)
+ - DDR5: When HdtCtrl <= 5, report in the log all the MRW/MPC/VrefCS/VrefCA command
+         (the report is provided before the command is effectively sent); also, some
+         minor clean-up in reported debug messages in general
+ - DDR5: New option ReservedF6[5], when set to 1, explicitly sweep VrefDac during rd2D
+         training, from VrefDAC 0 to VrefDAC 127, instead of using TrainingCntr CSR
+ - DDR5: New option ReservedF6[7], when set to 1, during final stage of rx DFE optimization,
+         considered as outside the eye the combination for which a VrefDACx become saturated
+         (see detail in training FW application note)
+ - DDR5: Improve comment for message block DisabledDbyte and DisableDB*LaneR* fields
+ - DDR5: (RDIMM/LRDIMM) New option CATrainOpt[6], when set to 1, force all QCK delays
+         to 1 UI prior to QCS/QCA training. This can improve QCS/QCA margins and reduce
+         latency in some cases
+
+Limitations
+-----------
+ - CA swizzle support is only partially validated (may not work for all PUBs).
+	PUBs supporting CA swizzle: 3.30 and later, and 4.10 and later
+
+Minimum Required Versions
+-------------------------
+ - Phyinit: F-2023.01
+ - PUB: 1.01*, 2.42*, 2.44*, 3.00*, 3.30*, 3.31*, 3.40*, 3.50*, 3.51*, 4.10*, 4.11*, 4.20*, 4.21*
+   Note: * = {a,b,c,...} and indicates a non-functional change which does not impact firmware
+
+
+----------------------------------------
+Version F-2022.06
+May 24, 2022
+
+Changes from version F-2022.01
+(mandatory)
+
+
+Note:
+---------
+- DDR4 and DDR5 LRDIMM functionality is only supported with the DWC DDR5/4 PHY LRDIMM Add-On- Product Code: F967-0
+
+
+Bug Fixes
+---------
+- STAR 3978741 - DDR5: Fix DQ swizzle detection for PUB 1.x when rank 0 is not populated
+- STAR 4096300 - DDR5: Fix self-refresh exit sequence for skip Mem Reset option
+- STAR 4129241 - DDR5: Document message block field Reserved1E3
+- STAR 4107099 - DDR5: Fix for write 2D training failure for x16 devices with ECC
+
+Enhancements
+------------
+Training Firmware:
+ - PMU Revision : 0x000F
+ - DDR5: Enhance self-refresh exit sequence to be compliant with 3DS
+ - DDR5 L/RDIMM: Report in log some RCW values after MR values at the end of training
+ - DDR5 LRDIMM: Do not consider tDQS2DQ during write DQ training
+ - DDR5 L/RDIMM: Support new option CATrainOpt[5] 2D CS training
+   NOTE: when enable, this new step is replacing the CS delay only training step;
+   information is missing from training FW application note, will be added in a future release
+ - DDR5 L/RDIMM: Some improvement in the RCD CA DFE gain training (option Reserved1E2[6])
+ - DDR5 L/RDIMM: Extend option Reserved1E4[4] to force DPAR to 1 also during RCD
+   self-refresh exit
+ - DDR5 LRDIMM: Improve PBA enumeration sequence in case of SDR mode
+ - DDR5: Avoid updating the provided NoX4onUpperNibbleTg* CSR value
+ - DDR5 LRDIMM: Disable Rx FIFO during MRE/MRD/MWD training
+ - DDR5 L/RDIMM: Report trained values during RCD CA DFE in DCCM at the end of
+   training (see details in training FW application note)
+ - DDR5: Support option ReservedF6[3:0] to optimize independently RxClkDly and RxClkcDly
+   at the end of read 2D training (see details in training FW application note)
+ - DDR5: Support option ReservedF6[7] to filter out saturated VrefDAC* combination
+   during read 2D training with DFE option
+ - DDR5: Report in log MR5 instead of MR3 provided value at the beginning of training
+ - DDR5: Some improvement in message block comments
+ - DDR5: Fix comment for message block DisabledDbyte and UseBroadcastMR fields
+ - DDR5: Fix direction for message block RCW40_Ch* to RCW49_Ch* fields
+ - DDR5: Fix typo on "lenght" in message block comments (2 occurrences)
+
+
+Limitations
+-----------
+ - Legacy mode PDA enumeration is only partially validated. In particular, it may not work
+   for low frequencies, such as 2000MT/s, since the margin to fit the BL16 DQS sequence
+   inside the tPDA_DQS_delay window is very small and the board delays are unknown.
+ - Some newly introduced optional features remain experimental, as 2D CS training.
+
+
+Minimum Required Versions
+-------------------------
+ - Phyinit: F-2022.06
+ - PUB: 1.01*, 2.42*, 2.44*, 3.00*, 3.10*, 3.30*, 3.31*, 3.40*, 3.50*, 3.51*, 4.10*, 4.11*
+   Note: * = {a,b,c,...} and indicates a non-functional change which does not impact firmware
+
+
+
+----------------------------------------
+
+Version F-2022.01
+November 22, 2021
+
+Changes from version F-2021.07
+(mandatory)
+
+Note:
+---------
+- DDR4 and DDR5 LRDIMM functionality is only supported with the DWC DDR5/4 PHY LRDIMM Add-On- Product Code: F967-0
+
+
+Bug Fixes
+---------
+- STAR 3741083 - DDR5: Extra Wr DQS pulse from RTL during WL training
+- STAR 3751849 - DDR5: VrefCS/VrefCA might fail when UsePerDeviceVrefCSCA (PhyCfg[5]) is set
+- STAR 3857083 - DDR5: PHY ODT is enabled during QCS/QCA training stage
+- STAR 3858368 - DDR5: Data mask (DM) training fails for x16 DRAM devices
+- STAR 3885247 - DDR5: Cannot disable DCS1 at the end of the training process
+- STAR 3885249 - DDR5: VrefCS for DCS1 is not trained for single-rank DIMMs
+- STAR 3899056 - VREGCtrl2 is not restored to pre-training values after training
+- STAR 3960246 - Dummy DQS_t/DQS_c cycles violate JEDEC spec for Write Leveling Training
+                 (Note: this STAR only affects the F-2021.07-T-169705 training firmware release)
+
+Enhancements
+------------
+Training Firmware:
+ - PMU Revision : 0x000D
+ - DDR5: An internal revision number is now stored into the new output message block fields
+   PmuInternalRev0/1 (this internal number can be useful to differentiate engineering
+   release having same PMU revision number (e.g., used for debugging purpose);
+   the internal revision number is also displayed together with official PMU revision number
+   (only if HdtCtrl < 11)
+ - DDR4/DDR5: Set CSR PhyTrngCmpltFW (resp. PhyTrngFailFW) after training complete with success
+   (resp. failure)
+ - DDR5: Disabling RTT_PARK on DRAM for all ranks during
+  * UDIMM CS/CA training
+  * RCD QCS/QCA training
+  * DQ swizzle discovery
+  * Write Leveling
+ - DDR5: New CA training options (see training FW application note for detail)
+  * 2D DCA training for RDIMM/LRDIMM
+  * RCD DCA DFE training (experimental)
+  * Multi-pattern training
+ - DDR5 write-leveling (WL) training enhancements:
+  * Improved support for negative WL skew
+  * MR3 is now reset to 0 before external WL training starts
+  * Internal WL was enhanced by searching backward for more than 1MCLK, and being more
+    sensitive if the external WL delay is such that the DQS is aligned with internal WL pulse
+    rising edge (permitting to converge with a smaller ICA instead of smaller TxDqsDly)
+  * Added more traces in external WL: dump TxDqs delays before adjustment
+  * WL margins are now extracted and displayed after internal WL (only if HdtCtrl < 5)
+ - DDR5 RCD QCS/QCA training enhancements:
+  * Increased the delay before polling DQ during QCS training, and now reporting QCS/QCA
+    training errors in the message block output field Reserved1E3 (per channel, per DIMM).
+    if Reserved1E3 is not 0 after training, at least one error was detected:
+      Reserved1E3[0] == 1: Error during CS training Dimm 0 Chan A
+      Reserved1E3[1] == 1: Error during CS training Dimm 1 Chan A
+      Reserved1E3[2] == 1: Error during CA training Dimm 0 Chan A
+      Reserved1E3[3] == 1: Error during CA training Dimm 1 Chan A
+      Reserved1E3[4] == 1: Error during CS training Dimm 0 Chan B
+      Reserved1E3[5] == 1: Error during CS training Dimm 1 Chan B
+      Reserved1E3[6] == 1: Error during CA training Dimm 0 Chan B
+      Reserved1E3[7] == 1: Error during CA training Dimm 1 Chan B
+  * QCS and QCA margins are now extracted and stored into the new message block output
+    fields QCS_Dly_Margins_* ad QCA_Dly_Margin_*.
+ - New DDR5 options controlled by message block field Reserved1E4:
+  * Reserved1E4[0]: Enables the "legacy mode" for DRAM PDA enumeration. Instead of sending a continuous
+    sequence of DQS toggles to enumerate each device, one after the other, a single BL16 DQS sequence
+    is sent during the short tPDA_DQS_delay window after the MPC enumerate ID command
+  * Reserved1E4[1]: Dumps MR after read/write training stages (only if HdtCtrl < 5)
+  * Reserved1E4[2]: Avoids sanitizing in devinit the specified message block values for
+    MR37, MR38 and MR39 (i.e., customer provided values are used during training)
+  * Reserved1E4[3]: Sanitize MR2[7] to 0 during devinit, since it will be set only when and after
+    internal WL is executed
+  * Reserved1E4[4]: Forces DCA+PAR signals at 1 during initialisation phase,
+    before sending the first commands
+ - DDR5 RDIMM/LRDIMM: Applying the RCW05 and RCW06 "_next" value settings when multi-context
+   feature is used
+ - DDR5 RDIMM/LRDIMM: SMBus request messages now include a field for the RW page number,
+   using bits [15:8] of the 32-bit payload.
+ - DDR5: Doubled the wait time between the long NOP and the REF command during the DRAM
+   Self-Refresh Exit sequence
+
+
+Limitations
+-----------
+ - Legacy mode PDA enumeration is only partially validated. In particular, it may not work
+   for low frequencies, such as 2000MT/s, since the margin to fit the BL16 DQS sequence
+   inside the tPDA_DQS_delay window is very small and the board delays are unknown.
+ - RCD DCA DFE training support is experimental (not fully validated)
+
+Minimum Required Versions
+-------------------------
+ - Phyinit: F-2022.01
+ - PUB: 1.01*, 2.42*, 2.44*, 3.00*, 3.10*, 3.30*, 3.31*, 3.40*, 3.50*, 3.51*, 4.10*, 4.11*
+   Note: * = {a,b,c,...} and indicates a non-functional change which does not impact firmware
+
+
+
+
+Version F-2021.07
+June 23, 2021
+
+Changes from version F-2021.02
+(mandatory)
+
+Note:
+---------
+- DDR4 and DDR5 LRDIMM functionality is only supported with the DWC DDR5/4 PHY LRDIMM Add-On- Product Code: F967-0
+
+
+Bug Fixes
+---------
+- STAR: 3653055 - Enhance DDR5 wr2D DFE option with DM enable;
+- STAR: 3550348 - Extend wait during impedance calibration from 10us to 100us when
+                  MsgMisc[1] is 0, i.e., normal reset mode;
+
+Enhancements
+------------
+Training Firmware:
+ - PMU Revision : 0x0009
+ - DDR5 wr2D DFE option supported for pstate > 0;
+ - DDR5 rd2D DFE option supported for pstate > 0, but only for 4TAP DFE PUB version
+   (enabling rd2D DFE option for pstate > 0 for other PUB is illegal, training
+   results is undefined);
+ - Add a new DDR5 feature, enable via PhyCfg[6], when set continuous numbering for
+   DRAM during PDA ID enumerate is used, regardless if DRAM width is x4, x8, or 16
+   (that is, the nth DRAM of the rank has always ID n-1);
+ - Extend DDR5 rd2D/wr2D to generate compound eye when applying delay/vref optimization
+ - Extend DDR5 training to report in message block output the trained value for RCD QCS/QCA
+   delay training (resp. RCD VrefCS/VrefCA training), in corresponding existing fields
+   RCW17 to RCW1C (resp. RCW40 to RCW49), per channel and per device.
+ - Extend DDR5 WL to avoid potential underflow issue in case of no board delay and
+   large write preamble
+ - Enhance DDR4 option ExtOptTrain[3] (re-executing RdDeskew with PRBS pattern):
+   if quick2D is also enable, it is not be executed again, and if RdDBI is enable,
+   it is temporary disable.
+ - Quickboot DDR5 message block field is now reserved, must be zero
+ - Update training FW to set correctly PhyInterruptFWControl CSR when training
+   pass or fail.
+
+
+Limitations
+-----------
+- None
+
+Minimum Required Versions
+-------------------------
+ - Phyinit: F-2021.07
+ - PUB: 1.01*, 2.43*, 3.00*, 3.10*, 3.30*, 3.31*, 3.40*, 4.10*, 4.11*
+   Note: * = {a,b,c,...} and indicates a non-functional change which does not impact firmware
+
+
+
+
+Version F-2021.02
+March 19, 2021
+
+Changes from version A/B/C/D/E-2020.08
+(mandatory)
+
+Note:
+---------
+- DDR4 and DDR5 LRDIMM functionality is only supported with the DWC DDR5/4 PHY LRDIMM Add-On- Product Code: F967-0
+
+Bug Fixes
+---------
+- STAR: 3534717 - Implement more robust DDR5 PDA enumeration
+- STAR: 3686690 - Avoid failing DDR5 rd2D DFE because of closed eye when only optimizing TAP separately
+- STAR: 3685419 - Correct reporting of centerDelay in DDR5 Tx eye dump
+- STAR: 3565356 - Fix DDR5 read training in case of byte swap for x16 configuration;
+- STAR: 3684967 - Avoid failing DDR4 wr2D FFE because of closed eye when only optimizing FFE separately
+
+Enhancements
+------------
+Training Firmware:
+ - PMU Revision : 0x0007
+ - Multiple enhancements of DDR5 devinit:
+   * Sanitize RCW01 message block field to disable RCD parity checking during training,
+     and enable RCD parity checking (if requested) at the end of training
+   * Set RCW12 to RCW1C (QCK/QCS/QCA delays) via SMBus (but only if value is non zero)
+   * Avoid sending extended NOP before DRAM initialization when MemReset is skipped
+   * Support different RTT setting for group A and group B: MR32_*[6] message block
+     field provide the group (A or B) for which respective MR32_* and MR33_*
+     apply to, while MR32_ORG_* and MR33_ORG_* apply to the Other Rtt Group (ORG)
+   * Set MR111;
+
+ - Fix DDR5 UDIMM CS training in case of x4 and x16; there is possibility that the
+   passing region are 1 MCLK apart, so region are shifted by 1 MCLK to increase
+   compound eye (need to increase the sequence length by 50% for this fix)
+
+ - DDR5 CS/CA training for pstate 0 is broadcasting AT*Dly setting for all pstates
+   (for same 1N/2N mode);
+
+ - DDR5 RCD VrefCS (resp. VrefCA) training, 1D variant, executed after
+   RCD CS/CA (delay) training; enable by setting CATrainOpt[5] (resp. CATrainOpt[6])
+   * Note: PhyCfg[2] must also be set
+   * Note: this feature is not fully verified
+
+ - Report CS/CA trained delay margins if CS/CA training executed with CK alignment
+   Include also Vref margin if VrefCS/VrefCA training is executed
+
+ - Many enhancements/fixes for RCD QCS/QCA training:
+   * Use SMBus to enter/exit these training mode
+   * Support CS passing region 1MCLK apart
+   * Support SDR1/SDR2 modes
+
+ - MR2[4] is now set to 1 after devinit, meaning single cycle MPC are now used
+   after devinit (RCD CA passthrough mode is no more required to be set for MPC)
+   * Note: it is still mandatory to user to set MR2[4] to 1 in message block
+
+ - Fix a bug in WL when RxEn is skipped (Channel B was not trained)
+   * Note: skipping RxEn is an option not officially supported but bug is fixed anyway
+
+ - Update WL final TxDqsDly setting position when internal WL is skipped
+   Now, with WL_ADJ set to 0, WL_pulse raising edge is set 0.5 UI (resp. 1.5 UI)
+   before first DQS raising edge of 2tCK (resp. 3tCK and 4 tCK) write preamble;
+   WL_ADJ remains a sign magnitude 8bit value to increase/decrease the TxDqsDly
+   by a value in the range [-127, +127] fine step (inversion is no more applied
+   on the provided value);
+   * Note: Skipping Internal WL remains an option not officially supported, but
+           we update the trained value positioning to be consistent between
+           different write preamble configuration (it was not the case before, since
+           in case of 2tCK, the WL_pulse was in front of DQS of first data beat,
+           while it was in front of first DQS of preamble in the two other cases).
+
+ - Force OP[7] to 1 in VrefCS command (no more relying on MR12[7] setting,
+   to be compliant with future JEDEC)
+
+ - Rename the following unused MR fields in DDR5 message block (ORG is for Other Rtt Group):
+   MR9_*  into MR32_ORG_*_next (MR32 next value for Other Rtt Group)
+   MR23_* into MR111_*         (Need explicitly disable DFE for low frequency)
+   MR36_* into MR32_ORG_*      (MR32 value for Other Rtt Group)
+   MR40_* into MR33_ORG_*      (MR33 value for Other Rtt Group)
+   MR48_* into MR33_ORG_*_next (MR33 next value for Other Rtt Group)
+
+ - Other fields update in message block (mainly DDR5)
+   - DDR5 Reserved1A is replaced by RXEN_ADJ (not yet supported)
+   - DDR5 Reserved20 is replaced by MRE_MIN_PULSE (not yet supported)
+   - DDR5 Reserved21 is replaced by DWL_MIN_PULSE (not yet supported
+   - Add DDR5 LRDIMM training stage control in SequenceCtrl (not yet supported)
+   - Shared2DVrefResults is now reserved (not required in DDR5, no more required in DDR4)
+   - New DDR5 field ResultAddrOffset (to report results at end of training)
+   - New DDR5 fields BCW04_next and BCW05_next (context switch for LRDIMM)
+   - New DDR5 MR3R*Nib* fields (to report MR3 trained values)
+   - New DDR5 VrefCSR*Nib* fields (to support VrefCS setting per device)
+   - New DDR5 VrefCAR*Nib* fields (to support VrefCA setting per device)
+
+ - Add new options enable with AdvTrainOpt
+   AdvTrainOpt[0]: Use same data sequence on all DQ during read training (MRR31 based)
+     0x0 : Use different data sequence per DQ of a nibble
+           (2 or 4 different sequences, depending on D5Misc[4])
+     0x1 : Use same data sequence for all DQ of a nibble
+   AdvTrainOpt[2:1]: DQ odd seed setting during read training
+     (MRR31 based, don't care if either AdvTrainOpt[0] or D5Misc[4] is 1)
+     0x00: one bit shift  w.r.t. DQ even seed
+     0x01: two bit shift  w.r.t. DQ even seed
+     0x10: RFU, must be 0
+     0x11: RFU, must be 0
+   AdvTrainOpt[4:3]: Extended sequence for read training (w.r.t. AdvTrainOpt[7] setting)
+     0x00: 1x burst length
+     0x01: 2x burst length
+     0x10: 4x burst length
+     0x11: 8x burst length
+   AdvTrainOpt[6:5]: Extended sequence for write training (w.r.t. AdvTrainOpt[7] setting)
+     0x00: 1x burst length
+     0x01: 2x burst length
+     0x10: 4x burst length
+     0x11: 8x burst length
+
+ - Add new feature, enable via PhyCfg[5], to permit setting, via PDA, different VrefCS and
+   VrefCA for each DRAM, using the new message block fields VrefCSR*Nib* and VrefCAR*Nib*.
+   Since this setting is done before CS/CA training, PDA enumeration is now executed
+   earlier during devinit
+
+ - Add new feature, enable via PhyCfg[3], to detect DQ swizzle automatically
+   If PhyCfg[4] is also set, this feature also assume the CSR DqLnSel* are
+   already set and error is reported if values do not match
+
+ - Extend DDR5 internal WL to populate the MR3R*Nib* fields
+
+ - Use 2x larger delay step size during first pass of rd2D training to extend range
+   to find left-edge of the eyes (enhancement to support larger DQS->DQ skew)
+
+ - Dump trained VrefDAC* values after rd2D (if HdtCtrl < 5)
+
+ - Extend DDR4/DDR5 DM training FW to support up to +/- one UI of board delay skew
+   between DQ and DM
+
+ - Extend end of training to write back in DCCM at ResultAddrOffset the trained values
+   that are not reported in message block; for now, only the wr2D DFE value are written
+   back (see training FW application note for detail)
+   * Note: the now obsolete data dump mailbox feature will be removed in a future release
+
+ - Add new stage completion major mailbox messages for LRDIMM (DDR4/DDR5)
+   (see training FW application note for detail)
+   * NOTE: this is impacting DDR4 LRDIMM
+
+ - Setting CSR Seq0BGPR3 before end of training, as required for fast PLL relock
+
+ - Update DDR5 MRR support for x16 device
+
+Limitations
+-----------
+ - DDR5 rd2D/wr2D DFE option is available only for pstate 0
+ - RCW trained value resulting of DDR5 RCD QCS/QCA training are not reported back
+   in message block (RCD RCW needs to be read by host to retrieve the values)
+
+Known Issues
+------------
+ - DDR4 RDIMM: Spurious MCLK start-stop is generated at beginning of training,
+   even when skip Memory reset option is enable
+
+Minimum Required Versions
+-------------------------
+- PUB: 1.01a, 2.43a, 3.00a, 3.10b, 3.30a, 3.40a, 4.10a
+- Phyinit: F-2021.02
+
+
+
+
+
+Version A/B/C/D/E-2020.08
+September 15, 2020
+
+Changes from version A-2020.02-BETA
+(mandatory)
+
+Bug Fixes
+---------
+ - DDR5: Add MR14, MR15, MR51 and MR52 in the set of MR to write during devinit
+   and at the end of training;
+ - DDR5: toggle PAR during PDA enumerate in 2N/SDR mode;
+ - Some update of DDR5 training FW to avoid X-propagation that can
+   occur with 4bit ECC configuration;
+ - DDR5 RFM command was wrongly used instead of refresh all command;
+ - Support enabling DDR5 RCD parity check at the end of training
+  (RCW01[0] can be set to 1);
+ - Fix DM training in case of DDR5 UDIMM 2N mode and DDR5 RDIMM SDR mode;
+ - DDR5 RDIMM: Fix (RCD) QCS/QCA training;
+ - DDR5: Fix internal ACSM delay to consider 2N mode setting and RCD RCW11 value (for RDIMM);
+
+Enhancements
+------------
+Training Firmware:
+ - PMU Revision : 0x0003
+ - DDR5 training FW aligned with DRAM JEDEC Rev 0.99 and RCD01 JEDEC REv 0.9 Draft 2;
+   Backward compatibility for older JEDEC version is no more supported,
+   D5Misc[7] and D5Misc[3] are now reserved;
+ - Add option PhyCfg[2] to provide channel ID in DDR5 RDIMM SMBus related
+   mailbox message for non-global RCW update (see DDR5 training FW app note);
+ - Improved support of DDR5 UDIMM 2N mode and DDR5 RDIMM SDR mode;
+ - DDR5: Send VrefCS command during devinit, just after VrefCA command;
+ - DDR5: Support enabling DRAM CRC check at the end of training (including 4bit ECC case
+   in which upper nibble write CRC will be disable in DRAM associated with ECC);
+ - DDR5 RDIMM: Avoid sending mailbox SMBus command for non-populated RDIMM;
+ - DDR5: Avoid writing MR34 and MR35 at the end of training;
+ - DDR5: Use MR32[6] user value from message block to set only groupB or groupA (but not both)
+   for RTT CK/CS/CA termination using values provided in MR32 and MR33 (other group disable);
+ - DDR5: D5Misc[1] is now reserved, internal WL setting is now controlled only with MR2[7];
+ - DDR5: New mailbox major message to dump trained DRAM DFE values (see DDR5 training FW app note);
+ - DDR5: Support 4TAP DFE training;
+ - DDR5: Support Self-Refresh Entry with Frequency change, and RCD multi-context setting;
+ - DDR5: Read/Write 1D no more implemented as in DDR4, but instead using 2D implementation
+   where Vref are not swept; RdDeskew bit in sequenceCtrl is now reserved, since
+   RdDeskew always executed during read 1D/2D training for pstate 0; wrDq1D high-effort
+   option no more supported since not required;
+ - DDR5: Report trained Read/Write 2D Vref/Delay margin in message block
+   see new fields [RxClkDly|VrefDac|TxDqDly|DeviceVref]_Margin*);
+ - DDR4: Support CA training;
+
+Limitations
+-----------
+ - DDR5 Support Self-Refresh Entry with Frequency change, and RCD multi-context setting was
+   not verified;
+ - DDR5 RDIMM: QCS/QCA training may not work in SDR mode (but should not be required);
+ - DDR5: 4TAP DFE training is not complete and not validated;
+ - DDR5: Vref/Delay margin for trained CS/CA is not reported
+   (the new message block output fields [CS|CA]_[Dly|Vref]_Margin_* are always 0);
+
+Known Issues
+------------
+ - Fast PLL relock is not yet supported
+ - DDR4 RDIMM/LRDIMM: Spurious MCLK start-stop is generated at beginning of training,
+   even when skip Memory reset option is enable
+
+Minimum Required Versions
+-------------------------
+- PUB: 4.00
+- Phyinit: E-2020.08
+
+
+
+
+Version A-2020.02-BETA
+
+February 25, 2020
+
+Initial Release:
+(recommended)
+
+NOTE: This is a preliminary release of the training firmware and it has not been fully verified.
+
+This release supports the following functionality:
+- CS/CA training - including CK delay adjustment option
+- RxEn training
+- WL training (including internal WL option)
+- Rd2D training (including DFE option)
+- Wr2D training (including DFE option)
+- Max Read Latency training
+- PMU_REVISION: 0x0002
+
+Known limitations:
+- x16 verification is not complete.
+- No Vref CA/CS training
+- CS/CA training option between RCD and DRAM is not verified
+- CK adjustment option is not verified
+- RDIMM training FW validated mainly with RCD JEDEC 0.3 spec, support for 0.5 and beyond is provided but only RC02 format is updated
+- Training FW validated with DRAM JEDEC 0.78 and 0.83
+
+
+Minimum Required Versions
+-------------------------
+- PUB: 1.01a
+- Phyinit: A-2020.01-BETA
+- Memory VIP P-2019.09
+

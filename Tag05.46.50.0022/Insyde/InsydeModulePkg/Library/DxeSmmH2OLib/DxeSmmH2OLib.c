@@ -1,0 +1,602 @@
+/** @file
+  DXE/SMM H2O library. This library provides DXE/SMM utility functions that have
+  access to core H2O resources.
+
+;******************************************************************************
+;* Copyright (c) 2019 - 2021, Insyde Software Corporation. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+#include <Uefi.h>
+#include <KernelSetupConfig.h>
+
+#include <Library/H2OLib.h>
+#include <Library/KernelConfigLib.h>
+#include <Library/PcdLib.h>
+#include <Library/MemoryAllocationLib.h>
+#include <Library/UefiBootServicesTableLib.h>
+#include <Library/SmmServicesTableLib.h>
+#include <Library/BaseMemoryLib.h>
+#include <Library/DebugLib.h>
+
+/**
+  This function returns the currently selected boot type.
+
+  NOTE: If PcdH2OCsmSupported is set to FALSE, then this will always return EFI_BOOT_TYPE.
+
+  @return         Enumerated value that indicates the current boot type. Valid values are:
+                    EFI_BOOT_TYPE    - UEFI Boot
+                    LEGACY_BOOT_TYPE - Legacy Boot
+                    DUAL_BOOT_TYPE   - Either UEFI or Legacy.
+**/
+UINT8
+H2OGetBootType (
+  VOID
+  )
+{
+  UINT8                  BootType;
+  EFI_STATUS             Status;
+  KERNEL_CONFIGURATION   KernelConfig;
+
+  if (!PcdGetBool (PcdH2OCsmSupported)) {
+    return EFI_BOOT_TYPE;
+  }
+
+  BootType = EFI_BOOT_TYPE;
+  Status = GetKernelConfiguration (&KernelConfig);
+  if (!EFI_ERROR (Status)) {
+    BootType = KernelConfig.BootType;
+  }
+  return BootType;
+}
+
+/**
+  This function frees a pool of memory if the address is non-NULL and then resets
+  the address to NULL so that future calls will do nothing.
+
+  @param[in out]    Buffer              On entry, optional pointer to the
+                                        address of the buffer to free or NULL.
+                                        On exit, optional pointer to NULL.
+
+  @return           None
+**/
+VOID
+H2OFreePool (
+  IN OUT VOID **Buffer OPTIONAL
+  )
+{
+  if (Buffer != NULL && *Buffer != NULL) {
+    FreePool (*Buffer);
+    *Buffer = NULL;
+  }
+}
+
+
+/**
+  This function locates the first instance of a protocol/PPI. The PEI version
+  returns PPIs. The DXE version returns DXE protocols. The DXE/SMM version
+  returns DXE protocols outside of SMM and SMM protocols inside of SMM. The
+  SMM version returns SMM protocols.
+
+  @param[in]    Guid                    Ptr to GUID that specifies the protocol
+                                        or PPI.
+  @param[out]   Instance                Ptr to returned protocol interface
+                                        structure pointer or NULL if an error.
+
+  @returns      Boolean that indicates whether an instance of the specified
+                protocol was found (TRUE) or not (FALSE).
+**/
+BOOLEAN
+H2OLocate (
+  IN  CONST EFI_GUID        *Guid,
+  OUT       VOID            **Instance
+  )
+{
+  if (Guid == NULL || Instance == NULL) {
+    return FALSE;
+  }
+
+  *Instance = NULL;
+  if (!InSmm ()) {
+    return (BOOLEAN)(!EFI_ERROR (gBS->LocateProtocol ((EFI_GUID *)Guid, NULL, Instance)));
+  }
+  return (BOOLEAN)(!EFI_ERROR (gSmst->SmmLocateProtocol ((EFI_GUID *)Guid, NULL, Instance)));  
+}
+
+
+/**
+  Allocates a buffer of a certain pool type.
+
+  Allocates the number bytes specified by AllocationSize of a certain pool type
+  and returns a pointer to the allocated buffer.  If AllocationSize is 0, then a
+  valid buffer of 0 size is returned.  If there is not enough memory remaining to
+  satisfy the request, then NULL is returned.
+
+  @param  MemoryType            The type of memory to allocate.
+  @param  AllocationSize        The number of bytes to allocate.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+H2OInternalAllocatePool (
+  IN EFI_MEMORY_TYPE  MemoryType,
+  IN UINTN            AllocationSize
+  )
+{
+  EFI_STATUS  Status;
+  VOID        *Memory;
+
+
+  if (InSmm ()){
+    Status = gSmst->SmmAllocatePool (MemoryType, AllocationSize, &Memory);
+
+  } else{
+    Status = gBS->AllocatePool (MemoryType, AllocationSize, &Memory);
+
+  }
+
+  if (EFI_ERROR (Status)) {
+    Memory = NULL;
+  }
+  return Memory;
+}
+
+
+/**
+  Allocates and zeros a buffer of a certain pool type.
+
+  Allocates the number bytes specified by AllocationSize of a certain pool type,
+  clears the buffer with zeros, and returns a pointer to the allocated buffer.
+  If AllocationSize is 0, then a valid buffer of 0 size is returned.  If there is
+  not enough memory remaining to satisfy the request, then NULL is returned.
+
+  @param  PoolType              The type of memory to allocate.
+  @param  AllocationSize        The number of bytes to allocate and zero.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+H2OInternalAllocateZeroPool (
+  IN EFI_MEMORY_TYPE  PoolType,
+  IN UINTN            AllocationSize
+  )
+{
+  VOID  *Memory;
+
+  Memory = H2OInternalAllocatePool (PoolType, AllocationSize);
+  if (Memory != NULL) {
+    Memory = ZeroMem (Memory, AllocationSize);
+  }
+  return Memory;
+}
+
+
+/**
+  Copies a buffer to an allocated buffer of a certain pool type.
+
+  Allocates the number bytes specified by AllocationSize of a certain pool type,
+  copies AllocationSize bytes from Buffer to the newly allocated buffer, and returns
+  a pointer to the allocated buffer.  If AllocationSize is 0, then a valid buffer
+  of 0 size is returned.  If there is not enough memory remaining to satisfy the
+  request, then NULL is returned. If Buffer is NULL, then ASSERT().
+  If AllocationSize is greater than (MAX_ADDRESS - Buffer + 1), then ASSERT().
+
+  @param  PoolType              The type of pool to allocate.
+  @param  AllocationSize        The number of bytes to allocate and zero.
+  @param  Buffer                The buffer to copy to the allocated buffer.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+H2OInternalAllocateCopyPool (
+  IN EFI_MEMORY_TYPE  PoolType,
+  IN UINTN            AllocationSize,
+  IN CONST VOID       *Buffer
+  )
+{
+  VOID  *Memory;
+
+  ASSERT (Buffer != NULL);
+  ASSERT (AllocationSize <= (MAX_ADDRESS - (UINTN) Buffer + 1));
+
+  Memory = H2OInternalAllocatePool (PoolType, AllocationSize);
+  if (Memory != NULL) {
+     Memory = CopyMem (Memory, Buffer, AllocationSize);
+  }
+  return Memory;
+}
+
+
+/**
+  Allocates a buffer of type EfiBootServicesData in Dxe phase.
+
+  Allocates the number bytes specified by AllocationSize of type EfiBootServicesData
+  and returns a pointer to the allocated buffer.  If AllocationSize is 0, then a
+  valid buffer of 0 size is returned.  If there is not enough memory remaining to
+  satisfy the request, then NULL is returned.
+
+  @param  AllocationSize        The number of bytes to allocate.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OAllocate (
+  IN UINTN  AllocationSize
+  )
+{
+  if (!InSmm ()){
+    return H2OInternalAllocatePool (EfiBootServicesData, AllocationSize);
+  } else {
+    return NULL;
+  }
+}
+
+/**
+  Allocates and zeros a buffer of type EfiBootServicesData in Dxe phase.
+
+  Allocates the number bytes specified by AllocationSize of type EfiBootServicesData,
+  clears the buffer with zeros, and returns a pointer to the allocated buffer.
+  If AllocationSize is 0, then a valid buffer of 0 size is returned.  If there is
+  not enough memory remaining to satisfy the request, then NULL is returned.
+
+  @param  AllocationSize        The number of bytes to allocate and zero.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OAllocateZero (
+  IN UINTN  AllocationSize
+  )
+{
+  if (!InSmm ()){
+    return H2OInternalAllocateZeroPool (EfiBootServicesData, AllocationSize);
+  } else {
+    return NULL;
+  }
+}
+
+
+/**
+  Copies a buffer to an allocated buffer of type EfiBootServicesData in Dxe phase.
+
+  Allocates the number bytes specified by AllocationSize of type EfiBootServicesData,
+  copies AllocationSize bytes from Buffer to the newly allocated buffer, and returns
+  a pointer to the allocated buffer.  If AllocationSize is 0, then a valid buffer
+  of 0 size is returned.  If there is not enough memory remaining to satisfy the
+  request, then NULL is returned.
+
+  If Buffer is NULL, then ASSERT().
+  If AllocationSize is greater than (MAX_ADDRESS - Buffer + 1), then ASSERT().
+
+  @param  AllocationSize        The number of bytes to allocate and zero.
+  @param  Buffer                The buffer to copy to the allocated buffer.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OAllocateCopy (
+  IN UINTN       AllocationSize,
+  IN CONST VOID  *Buffer
+  )
+{
+  if (!InSmm ()){
+    return H2OInternalAllocateCopyPool (EfiBootServicesData, AllocationSize, Buffer);
+  } else {
+    return NULL;
+  }
+}
+
+
+/**
+  Allocates a buffer of type EfiRuntimeServicesData.
+
+  Allocates the number bytes specified by AllocationSize of type EfiRuntimeServicesData
+  and returns a pointer to the allocated buffer.  If AllocationSize is 0, then a
+  valid buffer of 0 size is returned.  If there is not enough memory remaining to
+  satisfy the request, then NULL is returned.
+
+  @param  AllocationSize        The number of bytes to allocate.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2ORuntimeAllocate (
+  IN UINTN  AllocationSize
+  )
+{
+  return H2OInternalAllocatePool (EfiRuntimeServicesData, AllocationSize);
+}
+
+
+/**
+  Allocates and zeros a buffer of type EfiRuntimeServicesData.
+
+  Allocates the number bytes specified by AllocationSize of type EfiRuntimeServicesData,
+  clears the buffer with zeros, and returns a pointer to the allocated buffer.
+  If AllocationSize is 0, then a valid buffer of 0 size is returned.  If there is
+  not enough memory remaining to satisfy the request, then NULL is returned.
+
+  @param  AllocationSize        The number of bytes to allocate and zero.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2ORuntimeAllocateZero (
+  IN UINTN  AllocationSize
+  )
+{
+  return H2OInternalAllocateZeroPool (EfiRuntimeServicesData, AllocationSize);
+}
+
+
+/**
+  Copies a buffer to an allocated buffer of type EfiRuntimeServicesData.
+
+  Allocates the number bytes specified by AllocationSize of type EfiRuntimeServicesData,
+  copies AllocationSize bytes from Buffer to the newly allocated buffer, and returns
+  a pointer to the allocated buffer.  If AllocationSize is 0, then a valid buffer
+  of 0 size is returned.  If there is not enough memory remaining to satisfy the
+  request, then NULL is returned.
+
+  If Buffer is NULL, then ASSERT().
+  If AllocationSize is greater than (MAX_ADDRESS - Buffer + 1), then ASSERT().
+
+  @param  AllocationSize        The number of bytes to allocate and zero.
+  @param  Buffer                The buffer to copy to the allocated buffer.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2ORuntimeAllocateCopy (
+  IN UINTN       AllocationSize,
+  IN CONST VOID  *Buffer
+  )
+{
+  return H2OInternalAllocateCopyPool (EfiRuntimeServicesData, AllocationSize, Buffer);
+}
+
+
+/**
+  Allocates a buffer of type EfiReservedMemoryType.
+
+  Allocates the number bytes specified by AllocationSize of type EfiReservedMemoryType
+  and returns a pointer to the allocated buffer.  If AllocationSize is 0, then a
+  valid buffer of 0 size is returned.  If there is not enough memory remaining to
+  satisfy the request, then NULL is returned.
+
+  @param  AllocationSize        The number of bytes to allocate.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OReservedAllocate (
+  IN UINTN  AllocationSize
+  )
+{
+  return NULL;
+}
+
+
+/**
+  Allocates and zeros a buffer of type EfiReservedMemoryType.
+
+  Allocates the number bytes specified by AllocationSize of type EfiReservedMemoryType,
+  clears the   buffer with zeros, and returns a pointer to the allocated buffer.
+  If AllocationSize is 0, then a valid buffer of 0 size is returned.  If there is
+  not enough memory remaining to satisfy the request, then NULL is returned.
+
+  @param  AllocationSize        The number of bytes to allocate and zero.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OReservedAllocateZero (
+  IN UINTN  AllocationSize
+  )
+{
+  return NULL;
+}
+
+
+
+/**
+  Copies a buffer to an allocated buffer of type EfiReservedMemoryType.
+
+  Allocates the number bytes specified by AllocationSize of type EfiReservedMemoryType,
+  copies AllocationSize bytes from Buffer to the newly allocated buffer, and returns
+  a pointer to the allocated buffer.  If AllocationSize is 0, then a valid buffer
+  of 0 size is returned.  If there is not enough memory remaining to satisfy the
+  request, then NULL is returned.
+
+  If Buffer is NULL, then ASSERT().
+  If AllocationSize is greater than (MAX_ADDRESS - Buffer + 1), then ASSERT().
+
+  @param  AllocationSize        The number of bytes to allocate and zero.
+  @param  Buffer                The buffer to copy to the allocated buffer.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OReservedAllocateCopy (
+  IN UINTN       AllocationSize,
+  IN CONST VOID  *Buffer
+  )
+{
+  return NULL;
+}
+
+
+/**
+  Allocates a buffer of type EfiACPIMemoryNVS.
+
+  Allocates the number bytes specified by AllocationSize of type EfiACPIMemoryNVS
+  and returns a pointer to the allocated buffer.  If AllocationSize is 0, then a
+  valid buffer of 0 size is returned.  If there is not enough memory remaining to
+  satisfy the request, then NULL is returned.
+
+  @param  AllocationSize        The number of bytes to allocate.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OAcpiNvsAllocate (
+  IN UINTN  AllocationSize
+  )
+{
+  return H2OInternalAllocatePool (EfiACPIMemoryNVS, AllocationSize);
+}
+
+
+/**
+  Allocates and zeros a buffer of type EfiACPIMemoryNVS.
+
+  Allocates the number bytes specified by AllocationSize of type EfiACPIMemoryNVS,
+  clears the buffer with zeros, and returns a pointer to the allocated buffer.
+  If AllocationSize is 0, then a valid buffer of 0 size is returned.  If there is
+  not enough memory remaining to satisfy the request, then NULL is returned.
+
+  @param  AllocationSize        The number of bytes to allocate and zero.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OAcpiNvsAllocateZero (
+  IN UINTN  AllocationSize
+  )
+{
+  return H2OInternalAllocateZeroPool (EfiACPIMemoryNVS, AllocationSize);
+}
+
+
+/**
+  Copies a buffer to an allocated buffer of type EfiACPIMemoryNVS.
+
+  Allocates the number bytes specified by AllocationSize of type EfiACPIMemoryNVS,
+  copies AllocationSize bytes from Buffer to the newly allocated buffer, and returns
+  a pointer to the allocated buffer.  If AllocationSize is 0, then a valid buffer
+  of 0 size is returned.  If there is not enough memory remaining to satisfy the
+  request, then NULL is returned.
+
+  If Buffer is NULL, then ASSERT().
+  If AllocationSize is greater than (MAX_ADDRESS - Buffer + 1), then ASSERT().
+
+  @param  AllocationSize        The number of bytes to allocate and zero.
+  @param  Buffer                The buffer to copy to the allocated buffer.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OAcpiNvsAllocateCopy (
+  IN UINTN       AllocationSize,
+  IN CONST VOID  *Buffer
+  )
+{
+  return H2OInternalAllocateCopyPool (EfiACPIMemoryNVS, AllocationSize, Buffer);
+}
+
+
+/**
+  Allocates a buffer of type EfiACPIReclaimMemory.
+
+  Allocates the number bytes specified by AllocationSize of type EfiACPIReclaimMemory
+  and returns a pointer to the allocated buffer.  If AllocationSize is 0, then a
+  valid buffer of 0 size is returned.  If there is not enough memory remaining to
+  satisfy the request, then NULL is returned.
+
+  @param  AllocationSize        The number of bytes to allocate.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OAcpiReclaimAllocate (
+  IN UINTN  AllocationSize
+  )
+{
+  return H2OInternalAllocatePool (EfiACPIReclaimMemory, AllocationSize);
+}
+
+
+/**
+  Allocates and zeros a buffer of type EfiACPIReclaimMemory.
+
+  Allocates the number bytes specified by AllocationSize of type EfiACPIReclaimMemory,
+  clears the buffer with zeros, and returns a pointer to the allocated buffer.
+  If AllocationSize is 0, then a valid buffer of 0 size is returned.  If there is
+  not enough memory remaining to satisfy the request, then NULL is returned.
+
+  @param  AllocationSize        The number of bytes to allocate and zero.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OAcpiReclaimAllocateZero (
+  IN UINTN  AllocationSize
+  )
+{
+  return H2OInternalAllocateZeroPool (EfiACPIReclaimMemory, AllocationSize);
+}
+
+
+/**
+  Copies a buffer to an allocated buffer of type EfiACPIReclaimMemory.
+
+  Allocates the number bytes specified by AllocationSize of type EfiACPIReclaimMemory,
+  copies AllocationSize bytes from Buffer to the newly allocated buffer, and returns
+  a pointer to the allocated buffer.  If AllocationSize is 0, then a valid buffer
+  of 0 size is returned.  If there is not enough memory remaining to satisfy the
+  request, then NULL is returned.
+
+  If Buffer is NULL, then ASSERT().
+  If AllocationSize is greater than (MAX_ADDRESS - Buffer + 1), then ASSERT().
+
+  @param  AllocationSize        The number of bytes to allocate and zero.
+  @param  Buffer                The buffer to copy to the allocated buffer.
+
+  @return A pointer to the allocated buffer or NULL if allocation fails.
+
+**/
+VOID *
+EFIAPI
+H2OAcpiReclaimAllocateCopy (
+  IN UINTN       AllocationSize,
+  IN CONST VOID  *Buffer
+  )
+{
+  return H2OInternalAllocateCopyPool (EfiACPIReclaimMemory, AllocationSize, Buffer);
+}

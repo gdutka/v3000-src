@@ -1,0 +1,38 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CbsBctSmmLib
+  FILE_GUID                      = 41F85A6B-ECE8-4741-B6FA-CE830F841A91
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CbsBctSmmLib | DXE_SMM_DRIVER
+
+[sources.common]
+  CbsBctSmmLib/CbsBctSmmLib.c
+  CbsFuncLib/CbsBaseLib.c
+  ../../../../../Build/ResourceRMB/ApcbSetDataRMB.c
+  ../../../../../Build/ResourceRMB/AmdCbsVariable.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+
+[LibraryClasses]
+  AmdPspBaseLibV2
+  BaseLib
+  SmmServicesTableLib
+
+[Protocols]
+  gAmdApcbSmmServiceProtocolGuid          #CONSUME
+
+[DEPEX]
+  gAmdApcbSmmServiceProtocolGuid

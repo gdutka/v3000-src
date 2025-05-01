@@ -1,0 +1,67 @@
+AMD PEI GOP version: 3.2.7
+========================================================
+1. This is un-sign Pei Gop driver for pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit e516992edeb77d3423532d09539eae7b008547d1
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld391-202108020552.zip
+4. Changes list: 
+   SWDEV-3 - move lsdma runtime reg access to data table
+   SWDEV-3 - move lsdma init action to command table
+   DERMBE-990 [RMB_B0_USB4] GOP Setting default display to DPIA-2 which doesn't have valid edid data
+   SWDEV-3 - optimize adding delay for some panel HPD pulse when HBR2 case
+
+AMD PEI GOP internal version: 3.2.6
+========================================================
+1. This is un-sign Pei Gop driver for pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit c6572fbc9a2b66c604c75b22a5a1b1d360a3156a
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld386-202107270950.zip
+4. Changes list: 
+   SWDEV-3 - Gop 3.2.4 for RMB B0 DPIA change
+   SWDEV-295847 - gop: RMB FP7: Update data structure by VBIOS for UMA Carveout Size Control via UI rev.0001 (RMBT-CR-119)
+   SWDEV-3 - add delay for some panel HPD pulse when HBR2 case
+
+AMD PEI GOP internal version: 3.2.3   Date: 2021/07/07
+========================================================
+1. This is un-sign Gop driver for pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit 880121889ce0c4bf1e0d8414c4ad0469875788b2
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld380-202107070635.zip
+4. Changes list: 
+   SWDEV-3 - switch PIO in videoToVideo case since RB mode overlapped
+   SWDEV-3 - gop:sync the atomfirmware.h header file to staging revision 253
+   SWDEV-3 - sync latest atomfirmware.h and dcn31 changes
+   SWDEV-3 - add debug messages in gop for non-null rdp
+
+AMD PEI GOP internal version: 3.2.2   Date: 2021/06/21
+========================================================
+1. This is un-sign Gop driver for pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit 6875ce7f3d2bd1cf09f3d15272c77fe3d77c7d03
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld377-202106210701.zip
+4. Changes list: 
+   SWDEV-3 - sync latest atomfirmware.h and Caps filed for expose new extend 16bit flags
+   SWDEV-3 - update display_phy_tuning_info table incorrect issue for header missing
+   SWDEV-3 - [NV2X]Add NOVA daughter card support for NV2x.
+   SWDEV-3 - sync rmb a0 dmu changes which from nv2x
+   SWDEV-3 - optimize lsdma init function for phx front load
+   SWDEV-3 - [Gop 3.2.2] Correct disppath in reserved FB and enable lsdma frontdoor load
+
+AMD PEI GOP internal version: 3.2.1  Date: 2021/05/12
+========================================================
+1. This is un-signed Gop driver for RMB pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit 5362a34d0eaac56bcc01a1f16152d933c09c79d7
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld356-202105120618.zip
+4. Bug fix: 
+   a) revert change of display_phy_tuning_info table issue for header missing
+   b) PLAT-75939 eDP is not working on DP1 port with eDP Nova.
+
+AMD PEI GOP internal version: 3.2.0  Date: 2021/03/16
+========================================================
+1. This is not a Signing Certified Gop Driver for RMB pre-OS use.
+2. This is a release build version for recovery case
+3. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  Change-Id: Ib6d9f0c49ac6e84b383347332e7fa716c586108b
+
+

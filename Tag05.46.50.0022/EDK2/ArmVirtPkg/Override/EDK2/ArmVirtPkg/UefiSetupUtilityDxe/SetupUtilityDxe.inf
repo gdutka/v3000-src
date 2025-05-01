@@ -1,0 +1,98 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SetupUtility
+  FILE_GUID                      = FE3542FE-C1D3-4EF8-657C-8048606FF670
+  MODULE_TYPE                    = DXE_DRIVER
+  ENTRY_POINT                    = SetupUtilityInit
+  STRGATHER_RESERVE_SIZE         = 0x1000
+
+[Sources]
+  Advance/AdvanceVfr.vfr
+  Advance/Advance.c
+  Power/Power.c
+  Power/PowerVfr.vfr
+  Main/PlatformInfo.c
+  Images/SetupImage.idf
+  SetupVfrStrings.uni
+
+  SetupUtility.c
+  SetupFuncs.c
+  GenericCallback.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SecurityPkg/SecurityPkg.dec
+  ArmVirtPkg/ArmVirtPkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydeOemServicesPkg/InsydeOemServicesPkg.dec
+  $(PROJECT_PKG)/Project.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  SetupUtilityLib
+  BaseMemoryLib
+  OemGraphicsLib
+  HobLib
+  BaseLib
+  BaseSetupDefaultLib
+  PcdLib
+  DxeOemSvcKernelLibDefault
+  StdLib
+  VariableSupportLib
+  DxeServicesTableLib
+  DebugLib
+  TimerLib
+  ReportStatusCodeLib
+
+[Guids]
+  gEfiGenericVariableGuid
+  gEfiPowerOnPwSCUHobGuid
+  gEfiHobListGuid
+  gSystemConfigurationGuid
+  gEfiHiiPlatformSetupFormsetGuid
+
+[Protocols]
+  gEfiSetupUtilityProtocolGuid
+  gEfiFormBrowser2ProtocolGuid
+  gEfiSetupUtilityBrowserProtocolGuid
+  gH2ODialogProtocolGuid
+  gEfiSetupUtilityApplicationProtocolGuid
+  gEdkiiFormBrowserEx2ProtocolGuid
+  gH2OFormBrowserProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiVariableWriteArchProtocolGuid
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang
+  gInsydeTokenSpaceGuid.PcdPlatformBootTimeOut
+  gArmVirtTokenSpaceGuid.PcdSetupConfigSize
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdMultiConfigSupported
+  gInsydeTokenSpaceGuid.PcdH2OFormBrowserLocalMetroDESupported
+
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D __HOB__H__   # to avod efi_HOB_GENERIC_HERDER refdifine on XTUInfoHob.h
+  MSFT:*_*_*_VFRPP_FLAGS = -DSETUP_IMAGE_SUPPORT /FI$(MODULE_NAME)IdfDefs.h
+  GCC:*_*_*_VFRPP_FLAGS  = -DSETUP_IMAGE_SUPPORT --include $(DEST_DIR_DEBUG)/$(MODULE_NAME)IdfDefs.h
+
+[Depex]
+  gEfiVariableArchProtocolGuid       AND
+  gEfiVariableWriteArchProtocolGuid  AND
+  gEfiBdsArchProtocolGuid
+

@@ -1,0 +1,44 @@
+## @file
+#  Component description file of LanguageDataLib.
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LanguageDataLib
+  FILE_GUID                      = C3012186-4076-4C52-A9E7-908330C6F864
+  MODULE_TYPE                    = UEFI_DRIVER
+  LIBRARY_CLASS                  = LanguageDataLib
+
+[Sources]
+  HiiFormatStringRoutines.c
+  LanguageDataLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  UefiLib
+  HiiLib
+  VariableLib
+
+[Protocols]
+
+[Guids]
+  gEfiGlobalVariableGuid

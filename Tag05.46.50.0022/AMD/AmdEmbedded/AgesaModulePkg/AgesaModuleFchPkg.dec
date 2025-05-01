@@ -1,0 +1,1398 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaFchPkg
+  PACKAGE_GUID          = e47c8ed9-3000-4e6e-b1c6-875b365b3849
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Fch/Common/Include/
+  Include/
+  Include/Library/
+
+[LibraryClasses]
+  FchPeiLibV9|Include/Library/FchPeiLib.h
+  FchDxeLibV9|Include/Library/FchDxeLib.h
+
+[Guids]
+  gFchResetDataHobGuid                   = { 0x26ab8e31, 0x6c47, 0x480a, { 0xa0, 0x39, 0x1e, 0x04, 0x3f, 0xa7, 0x93, 0xcd } }
+  gFchMultiFchResetDataHobGuid           = { 0xf1167c37, 0xca4c, 0x4c58, { 0x87, 0x19, 0x19, 0x32, 0x02, 0x6e, 0x70, 0x8f } }
+  gEfiAmdAgesaPkgTokenSpaceGuid          = { 0xd4d8435f, 0xfffb, 0x4acb, { 0xa0, 0x4d, 0xff, 0xf, 0xad, 0x67, 0x7f, 0xe9 } }
+  gEfiAmdAgesaModulePkgTokenSpaceGuid    = { 0x7788adf0, 0x9788, 0x4a3f, { 0x83, 0xfa, 0xcb, 0x51, 0x2e, 0x7c, 0xf8, 0xdd } }
+  gEfiAmdAgesaSpecificWarmResetGuid      = { 0x49883fe2, 0x915d, 0x42bc, { 0xa6, 0xfe, 0x71, 0xfd, 0x76, 0x0f, 0x39, 0x75 } }
+  gFchSmmDiagDispatchProtocolGuid        = { 0x89fef87c, 0xcc96, 0x4d20, { 0xa4, 0x62, 0xcd, 0x11, 0x92, 0x75, 0xA3, 0x89 } }
+
+[Protocols]
+  gFchInitProtocolGuid                   = { 0xdb4a79ac, 0x5bbb, 0x4625, {0xa6, 0x9e, 0xfe, 0xbf, 0x9d, 0x6d, 0x95, 0xeb } }
+  gFchInitDonePolicyProtocolGuid         = { 0xc63c0c73, 0xf612, 0x4c02, {0x84, 0xa3, 0xc6, 0x40, 0xad, 0xb, 0xa6, 0x22 } }
+  gFchSmmInitProtocolGuid                = { 0xad63ce68, 0x792a, 0x4fec, {0xac, 0xa6, 0x81, 0x6a, 0xd9, 0x7c, 0x01, 0x76 } }
+  gFchMultiFchInitProtocolGuid           = { 0xbb6afbf4, 0x1b0d, 0x483d, {0x96, 0x87, 0xee, 0x02, 0x3c, 0x1b, 0x54, 0x55 } }
+  gFchSsdtInstalledProtocolGuid          = { 0x16560ed9, 0x3636, 0x4ee7, {0xa6, 0xad, 0x8b, 0xde, 0x4f, 0x35, 0x37, 0x7c } }
+  gFchSmmGpiDispatch2ProtocolGuid        = { 0x7051ab6d, 0x9ec2, 0x42eb, { 0xa2, 0x13, 0xde, 0x48, 0x81, 0xf1, 0xf7, 0x87 } }
+  gFchSmmIoTrapDispatch2ProtocolGuid     = { 0x91288fc4, 0xe64b, 0x4ef9, { 0xa4, 0x63, 0x66, 0x88, 0x0, 0x71, 0x7f, 0xca } }
+  gFchSmmPeriodicalDispatch2ProtocolGuid = { 0x736102f1, 0x9584, 0x44e7, { 0x82, 0x8a, 0x43, 0x4b, 0x1e, 0x67, 0x5c, 0xc4 } }
+  gFchSmmPwrBtnDispatch2ProtocolGuid     = { 0xa365240e, 0x56b0, 0x426d, { 0x83, 0xa, 0x30, 0x66, 0xc6, 0x81, 0xbe, 0x9a } }
+  gFchSmmSwDispatch2ProtocolGuid         = { 0x881b4ab6, 0x17b0, 0x4bdf, { 0x88, 0xe2, 0xd4, 0x29, 0xda, 0x42, 0x5f, 0xfd } }
+  gFchSmmSxDispatch2ProtocolGuid         = { 0x87e2a6cf, 0x91fb, 0x4581, { 0x90, 0xa9, 0x6f, 0x50, 0x5d, 0xdc, 0x1c, 0xb2 } }
+  gFchSmmUsbDispatch2ProtocolGuid        = { 0xfbbb2ea9, 0xce0e, 0x4689, { 0xb3, 0xf0, 0xc6, 0xb8, 0xf0, 0x76, 0xbd, 0x20 } }
+  gFchSmmMiscDispatchProtocolGuid        = { 0x13bd659b, 0xb4c6, 0x47da, {0x9b, 0x22, 0x11, 0x50, 0xd4, 0xf3, 0xb, 0xda } }
+  gFchSmmUsbDispatchProtocolGuid         = { 0x59053b0d, 0xeeb8, 0x4379, {0xb1, 0xc8, 0x14, 0x5f, 0x1b, 0xb, 0xe4, 0xb9 } }
+  gFchControlServiceProtocolGuid         = { 0xae8fa023, 0xa0b6, 0x4ebc, {0xa3, 0xc7, 0x3d, 0xf3, 0xa6, 0xa8, 0x94, 0xe9} }
+
+  gAmdFchTaishanDepexProtocolGuid        = {0xa8ad1743, 0xc841, 0x4dbf, {0xb6, 0x51, 0xae, 0x75, 0xc6, 0xb1, 0x19, 0x23}}
+  gAmdFchTSSmbusDepexProtocolGuid        = {0x4d427da6, 0x2d8c, 0x4252, {0xba, 0xbe, 0xd1, 0xdc, 0x5e, 0x60, 0xc5, 0xad}}
+  gAmdFchTSSmmDispacherDepexProtocolGuid = {0xe4eb9f35, 0xe1df, 0x45d1, {0x97, 0x2b, 0xeb, 0xa4, 0xe6, 0x5e, 0xd5, 0x44}}
+  gAmdFchTSSmmControlDepexProtocolGuid   = {0xd2b711bc, 0x68b0, 0x4e98, {0xa5, 0x56, 0x57, 0x94, 0xc0, 0x64, 0x68, 0x32}}
+  gAmdFchTSMultiFchDepexProtocolGuid     = {0x09ada51f, 0x97b6, 0x45af, {0x8b, 0xba, 0x2d, 0xeb, 0x04, 0x06, 0x5a, 0xc2}}
+  gAmdFchSandstoneDepexProtocolGuid      = {0x8a51c4cc, 0xf3ba, 0x4895, {0xb0, 0xe2, 0x90, 0xe4, 0xa6, 0x1a, 0x91, 0xc7}}
+  gAmdFchSSSmbusDepexProtocolGuid        = {0x16a8af0a, 0x8a12, 0x40cf, {0x9d, 0x01, 0x56, 0xf3, 0xbc, 0x75, 0x1f, 0xc0}}
+  gAmdFchSSSmmDispacherDepexProtocolGuid = {0xabbf33f9, 0x3581, 0x44a2, {0x8d, 0x66, 0x8c, 0x9e, 0x14, 0xc7, 0xa6, 0x56}}
+  gAmdFchSSSmmControlDepexProtocolGuid   = {0x8c41ba00, 0x662e, 0x4754, {0xa4, 0x15, 0x76, 0x92, 0xf5, 0x23, 0x4f, 0x4c}}
+  gAmdFchHuashanDepexProtocolGuid        = {0xa6e0c601, 0x46eb, 0x4a83, {0xac, 0xe3, 0x14, 0xda, 0x30, 0x1f, 0x5a, 0x85}}
+  gAmdFchHSSmbusDepexProtocolGuid        = {0xe527790e, 0x3caa, 0x4b92, {0xbb, 0x78, 0x6d, 0x62, 0x97, 0x07, 0x84, 0x96}}
+  gAmdFchHSSmmDispacherDepexProtocolGuid = {0xd7bf10f3, 0xf98c, 0x4c81, {0xa4, 0xad, 0x08, 0xad, 0xea, 0xc4, 0xd9, 0x71}}
+  gAmdFchHSSmmControlDepexProtocolGuid   = {0x733121ed, 0x93e6, 0x40b7, {0x9f, 0x6f, 0x0d, 0xd6, 0xd7, 0x6a, 0xfc, 0xcf}}
+  gAmdFchHSMultiFchDepexProtocolGuid     = {0xf867cb76, 0xe12d, 0x48c4, {0x98, 0xeb, 0xc2, 0x3c, 0xdb, 0x98, 0x74, 0x40}}
+  gAmdFchSongshanDepexProtocolGuid       = {0x40022DC3, 0x5A34, 0x454D, {0xBB, 0x53, 0x1C, 0xAC, 0xE5, 0x2D, 0x70, 0x1E}}
+  gAmdFchSNSmbusDepexProtocolGuid        = {0x70AD78BF, 0x1C2C, 0x4BA2, {0x95, 0xEE, 0x6C, 0xBC, 0xCA, 0xE6, 0x07, 0x59}}
+  gAmdFchSNI3cProtocolGuid               = {0xf355565b, 0x3a3b, 0x485c, {0x9d, 0xa4, 0xec, 0x1a, 0xef, 0xb2, 0xcb, 0x0c}}
+  gAmdFchSNSmmDispacherDepexProtocolGuid = {0x3F35BB66, 0xD30C, 0x49CC, {0xBC, 0xBB, 0xDD, 0x0A, 0x9C, 0xDB, 0xC6, 0xED}}
+  gAmdFchSNSmmControlDepexProtocolGuid   = {0x5237AFCE, 0x48F6, 0x4D2E, {0xB6, 0x7F, 0x15, 0x30, 0x6A, 0xBA, 0xC7, 0x4E}}
+  gAmdFchSNMultiFchDepexProtocolGuid     = {0xB2A9A4B1, 0x22B6, 0x4A4C, {0x8C, 0xDE, 0xEF, 0x21, 0x06, 0x75, 0x95, 0x32}}
+  gAmdFchQiantangDepexProtocolGuid       = {0x7F394099, 0x71E7, 0x4F7C, {0xBC, 0x64, 0x53, 0x3D, 0xD1, 0x78, 0x3B, 0x47}}
+  gAmdFchQTSmbusDepexProtocolGuid        = {0x9CB944FB, 0x6344, 0x4561, {0xA9, 0xBC, 0x1F, 0xFD, 0x14, 0xB0, 0x77, 0xCA}}
+  gAmdFchQTSmmDispacherDepexProtocolGuid = {0x5572F5CB, 0x0A10, 0x46E2, {0x82, 0x02, 0x88, 0x6E, 0xDE, 0x0F, 0xBA, 0xD5}}
+  gAmdFchQTSmmControlDepexProtocolGuid   = {0xF90451A0, 0x9777, 0x4FC0, {0x9D, 0x05, 0xE8, 0x45, 0x66, 0x70, 0x60, 0x7B}}
+  gAmdFchQTMultiFchDepexProtocolGuid     = {0x9F492090, 0xE0F8, 0x408D, {0xB5, 0x35, 0x78, 0x02, 0x80, 0xC7, 0x20, 0x28}}
+  gAmdFchShastaDepexProtocolGuid         = {0xb0e7f06e, 0x867a, 0x4fbf, {0xbd, 0xd0, 0x91, 0xa7, 0x6e, 0xd9, 0x2f, 0x91}}
+  gAmdFchSHSmbusDepexProtocolGuid        = {0xa739b734, 0x21bc, 0x419c, {0x84, 0x38, 0x85, 0xec, 0x90, 0x00, 0xc2, 0x74}}
+  gAmdFchSHSmmDispacherDepexProtocolGuid = {0x45066a3b, 0xb760, 0x4411, {0xa4, 0x20, 0x51, 0x19, 0x21, 0xef, 0x59, 0x56}}
+  gAmdFchSHSmmControlDepexProtocolGuid   = {0x57f406f8, 0x0e3d, 0x4af7, {0x86, 0xa2, 0x0c, 0x15, 0x52, 0xee, 0x89, 0x38}}
+  gAmdFchShangDepexProtocolGuid          = {0xdd85a300, 0x33f3, 0x4ec5, {0xb7, 0x9b, 0x64, 0x34, 0x6d, 0x33, 0xd8, 0xda}}
+  gAmdFchSGSmbusDepexProtocolGuid        = {0xdcc15cfd, 0x6957, 0x48e8, {0x81, 0x11, 0x99, 0x1e, 0x85, 0x20, 0x2f, 0xc3}}
+  gAmdFchSGSmmDispacherDepexProtocolGuid = {0x4d8c23f6, 0x0d33, 0x432f, {0xad, 0xe4, 0x92, 0x91, 0x3a, 0xce, 0x2f, 0xba}}
+  gAmdFchSGSmmControlDepexProtocolGuid   = {0xf5e25fbd, 0xcaa4, 0x43ba, {0xbe, 0x11, 0x6d, 0x13, 0x53, 0xe9, 0x2e, 0xe8}}
+  gAmdFchKeithDepexProtocolGuid          = {0xe4b3dd59, 0x0232, 0x4df7, {0xa4, 0x03, 0x3a, 0xca, 0x40, 0x15, 0xcb, 0xd6}}
+  gAmdFchKTSmbusDepexProtocolGuid        = {0xc12cc5df, 0x1e1c, 0x41f6, {0xbf, 0x9f, 0xfd, 0x86, 0xe6, 0x2c, 0xad, 0x29}}
+  gAmdFchKTSmmDispacherDepexProtocolGuid = {0xca22fdfa, 0x3742, 0x4c68, {0x92, 0xc6, 0xe1, 0x87, 0x2e, 0x5c, 0xec, 0xb5}}
+  gAmdFchKTSmmControlDepexProtocolGuid   = {0xdd9a0c48, 0x581f, 0x40b0, {0x98, 0x07, 0x07, 0x6e, 0x79, 0x0e, 0x68, 0x7e}}
+  gAmdSmmResetSystemProtocolGuid         = {0xbb74386f, 0xdfff, 0x4c36, {0x8a, 0x2e, 0xde, 0x2d, 0x3a, 0x62, 0x2b, 0x85}}
+  gFchSmmOemSecureCompleteProtocolGuid   = {0x8a18bd41, 0x156e, 0x426a, {0xad, 0xbd, 0x40, 0x09, 0x05, 0xda, 0x29, 0x4d}}
+  gAmdFchYuntaiDepexProtocolGuid         = {0xb0225f63, 0x1e64, 0x42bf, {0xbc, 0xdb, 0x3a, 0xf9, 0xd0, 0x13, 0x1f, 0x7a}}
+  gAmdFchYTSmbusDepexProtocolGuid        = {0xebb11f94, 0x01fd, 0x4c06, {0xb7, 0xd2, 0x82, 0x54, 0x3e, 0x10, 0x9f, 0x7c}}
+  gAmdFchYTSmmDispacherDepexProtocolGuid = {0x84f3346f, 0xba7c, 0x4e2b, {0xbf, 0x42, 0xa4, 0x44, 0x40, 0xd4, 0xbe, 0x79}}
+  gAmdFchYTSmmControlDepexProtocolGuid   = {0xa6af455b, 0x8751, 0x4970, {0x84, 0x87, 0xcc, 0x77, 0x10, 0xb6, 0x16, 0xf6}}
+  gAmdFchTacomaDepexProtocolGuid         = {0x1F6DBB2A, 0x3E90, 0x4A3C, {0x99, 0x2B, 0xEC, 0x39, 0x9F, 0x8F, 0x93, 0x88}}
+  gAmdFchTCSmbusDepexProtocolGuid        = {0x835C9B6B, 0x6C67, 0x4A46, {0x9A, 0xAB, 0x17, 0x45, 0x73, 0xC4, 0xD2, 0xE6}}
+  gAmdFchTCSmmDispacherDepexProtocolGuid = {0xAE1B9A1F, 0x2618, 0x4A91, {0x8A, 0x88, 0xAC, 0x52, 0x2E, 0xA2, 0x45, 0x30}}
+  gAmdFchTCSmmControlDepexProtocolGuid   = {0x0C902B83, 0x570A, 0x414B, {0xA7, 0xC7, 0xA4, 0xA3, 0x38, 0x1D, 0xDE, 0xDB}}
+  gAmdFchKeithMdnDepexProtocolGuid       = {0x5773A9B8, 0x4635, 0x4B53, {0x86, 0xE2, 0xBE, 0xFA, 0xD9, 0x1C, 0x09, 0x17}}
+  gAmdFchKMSmbusDepexProtocolGuid        = {0xC81437B9, 0xE886, 0x44B7, {0xA3, 0xD7, 0xA9, 0xA3, 0xD5, 0xDB, 0x0A, 0xB5}}
+  gAmdFchKMSmmDispacherDepexProtocolGuid = {0x91BA14AF, 0x0626, 0x4E61, {0x82, 0x37, 0x72, 0x23, 0x50, 0x02, 0xAB, 0x2C}}
+  gAmdFchKMSmmControlDepexProtocolGuid   = {0x2A49447D, 0xD2E8, 0x425B, {0xAA, 0xC2, 0x04, 0xD0, 0xEC, 0xFF, 0xA3, 0x4F}}
+  gAmdFchEspiCmdProtocolGuid             = {0x46b62af9, 0x25bf, 0x4b96, {0x98, 0x7d, 0x26, 0xa3, 0x89, 0x27, 0x9d, 0xf1}}
+  gAmdFchEspiCmdSmmProtocolGuid          = {0x69f766e6, 0x7137, 0x49af, {0xb8, 0x41, 0x4f, 0xd5, 0x65, 0x77, 0xe6, 0xc8}}
+
+[Ppis]
+  gAmdFchInitPpiGuid                     = { 0x3fb7a27a, 0x33f3, 0x483d, {0xbc, 0x6f, 0x7a, 0x51, 0xbe, 0xf5, 0x3d, 0xa } }
+  gAmdFchMultiFchInitPpiGuid             = { 0xa5640daf, 0xfb8b, 0x4265, {0xbf, 0xab, 0x9c, 0x77, 0xf4, 0xe9, 0xd6, 0x20} }
+  gAmdFchSNI3cPpiGuid                    = {0xdfee1b5c, 0x9217, 0x493c, {0xa7, 0xec, 0xbf, 0xec, 0x70, 0x1c, 0xd4, 0xc4}}
+
+  gAmdFchTaishanDepexPpiGuid             = {0xae6d98f0, 0x3720, 0x4c10, {0xaf, 0xce, 0xc8, 0xcf, 0x94, 0x36, 0x14, 0x31}}
+  gAmdFchTSSmbusDepexPpiGuid             = {0xdd946448, 0x6adb, 0x4ed7, {0x8f, 0x66, 0x0d, 0x61, 0x06, 0x3e, 0x89, 0x2d}}
+  gAmdFchTSMultiFchDepexPpiGuid          = {0xc076ec1b, 0x5b4e, 0x4b80, {0xad, 0x70, 0xb7, 0x8a, 0x92, 0x29, 0x55, 0xa3}}
+  gAmdFchSandstoneDepexPpiGuid           = {0x6a2acc7a, 0x48fb, 0x46d3, {0x94, 0x2e, 0x07, 0x4b, 0x81, 0xa3, 0xf4, 0xf8}}
+  gAmdFchSSSmbusDepexPpiGuid             = {0xb2c5404d, 0x4385, 0x48f7, {0xa4, 0xa5, 0x6d, 0x42, 0x27, 0x49, 0xb9, 0xac}}
+  gAmdFchHuashanDepexPpiGuid             = {0x6931fd65, 0x4705, 0x4363, {0x80, 0xfb, 0x4c, 0xd0, 0x8f, 0x6a, 0xeb, 0xe8}}
+  gAmdFchHSSmbusDepexPpiGuid             = {0xe0ae49a4, 0xeb70, 0x46d4, {0xa4, 0x5e, 0xb7, 0xae, 0xda, 0xd5, 0xcb, 0x90}}
+  gAmdFchHSMultiFchDepexPpiGuid          = {0xb06950c5, 0xf655, 0x4ac6, {0xae, 0x99, 0x07, 0x57, 0xd4, 0x33, 0x8c, 0x55}}
+  gAmdFchSongshanDepexPpiGuid            = {0x60ADC48D, 0x4763, 0x4309, {0x99, 0x62, 0x1F, 0xAE, 0x51, 0xED, 0xBF, 0xDB}}
+  gAmdFchSNSmbusDepexPpiGuid             = {0xEAB70E9B, 0xDC86, 0x4D4D, {0x82, 0x1B, 0x16, 0x53, 0x00, 0xD0, 0x62, 0xA4}}
+  gAmdFchSNMultiFchDepexPpiGuid          = {0x76474868, 0x6182, 0x4A38, {0xBC, 0x43, 0xE9, 0x58, 0x2A, 0x2B, 0xD3, 0x1A}}
+  gAmdFchQiantangDepexPpiGuid            = {0xD91357AF, 0xFBA8, 0x4B7B, {0x89, 0xB0, 0x40, 0x5E, 0xA8, 0xAA, 0x14, 0x09}}
+  gAmdFchQTSmbusDepexPpiGuid             = {0xDE35AA7B, 0x063D, 0x455F, {0xAB, 0x1D, 0xE0, 0xF1, 0xE5, 0xA8, 0x44, 0xAA}}
+  gAmdFchQTMultiFchDepexPpiGuid          = {0x2B29ABCD, 0x11D8, 0x4A0A, {0xB9, 0xE2, 0x08, 0x42, 0x51, 0x3B, 0x6C, 0xD1}}
+  gAmdFchShastaDepexPpiGuid              = {0x09b3a112, 0x8e27, 0x4d4d, {0x9a, 0x9a, 0x30, 0x9f, 0x0a, 0x83, 0x21, 0x10}}
+  gAmdFchSHSmbusDepexPpiGuid             = {0x72255060, 0xd7b5, 0x4bf2, {0xa8, 0xd5, 0x43, 0xeb, 0xd0, 0x01, 0xdc, 0xd7}}
+  gAmdFchShangDepexPpiGuid               = {0xec8240a8, 0xe489, 0x4f33, {0xa6, 0x82, 0x7f, 0x8b, 0xd0, 0x35, 0x0a, 0x3c}}
+  gAmdFchSGSmbusDepexPpiGuid             = {0x293a0d61, 0x2e58, 0x4c24, {0x9d, 0x48, 0x06, 0xd7, 0xc4, 0x8d, 0xe8, 0x14}}
+  gAmdFchKeithDepexPpiGuid               = {0xc4516b60, 0xa58a, 0x4f13, {0x91, 0xd3, 0x16, 0x0e, 0x13, 0xa1, 0x9a, 0xfc}}
+  gAmdFchKTSmbusDepexPpiGuid             = {0x74b71337, 0xf790, 0x4449, {0x84, 0xf5, 0x83, 0xc5, 0x09, 0x29, 0x8e, 0x7a}}
+  gAmdFchYuntaiDepexPpiGuid              = {0x711496f0, 0x0e10, 0x4fa6, {0x98, 0x47, 0x23, 0xd4, 0x6b, 0x79, 0x70, 0xb3}}
+  gAmdFchYTSmbusDepexPpiGuid             = {0x1485fbac, 0xf96b, 0x48b5, {0x8b, 0x49, 0x62, 0x6d, 0x3e, 0x98, 0xc7, 0xf1}}
+  gAmdFchTacomaDepexPpiGuid              = {0x22C690B8, 0x2AA1, 0x44AF, {0x84, 0x84, 0x19, 0x88, 0xD1, 0x81, 0x03, 0xD5}}
+  gAmdFchTCSmbusDepexPpiGuid             = {0xC73DDA8C, 0x85C7, 0x4B1C, {0x9E, 0xC9, 0x68, 0x35, 0x62, 0x34, 0x99, 0x13}}
+  gAmdFchKeithMdnDepexPpiGuid            = {0xC18091C8, 0x8685, 0x47AE, {0xA9, 0xA8, 0xF0, 0xE7, 0xA3, 0xF5, 0xCD, 0xE0}}
+  gAmdFchKMSmbusDepexPpiGuid             = {0xF9FE5839, 0xDCCD, 0x4298, {0xB4, 0x62, 0xD6, 0x36, 0x28, 0x4A, 0x32, 0xC0}}
+  gAmdFchEspiCmdPpiGuid                  = {0x3881bf81, 0x3513, 0x43d3, {0xaa, 0xa2, 0x28, 0x27, 0x1b, 0x2d, 0x60, 0x79}}
+
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSmbus0BaseAddress|0xB00|UINT16|0x0002F001
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSioPmeBaseAddress|0xE00|UINT16|0x0002F003
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPm1EvtBlkAddr|0x400|UINT16|0x0002F004
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPm1CntBlkAddr|0x404|UINT16|0x0002F005
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiPmTmrBlkAddr|0x408|UINT16|0x0002F006
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgCpuControlBlkAddr|0x410|UINT16|0x0002F007
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgAcpiGpe0BlkAddr|0x420|UINT16|0x0002F008
+  #gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSmiCmdPortAddr|0xB0|UINT16|0x0002F009
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNvdimmGpioForceSave|0x00000095|UINT32|0x0002F00A
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemBeforePciRestoreSwSmi|0xD3|UINT8|0x0002F010
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemAfterPciRestoreSwSmi|0xD4|UINT8|0x0002F011
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemEnableAcpiSwSmi|0xA0|UINT8|0x0002F012
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemDisableAcpiSwSmi|0xA1|UINT8|0x0002F013
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemSpiUnlockSwSmi|0xAA|UINT8|0x0002F014
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemSpiLockSwSmi|0xAB|UINT8|0x0002F015
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemStartTimerSmi|0xBC|UINT8|0x0002F016
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemStopTimerSmi|0xBD|UINT8|0x0002F017
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemXhciD3ColdExitSmi|0x66|UINT8|0x0002F018
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemXhciD3ColdEnterSmi|0x67|UINT8|0x0002F019
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemSecureSwSmi|0xD2|UINT8|0x0002F024
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchReadyToBootSwSmi|0xD7|UINT8|0x0002F025
+  ##0xD8-0xDB Reserved for discrete USB4
+  #gEfiAmdAgesaPkgTokenSpaceGuid.PcdTurnerD3EntryExitSwSmi|0xD8|UINT8|0x0002F026
+  #gEfiAmdAgesaPkgTokenSpaceGuid.PcdTurnerFwCmHandOffSwSmi|0xD9|UINT8|0x0002F027
+  #gEfiAmdAgesaPkgTokenSpaceGuid.PcdTurnerSwSmiReserved0|0xDA|UINT8|0x0002F028
+  #gEfiAmdAgesaPkgTokenSpaceGuid.PcdTurnerSwSmiReserved1|0xDB|UINT8|0x0002F029
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchSataD3EntrySwSmi|0xD5|UINT8|0x0002F030
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchSataD3ExitSwSmi|0xD6|UINT8|0x0002F031
+
+  ### @brief PcdFch_i2c4_padctrl_i2crxsel for MISCx000000E8 (FCH::MISC::i2c4_padctrl):i2cRxSel
+  ### @brief 0, 1, 2, 3, 0xFF - auto, do nothing - this is the default setting
+  ### @li i2cRxSel<1:0>=0b01 Schmit trigger for 3.3V input
+  ### @li i2cRxSel<1:0>=0b10 Schmit trigger for 3.3V input
+  ### @li i2cRxSel<1:0>=0b11 Schmit trigger for 1.8V input
+  ### @li i2cRxSel<1:0>=0b00 All receivers off.
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFch_i2c4_padctrl_i2crxsel|0xFF|UINT8|0x0002F032
+
+[PcdsDynamic]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLegacyFree|FALSE|BOOLEAN|0x0003F001
+
+  ### @brief High Precision Event Timer (HPET)
+  ### @details Select whether or not the ACPI Timer Device is active.
+  ### @li  TRUE  - This option is active.
+  ### @li  FALSE - This option is turned off.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdHpetEnable|TRUE|BOOLEAN|0x0003F002
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdHpetMsiDis|TRUE|BOOLEAN|0x0003F003
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEcKbd|FALSE|BOOLEAN|0x0003F004
+
+  ### @brief Spread Spectrum
+  ### @details This control enables the EMI control for Spread Spectrum feature
+  ### for the clock source.
+  ### @li TRUE  - This option is active.
+  ### @li FALSE - This option is turned off.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSpreadSpectrum|TRUE|BOOLEAN|0x0003F005
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchOscout1ClkContinous|FALSE|BOOLEAN|0x0003F006
+  ## move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPwrFailShadow|0x00|UINT8|0x0003F007
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdStressResetMode|0x00|UINT8|0x0003F008
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdOemProgrammingTablePtr|{0x0}|VOID*|0x0003F009
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUmiGen2|TRUE|BOOLEAN|0x0003F00A
+
+  ### @brief Initial SPI speed for fast transactions
+  ### @details This option selects the clock speed for the 'fast read' command
+  ### on the SPI bus after a reset.
+  ### @li 0 Use power up default
+  ### @li 1 66MHz
+  ### @li 2 33MHz
+  ### @li 3 22MHz
+  ### @li 4 16.7MHz
+  ### @li 5 100MHz
+  ### @li 6 800KHz
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetFastSpeed|0x00|UINT8|0x0003F00B
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetWriteSpeed|0x00|UINT8|0x0003F00C
+
+  ### @brief Initial SPI Mode
+  ### @details This option selects the SPI bus mode after a reset. The original
+  ### SPI bus used only 1 wire for information transfer; this is known as 'normal mode'.
+  ### Later, to improve transfer speeds, additional lines were added and
+  ### thus was added 'Dual mode' and 'Quad mode'. The numbers following the mode
+  ### names below show how the information is transferred, e.g. the number of
+  ### lines used. The first number is for the command, the 2nd for the address
+  ### and the 3rd is for the data.
+  ### @li 0 Use power up default
+  ### @li 1 Normal read (up to 33MHz)
+  ### @li 2 Dual IO (1-1-2)
+  ### @li 3 Quad IO (1-1-4)
+  ### @li 4 Dual IO (1-2-2)
+  ### @li 5 Quad IO (1-4-4)
+  ### @li 6 Normal Read (up to 66MHz)
+  ### @li 7 Fast Read commands
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetMode|0x00|UINT8|0x0003F00D
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetAutoMode|0x00|UINT8|0x0003F00E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetBurstWrite|0x00|UINT8|0x0003F00F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetCg2Pll|0x00|UINT8|0x0003F010
+
+  ### @brief Initial SPI speed
+  ### @details This option selects the clock speed for the SPI bus after a reset.
+  ### @li 0 Use power up default
+  ### @li 1 66MHz
+  ### @li 2 33MHz
+  ### @li 3 22MHz
+  ### @li 4 16.7MHz
+  ### @li 5 100MHz
+  ### @li 6 800KHz
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetSpiSpeed|0x02|UINT8|0x0003F011
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetSPI100Enable|0x01|UINT8|0x0003F012
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.QeEnabled|FALSE|BOOLEAN|0x0003F013
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSerialDebugBusEnable|FALSE|BOOLEAN|0x0003F014
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdNoClearThermalTripSts|FALSE|BOOLEAN|0x0003F015
+  ## move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiEnable|FALSE|BOOLEAN|0x0003F016
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiEc0Enable|FALSE|BOOLEAN|0x0003F017
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiIo80Enable|FALSE|BOOLEAN|0x0003F018
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiKbc6064Enable|FALSE|BOOLEAN|0x0003F019
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchWdtEnable|TRUE|BOOLEAN|0x0003F01A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchAoacInitEnable|TRUE|BOOLEAN|0x0003F01B
+  ## move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdFchAlinkRasSupport|FALSE|BOOLEAN|0x0003F01C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspiIo2E2FEnable|FALSE|BOOLEAN|0x0003F01C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchHfpEnable|FALSE|BOOLEAN|0x0003F01D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchSmiDiagEnable|FALSE|BOOLEAN|0x0003F01E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchAoacLpcSaveRestoreEnable|FALSE|BOOLEAN|0x0003F01F
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdNativePcieSupport|TRUE|BOOLEAN|0x0003F020
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdNoneSioKbcSupport|FALSE|BOOLEAN|0x0003F021
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdTimerTickTrack|0x00|UINT8|0x0003F022
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdClockInterruptTag|0x00|UINT8|0x0003F023
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdBpX48M0OutputEnable|TRUE|BOOLEAN|0x0003F024
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.BpX48M0S0i3Enable|FALSE|BOOLEAN|0x0003F025
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDapGpioSupport|FALSE|BOOLEAN|0x0003F026
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIomuxSmbusI2c2|0x00|UINT8|0x0003F030
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIomuxAsfI2c3|0x00|UINT8|0x0003F031
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetSpiTpmSpeed|0x00|UINT8|0x0003F032
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchDedicatedRomRwTestRangeBase|0x00|UINT32|0x0003F033
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchDedicatedRomRwTestRangeSize|0x00|UINT32|0x0003F034
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetSpiClkEarlier|FALSE|BOOLEAN|0x0003F035
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetSpiTpmDiToEnable|TRUE|BOOLEAN|0x0003F036
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetSpiTpmDiToCnt|0x10|UINT8|0x0003F037
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchOemSecureEnable|TRUE|BOOLEAN|0x0003F040
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchOemSecureLateFenceEnable|TRUE|BOOLEAN|0x0003F041
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchOemSecureGpioEnable|TRUE|BOOLEAN|0x0003F042
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchOemSecureGpioStartPin|0x03|UINT8|0x0003F043
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchOemSecureGpioPinCount|0x02|UINT8|0x0003F044
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchLockFCHReg|FALSE|BOOLEAN|0x0003F045
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchOemGpioFencing|FALSE|BOOLEAN|0x0003F046
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspi1Enable|FALSE|BOOLEAN|0x0003F050
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspi1Slave0Enable|FALSE|BOOLEAN|0x0003F051
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspi1Io80Enable|FALSE|BOOLEAN|0x0003F052
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEspi1Kbc6064Enable|FALSE|BOOLEAN|0x0003F053
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDisEspiMasCtlRegWr|FALSE|BOOLEAN|0x0003F054
+
+  ## move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEnable|TRUE|BOOLEAN|0x0003F100
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataClass|0x02|UINT8|0x0003F101
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataSetMaxGen2|FALSE|BOOLEAN|0x0003F102
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataClkMode|0x01|UINT8|0x0003F103
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort|0x00|UINT8|0x0003F104
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPower|0x00|UINT8|0x0003F105
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortMd|0x00|UINT8|0x0003F106
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataHotRemovalEnhPort|0x00|UINT8|0x0003F107
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataAggrLinkPmCap|0x01|UINT8|0x0003F108
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortMultCap|0x01|UINT8|0x0003F109
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataClkAutoOff|0x01|UINT8|0x0003F10A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPscCap|0x01|UINT8|0x0003F10B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataSscCap|0x01|UINT8|0x0003F10C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataBiosOsHandOff|0x00|UINT8|0x0003F10D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataFisBasedSwitching|0x01|UINT8|0x0003F10E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataCccSupport|0x00|UINT8|0x0003F10F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataMsiCapability|0x00|UINT8|0x0003F110
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataTargetSupport8Device|0x00|UINT8|0x0003F111
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataAhciEnclosureManagement|0x00|UINT8|0x0003F112
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDisableGenericMode|0x00|UINT8|0x0003F113
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPhyPllShutDown|0x00|UINT8|0x0003F114
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDevSlpPort|0x00|UINT8|0x0003F115
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataOobDetectionEnh|FALSE|BOOLEAN|0x0003F116
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataMemoryPowerSaving|0|UINT8|0x0003F117
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataHotRemovalEnh|FALSE|BOOLEAN|0x0003F118
+  ## move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataAhciDisPrefetchFunction|TRUE|BOOLEAN|0x0003F119
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataSata6AhciCap|FALSE|BOOLEAN|0x0003F11A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModeReg|0x09|UINT8|0x0003F11B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataInternal100Spread|FALSE|BOOLEAN|0x0003F11C
+  ## move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataRasSupport|FALSE|BOOLEAN|0x0003F11D
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDevSlpPort0|FALSE|BOOLEAN|0x0003F11E
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDevSlpPort1|FALSE|BOOLEAN|0x0003F11F
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDevSlpPort0Num|0x00|UINT8|0x0003F120
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataDevSlpPort1Num|0x01|UINT8|0x0003F121
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataMsiEnable|TRUE|BOOLEAN|0x0003F122
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataSgpio0|0x00|UINT8|0x0003F123
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataControllerAutoShutdown|TRUE|BOOLEAN|0x0003F124
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort0|0x00|UINT8|0x0003F130
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort1|0x00|UINT8|0x0003F131
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort2|0x00|UINT8|0x0003F132
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort3|0x00|UINT8|0x0003F133
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort4|0x00|UINT8|0x0003F134
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort5|0x00|UINT8|0x0003F135
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort6|0x00|UINT8|0x0003F136
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataModePort7|0x00|UINT8|0x0003F137
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort0|0x00|UINT8|0x0003F140
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort1|0x00|UINT8|0x0003F141
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort2|0x00|UINT8|0x0003F142
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort3|0x00|UINT8|0x0003F143
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort4|0x00|UINT8|0x0003F144
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort5|0x00|UINT8|0x0003F145
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort6|0x00|UINT8|0x0003F146
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEspPort7|0x00|UINT8|0x0003F147
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort0|0x00|UINT8|0x0003F150
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort1|0x00|UINT8|0x0003F151
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort2|0x00|UINT8|0x0003F152
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort3|0x00|UINT8|0x0003F153
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort4|0x00|UINT8|0x0003F154
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort5|0x00|UINT8|0x0003F155
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort6|0x00|UINT8|0x0003F156
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort7|0x00|UINT8|0x0003F157
+  ## move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataEnable2|0xFF|UINT8|0x0003F10060                   #Enable Sata controllers, bit0 - Sata0, bit1 - Sata1, etc.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataIoDie0PortMode|0x00|UINT64|0x0003F161
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataIoDie1PortMode|0x00|UINT64|0x0003F162
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataBISTLComplianceMode|0x00|UINT8|0x0003F163
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataMultiDieEnable|0xFF|UINT8|0x0003F1E0              #bit1-7, Enable (1) or Disable (0) Sata on Die1-7
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataMultiDiePortShutDown|0x00|UINT64|0x0003F1E1       #bit8-15: Die1 Sata Port0-7 shutdown, bit16-23: Die2, etc.
+
+  ### @brief
+  ### @details This control selects the SATA port hot plug capability. Note: 'ESP'
+  ###  is External SATA Port, also known as E-SATA in the SATA spec. 5.2.6 e-SATA.
+  ###  The hot-plug feature is described in SATA spec 5.2 Usage Models -
+  ###  hot plug support. The control is a 64-bit value divided into bit fields.
+  ###  Each bit represents one SATA port as follows:
+  ### @li Bit 0-7: Socket0, SATA0 controller, Ports 0-7
+  ### @li Bit 8-15: Socket0, SATA1 controller, Ports 0-7
+  ### @li Bit 16-23: Socket0, SATA2 controller, Ports 0-7
+  ### @li Bit 24-31: Socket0, SATA3 controller, Ports 0-7
+  ### @li Bit 32-39: Socket1, SATA0 controller, Ports 0-7
+  ### @li Bit 40-47: Socket1, SATA1 controller, Ports 0-7
+  ### @li Bit 48-55: Socket1, SATA2 controller, Ports 0-7
+  ### @li Bit 56-63: Socket1, SATA3 controller, Ports 0-7
+  ### <p>For each bit field,
+  ### @li  0b - hot plug feature is disabled.
+  ### @li  1b - hot plug feature is enabled for the port.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataMultiDiePortESP|0x00|UINT64|0x0003F1E2
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataMultiDieDevSlp|0x00|UINT64|0x0003F1E3             #bit8: Die1 DevSlp Port0 enable, bit9-11: port mapping
+                                                                                               #bit12: Die1 DevSlp Port1 enable, bit13-15: port mapping
+                                                                                               #bit16-23 Die2, etc.
+  ### @brief Sata Activity LEDs
+  ### @details This control specifies if each of the SATA controllers will use
+  ### an SGPIO pin to show status/activity (e.g. via an LED). The value is split
+  ###  into bit fields as follows:
+  ### @li  bits 0-3: Socket 0 , SATA controllers 0-3.
+  ### @li  bits 4-7: Socket 1 , SATA controllers 0-3.
+  ### <p>For each bit field,
+  ### @li  0b - No pin is used by this controller.
+  ### @li  1b - SATA controller uses a SGPIO pin.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataSgpioMultiDieEnable|0x00|UINT8|0x0003F1E4
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdALinkClkGateOff|0x01|UINT8|0x0003F201
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdBLinkClkGateOff|0x01|UINT8|0x0003F202
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAbClockGating|0x01|UINT8|0x0003F203
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSlowSpeedAbLinkClock|0x00|UINT8|0x0003F204
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAbDmaMemoryWrtie3264B|TRUE|BOOLEAN|0x0003F205
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAbMemoryPowerSaving|TRUE|BOOLEAN|0x0003F206
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSbgMemoryPowerSaving|TRUE|BOOLEAN|0x0003F207
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSbgClockGating|TRUE|BOOLEAN|0x0003F208
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXdmaDmaWrite16ByteMode|FALSE|BOOLEAN|0x0003F209
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXdmaMemoryPowerSaving|FALSE|BOOLEAN|0x0003F20A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXdmaPendingNprThreshold|0x00|UINT8|0x0003F20B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXdmaDncplOrderDis|FALSE|BOOLEAN|0x0003F20C
+  ## move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdResetCpuOnSyncFlood|TRUE|BOOLEAN|0x0003F20D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppClockRequest0|0x03|UINT8|0x0003F20E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppClockRequest1|0x03|UINT8|0x0003F20F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppClockRequest2|0x03|UINT8|0x0003F210
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdGppClockRequest3|0x03|UINT8|0x0003F211
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSltGfxClockRequest0|0x03|UINT8|0x0003F212
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSltGfxClockRequest1|0x03|UINT8|0x0003F213
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdphostBypassDataPack|FALSE|BOOLEAN|0x0003F214
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdphostDisNpmwrProtect|FALSE|BOOLEAN|0x0003F215
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbDbgclkEn|FALSE|BOOLEAN|0x0003F216
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdALinkClockSlowdown|0|UINT8|0x0003F217
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdALinkClockSlowFrequency|0x0F|UINT8|0x0003F218
+
+  # move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0Enable|TRUE|BOOLEAN|0x0003F300
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci1Enable|TRUE|BOOLEAN|0x0003F301                   #USB3.0 controller1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEhci1Enable|TRUE|BOOLEAN|0x0003F302
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci2Enable|TRUE|BOOLEAN|0x0003F304                   #USB3.0 controller0 on MCM-1
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci3Enable|TRUE|BOOLEAN|0x0003F305                   #USB3.0 controller1 on MCM-1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0DevRemovable|0x00|UINT32|0x0003F308
+                                                                                               #RMB
+                                                                                               #SS PORT
+                                                                                               #[17:16] -- 2 USB 3.0 ports on XHCI controller 0
+                                                                                               #[19:18] -- 2 USB 3.0 ports on XHCI controller 1
+                                                                                               #USB2 PORT
+                                                                                               #[3:0] -- 4 USB 2.0 ports on XHCI controller 0
+                                                                                               #[7:4] -- 3 USB 2.0 ports on XHCI controller 1
+                                                                                               #[8]   -- 1 USB 2.0 ports on XHCI controller 2
+                                                                                               #RPL
+                                                                                               #SS PORT
+                                                                                               #[17:16] -- 2 USB 3.0 ports on XHCI controller 0
+                                                                                               #[19:18] -- 2 USB 3.0 ports on XHCI controller 1
+                                                                                               #USB2 PORT
+                                                                                               #[1:0] -- 2 USB 2.0 ports on XHCI controller 0
+                                                                                               #[3:2] -- 2 USB 2.0 ports on XHCI controller 1
+                                                                                               #[4]   -- 1 USB 2.0 ports on XHCI controller 2
+
+  ### @brief USB OverCurrent (OC) pin polarity
+  ### @details This item allows the customer to change OC signal polarity to be
+  ###  active low. This is universal and applies to all OC pins.
+  ### @li  TRUE - OC pin is low when OC occurs.
+  ### @li FALSE - OC pin is high when OC occurs.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciOcPolarityCfgLow|FALSE|BOOLEAN|0x0003F309
+
+  ### @brief Select USB 3.0 ports
+  ### @details This item allow the host BIOS to select which USB ports will be
+  ###  active with USB 3.x capability in the system. Each bit in the value controls
+  ###  one USB port: bit0 for Port0, bit1 for Port1, etc.
+  ### @li bit n = 0 - the corresponding port has USB 2.0 capability Enabled.
+  ### @li bit n = 1 - the corresponding port is <b>DISABLED</b>.
+  ### <p>This work in conjunction with the USB2PortDisable to specify the
+  ###  function of the USB controller ports. Each controller has upto 2 USB3 ports
+  ###  with bits [1:0] representing ctlr 0, bits [3:2] for ctlr 1, bits [5:4] for ctlr 2,
+  ###  bits [7:6] for ctlr 3, bits [9:8] for ctlr 4.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciUsb3PortDisable|0x00|UINT32|0x0003F30A
+
+  ### @brief Select USB 2.0 ports
+  ### @details This item allows the host BIOS to select which USB ports will be
+  ###  active with USB 2.0 capability in the system. Each bit in the value
+  ###  controls one USB port: bit0 for Port0, bit1 for Port1, etc.
+  ### @li bit n = 0 - the corresponding port has USB 2.0 capability Enabled.
+  ### @li bit n = 1 - the corresponding port is <b>DISABLED</b>.
+  ### <p>This work in conjunction with the USB3PortDisable to specify the
+  ###  function of the USB controller ports. Each controller has upto 4 USB2 ports
+  ###  with bits [3:0] representing ctlr 0, bits [7:4] for ctlr 1, bits [11:8] for ctlr 2,
+  ###  bits [15:12] for ctlr 3, bits [19:16] for ctlr 4.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciUsb2PortDisable|0x00|UINT32|0x0003F30B
+
+  ### @brief USB OC pin select
+  ### @details This item allows the customer to map the OC Pins to USB Ports.
+  ###  Each 4-bit field selects an OC pin (pin name "OCn", n=value in field).
+  ###  Each position in the array of 4-bit fields represents one USB port.
+  ### @li bits [ 3: 0] - represents the pin number for port 0
+  ### @li bits [ 7: 4] - pin number for port 1
+  ### @li bits [11: 8] - pin number for port 2
+  ### @li bits [15:12] - pin number for port 3
+  ### @li bits [19:16] - pin number for port 4
+  ### @li bits [23:20] - pin number for port 5
+  ### @li bits [27:24] - pin number for port 6
+  ### @li bits [31:28] - pin number for port 7
+  ### <p>Example: if bit[3:0] = 0, OC Pin0 will map to USB port0.
+  ### <p> if bit [15:12] = 0x02, OC Pin2 will map to USB port3.
+  ### <p>Refer to the lead-in chapter for USB port mapping details and to the
+  ### Product Processor Programming Reference and Socket Functional Data Sheet
+  ### for the quantity of OC pins available.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciOcPinSelect|0xFFFFFFFF|UINT32|0x0003F30C
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciForceGen1|0x00|UINT8|0x0003F30D                   #PCD to force USB 3.1 Gen 1
+                                                                                               #RMB/RPL
+                                                                                               # 2*USB3 XHCI controller 0 [1:0]
+                                                                                               # 2*USB3 XHCI controller 1 [3:2]
+                                                                                               # 1*USB3 XHCI controller 3 [4]
+                                                                                               # 1*USB3 XHCI controller 7 [5]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci1OcPinSelect|0xFFFFFFFF|UINT32|0x0003F30E
+                                                                                               #RMB
+                                                                                               #[19:12] 2*USB3 + [11:0] 3*USB2 Port on XHCI controller 1
+                                                                                               #RPL
+                                                                                               #[15:8] 2*USB3 + [7:0] 2*USB2 Port on XHCI controller 1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci2OcPinSelect|0xFFFFFFFF|UINT32|0x0003F30F
+                                                                                               #RMB/RPL
+                                                                                               #[3:0] 1*USB2 Port on XHCI controller 2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciUsb20OcPinSelect|0xFFFFFFFFFFFFFFFF|UINT64|0x0003F340
+                                                                                               #Die 0
+                                                                                               #[7:0]  SSP -- 2 USB 2.0 ports on XHCI controller 0
+                                                                                               #[15:8] SSP -- 2 USB 2.0 ports on XHCI controller 1
+                                                                                               #[23:0] MTS -- 6 USB 2.0 ports on XHCI controller 0
+                                                                                               #Die 1
+                                                                                               #[39:32] SSP -- 2 USB 2.0 ports on XHCI controller 0
+                                                                                               #[47:40] SSP -- 2 USB 2.0 ports on XHCI controller 1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciUsb31OcPinSelect|0xFFFFFFFF|UINT32|0x0003F341
+                                                                                               #Die 0
+                                                                                               #[7:0]  SSP -- 2 USB 3.1 ports on XHCI controller 0
+                                                                                               #[15:8] SSP -- 2 USB 3.1 ports on XHCI controller 1
+                                                                                               #[15:0] MTS -- 4 USB 3.1 ports on XHCI controller 0
+                                                                                               #Die 1
+                                                                                               #[23:16] SSP -- 2 USB 3.1 ports on XHCI controller 0
+                                                                                               #[31:24] SSP -- 2 USB 3.1 ports on XHCI controller 1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P0Phy_tx_vboost_lvl|0x02|UINT8|0x0003F310
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P0Phy_rx_eq|0x03|UINT8|0x0003F311
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P0Phy_los_bias|0x05|UINT8|0x0003F312
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P0Phy_pcs_tx_deemph_3p5db|0x1C|UINT8|0x0003F313
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P0Phy_pcs_tx_deemph_6db|0x1C|UINT8|0x0003F314
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P0Phy_pcs_tx_swing_full|0x7F|UINT8|0x0003F315
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P1Phy_tx_vboost_lvl|0x02|UINT8|0x0003F316
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P1Phy_rx_eq|0x03|UINT8|0x0003F317
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P1Phy_los_bias|0x05|UINT8|0x0003F318
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P1Phy_pcs_tx_deemph_3p5db|0x1C|UINT8|0x0003F319
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P1Phy_pcs_tx_deemph_6db|0x1C|UINT8|0x0003F31A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P1Phy_pcs_tx_swing_full|0x7F|UINT8|0x0003F31B
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P2Phy_tx_vboost_lvl|0x02|UINT8|0x0003F31C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P2Phy_rx_eq|0x03|UINT8|0x0003F31D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P2Phy_los_bias|0x05|UINT8|0x0003F31E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P2Phy_pcs_tx_deemph_3p5db|0x1C|UINT8|0x0003F31F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P2Phy_pcs_tx_deemph_6db|0x1C|UINT8|0x0003F320
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P2Phy_pcs_tx_swing_full|0x7F|UINT8|0x0003F321
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P3Phy_tx_vboost_lvl|0x02|UINT8|0x0003F322
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P3Phy_rx_eq|0x03|UINT8|0x0003F323
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P3Phy_los_bias|0x05|UINT8|0x0003F324
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P3Phy_pcs_tx_deemph_3p5db|0x1C|UINT8|0x0003F325
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P3Phy_pcs_tx_deemph_6db|0x1C|UINT8|0x0003F326
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0P3Phy_pcs_tx_swing_full|0x7F|UINT8|0x0003F327
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci3OcPinSelect|0xFFFFFFFF|UINT32|0x0003F328
+                                                                                               #RMB
+                                                                                               #[7:4] 1*USB4 + [3:0] 1*USB2 Port on XHCI controller 3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci4OcPinSelect|0xFFFFFFFF|UINT32|0x0003F329
+                                                                                               #RMB
+                                                                                               #[7:4] 1*USB4 + [3:0] 1*USB2 Port on XHCI controller 4
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdServiceIntervalEnable|TRUE|BOOLEAN|0x0003F330
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdBandwidthExpandEnable|TRUE|BOOLEAN|0x0003F331
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAoacEnable|TRUE|BOOLEAN|0x0003F332
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdHwLpmEnable|TRUE|BOOLEAN|0x0003F333
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDbcEnable|TRUE|BOOLEAN|0x0003F334
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdMiscPlusEnable|TRUE|BOOLEAN|0x0003F335
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEcoFixEnable|TRUE|BOOLEAN|0x0003F336
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSsifEnable|TRUE|BOOLEAN|0x0003F337
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdU2ifEnable|TRUE|BOOLEAN|0x0003F338
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFseEnable|TRUE|BOOLEAN|0x0003F339
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhcPmeEnable|TRUE|BOOLEAN|0x0003F33A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbPhyPowerDown|FALSE|BOOLEAN|0x0003F33B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEhci1DebugPortSel|0x00|UINT8|0x0003F33C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbBatteryChargeEnable|FALSE|BOOLEAN|0x0003F33D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDisableXhciPortLate|FALSE|BOOLEAN|0x0003F33E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDisableXhciPort0|FALSE|BOOLEAN|0x0003F33F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbDrd0Mode|0x0f|UINT8|0x0003F350
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbDrd1Mode|0x0f|UINT8|0x0003F351
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbSparseModeEnable|TRUE|BOOLEAN|0x0003F352
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsb4PhyTuningSettingTableContent|0x00000000|UINT32|0x0003F353
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsb4PhyTuningSettingTableSize|0x00000000|UINT32|0x0003F354
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsb4PhyTuningEnable|FALSE|BOOLEAN|0x0003F355
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbOemConfigurationTableAuto|TRUE|BOOLEAN|0x0003F37F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbOemConfigurationTable|{0x0}|VOID*|0x0003F380
+  #   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbOemConfigurationTable|{ \
+  # #Version_Major, Minor, Reserve, Reserve
+  #   0x0D, 0x00, 0x80, 0x00, \
+  # #Usb 2.0 PHY Parameters  9 params per controller:
+  #   # 1,COMPDSTUNE          - Disconnect Threshold Adjustment. Range 0 - 0x7.
+  #   # 2,SQRXTUNE            - Squelch Threshold Adjustment. Range 0 - 0x7.
+  #   # 3,TXFSLSTUNE          - FS/LS Source Impedance Adjustment. Range 0 - 0xF.
+  #   # 4,TXPREEMPAMPTUNE     - HS Transmitter Pre-Emphasis Curent Control. Range 0 - 0x3.
+  #   # 5,TXPREEMPPULSETUNE   - HS Transmitter Pre-Emphasis Duration Control. Range: 0 - 0x1.
+  #   # 6,TXRISETUNE          - HS Transmitter Rise/Fall Time Adjustment. Range: 0 - 0x3.
+  #   # 7,TXVREFTUNE          - HS DC Voltage Level Adjustment. Range 0 - 0xF.
+  #   # 8,TXHSXVTUNE          - Transmitter High-Speed Crossover Adjustment. Range 0 - 0x3.
+  #   # 9,TXRESTUNE           - USB Source Impedance Adjustment. Range 0 - 0x3.
+  #   #Controller0 Port0 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller0 Port1 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller0 Port2 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller0 Port3 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller1 Port0 Default
+  #   0x03, 0x03, 0x03, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller1 Port1 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  # #DeviceRemovable
+  #   0x00, \
+  # #U3RxDetWAEnable, U3RxDetWAPortMap
+  #   0x00, 0x00, \
+  # #EarlyDebugSelectEnable
+  #   0x00, \
+  # #Usb31PhyEnable
+  #   0x00, \
+  # #Usb 3.1 PHY Parameters
+  #   # 1,RX_EQ_DELTA_IQ_OVRD_VAL   - Override value for rx_eq_delta_iq. Range 0 - 0xF.
+  #   # 2,RX_EQ_DELTA_IQ_OVRD_EN    - Enable override value for rx_eq_delta_iq. Range 0 - 0x1.
+  #   #Port0-3 Default
+  #   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
+  #   # 3,RX_VREF_CTRL              - Override value for rx_vref_ctrl. Range 0 - 0x1F.
+  #   # 4,RX_VREF_CTRL_EN           - Enable override value for rx_vref_ctrl. Range 0 - 0x1.
+  #   # 5,TX_VBOOST_LVL             - Override value for tx_vboost_lvl: 0 - 0x7.
+  #   # 6,TX_VBOOST_LVL_EN          - Enable override value for tx_vboost_lvl. Range: 0 - 0x1.
+  #   # 7,RX_VREF_CTRL_X            - Override value for rx_vref_ctrl. Range 0 - 0x1F.
+  #   # 8,RX_VREF_CTRL_EN_X         - Enable override value for rx_vref_ctrl. Range 0 - 0x1.
+  #   # 9,TX_VBOOST_LVL_X           - Override value for tx_vboost_lvl: 0 - 0x7.
+  #   # 10,TX_VBOOST_LVL_EN_X       - Enable override value for tx_vboost_lvl. Range: 0 - 0x1.
+  #   0x10, 0x00, 0x07, 0x00, 0x10, 0x00, 0x07, 0x00, \
+  # #Reserved
+  #   0x00, 0x00, 0x00, 0x00 }
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbMtsOemConfigurationTable|{0x0}|VOID*|0x0003F381
+  #   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbMtsOemConfigurationTable|{ \
+  #   #Version_Major, Minor, Reserve, Reserve
+  #   0x0D, 0x07, 0x40, 0x00, \
+  #   #Usb 2.0 PHY Parameters
+  #   # 1,COMPDSTUNE          - Disconnect Threshold Adjustment. Range 0 - 0x7.
+  #   # 2,SQRXTUNE            - Squelch Threshold Adjustment. Range 0 - 0x7.
+  #   # 3,TXFSLSTUNE          - FS/LS Source Impedance Adjustment. Range 0 - 0xF.
+  #   # 4,TXPREEMPAMPTUNE     - HS Transmitter Pre-Emphasis Curent Control. Range 0 - 0x3.
+  #   # 5,TXPREEMPPULSETUNE   - HS Transmitter Pre-Emphasis Duration Control. Range: 0 - 0x1.
+  #   # 6,TXRISETUNE          - HS Transmitter Rise/Fall Time Adjustment. Range: 0 - 0x3.
+  #   # 7,TXVREFTUNE          - HS DC Voltage Level Adjustment. Range 0 - 0xF.
+  #   # 8,TXHSXVTUNE          - Transmitter High-Speed Crossover Adjustment. Range 0 - 0x3.
+  #   # 9,TXRESTUNE           - USB Source Impedance Adjustment. Range 0 - 0x3.
+  #   #Controller0 Port0 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller0 Port1 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller0 Port2 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller0 Port3 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller1 Port0 Default
+  #   0x03, 0x03, 0x03, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller1 Port1 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #DeviceRemovable
+  #   0x00, \
+  #   #Reserved
+  #   0x00, 0x00, 0x00, 0x00 }
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbSspOemConfigurationTable|{0x0}|VOID*|0x0003F382
+  #   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbSspOemConfigurationTable|{ \
+  #   #Version_Major, Minor, Reserve, Reserve
+  #   0x0D, 0x02, 0x50, 0x00, \
+  #   #Usb20PhyEnable
+  #   0x00, \
+  #   #Usb 2.0 PHY Parameters - Socket0
+  #   # 1,COMPDSTUNE          - Disconnect Threshold Adjustment. Range 0 - 0x7.
+  #   # 2,SQRXTUNE            - Squelch Threshold Adjustment. Range 0 - 0x7.
+  #   # 3,TXFSLSTUNE          - FS/LS Source Impedance Adjustment. Range 0 - 0xF.
+  #   # 4,TXPREEMPAMPTUNE     - HS Transmitter Pre-Emphasis Curent Control. Range 0 - 0x3.
+  #   # 5,TXPREEMPPULSETUNE   - HS Transmitter Pre-Emphasis Duration Control. Range: 0 - 0x1.
+  #   # 6,TXRISETUNE          - HS Transmitter Rise/Fall Time Adjustment. Range: 0 - 0x3.
+  #   # 7,TXVREFTUNE          - HS DC Voltage Level Adjustment. Range 0 - 0xF.
+  #   # 8,TXHSXVTUNE          - Transmitter High-Speed Crossover Adjustment. Range 0 - 0x3.
+  #   # 9,TXRESTUNE           - USB Source Impedance Adjustment. Range 0 - 0x3.
+  #   #Controller0 Port0 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller0 Port1 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller1 Port0 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller1 Port1 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Reverved
+  #   0x00, \
+  #   #S1Usb20PhyEnable
+  #   0x00, \
+  #   #Usb 2.0 PHY Parameters - Socket1
+  #   #Controller0 Port0 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller0 Port1 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller1 Port0 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Controller1 Port1 Default
+  #   0x03, 0x03, 0x03, 0x03, 0x00, 0x01, 0x06, 0x03, 0x01, \
+  #   #Usb31PhyEnable
+  #   0x00, \
+  #   #Usb 3.1 PHY Parameters - Socket0
+  #   # 1,RX_ANA_IQ_PHASE_ADJUST    - Value for rx_ana_iq_phase_adjust[6:0]. Range 0 - 0x7F.
+  #   # 2,RX_EQ_DELTA_IQ_OVRD_EN    - Enable override value for rx_eq_delta_iq. Range 0 - 0x1.
+  #   # 3,RX_EQ_DELTA_IQ_OVRD_VAL   - Override value for rx_eq_delta_iq. Range 0 - 0xF.
+  #   # 4,RX_IQ_PHASE_ADJUST        - Value for RX IQ PHASE Adjust. Range 0 - 0x7F.
+  #   # 5,TX_VBOOST_LVL_EN          - Enable override value for tx_vboost_lvl. Range: 0 - 0x1.
+  #   # 6,TX_VBOOST_LVL             - Override value for tx_vboost_lvl: 0 - 0x7.
+  #   # 7,RX_VREF_CTRL_EN           - Enable override value for rx_vref_ctrl. Range 0 - 0x1.
+  #   # 8,RX_VREF_CTRL              - Override value for rx_vref_ctrl. Range 0 - 0x1F.
+  #   # 9,TX_VBOOST_LVL_EN_X        - Enable override value for tx_vboost_lvl. Range: 0 - 0x1.
+  #   # 10,TX_VBOOST_LVL_X          - Override value for tx_vboost_lvl. Range: 0 - 0x7.
+  #   # 11,RX_VREF_CTRL_EN_X        - Enable override value for rx_vref_ctrl. Range 0 - 0x1.
+  #   # 12,RX_VREF_CTRL_X           - Override value for rx_vref_ctrl. Range 0 - 0x1F.
+  #   #Controller0 Port0 Default
+  #   0x07, 0x00, 0x00, 0x07, 0x00, 0x07, 0x00, 0x10, 0x00, 0x07, 0x00, 0x10,\
+  #   #Controller0 Port1 Default
+  #   0x07, 0x00, 0x00, 0x07, 0x00, 0x07, 0x00, 0x10, 0x00, 0x07, 0x00, 0x10,\
+  #   #Controller1 Port0 Default
+  #   0x07, 0x00, 0x00, 0x07, 0x00, 0x07, 0x00, 0x10, 0x00, 0x07, 0x00, 0x10,\
+  #   #Controller1 Port1 Default
+  #   0x07, 0x00, 0x00, 0x07, 0x00, 0x07, 0x00, 0x10, 0x00, 0x07, 0x00, 0x10,\
+  #   #S1Usb31PhyEnable
+  #   0x00, \
+  #   #Usb 3.1 PHY Parameters - Socket1
+  #   #Controller0 Port0 Default
+  #   0x07, 0x00, 0x00, 0x07, 0x00, 0x07, 0x00, 0x10, 0x00, 0x07, 0x00, 0x10,\
+  #   #Controller0 Port1 Default
+  #   0x07, 0x00, 0x00, 0x07, 0x00, 0x07, 0x00, 0x10, 0x00, 0x07, 0x00, 0x10,\
+  #   #Controller1 Port0 Default
+  #   0x07, 0x00, 0x00, 0x07, 0x00, 0x07, 0x00, 0x10, 0x00, 0x07, 0x00, 0x10,\
+  #   #Controller1 Port1 Default
+  #   0x07, 0x00, 0x00, 0x07, 0x00, 0x07, 0x00, 0x10, 0x00, 0x07, 0x00, 0x10,\
+  #   }
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbSHOemConfigurationTable|{0x0}|VOID*|0x0003F383
+  #   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbSHOemConfigurationTable|{ \
+  #   #Version_Major, Minor, Reserve, Reserve
+  #   0x0D, 0x06, 0x40, 0x00, \
+  #   #Usb 2.0 PHY Parameters
+  #   # 1,COMPDSTUNE          - Disconnect Threshold Adjustment. Range 0 - 0x7.
+  #   # 2,SQRXTUNE            - Squelch Threshold Adjustment. Range 0 - 0x7.
+  #   # 3,TXFSLSTUNE          - FS/LS Source Impedance Adjustment. Range 0 - 0xF.
+  #   # 4,TXPREEMPAMPTUNE     - HS Transmitter Pre-Emphasis Curent Control. Range 0 - 0x3.
+  #   # 5,TXPREEMPPULSETUNE   - HS Transmitter Pre-Emphasis Duration Control. Range: 0 - 0x1.
+  #   # 6,TXRISETUNE          - HS Transmitter Rise/Fall Time Adjustment. Range: 0 - 0x3.
+  #   # 7,TXVREFTUNE          - HS DC Voltage Level Adjustment. Range 0 - 0xF.
+  #   # 8,TXHSXVTUNE          - Transmitter High-Speed Crossover Adjustment. Range 0 - 0x3.
+  #   # 9,TXRESTUNE           - USB Source Impedance Adjustment. Range 0 - 0x3.
+  #   #Controller0 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller0 Port1 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller0 Port2 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller0 Port3 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port1 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port2 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port3 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Usb 3 PHY Parameters
+  #   # 1,TX_TERM_CTRL        - Tx term control. Range 0 - 0x7.
+  #   # 2,RX_TERM_CTRL        - Rx term control. Range 0 - 0x7.
+  #   # 3,TX_VBOOST_LVL_EN    - Enable override value for tx_vboost_lvl. Range 0 - 0x1.
+  #   # 4,TX_VBOOST_LVL       - Override value for tx_vboost_lvl. Range 0 - 0x7.
+  #   #Controller0 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller0 Port1 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port1 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #BatteryChargerEnable
+  #   0x00, \
+  #   #PhyP3CpmP4Support
+  #   0x00, \
+  #   #ComboPhyStaticConfig0 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #ComboPhyStaticConfig1 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #Reserved
+  #   0x00, 0x00, 0x00, 0x00 }
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbKTOemConfigurationTable|{0x0}|VOID*|0x0003F384
+  #   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbKTOemConfigurationTable|{ \
+  #   #Version_Major, Minor, Reserve, Reserve
+  #   0x0D, 0x09, 0x00, 0x00, \
+  #   #Usb 2.0 PHY Parameters
+  #   # 1,COMPDISTUNE         - Disconnect Threshold Adjustment. Range 0 - 0x7.
+  #   # 2,SQRXTUNE            - Squelch Threshold Adjustment. Range 0 - 0x7.
+  #   # 3,TXFSLSTUNE          - FS/LS Source Impedance Adjustment. Range 0 - 0xF.
+  #   # 4,TXPREEMPAMPTUNE     - HS Transmitter Pre-Emphasis Curent Control. Range 0 - 0x3.
+  #   # 5,TXPREEMPPULSETUNE   - HS Transmitter Pre-Emphasis Duration Control. Range: 0 - 0x1.
+  #   # 6,TXRISETUNE          - HS Transmitter Rise/Fall Time Adjustment. Range: 0 - 0x3.
+  #   # 7,TXVREFTUNE          - HS DC Voltage Level Adjustment. Range 0 - 0xF.
+  #   # 8,TXHSXVTUNE          - Transmitter High-Speed Crossover Adjustment. Range 0 - 0x3.
+  #   # 9,TXRESTUNE           - USB Source Impedance Adjustment. Range 0 - 0x3.
+  #   #Controller0 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller0 Port1 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller0 Port2 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller0 Port3 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port1 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port2 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller2 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller3 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller4 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Usb 3 PHY Parameters
+  #   # 1,TX_TERM_CTRL        - Tx term control. Range 0 - 0x7.
+  #   # 2,RX_TERM_CTRL        - Rx term control. Range 0 - 0x7.
+  #   # 3,TX_VBOOST_LVL_EN    - Enable override value for tx_vboost_lvl. Range 0 - 0x1.
+  #   # 4,TX_VBOOST_LVL       - Override value for tx_vboost_lvl. Range 0 - 0x7.
+  #   #Controller0 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller0 Port1 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port1 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #BatteryChargerEnable
+  #   0x00, \
+  #   #PhyP3CpmP4Support
+  #   0x00, \
+  #   #ComboPhyStaticConfig0 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #ComboPhyStaticConfig1 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #ComboPhyStaticConfig2 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #Reserved
+  #   0x00, 0x00, 0x00 }
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbSGOemConfigurationTable|{0x0}|VOID*|0x0003F385
+  #   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbSGOemConfigurationTable|{ \
+  #   #Version_Major, Minor, Reserve, Reserve
+  #   0x0E, 0x00, 0x64, 0x00, \
+  #   #Usb 2.0 PHY Parameters
+  #   # 1,COMPDSTUNE          - Disconnect Threshold Adjustment. Range 0 - 0x7.
+  #   # 2,SQRXTUNE            - Squelch Threshold Adjustment. Range 0 - 0x7.
+  #   # 3,TXFSLSTUNE          - FS/LS Source Impedance Adjustment. Range 0 - 0xF.
+  #   # 4,TXPREEMPAMPTUNE     - HS Transmitter Pre-Emphasis Curent Control. Range 0 - 0x3.
+  #   # 5,TXPREEMPPULSETUNE   - HS Transmitter Pre-Emphasis Duration Control. Range: 0 - 0x1.
+  #   # 6,TXRISETUNE          - HS Transmitter Rise/Fall Time Adjustment. Range: 0 - 0x3.
+  #   # 7,TXVREFTUNE          - HS DC Voltage Level Adjustment. Range 0 - 0xF.
+  #   # 8,TXHSXVTUNE          - Transmitter High-Speed Crossover Adjustment. Range 0 - 0x3.
+  #   # 9,TXRESTUNE           - USB Source Impedance Adjustment. Range 0 - 0x3.
+  #   #Controller0 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port1 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port2 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port3 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port4 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port5 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller2 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Usb 3 PHY Parameters
+  #   # 1,TX_TERM_CTRL        - Tx term control. Range 0 - 0x7.
+  #   # 2,RX_TERM_CTRL        - Rx term control. Range 0 - 0x7.
+  #   # 3,TX_VBOOST_LVL_EN    - Enable override value for tx_vboost_lvl. Range 0 - 0x1.
+  #   # 4,TX_VBOOST_LVL       - Override value for tx_vboost_lvl. Range 0 - 0x7.
+  #   #Controller0 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port1 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller2 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #BatteryChargerEnable
+  #   0x00, \
+  #   #PhyP3CpmP4Support
+  #   0x00, \
+  #   #ComboPhyStaticConfig0 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #ComboPhyStaticConfig1 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #Reserved
+  #   0x00, 0x00, 0x00, 0x00 }
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbYTOemConfigurationTable|{0x0}|VOID*|0x0003F386
+  #   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbYTOemConfigurationTable|{ \
+  #   #Version_Major, Minor, Third, TableLength
+  #   0x0D, 0x09, 0x01, 0x58, \
+  #   #Usb 2.0 PHY Parameters
+  #   # 1,COMPDISTUNE         - Disconnect Threshold Adjustment. Range 0 - 0x7.
+  #   # 2,PLLBTUNE            - PLL Bandwidth Adjustment. Range 0 - 0x1.
+  #   # 3,PLLITUNE            - PLL Integral Path Tune. Range 0 - 0x3.
+  #   # 4,PLLPTUNE            - PLL Proportional Path Tune. Range 0 - 0xF.
+  #   # 5,SQRXTUNE            - Squelch Threshold Adjustment. Range 0 - 0x7.
+  #   # 6,TXFSLSTUNE          - FS/LS Source Impedance Adjustment. Range 0 - 0xF.
+  #   # 7,TXPREEMPAMPTUNE     - HS Transmitter Pre-Emphasis Curent Control. Range 0 - 0x3.
+  #   # 8,TXPREEMPPULSETUNE   - HS Transmitter Pre-Emphasis Duration Control. Range: 0 - 0x1.
+  #   # 9,TXRISETUNE          - HS Transmitter Rise/Fall Time Adjustment. Range: 0 - 0x3.
+  #   # 10,TXVREFTUNE         - HS DC Voltage Level Adjustment. Range 0 - 0xF.
+  #   # 11,TXHSXVTUNE         - Transmitter High-Speed Crossover Adjustment. Range 0 - 0x3.
+  #   # 12,TXRESTUNE          - USB Source Impedance Adjustment. Range 0 - 0x3.
+  #   #Controller0 Port0 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x03, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller0 Port1 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x03, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller1 Port0 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x03, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller1 Port1 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x03, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller2 Port0 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x03, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Usb 3 PHY Parameters
+  #   # 1,TX_TERM_CTRL        - Tx term control. Range 0 - 0x7.
+  #   # 2,RX_TERM_CTRL        - Rx term control. Range 0 - 0x7.
+  #   # 3,TX_VBOOST_LVL_EN    - Enable override value for tx_vboost_lvl. Range 0 - 0x1.
+  #   # 4,TX_VBOOST_LVL       - Override value for tx_vboost_lvl. Range 0 - 0x7.
+  #   #Controller0 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller0 Port1 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port1 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #BatteryChargerEnable
+  #   0x00, \
+  #   #PhyP3CpmP4Support
+  #   0x00, \
+  #   #ComboPhyStaticConfig0 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #ComboPhyStaticConfig1 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #ComboPhyStaticConfig2 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #Reserved
+  #   0x00, 0x00, 0x00 }
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbTCOemConfigurationTable|{0x0}|VOID*|0x0003F387
+  #   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbTCOemConfigurationTable|{ \
+  #   #Version_Major, Minor, TableLength, Reserve
+  #   0x0F, 0x01, 0x60, 0x00, \
+  #   #Usb 2.0 PHY Parameters
+  #   # 1,COMPDISTUNE         - Disconnect Threshold Adjustment. Range 0 - 0x7.
+  #   # 2,PLLBTUNE            - PLL Bandwidth Adjustment. Range 0 - 0x1.
+  #   # 3,PLLITUNE            - PLL Integral Path Tune. Range 0 - 0x3.
+  #   # 4,PLLPTUNE            - PLL Proportional Path Tune. Range 0 - 0xF.
+  #   # 5,SQRXTUNE            - Squelch Threshold Adjustment. Range 0 - 0x7.
+  #   # 6,TXFSLSTUNE          - FS/LS Source Impedance Adjustment. Range 0 - 0xF.
+  #   # 7,TXPREEMPAMPTUNE     - HS Transmitter Pre-Emphasis Curent Control. Range 0 - 0x3.
+  #   # 8,TXPREEMPPULSETUNE   - HS Transmitter Pre-Emphasis Duration Control. Range: 0 - 0x1.
+  #   # 9,TXRISETUNE          - HS Transmitter Rise/Fall Time Adjustment. Range: 0 - 0x3.
+  #   # 10,TXVREFTUNE         - HS DC Voltage Level Adjustment. Range 0 - 0xF.
+  #   # 11,TXHSXVTUNE         - Transmitter High-Speed Crossover Adjustment. Range 0 - 0x3.
+  #   # 12,TXRESTUNE          - USB Source Impedance Adjustment. Range 0 - 0x3.
+  #   #Controller0 Port0 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x02, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller0 Port1 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x02, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller0 Port2 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x02, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller0 Port3 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x02, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller0 Port4 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x02, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Controller1 Port0 Default
+  #   0x03, 0x01, 0x00, 0x0E, 0x03, 0x02, 0x00, 0x00, 0x01, 0x03, 0x03, 0x01, \
+  #   #Usb 3 PHY Parameters
+  #   # 1,TX_TERM_CTRL        - Tx term control. Range 0 - 0x7.
+  #   # 2,RX_TERM_CTRL        - Rx term control. Range 0 - 0x7.
+  #   # 3,TX_VBOOST_LVL_EN    - Enable override value for tx_vboost_lvl. Range 0 - 0x1.
+  #   # 4,TX_VBOOST_LVL       - Override value for tx_vboost_lvl. Range 0 - 0x7.
+  #   #Controller0 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller0 Port1 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #BatteryChargerEnable
+  #   0x00, \
+  #   #PhyP3CpmP4Support
+  #   0x00, \
+  #   #ComboPhyStaticConfig0 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #ComboPhyStaticConfig1 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #ComboPhyStaticConfig2 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #Reserved
+  #   0x00, 0x00, 0x00 }
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbKMOemConfigurationTable|{0x0}|VOID*|0x0003F388
+  #   gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbKMOemConfigurationTable|{ \
+  #   #Version_Major, Minor, Reserve, Reserve
+  #   0x0D, 0x0E, 0x00, 0x00, \
+  #   #Usb 2.0 PHY Parameters
+  #   # 1,COMPDISTUNE         - Disconnect Threshold Adjustment. Range 0 - 0x7.
+  #   # 2,SQRXTUNE            - Squelch Threshold Adjustment. Range 0 - 0x7.
+  #   # 3,TXFSLSTUNE          - FS/LS Source Impedance Adjustment. Range 0 - 0xF.
+  #   # 4,TXPREEMPAMPTUNE     - HS Transmitter Pre-Emphasis Curent Control. Range 0 - 0x3.
+  #   # 5,TXPREEMPPULSETUNE   - HS Transmitter Pre-Emphasis Duration Control. Range: 0 - 0x1.
+  #   # 6,TXRISETUNE          - HS Transmitter Rise/Fall Time Adjustment. Range: 0 - 0x3.
+  #   # 7,TXVREFTUNE          - HS DC Voltage Level Adjustment. Range 0 - 0xF.
+  #   # 8,TXHSXVTUNE          - Transmitter High-Speed Crossover Adjustment. Range 0 - 0x3.
+  #   # 9,TXRESTUNE           - USB Source Impedance Adjustment. Range 0 - 0x3.
+  #   #Controller0 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller0 Port1 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller0 Port2 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller0 Port3 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port1 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller1 Port2 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Controller2 Port0 Default
+  #   0x01, 0x03, 0x03, 0x02, 0x00, 0x02, 0x03, 0x03, 0x02, \
+  #   #Usb 3 PHY Parameters
+  #   # 1,TX_TERM_CTRL        - Tx term control. Range 0 - 0x7.
+  #   # 2,RX_TERM_CTRL        - Rx term control. Range 0 - 0x7.
+  #   # 3,TX_VBOOST_LVL_EN    - Enable override value for tx_vboost_lvl. Range 0 - 0x1.
+  #   # 4,TX_VBOOST_LVL       - Override value for tx_vboost_lvl. Range 0 - 0x7.
+  #   #Controller0 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller0 Port1 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port0 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #Controller1 Port1 Default
+  #   0x02, 0x02, 0x00, 0x05, \
+  #   #BatteryChargerEnable
+  #   0x00, \
+  #   #PhyP3CpmP4Support
+  #   0x00, \
+  #   #ComboPhyStaticConfig0 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #ComboPhyStaticConfig1 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #ComboPhyStaticConfig2 0-Type C, 1- USB only mode, 2- DP only mode, 3- USB + DP
+  #   0x00, \
+  #   #Reserved
+  #   0x00, 0x00, 0x00 }
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcEnable|TRUE|BOOLEAN|0x0003F400
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClockDriveStrength|0x00|UINT8|0x0003F401
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClk0|TRUE|BOOLEAN|0x0003F402
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClk1|TRUE|BOOLEAN|0x0003F403
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClkRunEn|TRUE|BOOLEAN|0x0003F404
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdToggleAllPwrGoodOnCf9|FALSE|BOOLEAN|0x0003F405
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClockDriveStrengthRiseTime|0x08|UINT8|0x0003F406
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClockDriveStrengthFallTime|0x08|UINT8|0x0003F407
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcClockDriveStrengthEnable|FALSE|BOOLEAN|0x0003F408
+
+
+  ### @brief SD card mode
+  ### @details Selects the operational mode for the Secure Digital (SD) controller.
+  ### @li 0 - Disabled
+  ### @li 1 - SD 2.0 mode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdConfig|0x00|UINT8|0x0003F501
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdClockMultiplier|FALSE|BOOLEAN|0x0003F502
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdDbgConfig|0x00|UINT8|0x0003F503
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchiLa1MTraceMemoryEn|FALSE|BOOLEAN|0x0003F504
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchiLa1MTraceMemoryBase|0|UINT32|0x0003F505
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcEnable|0x00|UINT8|0x0003F601
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcDriverType|0x01|UINT8|0x0003F602
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcBoot|FALSE|BOOLEAN|0x0003F603
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcAdma2Support|TRUE|BOOLEAN|0x0003F604
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcAdmaSupport|TRUE|BOOLEAN|0x0003F605
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcSdmaSupport|TRUE|BOOLEAN|0x0003F606
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcA64bSupport|TRUE|BOOLEAN|0x0003F607
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcD3Support|FALSE|BOOLEAN|0x0003F608
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchMiscModernStanbyEnable|FALSE|BOOLEAN|0x0003F609
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcType|0x09|UINT8|0x0003F60A
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbeMdio0|FALSE|BOOLEAN|0x0003F710
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbeMdio1|FALSE|BOOLEAN|0x0003F711
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbeSfp|FALSE|BOOLEAN|0x0003F712
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0ConfigEn|FALSE|BOOLEAN|0x0003F713
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1ConfigEn|FALSE|BOOLEAN|0x0003F714
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort2ConfigEn|FALSE|BOOLEAN|0x0003F715
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort3ConfigEn|FALSE|BOOLEAN|0x0003F716
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort4ConfigEn|FALSE|BOOLEAN|0x0003F717
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort5ConfigEn|FALSE|BOOLEAN|0x0003F718
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort6ConfigEn|FALSE|BOOLEAN|0x0003F719
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort7ConfigEn|FALSE|BOOLEAN|0x0003F71A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0Table|{0x0}|VOID*|0x0003F71B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1Table|{0x0}|VOID*|0x0003F71C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort2Table|{0x0}|VOID*|0x0003F71D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort3Table|{0x0}|VOID*|0x0003F71E
+  #{0x01, PortConfig, Speed, Type, MdioId, MdioResetType, ResetGpio, ResetI2C, SfpI2c, TX_FAULT, RS, Mod_ABS, Rx_LOS, SfpGpioMask, TwiAddress, TwiBus, RedriverEn, 0x00, 0x00, 0x00, RedriverModel, RedriverInterface, RedriverAddress, RedriverLane, GpioPad, MdioPad, I2cPac, 0x00}
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0MAC|0x00|UINT64|0x0003F720
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1MAC|0x00|UINT64|0x0003F721
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort2MAC|0x00|UINT64|0x0003F722
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort3MAC|0x00|UINT64|0x0003F723
+  #XGBE_LED_GPIO
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0Led1Gpio|0x0A|UINT8|0x0003F724
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort0Led2Gpio|0x5B|UINT8|0x0003F725
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1Led1Gpio|0x90|UINT8|0x0003F726
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbePort1Led2Gpio|0x9D|UINT8|0x0003F727
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdHwMonitorEnable|0x00|UINT8|0x0003F801
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdHwmFchtsiAutoPoll|0x00|UINT8|0x0003F802
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdWifiWOLEn|TRUE|BOOLEAN|0x0003F901
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdWifiWOBEn|TRUE|BOOLEAN|0x0003F902
+
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsb4Rt0En|TRUE|BOOLEAN|0x0003FA01
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsb4Rt1En|TRUE|BOOLEAN|0x0003FA02
+
+  ### @brief SMBus special SSID
+  ### @details This item specifies the SMBus controller Sub-System ID (SSID).
+  ### Some customers may wish to set a specific SSID so that their driver or application
+  ### can invoke special features. A value of zero will indicate that the normal
+  ###  hardware fused value should be used.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmbusSsid|0x00000000|UINT32|0x0003FF01
+
+  ### @brief SATA special SSID
+  ### @details This item specifies the SATA controller Sub-System ID (SSID).
+  ### Some customers may wish to set a specific SSID so that their driver or application
+  ### can invoke special features. A value of zero will indicate that the normal
+  ###  hardware fused value should be used.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataAhciSsid|0x00000000|UINT32|0x0003FF02
+
+  ### @brief SATA-Raid special SSID
+  ### @details This item specifies the SATA controller Sub-System ID (SSID) when
+  ### @see SataClass SataClass configured for the Raid operational mode.
+  ### Some customers may wish to set a specific SSID so that their driver or application
+  ### can invoke special features. A value of zero will indicate that the normal
+  ###  hardware fused value should be used.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataRaidSsid|0x00000000|UINT32|0x0003FF03
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataRaid5Ssid|0x00000000|UINT32|0x0003FF04
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataIdeSsid|0x00000000|UINT32|0x0003FF05
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEhciSsid|0x00000000|UINT32|0x0003FF06
+
+  ### @brief USB-3 special SSID
+  ### @details This item specifies the USB-3 controller Sub-System ID (SSID).
+  ### Some customers may wish to set a specific SSID so that their driver or application
+  ### can invoke special features. A value of zero will indicate that the normal
+  ###  hardware fused value should be used.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciSsid|0x00000000|UINT32|0x0003FF07
+
+  ### @brief LPC special SSID
+  ### @details This item specifies the LPC bridge controller Sub-System ID (SSID).
+  ### Some customers may wish to set a specific SSID so that their driver or application
+  ### can invoke special features. A value of zero will indicate that the normal
+  ###  hardware fused value should be used.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLpcSsid|0x00000000|UINT32|0x0003FF08
+
+  ### @brief SD special SSID
+  ### @details This item specifies the Secure Digital (SD) card Sub-System ID (SSID).
+  ### Some customers may wish to set a specific SSID so that their driver or application
+  ### can invoke special features. A value of zero will indicate that the normal
+  ###  hardware fused value should be used.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSdSsid|0x00000000|UINT32|0x0003FF09
+  ## move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciECCDedErrRptEn|FALSE|BOOLEAN|0x0003FF0A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci0ForceGen1|FALSE|BOOLEAN|0x0003FF0B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhci1Disable31Port|FALSE|BOOLEAN|0x0003FF0C
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTDeviceD3ColdMap|0x7FFFFFFF|UINT32|0x0003FF80
+
+  ### @brief FCH device selection
+  ### @details This control selects which FCH devices are to be enabled during
+  ###  runtime. This is a bit-mapped value where each bit represents an FCH device.
+  ###  A bit=1 indicates the device is enabled/active; a bit=0 indicates the device
+  ###  is turned off.
+  ###  Bits marked as 'read-only' or 'Reserved' cannot be modified via this control.
+  ### @li BITs0-4  - Reserved
+  ### @li BIT5 - I2C0
+  ### @li BIT6 - I2C1
+  ### @li BIT7 - I2C2
+  ### @li BIT8 - I2C3
+  ### @li BIT9 - I2C4
+  ### @li BIT10 - I2C5
+  ### @li BIT11 - UART0
+  ### @li BIT12 - UART1
+  ### @li BIT13 - I3C1
+  ### @li BIT14 - I3C2
+  ### @li BIT15 - I3C3
+  ### @li BIT16 - UART2
+  ### @li BITs17-20  - Reserved
+  ### @li BIT21 - I3C0
+  ### @li BITs22-25  - Reserved
+  ### @li BIT26 - UART3
+  ### @li BIT27 - ESPI
+  ### @li BIT28 - Reserved
+  ### @li BIT29 - HFP
+  ### @li BIT30 - HID0
+  ### @li BIT31 - HID2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTDeviceEnableMap|0x00000000|UINT32|0x0003FF81
+
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTSataDevSlpPort0S5Pin|0x00|UINT8|0x0003FF82
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTSataDevSlpPort1S5Pin|0x00|UINT8|0x0003FF83
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchAl2AhbLegacyUartIoEnable|0xE400|UINT16|0x0003FF84
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTD3ColdEnableMap|0x040119E0|UINT32|0x0003FF85
+  ## move to external
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.FchUart0LegacyEnable|0x00|UINT8|0x0003FF86                  # indicate the IO range assigned to UART0:
+                                                                                                  # 0x00: Disabled
+                                                                                                  # 0x01: 0x2E8-0x2EF
+                                                                                                  # 0x02: 0x2F8-0x2FF
+                                                                                                  # 0x03: 0x3E8-0x3EF
+                                                                                                  # 0x04: 0x3F8-0x3FF
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.FchUart1LegacyEnable|0x00|UINT8|0x0003FF87                  # indicate the IO range assigned to UART1:
+                                                                                                  # 0x00: Disabled
+                                                                                                  # 0x01: 0x2E8-0x2EF
+                                                                                                  # 0x02: 0x2F8-0x2FF
+                                                                                                  # 0x03: 0x3E8-0x3EF
+                                                                                                  # 0x04: 0x3F8-0x3FF
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.FchUart2LegacyEnable|0x00|UINT8|0x0003FF88                  # indicate the IO range assigned to UART2:
+                                                                                                  # 0x00: Disabled
+                                                                                                  # 0x01: 0x2E8-0x2EF
+                                                                                                  # 0x02: 0x2F8-0x2FF
+                                                                                                  # 0x03: 0x3E8-0x3EF
+                                                                                                  # 0x04: 0x3F8-0x3FF
+  #gEfiAmdAgesaModulePkgTokenSpaceGuid.FchUart3LegacyEnable|0x00|UINT8|0x0003FF89                  # indicate the IO range assigned to UART3:
+                                                                                                  # 0x00: Disabled
+                                                                                                  # 0x01: 0x2E8-0x2EF
+                                                                                                  # 0x02: 0x2F8-0x2FF
+                                                                                                  # 0x03: 0x3E8-0x3EF
+                                                                                                  # 0x04: 0x3F8-0x3FF
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchSataDummyD3ColdSupport|FALSE|BOOLEAN|0x0003FF8A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchSxEntryXhciPmeEnWA|TRUE|BOOLEAN|0x0003FF8C            # WA to enable XHCI PME when entering S3/S4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchI3CMode|0x00|UINT8|0x0003FF8F                            # I3CMode - BIT[3:0] for channel [3:0], 0:I3C,1:I2C
+
+  ### @brief FCH device selection extension
+  ### @details This control selects which FCH devices are to be enabled during
+  ###  runtime. This is a bit-mapped value where each bit represents an FCH device.
+  ###  A bit=1 indicates the device is enabled/active; a bit=0 indicates the device
+  ###  is turned off.
+  ###  Bits marked as 'read-only' or 'Reserved' cannot be modified via this control.
+  ### @li BIT00 - I3C0 I3C Mode
+  ### @li BIT01 - I3C1 I3C Mode
+  ### @li BIT02 - I3C2 I3C Mode
+  ### @li BIT03 - I3C3 I3C Mode
+  ### @li BIT04-31 - Reserved
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTDeviceEnableMapEx|0x00000000|UINT32|0x0003FF90
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchPmCtrlSlpIoWrWidth|0x00|UINT8|0x0003FF91              # IO write Width to AcpiPm1CntBlk for sleep entry
+                                                                                                  # 0x00 : 16 bits (default)
+                                                                                                  # 0x01 : 8 bits
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchI2cI3cEarlyInit|FALSE|BOOLEAN|0x0003FF92              # Init I2C/I3C in PEI phase
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchCfgSmiCmdPortAddr|0xB0|UINT16|0x0003FFC0
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchApuRasSmiSupport|FALSE|BOOLEAN|0x0003FFC1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSpiCustomConfig|FALSE|BOOLEAN|0x800FC006
+
+ #
+ # Promontory
+ #
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTXhciGen1|0x01|UINT8|0x0003EF00
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTXhciGen2|0x01|UINT8|0x0003EF01
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTAOAC|0x00|UINT8|0x0003EF02
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTHW_LPM|0x01|UINT8|0x0003EF03
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTDbC|0x01|UINT8|0x0003EF04
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTXHC_PME|0x01|UINT8|0x0003EF05
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataMode|0x00|UINT8|0x0003EF08
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggresiveDevSlpP0|0x00|UINT8|0x0003EF09
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggresiveDevSlpP1|0x00|UINT8|0x0003EF0A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataAggrLinkPmCap|0x01|UINT8|0x0003EF0B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPscCap|0x01|UINT8|0x0003EF0C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataSscCap|0x01|UINT8|0x0003EF0D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataMsiCapability|0x01|UINT8|0x0003EF0E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPortMdPort0|0x00|UINT8|0x0003EF0F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPortMdPort1|0x00|UINT8|0x0003EF10
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataHotPlug|0x00|UINT8|0x0003EF11
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsbEqualization4|0x00|UINT8|0x0003EF12
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsbRedriver|0x00|UINT8|0x0003EF13
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb31P0|0x01|UINT8|0x0003EF14
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb31P1|0x01|UINT8|0x0003EF15
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P0|0x01|UINT8|0x0003EF16
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P1|0x01|UINT8|0x0003EF17
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P2|0x01|UINT8|0x0003EF18
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P3|0x01|UINT8|0x0003EF19
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P4|0x01|UINT8|0x0003EF1A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb30P5|0x01|UINT8|0x0003EF1B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P0|0x01|UINT8|0x0003EF1C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P1|0x01|UINT8|0x0003EF1D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P2|0x01|UINT8|0x0003EF1E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P3|0x01|UINT8|0x0003EF1F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P4|0x01|UINT8|0x0003EF20
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTUsb20P5|0x01|UINT8|0x0003EF21
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb31P0|0x01|UINT8|0x0003EF22
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb31P1|0x01|UINT8|0x0003EF23
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb30P0|0x01|UINT8|0x0003EF24
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb30P1|0x01|UINT8|0x0003EF25
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P0|0x01|UINT8|0x0003EF26
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P1|0x01|UINT8|0x0003EF27
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P2|0x01|UINT8|0x0003EF28
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P3|0x01|UINT8|0x0003EF29
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P4|0x01|UINT8|0x0003EF2A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm2Usb20P5|0x01|UINT8|0x0003EF2B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb31P0|0x01|UINT8|0x0003EF2C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb31P1|0x01|UINT8|0x0003EF2D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb30P0|0x01|UINT8|0x0003EF2E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P0|0x01|UINT8|0x0003EF2F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P1|0x01|UINT8|0x0003EF30
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P2|0x01|UINT8|0x0003EF31
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P3|0x01|UINT8|0x0003EF32
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P4|0x01|UINT8|0x0003EF33
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTProm1Usb20P5|0x01|UINT8|0x0003EF34
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort0Enable|0x01|UINT8|0x0003EF35
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort1Enable|0x01|UINT8|0x0003EF36
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort2Enable|0x01|UINT8|0x0003EF37
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort3Enable|0x01|UINT8|0x0003EF38
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort4Enable|0x01|UINT8|0x0003EF39
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort5Enable|0x01|UINT8|0x0003EF3A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort6Enable|0x01|UINT8|0x0003EF3B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTSataPort7Enable|0x01|UINT8|0x0003EF3C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort0Enable|0x01|UINT8|0x0003EF3D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort1Enable|0x01|UINT8|0x0003EF3E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort2Enable|0x01|UINT8|0x0003EF3F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort3Enable|0x01|UINT8|0x0003EF40
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort4Enable|0x01|UINT8|0x0003EF41
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort5Enable|0x01|UINT8|0x0003EF42
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort6Enable|0x01|UINT8|0x0003EF43
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPciePort7Enable|0x01|UINT8|0x0003EF44
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk0ForceOn|0x00|UINT8|0x0003EF45
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk1ForceOn|0x00|UINT8|0x0003EF46
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk2ForceOn|0x00|UINT8|0x0003EF47
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk3ForceOn|0x00|UINT8|0x0003EF48
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk4ForceOn|0x00|UINT8|0x0003EF49
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk5ForceOn|0x00|UINT8|0x0003EF4A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk6ForceOn|0x00|UINT8|0x0003EF4B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTGppClk7ForceOn|0x00|UINT8|0x0003EF4C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb31P0|0x01|UINT8|0x0003EF4D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb31P1|0x01|UINT8|0x0003EF4E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb30P0|0x01|UINT8|0x0003EF4F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb30P1|0x01|UINT8|0x0003EF50
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb30P2|0x01|UINT8|0x0003EF51
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb30P3|0x01|UINT8|0x0003EF52
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P0|0x01|UINT8|0x0003EF53
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P1|0x01|UINT8|0x0003EF54
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P2|0x01|UINT8|0x0003EF55
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P3|0x01|UINT8|0x0003EF56
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P4|0x01|UINT8|0x0003EF57
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPro460Usb20P5|0x01|UINT8|0x0003EF58
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTLock|0x01|UINT8|0x0003EF59
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P000SlewRateDelay|0x01|UINT8|0x0003EF5A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2PAPCSlewRateDelay|0x01|UINT8|0x0003EF5B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P2P6SlewRateDelay|0x01|UINT8|0x0003EF5C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P4P8SlewRateDelay|0x01|UINT8|0x0003EF5D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P005SlewRateDelay|0x01|UINT8|0x0003EF5E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2PBPDSlewRateDelay|0x01|UINT8|0x0003EF5F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P3P7SlewRateDelay|0x01|UINT8|0x0003EF60
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P1P9SlewRateDelay|0x01|UINT8|0x0003EF61
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P000DrivingCurrent|0x07|UINT8|0x0003EF62
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2PAPCDrivingCurrent|0x07|UINT8|0x0003EF63
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P2P6DrivingCurrent|0x07|UINT8|0x0003EF64
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P4P8DrivingCurrent|0x07|UINT8|0x0003EF65
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P005DrivingCurrent|0x07|UINT8|0x0003EF66
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2PBPDDrivingCurrent|0x07|UINT8|0x0003EF67
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P3P7DrivingCurrent|0x07|UINT8|0x0003EF68
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P1P9DrivingCurrent|0x07|UINT8|0x0003EF69
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P001DisconnectWindow|0x01|UINT8|0x0003EF6A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P2P8DisconnectWindow|0x01|UINT8|0x0003EF6B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P4PADisconnectWindow|0x01|UINT8|0x0003EF6C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P6PCDisconnectWindow|0x01|UINT8|0x0003EF6D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P000DisconnectWindow|0x01|UINT8|0x0003EF6E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P3P9DisconnectWindow|0x01|UINT8|0x0003EF6F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P5PBDisconnectWindow|0x01|UINT8|0x0003EF70
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdLPPTU2P7PDDisconnectWindow|0x01|UINT8|0x0003EF71
+#XGBE Port specific SFP pcds
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbeSfp0|FALSE|BOOLEAN|0x0003EF72
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbeSfp1|FALSE|BOOLEAN|0x0003EF73

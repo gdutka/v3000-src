@@ -1,0 +1,561 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+Scope (\_GPE) {
+    //
+    // Smbus IO Expander 0 Interrupt Event Method
+    //
+    Method (SIE0, 0, Notserialized) {
+        CpmDebugPrint ("  KER-ASL-\\_GPE.SIE0 Start\n", 0, 0, 0, 0, 0, 0)
+        //
+        // Entry Callout Method before handling this event
+        //
+        If (CondRefOf (\_GPE.BIE0)) {
+            CpmDebugPrint ("  KER-ASL-Callout \\_GPE.BIE0\n", 0, 0, 0, 0, 0, 0)
+            \_GPE.BIE0 ()
+        }
+
+        //
+        // Check GPIO Input Pin Status
+        //
+        Store (CpmCheckExpanderInputEvent (0), Local0)
+
+        //
+        // GPIO Input Event Callout Method
+        //
+        If (LEqual (And (Local0, 0x0001), 0x0001)) {                      // IO Expander 0 Port 0 Gpio 0
+            If (CondRefOf (\_GPE.SP00)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP00\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP00 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0002), 0x0002)) {                      // IO Expander 0 Port 0 Gpio 1
+            If (CondRefOf (\_GPE.SP01)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP01\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP01 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0004), 0x0004)) {                      // IO Expander 0 Port 0 Gpio 2
+            If (CondRefOf (\_GPE.SP02)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP02\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP02 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0008), 0x0008)) {                      // IO Expander 0 Port 0 Gpio 3
+            If (CondRefOf (\_GPE.SP03)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP03\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP03 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0010), 0x0010)) {                      // IO Expander 0 Port 0 Gpio 4
+            If (CondRefOf (\_GPE.SP04)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP04\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP04 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0020), 0x0020)) {                      // IO Expander 0 Port 0 Gpio 5
+            If (CondRefOf (\_GPE.SP05)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP05\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP05 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0040), 0x0040)) {                      // IO Expander 0 Port 0 Gpio 6
+            If (CondRefOf (\_GPE.SP06)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP06\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP06 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0080), 0x0080)) {                      // IO Expander 0 Port 0 Gpio 7
+            If (CondRefOf (\_GPE.SP07)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP07\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP07 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0100), 0x0100)) {                      // IO Expander 0 Port 1 Gpio 0
+            If (CondRefOf (\_GPE.SP10)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP10\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP10 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0200), 0x0200)) {                      // IO Expander 0 Port 1 Gpio 1
+            If (CondRefOf (\_GPE.SP11)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP11\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP11 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0400), 0x0400)) {                      // IO Expander 0 Port 1 Gpio 2
+            If (CondRefOf (\_GPE.SP12)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP12\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP12 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0800), 0x0800)) {                      // IO Expander 0 Port 1 Gpio 3
+            If (CondRefOf (\_GPE.SP13)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP13\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP13 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x1000), 0x1000)) {                      // IO Expander 0 Port 1 Gpio 4
+            If (CondRefOf (\_GPE.SP14)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP14\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP14 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x2000), 0x2000)) {                      // IO Expander 0 Port 1 Gpio 5
+            If (CondRefOf (\_GPE.SP15)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP15\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP15 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x4000), 0x4000)) {                      // IO Expander 0 Port 1 Gpio 6
+            If (CondRefOf (\_GPE.SP16)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP16\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP16 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x8000), 0x8000)) {                      // IO Expander 0 Port 1 Gpio 7
+            If (CondRefOf (\_GPE.SP17)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP17\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP17 ()
+            }
+        }
+
+        //
+        // Exit Callout Method after handling this event
+        //
+        If (CondRefOf (\_GPE.AIE0)) {
+            CpmDebugPrint ("  KER-ASL-Callout \\_GPE.AIE0\n", 0, 0, 0, 0, 0, 0)
+            \_GPE.AIE0 ()
+        }
+        CpmDebugPrint ("  KER-ASL-\\_GPE.SIE0 End\n", 0, 0, 0, 0, 0, 0)
+    }
+
+    //
+    // Smbus IO Expander 1 Interrupt Event Method
+    //
+    Method (SIE1, 0, Notserialized) {
+        CpmDebugPrint ("  KER-ASL-\\_GPE.SIE1 Start\n", 0, 0, 0, 0, 0, 0)
+        //
+        // Entry Callout Method before handling this event
+        //
+        If (CondRefOf (\_GPE.BIE1)) {
+            CpmDebugPrint ("  KER-ASL-Callout \\_GPE.BIE1\n", 0, 0, 0, 0, 0, 0)
+            \_GPE.BIE1 ()
+        }
+
+        //
+        // Check GPIO Input Pin Status
+        //
+        Store (CpmCheckExpanderInputEvent (1), Local0)
+
+        //
+        // GPIO Input Event Callout Method
+        //
+        If (LEqual (And (Local0, 0x0001), 0x0001)) {                      // IO Expander 1 Port 0 Gpio 0
+            If (CondRefOf (\_GPE.SP20)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP20\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP20 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0002), 0x0002)) {                      // IO Expander 1 Port 0 Gpio 1
+            If (CondRefOf (\_GPE.SP21)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP21\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP21 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0004), 0x0004)) {                      // IO Expander 1 Port 0 Gpio 2
+            If (CondRefOf (\_GPE.SP22)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP22\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP22 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0008), 0x0008)) {                      // IO Expander 1 Port 0 Gpio 3
+            If (CondRefOf (\_GPE.SP23)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP23\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP23 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0010), 0x0010)) {                      // IO Expander 1 Port 0 Gpio 4
+            If (CondRefOf (\_GPE.SP24)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP24\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP24 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0020), 0x0020)) {                      // IO Expander 1 Port 0 Gpio 5
+            If (CondRefOf (\_GPE.SP25)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP25\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP25 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0040), 0x0040)) {                      // IO Expander 1 Port 0 Gpio 6
+            If (CondRefOf (\_GPE.SP26)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP26\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP26 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0080), 0x0080)) {                      // IO Expander 1 Port 0 Gpio 7
+            If (CondRefOf (\_GPE.SP27)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP27\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP27 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0100), 0x0100)) {                      // IO Expander 1 Port 1 Gpio 0
+            If (CondRefOf (\_GPE.SP30)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP30\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP30 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0200), 0x0200)) {                      // IO Expander 1 Port 1 Gpio 1
+            If (CondRefOf (\_GPE.SP31)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP31\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP31 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0400), 0x0400)) {                      // IO Expander 1 Port 1 Gpio 2
+            If (CondRefOf (\_GPE.SP32)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP32\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP32 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0800), 0x0800)) {                      // IO Expander 1 Port 1 Gpio 3
+            If (CondRefOf (\_GPE.SP33)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP33\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP33 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x1000), 0x1000)) {                      // IO Expander 1 Port 1 Gpio 4
+            If (CondRefOf (\_GPE.SP34)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP34\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP34 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x2000), 0x2000)) {                      // IO Expander 1 Port 1 Gpio 5
+            If (CondRefOf (\_GPE.SP35)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP35\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP35 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x4000), 0x4000)) {                      // IO Expander 1 Port 1 Gpio 6
+            If (CondRefOf (\_GPE.SP36)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP36\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP36 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x8000), 0x8000)) {                      // IO Expander 1 Port 1 Gpio 7
+            If (CondRefOf (\_GPE.SP37)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP37\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP37 ()
+            }
+        }
+
+        //
+        // Exit Callout Method after handling this event
+        //
+        If (CondRefOf (\_GPE.AIE1)) {
+            CpmDebugPrint ("  KER-ASL-Callout \\_GPE.AIE1\n", 0, 0, 0, 0, 0, 0)
+            \_GPE.AIE1 ()
+        }
+        CpmDebugPrint ("  KER-ASL-\\_GPE.SIE1 End\n", 0, 0, 0, 0, 0, 0)
+    }
+
+    //
+    // Smbus IO Expander 2 Interrupt Event Method
+    //
+    Method (SIE2, 0, Notserialized) {
+        CpmDebugPrint ("  KER-ASL-\\_GPE.SIE2 Start\n", 0, 0, 0, 0, 0, 0)
+        //
+        // Entry Callout Method before handling this event
+        //
+        If (CondRefOf (\_GPE.BIE2)) {
+            CpmDebugPrint ("  KER-ASL-Callout \\_GPE.BIE2\n", 0, 0, 0, 0, 0, 0)
+            \_GPE.BIE2 ()
+        }
+
+        //
+        // Check GPIO Input Pin Status
+        //
+        Store (CpmCheckExpanderInputEvent (2), Local0)
+
+        //
+        // GPIO Input Event Callout Method
+        //
+        If (LEqual (And (Local0, 0x0001), 0x0001)) {                      // IO Expander 2 Port 0 Gpio 0
+            If (CondRefOf (\_GPE.SP40)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP40\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP40 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0002), 0x0002)) {                      // IO Expander 2 Port 0 Gpio 1
+            If (CondRefOf (\_GPE.SP41)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP41\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP41 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0004), 0x0004)) {                      // IO Expander 2 Port 0 Gpio 2
+            If (CondRefOf (\_GPE.SP42)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP42\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP42 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0008), 0x0008)) {                      // IO Expander 2 Port 0 Gpio 3
+            If (CondRefOf (\_GPE.SP43)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP43\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP43 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0010), 0x0010)) {                      // IO Expander 2 Port 0 Gpio 4
+            If (CondRefOf (\_GPE.SP44)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP44\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP44 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0020), 0x0020)) {                      // IO Expander 2 Port 0 Gpio 5
+            If (CondRefOf (\_GPE.SP45)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP45\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP45 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0040), 0x0040)) {                      // IO Expander 2 Port 0 Gpio 6
+            If (CondRefOf (\_GPE.SP46)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP46\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP46 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0080), 0x0080)) {                      // IO Expander 2 Port 0 Gpio 7
+            If (CondRefOf (\_GPE.SP47)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP47\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP47 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0100), 0x0100)) {                      // IO Expander 2 Port 1 Gpio 0
+            If (CondRefOf (\_GPE.SP50)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP50\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP50 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0200), 0x0200)) {                      // IO Expander 2 Port 1 Gpio 1
+            If (CondRefOf (\_GPE.SP51)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP51\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP51 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0400), 0x0400)) {                      // IO Expander 2 Port 1 Gpio 2
+            If (CondRefOf (\_GPE.SP52)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP52\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP52 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0800), 0x0800)) {                      // IO Expander 2 Port 1 Gpio 3
+            If (CondRefOf (\_GPE.SP53)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP53\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP53 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x1000), 0x1000)) {                      // IO Expander 2 Port 1 Gpio 4
+            If (CondRefOf (\_GPE.SP54)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP54\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP54 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x2000), 0x2000)) {                      // IO Expander 2 Port 1 Gpio 5
+            If (CondRefOf (\_GPE.SP55)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP55\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP55 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x4000), 0x4000)) {                      // IO Expander 2 Port 1 Gpio 6
+            If (CondRefOf (\_GPE.SP56)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP56\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP56 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x8000), 0x8000)) {                      // IO Expander 2 Port 1 Gpio 7
+            If (CondRefOf (\_GPE.SP57)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP57\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP57 ()
+            }
+        }
+
+        //
+        // Exit Callout Method after handling this event
+        //
+        If (CondRefOf (\_GPE.AIE2)) {
+            CpmDebugPrint ("  KER-ASL-Callout \\_GPE.AIE2\n", 0, 0, 0, 0, 0, 0)
+            \_GPE.AIE2 ()
+        }
+        CpmDebugPrint ("  KER-ASL-\\_GPE.SIE2 End\n", 0, 0, 0, 0, 0, 0)
+    }
+
+    //
+    // Smbus IO Expander 3 Interrupt Event Method
+    //
+    Method (SIE3, 0, Notserialized) {
+        CpmDebugPrint ("  KER-ASL-\\_GPE.SIE3 Start\n", 0, 0, 0, 0, 0, 0)
+        //
+        // Entry Callout Method before handling this event
+        //
+        If (CondRefOf (\_GPE.BIE3)) {
+            CpmDebugPrint ("  KER-ASL-Callout \\_GPE.BIE3\n", 0, 0, 0, 0, 0, 0)
+            \_GPE.BIE3 ()
+        }
+
+        //
+        // Check GPIO Input Pin Status
+        //
+        Store (CpmCheckExpanderInputEvent (3), Local0)
+
+        //
+        // GPIO Input Event Callout Method
+        //
+        If (LEqual (And (Local0, 0x0001), 0x0001)) {                      // IO Expander 3 Port 0 Gpio 0
+            If (CondRefOf (\_GPE.SP60)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP60\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP60 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0002), 0x0002)) {                      // IO Expander 3 Port 0 Gpio 1
+            If (CondRefOf (\_GPE.SP61)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP61\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP61 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0004), 0x0004)) {                      // IO Expander 3 Port 0 Gpio 2
+            If (CondRefOf (\_GPE.SP62)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP62\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP62 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0008), 0x0008)) {                      // IO Expander 3 Port 0 Gpio 3
+            If (CondRefOf (\_GPE.SP63)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP63\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP63 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0010), 0x0010)) {                      // IO Expander 3 Port 0 Gpio 4
+            If (CondRefOf (\_GPE.SP64)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP64\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP64 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0020), 0x0020)) {                      // IO Expander 3 Port 0 Gpio 5
+            If (CondRefOf (\_GPE.SP65)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP65\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP65 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0040), 0x0040)) {                      // IO Expander 3 Port 0 Gpio 6
+            If (CondRefOf (\_GPE.SP66)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP66\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP66 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0080), 0x0080)) {                      // IO Expander 3 Port 0 Gpio 7
+            If (CondRefOf (\_GPE.SP67)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP67\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP67 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0100), 0x0100)) {                      // IO Expander 3 Port 1 Gpio 0
+            If (CondRefOf (\_GPE.SP70)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP70\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP70 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0200), 0x0200)) {                      // IO Expander 3 Port 1 Gpio 1
+            If (CondRefOf (\_GPE.SP71)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP71\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP71 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0400), 0x0400)) {                      // IO Expander 3 Port 1 Gpio 2
+            If (CondRefOf (\_GPE.SP72)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP72\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP72 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x0800), 0x0800)) {                      // IO Expander 3 Port 1 Gpio 3
+            If (CondRefOf (\_GPE.SP73)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP73\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP73 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x1000), 0x1000)) {                      // IO Expander 3 Port 1 Gpio 4
+            If (CondRefOf (\_GPE.SP74)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP74\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP74 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x2000), 0x2000)) {                      // IO Expander 3 Port 1 Gpio 5
+            If (CondRefOf (\_GPE.SP75)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP75\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP75 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x4000), 0x4000)) {                      // IO Expander 3 Port 1 Gpio 6
+            If (CondRefOf (\_GPE.SP76)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP76\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP76 ()
+            }
+        }
+        If (LEqual (And (Local0, 0x8000), 0x8000)) {                      // IO Expander 3 Port 1 Gpio 7
+            If (CondRefOf (\_GPE.SP77)) {
+                CpmDebugPrint ("  KER-ASL-Callout \\_GPE.SP77\n", 0, 0, 0, 0, 0, 0)
+                \_GPE.SP77 ()
+            }
+        }
+
+        //
+        // Exit Callout Method after handling this event
+        //
+        If (CondRefOf (\_GPE.AIE3)) {
+            CpmDebugPrint ("  KER-ASL-Callout \\_GPE.AIE3\n", 0, 0, 0, 0, 0, 0)
+            \_GPE.AIE3 ()
+        }
+        CpmDebugPrint ("  KER-ASL-\\_GPE.SIE3 End\n", 0, 0, 0, 0, 0, 0)
+    }
+
+    Name (CpmAlibFunctionCReturnBuffer, Buffer (8) {})                        // M4D2
+
+    Method (XL0B, 0, Notserialized) {
+        Store (Buffer (8) {}, Local3)
+        CreateWordField (Local3, 0, CpmAlibStructureSize)         // Buffer Size
+        CreateByteField (Local3, 2, CpmAlibSubFunction)           // DPTCi Sub Function
+        CreateDwordField (Local3, 3, CpmAlibControlValue)         // DPTCi Control Value
+        Store (0, CpmAlibControlValue)
+        Store (7, CpmAlibStructureSize)                           // Size of Buffer
+        Store (0x30, CpmAlibSubFunction)                          // Message ID of core
+        If (CondRefOf (\_SB.ALIB)) {
+            CpmDebugPrint ("  KER-ASL-Call \\_SB.ALIB (0x0C, 0x%X)\n", Local3, 0, 0, 0, 0, 0)
+            Store (\_SB.ALIB (0x0C, Local3), Local4)
+            Store (Local4, CpmAlibFunctionCReturnBuffer)
+            CreateDwordField (CpmAlibFunctionCReturnBuffer, 0, CpmAlibReturnData0)      // ALIB Return Data 0
+            CreateDwordField (CpmAlibFunctionCReturnBuffer, 4, CpmAlibReturnData1)      // ALIB Return Data 1
+            ToInteger (CpmAlibReturnData0, Local0)
+            ToInteger (CpmAlibReturnData1, Local1)
+            CpmDebugPrint ("  KER-ASL-ALIB Return Data (0x%X, 0x%X)\n", Local0, Local1, 0, 0, 0, 0)
+            If (LEqual (Local0, 0)) {
+                If (CondRefOf (\_SB.APAD)) {
+                    Store (Local1, Index (\_SB.APAD.CpmIdleCoreCount, 1))
+                    // Notify Processor Aggregator Device - Processor Utilization Request - 0x80
+                    CpmDebugPrint ("  KER-ASL-Notify \\_SB.APAD 0x80\n", 0, 0, 0, 0, 0, 0)
+                    Notify (\_SB.APAD, 0x80)
+                }
+            } ElseIf (LEqual (Local0, 1)) {
+                // Notify Processor Device - Minimum Excursion - 0x84
+                CpmDebugPrint ("  KER-ASL-Notify \\_SB.APAD 0x84\n", 0, 0, 0, 0, 0, 0)
+                // Notify (\_SB.APAD, 0x84)
+            } ElseIf (LEqual (Local0, 2)) {
+                // Notify Processor Device - Highest Performance Changed - 0x85
+                CpmDebugPrint ("  KER-ASL-Notify \\_SB.APAD 0x85\n", 0, 0, 0, 0, 0, 0)
+                If (CondRefOf (NFPC)) {
+                    NFPC()
+                }
+            }
+        } // End of If (CondRefOf (\_SB.ALIB))
+    } // End of Method (XL0B, 0, Notserialized)
+} // End of Scope (\_GPE)
+

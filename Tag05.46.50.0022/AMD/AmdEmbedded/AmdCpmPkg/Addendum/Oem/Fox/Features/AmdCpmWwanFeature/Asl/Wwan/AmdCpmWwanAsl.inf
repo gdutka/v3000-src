@@ -1,0 +1,21 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmWwanAsl
+  FILE_GUID             = fd195a94-3730-cd78-aefd-55bd9a6f400d
+  MODULE_TYPE           = USER_DEFINED
+  VERSION_STRING        = 1.0
+
+[Sources.common]
+  WwanAsl.asl
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec

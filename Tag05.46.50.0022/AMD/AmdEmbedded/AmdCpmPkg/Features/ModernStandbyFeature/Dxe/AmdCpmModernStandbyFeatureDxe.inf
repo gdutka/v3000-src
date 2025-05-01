@@ -1,0 +1,45 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2017-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmModernStandbyFeatureDxe
+  FILE_GUID             = 24B14CB4-A14A-4e9a-AAD2-853335FA3297
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmModernStandbyFeatureDxeEntryPoint
+
+[Sources.common]
+  AmdCpmModernStandbyFeatureDxe.c
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  AmdCpmBaseLib
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+
+[Protocols]
+  gAmdCpmTableProtocolGuid
+  gAmdCpmOemModsSsdtTableProtocol
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable
+
+
+[Depex]
+ gAmdCpmTableProtocolGuid 

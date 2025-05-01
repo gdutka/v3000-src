@@ -1,0 +1,117 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2018-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPlatformRasRmbDxe
+  FILE_GUID                      = 9DCACA24-81F8-43EC-91CA-25CC68F67583
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdPlatformRasRmbDxeInit
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleRasPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+
+[Sources]
+  AmdApeiBert.c
+  AmdApeiBert.h
+  AmdApeiEinj.c
+  AmdApeiEinj.h
+  AmdApeiErst.c
+  AmdApeiErst.h
+  AmdApeiHest.c
+  AmdApeiHest.h
+  AmdPlatformRasRmbDxe.c
+  AmdPlatformRasRmbDxe.h
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  IoLib
+  PciLib
+  HobLib
+  UefiDriverEntryPoint
+  DebugLib
+  AmdCpmRasLib
+  AmdPspMboxLibV2
+  TimerLib
+
+[Guids]
+  gEfiEventReadyToBootGuid
+  gAmdCpmRasHobGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCcxCfgPFEHEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFchApuRasSmiSupport
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMceSwSmiData
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMcaErrThreshEn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMcaErrThreshCount
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioCorrectedErrThreshEn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioCorrectedErrThreshCount
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioDeferredErrThreshEn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdNbioDeferredErrThreshCount
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPcieAerReportMechanism
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMemPostPackageRepair
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioPoisonConsumption
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCompliantEdkIIAcpiSdtProtocol
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHotPlugHandlingMode
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmEinjSwSmiData
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdAcpiHestTableHeaderOemTableId
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdAcpiBertTableHeaderOemTableId
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdAcpiEinjTableHeaderOemTableId
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmMcaPollInterval
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmNbioPollInterval
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPciePollInterval
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSmiThreshold
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSmiScale
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmThresholdPeriodicSmiEn
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmRasRetryCount
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmEinjTrigErrSwSmiId
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmGhesNotifyType
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieGhesNotifyType
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieRpCorrectedErrorMask
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieRpUnCorrectedErrorMask
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieRpUnCorrectedErrorSeverity
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieDevCorrectedErrorMask
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieDevUnCorrectedErrorMask
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieDevUnCorrectedErrorSeverity
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmCcixGhesCorrectedNotifyType
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmCcixGhesDeferredNotifyType
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmHardPprEnable
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSmiScaleUnit
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSmiPeriod
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmUsbErrPollInterval
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmGhesUnCorrNotifyType
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieUnCorrGhesNotifyType
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmEinjBeginInjOptSwSmiData
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmEinjEndOptSwSmiData
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmHestDmcStrucEn
+
+[Protocols]
+  gAmdPlatformApeiDataProtocolGuid        #PRODUCED
+  gEfiAcpiTableProtocolGuid               #CONSUME
+  gEfiAcpiSdtProtocolGuid                 #CONSUME
+  gAmdRasApeiRmbProtocolGuid              #CONSUME
+  gEfiMpServiceProtocolGuid               #CONSUME
+  gAmdNbioPcieAerProtocolGuid             #CONSUME
+  gEfiPciIoProtocolGuid                   #Notify
+  gEfiFirmwareVolume2ProtocolGuid         #CONSUMED
+  gRasOemDimmMapProtocolGuid              #CONSUMED
+  gAmdErrorLogServiceProtocolGuid         #CONSUMED
+  gAmdSocLogicalIdProtocolGuid            #CONSUMED
+  gAmdErrorLogServiceProtocolGuid         #CONSUME
+  gEfiPciEnumerationCompleteProtocolGuid  #CONSUME
+
+[Depex]
+  gAmdRasApeiRmbProtocolGuid
+

@@ -1,0 +1,532 @@
+ SmmSupervisor
+
+ Timestamp is 652656d0 (Wed Oct 11 16:03:28 2023)
+
+ Preferred load address is 0000000000000000
+
+ Start         Length     Name                   Class
+ 0001:00000000 00000ae8H .text                   CODE
+ 0001:00000ae8 00006dccH .text$mn                CODE
+ 0002:00000000 00000300H .data                   DATA
+ 0002:00000300 00000e00H .rdata                  DATA
+ 0002:00001100 0000f1c0H .bss                    DATA
+ 0002:000102c0 00000220H .rdata$voltmd           DATA
+ 0002:000104e0 000000a8H .rdata$zzzdbg           DATA
+ 0003:00000000 000003c0H .pdata                  DATA
+ 0004:00000000 00000348H .xdata                  DATA
+
+  Address         Publics by Value              Rva+Base               Lib:Object
+
+ 0000:00000000       __AbsoluteZero             0000000000000000     <absolute>
+ 0000:00000000       __arm64x_extra_rfe_table   0000000000000000     <absolute>
+ 0000:00000000       __arm64x_extra_rfe_table_size 0000000000000000     <absolute>
+ 0000:00000000       __arm64x_native_entrypoint 0000000000000000     <absolute>
+ 0000:00000000       __arm64x_redirection_metadata 0000000000000000     <absolute>
+ 0000:00000000       __arm64x_redirection_metadata_count 0000000000000000     <absolute>
+ 0000:00000000       __dynamic_value_reloc_table 0000000000000000     <absolute>
+ 0000:00000000       __enclave_config           0000000000000000     <absolute>
+ 0000:00000000       __guard_check_icall_a64n_fptr 0000000000000000     <absolute>
+ 0000:00000000       __guard_eh_cont_count      0000000000000000     <absolute>
+ 0000:00000000       __guard_eh_cont_table      0000000000000000     <absolute>
+ 0000:00000000       __guard_fids_count         0000000000000000     <absolute>
+ 0000:00000000       __guard_fids_table         0000000000000000     <absolute>
+ 0000:00000000       __guard_flags              0000000000000000     <absolute>
+ 0000:00000000       __guard_iat_count          0000000000000000     <absolute>
+ 0000:00000000       __guard_iat_table          0000000000000000     <absolute>
+ 0000:00000000       __guard_longjmp_count      0000000000000000     <absolute>
+ 0000:00000000       __guard_longjmp_table      0000000000000000     <absolute>
+ 0000:00000000       __hybrid_auxiliary_delayload_iat 0000000000000000     <absolute>
+ 0000:00000000       __hybrid_auxiliary_delayload_iat_copy 0000000000000000     <absolute>
+ 0000:00000000       __hybrid_auxiliary_iat     0000000000000000     <absolute>
+ 0000:00000000       __hybrid_auxiliary_iat_copy 0000000000000000     <absolute>
+ 0000:00000000       __hybrid_code_map          0000000000000000     <absolute>
+ 0000:00000000       __hybrid_code_map_count    0000000000000000     <absolute>
+ 0000:00000000       __hybrid_image_info_bitfield 0000000000000000     <absolute>
+ 0000:00000000       __x64_code_ranges_to_entry_points 0000000000000000     <absolute>
+ 0000:00000000       __x64_code_ranges_to_entry_points_count 0000000000000000     <absolute>
+ 0000:00000000       __ImageBase                0000000000000000     <linker-defined>
+ 0001:000000f8       InternalX86Retf            00000000000010f8     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:0000010c       Cpl3HandlerStub            000000000000110c     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:0000013e       Cpl3HandlerEndStub         000000000000113e     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000140       SyscallCenter              0000000000001140     SmmSupervisor:SysCallEntry_msvc.obj
+ 0001:000001b0       InternalMemCopyMem         00000000000011b0     BaseMemoryLibRepStr:CopyMem.obj
+ 0001:000001f0       InternalMemZeroMem         00000000000011f0     BaseMemoryLibRepStr:ZeroMem.obj
+ 0001:00000210       InternalMemCompareMem      0000000000001210     BaseMemoryLibRepStr:CompareMem.obj
+ 0001:00000230       InternalMemIsZeroBuffer    0000000000001230     BaseMemoryLibRepStr:IsZeroBuffer.obj
+ 0001:00000260       SetJump                    0000000000001260     BaseLib:SetJump.obj
+ 0001:00000330       CpuPause                   0000000000001330     BaseLib:CpuPause.obj
+ 0001:00000340       AsmWriteCr3                0000000000001340     BaseLib:WriteCr3.obj
+ 0001:00000350       AsmWbinvd                  0000000000001350     BaseLib:Wbinvd.obj
+ 0001:00000360       DisableInterrupts          0000000000001360     BaseLib:DisableInterrupts.obj
+ 0001:00000370       AsmReadCr0                 0000000000001370     BaseLib:ReadCr0.obj
+ 0001:00000380       AsmReadCr3                 0000000000001380     BaseLib:ReadCr3.obj
+ 0001:00000390       AsmCpuid                   0000000000001390     BaseLib:CpuId.obj
+ 0001:000003c0       AsmReadCr4                 00000000000013c0     BaseLib:ReadCr4.obj
+ 0001:000003d0       InternalLongJump           00000000000013d0     BaseLib:LongJump.obj
+ 0001:00000480       InternalX86WriteGdtr       0000000000001480     BaseLib:WriteGdtr.obj
+ 0001:00000490       InternalX86ReadGdtr        0000000000001490     BaseLib:ReadGdtr.obj
+ 0001:000004a0       InternalX86WriteIdtr       00000000000014a0     BaseLib:WriteIdtr.obj
+ 0001:000004b0       InternalX86ReadIdtr        00000000000014b0     BaseLib:ReadIdtr.obj
+ 0001:000004c0       EnableInterrupts           00000000000014c0     BaseLib:EnableInterrupts.obj
+ 0001:000004d0       AsmReadEflags              00000000000014d0     BaseLib:ReadEflags.obj
+ 0001:000004e0       CpuSleep                   00000000000014e0     BaseCpuLib:CpuSleep.obj
+ 0001:0000069e       CommonInterruptEntry       000000000000169e     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:000008f8       AsmGetTemplateAddressMap   00000000000018f8     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:00000939       AsmVectorNumFixup          0000000000001939     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:00000940       TransferToDefaultExceptionHandler 0000000000001940     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:0000095c       ReturnToCpl0ExceptionHandler 000000000000195c     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:0000096d       GetRsp                     000000000000196d     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:00000971       FlushTlbMemory             0000000000001971     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:00000980       LibAmdSimNowEnterDebugger  0000000000001980     AmdBaseLib:AmdBaseLib64.obj
+ 0001:0000099e       LibAmdHDTBreakPoint        000000000000199e     AmdBaseLib:AmdBaseLib64.obj
+ 0001:000009bf       LibAmdFinit                00000000000019bf     AmdBaseLib:AmdBaseLib64.obj
+ 0001:000009d0       InternalMemSetMem          00000000000019d0     BaseMemoryLibRepStr:SetMem.obj
+ 0001:000009f0       InternalMemSetMem64        00000000000019f0     BaseMemoryLibRepStr:SetMem64.obj
+ 0001:00000a10       InternalMemSetMem32        0000000000001a10     BaseMemoryLibRepStr:SetMem32.obj
+ 0001:00000a30       AsmReadTsc                 0000000000001a30     BaseLib:ReadTsc.obj
+ 0001:00000a40       AsmReadCs                  0000000000001a40     BaseLib:ReadCs.obj
+ 0001:00000a50       AsmWriteTr                 0000000000001a50     BaseLib:WriteTr.obj
+ 0001:00000a60       InternalX86RdSeed32        0000000000001a60     AmdPspBaseLibV2:RdSeed.obj
+ 0001:00000a80       AsmCpuidEx                 0000000000001a80     BaseLib:CpuIdEx.obj
+ 0001:00000ab0       InternalX86RdRand16        0000000000001ab0     BaseLib:RdRand.obj
+ 0001:00000ac2       InternalX86RdRand32        0000000000001ac2     BaseLib:RdRand.obj
+ 0001:00000ad3       InternalX86RdRand64        0000000000001ad3     BaseLib:RdRand.obj
+ 0001:00000ae8       _ModuleEntryPoint          0000000000001ae8 f   UefiDriverEntryPoint:DriverEntryPoint.obj
+ 0001:00000b68       ProcessLibraryConstructorList 0000000000001b68 f   SmmSupervisor:AutoGen.obj
+ 0001:00000eb0       ReportDrtmInfo             0000000000001eb0 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:00001094       CompareMemoryPolicy        0000000000002094 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:000011d8       VerifyAndUpdatePageTbl     00000000000021d8 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:00001688       PostDrtmEntry              0000000000002688 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:00001a04       AllocatePoolForGlobalData  0000000000002a04 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:00001b90       SmmSupvSmiEntry            0000000000002b90 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:00001f18       PageTblReadyToLockCallback 0000000000002f18 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:00002068       SmmSupvSmiExit             0000000000003068 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:000021d4       GetSmmBase                 00000000000031d4 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:000021ec       SmmSupvSmmReadyToLockEventNotify 00000000000031ec f   SmmSupervisor:SmmSupervisor.obj
+ 0001:000022f4       AllocateSmmSupvPool        00000000000032f4 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:00002324       SmmSupervisorEntry         0000000000003324 f   SmmSupervisor:SmmSupervisor.obj
+ 0001:00002634       SmmSupervisorInstallErrorReporter 0000000000003634 f   SmmSupervisor:SmmSupervisorProtocol.obj
+ 0001:00002678       GetSmmSupervisorVersionAndSplValue 0000000000003678 f   SmmSupervisor:SmmSupervisorProtocol.obj
+ 0001:00002738       SmmSupervisorInstallSmiHandler 0000000000003738 f   SmmSupervisor:SmmSupervisorProtocol.obj
+ 0001:000029ac       TurnOnSmmIsoAtEvent        00000000000039ac f   SmmSupervisor:SmmSupervisorProtocol.obj
+ 0001:000029cc       InstallExceptionHandler    00000000000039cc f   SmmSupervisor:SmmSupervisorProtocol.obj
+ 0001:00002a90       SetExceptionHandlerReturnAddress 0000000000003a90 f   SmmSupervisor:SmmSupervisorProtocol.obj
+ 0001:00002a9c       SetEndOfPolicyViolationAction 0000000000003a9c f   SmmSupervisor:SmmSupervisorProtocol.obj
+ 0001:00002ab8       InitGdtTable               0000000000003ab8 f   SmmSupervisor:SmmSupvGdt.obj
+ 0001:00002ba8       AmdIdsDpRamConstructor     0000000000003ba8 f   AmdIdsDebugPrintLib:AmdIdsDpRam.obj
+ 0001:00002ba8       AmdIdsDpRedirectIoConstructor 0000000000003ba8 f   AmdIdsDebugPrintLib:AmdIdsDpRedirectIo.obj
+ 0001:00002ba8       AmdIdsDpSerialConstructor  0000000000003ba8 f   AmdIdsDebugPrintLib:AmdIdsDpSerial.obj
+ 0001:00002ba8       DumpSmmPolicyData          0000000000003ba8 f   SmmSupervisorPolicyLib:SmmSupervisorPolicyMgmtLib.obj
+ 0001:00002ba8       InternalAssertJumpBuffer   0000000000003ba8 f   BaseLib:SetJump.obj
+ 0001:00002c74       InitializeSmmIdt           0000000000003c74 f   SmmSupervisor:SmmExceptionHandler.obj
+ 0001:00002d88       IsSyncTimerTimeout         0000000000003d88 f   SmmSupervisor:SyncTimer.obj
+ 0001:00002e2c       SyscallDispatcher          0000000000003e2c f   SmmSupervisor:SyscallDispatcher.obj
+ 0001:000033b0       GetPiPcdProtocol           00000000000043b0 f   DxePcdLib:DxePcdLib.obj
+ 0001:000033ec       AsciiSPrint                00000000000043ec f   BasePrintLib:PrintLib.obj
+ 0001:00003418       BasePrintLibFillBuffer     0000000000004418 f   BasePrintLib:PrintLibInternal.obj
+ 0001:0000344c       BasePrintLibSPrintMarker   000000000000444c f   BasePrintLib:PrintLibInternal.obj
+ 0001:000042f0       BasePrintLibSPrint         00000000000052f0 f   BasePrintLib:PrintLibInternal.obj
+ 0001:00004314       WriteErrorData             0000000000005314 f   ErrorDataLogLib:ErrorDataLogLib.obj
+ 0001:00004370       WriteErrorDataAndReset     0000000000005370 f   ErrorDataLogLib:ErrorDataLogLib.obj
+ 0001:000043d0       UpdateLegacyMemoryDesc     00000000000053d0 f   SmmSupervisorPolicyLib:SmmSupervisorPolicyMgmtLib.obj
+ 0001:00004444       UpdateMemoryDesc           0000000000005444 f   SmmSupervisorPolicyLib:SmmSupervisorPolicyMgmtLib.obj
+ 0001:000044a8       SecurityPolicyCheck        00000000000054a8 f   SmmSupervisorPolicyLib:SmmSupervisorPolicyMgmtLib.obj
+ 0001:00004988       PopulateMemoryPolicyEntries 0000000000005988 f   SmmSupervisorPolicyLib:SmmSupervisorPolicyMgmtLib.obj
+ 0001:00004aa0       AllocateCopyOnePage        0000000000005aa0 f   SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0001:00004ad8       GetPageTableBase           0000000000005ad8 f   SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0001:00004b08       GetPageTableEntry          0000000000005b08 f   SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0001:00004c10       SplitPage                  0000000000005c10 f   SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0001:00004cf4       CalculateMaximumSupportAddress 0000000000005cf4 f   SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0001:00004d44       ConvertMemoryPageAttributes 0000000000005d44 f   SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0001:00004f30       GenMemPolicyAndShadowPageTable 0000000000005f30 f   SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0001:0000551c       SaveAndDisableInterrupts   000000000000651c f   BaseLib:Cpu.obj
+ 0001:00005540       StrnLenS                   0000000000006540 f   BaseLib:SafeString.obj
+ 0001:0000556c       BufferInSmram              000000000000656c f   SmmMemoryAllocationLib:MemoryAllocationLib.obj
+ 0001:000055b0       AllocatePool               00000000000065b0 f   SmmMemoryAllocationLib:MemoryAllocationLib.obj
+ 0001:000055e0       InternalAllocateCopyPool   00000000000065e0 f   SmmMemoryAllocationLib:MemoryAllocationLib.obj
+ 0001:00005640       FreePool                   0000000000006640 f   SmmMemoryAllocationLib:MemoryAllocationLib.obj
+ 0001:00005678       MicroSecondDelay           0000000000006678 f   AmdDxeTscTimerLib:AmdTscTimerLibShare.obj
+ 0001:000056d8       GetHobList                 00000000000066d8 f   DxeHobLib:HobLib.obj
+ 0001:00005744       GetNextGuidHob             0000000000006744 f   DxeHobLib:HobLib.obj
+ 0001:00005790       BuildHeapBufferNodeLinked  0000000000006790 f   AmdHeapDxeLib:AmdHeapDxeLib.obj
+ 0001:00005840       AllocateSmmSupvPages       0000000000006840 f   SmmSupervisorMemMgmtLib:SmmSupervisorMemMgmtLib.obj
+ 0001:000058ac       AllocateSmmSupvPageTableMemory 00000000000068ac f   SmmSupervisorMemMgmtLib:SmmSupervisorMemMgmtLib.obj
+ 0001:000058f0       OverlapStatus              00000000000068f0 f   SmmSupervisorMemMgmtLib:SmmSupervisorMemMgmtLib.obj
+ 0001:00005938       AmdIdsDebugPrintCheckSupportAny 0000000000006938 f   AmdIdsDebugPrintLib:AmdIdsDebugPrintLib.obj
+ 0001:0000598c       AmdIdsDpRamGetFilter       000000000000698c f   AmdIdsDebugPrintLib:AmdIdsDpRam.obj
+ 0001:0000598c       AmdIdsDpRamSupport         000000000000698c f   AmdIdsDebugPrintLib:AmdIdsDpRam.obj
+ 0001:0000598c       AmdIdsDpRedirectIoGetFilter 000000000000698c f   AmdIdsDebugPrintLib:AmdIdsDpRedirectIo.obj
+ 0001:0000598c       AmdIdsDpRedirectIoSupport  000000000000698c f   AmdIdsDebugPrintLib:AmdIdsDpRedirectIo.obj
+ 0001:0000598c       AmdIdsDpSerialGetFilter    000000000000698c f   AmdIdsDebugPrintLib:AmdIdsDpSerial.obj
+ 0001:0000598c       AmdIdsDpSerialSupport      000000000000698c f   AmdIdsDebugPrintLib:AmdIdsDpSerial.obj
+ 0001:00005990       AmdIdsDpRamPrint           0000000000006990 f   AmdIdsDebugPrintLib:AmdIdsDpRam.obj
+ 0001:00005a64       AmdIdsDpSerialPrint        0000000000006a64 f   AmdIdsDebugPrintLib:AmdIdsDpSerial.obj
+ 0001:00005aa8       AmdIdsDpRedirectIoPrint    0000000000006aa8 f   AmdIdsDebugPrintLib:AmdIdsDpRedirectIo.obj
+ 0001:00005ad4       MemLogInternal             0000000000006ad4 f   MemLogLibNull:MemLogLibNull.obj
+ 0001:00005ae4       InternalImageHandleToFvHandle 0000000000006ae4 f   DxeServicesLib:DxeServicesLib.obj
+ 0001:00005b1c       InternalGetSectionFromFv   0000000000006b1c f   DxeServicesLib:DxeServicesLib.obj
+ 0001:00005bf0       GetSectionFromAnyFv        0000000000006bf0 f   DxeServicesLib:DxeServicesLib.obj
+ 0001:00005d0c       CommonExceptionHandler     0000000000006d0c f   SmmCpuExceptionHandlerLib:SmmException.obj
+ 0001:00005d14       InitializeCpuExceptionHandlers 0000000000006d14 f   SmmCpuExceptionHandlerLib:SmmException.obj
+ 0001:00005ddc       FlushTlbRange              0000000000006ddc f   SmmCpuExceptionHandlerLib:PeiDxeSmmCpuException.obj
+ 0001:00005e14       ExecuteDefaultHandler      0000000000006e14 f   SmmCpuExceptionHandlerLib:PeiDxeSmmCpuException.obj
+ 0001:0000601c       CommonExceptionHandlerWorker 000000000000701c f   SmmCpuExceptionHandlerLib:PeiDxeSmmCpuException.obj
+ 0001:000062f0       UpdateIdtTable             00000000000072f0 f   SmmCpuExceptionHandlerLib:PeiDxeSmmCpuException.obj
+ 0001:000063e8       DumpCpuContext             00000000000073e8 f   SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0001:000066d0       InternalPrintMessage       00000000000076d0 f   SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0001:00006718       IsIoReadWriteAllowed       0000000000007718 f   SmmPolicyGateLib:SmmPolicyGateLib.obj
+ 0001:00006868       IsMsrReadWriteAllowed      0000000000007868 f   SmmPolicyGateLib:SmmPolicyGateLib.obj
+ 0001:0000694c       IsInstructionExecutionAllowed 000000000000794c f   SmmPolicyGateLib:SmmPolicyGateLib.obj
+ 0001:000069fc       PreDrtmInfoSecureStore     00000000000079fc f   IhvDrtmLibAmd:IhvDrtmLib.obj
+ 0001:00006ad8       PostDrtmSecureValidation   0000000000007ad8 f   IhvDrtmLibAmd:IhvDrtmLib.obj
+ 0001:00006be0       SmmSupvPspMboxSmmBufferAddressCallback 0000000000007be0 f   IhvDrtmLibAmd:IhvDrtmLib.obj
+ 0001:00006c28       FindSmmSupvEntry           0000000000007c28 f   SmmSupvEntryLocateLibAmd:SmmSupvEntryLocateLib.obj
+ 0001:00006d28       IhvGetPagesForProtection   0000000000007d28 f   IhvPageProtectionLib:IhvPageProtectionLib.obj
+ 0001:00006e1c       ParseSupervisionType       0000000000007e1c f   IhvPageSupervisionLib:IhvPageSupervisionLib.obj
+ 0001:00006e68       IhvGetPagesForSupervision  0000000000007e68 f   IhvPageSupervisionLib:IhvPageSupervisionLib.obj
+ 0001:00006f24       CheckIoTrapOnAllCores      0000000000007f24 f   IhvSmmSaveStateSupervisionLib:IhvSmmSaveStateSupervisionLib.obj
+ 0001:00007000       IsIhvSmmSaveStateReadAllowed 0000000000008000 f   IhvSmmSaveStateSupervisionLib:IhvSmmSaveStateSupervisionLib.obj
+ 0001:0000714c       ResetCold                  000000000000814c f   ForceResetSystemLib:FchForceResetSystemLib.obj
+ 0001:00007194       IdsLibDebugPrint           0000000000008194 f   IdsNonUefiLib:IdsNonUefiLib.obj
+ 0001:000071a0       LocalApicBaseAddressMsrSupported 00000000000081a0 f   BaseXApicLib:BaseXApicLib.obj
+ 0001:000071e4       ReadLocalApicReg           00000000000081e4 f   BaseXApicLib:BaseXApicLib.obj
+ 0001:00007228       GetApicId                  0000000000008228 f   BaseXApicLib:BaseXApicLib.obj
+ 0001:000072b0       SendPspCommand             00000000000082b0 f   AmdPspMboxLibV2:AmdPspMboxLibV2.obj
+ 0001:00007468       PspMboxBiosDrtmInfo        0000000000008468 f   AmdPspMboxLibV2:AmdPspMboxLibV2.obj
+ 0001:0000750c       GetDrtmMmio                000000000000850c f   SmmSupvPspMmioLib:SmmSupvPspMmioLib.obj
+ 0001:000075a8       PciCf8Read8                00000000000085a8 f   BasePciCf8Lib:PciCf8Lib.obj
+ 0001:00007618       PciCf8Read16               0000000000008618 f   BasePciCf8Lib:PciCf8Lib.obj
+ 0001:0000766c       PciCf8Read32               000000000000866c f   BasePciCf8Lib:PciCf8Lib.obj
+ 0001:000076d0       PciCf8Write32              00000000000086d0 f   BasePciCf8Lib:PciCf8Lib.obj
+ 0001:00007720       GetAmdPspRegInfoEntry      0000000000008720 f   AmdPspRegBaseLib:AmdPspRegBaseLib.obj
+ 0001:00007794       PspMmioRead                0000000000008794 f   AmdPspMmioLib:AmdPspMmioLib.obj
+ 0001:000077c4       GetPspMboxLocation         00000000000087c4 f   AmdPspBaseLibV2:AmdPspBaseLibV2.obj
+ 0001:0000781c       GetPspMmioBase             000000000000881c f   AmdPspBaseLibV2:AmdPspBaseLibV2.obj
+ 0001:00007878       SocFamilyIdentificationCheck 0000000000008878 f   AmdSocBaseLib:AmdSocBaseLib.obj
+ 0002:00000000       mSmiGdtr                   0000000000009000     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0002:0000000a       mOemExceptionHandlerFixUpOffset 000000000000900a     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0002:00000020       gEfiLoadedImageProtocolGuid 0000000000009020     SmmSupervisor:AutoGen.obj
+ 0002:00000030       gEfiMpServiceProtocolGuid  0000000000009030     SmmSupervisor:AutoGen.obj
+ 0002:00000040       gAmdHeapHobGuid            0000000000009040     SmmSupervisor:AutoGen.obj
+ 0002:00000050       gEfiSmmVariableProtocolGuid 0000000000009050     SmmSupervisor:AutoGen.obj
+ 0002:00000060       gEfiFirmwareVolume2ProtocolGuid 0000000000009060     SmmSupervisor:AutoGen.obj
+ 0002:00000070       gEfiPcdProtocolGuid        0000000000009070     SmmSupervisor:AutoGen.obj
+ 0002:00000080       gAmdHeapHeaderProtocolGuid 0000000000009080     SmmSupervisor:AutoGen.obj
+ 0002:00000090       gPspMboxSmmBufferAddressProtocolGuid 0000000000009090     SmmSupervisor:AutoGen.obj
+ 0002:000000a0       gSmmSupervisorProtocolGuid 00000000000090a0     SmmSupervisor:AutoGen.obj
+ 0002:000000b0       gEfiSmmReadyToLockProtocolGuid 00000000000090b0     SmmSupervisor:AutoGen.obj
+ 0002:000000c0       gEfiHobListGuid            00000000000090c0     SmmSupervisor:AutoGen.obj
+ 0002:000000d0       gSmmSupervisorPkgTokenSpaceGuid 00000000000090d0     SmmSupervisor:AutoGen.obj
+ 0002:000000e0       gSmmSupervisorPublicInfoTableGuid 00000000000090e0     SmmSupervisor:AutoGen.obj
+ 0002:000000f0       gEfiSmmBase2ProtocolGuid   00000000000090f0     SmmSupervisor:AutoGen.obj
+ 0002:00000100       gEfiCallerIdGuid           0000000000009100     SmmSupervisor:AutoGen.obj
+ 0002:00000110       gEfiSmmAccess2ProtocolGuid 0000000000009110     SmmSupervisor:AutoGen.obj
+ 0002:00000120       mSmmSupervisorVersionGuid  0000000000009120     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00000130       mSmmSupervisor             0000000000009130     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00000210       mCpuFamily                 0000000000009210     AmdDxeTscTimerLib:AmdDxeTscTimerLib.obj
+ 0002:00000218       mAmdHeapProtocolStruct     0000000000009218     AmdHeapDxeLib:AmdHeapDxeLib.obj
+ 0002:00000230       mAmdIdsDebugPrintInstances 0000000000009230     AmdIdsDebugPrintLib:AmdIdsDebugPrintLib.obj
+ 0002:00000250       mSvstOffsetToPolicyMap     0000000000009250     IhvSmmSaveStateSupervisionLib:IhvSmmSaveStateSupervisionLib.obj
+ 0002:00000270       gAmdPspRegInfoTbl          0000000000009270     AmdPspRegBaseLib:AmdPspRegBaseLib.obj
+ 0002:00000300       _gPcd_FixedAtBuild_PcdControlFlowEnforcementPropertyMask 0000000000009300     SmmSupervisor:AutoGen.obj
+ 0002:00000308       ??_C@_1CK@CKPHDOBB@?$AAS?$AAm?$AAm?$AAS?$AAu?$AAp?$AAe?$AAr?$AAv?$AAi?$AAs?$AAo?$AAr?$AAV?$AAe@ 0000000000009308     SmmSupervisor:SmmSupervisor.obj
+ 0002:00000338       ??_C@_0N@OFKIIELI@SMM_SC_RDMSR@ 0000000000009338     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00000348       ??_C@_0N@FKMFHHCJ@SMM_SC_WRMSR@ 0000000000009348     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00000358       ??_C@_0L@ENJDNINF@SMM_SC_CLI@ 0000000000009358     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00000368       ??_C@_0P@LOOCHHFG@SMM_SC_IO_READ@ 0000000000009368     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00000378       ??_C@_0BA@FECHPMEI@SMM_SC_IO_WRITE@ 0000000000009378     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00000388       ??_C@_0O@IFNBFENP@SMM_SC_WBINVD@ 0000000000009388     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00000398       ??_C@_0L@GFPODDMI@SMM_SC_HLT@ 0000000000009398     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:000003a8       ??_C@_0BB@POOMKDON@SMM_SC_SVST_READ@ 00000000000093a8     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:000003c0       ??_C@_0BF@JMDJBOKM@SMM_SC_IHV_SUPV_READ@ 00000000000093c0     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:000003d8       ??_C@_0BG@JGNDMCD@SMM_SC_IHV_SUPV_WRITE@ 00000000000093d8     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:000003f0       ??_C@_07LCONPLCO@?$CFd?4?$CF04d@ 00000000000093f0     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:000003f8       ??_C@_04HCDDPBNL@TRUE@     00000000000093f8     SmmSupervisor:SyscallDispatcher.obj
+ 0002:00000400       ??_C@_05MAJJAKPI@FALSE@    0000000000009400     SmmSupervisor:SyscallDispatcher.obj
+ 0002:00000408       ??_C@_0BC@OBKGMBL@SyscallDispatcher@ 0000000000009408     SmmSupervisor:SyscallDispatcher.obj
+ 0002:00000420       ??_C@_0GF@DOAPNJGO@?$CFc?$CF08x?$CFc?$CFa?5Enter?4?4?4?5CallIndex?3?5@ 0000000000009420     SmmSupervisor:SyscallDispatcher.obj
+ 0002:00000490       ??_C@_0EC@KDFBCDIJ@?$CFc?$CF08x?$CFcERROR?$CB?5It?5is?5invoked?5fr@ 0000000000009490     SmmSupervisor:SyscallDispatcher.obj
+ 0002:000004d8       ??_C@_0O@MLOLIMFM@?$DMnull?5string?$DO@ 00000000000094d8     BasePrintLib:PrintLibInternal.obj
+ 0002:000004e8       ??_C@_0M@BJJDNPHK@?$DMnull?5guid?$DO@ 00000000000094e8     BasePrintLib:PrintLibInternal.obj
+ 0002:000004f8       ??_C@_0DB@PMLHLBMO@?$CF08x?9?$CF04x?9?$CF04x?9?$CF02x?$CF02x?9?$CF02x?$CF02@ 00000000000094f8     BasePrintLib:PrintLibInternal.obj
+ 0002:00000530       ??_C@_0M@LHGBCIKM@?$DMnull?5time?$DO@ 0000000000009530     BasePrintLib:PrintLibInternal.obj
+ 0002:00000540       ??_C@_0BK@FCPKCIDD@?$CF02d?1?$CF02d?1?$CF04d?5?5?$CF02d?3?$CF02d@ 0000000000009540     BasePrintLib:PrintLibInternal.obj
+ 0002:0000055c       ??_C@_04JIMNDDED@?$CF08X@  000000000000955c     BasePrintLib:PrintLibInternal.obj
+ 0002:00000564       ??_C@_02PCIJFNDE@?$AN?6@   0000000000009564     BasePrintLib:PrintLibInternal.obj
+ 0002:00000568       ??_C@_01LIIJDEN@?$AN@      0000000000009568     BasePrintLib:PrintLibInternal.obj
+ 0002:00000570       mWarningString             0000000000009570     BasePrintLib:PrintLibInternal.obj
+ 0002:00000640       mErrorString               0000000000009640     BasePrintLib:PrintLibInternal.obj
+ 0002:00000920       mHexStr                    0000000000009920     BasePrintLib:PrintLibInternal.obj
+ 0002:00000978       IdsDebugPrintRamInstance   0000000000009978     AmdIdsDebugPrintLib:AmdIdsDpRam.obj
+ 0002:00000998       AmdIdsDebugPrintSerialInstance 0000000000009998     AmdIdsDebugPrintLib:AmdIdsDpSerial.obj
+ 0002:000009b8       AmdIdsDebugPrintRedirectIoInstance 00000000000099b8     AmdIdsDebugPrintLib:AmdIdsDpRedirectIo.obj
+ 0002:000009d8       mDoFarReturnFlag           00000000000099d8     SmmCpuExceptionHandlerLib:SmmException.obj
+ 0002:000009e0       ??_C@_0DN@OILJOCCP@?$CB?$CB?$CB?$CB?5X64?5Exception?5Type?5?9?5?$CF02x?$CI@ 00000000000099e0     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000a20       ??_C@_0BH@GDPLHCJG@ExceptionData?5?9?5?$CF016lx@ 0000000000009a20     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000a38       ??_C@_0CO@BBEHDOI@?5?5I?3?$CFx?5R?3?$CFx?5U?3?$CFx?5W?3?$CFx?5P?3?$CFx?5PK?3?$CF@ 0000000000009a38     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000a68       ??_C@_01EEMJAFIK@?6@       0000000000009a68     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000a70       ??_C@_0CO@OABPHBNC@RIP?5?5?9?5?$CF016lx?0?5CS?5?5?9?5?$CF016lx?0?5RF@ 0000000000009a70     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000aa0       ??_C@_0CL@EBCIBAPN@RAX?5?5?9?5?$CF016lx?0?5RCX?5?9?5?$CF016lx?0?5RD@ 0000000000009aa0     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000ad0       ??_C@_0CL@NEKHLEEE@RBX?5?5?9?5?$CF016lx?0?5RSP?5?9?5?$CF016lx?0?5RB@ 0000000000009ad0     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000b00       ??_C@_0BN@KJEBEAEC@RSI?5?5?9?5?$CF016lx?0?5RDI?5?9?5?$CF016lx?6@ 0000000000009b00     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000b20       ??_C@_0CL@IAICEOHO@R8?5?5?5?9?5?$CF016lx?0?5R9?5?5?9?5?$CF016lx?0?5R1@ 0000000000009b20     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000b50       ??_C@_0CL@JAMCECPD@R11?5?5?9?5?$CF016lx?0?5R12?5?9?5?$CF016lx?0?5R1@ 0000000000009b50     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000b80       ??_C@_0BN@PKAAKNBO@R14?5?5?9?5?$CF016lx?0?5R15?5?9?5?$CF016lx?6@ 0000000000009b80     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000ba0       ??_C@_0CL@DLLIMCBJ@DS?5?5?5?9?5?$CF016lx?0?5ES?5?5?9?5?$CF016lx?0?5FS@ 0000000000009ba0     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000bd0       ??_C@_0BN@EICEFBKL@GS?5?5?5?9?5?$CF016lx?0?5SS?5?5?9?5?$CF016lx?6@ 0000000000009bd0     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000bf0       ??_C@_0CL@DIOBDFLD@CR0?5?5?9?5?$CF016lx?0?5CR2?5?9?5?$CF016lx?0?5CR@ 0000000000009bf0     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000c20       ??_C@_0BN@JAPKHAJM@CR4?5?5?9?5?$CF016lx?0?5CR8?5?9?5?$CF016lx?6@ 0000000000009c20     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000c40       ??_C@_0CL@DONNALBH@DR0?5?5?9?5?$CF016lx?0?5DR1?5?9?5?$CF016lx?0?5DR@ 0000000000009c40     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000c70       ??_C@_0CL@JNPELAID@DR3?5?5?9?5?$CF016lx?0?5DR6?5?9?5?$CF016lx?0?5DR@ 0000000000009c70     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000ca0       ??_C@_0CF@MGIBIPBB@GDTR?5?9?5?$CF016lx?5?$CF016lx?0?5LDTR?5?9?5?$CF0@ 0000000000009ca0     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000cc8       ??_C@_0CF@DMFPLAJK@IDTR?5?9?5?$CF016lx?5?$CF016lx?0?5?5?5TR?5?9?5?$CF0@ 0000000000009cc8     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000cf0       ??_C@_0BH@PFOFIBPH@FXSAVE_STATE?5?9?5?$CF016lx?6@ 0000000000009cf0     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0002:00000d08       mErrorCodeFlag             0000000000009d08     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000d10       ??_C@_0BD@PANICNEP@?$CDDE?5?9?5Divide?5Error@ 0000000000009d10     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000d28       ??_C@_0M@BENGJJME@?$CDDB?5?9?5Debug@ 0000000000009d28     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000d38       ??_C@_0O@PELAMGDH@NMI?5Interrupt@ 0000000000009d38     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000d48       ??_C@_0BB@ONIBFOGK@?$CDBP?5?9?5Breakpoint@ 0000000000009d48     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000d60       ??_C@_0P@BBLCINEF@?$CDOF?5?9?5Overflow@ 0000000000009d60     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000d70       ??_C@_0BL@FGFNPPKN@?$CDBR?5?9?5BOUND?5Range?5Exceeded@ 0000000000009d70     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000d90       ??_C@_0BF@PAJDEHLF@?$CDUD?5?9?5Invalid?5Opcode@ 0000000000009d90     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000da8       ??_C@_0BL@HAMCGOMD@?$CDNM?5?9?5Device?5Not?5Available@ 0000000000009da8     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000dc8       ??_C@_0BD@POLKFCFP@?$CDDF?5?9?5Double?5Fault@ 0000000000009dc8     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000de0       ??_C@_0BM@LFJODCLN@Coprocessor?5Segment?5Overrun@ 0000000000009de0     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000e00       ??_C@_0BC@NJGFAHLO@?$CDTS?5?9?5Invalid?5TSS@ 0000000000009e00     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000e18       ??_C@_0BK@CJDBEANG@?$CDNP?5?9?5Segment?5Not?5Present@ 0000000000009e18     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000e38       ??_C@_0BI@DKNGHJJN@?$CDSS?5?9?5Stack?5Fault?5Fault@ 0000000000009e38     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000e50       ??_C@_0BJ@OPPOMNHK@?$CDGP?5?9?5General?5Protection@ 0000000000009e50     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000e70       ??_C@_0BB@CJKCEJGM@?$CDPF?5?9?5Page?9Fault@ 0000000000009e70     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000e88       ??_C@_08NKCLJDKG@Reserved@ 0000000000009e88     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000e98       ??_C@_0CD@DAPDALEP@?$CDMF?5?9?5x87?5FPU?5Floating?9Point?5Er@ 0000000000009e98     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000ec0       ??_C@_0BG@JJECJFKO@?$CDAC?5?9?5Alignment?5Check@ 0000000000009ec0     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000ed8       ??_C@_0BE@CIGFNHHH@?$CDMC?5?9?5Machine?9Check@ 0000000000009ed8     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000ef0       ??_C@_0BK@IKBNPED@?$CDXM?5?9?5SIMD?5floating?9point@ 0000000000009ef0     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000f10       ??_C@_0BF@MIEADEIE@?$CDVE?5?9?5Virtualization@ 0000000000009f10     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000f28       ??_C@_0BJ@POMBGBMH@?$CDCP?5?9?5Control?5Protection@ 0000000000009f28     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000f48       ??_C@_0BI@HOPEKCJH@?$CDVC?5?9?5VMM?5Communication@ 0000000000009f48     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000f60       ??_C@_0CJ@NIJFIMND@?$CB?$CB?$CB?$CB?5Can?8t?5find?5image?5informati@ 0000000000009f60     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00000f90       mExceptionNameStr          0000000000009f90     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00001080       mExceptionReservedStr      000000000000a080     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0002:00001090       ??_C@_0CD@NBOPDGDC@Psp?4SendC2PCMD?5?$FL0x?$CFx?$FN?5Buffer?30x@ 000000000000a090     AmdPspMboxLibV2:AmdPspMboxLibV2.obj
+ 0002:000010b8       ??_C@_0P@NFKAIGLK@SmmBuffer?3?5?$CFx?6@ 000000000000a0b8     AmdPspMboxLibV2:AmdPspMboxLibV2.obj
+ 0002:000010c8       ??_C@_0N@EBBEAGKD@SmmFlag?3?5?$CFx?6@ 000000000000a0c8     AmdPspMboxLibV2:AmdPspMboxLibV2.obj
+ 0002:00001108       mThreadCount               000000000000a108     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001118       mBootMode                  000000000000a118     SmmSupervisor:SmmSupervisor.obj
+ 0002:0000111c       mGdtTableUpdateComplete    000000000000a11c     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001120       mSyscallViolationCnt       000000000000a120     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001124       mSmmIsoEnableEvent         000000000000a124     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001125       mPageTblPatchComplete      000000000000a125     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001128       mSmmSupervisorPostReadyToLock 000000000000a128     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001130       mPageTblPatchComplete1     000000000000a130     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001140       mCpuToken                  000000000000a140     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001150       mSmmSupvGdtData            000000000000a150     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001158       mGdtrPtr                   000000000000a158     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001160       mBspInSmm                  000000000000a160     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001168       mSmmEntryAddr              000000000000a168     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00001170       mSmmSupVersion             000000000000a170     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00001178       mSmmSupervisorHandle       000000000000a178     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00001180       mOemExceptionHandler       000000000000a180     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00001188       mExternalErrorLogger       000000000000a188     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00001190       mEndOfPolicyViolationAction 000000000000a190     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:00001198       mCycle                     000000000000a198     SmmSupervisor:SyncTimer.obj
+ 0002:000011a0       mTimeoutTicker             000000000000a1a0     SmmSupervisor:SyncTimer.obj
+ 0002:000011a8       mPiPcd                     000000000000a1a8     DxePcdLib:DxePcdLib.obj
+ 0002:000011b0       mSmmPolicyData             000000000000a1b0     SmmSupervisorPolicyLib:SmmSupervisorPolicyMgmtLib.obj
+ 0002:000011b8       mSmmTempPolicyData         000000000000a1b8     SmmSupervisorPolicyLib:SmmSupervisorPolicyMgmtLib.obj
+ 0002:000011c8       gST                        000000000000a1c8     UefiBootServicesTableLib:UefiBootServicesTableLib.obj
+ 0002:000011d0       gBS                        000000000000a1d0     UefiBootServicesTableLib:UefiBootServicesTableLib.obj
+ 0002:000011d8       gImageHandle               000000000000a1d8     UefiBootServicesTableLib:UefiBootServicesTableLib.obj
+ 0002:000011e0       gSmst                      000000000000a1e0     SmmServicesTableLib:SmmServicesTableLib.obj
+ 0002:000011e8       gRT                        000000000000a1e8     UefiRuntimeServicesTableLib:UefiRuntimeServicesTableLib.obj
+ 0002:000011f0       mHobList                   000000000000a1f0     DxeHobLib:HobLib.obj
+ 0002:00001200       mMemLogCount               000000000000a200     MemLogLibNull:MemLogLibNull.obj
+ 0002:00001208       mExceptionHandlerRetunAddress 000000000000a208     SmmCpuExceptionHandlerLib:SmmException.obj
+ 0002:00001210       mDefaultInterruptHandler   000000000000a210     SmmCpuExceptionHandlerLib:PeiDxeSmmCpuException.obj
+ 0002:00001218       DrtmInfoStored             000000000000a218     IhvDrtmLibAmd:IhvDrtmLib.obj
+ 0002:00001220       mPspMboxSmmFlagAddr        000000000000a220     IhvDrtmLibAmd:IhvDrtmLib.obj
+ 0002:00001228       mPspMboxSmmBuffer          000000000000a228     IhvDrtmLibAmd:IhvDrtmLib.obj
+ 0002:00001560       mDrtmInfo1                 000000000000a560     <common>
+ 0002:000015a0       mDrtmInfo                  000000000000a5a0     <common>
+ 0002:000015d8       mTssStackLock              000000000000a5d8     <common>
+ 0002:000015e0       mExceptionHandlerData      000000000000a5e0     <common>
+ 0002:00001600       mReservedVectorsData       000000000000a600     <common>
+ 0002:00002100       mExternalInterruptHandlerTable 000000000000b100     <common>
+ 0002:00002200       mHeapLinkedListHead        000000000000b200     <common>
+ 0002:00002208       mTscFrequency              000000000000b208     <common>
+ 0002:00002210       mSmramRangeCount           000000000000b210     <common>
+ 0002:00002218       mSmramRanges               000000000000b218     <common>
+ 0002:00002220       mCountDown                 000000000000b220     <common>
+ 0002:00002240       mIDTBaseBuffer             000000000000b240     <common>
+ 0002:0000a240       mCpl3HandlerStubBuffer     0000000000013240     <common>
+ 0002:0000a248       mSmiIdtrPtr                0000000000013248     <common>
+ 0002:0000a250       mSmiIdtr                   0000000000013250     <common>
+ 0002:0000a25c       mThreadsInSmm              000000000001325c     <common>
+ 0002:0000a260       mMpService                 0000000000013260     <common>
+ 0002:0000a280       mProtectedMemPool          0000000000013280     <common>
+ 0002:0000a2a0       mSmmSupvCpuData            00000000000132a0     <common>
+ 0002:0000a2b8       mPcdSmmIsolationEnable     00000000000132b8     <common>
+ 0002:0000a2c0       mSmmSupvCpl0Regions        00000000000132c0     <common>
+ 0002:000102c0       __volatile_metadata        00000000000192c0     <linker-defined>
+
+ entry point at        0001:00000ae8
+
+ Static symbols
+
+ 0001:00000000       NullSeg                    0000000000001000     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000008       CodeSeg32                  0000000000001008     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000010       ProtModeCodeSeg32          0000000000001010     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000018       ProtModeSsSeg32            0000000000001018     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000020       DataSeg32                  0000000000001020     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000028       CodeSeg16                  0000000000001028     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000030       DataSeg16                  0000000000001030     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000038       CodeSeg64                  0000000000001038     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000040       DataSeg64                  0000000000001040     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000048       CodeSegComR3               0000000000001048     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000050       DataSeg64R3                0000000000001050     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000058       CodeSeg64R3                0000000000001058     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000060       CallGate64                 0000000000001060     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000070       CallGate64Iret             0000000000001070     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000080       TssSeg                     0000000000001080     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000090       TssDescriptor              0000000000001090     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000105       Base1                      0000000000001105     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:0000010b       InternalX86RetfExit        000000000000110b     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:0000010e       mOemExceptionHandlerFixUp  000000000000110e     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:00000126       mOemExceptionHandlerFixUp.0 0000000000001126     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:0000012e       mOemExceptionHandlerFixUp.1 000000000000112e     SmmSupervisor:SmmSupvGdtTbl.obj
+ 0001:0000019d       NormalReturn               000000000000119d     SmmSupervisor:SysCallEntry_msvc.obj
+ 0001:000001a1       Sysret                     00000000000011a1     SmmSupervisor:SysCallEntry_msvc.obj
+ 0001:000001ca       InternalMemCopyMem.0       00000000000011ca     BaseMemoryLibRepStr:CopyMem.obj
+ 0001:000001da       @CopyBackward              00000000000011da     BaseMemoryLibRepStr:CopyMem.obj
+ 0001:000001e3       @CopyBytes                 00000000000011e3     BaseMemoryLibRepStr:CopyMem.obj
+ 0001:00000255       @ReturnFalse               0000000000001255     BaseMemoryLibRepStr:IsZeroBuffer.obj
+ 0001:000002a3       CetDone                    00000000000012a3     BaseLib:SetJump.obj
+ 0001:0000039f       AsmCpuid.0                 000000000000139f     BaseLib:CpuId.obj
+ 0001:000003a4       AsmCpuid.1                 00000000000013a4     BaseLib:CpuId.obj
+ 0001:000003ab       AsmCpuid.2                 00000000000013ab     BaseLib:CpuId.obj
+ 0001:000003b4       AsmCpuid.3                 00000000000013b4     BaseLib:CpuId.obj
+ 0001:00000400       CetDone                    0000000000001400     BaseLib:LongJump.obj
+ 0001:000004f0       AsmIdtVectorBegin          00000000000014f0     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:00000670       AsmIdtVectorEnd            0000000000001670     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:00000670       HookAfterStubHeaderBegin   0000000000001670     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:00000671       @VectorNum                 0000000000001671     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:0000067a       JmpAbsoluteAddress         000000000000167a     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:0000067c       HookAfterStubHeaderEnd     000000000000167c     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:00000698       HookAfterStubHeaderEnd.0   0000000000001698     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:000006b9       NoErrorCode                00000000000016b9     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:000006c5       HasErrorCode               00000000000016c5     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:0000078d       VcDebugRegs                000000000000178d     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:00000796       DrFinish                   0000000000001796     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:0000082d       CetDone                    000000000000182d     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:0000086b       SKIP_CR_POP                000000000000186b     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:0000086f       CR_POP_END                 000000000000186f     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:000008c0       ErrorCode                  00000000000018c0     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:000008c8       DoReturn                   00000000000018c8     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:000008e7       DoReturn.0                 00000000000018e7     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:000008f6       DoIret                     00000000000018f6     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0001:00000a69       rn32_ok                    0000000000001a69     AmdPspBaseLibV2:RdSeed.obj
+ 0001:00000a95       AsmCpuidEx.0               0000000000001a95     BaseLib:CpuIdEx.obj
+ 0001:00000a9c       AsmCpuidEx.1               0000000000001a9c     BaseLib:CpuIdEx.obj
+ 0001:00000aa3       AsmCpuidEx.2               0000000000001aa3     BaseLib:CpuIdEx.obj
+ 0001:00000aac       AsmCpuidEx.3               0000000000001aac     BaseLib:CpuIdEx.obj
+ 0001:00000ab9       rn16_ok                    0000000000001ab9     BaseLib:RdRand.obj
+ 0001:00000acb       rn32_ok                    0000000000001acb     BaseLib:RdRand.obj
+ 0001:00000add       rn64_ok                    0000000000001add     BaseLib:RdRand.obj
+ 0001:00002ba8       SmmSupervisorGpExceptionHandler 0000000000003ba8 f   SmmSupervisor:SmmExceptionHandler.obj
+ 0001:00002bac       InitExceptionHandlerSpinLock 0000000000003bac f   SmmSupervisor:SmmExceptionHandler.obj
+ 0002:00000010       CommonInterruptEntryFixup  0000000000009010     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0002:00000018       HookAfterStubHeaderEndFixup 0000000000009018     SmmCpuExceptionHandlerLib:Xcode5ExceptionHandlerAsm.obj
+ 0002:00000170       SyscallIdNamePairs         0000000000009170     SmmSupervisor:SyscallDispatcher.obj
+ 0002:00000930       mPageAttributeTable        0000000000009930     SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0002:00001100       mMsrStarValue              000000000000a100     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001110       mMsrCstarValue             000000000000a110     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001138       mMsrStar64Value            000000000000a138     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001148       mMmSupvGsStore             000000000000a148     SmmSupervisor:SmmSupervisor.obj
+ 0002:00001194       mSmmEntrySize              000000000000a194     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0002:000011c0       mSmmSupvCr3                000000000000a1c0     SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0002:000011f8       mMaxSmmSupvPageTablePages  000000000000a1f8     SmmSupervisorMemMgmtLib:SmmSupervisorMemMgmtLib.obj
+ 0002:000011fc       mMemBlockListCursor        000000000000a1fc     SmmSupervisorMemMgmtLib:SmmSupervisorMemMgmtLib.obj
+ 0002:00001230       mJumpContext               000000000000a230     SmmSupervisor:AutoGen.obj
+ 0002:00001330       mDriverEntryPointStatus    000000000000a330     SmmSupervisor:AutoGen.obj
+ 0002:00001340       mMemBlockList              000000000000a340     SmmSupervisorMemMgmtLib:SmmSupervisorMemMgmtLib.obj
+ 0002:00001540       mSmmSupvPageTableStruct    000000000000a540     SmmSupervisorMemMgmtLib:SmmSupervisorMemMgmtLib.obj
+ 0004:00000000       $unwind$PspMmioRead        000000000001b000     AmdPspMmioLib:AmdPspMmioLib.obj
+ 0004:00000000       $unwind$SaveAndDisableInterrupts 000000000001b000     BaseLib:Cpu.obj
+ 0004:00000000       $unwind$PciCf8Read16       000000000001b000     BasePciCf8Lib:PciCf8Lib.obj
+ 0004:00000000       $unwind$PciCf8Read32       000000000001b000     BasePciCf8Lib:PciCf8Lib.obj
+ 0004:00000000       $unwind$PciCf8Read8        000000000001b000     BasePciCf8Lib:PciCf8Lib.obj
+ 0004:00000000       $unwind$PciCf8Write32      000000000001b000     BasePciCf8Lib:PciCf8Lib.obj
+ 0004:00000000       $unwind$FreePool           000000000001b000     SmmMemoryAllocationLib:MemoryAllocationLib.obj
+ 0004:00000000       $unwind$_ModuleEntryPoint  000000000001b000     UefiDriverEntryPoint:DriverEntryPoint.obj
+ 0004:00000000       $unwind$AllocateSmmSupvPages 000000000001b000     SmmSupervisorMemMgmtLib:SmmSupervisorMemMgmtLib.obj
+ 0004:00000000       $unwind$AllocateCopyOnePage 000000000001b000     SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0004:00000000       $unwind$SmmSupvSmiExit     000000000001b000     SmmSupervisor:SmmSupervisor.obj
+ 0004:00000008       $unwind$ProcessLibraryConstructorList 000000000001b008     SmmSupervisor:AutoGen.obj
+ 0004:00000018       $unwind$ReportDrtmInfo     000000000001b018     SmmSupervisor:SmmSupervisor.obj
+ 0004:00000028       $unwind$GetPspMboxLocation 000000000001b028     AmdPspBaseLibV2:AmdPspBaseLibV2.obj
+ 0004:00000028       $unwind$PreDrtmInfoSecureStore 000000000001b028     IhvDrtmLibAmd:IhvDrtmLib.obj
+ 0004:00000028       $unwind$InternalAllocateCopyPool 000000000001b028     SmmMemoryAllocationLib:MemoryAllocationLib.obj
+ 0004:00000028       $unwind$FlushTlbRange      000000000001b028     SmmCpuExceptionHandlerLib:PeiDxeSmmCpuException.obj
+ 0004:00000028       $unwind$CompareMemoryPolicy 000000000001b028     SmmSupervisor:SmmSupervisor.obj
+ 0004:00000028       $unwind$IsSyncTimerTimeout 000000000001b028     SmmSupervisor:SyncTimer.obj
+ 0004:00000034       $unwind$VerifyAndUpdatePageTbl 000000000001b034     SmmSupervisor:SmmSupervisor.obj
+ 0004:0000004c       $unwind$PostDrtmEntry      000000000001b04c     SmmSupervisor:SmmSupervisor.obj
+ 0004:0000005c       $unwind$AllocatePoolForGlobalData 000000000001b05c     SmmSupervisor:SmmSupervisor.obj
+ 0004:00000068       $unwind$SmmSupvSmiEntry    000000000001b068     SmmSupervisor:SmmSupervisor.obj
+ 0004:00000084       $unwind$PageTblReadyToLockCallback 000000000001b084     SmmSupervisor:SmmSupervisor.obj
+ 0004:00000098       $unwind$SocFamilyIdentificationCheck 000000000001b098     AmdSocBaseLib:AmdSocBaseLib.obj
+ 0004:00000098       $unwind$InitExceptionHandlerSpinLock 000000000001b098     SmmSupervisor:SmmExceptionHandler.obj
+ 0004:00000098       $unwind$SmmSupvSmmReadyToLockEventNotify 000000000001b098     SmmSupervisor:SmmSupervisor.obj
+ 0004:000000a0       $unwind$SmmSupervisorEntry 000000000001b0a0     SmmSupervisor:SmmSupervisor.obj
+ 0004:000000ac       $unwind$GetSmmSupervisorVersionAndSplValue 000000000001b0ac     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0004:000000b8       $unwind$SmmSupervisorInstallSmiHandler 000000000001b0b8     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0004:000000d4       $unwind$MicroSecondDelay   000000000001b0d4     AmdDxeTscTimerLib:AmdTscTimerLibShare.obj
+ 0004:000000d4       $unwind$IsIhvSmmSaveStateReadAllowed 000000000001b0d4     IhvSmmSaveStateSupervisionLib:IhvSmmSaveStateSupervisionLib.obj
+ 0004:000000d4       $unwind$InstallExceptionHandler 000000000001b0d4     SmmSupervisor:SmmSupervisorProtocol.obj
+ 0004:000000d4       $unwind$InitGdtTable       000000000001b0d4     SmmSupervisor:SmmSupvGdt.obj
+ 0004:000000e4       $unwind$InitializeSmmIdt   000000000001b0e4     SmmSupervisor:SmmExceptionHandler.obj
+ 0004:000000f0       $unwind$SyscallDispatcher  000000000001b0f0     SmmSupervisor:SyscallDispatcher.obj
+ 0004:00000110       $unwind$SmmSupvPspMboxSmmBufferAddressCallback 000000000001b110     IhvDrtmLibAmd:IhvDrtmLib.obj
+ 0004:00000110       $unwind$GetPiPcdProtocol   000000000001b110     DxePcdLib:DxePcdLib.obj
+ 0004:00000110       $unwind$AllocatePool       000000000001b110     SmmMemoryAllocationLib:MemoryAllocationLib.obj
+ 0004:00000110       $unwind$AllocateSmmSupvPageTableMemory 000000000001b110     SmmSupervisorMemMgmtLib:SmmSupervisorMemMgmtLib.obj
+ 0004:00000110       $unwind$GetPageTableBase   000000000001b110     SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0004:00000110       $unwind$SplitPage          000000000001b110     SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0004:00000110       $unwind$ReadLocalApicReg   000000000001b110     BaseXApicLib:BaseXApicLib.obj
+ 0004:00000118       $unwind$AsciiSPrint        000000000001b118     BasePrintLib:PrintLib.obj
+ 0004:00000120       $unwind$BasePrintLibSPrintMarker 000000000001b120     BasePrintLib:PrintLibInternal.obj
+ 0004:00000138       $unwind$BasePrintLibSPrint 000000000001b138     BasePrintLib:PrintLibInternal.obj
+ 0004:00000140       $unwind$SecurityPolicyCheck 000000000001b140     SmmSupervisorPolicyLib:SmmSupervisorPolicyMgmtLib.obj
+ 0004:00000158       $unwind$PopulateMemoryPolicyEntries 000000000001b158     SmmSupervisorPolicyLib:SmmSupervisorPolicyMgmtLib.obj
+ 0004:00000170       $unwind$GetPageTableEntry  000000000001b170     SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0004:0000018c       $unwind$CalculateMaximumSupportAddress 000000000001b18c     SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0004:0000018c       $unwind$GetApicId          000000000001b18c     BaseXApicLib:BaseXApicLib.obj
+ 0004:0000018c       $unwind$LocalApicBaseAddressMsrSupported 000000000001b18c     BaseXApicLib:BaseXApicLib.obj
+ 0004:00000194       $unwind$ConvertMemoryPageAttributes 000000000001b194     SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0004:000001ac       $unwind$GenMemPolicyAndShadowPageTable 000000000001b1ac     SmmSupervisorPageMgmtLib:SmmSupervisorPageMgmtLib.obj
+ 0004:000001cc       $unwind$BuildHeapBufferNodeLinked 000000000001b1cc     AmdHeapDxeLib:AmdHeapDxeLib.obj
+ 0004:000001dc       $unwind$AmdIdsDebugPrintCheckSupportAny 000000000001b1dc     AmdIdsDebugPrintLib:AmdIdsDebugPrintLib.obj
+ 0004:000001dc       $unwind$PostDrtmSecureValidation 000000000001b1dc     IhvDrtmLibAmd:IhvDrtmLib.obj
+ 0004:000001dc       $unwind$IhvGetPagesForProtection 000000000001b1dc     IhvPageProtectionLib:IhvPageProtectionLib.obj
+ 0004:000001f0       $unwind$AmdIdsDpRamPrint   000000000001b1f0     AmdIdsDebugPrintLib:AmdIdsDpRam.obj
+ 0004:000001f8       $unwind$InternalImageHandleToFvHandle 000000000001b1f8     DxeServicesLib:DxeServicesLib.obj
+ 0004:00000200       $unwind$InternalGetSectionFromFv 000000000001b200     DxeServicesLib:DxeServicesLib.obj
+ 0004:00000210       $unwind$GetSectionFromAnyFv 000000000001b210     DxeServicesLib:DxeServicesLib.obj
+ 0004:00000228       $unwind$InitializeCpuExceptionHandlers 000000000001b228     SmmCpuExceptionHandlerLib:SmmException.obj
+ 0004:00000234       $unwind$ExecuteDefaultHandler 000000000001b234     SmmCpuExceptionHandlerLib:PeiDxeSmmCpuException.obj
+ 0004:0000024c       $unwind$CommonExceptionHandlerWorker 000000000001b24c     SmmCpuExceptionHandlerLib:PeiDxeSmmCpuException.obj
+ 0004:00000268       $unwind$UpdateIdtTable     000000000001b268     SmmCpuExceptionHandlerLib:PeiDxeSmmCpuException.obj
+ 0004:00000280       $unwind$DumpCpuContext     000000000001b280     SmmCpuExceptionHandlerLib:ArchExceptionHandler.obj
+ 0004:00000290       $unwind$InternalPrintMessage 000000000001b290     SmmCpuExceptionHandlerLib:CpuExceptionCommon.obj
+ 0004:00000298       $unwind$CheckIoTrapOnAllCores 000000000001b298     IhvSmmSaveStateSupervisionLib:IhvSmmSaveStateSupervisionLib.obj
+ 0004:00000298       $unwind$IsIoReadWriteAllowed 000000000001b298     SmmPolicyGateLib:SmmPolicyGateLib.obj
+ 0004:000002ac       $unwind$IsMsrReadWriteAllowed 000000000001b2ac     SmmPolicyGateLib:SmmPolicyGateLib.obj
+ 0004:000002b8       $unwind$IsInstructionExecutionAllowed 000000000001b2b8     SmmPolicyGateLib:SmmPolicyGateLib.obj
+ 0004:000002c0       $unwind$FindSmmSupvEntry   000000000001b2c0     SmmSupvEntryLocateLibAmd:SmmSupvEntryLocateLib.obj
+ 0004:000002d8       $unwind$ParseSupervisionType 000000000001b2d8     IhvPageSupervisionLib:IhvPageSupervisionLib.obj
+ 0004:000002e4       $unwind$IhvGetPagesForSupervision 000000000001b2e4     IhvPageSupervisionLib:IhvPageSupervisionLib.obj
+ 0004:000002f0       $unwind$SendPspCommand     000000000001b2f0     AmdPspMboxLibV2:AmdPspMboxLibV2.obj
+ 0004:00000304       $unwind$PspMboxBiosDrtmInfo 000000000001b304     AmdPspMboxLibV2:AmdPspMboxLibV2.obj
+ 0004:00000310       $unwind$GetDrtmMmio        000000000001b310     SmmSupvPspMmioLib:SmmSupvPspMmioLib.obj
+ 0004:00000324       $unwind$GetAmdPspRegInfoEntry 000000000001b324     AmdPspRegBaseLib:AmdPspRegBaseLib.obj
+ 0004:0000033c       $unwind$GetPspMmioBase     000000000001b33c     AmdPspBaseLibV2:AmdPspBaseLibV2.obj

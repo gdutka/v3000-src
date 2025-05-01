@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010005
+  BASE_NAME             = SmbiosTypeAdd
+  FILE_GUID             = 14575e7c-03d7-4a62-9c01-4ebfbd48ba48
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = SmbiosTypeAddEntry
+
+[Sources]
+  SmbiosTypeAdd.h
+  SmbiosTypeAdd.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCommonPkg/AmdCommonPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseLib
+  DebugLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  MemoryAllocationLib
+  CommonSetupLib
+
+[Protocols]
+  gEfiSmbiosProtocolGuid
+  gEfiVariableArchProtocolGuid
+
+[Depex]
+  gEfiSmbiosProtocolGuid AND
+  gEfiVariableArchProtocolGuid

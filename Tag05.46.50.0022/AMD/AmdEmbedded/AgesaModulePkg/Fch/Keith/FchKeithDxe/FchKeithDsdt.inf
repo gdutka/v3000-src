@@ -1,0 +1,60 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchKeithDsdt
+  FILE_GUID                      = B3F9713B-70CC-43E9-BC34-D960C6F4ACC9
+  MODULE_TYPE                    = DXE_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = FchKeithDsdtInitEntry
+
+
+[sources]
+  FchKeithDsdt.c
+  FchKeithDsdt.h
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+
+[Guids]
+
+[Protocols]
+  gEfiAcpiSdtProtocolGuid                #CONSUMED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchUart0Irq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchUart1Irq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchUart2Irq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchUart3Irq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchUart4Irq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchI2c0Irq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchI2c1Irq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchI2c2Irq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchI2c3Irq
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchI2c4Irq
+
+[Depex]
+  gEfiPciRootBridgeIoProtocolGuid
+  AND
+  gFchInitProtocolGuid
+  AND
+  gEfiAcpiSdtProtocolGuid
+  AND
+  gAmdFchKeithDepexProtocolGuid
+
+

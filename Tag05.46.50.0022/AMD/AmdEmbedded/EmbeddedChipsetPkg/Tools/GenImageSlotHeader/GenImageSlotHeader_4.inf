@@ -1,0 +1,55 @@
+## @file
+# Auto Generate OemRomSig
+#
+#******************************************************************************
+#* Copyright (c) 2013, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GenImageSlotHeader_4
+  FILE_GUID                      = 623648E6-78F0-4075-8C43-BA218C78CB14
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 0.1
+
+  MODULE_AUTORUN_TOOL            = $(BIN_DIR)\$(BASE_NAME)
+  AUTORUN_PARAM                  = $(BUILD_DIR)\FV\ImageSlotHeader_4.fv
+
+[Sources]
+  GenImageSlotHeader_4.c
+  GenImageSlotHeader.h
+  Fletcher32.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  AmdPspFeaturePkg/AmdPspFeaturePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  DebugLib
+  PrintLib
+  BaseMemoryLib
+
+[Ppis]
+
+[Protocols]
+
+[Guids]
+
+[Pcd]
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashAbImageSlot2Priority
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashAbImageSlotUpdateRetries
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashAbImageSlotGlitchRetry
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashAbImageSlot4Base
+  gInsydeTokenSpaceGuid.PcdFlashAreaBaseAddress
+
+[BuildOptions]
+  MSFT:*_*_IA32_DLINK_FLAGS == /out:"$(BIN_DIR)\$(BASE_NAME).exe" /base:0x10000000 /NOLOGO /SUBSYSTEM:CONSOLE /NODEFAULTLIB /IGNORE:4086 /MAP /OPT:REF /DEBUG /MACHINE:I386 /LTCG Kernel32.lib libcmtd.lib libvcruntimed.lib libucrtd.lib Advapi32.lib
+  MSFT:*_*_*_CC_FLAGS = /wd4996 /D PLATFORM_NAME=$(PLATFORM_NAME)

@@ -1,0 +1,301 @@
++-------------------------------------------+
+| ZSC Firmware Release Notes - Rembrandt B0 |
++-------------------------------------------+
++---------------------------+
+| Version 255.69.46.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         02/11/22
+|
+| * Changelist
+|   - 5369485 Fixed UMC DramReady update mask
+|   - 5367563 Clock BB update
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.45.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         01/28/22
+|
+| * Changelist
+|   - 5356528 Z9 Resolution check and denial for res > 2k update
+|   - 5349430 [PMFW-8166] Update Z-state poll exit timer
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.44.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         01/20/22
+|
+| * Changelist
+|   - 5345876 Z9 Resolution check and denial for res > 2k
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.43.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         12/10/21
+|
+| * Changelist
+|   - 5300736 Added support for PCS3 and PCS4 RSMU FSDL
+|   - 5298397 Move AEB override in S and NS exit before DFX RSMU restore
+|   - 5297861 RSMU FSDL Updates for AEB override for all IPs
+|   - 5297838 DFCLK PLL update
+|   - 5295181 XGBE RSMU FSDL support
+|   - 5291972 Group MP1 and HSP fence
+|   - 5291397 Fix SMU hang
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.42.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         11/11/21
+|
+| * Changelist
+|   - 5262673 [PLAT-88551] Clear PSP Lock for secure parts
+|   - 5262663 [PLAT-91678] Fixed USB4 FSDL USB hang
+|   - 5258986 [PLAT-94753] Update Security Patch Level
+|   - 5254713 Add WRITESTB_REG macro 
+|   - 5242355 [PLAT-92594] Update UMC DramReady check
+|   - 5240361 Rollback 5227196 WA for PLAT-91678
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.41.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         10/15/21
+|
+| * Changelist
+|   - 5221434 [PLAT-91772] CLK IP FSDL changes + DS for LVP
+|   - 5220805 [PLAT-91724] USB4 FSDL update for USB_SAVE hang
+|   - 5218342 [DENBFW-2365] PCIE2/3_init FSDL update
+|   - 5216998 [PLAT-87427] Resubmit Update for MSMU SPL
+|   - 5210067 [PLAT-92053] Compress ZSCFW binary
+|   - 5208023 [PLAT-90955] PCIE2/3 CORE and PORT FSDL update
+|   - 5205758 [PLAT-82192] UMC DebugMisc check on Z-state entry
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.40.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         10/01/21
+|
+| * Changelist
+|   - 5202051 [PLAT-89749] LPAP Update.  AudioPLL set to REFCLK on exit
+|   - 5173850 [PLAT-90968] PCS FSDL to re-engage DXIO CG on interim Z9 cycles
+|   - 5167218 [PLAT-90760] Suppress dummy interrupt from IH
+|   - 5165144 [PLAT-90955] IP PCIE FSDL Update for USB4 z10 cycling
+|   - 5162004 [PLAT-89207] CDFX FSDL update to disable USB4 CG
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.39.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         09/02/21
+|
+| * Changelist
+|   - 5154884 Port CLK FSDL updates from RMB A0
+|   - 5154774 [PLAT-89904] Fix for restoring AGESA FSDL after Z9 cycle
+|   - 5150667 [PLAT-85689] CLK FSDL update for z10 audio playback support
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.38.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         08/30/21
+|
+| * Changelist
+|   - 5144967 [PLAT-85689] Fix ACP LPAP hang in Z9
+|   - 5144504 [PLAT-89680] Updated PCIE and AGESA FSDL files
+|   - 5134507 [PLAT-89297] Invoke AGESA FSDL on every z-state cycle
+|
++---------------------------+---------------------------------------------------
++--------------------------+
+| Version 255.69.37.0      |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         08/17/21
+|
+| * Changelist
+|   - 5123672 [PLAT-86104] Integrate AGESA PCIE FSDL
+|   - 5121825 [PLAT-88922] Fix bit mask in PCIE FSDL
+|
++---------------------------+---------------------------------------------------
++--------------------------+
+| Version 255.69.36.0      |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         08/10/21
+|
+| * Changelist
+|   - 5111773 Revert CLK FSDL due to screen flicker
+|   - 5088530 [PLAT-87427] Update MSMU Security Patch Level
+|   - 5070078 [PLAT-84570] Fix CPU Fan Full Speed entering Z9
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.35.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         07/09/21
+|
+| * Changelist
+|   - 5056971 [PMFW-7949] Additional 30us delay for PSI6 exit in low power mode
+|   - 5056950 Add additional API to MSMU compiler
+|   - 5056949 Add Artifactory script for release uploads
+|   - 5056948 Removed unused config file
+|   - 5056947 [PLAT-78287] Incorrect use of RMW in GFXOFF FSDL
+|   - 5056943 [PLAT-81170] Updated GFXOFF FSDL security policy functions
+|   - 5056646 [DEZSCFW-283] CLK FSDL update for clk assertion issue of df clk
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 255.69.34.0       |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         06/18/21
+|
+| General Changes
+| * Changelist
+|   - 5012757 [PLAT-84416] ZSC Versioning Update
+|   - 4868856 CLK BB IP Update for DDR5
+|   - 4983592/4980767 Add breakpoint to ZSCFW compiler
+|   - 4989173/4980714 Add fw-sign to ZSCFW compiler
+|
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.33.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         05/27/21
+|
+| General Changes
+|  - GFX_DLDO.Rmb.SecPolicy.fsdl update                        PLAT-83024/81170
+|  - Updated GFXOFF SecurityPolicy to use MP0_FW_INTF_alt_1    PLAT-83024/81170
+|  - zsc_counters.c GP_CNT_CONTROL fix
+|  - zsc_segment.pl RSMU update
+| * Files
+|  - //sysip/pma/zsc/branches/zsc_rmb_b0/fsdl/
++---------------------------+                                                                                                                                                         
++---------------------------+
+| Version 0.1.32.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         04/16/21
+|
+| General Changes
+|  - Clock update ported from RMB A0                                (CL4873459)
+|  - VRC Change                                                     (CL4897013)
+|  - Program VDD VID on z10 entry 
+| * Files
+|  - //sysip/pma/zsc/branches/zsc_rmb_b0/fsdl/
++---------------------------+                                                                                                                                                         
+| Version 0.1.31.0          |                                                                                                                                                         
++---------------------------+---------------------------------------------------                                                                                                      
+| * Date (mm/dd/yy)                                                                                                                                                                   
+|         04/01/21                                                                                                                                                                    
+|                                                                                                                                                                                     
+| General Changes                                                                                                                                                                     
+|  - UMC FSDL Update                                                 (CL4865748)                                                                                                      
+|  - Clock FSDL Update for Z10 Exit                                 (PLAT-79599)                                                                                                      
+|  - VRC FSDL Update for Latency tuning                              (CL4866715)                                                                                                      
+|  - RSMU FSDL Update to remove static command                       (CL4867334)                                                                                                      
+|  - VR Latency Tuning changes on exit                                                                                                                                                
+|  - Move PCS0 to soc_msmu6 for latency improvement                                                                                                                                   
+| * Files                                                                                                                                                                             
+|  - //sysip/pma/zsc/branches/zsc_rmb_b0/fsdl/
++---------------------------+--------------------------------------------------- 
++---------------------------+
+| Version 0.1.30.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         03/19/21
+|
+| General Changes
+|  - msmu compiler updates                                           (CL4831560)
+|  - RSMU FSDL update to align with bootcode                         (CL4826482)
+|  - IOHC FSDL Update                                                (CL4822784)
+|  - Fix USB save hang by correcting  pgfsm.c                    (DERMBVRF-1165)
+|
+| * Files
+|  - //sysip/pma/zsc/branches/zsc_rmb_b0/fsdl/
++---------------------------+
+| Version 0.1.29.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         03/01/21
+|
+| General Changes
+|  - using latest GC.SecurityPolicy#3                                (CL4780240)
+|  - Fixed RMW_SMN_REG in zsc_main.c and rmb_msmu_gfxoff_fsdl.c      (CL4788125)
+|  - updated breakpoint implementation for flexible resetting        (CL4799826)
+|  - fix inverted while loop condition in pgfsm.c                (DERMBVRF-1165)
+|  - added postcodes and breakpoint to zx_usb<#>.c
+|
+| * Files
+|  - //sysip/pma/zsc/branches/zsc_rmb_b0/fsdl/
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.28.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         02/18/21
+|
+| General Changes 0.1.27.0 from RMB A0
+|  - updated CLK IP FSDL from RMB A0 zx_clk.c#6                      (CL4758911)
+|  - updated UMC IP FSDL from RMB A0 zx_umc*.c#2                     (CL4762324)
+|  - zsc_setEntryBreakpoint implementation from 0.1.26.16            (CL4762333)
+|  - update PCIE IP FSDL from RMB A0 zx_pcie0.c#2                    (CL4758266)
+|  - AGPIO27_PCIE_RST1_L output value change                    (DEFCHFCHC-2517)
+|    - updated register name to acpi_lpc_pd_l_agpio27_pcie_rst1_l
+|
+| General Changes 0.1.28.0 from RMB A0
+|  - updated CLK IP FSDL from RMB A0 zsc_clk.c#3                     (CL4765346)
+|  - iomux slave-access adated to 32 bits rd/wr
+|  - GPIO27 setup moved to stage3_stage4 (right after PONR)
+|    - no debug postcodes ported over from 0.1.27.4
+|  - updated GC Security Polcy from //sysip/smu/doc/security/policy  (CL4767073)
+|  - updated GFXOFF FSDL from //sysip/pma/rembrandt/fsdl/gfxoff      (CL4770767)
+|
+| * Files
+|  - //sysip/pma/zsc/branches/zsc_rmb_b0/fsdl/
++---------------------------+---------------------------------------------------
++---------------------------+
+| Version 0.1.26.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         01/26/21
+|
+| General Changes
+|  - MP0/MP1 out of Sync on ZSC abort at IDLE check in Windows      (PLAT-76169)
+|  - Moved TSC sequence from STU wake to STU-to-NonSTU wake         (PLAT-75408)
+|
+| * Files
+|  - //sysip/pma/zsc/branches/zsc_rmb_b0/fsdl/
++---------------------------+---------------------------------------------------
+
++---------------------------+
+| Version 0.1.25.0          |
++---------------------------+---------------------------------------------------
+| * Date (mm/dd/yy)
+|         01/13/21
+|
+| General Changes
+|  - Integrated from //sysip/smu/smu-13/zsc_msmu/main/
+|    - Includes all changes from RMB A0 0.1.25.0 (LSD.7 changes)
+|    - uncommented usb4rt/usb4phy from zsc_segment.pl
+|    - ported over zx_*_psi_restore functions for ip/zx_vrc.c  
+|    - updated config.yaml to include usb_save functions
+|
+| * Files
+|  - //sysip/pma/zsc/branches/zsc_rmb_b0/fsdl/
++---------------------------+---------------------------------------------------
+

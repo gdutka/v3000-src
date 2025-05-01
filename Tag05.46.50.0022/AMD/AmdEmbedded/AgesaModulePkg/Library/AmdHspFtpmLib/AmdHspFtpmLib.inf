@@ -1,0 +1,48 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdHspFtpmLib
+  FILE_GUID                      = CC62C3DE-B661-45DA-8624-243912072A31
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdHspFtpmLib
+
+[Sources.common]
+  AmdHspFtpmLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  AmdBaseLib
+  IdsLib
+  AmdPspCommonLib
+  SmnAccessLib
+  HspLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFtpmTimeout1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFtpmTimeout2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitFastReg
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspMmioBase
+
+[Depex]
+

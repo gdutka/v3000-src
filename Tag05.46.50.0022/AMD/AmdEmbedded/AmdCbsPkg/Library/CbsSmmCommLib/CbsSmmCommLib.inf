@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CbsSmmCommLib
+  FILE_GUID                      = 1956d1ed-1985-4289-971c-97b806795ca6
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CbsSmmCommLib|DXE_DRIVER DXE_SMM_DRIVER
+
+[sources.common]
+  CbsSmmCommLib.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+
+[Guids]
+  gCbsSmmCommHandleGuid
+
+[Protocols]
+  gEfiSmmCommunicationProtocolGuid        #CONSUMES
+
+
+[Pcd]
+  gAmdCbsPkgTokenSpaceGuid.PcdCbsSmmCommunicationAddress
+  gAmdCbsPkgTokenSpaceGuid.PcdCbsSmmCommunicationBufferSize
+

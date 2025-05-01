@@ -1,0 +1,30 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GnbPciSegmentAccLib
+  FILE_GUID                      = 06D73C9A-ED7A-44A1-9352-C1D4F90CBA37
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = GnbPciAccLib
+
+
+[Sources]
+  GnbPciSegmentAccLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PciSegmentLib
+  AmdBaseLib
+  IdsLib
+  AmdS3SaveLib

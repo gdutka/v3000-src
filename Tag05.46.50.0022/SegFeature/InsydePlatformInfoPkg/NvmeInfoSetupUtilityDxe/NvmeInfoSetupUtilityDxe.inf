@@ -1,0 +1,81 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2021 - 2023, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                          = 0x00010005
+  BASE_NAME                            = NvmeInfoSetupUtilityDxe
+  FILE_GUID                            = 45982835-d04f-4745-bcfd-519e6bb2de7a
+  MODULE_TYPE                          = DXE_DRIVER
+  VERSION_STRING                       = 1.0
+  ENTRY_POINT                          = NvmeInfoEntry
+  UNLOAD_IMAGE                         = NvmeInfoUnload
+
+[Sources]
+  NvmeInfoSetupUtilityDxe.h
+  NvmeInfoSetupUtilityDxe.c
+  NvmeInfoFormset.h
+  NvmeInfoStr.uni
+  NvmeInfoVfr.vfr
+  
+  NvmeDetailDisplay.h
+  NvmeControllerInfo.c
+  NvmeNamespaceInfo.c
+  NvmeSmartInfo.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+  BaseLib
+  BaseMemoryLib
+  DevicePathLib
+  MemoryAllocationLib
+  PrintLib
+  HiiLib
+  SortLib
+  HiiExLib
+  BinarySearchExLib
+  BlockIoCapacityLib
+  DeviceInfoLookupDataLib
+  HiiStringIdManageLib
+  LanguageDataLib
+  NvmeInfoLib
+
+[Guids]
+  gH2ONvmeInfoFormsetGuid
+  gEfiIfrTianoGuid
+
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gEfiDiskInfoProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiNvmExpressPassThruProtocolGuid
+  gEfiHiiConfigAccessProtocolGuid
+  gEfiSetupUtilityApplicationProtocolGuid
+  gH2ONvmeInfoProtocolGuid
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OFormBrowserLocalTextDESupported|TRUE  ## CONSUMES
+  
+[FixedPcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ONvmeInfoLinkToFormsetGuid
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ONvmeDetailDisplayList
+  
+[Depex]
+  gEfiHiiConfigRoutingProtocolGuid

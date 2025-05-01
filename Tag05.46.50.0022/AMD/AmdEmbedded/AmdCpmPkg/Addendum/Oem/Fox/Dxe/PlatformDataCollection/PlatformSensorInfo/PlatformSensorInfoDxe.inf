@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME               = SensorInfoDxe
+  MODULE_TYPE             = DXE_DRIVER
+  FILE_GUID               = fe503ffe-497f-4a46-9ad2-fbddd253d5b1
+  ENTRY_POINT             = SensorInfoDxeEntry
+
+[Sources]
+  PlatformSensorInfoDxe.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  DebugLib
+  IoLib
+  MpmLib
+  PcdLib
+  TimerLib
+
+[Protocols]
+  gAmdMpmGetSensorInfoProtocol
+  gAmdCpmTableProtocolGuid
+
+[Guids]
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.EcRamBaseAddr
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironment98
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[Depex]
+  gAmdMpmDepexProtocolGuid AND
+  gAmdCpmTableProtocolGuid
+

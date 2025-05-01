@@ -1,0 +1,1015 @@
+## @file
+#  Platform Package Flash Description File
+#
+#******************************************************************************
+#* Copyright (c) 2015 - 2020, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+!import BaseTools/Conf/PackageBase.fdf
+!import MdeModulePkg/Package.fdf
+!import UefiCpuPkg/Package.fdf
+!import SecurityPkg/Package.fdf
+!import PcAtChipsetPkg/Package.fdf
+!import FatPkg/Package.fdf
+!import ShellBinPkg/Package.fdf
+!import ShellPkg/Package.fdf
+!import UnitTestFrameworkPkg/Package.fdf
+!import InsydeOemServicesPkg/Package.fdf
+!import InsydeModulePkg/Package.fdf
+!import InsydeSetupPkg/Package.fdf
+!import InsydeNetworkPkg/Package.fdf
+!import InsydeFlashDevicePkg/Package.fdf
+#[-start-220301-IB14740220-modify]#
+!import AgesaModulePkg/Package.fdf
+!import AmdCbsPkg/Package.fdf
+!import AmdCpmPkg/Package.fdf
+!import AmdSupervisorPkg/Package.fdf
+#[-end-220301-IB14740220-modify]#
+!import SegFeaturePkg/Package.fdf
+!import InsydeCrPkg/Package.fdf
+!import InsydeH2OUvePkg/Package.fdf
+!import InsydePostCodePkg/Package.fdf
+!import InsydeDebugAssistPkg/Package.fdf
+#[-start-210819-IB19520010-add]#
+# Workaround to avoid system hang when enter SETUP.
+!import InsydePlatformInfoPkg/Package.fdf
+#[-end-210819-IB19520010-add]#
+!import EmbeddedChipsetPkg/Package.fdf
+!import SioDummyPkg/Package.fdf
+!import AmdPspFeaturePkg/Package.fdf
+!import AmdCommonChipsetPkg/Package.fdf
+
+[Defines]
+#
+# Flash Layout definitions
+#
+
+DEFINE FLASH_16MB_OFFSET                                            = 0x01000000
+
+DEFINE FLASH_18MB_OFFSET                                            = 0x01200000
+
+!if $(VN_32M_AB_COMBO_CFG)  == YES
+  DEFINE FLASH_AREA_BASE_ADDRESS                                    = 0xFE000000
+  DEFINE FLASH_AREA_SIZE                                            = 0x02000000
+!endif
+
+!if $(L2A_ONLY)  == YES
+  DEFINE FLASH_AREA_BASE_ADDRESS                                    = 0xFE000000
+  DEFINE FLASH_AREA_SIZE                                            = 0x02000000
+!endif
+
+!if $(VN_16M_AB_CFG)  == YES
+  DEFINE FLASH_AREA_BASE_ADDRESS                                    = 0xFF000000
+  DEFINE FLASH_AREA_SIZE                                            = 0x01000000
+!endif
+
+DEFINE FLASH_REGION_FV_RECOVERY_OFFSET                              = 0x00000000
+DEFINE FLASH_REGION_FV_RECOVERY_SIZE                                = 0x00300000
+
+DEFINE FLASH_REGION_PEI_COMPRESSED_OFFESET                          = 0x006B0000
+
+!if $(BOOT_FROM_ROM) == NO
+  DEFINE FLASH_REGION_PEI_COMPRESSED_SIZE                           = 0x000E0000
+!else
+  DEFINE FLASH_REGION_PEI_COMPRESSED_SIZE                           = 0x00000000
+!endif
+
+!if $(L2A_ONLY) == YES
+  DEFINE FLASH_REGION_PEI_COMPRESSED_SIZE                           = 0x00300000
+!endif
+
+DEFINE FLASH_BASE                                                   = $(FLASH_AREA_BASE_ADDRESS)
+DEFINE FD_SIZE                                                      = $(FLASH_AREA_SIZE)
+
+DEFINE BLOCK_SIZE                                                   = 0x00001000
+DEFINE NUM_BLOCKS                                                   = $(FD_SIZE)/$(BLOCK_SIZE)
+DEFINE BANK1_NUM_BLOCKS                                             = $(FLASH_AREA_SIZE)/$(BLOCK_SIZE)
+
+!if $(L2A_ONLY) == YES
+DEFINE PEI_MEM_BASE                                                 = 0xFFD00000
+!else
+!if $(BOOT_FROM_ROM) == YES
+DEFINE PEI_MEM_BASE                                                 = $(PEI_FLASH_BASE)
+!else
+DEFINE PEI_MEM_BASE                                                 = 0x09B00000
+!endif
+!endif
+
+DEFINE PEI_MEM_SIZE                                                 = 0x00300000
+DEFINE PEI_BLOCK_SIZE                                               = 0x00001000
+DEFINE PEI_NUM_BLOCKS                                               = $(PEI_MEM_SIZE)/$(PEI_BLOCK_SIZE)
+
+!if $(MULTI_CONFIG_SUPPORT) == YES
+  DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_MULTICONFIG_SIZE    = 0x00004000
+!else
+  DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_MULTICONFIG_SIZE    = 0x00000000
+!endif
+
+DEFINE RECOVERYFV_NUM_BLOCKS                                        = $(PEI_MEM_SIZE) / 0x10000
+
+DEFINE FLASH_REGION_FVEC_OFFSET                                     = 0x00000000
+DEFINE FLASH_REGION_FVEC_SIZE                                       = 0x00000200
+
+# PSP SIG
+DEFINE FLASH_REGION_FVSIG_OFFSET                                    = 0x00020000
+DEFINE FLASH_REGION_FVSIG_SIZE                                      = 0x00001000
+
+# PD TI, it should check with EC SIG offset 0x10, 0x18, 0x20, 0x28, 0x30, 0x38
+DEFINE FLASH_REGION_PD_TI_0_OFFSET                                  = 0x00001000
+DEFINE FLASH_REGION_PD_TI_0_SIZE                                    = 0x00008000
+DEFINE FLASH_REGION_PD_TI_1_OFFSET                                  = 0x00009000
+DEFINE FLASH_REGION_PD_TI_1_SIZE                                    = 0x00008000
+DEFINE FLASH_REGION_PD_TI_2_OFFSET                                  = 0x00011000
+DEFINE FLASH_REGION_PD_TI_2_SIZE                                    = 0x00008000
+DEFINE FLASH_REGION_PD_TI_3_OFFSET                                  = 0x00021000
+DEFINE FLASH_REGION_PD_TI_3_SIZE                                    = 0x00008000
+DEFINE FLASH_REGION_PD_TI_4_OFFSET                                  = 0x00029000
+DEFINE FLASH_REGION_PD_TI_4_SIZE                                    = 0x00008000
+DEFINE FLASH_REGION_PD_TI_5_OFFSET                                  = 0x00031000
+DEFINE FLASH_REGION_PD_TI_5_SIZE                                    = 0x00008000
+DEFINE FLASH_REGION_PD_TI_6_OFFSET                                  = 0x00039000
+DEFINE FLASH_REGION_PD_TI_6_SIZE                                    = 0x00008000
+DEFINE FLASH_REGION_PD_TI_7_OFFSET                                  = 0x00041000
+DEFINE FLASH_REGION_PD_TI_7_SIZE                                    = 0x00008000
+DEFINE FLASH_REGION_PD_TI_8_OFFSET                                  = 0x00049000
+DEFINE FLASH_REGION_PD_TI_8_SIZE                                    = 0x00008000
+DEFINE FLASH_REGION_PD_TI_9_OFFSET                                  = 0x00051000
+DEFINE FLASH_REGION_PD_TI_9_SIZE                                    = 0x00008000
+DEFINE FLASH_REGION_PD_TI_10_OFFSET                                 = 0x00059000
+DEFINE FLASH_REGION_PD_TI_10_SIZE                                   = 0x00008000
+DEFINE FLASH_REGION_PD_TI_11_OFFSET                                 = 0x00061000
+DEFINE FLASH_REGION_PD_TI_11_SIZE                                   = 0x00008000
+
+# PD CY, it should check with EC SIG offset 0x40, 0x48, 0x50, 0x58, 0x60, 0x68
+DEFINE FLASH_REGION_PD_CY_0_OFFSET                                  = 0x00001000
+DEFINE FLASH_REGION_PD_CY_0_SIZE                                    = 0x00010000
+DEFINE FLASH_REGION_PD_CY_1_OFFSET                                  = 0x00011000
+DEFINE FLASH_REGION_PD_CY_1_SIZE                                    = 0x0000F000
+DEFINE FLASH_REGION_PD_CY_2_OFFSET                                  = 0x00021000
+DEFINE FLASH_REGION_PD_CY_2_SIZE                                    = 0x00010000
+DEFINE FLASH_REGION_PD_CY_3_OFFSET                                  = 0x00031000
+DEFINE FLASH_REGION_PD_CY_3_SIZE                                    = 0x00010000
+DEFINE FLASH_REGION_PD_CY_4_OFFSET                                  = 0x00041000
+DEFINE FLASH_REGION_PD_CY_4_SIZE                                    = 0x00010000
+DEFINE FLASH_REGION_PD_CY_5_OFFSET                                  = 0x00051000
+DEFINE FLASH_REGION_PD_CY_5_SIZE                                    = 0x00010000
+DEFINE FLASH_REGION_PD_CY_6_OFFSET                                  = 0x00061000
+DEFINE FLASH_REGION_PD_CY_6_SIZE                                    = 0x00010000
+
+DEFINE FLASH_REGION_RETIMER_OFFSET                                  = 0x00071000
+DEFINE FLASH_REGION_RETIMER_SIZE                                    = 0x00010000
+
+# EC ROM, it should check with EC SIG offset 0x00
+DEFINE FLASH_REGION_FVEC2_OFFSET                                    = 0x00081000
+DEFINE FLASH_REGION_FVEC2_SIZE                                      = 0x00040000
+
+DEFINE FLASH_REGION_PSPL1_OFFSET                                    = $(FLASH_REGION_FVEC2_OFFSET) + $(FLASH_REGION_FVEC2_SIZE)
+DEFINE FLASH_REGION_PSPL1_SIZE                                      = 0x00001000
+
+DEFINE FLASH_REGION_BACKUP_PSPL1_OFFSET                             = $(FLASH_REGION_PSPL1_OFFSET) + $(FLASH_REGION_PSPL1_SIZE)
+
+DEFINE FLASH_REGION_SOLT_HEADER_1_OFFSET                            = $(FLASH_REGION_BACKUP_PSPL1_OFFSET) + $(FLASH_REGION_PSPL1_SIZE)
+DEFINE FLASH_REGION_SOLT_HEADER_1_SIZE                              = 0x00001000
+
+!if $(L2A_ONLY)  == NO
+DEFINE FLASH_REGION_SOLT_HEADER_2_OFFSET                            = $(FLASH_REGION_SOLT_HEADER_1_OFFSET) + $(FLASH_REGION_SOLT_HEADER_1_SIZE)
+DEFINE FLASH_REGION_SOLT_HEADER_2_SIZE                              = 0x00001000
+
+DEFINE FLASH_REGION_PSPDIR_A_OFFSET                                 = $(FLASH_REGION_SOLT_HEADER_2_OFFSET) + $(FLASH_REGION_SOLT_HEADER_2_SIZE)
+!else
+DEFINE FLASH_REGION_PSPDIR_A_OFFSET                                 = $(FLASH_REGION_SOLT_HEADER_1_OFFSET) + $(FLASH_REGION_SOLT_HEADER_1_SIZE)
+!endif
+DEFINE FLASH_REGION_PSPDIR_A_SIZE                                   = 0x00380000
+
+DEFINE FLASH_REGION_BIOSDIR_A_OFFSET                                = $(FLASH_REGION_PSPDIR_A_OFFSET)+$(FLASH_REGION_PSPDIR_A_SIZE)
+DEFINE FLASH_REGION_BIOSDIR_A_SIZE                                  = 0x00048000
+
+!if $(L2A_ONLY)  == NO
+DEFINE FLASH_REGION_PSPDIR_B_OFFSET                                 = $(FLASH_REGION_BIOSDIR_A_OFFSET)+$(FLASH_REGION_BIOSDIR_A_SIZE)
+DEFINE FLASH_REGION_PSPDIR_B_SIZE                                   = 0x00380000
+
+DEFINE FLASH_REGION_BIOSDIR_B_OFFSET                                = $(FLASH_REGION_PSPDIR_B_OFFSET)+$(FLASH_REGION_PSPDIR_B_SIZE)
+DEFINE FLASH_REGION_BIOSDIR_B_SIZE                                  = 0x00048000
+
+DEFINE FLASH_REGION_PSP_NVRAM_OFFSET                                = $(FLASH_REGION_BIOSDIR_B_OFFSET)+$(FLASH_REGION_BIOSDIR_B_SIZE)
+!else
+DEFINE FLASH_REGION_PSP_NVRAM_OFFSET                                = $(FLASH_REGION_BIOSDIR_A_OFFSET)+$(FLASH_REGION_BIOSDIR_A_SIZE)
+!endif
+
+DEFINE FLASH_REGION_PSP_NVRAM_SIZE                                  = 0x00020000
+
+DEFINE FLASH_REGION_PSP_RPMC_NVRAM_OFFSET                           = $(FLASH_REGION_PSP_NVRAM_OFFSET)+$(FLASH_REGION_PSP_NVRAM_SIZE)
+DEFINE FLASH_REGION_PSP_RPMC_NVRAM_SIZE                             = 0x00040000
+
+#[-start-231102-IB20840032-remove]#
+# MPM Binaries Support
+!if $(VN_16M_AB_CFG)  == YES
+  DEFINE FLASH_REGION_MPM_86_SIZE                                   = 0x00000000
+  DEFINE FLASH_REGION_FVWLAN_FW_SIZE                                = 0x00000000
+!else
+  DEFINE FLASH_REGION_MPM_86_SIZE                                   = 0x001EA000 ## 1.9MB
+  DEFINE FLASH_REGION_FVWLAN_FW_SIZE                                = 0x001B4000 ## 1.7MB
+!endif
+
+#Instance 0 for A/B recovery
+DEFINE FLASH_REGION_MPM_86_OFFSET                                   = $(FLASH_REGION_PSP_RPMC_NVRAM_OFFSET)+$(FLASH_REGION_PSP_RPMC_NVRAM_SIZE)
+DEFINE FLASH_REGION_FVWLAN_FW_OFFSET                                = $(FLASH_REGION_MPM_86_OFFSET)+$(FLASH_REGION_MPM_86_SIZE)
+
+#Instance 1 for A/B recovery
+DEFINE FLASH_REGION_MPM_86_OFFSET_B                                 = $(FLASH_REGION_FVWLAN_FW_OFFSET)+$(FLASH_REGION_FVWLAN_FW_SIZE)
+DEFINE FLASH_REGION_FVWLAN_FW_OFFSET_B                              = $(FLASH_REGION_MPM_86_OFFSET_B)+$(FLASH_REGION_MPM_86_SIZE)
+
+DEFINE FLASH_REGION_MPM_87_PERSISTENT_OBJECT_OFFSET                 = $(FLASH_REGION_FVWLAN_FW_OFFSET_B)+$(FLASH_REGION_FVWLAN_FW_SIZE)
+DEFINE FLASH_REGION_MPM_87_PERSISTENT_OBJECT_SIZE                   = 0x00040000
+#[-end-231102-IB20840032-remove]#
+
+#[-start-231102-IB20840032-modify]#
+DEFINE FLASH_REGION_FVBVM_OFFSET                                    = $(FLASH_REGION_MPM_87_PERSISTENT_OBJECT_OFFSET)+$(FLASH_REGION_MPM_87_PERSISTENT_OBJECT_SIZE)
+#[-end-231102-IB20840032-modify]#
+!if $(BVM_SUPPORT) == YES
+DEFINE FLASH_REGION_FVBVM_SIZE                                      = 0x00002000
+!else
+DEFINE FLASH_REGION_FVBVM_SIZE                                      = 0x00000000
+!endif
+
+!if $(VN_32M_AB_COMBO_CFG) == YES
+DEFINE FLASH_REGION_PEI_FLASH_A_OFFSET                              = $(FLASH_18MB_OFFSET)
+!else
+DEFINE FLASH_REGION_PEI_FLASH_A_OFFSET                              = $(FLASH_REGION_FVBVM_OFFSET)+$(FLASH_REGION_FVBVM_SIZE)
+!endif
+
+!if $(L2A_ONLY)  == NO
+DEFINE FLASH_REGION_PEI_FLASH_A_SIZE                                = $(FLASH_REGION_PEI_COMPRESSED_SIZE)
+
+DEFINE FLASH_REGION_PEI_FLASH_B_OFFSET                              = $(FLASH_REGION_PEI_FLASH_A_OFFSET)+$(FLASH_REGION_PEI_FLASH_A_SIZE)
+DEFINE FLASH_REGION_PEI_FLASH_B_SIZE                                = $(FLASH_REGION_PEI_COMPRESSED_SIZE)
+!endif
+
+#
+#  1. To adjust FVMAIN space add new FVMAINRESERVE space.
+#     The RESERVE space just to reduce FVMAIN space size, so that it's able to speed up Dxe IPL.
+#     If FVMAIN size is not enough to build. You can adjust FLASH_REGION_FVMAIN_SIZE directly.
+#
+#  2. FULL_FVAMIN_UNSIGNED_SIZE includes FVMAIN, FVMAIN_RESERVE and FVUNSIGNED (OPTIONAL)
+#     you need build BIOS and then wait PatchFdf done and then according to ProjectMod.fdf to
+#     adjust this value to make sure the last region + last region size is equal to flash area size
+#     ex: $(FLASH_REGION_FVMAIN_HASH_OFFSET) + $(FLASH_REGION_FVMAIN_HASH_SIZE) == $(FLASH_AREA_SIZE)
+#
+#  |               |      |               |
+#  +---------------+      +---------------+
+#  | FVMAIN        |      | FVMAIN        |
+#  |               |      |               |
+#  |               | ==>  |               |
+#  |               |      +---------------+
+#  |               |      | FVMAIN RESERVE|
+#  |               |      |               |
+#  +---------------+      +---------------+
+#  | FVUNSIGNED    |      | FVUNSIGNED    |
+#  | (OPTIONAL)    |      | (OPTIONAL)    |
+#  +---------------+      +---------------+
+#
+#
+#[-start-220125-IB14740205-modify]#
+!if $(VN_32M_AB_COMBO_CFG) == YES
+DEFINE FULL_FVAMIN_UNSIGNED_SIZE                                    = 0x00BC8000
+!else
+DEFINE FULL_FVAMIN_UNSIGNED_SIZE                                    = 0x00513000
+!endif
+#[-end-220125-IB14740205-modify]#
+
+!if $(L2A_ONLY) == YES
+#[-start-220125-IB14740205-modify]#
+DEFINE FULL_FVAMIN_UNSIGNED_SIZE                                    = 0x00DE8000 - 0x160000
+#[-end-220125-IB14740205-modify]#
+
+DEFINE FLASH_REGION_FVMAIN_OFFSET                                   = $(FLASH_16MB_OFFSET)
+DEFINE FLASH_REGION_FVMAIN_SIZE                                     = 0x00380000
+
+!else
+DEFINE FLASH_REGION_FVMAIN_OFFSET                                   = $(FLASH_REGION_PEI_FLASH_B_OFFSET)+$(FLASH_REGION_PEI_FLASH_B_SIZE)
+!if $(VN_32M_AB_COMBO_CFG) == YES
+DEFINE FLASH_REGION_FVMAIN_SIZE                                     = 0x00600000
+!else
+DEFINE FLASH_REGION_FVMAIN_SIZE                                     = 0x003A0000
+!endif
+!endif
+
+DEFINE FLASH_REGION_FVMAINRESERVE_OFFSET                            = $(FLASH_REGION_FVMAIN_OFFSET)+$(FLASH_REGION_FVMAIN_SIZE)
+DEFINE FLASH_REGION_FVMAINRESERVE_SIZE                              = $(FULL_FVAMIN_UNSIGNED_SIZE) - $(FLASH_REGION_FVMAIN_SIZE)
+
+DEFINE FLASH_REGION_FVUNSIGNED_OFFSET                               = $(FLASH_REGION_FVMAINRESERVE_OFFSET) + $(FLASH_REGION_FVMAINRESERVE_SIZE)
+
+!if $(UNSIGNED_FV_SUPPORT) == YES
+#
+# The region size is customized by the project owner.
+# The default size is 64K.
+# It also share with FVMAIN RESERVE space,
+# so we need recalculate FVMAINRESERVE size and FVUNSIGED offset
+#
+DEFINE FLASH_REGION_FVUNSIGNED_SIZE                                 = 0x00010000
+DEFINE FLASH_REGION_FVMAINRESERVE_SIZE                              = $(FLASH_REGION_FVMAINRESERVE_SIZE) - $(FLASH_REGION_FVUNSIGNED_SIZE)
+DEFINE FLASH_REGION_FVUNSIGNED_OFFSET                               = $(FLASH_REGION_FVUNSIGNED_OFFSET)  - $(FLASH_REGION_FVUNSIGNED_SIZE)
+!else
+DEFINE FLASH_REGION_FVUNSIGNED_SIZE                                 = 0x00000000
+!endif
+
+DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_OEM_DMI_STORE_OFFSET  = $(FLASH_REGION_FVUNSIGNED_OFFSET)+$(FLASH_REGION_FVUNSIGNED_SIZE)
+DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_OEM_DMI_STORE_SIZE    = 0x00001000
+
+# FVUNSIGNED_TOTAL_SIZE for FVUNSIGNED contain multiple region
+DEFINE FLASH_REGION_FVUNSIGNED_TOTAL_SIZE                           = $(FLASH_REGION_FVUNSIGNED_SIZE) + $(FLASH_REGION_NV_COMMON_STORE_SUBREGION_OEM_DMI_STORE_SIZE)
+
+# Flash Region Layout Info (FDM)
+DEFINE FLASH_REGION_FLASH_DEVICE_MAP_OFFSET                         = $(FLASH_REGION_NV_COMMON_STORE_SUBREGION_OEM_DMI_STORE_OFFSET)+$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_OEM_DMI_STORE_SIZE)
+DEFINE FLASH_REGION_FLASH_DEVICE_MAP_SIZE                           = 0x00002000
+
+DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_MICROCODE_OFFSET      = $(FLASH_REGION_FLASH_DEVICE_MAP_OFFSET)+$(FLASH_REGION_FLASH_DEVICE_MAP_SIZE)
+DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_MICROCODE_SIZE        = 0x00001000
+DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_GPNVFV_OFFSET         = $(FLASH_REGION_NV_COMMON_STORE_SUBREGION_MICROCODE_OFFSET)+$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_MICROCODE_SIZE)
+DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_GPNVFV_SIZE           = 0x00001000
+DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_BVDT_OFFSET        = $(FLASH_REGION_NV_COMMON_STORE_SUBREGION_GPNVFV_OFFSET)+$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_GPNVFV_SIZE)
+DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_BVDT_SIZE          = 0x00001000
+DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_MSDM_DATA_OFFSET   = $(FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_BVDT_OFFSET)+$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_BVDT_SIZE)
+DEFINE FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_MSDM_DATA_SIZE     = 0x00001000
+
+DEFINE FLASH_REGION_NVSTORAGE_SUBREGION_NV_VARIABLE_STORE_OFFSET    = $(FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_MSDM_DATA_OFFSET)+$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_MSDM_DATA_SIZE)
+DEFINE FLASH_REGION_NVSTORAGE_SUBREGION_NV_VARIABLE_STORE_SIZE      = 0x00025000
+DEFINE FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_WORKING_OFFSET       = $(FLASH_REGION_NVSTORAGE_SUBREGION_NV_VARIABLE_STORE_OFFSET)+$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_VARIABLE_STORE_SIZE)
+DEFINE FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_WORKING_SIZE         = 0x00001000
+DEFINE FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_SPARE_OFFSET         = $(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_WORKING_OFFSET)+$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_WORKING_SIZE)
+DEFINE FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_SPARE_SIZE           = 0x00026000
+DEFINE FLASH_REGION_NVSTORAGE_SUBREGION_NV_FACTORY_COPY_OFFSET      = $(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_SPARE_OFFSET)+$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_SPARE_SIZE)
+DEFINE FLASH_REGION_NVSTORAGE_SUBREGION_NV_FACTORY_COPY_SIZE        = 0x00004000
+
+#
+# WARNING:
+# Preserve variable defaults region for variable defaults feature.
+#
+#[-start-220125-IB14740205-modify]#
+DEFINE FLASH_REGION_FV_VARIABLE_DEFAULTS_OFFSET                     = $(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FACTORY_COPY_OFFSET)+$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FACTORY_COPY_SIZE)
+DEFINE FLASH_REGION_FV_VARIABLE_DEFAULTS_SIZE                       = 0x00020000
+#[-end-220125-IB14740205-modify]#
+
+DEFINE FLASH_REGION_FVMAIN_HASH_OFFSET                              = $(FLASH_REGION_FV_VARIABLE_DEFAULTS_OFFSET)+$(FLASH_REGION_FV_VARIABLE_DEFAULTS_SIZE)
+DEFINE FLASH_REGION_FVMAIN_HASH_SIZE                                = 0x00001000
+
+!if $(L2A_ONLY) == YES
+DEFINE FLASH_REGION_PEI_FLASH_A_OFFSET                              = 0x1D00000
+DEFINE FLASH_REGION_PEI_FLASH_A_SIZE                                = 0x300000
+!endif
+
+################################################################################
+#
+# FD Section
+# The [FD] Section is made up of the definition statements and a
+# description of what goes into  the Flash Device Image.  Each FD section
+# defines one flash "device" image.  A flash device image may be one of
+# the following: Removable media bootable image (like a boot floppy
+# image,) an Option ROM image (that would be "flashed" into an add-in
+# card,) a System "Flash"  image (that would be burned into a system's
+# flash) or an Update ("Capsule") image that will be used to update and
+# existing system flash.
+#
+################################################################################
+
+[FD.Fox]
+BaseAddress   = $(FLASH_BASE) | gChipsetPkgTokenSpaceGuid.PcdH2OFlashAreaMainBaseAddress     #The base address of the FLASH Device.
+Size          = $(FD_SIZE) | gChipsetPkgTokenSpaceGuid.PcdH2OFlashAreaMainSize            #The size in bytes of the FLASH Device
+
+SET gInsydeTokenSpaceGuid.PcdFlashAreaBaseAddress = $(FLASH_AREA_BASE_ADDRESS)
+SET gInsydeTokenSpaceGuid.PcdFlashAreaSize        = $(FLASH_AREA_SIZE)
+
+ErasePolarity = 1
+BlockSize     = $(BLOCK_SIZE)
+NumBlocks     = $(NUM_BLOCKS)                                                     # Size = NumBlocks x BlockSize
+################################################################################
+#
+# Following are lists of FD Region layout which correspond to the locations of different
+# images within the flash device.
+#
+# Regions must be defined in ascending order and may not overlap.
+#
+# A Layout Region start with a eight digit hex offset (leading "0x" required) followed by
+# the pipe "|" character, followed by the size of the region, also in hex with the leading
+# "0x" characters. Like:
+# Offset|Size
+# PcdOffsetCName|PcdSizeCName
+# <Optional keyword "RegionType =  region-type-guid | region-id | attributes" >
+# <FV, DATA, or FILE>
+#
+################################################################################
+SET gChipsetPkgTokenSpaceGuid.PcdH2OFlashAreaPeiBaseAddress  = $(PEI_MEM_BASE)
+SET gChipsetPkgTokenSpaceGuid.PcdH2OFlashAreaPeiSize         = $(PEI_MEM_SIZE)
+SET gChipsetPkgTokenSpaceGuid.PcdH2OBootFirmwareVolumeBase   = $(PEI_MEM_BASE)
+SET gChipsetPkgTokenSpaceGuid.PcdH2OBootFirmwareVolumeSize   = $(PEI_MEM_SIZE)
+
+
+#
+# A/B Recovery
+#
+SET gAmdCpmPkgTokenSpaceGuid.PcdCpmBIOSPointAddressL2A       = $(FLASH_REGION_PSPDIR_A_SIZE)
+#[-start-240202-IB20840046-modify]#
+SET gAmdCpmPkgTokenSpaceGuid.PcdCpmPEIPointAddressL2A        = $(FLASH_REGION_PEI_FLASH_A_OFFSET)
+#[-end-240202-IB20840046-modify]#
+SET gAmdCpmPkgTokenSpaceGuid.PcdCpmPSPNVDataL2A              = $(FLASH_REGION_PSP_NVRAM_OFFSET)
+!if $(L2A_ONLY)  == NO
+SET gAmdCpmPkgTokenSpaceGuid.PcdCpmBIOSPointAddressL2B       = $(FLASH_REGION_PSPDIR_B_SIZE)
+#[-start-240202-IB20840046-modify]#
+SET gAmdCpmPkgTokenSpaceGuid.PcdCpmPEIPointAddressL2B        = $(FLASH_REGION_PEI_FLASH_B_OFFSET)
+#[-end-240202-IB20840046-modify]#
+SET gAmdCpmPkgTokenSpaceGuid.PcdCpmPSPNVDataL2B              = $(FLASH_REGION_PSP_NVRAM_OFFSET)
+!endif
+
+
+
+!if $(DP_TI_SELECT) == YES
+#
+# PD TI 0 - 11 with New EcSig_Ti.bin
+#
+$(FLASH_REGION_FVEC_OFFSET)|$(FLASH_REGION_FVEC_SIZE)
+gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEcBase|gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEcSize
+RegionType = gH2OFlashMapRegionEcGuid
+FILE = $(PROJECT_PKG)/Binary/EC/ECSig_Ti.bin
+
+$(FLASH_REGION_PD_TI_0_OFFSET)|$(FLASH_REGION_PD_TI_0_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI0Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI0Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S0_TIPD.bin
+
+$(FLASH_REGION_PD_TI_1_OFFSET)|$(FLASH_REGION_PD_TI_1_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI1Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI1Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S1_TIPD.bin
+
+$(FLASH_REGION_PD_TI_2_OFFSET)|$(FLASH_REGION_PD_TI_2_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI2Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI2Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S2_TIPD.bin
+
+# PSP SIG
+$(FLASH_REGION_FVSIG_OFFSET)|$(FLASH_REGION_FVSIG_SIZE)
+gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvSigBase|gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvSigSize
+FILE = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/OemRomSig.fv
+
+$(FLASH_REGION_PD_TI_3_OFFSET)|$(FLASH_REGION_PD_TI_3_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI3Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI3Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S3_TIPD.bin
+
+$(FLASH_REGION_PD_TI_4_OFFSET)|$(FLASH_REGION_PD_TI_4_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI4Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI4Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S4_TIPD.bin
+
+$(FLASH_REGION_PD_TI_5_OFFSET)|$(FLASH_REGION_PD_TI_5_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI5Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI5Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S5_TIPD.bin
+
+$(FLASH_REGION_PD_TI_6_OFFSET)|$(FLASH_REGION_PD_TI_6_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI6Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI6Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S6_TIPD.bin
+
+$(FLASH_REGION_PD_TI_7_OFFSET)|$(FLASH_REGION_PD_TI_7_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI7Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI7Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S7_TIPD.bin
+
+$(FLASH_REGION_PD_TI_8_OFFSET)|$(FLASH_REGION_PD_TI_8_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI8Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI8Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S8_TIPD.bin
+
+$(FLASH_REGION_PD_TI_9_OFFSET)|$(FLASH_REGION_PD_TI_9_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI9Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI9Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S9_TIPD.bin
+
+$(FLASH_REGION_PD_TI_10_OFFSET)|$(FLASH_REGION_PD_TI_10_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI10Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI10Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S10_TIPD.bin
+
+$(FLASH_REGION_PD_TI_11_OFFSET)|$(FLASH_REGION_PD_TI_11_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI11Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDTI11Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/S11_TIPD.bin
+!endif
+
+!if $(DP_CY_SELECT) == YES
+#
+# PD CY 0 - 7 with ECSig_Cy.bin
+#
+$(FLASH_REGION_FVEC_OFFSET)|$(FLASH_REGION_FVEC_SIZE)
+gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEcBase|gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEcSize
+RegionType = gH2OFlashMapRegionEcGuid
+FILE = $(PROJECT_PKG)/Binary/EC/ECSig_Cy.bin
+
+$(FLASH_REGION_PD_CY_0_OFFSET)|$(FLASH_REGION_PD_CY_0_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY0Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY0Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/CY_PD1.bin
+
+$(FLASH_REGION_PD_CY_1_OFFSET)|$(FLASH_REGION_PD_CY_1_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY1Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY1Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/CY_PD2.bin
+
+# PSP SIG
+$(FLASH_REGION_FVSIG_OFFSET)|$(FLASH_REGION_FVSIG_SIZE)
+gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvSigBase|gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvSigSize
+FILE = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/OemRomSig.fv
+
+$(FLASH_REGION_PD_CY_2_OFFSET)|$(FLASH_REGION_PD_CY_2_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY2Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY2Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/CY_PD3.bin
+
+$(FLASH_REGION_PD_CY_3_OFFSET)|$(FLASH_REGION_PD_CY_3_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY3Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY3Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/CY_PD4.bin
+
+$(FLASH_REGION_PD_CY_4_OFFSET)|$(FLASH_REGION_PD_CY_4_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY4Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY4Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/CY_PD5.bin
+
+$(FLASH_REGION_PD_CY_5_OFFSET)|$(FLASH_REGION_PD_CY_5_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY5Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY5Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/CY_PD6.bin
+
+$(FLASH_REGION_PD_CY_6_OFFSET)|$(FLASH_REGION_PD_CY_6_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY6Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPDCY6Size
+FILE = $(PROJECT_PKG)/Binary/PD/B0/CY_PD7.bin
+
+!endif
+
+#
+# Parade PS8830 retimer binary
+#
+$(FLASH_REGION_RETIMER_OFFSET)|$(FLASH_REGION_RETIMER_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashRetimerBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashRetimerSize
+FILE = $(PROJECT_PKG)/Binary/Retimer/PS8830.bin
+
+#
+# EC ROM
+#
+$(FLASH_REGION_FVEC2_OFFSET)|$(FLASH_REGION_FVEC2_SIZE)
+gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEc2Base|gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEc2Size
+RegionType = gH2OFlashMapRegionEcGuid
+FILE = $(PROJECT_PKG)/Binary/EC/RmbCombEC.bin
+
+$(FLASH_REGION_PSPL1_OFFSET)|$(FLASH_REGION_PSPL1_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPSPL1HdrBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPSPL1HdrSize
+
+$(FLASH_REGION_BACKUP_PSPL1_OFFSET)|$(FLASH_REGION_PSPL1_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashBackupPSPL1HdrBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPSPL1HdrSize
+
+$(FLASH_REGION_SOLT_HEADER_1_OFFSET)|$(FLASH_REGION_SOLT_HEADER_1_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashImageSlot1HdrBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashImageSlot1HdrSize
+
+!if $(L2A_ONLY)  == NO
+$(FLASH_REGION_SOLT_HEADER_2_OFFSET)|$(FLASH_REGION_SOLT_HEADER_2_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashImageSlot2HdrBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashImageSlot2HdrSize
+!endif
+
+$(FLASH_REGION_PSPDIR_A_OFFSET)|$(FLASH_REGION_PSPDIR_A_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspDirABase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspDirASize
+
+$(FLASH_REGION_BIOSDIR_A_OFFSET)|$(FLASH_REGION_BIOSDIR_A_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashBiosDirABase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashBiosDirASize
+
+!if $(L2A_ONLY)  == NO
+$(FLASH_REGION_PSPDIR_B_OFFSET)|$(FLASH_REGION_PSPDIR_B_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspDirBBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspDirBSize
+RegionType = gH2OFlashMapRegionUnknownGuid
+
+$(FLASH_REGION_BIOSDIR_B_OFFSET)|$(FLASH_REGION_BIOSDIR_B_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashBiosDirBBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashBiosDirBSize
+RegionType = gH2OFlashMapRegionUnknownGuid
+!endif
+
+$(FLASH_REGION_PSP_NVRAM_OFFSET)|$(FLASH_REGION_PSP_NVRAM_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspNvRamBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspNvRamSize
+FILE = AgesaModulePkg/Firmwares/RMB/PspNvram_RMB.bin
+
+$(FLASH_REGION_PSP_RPMC_NVRAM_OFFSET)|$(FLASH_REGION_PSP_RPMC_NVRAM_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspRpmcNvRamBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspRpmcNvRamSize
+
+#[-start-231102-IB20840032-remove]#
+!if $(VN_32M_AB_COMBO_CFG) == YES
+$(FLASH_REGION_MPM_86_OFFSET)|$(FLASH_REGION_MPM_86_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashMpmEntry86Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashMpmEntry86Size
+FILE = AgesaModulePkg/Firmwares/RMB/TypeId0x86_MTK_MPMDram_RMB.sbin
+
+$(FLASH_REGION_FVWLAN_FW_OFFSET)|$(FLASH_REGION_FVWLAN_FW_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashWlanFwBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashWlanFwSize
+FILE = AgesaModulePkg/Firmwares/RMB/TypeId0x88_MTK_WLAN_RMB.sbin
+
+$(FLASH_REGION_MPM_86_OFFSET_B)|$(FLASH_REGION_MPM_86_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashMpmEntry86BaseB|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashMpmEntry86Size
+FILE = AgesaModulePkg/Firmwares/RMB/TypeId0x86_MTK_MPMDram_RMB.sbin
+
+
+$(FLASH_REGION_FVWLAN_FW_OFFSET_B)|$(FLASH_REGION_FVWLAN_FW_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashWlanFwBaseB|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashWlanFwSize
+FILE = AgesaModulePkg/Firmwares/RMB/TypeId0x88_MTK_WLAN_RMB.sbin
+!endif
+
+$(FLASH_REGION_MPM_87_PERSISTENT_OBJECT_OFFSET)|$(FLASH_REGION_MPM_87_PERSISTENT_OBJECT_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashMpmEntry87Base|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashMpmEntry87Size
+#[-end-231102-IB20840032-remove]#
+
+!if gPlatformPkgTokenSpaceGuid.PcdBvmSupport
+$(FLASH_REGION_FVBVM_OFFSET)|$(FLASH_REGION_FVBVM_SIZE)
+gPlatformPkgTokenSpaceGuid.PcdFlashFvBvmBase|gPlatformPkgTokenSpaceGuid.PcdFlashFvBvmSize
+FILE = $(PROJECT_PKG)/Binary/BVM/Bvm.bin
+!endif
+
+!if $(L2A_ONLY)  == NO
+SET gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPeiFlashABase  = $(FLASH_BASE) + $(FLASH_REGION_PEI_FLASH_A_OFFSET)
+SET gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPeiFlashABase  = $(FLASH_REGION_PEI_FLASH_A_SIZE)
+$(FLASH_REGION_PEI_FLASH_A_OFFSET)|$(FLASH_REGION_PEI_FLASH_A_SIZE)
+gInsydeTokenSpaceGuid.PcdFlashFvRecoveryBase|gInsydeTokenSpaceGuid.PcdFlashFvRecoverySize
+RegionType = gH2OFlashMapRegionBootFvGuid
+#[-start-230504-IB14740286-remove]#
+#FV = PEI_COMPACT
+#[-end-230504-IB14740286-remove]#
+
+
+$(FLASH_REGION_PEI_FLASH_B_OFFSET)|$(FLASH_REGION_PEI_FLASH_B_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPeiFlashBBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPeiFlashBSize
+RegionType = gH2OFlashMapRegionBootFvGuid
+#[-start-230504-IB14740286-remove]#
+#FV = PEI_COMPACT
+#[-end-230504-IB14740286-remove]#
+!endif
+
+$(FLASH_REGION_FVMAIN_OFFSET)|$(FLASH_REGION_FVMAIN_SIZE)
+gInsydeTokenSpaceGuid.PcdFlashFvMainBase|gInsydeTokenSpaceGuid.PcdFlashFvMainSize
+#
+# "RegionType =  region-type-guid | region-id | attributes " is a keyword to assign value to FDM entry.
+# This file format (FDM) is used for Flash Device Map regions, which describe the layout of a Flash Device (.fd) image.
+# The layout information consists of a header and then an array of flash device region entries.
+# Each flash device region entry describes the region type, the region identifier, the region offset (relative to the start of the image) and the size of the region.
+#
+# region-type-guid          GUID that specify region type
+# region-id                 For Firmware Volume : Please assign GUID to identify DXE FV
+#
+# attributes                If H2O_FLASH_DEVICE_MAP_ENTRY_ATTRIB_MUTABLE (bit 0) is set,
+#                           the region contents can be updated without updating the corresponding Hash value.
+#
+#                           If If H2O_FLASH_DEVICE_MAP_ENTRY_ATTRIB_IGNORE  (bit 1) is set,
+#                           the region contents should be ignored.
+#
+# NOTICE :  1. Please assign GUID gH2OFlashMapRegionDxeFvGuid to DXE FV
+#           2. Please assign PEI FV to gH2OFlashMapRegionBootFvGuid region type
+#           3. Default attribute is set to H2O_FLASH_DEVICE_MAP_ENTRY_ATTRIB_MUTABLE.
+#
+!if gInsydeTokenSpaceGuid.PcdH2OFdmChainOfTrustSupported
+RegionType = gH2OFlashMapRegionFvGuid | gH2OFlashMapRegionDxeFvGuid | 0
+!else
+RegionType = gH2OFlashMapRegionFvGuid | gH2OFlashMapRegionDxeFvGuid
+!endif
+FV = FVMAIN_COMPACT
+
+$(FLASH_REGION_FVMAINRESERVE_OFFSET)|$(FLASH_REGION_FVMAINRESERVE_SIZE)
+gPlatformPkgTokenSpaceGuid.PcdFlashFvMainReserveBase|gPlatformPkgTokenSpaceGuid.PcdFlashFvMainReserveSize
+
+!if $(UNSIGNED_FV_SUPPORT) == YES
+$(FLASH_REGION_FVUNSIGNED_OFFSET)|$(FLASH_REGION_FVUNSIGNED_SIZE)
+gInsydeTokenSpaceGuid.PcdFlashUnsignedFvRegionBase|gInsydeTokenSpaceGuid.PcdFlashUnsignedFvRegionSize
+RegionType = gH2OFlashMapRegionFvGuid | gH2OFlashMapRegionUnsignedFvGuid
+#Unsigned FV
+FV = UNSIGNEDFV
+SET gInsydeTokenSpaceGuid.PcdEndOfFlashUnsignedFvRegionOffset = $(FLASH_REGION_FVUNSIGNED_OFFSET) + $(FLASH_REGION_FVUNSIGNED_TOTAL_SIZE) - 1
+SET gInsydeTokenSpaceGuid.PcdEndOfFlashUnsignedFvRegionTotalSize = $(FLASH_REGION_FVUNSIGNED_TOTAL_SIZE)
+!endif
+
+$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_OEM_DMI_STORE_OFFSET)|$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_OEM_DMI_STORE_SIZE)
+gInsydeTokenSpaceGuid.PcdFlashNvStorageDmiBase|gInsydeTokenSpaceGuid.PcdFlashNvStorageDmiSize
+RegionType = gH2OFlashMapRegionSmbiosUpdateGuid
+DATA = {
+  0x24, 0x44, 0x4D, 0x49        # $DMI
+}
+
+$(FLASH_REGION_FLASH_DEVICE_MAP_OFFSET)|$(FLASH_REGION_FLASH_DEVICE_MAP_SIZE)
+gInsydeTokenSpaceGuid.PcdH2OFlashDeviceMapStart|gInsydeTokenSpaceGuid.PcdH2OFlashDeviceMapSize
+RegionType = gH2OFlashMapRegionFlashMapGuid
+FILE = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/FOX.fdm
+
+$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_BVDT_OFFSET)|$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_BVDT_SIZE)
+gInsydeTokenSpaceGuid.PcdFlashNvStorageBvdtBase|gInsydeTokenSpaceGuid.PcdFlashNvStorageBvdtSize
+RegionType = gH2OFlashMapRegionBvdtGuid
+FILE = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/Bvdt.bin
+
+$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_MSDM_DATA_OFFSET)|$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_NV_MSDM_DATA_SIZE)
+gInsydeTokenSpaceGuid.PcdFlashNvStorageMsdmDataBase|gInsydeTokenSpaceGuid.PcdFlashNvStorageMsdmDataSize
+RegionType = gH2OFlashMapRegionMsdmGuid
+
+$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_VARIABLE_STORE_OFFSET)|$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_VARIABLE_STORE_SIZE)
+gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase|gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableSize
+!if gInsydeTokenSpaceGuid.PcdH2OFdmChainOfTrustSupported
+RegionType = gH2OFlashMapRegionVarGuid | 0
+!else
+RegionType = gH2OFlashMapRegionVarGuid
+!endif
+FILE = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/NvStore.bin
+
+$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_WORKING_OFFSET)|$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_WORKING_SIZE)
+gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase|gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize
+RegionType = gH2OFlashMapRegionFtwStateGuid
+#NV_FTW_WORKING
+FILE = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/FtwWork.bin
+
+$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_SPARE_OFFSET)|$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FTW_SPARE_SIZE)
+gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase|gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize
+RegionType = gH2OFlashMapRegionFtwBackupGuid
+
+$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FACTORY_COPY_OFFSET)|$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FACTORY_COPY_SIZE)
+gInsydeTokenSpaceGuid.PcdFlashNvStorageFactoryCopyBase|gInsydeTokenSpaceGuid.PcdFlashNvStorageFactoryCopySize
+RegionType = gH2OFlashMapRegionVarDefaultGuid | gH2OFlashMapRegionFactoryCopyGuid
+!if gInsydeTokenSpaceGuid.PcdH2OSecureBootSupported
+FILE = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/FactoryCopy.bin
+!endif
+
+!if $(MULTI_CONFIG_SUPPORT) == YES
+$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_MULTICONFIG_OFFSET)|$(FLASH_REGION_NV_COMMON_STORE_SUBREGION_MULTICONFIG_SIZE)
+gInsydeTokenSpaceGuid.PcdFlashNvStorageMultiConfigBase|gInsydeTokenSpaceGuid.PcdFlashNvStorageMultiConfigSize
+RegionType = gH2OFlashMapRegionMultiConfigGuid
+FILE = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/MultiConfig.bin
+!endif
+
+$(FLASH_REGION_FV_VARIABLE_DEFAULTS_OFFSET)|$(FLASH_REGION_FV_VARIABLE_DEFAULTS_SIZE)
+gInsydeTokenSpaceGuid.PcdFlashNvStorageVariableDefaultsBase|gInsydeTokenSpaceGuid.PcdFlashNvStorageVariableDefaultsSize
+!if gInsydeTokenSpaceGuid.PcdH2OFdmChainOfTrustSupported
+RegionType = gH2OFlashMapRegionVarDefaultGuid | 0 | 0
+!else
+RegionType = gH2OFlashMapRegionVarDefaultGuid
+!endif
+FILE = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/VarDefault.varrc
+
+$(FLASH_REGION_FVMAIN_HASH_OFFSET)|$(FLASH_REGION_FVMAIN_HASH_SIZE)
+gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashFvMainHashBase|gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashFvMainHashSize
+
+!if $(L2A_ONLY)  == YES
+SET gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPeiFlashABase  = $(FLASH_BASE) + $(FLASH_REGION_PEI_FLASH_A_OFFSET)
+SET gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPeiFlashABase  = $(FLASH_REGION_PEI_FLASH_A_SIZE)
+$(FLASH_REGION_PEI_FLASH_A_OFFSET)|$(FLASH_REGION_PEI_FLASH_A_SIZE)
+gInsydeTokenSpaceGuid.PcdFlashFvRecoveryBase|gInsydeTokenSpaceGuid.PcdFlashFvRecoverySize
+RegionType = gH2OFlashMapRegionBootFvGuid
+FV = RECOVERYFV
+!endif
+
+[FV.PEI_COMPACT]
+  FvAlignment        = 128
+  ERASE_POLARITY     = 1
+  ERASE_POLARITY     = 1
+  MEMORY_MAPPED      = TRUE
+  STICKY_WRITE       = TRUE
+  LOCK_CAP           = TRUE
+  LOCK_STATUS        = TRUE
+  WRITE_DISABLED_CAP = TRUE
+  WRITE_ENABLED_CAP  = TRUE
+  WRITE_STATUS       = TRUE
+  WRITE_LOCK_CAP     = TRUE
+  WRITE_LOCK_STATUS  = TRUE
+  READ_DISABLED_CAP  = TRUE
+  READ_ENABLED_CAP   = TRUE
+  READ_STATUS        = TRUE
+  READ_LOCK_CAP      = TRUE
+  READ_LOCK_STATUS   = TRUE
+
+  #
+  # 1) BaseTools/Conf/PackageBase.fdf use "PE32 Align=32" settings for PEI / PEI_CORE
+  #    According to PI Specification Vol. 3, 3.2.3 Firmware File,
+  #    FFS only support 0, 8, 16, 128, 512, 1024, ... align
+  #    It will cause the PEIM/PEI_CORE FFS alignment is 128, and th FV alignment will become to 128 alignment
+  #    (check RECOVERYFV.Fv.txt in Build FV folder)
+  #
+  #    [Rule.Common.PEI_CORE]
+  #    FILE PEI_CORE = $(NAMED_GUID)            {
+  #      PE32       PE32     Align = 32       $(INF_OUTPUT)/$(MODULE_NAME).efi
+  #      UI       STRING="$(MODULE_NAME)" Optional
+  #      VERSION  STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+  #    }
+  #
+  # 2) When using GUIDED section to compress FV_IMAGE, the FV_IMAGE will been a RAW section to
+  #    make FV_IMAGE is 128 alignment
+  #    FV\Ffs\20bc8ac9-94d1-4208-ab28-5d673fd73487PEI_COMPACT\20bc8ac9-94d1-4208-ab28-5d673fd73487SEC1.guided.dummy
+  #
+  # 3) Therefore, CompressBios.bat will
+  #    3.1) Split the dummy file to two file
+  #         20bc8ac9-94d1-4208-ab28-5d673fd73487SEC1.guided.dummy.1 (PAD section; unncessary 0x80 bytes)
+  #         20bc8ac9-94d1-4208-ab28-5d673fd73487SEC1.guided.dummy.2 (origin RECOVERYFV.FV)
+  #    3.2) call CompressBios.exe to compress the 20bc8ac9-94d1-4208-ab28-5d673fd73487SEC1.guided.dummy.2
+  #
+#[-start-231129-IB14740308-remove]#
+#  FILE RAW = 20bc8ac9-94d1-4208-ab28-5d673fd73487 {
+#    SECTION GUIDED  991EFAC0-E260-416B-A4B8-3B153072B804 PROCESSING_REQUIRED = FALSE {  # AmdTools\CompressBios.bat
+#      SECTION  ALIGN=128 FV_IMAGE = RECOVERYFV
+#    }
+#  }
+#[-end-231129-IB14740308-remove]#
+
+################################################################################
+#
+# START FIRMWARE VOLUME SECTIONS
+#
+################################################################################
+[FV.PEIPLATFORMFV]
+BlockSize          = 0x1000
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+[FV.RECOVERYFV]
+FvBaseAddress = $(PEI_MEM_BASE)
+NumBlocks     = $(RECOVERYFV_NUM_BLOCKS)
+
+#[-start-220301-IB14740220-remove]#
+#!if $(LPDDR5) == YES
+#  !include AgesaModulePkg/AgesaFp7RmbModulePkg.pei.inc.fdf
+#!else
+#  !include AgesaModulePkg/AgesaFp7r2RmbModulePkg.pei.inc.fdf
+#!endif
+#[-end-220301-IB14740220-remove]#
+
+#[-start-220221-IB14740215-remove]#
+#!if gSioGuid.PcdSioDummySupported
+#  !disable INF SioDummyPkg/SioDummyPei/SioDummyPei.inf
+#!endif
+#[-end-220221-IB14740215-remove]#
+
+
+#[-start-220301-IB14740220-remove]#
+#  !include $(CBS_DSC_FDF_RELTIVE_PATH)/CbsRembrandt.pei.inc.fdf
+#[-end-220301-IB14740220-remove]#
+
+FILE FREEFORM = 98E145D7-1BDC-4636-ABCF-7CBCEF7B668D {
+  SECTION RAW = $(CHIPSET_PKG)/Binary/LegacyVideoRom/RmbGenericVbios.bin
+}
+
+!if $(USE_FAST_CRISIS_RECOVERY) == NO
+  INF $(CHIPSET_PKG)/GfxInitPei/GfxInitPei.inf
+
+  FILE FREEFORM = 7CE1ED80-F762-4218-8270-F7133706EB36 {
+    SECTION RAW = $(CHIPSET_PKG)/GfxInitPei/Logo/Insyde.bmp
+  }
+
+  FILE PEIM = F922DD8D-400C-43f6-951B-93673D73601F {
+    SECTION PEI_DEPEX = $(CHIPSET_PKG)/Binary/UefiGop/AmdIA32GenericGop.depex
+    SECTION PE32 = $(CHIPSET_PKG)/Binary/UefiGop/AmdIa32GenericGop.efi
+  }
+!endif
+
+FILE FV_IMAGE = 7DCAC77F-96F9-4AE4-AD53-5541F2870767 {
+  SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
+      SECTION FV_IMAGE = PEIPLATFORMFV
+  }
+}
+[FV.BACKUPFV]
+
+################################################################################
+[FV.DXEPLATFORMFV]
+BlockSize          = 0x1000
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+[FV.DXEFV]
+#[-start-220301-IB14740220-remove]#
+#!if $(LPDDR5) == YES
+#  !include AgesaModulePkg/AgesaFp7RmbModulePkg.dxe.inc.fdf
+#!else
+#  !include AgesaModulePkg/AgesaFp7r2RmbModulePkg.dxe.inc.fdf
+#!endif
+#[-end-220301-IB14740220-remove]#
+
+!if $(AMD_APP_INSTEAD_EFI_SHELL_SUPPORT) == YES
+  INF EmulationToolsPkg/EmuLinuxLoader/EmuLinuxLoader.inf
+!endif
+
+#[-start-220301-IB14740220-remove]#
+#  !include $(CBS_DSC_FDF_RELTIVE_PATH)/CbsRembrandt.dxe.inc.fdf
+#[-end-220301-IB14740220-remove]#
+
+!if $(KVM_SUPPORT) == YES
+  #
+  # For Commercial Cezanne will support KVM.
+  #
+  INF AgesaModulePkg/Psp/AmdPspKvm/AmdPspKvm.inf
+!endif
+
+!if gInsydeTokenSpaceGuid.PcdH2OCsmSupported
+  #
+  # BCM5762
+  #
+  FILE FREEFORM = PCD (gPlatformPkgTokenSpaceGuid.PcdBcm5762PxeRom) {
+   SECTION RAW = $(PROJECT_PKG)/Binary/Bcm5762/PxeRom/b57pxee.lom
+  }
+!endif
+  INF RuleOverride=BINARY $(PROJECT_PKG)/Binary/Bcm5762/PxeUefi/Bcm5762UndiX64.inf
+!if gInsydeTokenSpaceGuid.PcdH2OCsmSupported
+  #
+  # RTL8111
+  #
+  FILE FREEFORM = PCD (gPlatformPkgTokenSpaceGuid.PcdRTL8111PxeRom) {
+   SECTION RAW = $(PROJECT_PKG)/Binary/RtkLan/LegacyPxeROM/rtegpxe.bin
+  }
+!endif
+!if gPlatformPkgTokenSpaceGuid.PcdRtkUsbLanSupport == 1
+!if gInsydeTokenSpaceGuid.PcdH2OCsmSupported
+  #
+  # RTL 8153 LAN
+  #
+  #On XHCI controller
+  FILE FREEFORM =  PCD (gPlatformPkgTokenSpaceGuid.PcdRtl8153OnXhciRom) {
+   SECTION RAW = $(PROJECT_PKG)/Binary/RTL8153/RTL8153x.rom
+ }
+!endif
+  INF RuleOverride=BINARY $(PROJECT_PKG)/Binary/RtkUsbUndiDxe/RtkUsbUndiDxe.inf
+!else
+  INF RuleOverride=BINARY $(PROJECT_PKG)/Binary/RtkLan/RtkUndiDxe/RtkUndiDxe.inf
+!endif
+
+#[-start-220301-IB14740220-remove]#
+#!if $(SMM_ISOLATION_SUPPORT)
+#  INF AmdSupervisorPkg/Binary/SmmSupervisor/Release/SmmSupervisorBin.inf
+#  FILE FREEFORM = 83e1f409-21a3-491d-a415-b163a153776d {
+#    SECTION RAW = $(WORKSPACE)/Build/$(PROJECT_PKG)/SmmSupv/Bin/SmmSupv.bin
+#  }
+#!endif
+#[-end-220301-IB14740220-remove]#
+
+#[-start-220301-IB14740220-remove]#
+#INF $(PROJECT_PKG)/Override/$(CHIPSET_REL_PATH)/AgesaPkg/Addendum/Psp/HSPfTPMAcpi/HSPfTPMAcpi.inf
+#INF RuleOverride = DRIVER_ACPITABLE $(PROJECT_PKG)/Override/$(CHIPSET_REL_PATH)/AgesaPkg/Addendum/Psp/HSPfTPMAcpi/HspAcpifTpmSmm.inf
+#[-end-220301-IB14740220-remove]#
+
+
+#[-start-210819-IB19520010-add]#
+# Workaround to avoid system hang in postcode 0x95.
+!disable InsydePostCodePkg/PostCodeSmm/PostCodeSmm.inf
+#[-end-210819-IB19520010-add]#
+
+#[-start-220126-IB14740206-add]#
+INF RuleOverride = ACPITABLE $(PROJECT_PKG)/AcpiTables/AcpiTables.inf
+#[-end-220126-IB14740206-add]#
+
+################################################################################
+
+[FV.FVMAIN_COMPACT]
+
+  FILE FV_IMAGE = 20bc8ac9-94d1-4208-ab28-5d673fd73486 {
+    SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {  # Lzma Compress
+      SECTION FV_IMAGE = DXEFV
+    }
+  }
+
+[FV.UNSIGNEDFV]
+!if $(UNSIGNED_FV_SUPPORT) == YES
+#
+# Drivers, binary files, logos.... can be stored in this FV
+#
+
+!endif
+
+################################################################################
+#
+# Rules are use with the [FV] section's module INF type to define
+# how an FFS file is created for a given INF file. The following Rule are the default
+# rules for the different module type. User can add the customized rules to define the
+# content of the FFS file.
+#
+################################################################################
+[Rule.Common.USER_DEFINED.ACPITABLE]
+  FILE FREEFORM = $(NAMED_GUID) {
+    RAW ACPI Optional    |.acpi
+    RAW ASL  Optional    |.aml
+  }
+
+[Rule.Common.DXE_DRIVER.DRIVER_ACPITABLE]
+  FILE DRIVER = $(NAMED_GUID) {
+    DXE_DEPEX DXE_DEPEX Optional       $(INF_OUTPUT)/$(MODULE_NAME).depex
+    PE32      PE32                     $(INF_OUTPUT)/$(MODULE_NAME).efi
+    UI        STRING="$(MODULE_NAME)" Optional
+    VERSION   STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+    RAW ACPI  Optional                |.acpi
+    RAW ASL   Optional                |.aml
+  }

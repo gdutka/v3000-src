@@ -1,0 +1,53 @@
+## @file
+#  Generation of Flash layout information
+#
+#******************************************************************************
+#* Copyright (c) 2023, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  BASE_NAME               = GenUnsignedFv
+  FILE_GUID               = 2C8E85E4-BCAC-4c78-9702-58309B444BB4
+  MODULE_TYPE             = USER_DEFINED
+  VERSION_STRING          = 1.0
+
+[Sources]
+  Dummy.c
+
+[Packages]
+  InsydeModulePkg/InsydeModulePkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  ToolLib
+
+[Pcd]
+  #
+  # Do not remove the following PCDs
+  #
+  gInsydeTokenSpaceGuid.PcdFlashAreaBaseAddress
+  gInsydeTokenSpaceGuid.PcdFlashAreaSize
+  gInsydeTokenSpaceGuid.PcdFlashUnsignedFvRegionBase
+  gInsydeTokenSpaceGuid.PcdFlashUnsignedFvRegionSize
+  gInsydeTokenSpaceGuid.PcdEndOfFlashUnsignedFvRegionOffset
+  gInsydeTokenSpaceGuid.PcdEndOfFlashUnsignedFvRegionTotalSize
+
+[BuildOptions]
+  MSFT:*_*_IA32_DLINK_FLAGS == /out:"$(BIN_DIR)/$(BASE_NAME).exe" /base:0x10000000 /NOLOGO /SUBSYSTEM:CONSOLE /IGNORE:4086 /IGNORE:4001 /MAP /OPT:REF /MACHINE:I386 /ENTRY:main /LTCG
+  MSFT:*_*_X64_DLINK_FLAGS == /out:"$(BIN_DIR)\$(BASE_NAME).exe" /base:0x10000000 /NOLOGO /SUBSYSTEM:CONSOLE /IGNORE:4086 /IGNORE:4001 /MAP /OPT:REF /MACHINE:AMD64 /ENTRY:main /LTCG
+
+  GCC:*_*_IA32_CC_FLAGS == -m32 -g -fshort-wchar -fno-strict-aliasing -Wall -malign-double -idirafter/usr/include -c -include $(DEST_DIR_DEBUG)/AutoGen.h -DSTRING_ARRAY_NAME=$(BASE_NAME)Strings
+  GCC:*_*_IA32_PP_FLAGS == -m32 -E -x assembler-with-cpp -include $(DEST_DIR_DEBUG)/AutoGen.h
+  GCC:*_*_IA32_DLINK_FLAGS == -o $(BIN_DIR)/$(BASE_NAME) -m32
+  GCC:*_*_*_DLINK2_FLAGS == -lc
+
+  GCC:*_CLANGPDB_IA32_DLINK_FLAGS == /out:"$(BIN_DIR)/$(BASE_NAME).exe" /base:0x10000000 /NOLOGO /SUBSYSTEM:CONSOLE /IGNORE:4086 /IGNORE:4001 /OPT:REF /MACHINE:I386 /ENTRY:main 

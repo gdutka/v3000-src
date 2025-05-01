@@ -1,0 +1,61 @@
+#/*****************************************************************************
+# *
+# * Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+# *
+# *******************************************************************************
+# */
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmProtectionsTestSmm
+  FILE_GUID                      = CCEFDD0B-5B58-4769-9BC2-2BD70C7D2377
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = SmmProtectionsTestSmmEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+
+[Sources]
+  SmmProtectionsTestSmm.h
+  SmmProtectionsTestSmm.c
+  SmmProtectionViolationReport.c
+  SmmTestCases.c
+  SmmIsoTestCases.c
+  X64/SmmProtectionsTestSmm.nasm
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+  AgesaModulePkg/Universal/AmdTestPkg/AmdTestPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  DebugLib
+  SmmMemLib
+  BaseMemoryLib
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  UefiLib
+  IoLib
+  PcdLib
+
+[Protocols]
+  gSmmTestViolationAndExceptionInfoProtocolGuid
+
+[Guids]
+  gSmmProtectionsTestGuid
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSmmProtectionsTestSupport     ##Consumes
+
+[Depex]
+  TRUE

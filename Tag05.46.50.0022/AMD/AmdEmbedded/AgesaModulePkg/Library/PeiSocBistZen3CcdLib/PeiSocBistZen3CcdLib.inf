@@ -1,0 +1,44 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PeiSocBistZen3CcdLib
+  FILE_GUID                      = 36DB3954-9D77-4e44-9899-8724C4A6516C
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PeiSocBistLib
+
+[Sources]
+  PeiSocBistZen3CcdLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  IdsLib
+  AmdErrorLogLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdNbioSmuServicesPpiGuid  # CONSUMED
+  gAmdFabricTopologyServices2PpiGuid #CONSUMED
+  gAmdCoreTopologyServicesV2PpiGuid  #CONSUMED
+  gAmdErrorLogPpiGuid                #CONSUMED
+  gApobCommonServicePpiGuid
+
+[Pcd]
+
+[Depex]
+

@@ -1,0 +1,30 @@
+## @file
+#  CPU Exception Handler library instance for SMM modules.
+#
+#  Copyright (c) 2020, AMD Incorporated. All rights reserved.<BR>
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmSupvTestPointLib
+  FILE_GUID                      = 46AC2BE5-D92B-4A18-AE39-F72176284ADF
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.1
+  LIBRARY_CLASS                  = SmmSupvTestPointLib
+
+[Sources]
+  SmmSupvTestPointLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  IoLib
+  DebugLib

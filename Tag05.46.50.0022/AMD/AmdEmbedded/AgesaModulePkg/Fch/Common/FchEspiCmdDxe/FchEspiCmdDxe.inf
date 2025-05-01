@@ -1,0 +1,50 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2024 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+
+  INF_VERSION                   = 0x00010005
+  BASE_NAME                     = FchEspiCmdDxe
+  FILE_GUID                     = 103d3c97-ce0f-4df0-97b0-194c61bd540c
+  MODULE_TYPE                   = DXE_RUNTIME_DRIVER
+  VERSION_STRING                = 1.0
+  ENTRY_POINT                   = AmdFchEspiCmdDxeInit
+
+
+[Sources]
+  FchEspiCmdDxe.c
+  FchEspiCmdDxe.h
+
+[LibraryClasses.common.DXE_DRIVER]
+  BaseLib
+  UefiLib
+  PrintLib
+
+[LibraryClasses]
+  FchBaseLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  FchEspiCmdLib
+
+[Guids]
+
+[Protocols]
+  gAmdFchEspiCmdProtocolGuid           #PRODUCED
+
+[Ppis]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag
+
+[Depex]
+  TRUE

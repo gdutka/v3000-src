@@ -1,0 +1,15 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+  INF RuleOverride = ACPITABLE AgesaModulePkg/Fch/Prom21/Asl/FchProm21Asl.inf
+
+  INF AgesaModulePkg/Fch/Prom21/Dxe/FchProm21Dxe.inf
+  INF AgesaModulePkg/Fch/Prom21/Dxe/FchProm21GpioDxe.inf
+  INF AgesaModulePkg/Fch/Prom21/Dxe/FchProm21SsdtDxe.inf
+
+  INF AgesaModulePkg/Fch/Prom21/Smm/FchProm21Smm.inf
+  INF AgesaModulePkg/Fch/Prom21/Smm/FchProm21GpioSmm.inf
+

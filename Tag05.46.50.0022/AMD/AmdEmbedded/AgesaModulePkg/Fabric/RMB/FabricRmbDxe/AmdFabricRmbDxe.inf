@@ -1,0 +1,89 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdFabricRmbDxe
+  FILE_GUID                      = 6789A9E8-6FE9-4E1C-90F9-59329ED27300
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdFabricRmbDxeInit
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses.common.DXE_DRIVER]
+  BaseLib
+  UefiLib
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  BaseFabricTopologyLib
+  DxeFabricTopologyServices2Lib
+  FabricRegisterAccLib
+  AmdIdsHookLib
+  FabricIdsHookRmbLibDxe
+  FabricResourceReportToGcdLib
+  AmdPspApobLib
+  AmdHeapLib
+  PciLib
+  DxeFabricResourceManagerServicesLib
+
+[sources]
+  AmdFabricRmbDxe.c
+  FabricAcpiCdit.c
+  FabricAcpiCrat.c
+  FabricAcpiDistanceInfo.c
+  FabricAcpiDomainInfo.c
+  FabricAcpiDomainInfo.h
+  FabricAcpiSlit.c
+  FabricAcpiSrat.c
+  FabricAcpiMsct.c
+  FabricAcpiTable.h
+  FabricPiePwrMgmt.c
+  FabricPiePwrMgmt.h
+  FabricReadyToBoot.c
+  FabricReadyToBoot.h
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Protocols]
+  gAmdFabricTopologyServices2ProtocolGuid      # PRODUCED
+  gAmdFabricResourceManagerServicesProtocolGuid # PRODUCED
+  gAmdFabricAcpiSlitServicesProtocolGuid       # PRODUCED
+  gAmdFabricNumaServices2ProtocolGuid          # PRODUCED
+  gAmdFabricAcpiSratServicesV2ProtocolGuid     # PRODUCED
+  gAmdFabricAcpiSratServicesProtocolGuid       # PRODUCED
+  gAmdFabricAcpiCditServicesProtocolGuid       # PRODUCED
+  gAmdFabricAcpiCratServicesProtocolGuid       # PRODUCED
+  gAmdFabricAcpiMsctServicesProtocolGuid       # PRODUCED
+  gAmdSocLogicalIdProtocolGuid                 # CONSUMED
+  gAmdNbioSmuServicesProtocolGuid              # CONSUMED
+  gAmdCoreTopologyServicesV2ProtocolGuid       # CONSUMED
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCStateMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitDegree
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabric2ndDegreeSlitDistance
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabric3rdDegreeSlitLocalDistance
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabric3rdDegreeSlitRemoteDistance
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitSLinkLocalDistance
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricSlitSLinkRemoteDistance
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNumberOfPhysicalSocket
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricCcxAsNumaDomain
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricRoundRobinNumaDomainForCcx
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricMixedDimmConfigNumaDomain
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdFabricCstate
+
+[Depex]
+  gAmdFabricRmbDepexProtocolGuid

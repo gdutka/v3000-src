@@ -1,0 +1,65 @@
+## @file
+#
+#
+#******************************************************************************
+#* Copyright 2021 Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SDEmmcInfoDxe
+  FILE_GUID                      = 0d05d4db-4a1d-4dcd-89b5-87b36c6dd180
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SDEmmcInfoDxeProtocolEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  SDEmmcInfoDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiLib
+  DevicePathLib
+  MemoryAllocationLib
+  PcdLib
+  IoLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  BaseLib
+  DebugLib
+  PrintLib
+  H2OCpLib
+  SortLib
+  DeviceInfoLookupDataLib
+
+[Guids]
+  gH2OBdsCpConnectAllAfterGuid
+
+[Protocols]
+  gH2OSDEmmcInfoProtocolGuid
+  gSdPassThruProtocolGuid
+  gEfiBlockIoProtocolGuid
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpConnectAllAfterSupported
+
+[Depex]
+  TRUE

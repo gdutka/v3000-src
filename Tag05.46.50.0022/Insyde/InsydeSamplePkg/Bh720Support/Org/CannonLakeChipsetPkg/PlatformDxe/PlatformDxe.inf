@@ -1,0 +1,129 @@
+## @file
+#  Component description file for Platform Policy Initialization driver
+#
+#******************************************************************************
+#* Copyright (c) 2014 - 2019, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+   INF_VERSION                    = 0x00010005
+   BASE_NAME                      = DxePlatform
+   FILE_GUID                      = 74c83f3a-5ee3-4eb7-b945-702b839fb1a6
+   MODULE_TYPE                    = DXE_DRIVER
+   ENTRY_POINT                    = DxePlatformEntryPoint
+
+[Sources]
+  Platform.c
+  Platform.h
+  KeyboardSetup.c
+  UsbLegacy.c
+  UsbLegacy.h
+
+[Packages]
+  $(PROJECT_PKG)/Project.dec
+  $(CHIPSET_REF_CODE_PKG)/$(CHIPSET_REF_CODE_DEC_NAME).dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  MdePkg/MdePkg.dec
+  SecurityPkg/SecurityPkg.dec
+  IntelSiliconPkg/IntelSiliconPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  ClientSiliconPkg/ClientSiliconPkg.dec
+  ClientCommonPkg/ClientCommonPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  DxeMeLib
+  CmosLib
+  BaseMemoryLib
+  UefiLib
+  HobLib
+  IoLib
+  BaseLib
+  S3BootScriptLib
+  DxeInsydeChipsetLib
+  PciExpressLib
+  DxeOemSvcChipsetLibDefault
+#  OverclockingLib
+#  CpuOcLib
+  PchInfoLib
+  PttHeciLib
+#  BaseInsydeChipsetLib
+  DxeInsydeChipsetLib
+  VariableLib
+  ConfigBlockLib
+  MemoryAllocationLib
+  DxeSmbiosFirmwareVersionInfoLib
+  H2OCpLib
+
+[Protocols]
+  gEfiAcpiSupportProtocolGuid                          # CONSUMED
+  gEfiPciIoProtocolGuid                                # CONSUMED
+  gEfiSetupUtilityProtocolGuid                         # CONSUMED
+  gPlatformNvsAreaProtocolGuid                        # CONSUMED
+  gEfiIsaIoProtocolGuid                                # CONSUMED
+  gEfiPciRootBridgeIoProtocolGuid                      # CONSUMED
+  gEfiSmbusHcProtocolGuid                              # CONSUMED
+  gSaPolicyProtocolGuid                                # CONSUMED
+  gEfiSmmSmbusProtocolGuid                             # CONSUMED
+  gEfiPs2PolicyProtocolGuid                            # PRODUCED
+  gEfiUsbLegacyPlatformProtocolGuid                    # PRODUCED
+  gEfiCRPolicyProtocolGuid                             # PRODUCED
+  gWdtProtocolGuid                                     # CONSUMED
+#  gPchResetProtocolGuid                                # CONSUMED
+  gCpuInfoProtocolGuid                                 # CONSUMED
+  gEfiSmmControl2ProtocolGuid
+  gEfiVariableWriteArchProtocolGuid
+  gMemInfoProtocolGuid
+
+[Guids]
+  gEfiGenericVariableGuid
+  gXTUInfoHobGuid
+  gEfiEndOfDxeEventGroupGuid
+#  gPchGlobalResetWithEcGuid
+  gSystemConfigurationGuid
+  gChipsetSetupDafultGuid
+  gMemoryDxeConfigGuid
+  gMeSetupVariableGuid
+  gPchGlobalResetGuid
+  gH2OBdsCpRecoveryCompleteGuid
+  gEfiTpmDeviceInstanceTpm12Guid
+  gEfiTpmDeviceInstanceTpm20DtpmGuid
+  gMePolicyHobGuid
+  gEfiTpmDeviceInstanceTcmGuid
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gInsydeTokenSpaceGuid.PcdPlatformKeyList
+  gChipsetPkgTokenSpaceGuid.PcdXtuControlIdBuffersize
+  gChipsetPkgTokenSpaceGuid.PcdXmpDataBuffersize
+  gChipsetPkgTokenSpaceGuid.PcdSetupConfigSize
+  gInsydeTokenSpaceGuid.PcdTpmHide
+  gBoardModuleTokenSpaceGuid.PcdEcPresent                         ## CONSUMES
+  gEfiSecurityPkgTokenSpaceGuid.PcdTpmInstanceGuid
+
+[FeaturePcd]
+  gSiPkgTokenSpaceGuid.PcdAmtEnable
+  gChipsetPkgTokenSpaceGuid.PcdMemSpdProtectionSupported
+  gSiPkgTokenSpaceGuid.PcdOverclockEnable
+  gChipsetPkgTokenSpaceGuid.PcdUseCrbEcFlag
+  gChipsetPkgTokenSpaceGuid.PcdPttSupported
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpRecoveryCompleteSupported
+  gChipsetPkgTokenSpaceGuid.PcdH2OPreferDtpmBootSupported
+
+[Depex]
+  gEfiPciRootBridgeIoProtocolGuid     AND
+  gEfiVariableArchProtocolGuid        AND
+  gEfiVariableWriteArchProtocolGuid   AND
+  gSaPolicyProtocolGuid               AND
+  gEfiHiiDatabaseProtocolGuid         AND
+  gWdtProtocolGuid                    AND
+  gCpuInfoProtocolGuid

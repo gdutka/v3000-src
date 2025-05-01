@@ -1,0 +1,34 @@
+/** @file
+
+;******************************************************************************
+;* Copyright (c) 2018, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+
+#ifndef _NVIDIA_OPTIMUS_ASI_
+#define _NVIDIA_OPTIMUS_ASI_
+
+//
+// ASL code common define about device and bridge
+//
+#define DGPU_BRIDGE_SCOPE                     PCI_SCOPE.GPP0
+#define DGPU_DEVICE                           PEGP
+#define DGPU_SCOPE                            DGPU_BRIDGE_SCOPE.DGPU_DEVICE
+
+//
+// ACPI define in dGPU SCOPE _DOD method
+//
+#define ACPI_ID_LCD                           0x00000110
+#define ACPI_ID_CRT                           0x80000100
+#define ACPI_ID_HDMI                          0x80008320
+#define ACPI_ID_TMDS                          0x80008340
+#define ACPI_ID_DP_B                          0x80006330
+#define ACPI_ID_DP_C                          0x80006340
+#define ACPI_ID_EDP                           0x8000A450
+#endif

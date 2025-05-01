@@ -1,0 +1,90 @@
+#;******************************************************************************
+#;* Copyright (c) 2019 - 2020, Insyde Software Corp. All Rights Reserved.
+#;*
+#;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#;* transmit, broadcast, present, recite, release, license or otherwise exploit
+#;* any part of this publication in any form, by any means, without the prior
+#;* written permission of Insyde Software Corporation.
+#;*
+#;******************************************************************************
+#  Module Name:
+#
+#    PxeDummy.inf
+#
+#  Abstract:
+#
+#    This driver will install fake
+#      EFI_PXE_BASE_CODE_PROTOCOL
+#
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PxeDummyDxe
+  FILE_GUID                      = F0F1588E-9028-4eb8-8031-F233B48EA0B7
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PxeDummyEntryPoint
+  UNLOAD_IMAGE                   = PxeDummyUnload
+
+
+[Sources]
+  PxeDummy.c
+  PxeDummy.h
+  DummyFunction.c
+  DummyFunction.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  NetworkPkg/NetworkPkg.dec
+  InsydeNetworkPkg/InsydeNetworkPkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DevicePathLib
+  DebugLib
+  MemoryAllocationLib
+  UefiLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiDriverEntryPoint
+  NetLib
+#  HiiLib
+
+[Guids]
+  gEfiNetworkStackDHCPSupportGuid
+  gEfiNetworkStackIPv6SupportGuid
+  gEfiNetworkStackIPv4SupportGuid
+  gDeviceManagerFormSetGuid
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdDummyDhcpHintFunctionDisable
+  gInsydeTokenSpaceGuid.PcdDummyDhcpHintString
+
+[Protocols]
+  gEfiManagedNetworkServiceBindingProtocolGuid
+  gEfiPxeBaseCodeProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiSimpleNetworkProtocolGuid
+  gEfiIp4ServiceBindingProtocolGuid
+  gEfiIp6ServiceBindingProtocolGuid
+  gEfiDhcp4ServiceBindingProtocolGuid
+  gEfiDhcp6ServiceBindingProtocolGuid
+  gEfiDhcp4ProtocolGuid
+  gEfiDhcp6ProtocolGuid
+  gEfiIp4ConfigProtocolGuid
+  gEfiIp4Config2ProtocolGuid
+  gEfiIp6ConfigProtocolGuid
+  gNetworkLockerProtocolGuid
+  gEfiNetworkInterfaceIdentifierProtocolGuid_31
+  gEfiHiiConfigAccessProtocolGuid
+  gEfiLoadFileProtocolGuid
+  gEfiHiiDatabaseProtocolGuid
+  gEfiVlanConfigProtocolGuid
+  gH2ONetworkConfigProtocolGuid
+
+[Depex]
+  gNetworkLockerProtocolGuid

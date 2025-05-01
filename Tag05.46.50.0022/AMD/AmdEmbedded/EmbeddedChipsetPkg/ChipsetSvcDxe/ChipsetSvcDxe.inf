@@ -1,0 +1,141 @@
+## @file
+#  Implement the driver of DxeChipsetSvc.
+#  
+#  ***************************************************************************
+#  * Copyright (c) 2012 - 2021, Insyde Software Corp. All Rights Reserved.
+#  *
+#  * You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#  * transmit, broadcast, present, recite, release, license or otherwise exploit
+#  * any part of this publication in any form, by any means, without the prior
+#  * written permission of Insyde Software Corporation.
+#  *
+#  ******************************************************************************
+#  
+##
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = ChipsetSvcDxe
+  FILE_GUID                 = 9b0ff2c0-e245-11e1-8eff-d0df9a35c106
+  MODULE_TYPE               = DXE_DRIVER
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = ChipsetSvcDxeEntryPoint
+  UNLOAD_IMAGE              = ChipsetSvcDxeUnload
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydeOemServicesPkg/InsydeOemServicesPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+#[-start-220126-IB14740206-add]#
+  AmdCommonChipsetPkg/AmdCommonChipsetPkg.dec
+#[-end-220126-IB14740206-add]#
+  $(PROJECT_PKG)/Project.dec
+  $(CPM_PKG_PATH)/$(CPM_PKG_DEC).dec
+  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+
+[Sources]
+  ChipsetSvcDxe.c
+  ComponentName.c
+  ComponentName.h
+  SataComReset.c
+  EnableFdWrites.c
+  IoDecodeControl.c
+  LegacyRegionAccessCtrl.c
+  ProgramChipsetSsid.c
+  InstallPciRomSwitchTextMode.c
+  SetIsaInfo.c
+  SetSmbiosMemoryData.c
+  SkipGetPciRom.c
+  UpdateAcpiTable.c
+  IrqRoutingInformation.c
+  FvRecoveryInfo.c
+  GetBiosProtectTable.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  BaseLib
+  UefiLib
+  DevicePathLib
+  DebugLib
+  PcdLib
+  IoLib
+  S3BootScriptLib
+  AcpiPlatformLib
+  DxeOemSvcChipsetLibDefault
+  AmdPspBaseLibV2
+  FchKeithDxeLib
+  AmdPbsConfigLib
+  KernelConfigLib
+  ChipsetConfigLib
+  VariableLib
+  PciExpressLib
+  H2OCpLib
+
+[Protocols]
+  gEfiDriverSupportedEfiVersionProtocolGuid
+  gEfiComponentName2ProtocolGuid
+  gEfiComponentNameProtocolGuid
+  gH2OChipsetServicesProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiLegacy8259ProtocolGuid
+  gEfiCpuIo2ProtocolGuid
+  gFrameworkEfiMpServiceProtocolGuid
+  gEfiMpServiceProtocolGuid
+  gEfiGlobalNvsAreaProtocolGuid
+  gEfiAcpiSupportProtocolGuid
+  gAllPciIoPrtclsInstlFinishedProtocolGuid
+  gEfiBootLogoProtocolGuid
+  gEfiPciEnumerationCompleteProtocolGuid
+  gAmdCoreTopologyServicesProtocolGuid
+  gEfiHddPasswordServiceProtocolGuid
+  gAmdCpmDisplayFeatureProtocolGuid
+  gAmdCpmTableProtocolGuid
+#[-start-220126-IB14740206-add]#
+  gAmdMcmInfoProtocolGuid
+#[-end-220126-IB14740206-add]#
+
+[Guids]
+  gSystemConfigurationGuid
+  gH2OBdsCpBootDeviceEnumAfterGuid
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdPortNumberMapTable
+  gInsydeTokenSpaceGuid.PcdFlashFvMainBase
+  gInsydeTokenSpaceGuid.PcdFlashFvMainSize
+  gInsydeTokenSpaceGuid.PcdFlashFvRecoveryBase
+  gInsydeTokenSpaceGuid.PcdFlashFvRecoverySize
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gChipsetPkgTokenSpaceGuid.PcdH2OVirtualBusTable
+  gChipsetPkgTokenSpaceGuid.PcdH2OControllerDeviceIrqRoutingEntry
+  gChipsetPkgTokenSpaceGuid.PcdH2OPirqPriorityTable
+  gChipsetPkgTokenSpaceGuid.PcdH2OIrqPoolTable
+  gChipsetPkgTokenSpaceGuid.PcdH2OPirqLinkValueArray
+  gChipsetPkgTokenSpaceGuid.PcdH2ONbIoApicSupport
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyFreeSupported
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyFreeTiSupport
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbySupport
+  gAmdCpmPkgTokenSpaceGuid.PcdReduceHardwareSupport
+  gChipsetPkgTokenSpaceGuid.PcdH2OWatchdogTimerBase
+  gAmdCpmPkgTokenSpaceGuid.OriginalPlatformId
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEmmcEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbIoapicId
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgFchIoapicId
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiS3Support
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdGetRVFamilyOPN
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpBootDeviceEnumAfterSupported
+
+[Depex]
+  gEfiVariableArchProtocolGuid AND
+  gEfiVariableWriteArchProtocolGuid
+

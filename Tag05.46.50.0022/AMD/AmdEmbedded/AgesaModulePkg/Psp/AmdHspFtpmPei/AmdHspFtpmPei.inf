@@ -1,0 +1,72 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdHspFtpmPei
+  FILE_GUID                      = C2D38A48-D3AC-43DA-A484-17F980864DEA
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdHspFtpmPeiDriverEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  AmdHspFtpmLib
+  FchBaseLib
+  AmdCapsuleLib
+  AmdPspMboxLibV2
+  AmdHeapLib
+  FabricResourceManagerLib
+  HspLib
+  AmdSocBaseLib
+  AmdPspBaseLibV2
+  AmdPspCommonLib
+
+[Sources]
+  AmdHspFtpmPei.c
+
+[Guids]
+  gAmdHspPciCfgS3SaveUefiVariableGuid
+
+[Protocols]
+
+[Ppis]
+  gAmdFtpmPpiGuid                 #Publish
+  gEfiPeiMemoryDiscoveredPpiGuid  #Notify
+  gEfiEndOfPeiSignalPpiGuid       #Notify
+  gAmdFtpmFactoryResetPpiGuid     #Publish
+  gAmdPspRecoveryDetectPpiGuid    #Publish
+  gEfiPeiReadOnlyVariable2PpiGuid #Notify
+  gAmdFabricResourceManagerServicesPpiGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspMmioBase
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspBDF
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspUpBridgeBDF
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspAcpiFenceEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspNvramClearRequest
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspNvramUsingRpmc
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFtpmNvCorrupted
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspCoreEnable
+
+[Depex]
+  gEfiPeiMemoryDiscoveredPpiGuid AND
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gAmdFabricResourceManagerServicesPpiGuid
+
+[BuildOptions]
+
+

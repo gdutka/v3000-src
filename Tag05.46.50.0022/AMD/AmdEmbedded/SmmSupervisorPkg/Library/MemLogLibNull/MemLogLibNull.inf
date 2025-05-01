@@ -1,0 +1,25 @@
+#;*******************************************************************************
+#;
+#;Copyright(C) 2020 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;SPDX-License-Identifier: BSD-2-Clause-Patent
+#;
+#;*******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = MemLogLibNull
+  FILE_GUID                      = 39361B1B-2C75-4DEF-8D19-312C29C075A4
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MemLogLib
+
+[Sources]
+  MemLogLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+

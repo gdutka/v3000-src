@@ -1,0 +1,23 @@
+Ubuntu required to run below command line on terminal:
+
+sudo apt-get install make
+sudo ./InstallLinuxBuildSupport
+
+sudo apt-get install zlib1g
+sudo apt-get install zlib1g:i386
+
+sudo apt-get install python3
+sudo apt-get install python3-lxml
+sudo apt-get install python3-pip
+sudo pip3 install pathlib2
+sudo apt-get install perl
+
+
+File path:
+BaseTools\LinuxBuildSupport\InstallLinuxBuildSupport
+
+Note:
+Set Gcc version please refer to BaseTools\LinuxBuildSupport\ReadMe.txt
+
+Currently, the Linux build is supported for GCC 11 or later.
+The build has been tested on Ubuntu 22.04 for GCC 5.

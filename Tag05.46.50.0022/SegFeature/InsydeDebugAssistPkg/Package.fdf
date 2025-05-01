@@ -1,0 +1,26 @@
+## @file
+# Platform Package Flash Description File
+#
+#******************************************************************************
+#* Copyright (c) 2015 - 2018, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+#
+
+#[FV.RECOVERYFV]
+
+[FV.DXEFV]
+!if gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEventTraceSupported
+INF APRIORI=0x8002 InsydeDebugAssistPkg/DriverArpServiceDxe/DriverArpServiceDxe.inf
+!endif
+!if gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEventTraceSupported
+INF APRIORI=0x8000 InsydeDebugAssistPkg/EventTraceDxe/EventTraceDxe.inf
+!endif
+!if gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistMemoryDataAnalysisSupported
+INF APRIORI=0x8003 InsydeDebugAssistPkg/MemoryDataAnalysisDxe/MemoryDataAnalysisDxe.inf
+!endif

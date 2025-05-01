@@ -1,0 +1,259 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2018-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ *******************************************************************************
+ */
+
+/*----------------------------------------------------------------------------------------
+ *                             M O D U L E S    U S E D
+ *----------------------------------------------------------------------------------------
+ */
+#include <Uefi.h>
+#include <Library/PciLib.h>
+#include <Library/DebugLib.h>
+#include <Library/UefiRuntimeServicesTableLib.h>
+#include <Library/UefiBootServicesTableLib.h>
+#include <Library/DxeServicesTableLib.h>
+#include <Library/AmdPspRegMuxLibV2.h>
+#include <Library/AmdSocBaseLib.h>
+#include <Filecode.h>
+/*----------------------------------------------------------------------------------------
+ *                   D E F I N I T I O N S    A N D    M A C R O S
+ *----------------------------------------------------------------------------------------
+ */
+#define FILECODE LIBRARY_AMDPSPREGMUXLIBV2DXERT_AMDPSPREGMUXLIBV2_FILECODE
+#define NBMSIC_SMN_BASE                     0x13B10000ul                     ///< Define the SMN Base address for NB MISC register
+#define MTS_NBMISC_SMN_BASE                 0x13E10000ul                     ///< Define the SMN Base address for MTS NB MISC register
+#define NBMSIC_PSP_BASE_ADDR_LO_OFFSET      0x2E0                            ///< Define the offset of PSP_BASE_ADDR_LO in NB MISC block
+#define NB_SMN_INDEX_2_PCI_ADDR             (MAKE_SBDFO (0, 0, 0, 0, 0xB8))  ///< PCI Addr of NB_SMN_INDEX_2
+#define NB_SMN_DATA_2_PCI_ADDR              (MAKE_SBDFO (0, 0, 0, 0, 0xBC))  ///< PCI Addr of NB_SMN_DATA_2
+#define PSP_BAR_SIZE                        0x100000ul                       ///< Size of PSP BAR
+#define C2P_REG_OFFSET                      0x10500ul                        ///< BIOS to PSP mailbox Register SMN offset
+#define BIOS_MUTEX_OFFSET                   (23 * 4)                         ///< BIOS mutex: BIOS sets this to non-zero requesting the mutex; clears this register when releases the mutex;
+#define PSP_MUTEX_OFFSET                    (24 * 4)                         ///< PSP sets this to non-zero requesting the mutex; clears this register when releases the mutex;
+#define MUTEX_TURN_OFFSET                   (25 * 4)                         ///< Turn registers as it is: BIOS sets this to 1 when requests the mutes; PSP sets it to 0 when PSP requests the mutex
+
+EFI_EVENT                   mPspMmioBaseVirtualAddressConvertEvent = NULL;
+EFI_PHYSICAL_ADDRESS        mPspMmioBase64;
+BOOLEAN                     mRomArmor2Or3Enabled;
+
+/*----------------------------------------------------------------------------------------
+ *                  T Y P E D E F S     A N D     S T R U C T U  R E S
+ *----------------------------------------------------------------------------------------
+ */
+
+/*----------------------------------------------------------------------------------------
+ *           P R O T O T Y P E S     O F     L O C A L     F U N C T I O N S
+ *----------------------------------------------------------------------------------------
+ */
+
+/**
+  Return the PspMMIO MMIO location
+
+  @param[in] PspMmioBase Pointer to Psp MMIO address
+
+  @retval BOOLEAN  0: Error, 1 Success
+**/
+BOOLEAN
+GetPspMmioBaseAddress (
+  IN OUT   UINT32 *PspMmioBase
+  )
+{
+  UINT32    Value32;
+  UINTN     PciAddress;
+  UINT32    SmnBase;
+
+  *PspMmioBase = 0;
+
+  SmnBase = NBMSIC_SMN_BASE;
+  if (SocFamilyIdentificationCheck (F17_MTS_RAW_ID) || SocFamilyIdentificationCheck (F17_SSP_RAW_ID) || SocFamilyIdentificationCheck (F19_VMR_RAW_ID)) {
+    SmnBase = MTS_NBMISC_SMN_BASE;
+  }
+  PciAddress = NB_SMN_INDEX_2_PCI_ADDR;
+  Value32 = SmnBase + NBMSIC_PSP_BASE_ADDR_LO_OFFSET;
+  PciWrite32 (PciAddress, Value32);
+  PciAddress = NB_SMN_DATA_2_PCI_ADDR;
+  Value32 = PciRead32 (PciAddress);
+  //Mask out the lower bits
+  Value32 &= 0xFFF00000;
+
+  if (Value32 == 0) {
+    return (FALSE);
+  }
+
+  *PspMmioBase = Value32;
+  return (TRUE);
+}
+
+/**
+  Initializing function to allocate memory for PSP
+  @param ImageHandle The ImageHandle of the driver consuming the AmdPspRegMuxLibV2
+**/
+EFI_STATUS
+AllocatePspMmioBaseMemory(
+  IN EFI_HANDLE        ImageHandle
+  )
+{
+  EFI_STATUS                      Status;
+  UINT32                          PspMmioBase;
+  UINT64                          Attributes;
+  UINT64                          Length;
+  EFI_GCD_MEMORY_SPACE_DESCRIPTOR GcdMemorySpaceDescriptor;
+
+  // Get MMIO address for PSP Base for mutex control
+  PspMmioBase = 0;
+  GetPspMmioBaseAddress (&PspMmioBase);
+  ASSERT (PspMmioBase != 0);
+  if (0 == PspMmioBase) {
+    return EFI_LOAD_ERROR;
+  }
+  //mPspMmioBase64 will be converted to virtual address when VirtualAddress event triggers
+  mPspMmioBase64 = PspMmioBase;
+
+  Length = PSP_BAR_SIZE;
+  // Attempt to Add and Allocate the memory region for PspMmioBase
+  Status = gDS->GetMemorySpaceDescriptor (PspMmioBase, &GcdMemorySpaceDescriptor);
+  if (!EFI_ERROR (Status)) {
+    if (GcdMemorySpaceDescriptor.GcdMemoryType == EfiGcdMemoryTypeNonExistent) {
+      Status = gDS->AddMemorySpace (
+                      EfiGcdMemoryTypeMemoryMappedIo,
+                      mPspMmioBase64,
+                      Length,
+                      EFI_MEMORY_RUNTIME | EFI_MEMORY_UC
+                      );
+      if (!EFI_ERROR (Status)) {
+        Status = gDS->AllocateMemorySpace (
+                        EfiGcdAllocateAddress,
+                        EfiGcdMemoryTypeMemoryMappedIo,
+                        12,
+                        Length,
+                        &mPspMmioBase64,
+                        ImageHandle,
+                        NULL
+                        );
+        if (!EFI_ERROR (Status)) {
+          Status = gDS->GetMemorySpaceDescriptor (mPspMmioBase64, &GcdMemorySpaceDescriptor);
+        }
+      }
+    }
+  }
+  // Attempt to set runtime attribute
+  if (!EFI_ERROR (Status)) {
+    if (GcdMemorySpaceDescriptor.GcdMemoryType == EfiGcdMemoryTypeMemoryMappedIo) {
+      Attributes = GcdMemorySpaceDescriptor.Attributes | EFI_MEMORY_RUNTIME | EFI_MEMORY_UC;
+      Status = gDS->SetMemorySpaceAttributes (
+                      PspMmioBase,
+                      Length,
+                      Attributes
+                      );
+    }
+  }
+  // Failed to Allocate MMIO region as Runtime
+  if (EFI_ERROR (Status)) {
+    return (EFI_OUT_OF_RESOURCES);
+  }
+  return EFI_SUCCESS;
+}
+
+/**
+  Notification callback function for the virtual event change. This function is called when
+  the system is notified of the change to a virtual addressing mode so that the pointers
+  used can be converted to their virtual addresses.
+
+  @param Event The event handle
+  @param Context The context of the notification event
+**/
+VOID EFIAPI AmdPspRegMuxLibVirtualNotify(IN EFI_EVENT Event, IN VOID *Context)
+{
+  if(mPspMmioBase64 != 0){
+    gRT->ConvertPointer(0, (VOID**)&mPspMmioBase64);
+  }
+}
+
+/**
+  Library constructor for the AMD PSP Register Mutex Library V2 instance.
+
+  @param ImageHandle The ImageHandle of the driver consuming the AmdPspRegMuxLibV2
+  @param SystemTable Pointer to the EFI System Table
+
+  @return EFI_SUCCESS The library constructor completed execution
+**/
+EFI_STATUS EFIAPI AmdPspRegMuxLibV2Constructor (
+  IN EFI_HANDLE        ImageHandle,
+  IN EFI_SYSTEM_TABLE  *SystemTable
+){
+  EFI_STATUS    Status = EFI_SUCCESS;
+
+  UINT8 RomArmorSelection = PcdGet8 (PcdAmdPspRomArmorSelection);
+  mRomArmor2Or3Enabled = (RomArmorSelection == 2 || RomArmorSelection == 3);
+  Status = AllocatePspMmioBaseMemory(ImageHandle);
+  if (EFI_ERROR (Status)) {
+      return EFI_OUT_OF_RESOURCES;
+  }
+
+  Status = gBS->CreateEventEx (
+                      EVT_NOTIFY_SIGNAL,
+                      TPL_NOTIFY,
+                      AmdPspRegMuxLibVirtualNotify,
+                      NULL,
+                      &gEfiEventVirtualAddressChangeGuid,
+                      &mPspMmioBaseVirtualAddressConvertEvent
+                      );
+  return Status;
+}
+
+/*----------------------------------------------------------------------------------------
+ *                          E X P O R T E D    F U N C T I O N S
+ *----------------------------------------------------------------------------------------
+ */
+
+/**
+ * Acquire the Mutex for access PSP,X86 co-accessed register
+ * Call this routine before access certain registers, especially for SMI registers
+ *
+ */
+VOID
+AcquirePspAccRegMutex ()
+{
+  EFI_PHYSICAL_ADDRESS  BiosMutex;
+  EFI_PHYSICAL_ADDRESS  PspMutex;
+  EFI_PHYSICAL_ADDRESS  Turn;
+
+  //When RA2 enabled, PSP FW does not expect BIOS touch any PSP hardware mutex register
+  if (mRomArmor2Or3Enabled) {
+    return;
+  }
+
+  if (mPspMmioBase64 != 0) {
+    BiosMutex = mPspMmioBase64 + C2P_REG_OFFSET + BIOS_MUTEX_OFFSET;
+    PspMutex = mPspMmioBase64 + C2P_REG_OFFSET + PSP_MUTEX_OFFSET;
+    Turn = mPspMmioBase64 + C2P_REG_OFFSET + MUTEX_TURN_OFFSET;
+    *(volatile UINT32*)(UINTN)(BiosMutex) = 1;
+    *(volatile UINT32*)(UINTN)(Turn) = 1;
+    //Wait till PSP FW release the mutex
+    while ((*(volatile UINT32*)(UINTN)(PspMutex) == 1) && (*(volatile UINT32*)(UINTN)(Turn) == 1)) {
+      ;
+    }
+  }
+}
+/**
+ * Release the Mutex for access PSP,X86 co-accessed register
+ * Call this routine after access certain registers, especially for SMI registers
+ *
+ */
+VOID
+ReleasePspAccRegMutex ()
+{
+  EFI_PHYSICAL_ADDRESS  BiosMutex;
+
+  //When RA2 enabled, PSP FW does not expect BIOS touch any PSP hardware mutex register
+  if (mRomArmor2Or3Enabled) {
+    return;
+  }
+
+  if (mPspMmioBase64 != 0) {
+    BiosMutex = mPspMmioBase64 + C2P_REG_OFFSET + BIOS_MUTEX_OFFSET;
+    *(volatile UINT32*)(UINTN)(BiosMutex) = 0;
+  }
+}

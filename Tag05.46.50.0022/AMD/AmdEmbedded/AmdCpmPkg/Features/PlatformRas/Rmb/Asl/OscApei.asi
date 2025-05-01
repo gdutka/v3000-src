@@ -1,0 +1,45 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2018-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ * ***************************************************************************
+ */
+  Scope(\_SB) 
+  {
+    Method(_OSC,4,NotSerialized)
+    { // Check for proper UUID
+      Name(SUPP,0) //
+      Name(CTRL,0) //
+            //Arg0 -- A buffer containing UUID
+            //Arg1 -- An Integer containing a Revision ID of the buffer format
+            //Arg2 -- An integer containing a count of entries in Arg3
+            //Arg3 -- A buffer containing a list of DWORD capabilities
+      CreateDWordField(Arg3,0,CDW1) // ### - to fix OS ASL parser complain
+      If(LEqual(Arg0,ToUUID("0811B06E-4A27-44F9-8D60-3CBBC22E7B48")))
+      {
+        // Create DWord-addressable fields from the Capabilities Buffer
+//###        CreateDWordField(Arg3,0,CDW1)
+        CreateDWordField(Arg3,4,CDW2)
+        If(LNotEqual(Arg1,One))
+        {
+          Or(CDW1,0x08,CDW1)            // Unrecognized Revision
+        }
+        Or(CDW2,0x10,CDW2)
+        Return(Arg3)
+      }
+      Else 
+      {
+        Or(CDW1,4,CDW1) // Unrecognised UUID
+        Return(Arg3)
+      }
+    } // End _OSPM
+
+    Device(AERR) {
+      Name(_HID,EISAID("PNP0C33"))            // APEI Error Device
+      Name(_UID,0x0)
+
+      Method(_STA, 0, NotSerialized) {
+        Return (0x0F)
+      }
+    } // End Device AERR
+  }

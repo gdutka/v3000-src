@@ -1,0 +1,39 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = CcxSmbiosZen3Lib
+  FILE_GUID                      = 8DE47F41-48E7-40bd-A77B-397C1B28F2D2
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CcxSmbiosLib
+
+[Sources.common]
+  CcxSmbiosZen3Lib.c
+  CcxSmbiosZen3CommonLib.c
+  CcxSmbiosZen3CommonLib.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  IdsLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+
+[Depex]
+
+

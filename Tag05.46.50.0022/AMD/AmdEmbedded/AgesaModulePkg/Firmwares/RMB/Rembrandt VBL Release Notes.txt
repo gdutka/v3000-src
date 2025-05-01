@@ -1,0 +1,288 @@
++-----------------------------------------------------------------------------------------------------+
+| Rembrandt VBL Release Notes                                                                         |
++-----------------------------------------------------------------------------------------------------+
+| Version 20.11.0.1C
++-----------------------------------------------------------------------------------------------------+
+| Rembrandt A0 (DID: 0x164D) & B0 (DID: 0x1681)                                                       |
+| Buid date: 2021/12/30                                                                               |
+| build source: git: git clone "ssh://gerritgit/amd/ec/atombios/vbl_rembrandt"  master branch         |
+| commit 2a633c0e74b10f7ca4738d979cf84981d551f030 (HEAD -> master, origin/master, origin/HEAD)        |
+| TypeId0x3C_VbiosBootLoader_RMB.sbin is signed binary. sign script:fw-sign with pkey(2021-08-06).    |
+| the script is from http://ontrack-internal.amd.com/browse/PLAT-70906                                |
+|                                                                                                     |
+| Major changes:                                                                                      |
+|   1. SWDEV-3 - PPR updated to ver166             |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| Rembrandt VBL Release Notes                                                                         |
++-----------------------------------------------------------------------------------------------------+
+| Version 20.11.0.1B
++-----------------------------------------------------------------------------------------------------+
+| Rembrandt A0 (DID: 0x164D) & B0 (DID: 0x1681)                                                       |
+| Buid date: 2021/12/09                                                                               |
+| build source: git: git clone "ssh://gerritgit/amd/ec/atombios/vbl_rembrandt"  master branch         |
+| commit 7b34ff9faefa7b5e6a1c6aa350f45217cb1d180b (HEAD -> master)                                    |
+| TypeId0x3C_VbiosBootLoader_RMB.sbin is signed binary. sign script:fw-sign with pkey(2021-09-20).    |
+| the script is from http://ontrack-internal.amd.com/browse/PLAT-70906                                |
+|                                                                                                     |
+| Major changes:                                                                                      |
+|   1. SWDEV-3 - [20.11.00.1B] [RMB] enabld DIG_ON bit when eDP present in connector info             |
+|   2. PLAT-94750 - update VBL firmware stack to SPL = 2 for Rembrandt                                |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| Rembrandt VBL Release Notes                                                                         |
++-----------------------------------------------------------------------------------------------------+
+| Version 20.11.0.1A
++-----------------------------------------------------------------------------------------------------+
+| Rembrandt A0 DID: 0x164D & Rembrandt B0 DID: 0x1681                                                 |
+| Buid date: 2021/11/05                                                                               |
+| build source: git: git clone "ssh://gerritgit/amd/ec/atombios/vbl_rembrandt"  master branch         |
+| commit 8a591bd17f8b66cf6c5e5f2b550033590e4ce3c0 (HEAD -> master)                                    |
+| TypeId0x3C_VbiosBootLoader_RMB.sbin is signed binary. sign script:fw-sign with pkey(2021-09-20).    |
+| the script is from http://ontrack-internal.amd.com/browse/PLAT-70906                                |
+|                                                                                                     |
+| Major changes:                                                                                      |
+|   1. SWDEV-3 - [20.11.00.1A] [RMB] enable RMB B0 C20 PHY                                            |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| Rembrandt VBL Release Notes                                                                         |
++-----------------------------------------------------------------------------------------------------+
+| Version 20.11.0.19
++-----------------------------------------------------------------------------------------------------+
+| Rembrandt A0 DID: 0x164D & Rembrandt B0 DID: 0x1681                                                 |
+| Buid date: 2021/10/21                                                                               |
+| build source: git: git clone "ssh://gerritgit/amd/ec/atombios/vbl_rembrandt"  master branch         |
+| commit 869581695134dfb8f14e8755e135b967072e3ca2 (HEAD -> master)                                    |
+| TypeId0x3C_VbiosBootLoader_RMB.sbin is signed binary. sign script:fw-sign with pkey(2021-09-20).    |
+| the script is from http://ontrack-internal.amd.com/browse/PLAT-70906                                |
+|                                                                                                     |
+| Major changes:                                                                                      |
+|   1. SWDEV-3 - [20.11.00.19] [RMB] Unified VBL for emulation and real silicon                       |
+|   2. SWDEV-3 - [20.11.00.19] SWDEV-304683 [RMB][B0[USB4] DPIA enable feature support from VBL       |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| Rembrandt VBL Release Notes                                                                         |
++-----------------------------------------------------------------------------------------------------+
+| Version 20.11.0.18
++-----------------------------------------------------------------------------------------------------+
+| Rembrandt A0 DID: 0x164D & Rembrandt B0 DID: 0x1681                                                 |
+| Buid date: 2021/10/12                                                                               |
+| build source: git: git clone "ssh://gerritgit/amd/ec/atombios/vbl_rembrandt"  master branch         |
+| commit 8cf3192612ae0daae6b771887272903dc4529d5d (HEAD -> master)                                    |
+| TypeId0x3C_VbiosBootLoader_RMB.sbin is signed binary. sign script:fw-sign with pkey(2021-09-20).    |
+| the script is from http://ontrack-internal.amd.com/browse/PLAT-70906                                |
+|                                                                                                     |
+| Major changes:                                                                                      |
+|   1. SWDEV-3 - PLAT-92039 System hang EECA000D when UMA Frame buffer size is set 4G                 |
++-----------------------------------------------------------------------------------------------------+
+
+
+============================ Rembrandt 20.11.0.17 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.17
+Rembrandt A0 0x164D 102-D59501-00B    Rembrandt B0 0x1681
+Buid date: 2021/09/24
+build source: git: git clone "ssh://gerritgit/amd/ec/atombios/vbl_rembrandt"  master branch
+commit 1435c270a59876bfac1d1b42dcf74c77fdc95dbb (HEAD -> master, origin/master, origin/HEAD)
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with pkey(2021-03-01 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+Major changes:
+1. SWDEV-3 - [RMB] enhance DMUB FW loading sequence
+bug fix: PLAT-91127 [PI081_P1][RMB][LPD5] No eDP output when do reboot with memory context restore
+
+============================ Rembrandt 20.11.0.16 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.16
+Rembrandt A0 0x164D 102-D59501-00B
+Buid date:August 18, 2021, 5:42:32 PM
+build source:
+Perforce: //depot/stg/atombios/bios/psp_vbios/amd/Rembrandt/ CL2347289
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with pkey(08-06-2021 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+Major changes:
+1. PLAT-87430 Please update VBL firmware stack to SPL = 1 for Rembrandt
+2. RTGPLAT-7446 [RMB] ATCL2 VBL Update for PLAT-86013
+
+============================ Rembrandt 20.11.0.15 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.15
+Rembrandt A0 0x164D 102-D59501-00B
+Buid date:June 18, 2021, 11:17:57 PM
+build source:
+git: git clone "ssh://gerritgit/amd/ec/atombios/vbl_rembrandt"  master branch 
+commit 88afa1aea0a33a8d564ad4eb04ee075f907ee27a (HEAD -> master, origin/master, origin/HEAD)
+or 
+Perforce: //depot/stg/atombios/bios/psp_vbios/amd/Rembrandt/ CL2322428
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with pkey(2021-05-10 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+Major changes:
+1.  SWDEV-3 - PLAT-79296 [RMB] B0 - Move DMCUb from GOP driver to VBL
+
+============================ Rembrandt 20.11.0.14 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.14
+Rembrandt A0 0x164D 102-D59501-00B
+Buid date:2021/05/13
+build source:
+git: git clone "ssh://gerritgit/amd/ec/atombios/vbl_rembrandt"  master branch commit 7eb2b5385b2bdba3473bdc2ef96bc8d9c9cdd7ee
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with pkey(2021-05-10 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+Major changes:
+1. sync Perforce: //depot/stg/atombios/bios/psp_vbios/amd/Rembrandt/ CL2235305 to git
+2. power up second edp in vbl
+
+============================ Rembrandt 20.11.0.13 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.13
+Rembrandt A0 0x164D 102-D59501-00B
+Buid date:January 5, 2021, 5:50:39 PM
+build source:
+Perforce: //depot/stg/atombios/bios/psp_vbios/amd/Rembrandt/ CL2235305
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with pkey(2020-10-27 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+Major changes:
+1. PPR updated to Ver157
+2. PLAT-74650 - [RMB] E.B.2.0 B0 firmware change list alignment CL# 1356865 - VBL
+
+============================ Rembrandt 20.11.0.12 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.12
+Rembrandt A0 0x164D 102-D59501-00B
+Buid date:November 26, 2020, 11:27:15 AM
+build source:
+Perforce: //depot/stg/atombios/bios/psp_vbios/amd/Rembrandt/ CL2220877
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with pkey(2020-10-27 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-70906
+
+Major changes:
+1. PPR updated to V104
+2. Enable the Debug output
+
+============================ Rembrandt 20.11.0.11 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.11
+Rembrandt A0 0x164D 102-D59501-00B
+Buid date:November 26, 2020, 11:27:15 AM
+build source:
+Perforce: //depot/stg/atombios/bios/psp_vbios/amd/Rembrandt/ CL2210858
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with pkey(2020-10-27 Version).
+the script is from http://ontrack-internal.amd.com/browse/PLAT-68701 
+
+Major feature:
+1. [RMB]Firmware change list alignment for B0 - CL# 1343072 - VBL
+
+============================ Rembrandt 20.11.0.10 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.10
+Rembrandt A0 0x164D 102-D59501-00B
+Buid date:November 5, 2020, 1:40:43 PM
+build source:
+Perforce: //depot/stg/atombios/bios/psp_vbios/amd/Rembrandt/ CL2196792
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with pkey.
+the script is from http://ontrack-internal.amd.com/browse/PLAT-68701 
+
+Major feature:
+1. PLAT-71319 [RMB] E.B.0.6 firmware change list alignment for B0 - CL# 1327134 - VBL
+2. Update the PPR to Ver 152, ppr_RMB_A0_int_152_pprxml.zip. 
+
+============================ Rembrandt 20.11.0.9 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.9
+Rembrandt A0 0x164D 102-D59501-00B
+Buid date:October 22, 2020, 10:27:18 AM
+build source:
+Perforce: CL2189842
+Git hash: commit 7bb9c3ab452a4446b0fb49b0223c7906347de338 (HEAD -> master, origin/master, origin/HEAD)
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with tkey 
+
+Major feature:
+1. PLAT-71187 [RMB] A0 firmware MTO change list alignment - VBL, sync Reg spec to rmb_MTO_1322172
+2. Update the PPR to Ver 150, ppr_RMB_A0_int_150_pprxml.zip. 
+
+============================ Rembrandt 20.11.0.8 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.8
+Rembrandt A0 0x164D 102-D59501-00B
+build source:
+Perforce: CL2183561
+Git hash: commit eb7bab1f1ab85bc1e8fc8488fa1554ed28f281b9 (HEAD -> master, origin/master, origin/HEAD)
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with tkey 
+
+Major feature:
+1. DCIO.INTERCEPT_STATE.PWRSEQ0_INTERCEPTB_STATE set to 1
+
+
+============================ Rembrandt 20.11.0.7 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.7
+Rembrandt A0 0x164D 102-D59501-00B
+build source:
+Perforce: CL2179643
+Git hash: commit f3636bf4b7c8c9f98dc468f3c9359cbf8f324707 (HEAD -> master, origin/master, origin/HEAD)
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with tkey 
+
+Major feature:
+1. RTGPLAT-5489[RMB] MM/GC EA Shadow and formula-based registers programming by VBIOS; New method to find DstFabricID.
+
+============================ Rembrandt 20.11.0.6 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.6
+Rembrandt A0 0x164D 102-D59501-00B
+build source:
+Perforce: CL2176119
+Git hash: commit 566862ef7d55cc3e6ed7d59cdcf6ae146575f85f (HEAD -> master, origin/master, origin/HEAD)
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign with tkey 
+
+Major feature:
+1. RTGPLAT-5489[RMB] MM/GC EA Shadow and formula-based registers programming by VBIOS
+2. RTGPLAT-5490[RMB] MM/GC UTCL2 Shadow and formula-based registers programming by VBIOS
+
+============================ Rembrandt 20.11.0.5 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.5
+Rembrandt A0 0x164D 102-D59501-00B
+build source:
+Perforce: CL2173304
+Git hash: commit 1665c4811036a9af73c58f9438871a5032f3ef90 (HEAD -> master, origin/master, origin/HEAD)
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. sign script:fw-sign-2020-09-09 from PLAT-68701
+
+Major feature:
+1. PLAT-69251 [RMB] B0 firmware change list alignment - CL# 1308269 - VBL/GOP/CSM
+2. update RMB PPR to ppr_RMB_A0_int_102
+3. DF_instances update
+
+
+============================ Rembrandt 20.11.0.4 VBL release  ========================================
+Rembrandt generic  VBL 20.11.0.4
+Rembrandt A0 0x164D 102-D59501-00B
+build source:
+Perforce: CL2159906, 
+Git hash: commit 304bbf6212670280b43a4b562a86c4477eec352f (HEAD -> master, origin/master, origin/HEAD)
+
+The TypeId0x3C_VbiosBootLoader_RMB.sbin is the FW signed bianry. 
+
+Major feature:
+1. DERMBE-300 Remove GFX power up message from VBL for RMB
+
+
+============================ Rembrandt 20.11.0.3 VBL release  ========================================
+Rembrandt generic  VBL 17.10.0.20
+Rembrandt A0 0x164D 102-D59501-00B
+build source:
+Perforce: CL2157418, 
+Git hash: commit eae42902b439d6d29ef9dca6699565f75f193762 (HEAD -> master, origin/master, origin/HEAD)
+
+The VbiosBootLoader_prod.sbin is the FW sign. 
+
+Major feature:
+1. PLAT-67798 [RMB] LSE Emulation Drop CL : 1294576- VBL/CSM/GOP (with E.0.1.1c support)
+

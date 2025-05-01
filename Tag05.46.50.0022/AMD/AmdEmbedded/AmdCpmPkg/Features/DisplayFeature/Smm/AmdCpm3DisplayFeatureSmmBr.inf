@@ -1,0 +1,65 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2019-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION               = 0x00010006
+  BASE_NAME                 = AmdCpmDisplayFeatureSmmBr
+  FILE_GUID                 = C30ADC21-4AA5-4313-A7E7-53395B42BEAB
+  MODULE_TYPE               = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION  = 0x0001000A
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = AmdCpmDisplayFeatureSmmEntryPoint
+
+[Sources.common]
+  AmdCpmDisplayFeatureSmm.c
+  DisplayFeatureSmiRegistration.c
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[LibraryClasses]
+  BaseLib
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  AmdCpmBaseLib
+  DisplayCbsLibBr
+
+[Guids]
+
+[Protocols]
+  gAmdCpmTableSmmProtocolGuid
+  gAmdCpmDisplayFeatureProtocolGuid
+  gEfiSmmBase2ProtocolGuid
+  gEfiSmmSwDispatch2ProtocolGuid
+  gBootTimeRecordProtocolGuid
+  gEfiSmmReadyToLockProtocolGuid
+
+[Ppis]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.AcpiRestoreSwSmi
+  gAmdCpmPkgTokenSpaceGuid.AcpiDisableDgpuAudioSwSmi
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdSetAutoUmaMode
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdSetUmaSizeId
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmDgpuSsid
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmDgpuAudioSsid
+
+[Depex]
+  gAmdCpmTableSmmProtocolGuid
+  AND
+  gAmdCpmDisplayFeatureProtocolGuid
+  AND
+  gEfiSmmBase2ProtocolGuid
+  AND
+  gEfiSmmSwDispatch2ProtocolGuid
+

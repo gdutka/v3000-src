@@ -1,0 +1,28 @@
+## @file
+#  Null implementation for SmmErrorReportOemLib
+#
+#  Copyright (C) Microsoft Corporation.
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmErrorReportOemLibNull
+  FILE_GUID                      = 2AD22551-7153-4709-B2C9-FD87AB4B3FF8
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 0.1
+  LIBRARY_CLASS                  = SmmErrorReportOemLib
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  SmmErrorReportOemLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec

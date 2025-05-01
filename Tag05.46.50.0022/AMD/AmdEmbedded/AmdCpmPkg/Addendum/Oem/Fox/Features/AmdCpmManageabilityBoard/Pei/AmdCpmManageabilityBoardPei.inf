@@ -1,0 +1,52 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2019-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmManageabilityBoardPei
+  FILE_GUID             = 1D60DB95-9E47-4B63-A5AE-2317D71158B0
+  MODULE_TYPE           = PEIM
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmManageabilityBoardEntryPoint
+
+[Sources.common]
+  AmdCpmManageabilityBoardPei.c
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[LibraryClasses]
+  BaseLib
+  PeimEntryPoint
+  AmdBaseLib
+  AmdPbsConfigLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdCpmTablePpiGuid
+  gAmdCpmManageabilityBootPpiGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec                                     # PcdCfgAzaliaEnable
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec                     # PcdCfgIgpuContorl
+  AmdCpmPkg/Addendum/Oem/$(PLATFORM_NAME)/AmdCpmOemPkg.dec           # AmdPbsConfig.h
+  AgesaModulePkg/AgesaModuleFchPkg.dec                      # PcdXhci0Enable/PcdXhci1Enable/PcdSataEnable/PcdSataEnable2/FchRTDeviceEnableMap/PcdLpcEnable/PcdEspiEnable
+  AmdCpmPkg/Addendum/Oem/$(PLATFORM_NAME)/AmdCpmOemPkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.EcRamBaseAddr
+
+[Depex]
+  gAmdCpmTablePpiGuid
+
+[BuildOptions]

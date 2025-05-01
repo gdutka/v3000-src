@@ -1,0 +1,53 @@
+## @file
+#
+# ***************************************************************************
+# * Copyright (c) 2013, Insyde Software Corp. All Rights Reserved.
+# *
+# * You may not reproduce, distribute, publish, display, perform, modify, adapt,
+# * transmit, broadcast, present, recite, release, license or otherwise exploit
+# * any part of this publication in any form, by any means, without the prior
+# * written permission of Insyde Software Corporation.
+# *
+# ******************************************************************************
+##
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DashIoCfgDxe
+  FILE_GUID                      = 54AFED50-5999-4594-9B79-F0AAA09FA32C
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = DashIoCfgDxeEntryPoint
+
+[Sources]
+  DashIoCfgDxe.c
+  DashIoCfgDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  IoLib
+  DebugLib
+  ChipsetConfigLib
+
+[Guids]
+
+[Protocols]
+  gDashIoCfgProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiSetupUtilityProtocolGuid
+
+[Depex]
+  gEfiPciRootBridgeIoProtocolGuid AND
+  gEfiPciIoProtocolGuid           AND
+  gEfiSetupUtilityProtocolGuid

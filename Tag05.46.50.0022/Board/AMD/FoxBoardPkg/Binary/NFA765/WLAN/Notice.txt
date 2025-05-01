@@ -1,0 +1,252 @@
+This Notice.txt file contains certain notices of software components included 
+with the software that Qualcomm Atheros, Inc. (“Qualcomm Atheros”) is required 
+to provide you. Except where prohibited by the open source license, the content 
+of this notices file is only provided to satisfy Qualcomm Atheros's attribution 
+and notice requirement; your use of these software components together with the 
+Qualcomm Atheros software (Qualcomm Atheros software hereinafter referred to as 
+“Software”) is subject to the terms of your agreement from Qualcomm Atheros. 
+Compliance with all copyright laws and software license agreements included in 
+the notice section of this file are the responsibility of the user. Except as 
+may be granted by separate express written agreement, this file provides no 
+license to any patents, trademarks, copyrights, or other intellectual property 
+of Qualcomm Incorporated or any of its subsidiaries.
+
+Qualcomm is a trademark of Qualcomm Incorporated, registered in the United 
+States and other countries. All Qualcomm Incorporated trademarks are used with 
+permission. Other products and brand names may be trademarks or registered 
+trademarks of their respective owners.
+
+Notices
+
+=============================================================================
+File qdf/base_type.h
+/*-
+ * Copyright (c) 2010 Isilon Systems, Inc.
+ * Copyright (c) 2010 iX Systems, Inc.
+ * Copyright (c) 2010 Panasas, Inc.
+ * Copyright (c) 2013-2016 Mellanox Technologies, Ltd.
+ * Copyright (c) 2014-2015 François Tigeot
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice unmodified, this list of conditions, and the following
+ *    disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * $FreeBSD$
+ */
+
+File qdf/errno.h
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1986, 1989, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ * (c) UNIX System Laboratories, Inc.
+ * All or some portions of this file are derived from material licensed
+ * to the University of California by American Telephone and Telegraph
+ * Co. or Unix System Laboratories, Inc. and are reproduced herein with
+ * the permission of UNIX System Laboratories, Inc.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)errno.h	8.5 (Berkeley) 1/21/94
+ * $FreeBSD$
+ */
+
+File qdf/limits.h
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1988, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)limits.h	8.3 (Berkeley) 1/4/94
+ * $FreeBSD$
+ */
+
+
+/*===========*/
+Files in xz:
+Licensing of XZ Embedded
+========================
+
+    All the files in this package have been written by Lasse Collin
+    and/or Igor Pavlov. All these files have been put into the
+    public domain. You can do whatever you want with these files.
+
+    As usual, this software is provided "as is", without any warranty.
+
+/*===========*/
+Files in ath11k
+/* SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
+ * Copyright (c) 2010 The Linux Foundation. All rights reserved.
+ */
+
+/*===========*/
+File regulatory.h
+/*
+ * regulatory support structures
+ *
+ * Copyright 2008-2009	Luis R. Rodriguez <mcgrof@qca.qualcomm.com>
+ * Copyright (C) 2018 Intel Corporation
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
+File nl80211.h
+/*
+ * 802.11 netlink interface public header
+ *
+ * Copyright 2006-2010 Johannes Berg <johannes@sipsolutions.net>
+ * Copyright 2008 Michael Wu <flamingice@sourmilk.net>
+ * Copyright 2008 Luis Carlos Cobo <luisca@cozybit.com>
+ * Copyright 2008 Michael Buesch <m@bues.ch>
+ * Copyright 2008, 2009 Luis R. Rodriguez <lrodriguez@atheros.com>
+ * Copyright 2008 Jouni Malinen <jouni.malinen@atheros.com>
+ * Copyright 2008 Colin McCabe <colin@cozybit.com>
+ * Copyright 2015-2017	Intel Deutschland GmbH
+ * Copyright (C) 2018-2019 Intel Corporation
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ *
+ */
+
+/*
+ * This header file defines the userspace API to the wireless stack. Please
+ * be careful not to break things - i.e. don't move anything around or so
+ * unless you can demonstrate that it breaks neither API nor ABI.
+ *
+ * Additions to the API should be accompanied by actual implementations in
+ * an upstream driver, so that example implementations exist in case there
+ * are ever concerns about the precise semantics of the API or changes are
+ * needed, and to ensure that code for dead (no longer implemented) API
+ * can actually be identified and removed.
+ * Nonetheless, semantics should also be documented carefully in this file.
+ */
+
+File cfg80211/reg.c, cfg80211/reg.h
+/*
+ * Copyright 2008-2011	Luis R. Rodriguez <mcgrof@qca.qualcomm.com>
+ * Copyright (C) 2019 Intel Corporation
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
+
+/*===========*/
+wpa_supplicant and hostapd
+--------------------------
+
+Copyright (c) 2002-2019, Jouni Malinen <j@w1.fi> and contributors
+All Rights Reserved.
+
+
+See the README file for the current license terms.
+
+This software was previously distributed under BSD/GPL v2 dual license
+terms that allowed either of those license alternatives to be
+selected. As of February 11, 2012, the project has chosen to use only
+the BSD license option for future distribution. As such, the GPL v2
+license option is no longer used. It should be noted that the BSD
+license option (the one with advertisement clause removed) is compatible
+with GPL and as such, does not prevent use of this software in projects
+that use GPL.
+
+Some of the files may still include pointers to GPL version 2 license
+terms. However, such copyright and license notifications are maintained
+only for attribution purposes and any distribution of this software
+after February 11, 2012 is no longer under the GPL v2 option.

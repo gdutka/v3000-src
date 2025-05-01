@@ -1,0 +1,149 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdNbioGfxRMBPei
+  FILE_GUID                      = 166CAE80-98DE-45B9-BB47-85307145D874
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdNbioGfxRMBPeiEntry
+
+[Sources]
+  GfxDriverEntry.c
+  GfxInfoCollection.c
+  GfxInfoRegisters.h
+  GfxEnumConnectors.c
+  GfxEnumConnectors.h
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  IdsLib
+  PeimEntryPoint
+  PeiServicesLib
+  GnbCommonLib
+  PcdLib
+  HobLib
+  BaseMemoryLib
+  NbioHandleLib
+  GnbRegisterAccZpLib
+  NbioRegisterAccLib
+  PcieConfigLib
+  PeiServicesTablePointerLib
+  AmdIdsHookLib
+  NbioIdsHookRmbLibPei
+  SmnAccessLib
+  NbioSmuV13Lib
+  FabricRegisterAccLib
+
+[Guids]
+  gGnbNbioBaseZPHobInfoGuid
+  gGnbPcieHobInfoGuid
+  gAmdMemoryInfoHobGuid
+  gGnbIntegratedSysInfoV4HobGuid
+  gGnbPeiGopHobGuid
+
+[Ppis]
+  gAmdNbioBaseServicesRmbPpiGuid
+  gAmdNbioPcieServicesPpiGuid
+  gAmdMemoryInitCompletePpiGuid
+  gAmdMemoryInfoHobPpiGuid
+  gAmdNbioPcieComplexPpiGuid
+  gEfiPeiGraphicsPpiGuid
+  gAmdNbioGfxPpiGuid
+  gAmdSocLogicalIdPpiGuid            #CONSUMED
+  gAmdNbioSmuServicesPpiGuid
+
+[Pcd]
+  #GFX
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDpPhyOverride
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_max_symclk_in10khz
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_encoder_mode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_phy_sel
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_margindeemph
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_deemph_6db_4
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_boostadj
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_tx_driver_fifty_ohms
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDVI_deemph_sel
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_max_symclk_in10khz
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_encoder_mode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_phy_sel
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_margindeemph
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_deemph_6db_4
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_boostadj
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_tx_driver_fifty_ohms
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI_deemph_sel
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_max_symclk_in10khz
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_encoder_mode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_phy_sel
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_margindeemph
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_deemph_6db_4
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_boostadj
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_tx_driver_fifty_ohms
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHDMI6G_deemph_sel
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdBackLightPwmHz
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrOnDigonToDe
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrOnDeToVaryBl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrDownVaryBloffToDe
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrDownDeToDigOff
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrOffDelay
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrOnVaryBlToBlon
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPwrDownBloffToVaryBlOff
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMinAllowedBlLevel
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgPcieRefClkSpreadSpectrum
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIgpuContorl
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgMaxNumAudioEndpoints
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgDisableAllNumAudioEndpoints
+
+  #GFX v1_12
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopConfigMemsize
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopVmFbOffset
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPeiGopVmFbLocationTop
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPreSilCtrl1
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDisplayPhyTuningSettingTableHeader
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDisplayPhyTuningSettingTableContent
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDisplayCapDdi0
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDisplayCapDdi1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDisplayCapDdi2
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDisplayCapDdi3
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDisplayCapDdi4
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdBitMapDisaplyOnlyController
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4DpiaDisable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4Rt0En
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4Rt1En
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4Rt0DpTnlEn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4Rt1DpTnlEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSysInfoGpuCapsDdsSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSysInfoGpuCapsBr3SdrSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDisplayFixVoltageSwing
+
+[Depex]
+  gAmdNbioBaseRMBPeiDepexPpiGuid AND
+  gAmdNbioPcieServicesPpiGuid AND
+  gAmdMemoryInfoHobPpiGuid
+
+

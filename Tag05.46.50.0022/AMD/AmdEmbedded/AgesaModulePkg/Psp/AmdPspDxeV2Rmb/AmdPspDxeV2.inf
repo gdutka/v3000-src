@@ -1,0 +1,112 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPspDxeV2Rmb
+  FILE_GUID                      = 11a51daf-6834-4ba1-ad5e-4a58633b343e
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdPspDxeV2DriverEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  BaseMemoryLib
+  AmdBaseLib
+  IdsLib
+  AmdIdsHookLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiDriverEntryPoint
+  AmdSocBaseLib
+  AmdPspMboxLibV2
+  AmdPspBaseLibV2
+  AmdPspApobLib
+  AmdPspFlashUpdateLib
+  MemoryAllocationLib
+  CcxPspLib
+  AmdCapsuleLib
+  ApcbChecksumLibV3
+  FabricResourceManagerLib
+  MemRestoreLib
+  PspIdsHookLibDxe
+  ApobCommonServiceLib
+  DxeServicesLib
+  AmdPspFlashAccLib
+  SmnAccessLib
+  MpmLib
+  MpmFuncLib
+  MpmMboxLib
+  AmdPspFwImageHeaderLib
+
+[Sources]
+  AmdPspDxeV2.c
+
+[Sources.x64]
+  x64/AmdPspDxeSaveS3.nasm
+
+[Guids]
+  gEfiEventReadyToBootGuid
+  gPspSmmCommHandleGuid    ## CONSUMES
+  gEfiEventExitBootServicesGuid
+
+[Protocols]
+  gEfiSmmControl2ProtocolGuid #Consume
+  gPspPlatformProtocolGuid    #Consume
+  gEfiMpServiceProtocolGuid   #Consume
+  gEfiPciEnumerationCompleteProtocolGuid  #Consume
+  gAmdPspCommonServiceProtocolGuid  #publish
+  gPspFlashAccSmmCommReadyProtocolGuid
+  gEfiSmmCommunicationProtocolGuid        ## CONSUMES
+  gAmdCoreTopologyServicesV2ProtocolGuid  #CONSUME
+  gAmdNbioSmuServicesProtocolGuid         #CONSUME
+  gAmdFabricTopologyServices2ProtocolGuid #CONSUME
+  gAmdApcbDxeServiceProtocolGuid          #CONSUME
+  gEfiTcg2ProtocolGuid                    #CONSUME
+  gEfiFirmwareVolume2ProtocolGuid         #CONSUME
+  gEfiAcpiTableProtocolGuid               #CONSUME
+  gAmdNbioIommuProtocolGuid               #CONSUME
+  gEfiDxeSmmReadyToLockProtocolGuid       #CONSUME
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSmmCommunicationAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspApcbRecoveryEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspTsmeStatusTpmMeasurement
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspDrtmVirtualDevice
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspNvramClearRequest
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmAlgSmx
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspTpmConfigSynchronizationEnabled
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspS3WakeFromSmm
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessKvmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWiredKvmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdMpmConfigSynchronizationEnabled
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDmaProtection
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspLockeSPIEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdScpcAutoEnablement
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspDmaProtectionStatusTpmMeasurement
+
+[Depex]
+  gAmdPspDxeV2RmbDepexProtocolGuid AND
+  gAmdNbioSmuServicesProtocolGuid
+
+
+
+
+

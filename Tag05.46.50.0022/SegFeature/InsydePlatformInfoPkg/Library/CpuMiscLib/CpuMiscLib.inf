@@ -1,0 +1,37 @@
+## @file
+#  Component description file of CpuMiscLib.
+#
+#******************************************************************************
+#* Copyright (c) 2024, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuMiscLib
+  FILE_GUID                      = 62F91A92-0B24-48DF-9D4F-26332304D62C
+  MODULE_TYPE                    = UEFI_DRIVER
+  LIBRARY_CLASS                  = CpuMiscLib|DXE_DRIVER UEFI_APPLICATION UEFI_DRIVER
+
+[Sources.X64]
+  X64/CpuMiscLib.c
+
+[Sources.AARCH64]
+  AArch64/CpuMiscLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses.X64]
+  BaseLib
+
+[Protocols]

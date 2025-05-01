@@ -1,0 +1,59 @@
+## @file
+#  Component description file for Update ASF table DXE module.
+#
+# ***************************************************************************
+# * Copyright (c) 2020, Insyde Software Corp. All Rights Reserved.
+# *
+# * You may not reproduce, distribute, publish, display, perform, modify, adapt,
+# * transmit, broadcast, present, recite, release, license or otherwise exploit
+# * any part of this publication in any form, by any means, without the prior
+# * written permission of Insyde Software Corporation.
+# *
+# ******************************************************************************
+##
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UpdateAsfTableDxe
+  FILE_GUID                      = AB5BCFE8-BEE9-47B7-B7E5-7EEA4D357A01
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = UpdateAsfTableDxeEntryPoint
+
+[Sources]
+  UpdateAsfTableDxe.c
+  UpdateAsfTableDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  DebugLib
+  UefiLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  PcdLib
+
+[Protocols]
+  gEfiAcpiTableProtocolGuid
+  gEfiAcpiSupportProtocolGuid
+  gDashIoCfgProtocolGuid
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId            ## CONSUMES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId       ## CONSUMES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision      ## CONSUMES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorId        ## CONSUMES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorRevision  ## CONSUMES
+
+[Depex]
+  gEfiAcpiSupportProtocolGuid AND
+  gPublishAcpiTableDoneProtocolGuid AND
+  gDashIoCfgProtocolGuid

@@ -1,0 +1,47 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdPspDxeSmmBufLib
+  FILE_GUID                      = F6D08F89-AE89-41a2-9675-C33E78242AB0
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdPspDxeSmmBufLib | DXE_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER DXE_CORE SMM_CORE UEFI_DRIVER
+  CONSTRUCTOR                    = AmdPspDxeSmmBufLibConstructor
+
+[Sources.common]
+  AmdPspDxeSmmBufLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  BaseMemoryLib
+  UefiBootServicesTableLib
+  IdsLib
+
+[Guids]
+
+
+[Protocols]
+  gEfiSmmBase2ProtocolGuid
+
+[Ppis]
+
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspSmmRunTimeBufferAddress
+
+[Depex]
+
+

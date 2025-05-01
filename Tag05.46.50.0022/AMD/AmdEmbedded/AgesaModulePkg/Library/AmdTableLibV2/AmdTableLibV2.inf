@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdTableLibV2
+  FILE_GUID                      = 148FEABC-AED9-4723-B663-73388D5E3AD3
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdTableLib
+
+[Sources.common]
+  AmdTableLibV2.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdBaseLib
+  BaseMemoryLib
+  GnbLib
+  IdsLib
+  CcxRolesLib
+  PciLib
+  AmdTableHookLib  # There're 4 instances of this LIB
+                   # AmdTableHookPeiLib.inf --- For PEIM, would introduce depex on gAmdSocLogicalIdPpiGuid AND gAmdNbioSmuServicesPpiGuid AND gAmdFabricTopologyServices2PpiGuid
+                   # AmdTableHookDxeLib.inf --- For DXE driver, would introduce depex on gAmdSocLogicalIdProtocolGuid AND gAmdNbioSmuServicesProtocolGuid AND gAmdFabricTopologyServices2ProtocolGuid
+                   # AmdTableSmnPeiXvLib.inf --- Specifically for excavator, no depex would be introduced
+                   # AmdTableSmnDxeXvLib.inf --- Specifically for excavator, no depex would be introduced
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdApicMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdBranchSampling
+
+[Depex]

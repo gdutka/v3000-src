@@ -1,0 +1,229 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaCommonPkg
+  PACKAGE_GUID          = 1DB6EDBF-9646-4476-81B7-14FB9B872E88
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+
+[LibraryClasses]
+  # Common library classes for all drivers
+  AmdBaseLib|Include/Library/AmdBaseLib.h
+  AmdS3SaveLib|Include/Library/AmdS3SaveLib.h
+  AmdIdsDebugPrintLib|Include/Library/AmdIdsDebugPrintLib.h
+  AmdIdsHookLib|Include/Library/AmdIdsHookLib.h
+  AmdIdsHookExtLib|Include/Library/AmdIdsHookExtLib.h
+  AmdTableLib|Include/Library/AmdTableLib.h
+  AmdErrorLogLib|Include/Library/AmdErrorLogLib.h
+  AmdCfgPcdBufLib|Include/Library/AmdCfgPcdBufLib.h
+  BaseCoreLogicalIdLib|Include/Library/BaseCoreLogicalIdLib.h
+  BaseSocketLogicalIdLib|Include/Library/BaseSocketLogicalIdLib.h
+  BaseSocLogicalIdXlatLib|Include/Library/BaseSocLogicalIdXlatLib.h
+  DxeSocLogicalIdServicesLib|Include/Library/DxeSocLogicalIdServicesLib.h
+  PeiSocLogicalIdServicesLib|Include/Library/PeiSocLogicalIdServicesLib.h
+  PeiSocBistLoggingLib|Include/Library/SocBistLoggingLib.h
+  PeiSocBistLogging2Lib|Include/Library/SocBistLogging2Lib.h
+  PeiSocBistLib|Include/Library/PeiSocBistLib.h
+  ## DashAsfBaseLib
+  DashAsfBaseLib|Include/Library/DashAsfBaseLib.h
+  ## DashAsfSmbusLib
+  DashAsfSmbusLib|Include/Library/DashAsfSmbusLib.h
+
+[Guids]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid      = {0x7788adf0, 0x9788, 0x4a3f, {0x83, 0xfa, 0xcb, 0x51, 0x2e, 0x7c, 0xf8, 0xdd}}
+  gAmdMemoryInfoHobGuid                    = {0x1bce3d14, 0xa5fe, 0x4a0b, {0x9a, 0x8d, 0x69, 0xca, 0x5d, 0x98, 0x38, 0xd3}}
+  gAmdMemCfgInfoHobGuid                    = {0x13f03f37, 0xaf63, 0x4398, {0x98, 0x4d, 0x54, 0xe2, 0xdf, 0xe7, 0x03, 0xa5}}
+  gErrorLogHobGuid                         = {0xace4c26a, 0x4a31, 0x4861, {0x8e, 0xf9, 0xda, 0xd0, 0x7c, 0xfd, 0x39, 0x1f}}
+  gAmdSmmCommunicationHandleGuid           = {0x5c4061f0, 0xd051, 0x4f43, {0xbc, 0x23, 0x5e, 0x5e, 0x89, 0xb3, 0xce, 0xc0}}
+  gAmdNvdimmInfoHobGuid                    = {0x6d069e32, 0x4498, 0xb64b, {0x25, 0x1b, 0x6d, 0x8e, 0xda, 0x4a, 0xcb, 0x3c}}
+  gAmdNvdimmSpdInfoHobGuid                 = {0x989ce0ba, 0x99f8, 0x48fd, {0xa8, 0x93, 0x95, 0xe0, 0x06, 0xc3, 0x18, 0x19}}
+  gAmdMemHolesInfoHobGuid                  = {0xbd5acf5, 0xf7c1, 0x4932, {0xb8, 0x1a, 0xed, 0xce, 0xa0, 0xe5, 0x4e, 0x1d}}
+  gEfiSmmPeiSmramMemoryReserveGuid         = {0x6dadf1d1, 0xd4cc, 0x4910, { 0xbb, 0x6e, 0x82, 0xb1, 0xfd, 0x80, 0xff, 0x3d}}
+  gAmdMemPmuTrainingFailureHobGuid         = {0x5EFAF260, 0x682B, 0x48E2, {0x94, 0xE0, 0xDB, 0xAC, 0x3C, 0xB8, 0xCC, 0x72}}
+  gAmdMemEventLogHobGuid                   = {0x60B0691E, 0x7F6F, 0x4D92, {0x83, 0x5B, 0x67, 0xDE, 0x80, 0x86, 0x6E, 0x8D}}
+  gSocCoreInfoGuid                         = {0x0cdfa7da, 0x0d0b, 0x41f0, {0xb9, 0x8b, 0x0f, 0x63, 0x59, 0xc0, 0x85, 0x7f}}
+  gAgesaConfigDbPointerVariableGuid        = {0x21229d24, 0xc71d, 0x4bc0, {0xb6, 0x3e, 0x67, 0x2f, 0x6d, 0xbf, 0x5f, 0xf7}}
+  gMemDdr5DimmHubRegGuid                   = {0xD9C35A1E, 0x7D81, 0x4C77, {0xB1, 0xC4, 0x8C, 0xD8, 0x51, 0xFC, 0xC3, 0x58}}
+
+[Protocols]
+  ## IDS Protocols
+  gAmdIdsDebugPrintProtocolGuid            = {0x669ed5b1, 0x49a3, 0x4c59, {0x9d, 0x2d, 0x4, 0x32, 0xad, 0x6c, 0xdb, 0x61}}
+
+  ## Gnb Protocols
+
+  ## Fch Protocols
+
+  ## PSP Protocols
+
+  ## Soc Depex Protocols List
+  gAmdErrorLogDepexProtocolGuid            = {0x6f8c98ef, 0x2d68, 0x4bb9, {0x93, 0x88, 0x84, 0xc2, 0xa5, 0xd9, 0x22, 0xd}}
+
+  ## Soc Protocols
+  gAmdSocLogicalIdProtocolGuid             = {0x72f8e409, 0x0d2a, 0x4b91, {0x88, 0x6f, 0xba, 0x13, 0x44, 0x9f, 0xd7, 0x78}}
+  gAmdSocValhallaServicesProtocolGuid      = {0xb4f3b731, 0x8039, 0x4069, {0x9c, 0x59, 0x33, 0x7a, 0x3d, 0x6c, 0x9e, 0xaf}}
+  gAmdSocZenServicesProtocolGuid           = {0xe6693179, 0xe6df, 0x4ad9, {0x9f, 0x1e, 0xfc, 0xd8, 0xec, 0x7d, 0x28, 0x91}}
+  gAmdSocZen3ServicesProtocolGuid          = {0x6b7cd374, 0xcbea, 0x4b76, {0x96, 0x3f, 0x6e, 0xfc, 0x19, 0xe7, 0xd, 0x21}}
+  gAmdSocZen4ServicesProtocolGuid          = {0x0967cf7e, 0x6566, 0x4b11, {0xbe, 0x76, 0x0b, 0x3e, 0xae, 0x63, 0x92, 0xda}}
+
+  ## FCH
+
+  ## PSP
+  gAmdPspFirmwareVersionProtocolGuid       = {0x925b78d4, 0x6eb5, 0x4d4b, {0x82, 0xa0, 0x7e, 0xd4, 0xa4, 0x31, 0x16, 0xa0}}
+
+  ## Memory
+
+  ## NBIO
+
+  ## CCX
+
+  ## DF
+
+  ## APCB
+  gAmdApcbDxeServiceProtocolGuid           = {0x7189e04e, 0x6284, 0x4953, {0xa5, 0x43, 0xa3, 0x1f, 0x89, 0xa1, 0xa7, 0xbf}}
+  gAmdApcbSmmServiceProtocolGuid           = {0x8151730c, 0xe1d3, 0x4c8c, {0x91, 0x7b, 0xa3, 0x9b, 0x7e, 0xd4, 0x82, 0x65}}
+
+  ## Error Log Protocols
+  gAmdErrorLogReadyProtocolGuid            = {0x576732ae, 0xa8fd, 0x4ee2, {0xae, 0x42, 0x29, 0x8e, 0xcf, 0xd5, 0xad, 0x3a}}
+  gAmdErrorLogProtocolGuid                 = {0x79a128fb, 0xf8ea, 0x47c1, {0x86, 0x5, 0x30, 0xb5, 0xfd, 0xc2, 0x6a, 0xa1}}
+
+  ## Universal
+  gAmdSmbiosDxeInitCompleteProtocolGuid    = {0x607614f9, 0x3f1c, 0x45dd, {0x9c, 0x78, 0x1, 0x72, 0x3b, 0xc3, 0x85, 0xd9}}
+  gAmdAcpiDxeInitCompleteProtocolGuid      = {0x2148aa15, 0x700c, 0x4f75, {0x87, 0xaf, 0x10, 0xa4, 0xdd, 0xbb, 0xb9, 0xe1}}
+
+  ## MPM
+  gAmdMpmGetBatteryInfoProtocol            = { 0x7398E162, 0x460D, 0x4D3F, {0x5F, 0xB8, 0x76, 0x61, 0x60, 0x2B, 0x66, 0xC6}}
+  gAmdPldmProtocolGuid                     = {0xb418a081, 0x5e61, 0x4e2e, {0x8a, 0xcc, 0x3b, 0x9c, 0xc8, 0x86, 0x82, 0xb8}}
+  gAmdMpmGetSensorInfoProtocol             = {0x73e0cd10, 0x7541, 0x4dbf, {0xaa, 0xa8, 0x76, 0xcd, 0x62, 0x60, 0x3a, 0xb7}}
+  gAmdMpmKvmInitializedProtocolGuid        = {0xde2d159a, 0x8f63, 0x4566, {0x86, 0x84, 0x02, 0xe8, 0xa2, 0x37, 0x49, 0x79}}
+  gAmdMpmBccBiosPasswordProtocolGuid       = {0xe70c0218, 0x3a5f, 0x49fd, {0xbe, 0x2d, 0x15, 0x6f, 0x8b, 0x90, 0xe1, 0xe2}}
+  gAmdMpmBccGetOemBiosPasswordProtocolGuid = {0x03ca59aa, 0x0329, 0x4b20, {0x88, 0xfc, 0xae, 0xff, 0x51, 0xec, 0xc9, 0xb9}}
+  gAmdMpmTcrInitializedProtocolGuid        = {0x55f2236f, 0x6188, 0x433a, {0x96, 0x42, 0x3c, 0x2c, 0x51, 0x44, 0x66, 0x21}}
+  gAmdMpmWifiFwloadedProtocolGuid          = {0x577a0165, 0x14d5, 0x48be, {0x83, 0x4b, 0xf3, 0xe8, 0x22, 0xd4, 0x71, 0x30}}
+  gAmdMpmPldmBccProtocolGuid               = {0xcf4a2520, 0xa1b5, 0x4473, {0x9a, 0x34, 0xe0, 0x2e, 0x2a, 0xf6, 0x29, 0xac}}
+
+  ##PSP KVM
+  gAmdKvmStaticIpInfoProtocolGuid          = {0x6870f6c8, 0x6286, 0x4a73, {0x8C, 0x49, 0x87, 0x03, 0x82, 0x2c, 0x2a, 0x5c}}
+
+  ## Dash
+  gDashMctpIoProtocolGuid                  = {0xf375d9f0, 0x4ec6, 0x491d, {0x91, 0x86, 0x31, 0x34, 0x68, 0xf3, 0x48, 0x55}}
+  gAmdDashPldmProtocolGuid                 = {0x6cf2f094, 0xfb21, 0x4c9a, {0x84, 0x4f, 0xf5, 0x5a, 0xfa, 0x0d, 0x89, 0x06}}
+
+[Ppis]
+  gAmdPlatformDimmSpdPpiGuid             = {0x5f02b45f, 0xa78e, 0x4462, {0xba, 0x8, 0xc0, 0xc9, 0x7, 0xfd, 0x65, 0x68}}
+  gAmdIdsDebugPrintPpiGuid                 = {0x8663e771, 0x52f6, 0x49fb, {0xb3, 0x45, 0xdb, 0x93, 0x96, 0x5e, 0x6c, 0xab}}
+
+  ## SOC Depex Ppi list
+  gAmdErrorLogDepexPpiGuid                 = {0x1bee3339, 0x17e2, 0x4823, {0x93, 0x3b, 0x64, 0x4c, 0x3e, 0xc5, 0xaa, 0x62}}
+
+  ## Soc Ppis
+  gAmdSocLogicalIdPpiGuid                  = {0xb5e37753, 0x25e0, 0x48bf, {0xad, 0xd7, 0xbf, 0x8e, 0xf3, 0x75, 0x8, 0xa7}}
+  gAmdSocValhallaServicesPpiGuid           = {0x7c09b9c, 0x773b, 0x4708, {0xa1, 0x52, 0x24, 0x95, 0x5d, 0x53, 0xbe, 0xac}}
+  gAmdSocZenServicesPpiGuid                = {0xa2873fe5, 0x726d, 0x426b, {0xa6, 0x26, 0x9e, 0xa3, 0xef, 0x72, 0xb5, 0x95}}
+  gAmdSocZen3ServicesPpiGuid               = {0xbc55bdcd, 0xd1b8, 0x4680, {0x8c, 0xf7, 0x7e, 0x29, 0xf3, 0x44, 0x2f, 0xab}}
+  gAmdSocZen4ServicesPpiGuid               = {0x64a2494c, 0xdfc4, 0x4cbf, {0x95, 0xf6, 0xf3, 0xb8, 0x1b, 0xd4, 0x53, 0x1b}}
+
+  ## FCH
+
+  ## PSP
+
+  ## Memory
+  ## NBIO
+
+  ## CCX
+
+  ## DF
+
+  ## Error Log Ppis
+  gAmdErrorLogPpiGuid                      = {0x780bf289, 0x93d, 0x457f, {0x88, 0xf8, 0x8f, 0x58, 0xb7, 0x6, 0x32, 0x2e}}
+  gAmdErrorLogReadyPpiGuid                 = {0x80a63347, 0xe22f, 0x48e1, {0xb4, 0x50, 0x44, 0x7e, 0x2b, 0x6, 0x7, 0x96}}
+
+  ## GNB Ppis
+
+  ## GNB Depex Ppis
+
+  ## Feature Guids
+    gEfiPublicMemoryServicesInitPpiGuid    = {0x17fdd6fa, 0x6493, 0x44fa, {0xb8, 0xee, 0xf5, 0xb6, 0x58, 0xdf, 0xa2, 0x2}}
+
+  ## MPM Ppis
+  gAmdMpmDataInitializedPpiGuid  = {0x74394de6, 0x0424, 0x4491, {0x9c, 0x43, 0xd0, 0x78, 0x4b, 0xe8, 0x3c, 0xb8}}
+
+#[-start-240806-IB20840078-add]#
+  gPlatformCustomizePeiInitReadyPpiGuid = { 0x3a62d6d9, 0x65c2, 0x4115, { 0x95, 0x93, 0x5b, 0x6e, 0x8c, 0x25, 0x36, 0x49 } }
+#[-end-240806-IB20840078-add]#
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+
+  #AGESA PI and version string
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPackageString|"AGESA!V9\0UnkownPI 0.0.0.0"|VOID*|0x00002001  # AMD AGESA PI Name & Version string
+
+  # For SSP or later
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxSocketSupportedV2|2|UINT8|0x00002002 # 2 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxDiePerSocketV2|1|UINT8|0x00002003       # 1 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxChannelPerDieV2|8|UINT8|0x00002004     # 8 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxDimmPerChannelV2|2|UINT8|0x00002005  # 2 by default
+  # For ZP
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxSocketSupportedV1|2|UINT8|0x00002006 # 2 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxDiePerSocketV1|4|UINT8|0x00002007       # 4 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxChannelPerDieV1|2|UINT8|0x00002008     # 2 by default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdMemMaxDimmPerChannelV1|2|UINT8|0x00002009 # 2 by default
+
+[PcdsDynamic]
+  ## Common
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdS3LibPrivateDataAddress|0|UINT64|0x00027000                           # Record AMD_S3_LIB_PRIVATE_DATA Structure address
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdS3LibTableAddress|0|UINT64|0x00027002                                 # Record AMD_S3_LIB_BOOT_SCRIPT_TABLE_HEADER address
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdS3LibTableSize|0x4000|UINT64|0x00027003                               # AMD_S3_LIB_BOOT_SCRIPT_TABLE_HEADER buffer size, which should not be less than 0x4000.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag|0|UINT32|0x00027004                                   # Record Environment Flag for internal usage only
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironment98|0|UINT32|0x00027005                                     # Record Environment Flag for internal usage only
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdFchDisableAsfSlave|FALSE|BOOLEAN|0x00027006
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPreSilCtrl0|0|UINT32|0x00027007                                       # Environment Flags - SilCtrl0 (from APOB)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPreSilCtrl1|0|UINT32|0x00027008                                       # Environment Flags - SilCtrl1 (from APOB)
+
+  ### @brief Record address of Psp Smm Run Time Buffer Address
+  ### @details Record address of Psp Smm Run Time Buffer Address, and the default value must be 0.
+  ### @li 0: default value
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspSmmRunTimeBufferAddress|0|UINT64|0x0002700A
+
+  ## Promontory PCD
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTTargetSpeed|0x03|UINT8|0x0100000E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetIdentifiedId|0x0000|UINT16|0x0100000F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetVisableFlag0|0x0|UINT8|0x01000010                                 # Chipset Visable flag for PROM21/DUAL-PROM21
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetVisableFlag1|0x0|UINT8|0x01000011                                 # Chipset Visable flag for Turner
+  ## Smm Protection Test Support 
+  ### @brief PCD to Enable/Disable Smm Protection Testing Tool driver
+  ### @details Supports to test SMM protection using AmdTestPkg driver
+  ### @li TRUE:  Enable
+  ### @li FALSE: Disable : Default
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSmmProtectionsTestSupport|FALSE|BOOLEAN|0x01000012                    # False by default
+  ## Gnb Common Build Options
+
+  ## Gnb CZ Build Options
+
+  ## Gnb Build time Options for Common System Options.
+
+  ## PSP Fixed PCDs
+
+  ## Fch Fixed PCDs
+
+  ## MPM PCDs ##
+
+
+
+  #This is SCPC Levels Pcd, 0:Customized, 1: Level1, 2: Level2, 3:Level3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdScpcLevel|0x0|UINT8|0x00027106
+
+[PcdsDynamicEx]
+  #  PcdAmdSmmCommunicationAddress must be in [PcdsDynamicEx], because the EDKII system firmware update module may
+  #  consume the PCD produced in current system firmware.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSmmCommunicationAddress|0|UINT64|0x00027001                           # Record the address for SMM communication
+

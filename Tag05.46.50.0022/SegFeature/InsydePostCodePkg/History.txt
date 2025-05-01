@@ -1,0 +1,848 @@
+#;*************************************************************************************************
+#;* Copyright (c) 2017, Insyde Software Corporation. All Rights Reserved.
+#;*
+#;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#;* transmit, broadcast, present, recite, release, license or otherwise exploit
+#;* any part of this publication in any form, by any means, without the prior
+#;* written permission of Insyde Software Corporation.
+#;*
+#;*************************************************************************************************
+#; Revision History: 
+#; 
+#; Tag#: 01.02.04.0010
+#; Issue#: IB21210019
+#; Severity: minor
+#; Category: others
+#; Symptom: create a new tag
+#; RootCause: none
+#; Description: none
+#; Solution: none
+#; 
+#; Tag#: 01.02.04.0009
+#; Issue#: IB21210016
+#; Severity: Trivial
+#; Category: Others
+#; Symptom: none
+#; RootCause: none
+#; Description: add explanations for PostCodeDxe behavior
+#; Solution: none
+#; RelatedFiles:
+#; Modified:
+#;   1. PostCodeDxe\PostCodeDxe.c
+#; 
+#; Tag#: 01.02.04.0009
+#; Issue#: IB21210015
+#; Severity: Trivial
+#; Category: Others
+#; Symptom: after smm is locked, TimeStamp will not be shown along with <<PostCode>>
+#; RootCause: SerialPortPostcodeLib.c skip GetTimeStampString if gEfiDxeSmmReadyToLockProtocolGuid is installed
+#;            (because GetTimeStampString uses gBS)
+#; Description: none
+#; Solution: have a new SmmGetTimeStampString implementation for PostCodeSmm 
+#; RelatedFiles:
+#; Added:
+#;   1. Library\SerialPortPostCodeLib\SmmTimeStamp.c
+#;   2. Library\SerialPortPostCodeLib\SmmTimeStamp.h
+#; Modified:
+#;   1. InsydePostCodePkg.dec
+#;   2. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.c
+#;   3. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.inf
+#;   4. PostCodeDxe\PostCodeDxe.c
+#;   5. PostCodeDxe\PostCodeDxe.h
+#;   6. PostCodeDxe\PostCodeDxe.inf
+#;   7. PostCodeSmm\PostCodeSmm.c
+#; 
+#; Tag#: 01.02.04.0008
+#; Issue#: IB21210013
+#; Severity: Trivial
+#; Category: Others
+#; Symptom: [ITS#0116583] 1. cpu exception
+#;          [ITS#0116587] 2. 0x80 trap is off after gEfiSmmReadyToLockProtocolGuid is installed
+#;          [ITS#0116587] 3. CPU Exception
+#; RootCause: 1. boot service is used by PostCodeSmm
+#;            2. none
+#;            3. PostCodeFeatureHandlerEntry is in data section instead of in code section
+#; Description: 1. after smm is locked (gEfiSmmReadyToLockProtocolGuid is installed), gBS is no longer avaiable to smm.
+#;                 a. GetTimeStampString used by PostCodeSmm accesses HOB via gBS
+#;                 b. PostCodeSmm uses gBS->LocateProtocol
+#;              2. none
+#;              3. none
+#; Solution: 1. do not use boot service in smm
+#;              a. skip GetTimeStampString if smm is locked
+#;              b. no longer locate that protocol 
+#;           2. replace gEfiSmmReadyToLockProtocolGuid w/ gEdkiiSmmReadyToBootProtocolGuid and mReadyToBootDisableEvent
+#;           3. modify HandlerEntrySmm.asm: text  SEGMENT .code
+#; RelatedFiles:
+#; Modified:
+#;   1. Include\Library\SerialPortPostCodeLib.h
+#;   2. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.c
+#;   3. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.inf
+#;   4. Package.dsc
+#;   5. PostCodeDxe\PostCodeDxe.c
+#;   6. PostCodeSmm\PostCodeSmm.c
+#;   7. PostCodeSmm\X64\HandlerEntrySmm.asm
+#; 
+#; Tag#: 01.02.04.0007
+#; Issue#: IB21210011
+#; Severity: Trivial
+#; Category: Others
+#; Symptom: variable name typo
+#; RootCause: none
+#; Description: none
+#; Solution: modify mEnabkeFeatureCpHandlerCount into mEnableFeatureCpHandlerCount
+#; RelatedFiles:
+#; Modified:
+#;   1. PostCodeDxe\PostCodeDxe.c
+#; 
+#; Tag#: 01.02.04.0006
+#; Issue#: IB21210010
+#; Severity: Trivial
+#; Category: Others
+#; Symptom: Klockwork error
+#; RootCause: variable, Status, is not initialized
+#; Description: none
+#; Solution: assign EFI_SUCCESS to Status as its initial value
+#; RelatedFiles:
+#; Modified:
+#;   1. PostCodeDxe\PostCodeDxe.c
+#;   2. PostCodeSmm\PostCodeSmm.c
+#; 
+#; Tag#: 01.02.04.0006
+#; Issue#: IB21210007
+#; Severity: Minor
+#; Category: Others
+#; Symptom: 
+#; 1. PcdH2OPostCodeSmmDxeEnableVarName is unidentified
+#; 2. PcdH2OPostCodeSmmDxeEnable is unidentified
+#; RootCause: 
+#; 1. PcdH2OPostCodeSmmDxeEnableVarName is not described in .inf
+#; 2. PcdH2OPostCodeSmmDxeEnable is not described in .inf
+#; Description: none
+#; Solution: 
+#; 1. add PcdH2OPostCodeSmmDxeEnableVarName to [pcd] in .inf
+#; 2. add PcdH2OPostCodeSmmDxeEnable to [pcd] in .inf
+#; RelatedFiles:
+#; Modified:
+#;   1. PostCodeSmm\PostCodeSmm.c
+#;   2. PostCodeSmm\PostCodeSmm.h
+#;   3. PostCodeSmm\PostCodeSmm.inf
+#; 
+#; Tag#: 01.02.04.0006
+#; Issue#: IB21210003
+#; Severity: Minor
+#; Category: Others
+#; Symptom: 
+#; 1. cursor following the postcode is visible on screen 
+#; 2. 2 postcodes are showed at the same time
+#; 3. weird postcode color
+#; 4. high code complexity
+#; RootCause: 
+#; 1. console out device does not disable cursor while showing postcode
+#; 2. display card frame buffer is not cleaned when turn to show postcode by console out from showing postcode by frame buffer
+#; 3. unknown color macro is used
+#; 4. -
+#; Description: none
+#; Solution: 
+#; 1. disable cursor while using console out to show postcode
+#;    Library/VgaPostCodeLib.c/ConsoleShowPostCode: SimpleTextOutput->EnableCursor (SimpleTextOutput, FALSE);
+#; 2. clean frame buffer before showing postcode by console OutputString
+#;    PostCodeDxe/PostCodeDxe.c: VgaFbPostCodeClean();
+#; 3. use EFI_WHITE as postcode color instead
+#;    Library/VgaPostCodeLib.c/ConsoleShowPostCode: SimpleTextOutput->SetAttribute (SimpleTextOutput, EFI_WHITE); 
+#; 4. code refactoring
+#; RelatedFiles:
+#; Modified:
+#;   1. Include\Library\VgaPostCodeLib.h
+#;   2. InsydePostCodePkg.dec
+#;   3. Library\VgaPostCodeLib\VgaPostCodeLib.c
+#;   4. PostCodeDxe\PostCodeDxe.c
+#;   5. PostCodeDxe\PostCodeDxe.h
+#;   6. PostCodeDxe\PostCodeDxe.inf
+#;   7. PostCodeSmm\PostCodeSmm.c
+#; 
+#; Tag#: 01.02.04.0005
+#; Issue#: IB21210002
+#; Severity: Trivial
+#; Category: Others
+#; Symptom: 
+#; 1. an unknown identifier, mCrConfig, is used
+#; 2. comment typos
+#; RootCause: 
+#; 1. a pointer, mCrConfig, assigned with NULL is not declared
+#; 2. none
+#; Description: none
+#; Solution: 
+#; 1. remove the mCrConfig = NULL
+#; 2. modify typo
+#; SolutionDependency: None.
+#; RelatedFiles:
+#; Modified:
+#;   1. Include\Library\VgaPostCodeLib.h
+#;   2. Library\VgaPostCodeLib\VgaPostCodeLib.c
+#;   3. PostCodeDxe\PostCodeDxe.c
+#;   4. PostCodeDxe\PostCodeDxe.inf
+#; 
+#; Tag#: 01.02.04.0004
+#; Issue#: IB21210001
+#; Severity: Minor
+#; Category: Others
+#; Symptom: 
+#; 1. high coupling between InsydeCrPkg and InsydePostCodePkg
+#; 2. [ITS#0110683] a null pointer may be dereferenced
+#; 3. complicated conditional sentences in ShowPostCode ()
+#; RootCause: 
+#; 1. variable, mCrConfig, is got from gH2OCrConfigurationGuid defined in InsydeCrPkg.dec
+#; 2. due to the failure of GetVariable2, a null pointer, mPostcodeModeVar, may be dereferenced
+#; 3. none
+#; Description: none
+#; Solution: 
+#; 1. define an alias guid with the same value as gH2OCrConfigurationGuid in InsydePostCodePkg.dec and use this gH2OCrConfigurationAliasGuid to get mCrConfig var
+#; 2. add an if conditional sentence for checking GetVariable2 (PostcodeModeVar) return value. If GetVariable2 succeeds, the value of *PostcodeModeVar will be used; otherwise, assign a default value coming from pcd, newly defined in .dec, to mPostcodeMode.
+#; 3. simplify codes in this way
+#;    A. if console out is installed
+#;       a. if gop is installed, uses GOP frame buffer to show PostCode  
+#;    B. if console out is not installed
+#;       a. if sys is in console mode and cr is enabled, use gST->ConOut to show PostCode
+#;       b. otherwise, use Vga->SimpleTextOutput to show the PostCode 
+#; SolutionDependency: None.
+#; RelatedFiles:
+#; Modified:
+#;   1. Include\Library\VgaPostCodeLib.h
+#;   2. InsydePostCodePkg.dec
+#;   3. Library\VgaPostCodeLib\VgaPostCodeLib.c
+#;   4. PostCodeDxe\PostCodeDxe.c
+#;   5. PostCodeDxe\PostCodeDxe.h
+#;   6. PostCodeDxe\PostCodeDxe.inf
+#; 
+#; Tag#: 01.02.04.0003
+#; Issue#: IB21210000
+#; Severity: Minor
+#; Category: Others
+#; Symptom: klockwork error reports
+#; 1. null pointer may be dereferenced 
+#; 2. operands in a bitwise operation have different size 
+#; RootCause: 1. the status GetVariable2() returns is not checked
+#; 2. UNIN var is assigned with a UINT32 var
+#; Description: none
+#; Solution: 1. add error check for GetVariable2()'s return status
+#; 2. change UINT32 var type from UINT32 to UINTN
+#; SolutionDependency: None.
+#; RelatedFiles:
+#; Modified:
+#;   1. Library\PostCodeConfigLib\PostCodeConfigLib.c
+#;   2. PostCodeDxe\PostCodeDxe.c
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 01.02.04.0002
+#; Status: Tag
+#; Test Code Base: Kernel 05.42.23
+#; Notice: This version will use the libraries in SegFeaturePkg 02.01.04.0006 (or later versions)
+#; 
+#; Tag#: 01.02.04.0002
+#; Issue#: IB19550018
+#; Severity: Minor
+#; Category: Others
+#; Symptom: [ITS#0101449]Post code cannot display on screen correctly when screen is rotated
+#; RootCause: Screen rotation was not considered originally, the funtion uses GOP frame buffer to show the PostCode string on the lower right corner of the screen
+#; Description: Add variable "PostcodeMode", when Console Redirection is enabled,
+#;                PostcodeMode = 0 means serial mode (default)
+#;                PostcodeMode = 1 means Consol mode
+#; Solution:  Use SimpleTextOutput to output postcode, which can be rotated according to the screen settings
+#; SolutionDependency: None
+#; Reviewer: IB19550000
+#; 
+#; RelatedFiles:
+#; Modified:
+#;   1. Include\Library\VgaPostCodeLib.h
+#;   2. InsydePostCodePkg.dec
+#;   3. Library\VgaPostCodeLib\VgaPostCodeLib.c
+#;   4. Library\VgaPostCodeLib\VgaPostCodeLib.inf
+#;   5. Library\VgaPostCodeLib\VgaPostCodeLibInternal.h
+#;   6. PostCodeDxe\PostCodeDxe.c
+#;   7. PostCodeDxe\PostCodeDxe.h
+#;   8. PostCodeDxe\PostCodeDxe.inf
+#; 
+#; Tag#: 01.02.04.0002
+#; Issue#: IB19550000
+#; Severity: Feature
+#; Category: Others
+#; Symptom: New Feature
+#; RootCause: New Feature
+#; Description: [ITS#0101442]Add two PCDs (PcdH2OPostCodeTrapDebugPortCpNotifyList and PcdH2OPostCodeNonTrapDebugPortCpNotifyList) that allow user to add CheckPoint notify to enable or disable PostCode features.
+#; Solution: New Feature
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Modified:
+#;   1. InsydePostCodePkg.dec
+#;   2. Package.dsc
+#;   3. PostCodeDxe\PostCodeDxe.c
+#;   4. PostCodeDxe\PostCodeDxe.h
+#;   5. PostCodeDxe\PostCodeDxe.inf
+#;   6. PostCodePei\PostCodePei.c
+#;   7. PostCodePei\PostCodePei.h
+#;   8. PostCodePei\PostCodePei.inf
+#;   9. PostCodeSmm\PostCodeSmm.c
+#;   10. PostCodeSmm\PostCodeSmm.h
+#;   11. PostCodeSmm\PostCodeSmm.inf
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 01.02.04.0001
+#; Status: Tag
+#; Test Code Base: Kernel 05.42.23
+#; Notice: This version will use the libraries in SegFeaturePkg 02.01.04.0006 (or later versions)
+#; 
+#; Tag#: 01.02.04.0001
+#; Issue#: IB15760620
+#; Severity: Feature
+#; Category: Others
+#; Symptom: Updating .ifc file for supporting H2OIDE PFCM feature
+#; RootCause: None
+#; Description: None
+#; Solution: Updating the .ifc file to revision 4 format
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Modified:
+#;   1. InsydePostCodePkg.ifc
+#; 
+#; Tag#: 01.02.04.0001
+#; Issue#: IB15760619
+#; Severity: Feature
+#; Category: PostCode on Screen
+#; Symptom: Add timestamp string when serial out PostCode message
+#; RootCause: New Feature
+#; Description: New Feature
+#; Solution: New Feature
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Modified:
+#;   1. InsydePostCodePkg.dec
+#;   2. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.c
+#;   3. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.inf
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 01.01.05.0002
+#; Status: Tag
+#; Test Code Base: Kernel 05.21.51.
+#;                 Kernel 05.41.48.
+#; 
+#; Tag#: 01.01.05.0002
+#; Issue#: IB15760264
+#; Severity: Minor
+#; Category: Others
+#; Symptom: None.
+#; RootCause: None.
+#; Description: Update version to 01.01.05.0002 for *.ifc file.
+#; Solution: None.
+#; SolutionDependency: None.
+#; RelatedFiles:
+#; Modified:
+#;   1. InsydePostCodePkg.ifc
+#; 
+#; Tag#: 01.01.05.0002
+#; Issue#: IB15760263
+#; Severity: Fatal
+#; Category: PostCode on Screen
+#; Symptom: System hang after the AMD platform imports the InsydePostCodePkg.
+#; RootCause: The platform uses "SmmCorePlatformHookLib" library to disable watchdog timer, but InsydePostCodePkg also uses it to configure debug registers and the plaform "SmmCorePlatformHookLib" instance is replaced by InsydePostCodePkg.
+#; Description: None.
+#; Solution: Provide a "SmmDebugRegisterConfigLib" library and add a ReadMe.txt file to tell user how to modify the "SmmCorePlatformHookLib" for perfoming InsydePostCodePkg features.
+#; SolutionDependency: None.
+#; RelatedFiles:
+#; Added:
+#;   1. Include\Library\SmmDebugRegisterConfigLib.h
+#;   2. Library\SmmDebugRegisterConfigLib\
+#;   3. Library\SmmDebugRegisterConfigLib\SmmDebugRegisterConfigLib.c
+#;   4. Library\SmmDebugRegisterConfigLib\SmmDebugRegisterConfigLib.inf
+#;   5. ReadMe.txt
+#; Modified:
+#;   1. InsydePostCodePkg.dec
+#;   2. Library\SmmCorePlatformHookLib\SmmCorePlatformHookLib.c
+#;   3. Library\SmmCorePlatformHookLib\SmmCorePlatformHookLib.inf
+#;   4. Package.dsc
+#; 
+#; Tag#: 01.01.05.0002
+#; Issue#: IB15760262
+#; Severity: Minor
+#; Category: PostCode on Screen
+#; Symptom: Code enhancement
+#; RootCause: Code enhancement
+#; Description: 1. Check the instruction which triggers the trap, if it is the "in" instruction (this trap is triggered by reading the debug port), don't do anything.
+#; 2. Enhance the GetPostCodeLength (), use CompareMem () to compare the instructions.
+#; Solution: None.
+#; SolutionDependency: None.
+#; RelatedFiles:
+#; Modified:
+#;   1. Include\Library\PostCodeMiscLib.h
+#;   2. Library\PostCodeMiscLib\InternalPostCodeMiscLib.h
+#;   3. Library\PostCodeMiscLib\PostCodeMiscLib.c
+#;   4. Library\PostCodeMiscLib\PostCodeMiscLib.inf
+#;   5. PostCodeDxe\PostCodeDxe.c
+#;   6. PostCodePei\PostCodePei.c
+#;   7. PostCodeSmm\PostCodeSmm.c
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 01.01.05.0001
+#; Status: Tag
+#; Test Code Base: Kernel 05.21.51.
+#;                 Kernel 05.41.44.
+#; 
+#; Tag#: 01.01.05.0001
+#; Issue#: IB15760260
+#; Severity: Minor
+#; Category: PostCode on Screen
+#; Symptom: None.
+#; RootCause: None.
+#; Description: 1. Add a PcdH2OPostCodeSerialPortUseMmio to replace the PcdSerialUseMmio.
+#; 2. Support PcdSerialRegisterStride to adjust the register offset of UART.
+#; 3. Use PcdSerialClockRate to generate the UART divisor.
+#; Solution: None.
+#; SolutionDependency: None.
+#; RelatedFiles:
+#; Modified:
+#;   1. InsydePostCodePkg.dec
+#;   2. Library\SerialPortPostCodeLib\SerialPortFunc.c
+#;   3. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.inf
+#;   4. Package.dsc
+#; 
+#; Tag#: 01.01.05.0001
+#; Issue#: IB15760261
+#; Severity: Text
+#; Category: Others
+#; Symptom: None.
+#; RootCause: None.
+#; Description: 1.Change new Tag# to 01.01.05.0001.
+#; 2.Update version to 01.01.05.0001 for *.ifc file.
+#; Solution: None.
+#; SolutionDependency: None.
+#; RelatedFiles:
+#; Modified:
+#;   1. InsydePostCodePkg.ifc
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.41.40
+#; Status: Tag version
+#; 
+#; Tag#: 05.41.40
+#; Issue#: IB15760259
+#; Severity: Minor
+#; Category: Others
+#; Symptom: None.
+#; RootCause: None.
+#; Description: Update version to 05.41.40 for *.ifc file.
+#; Solution: None.
+#; SolutionDependency: None.
+#; RelatedFiles:
+#; Modified:
+#;   1. InsydePostCodePkg.ifc
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.41.36
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.41.32
+#; Status: Tag version
+#; 
+#; Tag#: 05.41.32
+#; Issue#: IB15760253
+#; Severity: Fatal
+#; Category: PostCode on Screen
+#; Symptom: System hangs on exception 01 (#DB - Debug) when runs POST code features in kernel 05.41.32.
+#; RootCause: Debug exception handler is replaced by some drivers which run in FSP environment but POST code drivers cannot be notified.
+#; Description: none
+#; Solution: Disable trapping port 0x80 before entering FSP environment and enable trapping port 0x80 after exiting FSP environment.
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Modified:
+#;   1. Package.dsc
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.41.28
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.41.24
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.41.20
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.41.16
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.41.12
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.33.08
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.33.04
+#; Status: Tag version
+#; 
+#; Tag#: 05.33.04
+#; Issue#: IB15760148
+#; Severity: Minor
+#; Category: Tools
+#; Symptom: Code Enhancement
+#; RootCause: Code Enhancement
+#; Description: Create Insyde Feature Catalog file (InsydePostCodePkg.ifc) in InsydePostCodePkg repository.
+#; Solution: Code Enhancement
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Added:
+#;   1. InsydePostCodePkg.ifc
+#; 
+#; Tag#: 05.33.04
+#; Issue#: IB15760147
+#; Severity: Trivial
+#; Category: PostCode
+#; Symptom: Remove some comments.
+#; RootCause: None
+#; Description: None
+#; Solution: Remove some comments.
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Modified:
+#;   1. PostCodePei\PostCodePei.c
+#; 
+#; Tag#: 05.33.04
+#; Issue#: IB15760146
+#; Severity: Minor
+#; Category: PostCode
+#; Symptom: Sometimes POST code feature showed POST code "0", but it's not "0" in POST code LEDs.
+#; RootCause: PostCodePei shifted 32 bit to POST_CODE_MASK in 32-bit environment.
+#; Description: None
+#; Solution: Use switch case to select POST code mask.
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Modified:
+#;   1. PostCodePei\PostCodePei.c
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.52
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.48
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.44
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.40
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.36
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.32
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.28
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.24
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.20
+#; Status: Tag version
+#; 
+#; Tag#: 05.32.20
+#; Issue#: IB15760037
+#; Severity: Medium
+#; Category: Build
+#; Symptom: Build failed in Linux.
+#; RootCause: 1.GCC can't build with "HandlerEntryPei.asm", "HandlerEntryDxe.asm", and "HandlerEntrySmm.asm".
+#;            2.VgaPostCodeLib uses StrLen () to get ASCII string length.
+#; Description: Fix bug.
+#; Solution: 1.Add "HandlerEntryPei.S", "HandlerEntryDxe.S", and "HandlerEntrySmm.S" files for GCC to build.
+#;           2.Use AsciiStrLen () to get ASCII string length.
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Added:
+#;   1. PostCodeDxe\X64\HandlerEntryDxe.S
+#;   2. PostCodePei\Ia32\HandlerEntryPei.S
+#;   3. PostCodeSmm\X64\HandlerEntrySmm.S
+#; Modified:
+#;   1. Library\VgaPostCodeLib\VgaPostCodeLib.c
+#;   2. PostCodeDxe\PostCodeDxe.inf
+#;   3. PostCodePei\PostCodePei.inf
+#;   4. PostCodeSmm\PostCodeSmm.inf
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.16
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.12
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.32.04
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.31.52
+#; Status: Tag version
+#; 
+#; Tag#: 05.31.52
+#; Issue#: IB15760028
+#; Severity: Minor
+#; Category: PostCode
+#; Symptom: (Code Enhancement)
+#; RootCause: (Code Enhancement)
+#; Description: Fix feature definition
+#;                gInsydePostCodeTokenSpaceGuid       -> gH2OPostCodePkgTokenSpaceGuid
+#;                gSmmDebugRegisterConfigProtocolGuid -> gH2OPostCodeSmmDebugRegProtocolGuid
+#;                gVgaSupportProtocolGuid             -> gH2OPostCodeVgaProtocolGuid
+#;                PcdPostCodeEnable                   -> PcdH2OPostCodeSupported
+#;                PcdSerialPortPostCodeEnable         -> PcdH2OPostCodeSerialPortSupported
+#;                PcdScreenPostCodeEnable             -> PcdH2OPostCodeScreenSupported
+#;                PcdSerialPortRegisterBase           -> PcdH2OPostCodeSerialPortRegBase
+#;                PcdH2OEnableTrapNotifyList          -> PcdH2OPostCodeTrapDebugPortNotifyList
+#;                PcdH2ODisableTrapNotifyList         -> PcdH2OPostCodeNonTrapDebugPortNotifyList
+#;                PcdH2ODebugPortAddress              -> PcdH2OPostCodeDebugPortAddress
+#;                PcdH2OPostCodePrintLength           -> PcdH2OPostCodeDisplayLength 
+#; Solution: (Code Enhancement)
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Modified:
+#;   1. Include\Protocol\SmmDebugRegisterConfig.h
+#;   2. Include\Protocol\VgaSupport.h
+#;   3. InsydePostCodePkg.dec
+#;   4. Library\PostCodeMiscLib\PostCodeMiscLib.c
+#;   5. Library\PostCodeMiscLib\PostCodeMiscLib.inf
+#;   6. Library\SerialPortPostCodeLib\SerialPortFunc.c
+#;   7. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.inf
+#;   8. Library\SmmCorePlatformHookLib\SmmCorePlatformHookLib.c
+#;   9. Library\SmmCorePlatformHookLib\SmmCorePlatformHookLib.inf
+#;   10. Package.dsc
+#;   11. Package.fdf
+#;   12. PostCodeDxe\PostCodeDxe.c
+#;   13. PostCodeDxe\PostCodeDxe.inf
+#;   14. PostCodePei\PostCodePei.c
+#;   15. PostCodePei\PostCodePei.inf
+#;   16. PostCodeSmm\PostCodeSmm.c
+#;   17. PostCodeSmm\PostCodeSmm.inf
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.31.48
+#; Status: Tag version
+#; 
+#; Tag#: 05.31.46
+#; Issue#: IB15760026
+#; Severity: Minor
+#; Category: PostCode
+#; Symptom: 1. The Post Code string on the screen will be clean at the end of PEI phase.
+#;          2. The source code can't be built with uefi64perf.
+#; RootCause: 1. The DisableFeatureCallback () will clean the Post Code when it is called.
+#;            2. The "POST_CODE_MASK" is defined as 64 bit value and it can't be built in 32 bit environment.
+#; Description: None.
+#; Solution: 1. Don't clean the Post Code string in the DisableFeatureCallback ().
+#;              Add a new callback PostCodeReadyToBootCallback () and use this callback to clean the Post Code string on the screen when the ReadyToBoot event is signaled.  
+#;           2. Define the "POST_CODE_MASK" as "(UINTN) (-1)".
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Modified:
+#;   1. Include\Library\PostCodeMiscLib.h
+#;   2. Include\Library\VgaPostCodeLib.h
+#;   3. Library\VgaPostCodeLib\VgaPostCodeLib.c
+#;   4. PostCodeDxe\PostCodeDxe.c
+#;   5. PostCodePei\PostCodePei.c
+#; 
+#; Tag#: 05.31.45
+#; Issue#: IB15760024
+#; Severity: Feature
+#; Category: PostCode
+#; Symptom: New Feature
+#; RootCause: New Feature
+#; Description: 1. Add the PcdH2OPostCodePrintLength that allow user to adjust the length of the Post Code
+#;                 which is printed on Monitor and COM Port.
+#;              2. Remove the "Post Code" pattern whcih is printed on the Monitor.
+#;              3. Add the PcdH2ODebugPortAddress that allow user to adjust the debug port which is trapped.
+#;              4. Add the gH2OCpuArchPpiGuid to the PcdH2OEnableTrapNotifyList. 
+#;              5. Remove some comments.
+#; Solution: New Feature
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Added:
+#;   1. Include\Library\PostCodeMiscLib.h
+#;   2. Library\PostCodeMiscLib\
+#;   3. Library\PostCodeMiscLib\InternalPostCodeMiscLib.h
+#;   4. Library\PostCodeMiscLib\PostCodeMiscLib.c
+#;   5. Library\PostCodeMiscLib\PostCodeMiscLib.inf
+#; Modified:
+#;   1. Include\Library\SerialPortPostCodeLib.h
+#;   2. Include\Library\VgaPostCodeLib.h
+#;   3. InsydePostCodePkg.dec
+#;   4. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.c
+#;   5. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.inf
+#;   6. Library\VgaPostCodeLib\VgaPostCodeLib.c
+#;   7. Library\VgaPostCodeLib\VgaPostCodeLib.inf
+#;   8. Library\VgaPostCodeLib\VgaPostCodeLibInternal.h
+#;   9. Package.dsc
+#;   10. PostCodeDxe\PostCodeDxe.c
+#;   11. PostCodeDxe\PostCodeDxe.h
+#;   12. PostCodeDxe\PostCodeDxe.inf
+#;   13. PostCodePei\Ia32\HandlerEntryPei.asm
+#;   14. PostCodePei\PostCodePei.c
+#;   15. PostCodePei\PostCodePei.h
+#;   16. PostCodePei\PostCodePei.inf
+#;   17. PostCodeSmm\PostCodeSmm.c
+#;   18. PostCodeSmm\PostCodeSmm.h
+#;   19. PostCodeSmm\PostCodeSmm.inf
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.31.44
+#; Status: Tag version
+#; 
+#; Tag#: 05.31.44
+#; Issue#: IB15760023
+#; Severity: Feature
+#; Category: PCD
+#; Symptom: New Feature
+#; RootCause: New Feature
+#; Description: Add two PCDs (PcdH2OEnableTrapNotifyList and PcdH2ODisableTrapNotifyList) 
+#;              that allow user to add PPI/Protocol notify to enable or disable PostCode features.
+#; Solution: New Feature
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Deleted:
+#;   1. PostCodeDxe\X64\CheckIdtEntry.c
+#; Modified:
+#;   1. InsydePostCodePkg.dec
+#;   2. Package.dsc
+#;   3. PostCodeDxe\PostCodeDxe.c
+#;   4. PostCodeDxe\PostCodeDxe.h
+#;   5. PostCodeDxe\PostCodeDxe.inf
+#;   6. PostCodePei\PostCodePei.c
+#;   7. PostCodePei\PostCodePei.h
+#;   8. PostCodePei\PostCodePei.inf
+#;   9. PostCodeSmm\PostCodeSmm.c
+#;   10. PostCodeSmm\PostCodeSmm.h
+#;   11. PostCodeSmm\PostCodeSmm.inf
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.31.40
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.31.36
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.31.32
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.31.28
+#; Status: Tag version
+#; 
+#; Tag#: 05.31.28
+#; Issue#: IB15760010
+#; Severity: Medium
+#; Category: PostCode
+#; Symptom: Build fail.
+#; RootCause: The old Early VGA libraries (PeiEarlyVgaLib and DxeEarlyVgaLib) have been removed.
+#; Description: None.
+#; Solution: Use new Early VGA library (GraphicVgaLib).
+#; SolutionDependency: IB05820439, IB05820440.
+#; RelatedFiles:
+#; Modified:
+#;   1. PostCodeDxe\PostCodeDxe.c
+#;   2. PostCodeDxe\PostCodeDxe.h
+#;   3. PostCodeDxe\PostCodeDxe.inf
+#;   4. PostCodePei\PostCodePei.c
+#;   5. PostCodePei\PostCodePei.h
+#;   6. PostCodePei\PostCodePei.inf
+#;   7. PostCodeSmm\PostCodeSmm.c
+#;   8. PostCodeSmm\PostCodeSmm.h
+#;   9. PostCodeSmm\PostCodeSmm.inf
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.31.24
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.31.20
+#; Status: Tag version
+#; 
+#;------------------------------------------------------------------------------
+#; Label#: 05.31.19
+#; Status: Tag version
+#; 
+#; Tag#: 05.31.04
+#; Issue#: IB15760001
+#; Severity: Feature
+#; Category: PostCode
+#; Symptom: New Feature
+#; RootCause: New Feature
+#; Description: None
+#; Solution: New Feature
+#; SolutionDependency: None
+#; RelatedFiles:
+#; Added:
+#;   1. History.txt
+#;   2. Include\
+#;   3. Include\Library\
+#;   4. Include\Library\PostCodeConfigLib.h
+#;   5. Include\Library\SerialPortPostCodeLib.h
+#;   6. Include\Library\VgaPostCodeLib.h
+#;   7. Include\Protocol\
+#;   8. Include\Protocol\SmmDebugRegisterConfig.h
+#;   9. Include\Protocol\VgaSupport.h
+#;   10. InsydePostCodePkg.dec
+#;   11. Library\
+#;   12. Library\PostCodeConfigLib\
+#;   13. Library\PostCodeConfigLib\Ia32\
+#;   14. Library\PostCodeConfigLib\Ia32\IdtHandlerConfig.c
+#;   15. Library\PostCodeConfigLib\PostCodeConfigLib.c
+#;   16. Library\PostCodeConfigLib\PostCodeConfigLib.inf
+#;   17. Library\PostCodeConfigLib\X64\
+#;   18. Library\PostCodeConfigLib\X64\IdtHandlerConfig.c
+#;   19. Library\SerialPortPostCodeLib\
+#;   20. Library\SerialPortPostCodeLib\SerialPortFunc.c
+#;   21. Library\SerialPortPostCodeLib\SerialPortFunc.h
+#;   22. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.c
+#;   23. Library\SerialPortPostCodeLib\SerialPortPostCodeLib.inf
+#;   24. Library\SmmCorePlatformHookLib\
+#;   25. Library\SmmCorePlatformHookLib\SmmCorePlatformHookLib.c
+#;   26. Library\SmmCorePlatformHookLib\SmmCorePlatformHookLib.inf
+#;   27. Library\VgaPostCodeLib\
+#;   28. Library\VgaPostCodeLib\VgaPostCodeLib.c
+#;   29. Library\VgaPostCodeLib\VgaPostCodeLib.inf
+#;   30. Library\VgaPostCodeLib\VgaPostCodeLibInternal.h
+#;   31. Package.dsc
+#;   32. Package.fdf
+#;   33. PostCodeDxe\
+#;   34. PostCodeDxe\PostCodeDxe.c
+#;   35. PostCodeDxe\PostCodeDxe.h
+#;   36. PostCodeDxe\PostCodeDxe.inf
+#;   37. PostCodeDxe\X64\
+#;   38. PostCodeDxe\X64\CheckIdtEntry.c
+#;   39. PostCodeDxe\X64\HandlerEntryDxe.asm
+#;   40. PostCodePei\
+#;   41. PostCodePei\Ia32\
+#;   42. PostCodePei\Ia32\HandlerEntryPei.asm
+#;   43. PostCodePei\PostCodePei.c
+#;   44. PostCodePei\PostCodePei.h
+#;   45. PostCodePei\PostCodePei.inf
+#;   46. PostCodeSmm\
+#;   47. PostCodeSmm\PostCodeSmm.c
+#;   48. PostCodeSmm\PostCodeSmm.h
+#;   49. PostCodeSmm\PostCodeSmm.inf
+#;   50. PostCodeSmm\X64\
+#;   51. PostCodeSmm\X64\HandlerEntrySmm.asm
+#; 

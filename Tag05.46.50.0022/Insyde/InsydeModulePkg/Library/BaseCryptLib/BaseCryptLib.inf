@@ -1,0 +1,38 @@
+## @file
+# Description of BaseCryptLib2
+#
+#;******************************************************************************
+#;* Copyright (c) 2023, Insyde Software Corp. All Rights Reserved.
+#;*
+#;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#;* transmit, broadcast, present, recite, release, license or otherwise exploit
+#;* any part of this publication in any form, by any means, without the prior
+#;* written permission of Insyde Software Corporation.
+#;*
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BaseCryptLib
+  FILE_GUID                      = 62958BE4-9E2E-478d-AD38-915927D69A07
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BaseCryptLib
+
+[Sources]
+  H2OHash/H2OSha1.c
+  H2OHash/H2OMd5.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  InternalBaseCryptLib
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdH2OCryptoSha1Supported
+  gInsydeTokenSpaceGuid.PcdH2OCryptoMd5Supported

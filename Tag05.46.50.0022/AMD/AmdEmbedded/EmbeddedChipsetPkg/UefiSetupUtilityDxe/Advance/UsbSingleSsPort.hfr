@@ -1,0 +1,21 @@
+/** @file
+
+;******************************************************************************
+;* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+      oneof
+        varid       = SystemConfig.Usb3Port[PORT_INDEX],
+        prompt      = STRING_TOKEN(CONCATENATE3(STR_USB_SS_PORT,PORT_INDEX,_PROMPT)),
+        help        = STRING_TOKEN(CONCATENATE3(STR_USB_SS_PORT,PORT_INDEX,_HELP)),
+#ifndef ENABLED_ONLY
+        option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags = 0;
+#endif
+        option text = STRING_TOKEN(STR_ENABLED_TEXT),  value = 1, flags = DEFAULT;
+      endoneof;

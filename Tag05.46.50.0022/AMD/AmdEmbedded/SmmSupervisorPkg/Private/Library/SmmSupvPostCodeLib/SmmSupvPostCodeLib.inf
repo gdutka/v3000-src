@@ -1,0 +1,32 @@
+## @file
+#  CPU Exception Handler library instance for SMM modules.
+#
+#  Copyright (c) 2020, AMD Incorporated. All rights reserved.<BR>
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmSupvPostCodeLib
+  FILE_GUID                      = 46AC2BE5-D92B-4A18-AE39-F72176284ADF
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.1
+  LIBRARY_CLASS                  = SmmSupvPostCodeLib|DXE_SMM_DRIVER
+
+[Sources]
+  SmmSupvPostCodeLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  IoLib
+  DebugLib
+
+

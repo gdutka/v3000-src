@@ -1,0 +1,36 @@
+## @file
+#  Component description file of SataDriveInfoLib.
+#
+#******************************************************************************
+#* Copyright (c) 2020, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SataDriveInfoLib
+  FILE_GUID                      = 1693d1b3-d3fe-4283-ad99-d97afa1c7e5b
+  MODULE_TYPE                    = UEFI_DRIVER
+  LIBRARY_CLASS                  = SataDriveInfoLib
+
+[Sources]
+  SataDriveInfoLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  MemoryAllocationLib
+  PrintLib
+  BlockIoCapacityLib

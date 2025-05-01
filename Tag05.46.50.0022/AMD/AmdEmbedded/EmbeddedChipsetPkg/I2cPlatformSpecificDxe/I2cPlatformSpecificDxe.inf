@@ -1,0 +1,70 @@
+## @file
+#  Component description file for I2C Platform Specific DXE module
+#
+#******************************************************************************
+#* Copyright (c)  2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = I2cPlatformSpecificDxe
+  FILE_GUID                      = C4700DAB-41B6-4FDF-CCAA-E39736FFF2BA
+  MODULE_TYPE                    = DXE_DRIVER
+  ENTRY_POINT                    = I2cPlatformSpecificDxeEntry  
+  UNLOAD_IMAGE                   = I2cPlatformSpecificDxeUnload
+
+
+[Sources.common]
+  I2cPlatformSpecificDxe.c
+
+[Sources.X64]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+
+[LibraryClasses]
+  BaseLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  IoLib
+  DebugLib
+  BaseMemoryLib
+  DxeServicesTableLib
+  MemoryAllocationLib
+  PcdLib
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.OemHookI2cSclSdaEnable
+  gChipsetPkgTokenSpaceGuid.I2cTotalControllerNumber
+  gChipsetPkgTokenSpaceGuid.I2cIcSsSclHcnt
+  gChipsetPkgTokenSpaceGuid.I2cIcSsSclLcnt
+  gChipsetPkgTokenSpaceGuid.I2cIcSsSdaHold
+  gChipsetPkgTokenSpaceGuid.I2cIcFsSclHcnt
+  gChipsetPkgTokenSpaceGuid.I2cIcFsSclLcnt
+  gChipsetPkgTokenSpaceGuid.I2cIcFsSdaHold
+  gChipsetPkgTokenSpaceGuid.I2cIcHsSclHcnt
+  gChipsetPkgTokenSpaceGuid.I2cIcHsSclLcnt
+  gChipsetPkgTokenSpaceGuid.I2cIcHsSdaHold
+  gChipsetPkgTokenSpaceGuid.I2cBase
+  gChipsetPkgTokenSpaceGuid.I2cGpioBase
+  
+[Guids]
+  
+[Protocols]
+  gEfiI2cPlatformSpecificProtocolGuid
+  
+[Depex]
+  gEfiPciRootBridgeIoProtocolGuid
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -O0
+  INTEL:*_*_*_CC_FLAGS = /Od
+  MSFT:*_*_*_CC_FLAGS = /Od

@@ -1,0 +1,45 @@
+## @file
+#  Library Implementation for Null RomArmorSpiAccessLib
+#
+#******************************************************************************
+#* Copyright 2020 Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RomArmorSpiAccessLibNull
+  FILE_GUID                      = 3D9B98EC-BC94-4163-847C-79F6081C77F6
+  MODULE_TYPE                    = BASE
+  LIBRARY_CLASS                  = RomArmorSpiAccessLib
+
+[Sources]
+  SpiAccessLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  IoLib
+  PciLib
+  BaseMemoryLib
+  DebugLib
+#[-start-220905-IB14740261-remove]#
+#  FdSupportLib
+#[-end-220905-IB14740261-remove]#
+
+[Pcd]
+
+[Guids]
+
+[FeaturePcd]
+
+[BuildOptions]

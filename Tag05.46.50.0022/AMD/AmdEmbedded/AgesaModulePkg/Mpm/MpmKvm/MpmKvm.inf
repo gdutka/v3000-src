@@ -1,0 +1,86 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MpmKvm
+  FILE_GUID                      = aff1afa8-07f5-46fa-a7ab-60f4c993b9bf
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = InitializeKvmDriver
+
+[Sources]
+  MpmKvm.h
+  MpmKvm.c
+  MpmKvmKbdTextIn.c
+  MpmKvmKeyboard.h
+  MpmKvmKeyboard.c
+  MpmKvmMouse.h
+  MpmKvmMouse.c
+  MpmKvmAbsoluteMouse.h
+  MpmKvmAbsoluteMouse.c
+  MpmKvmSimpleMouse.h
+  MpmKvmSimpleMouse.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  MemoryAllocationLib
+  UefiRuntimeServicesTableLib
+  UefiBootServicesTableLib
+  UefiLib
+  UefiDriverEntryPoint
+  BaseLib
+  BaseMemoryLib
+  PciLib
+  PcdLib
+  HobLib
+  AmdBaseLib
+  IdsLib
+  AmdPspBaseLibV2
+  AmdPspMboxLibV2
+  MpmLib
+  MpmMboxLib
+  MpmFuncLib
+  MpmDevLib
+  MpmBiosCmdLib
+
+[Protocols]
+  gEfiSimpleTextInProtocolGuid
+  gEfiSimpleTextInputExProtocolGuid
+  gEfiSimplePointerProtocolGuid
+  gEfiAbsolutePointerProtocolGuid
+  gEfiPciIoProtocolGuid
+  gAmdPspKvmServiceProtocolGuid  #publish
+  gEfiSmbiosProtocolGuid
+  gAmdMpmKvmInitializedProtocolGuid
+  gAmdNbioIommuProtocolGuid
+  gAmdKvmStaticIpInfoProtocolGuid
+
+[FeaturePcd]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWiredKvmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessKvmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmKvmMouseProtocol
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdIvInfoDmaReMap
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmKvmHorizontalResolution
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmKvmVerticalResolution
+
+[Guids]
+  gEfiConsoleInDeviceGuid
+
+[Depex]
+  gEfiPciIoProtocolGuid AND
+  gEfiGraphicsOutputProtocolGuid

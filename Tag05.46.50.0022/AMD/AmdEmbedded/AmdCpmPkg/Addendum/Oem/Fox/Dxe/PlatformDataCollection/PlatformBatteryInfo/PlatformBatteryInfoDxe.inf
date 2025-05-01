@@ -1,0 +1,48 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME               = BatteryInfoDxe
+  MODULE_TYPE             = DXE_DRIVER
+  FILE_GUID               = 23f0f40f-686d-45e4-b26e-11f9f265cf66
+  ENTRY_POINT             = BatteryInfoDxeEntry
+
+[Sources]
+  PlatformBatteryInfoDxe.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  DebugLib
+  IoLib
+  MpmLib
+  PcdLib
+
+[Protocols]
+  gAmdMpmGetBatteryInfoProtocol
+  gAmdCpmTableProtocolGuid
+  gEfiSmbiosProtocolGuid
+
+[Guids]
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.EcRamBaseAddr
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironment98
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[Depex]
+  gAmdMpmDepexProtocolGuid AND
+  gEfiSmbiosProtocolGuid AND
+  gAmdCpmTableProtocolGuid

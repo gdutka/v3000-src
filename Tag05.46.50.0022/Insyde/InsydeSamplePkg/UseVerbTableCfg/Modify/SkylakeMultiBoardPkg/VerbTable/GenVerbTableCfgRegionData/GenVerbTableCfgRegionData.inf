@@ -1,0 +1,48 @@
+## @file
+#  Component description file for GenVerbTableCfgRegionData.
+#
+#******************************************************************************
+#* Copyright (c) 2016 - 2017, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GenVerbTableCfgRegionData
+  FILE_GUID                      = 19DD5BC3-5FAE-4F81-B249-04E4DE5CA47C
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 1.0
+
+[Sources]
+
+  #
+  # Add verb table with its board-id supported in your project.
+  #
+  # Example : Assume the project support board-id 0x04,0x0A,0x0B,0x43,0x44,0x42
+  #
+
+  VerbTable1_04.verb
+  VerbTable2_0A.verb
+  VerbTable3_0B.verb
+  VerbTable4_43.verb
+  VerbTable5_44.verb
+  VerbTable7_42.verb
+
+  #
+  # Example : Assume the project default use this verb table, set file board-id to 0
+  #
+
+  #VerbTable6_00.verb
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]

@@ -1,0 +1,62 @@
+## @file
+#  SecurityEventDxe
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SecurityEventDxe
+  FILE_GUID                      = 6a0f22e8-69ee-4f1c-9336-69863fd96ee9
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SecurityEventDxeEntry
+
+[Sources]
+  SecurityEventDxe.c
+  SecurityEventDxe.uni
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  HobLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  PrintLib
+  HiiDbLib
+  HiiStringLib
+  HiiConfigAccessLib
+  UefiDriverEntryPoint
+  PcdLib
+  VariableLib
+  H2OCpLib
+  H2OLib
+  ResetSystemLib
+  OemGraphicsLib
+
+[Guids]
+  gH2OSecurityEventHobGuid
+  gH2OBdsCpDisplayBeforeGuid
+
+[Protocols]
+  gH2ODialogProtocolGuid
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpDisplayBeforeSupported
+  gInsydeTokenSpaceGuid.PcdH2OSecurityEventDisplaySupported
+
+[Depex]
+  gEfiHiiDatabaseProtocolGuid

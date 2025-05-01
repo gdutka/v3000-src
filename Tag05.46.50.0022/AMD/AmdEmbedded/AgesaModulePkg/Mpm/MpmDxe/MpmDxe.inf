@@ -1,0 +1,68 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MpmDxe
+  FILE_GUID                      = 6c1623a2-3245-4f42-a8ce-f73b054faafc
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = MpmDxeDriverEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  PcdLib
+  UefiBootServicesTableLib
+  MpmMboxLib
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  AmdPspBaseLibV2
+  AmdPspMboxLibV2
+  FchSpiAccessLib
+  MpmFuncLib
+  DxeServicesLib
+  MpmLib
+  TimerLib
+  MpmDevLib
+  ReportStatusCodeLib
+
+[Sources]
+  MpmDxe.c
+
+[Protocols]
+  gEfiPciEnumerationCompleteProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiAcpiTableProtocolGuid
+  gAmdMpmWifiFwloadedProtocolGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPackageString
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessKvmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessTcrEnable  ## CONSUMES
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessNicDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWiredNicDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessDeviceDetection
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWiredKvmEnable
+
+[Guids]
+  gEfiEventExitBootServicesGuid
+
+[Depex]
+  gEfiPciIoProtocolGuid
+
+

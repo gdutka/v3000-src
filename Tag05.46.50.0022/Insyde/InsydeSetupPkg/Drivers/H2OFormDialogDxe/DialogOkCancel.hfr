@@ -1,0 +1,35 @@
+
+text
+  help    = STRING_TOKEN(STR_BLANK),
+  text    = STRING_TOKEN(STR_OK),
+  text    = STRING_TOKEN(STR_BLANK),
+  flags   = INTERACTIVE,
+  key     = QID_OK,
+  property {
+    control-type : H2O_CONTROL_TYPE_SETUP_LMDE_ACTION_BUTTON_GUID;
+    color        : white;
+    font-size    : 16px;
+    left         : 50%;
+    top          : 85%;
+    width        : 65px;
+    height       : 30px;
+  }
+  ;
+
+text
+  help    = STRING_TOKEN(STR_BLANK),
+  text    = STRING_TOKEN(STR_CANCEL),
+  text    = STRING_TOKEN(STR_BLANK),
+  flags   = INTERACTIVE,
+  key     = QID_CANCEL,
+  property {
+    control-type : H2O_CONTROL_TYPE_SETUP_LMDE_ACTION_BUTTON_GUID;
+    color        : white;
+    font-size    : 16px;
+    left         : 70%;
+    top          : 85%;
+    width        : 65px;
+    height       : 30px;
+  }
+  ;
+

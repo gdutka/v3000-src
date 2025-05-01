@@ -1,0 +1,28 @@
+## @file
+#  Platform Package Flash Description File
+#
+#*******************************************************************************
+#* Copyright (c) 2013 - 2021, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#*******************************************************************************
+
+[FV.RECOVERYFV]
+INF AmdCommonChipsetPkg/SpeakerPei/LegacySpeakerPei.inf
+
+[FV.DXEFV]
+INF AmdCommonChipsetPkg/SmartTimerDxe/SmartTimerDxe.inf
+#[-start-220126-IB14740206-add]#
+INF AmdCommonChipsetPkg/PciHostBridgeDxe/PciHostBridgeDxe.inf
+#[-end-220126-IB14740206-add]#
+INF AmdCommonChipsetPkg/SpeakerDxe/LegacySpeakerDxe.inf
+INF AmdCommonChipsetPkg/SetSsidSvidDxe/SetSsidSvidDxe.inf
+
+INF AmdCommonChipsetPkg/TcgDmarDxe/TcgDmarDxe.inf
+#[-start-221207-IB14740272-add]#
+INF AmdCommonChipsetPkg/Override/EDK2/PcAtChipsetPkg/HpetTimerDxe/HpetTimerDxe.inf
+#[-end-221207-IB14740272-add]#

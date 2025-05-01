@@ -1,0 +1,213 @@
+============================ Rembrandt 032 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 032
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.032   08/05/21,21:01:03   CL#2342734@20.11.0.32 ATOMBuild #577026
+
+Major change:
+1. SWDEV-3 - vbios: set DCE_INFO_CAPS_LTTPR_SUPPORT_ENABLE to 0 by default.
+
+============================ Rembrandt 031 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 031
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.031   07/20/21,15:35:44   CL#2336096@20.11.0.31 ATOMBuild #575385
+
+Major change:
+1. SWDEV-295847 - vbios: RMB FP7: Update data structure by VBIOS for UMA Carveout Size Control via UI rev.0001 (RMBT-CR-119)
+
+============================ Rembrandt 030 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 030
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.030   07/16/21,03:19:13   CL#2334280@20.11.0.30 ATOMBuild #574955
+
+Major feature:
+1. enable DPIA_EN bit for DP2/DP3
+2. update the displayphysettings to the 0714 version. 
+
+============================ Rembrandt 029 VBIOS release ========================================
+Rembrandt generic Baseline VBIOS 029
+Rembrandt A0 0x164D 102-D59501-00B RmbGenericVbios.029 07/08/21,03:24:22 CL#2330440@20.11.0.29 ATOMBuild #572208
+
+Major feature:
+1. SWDEV-3 - [GENERIC]Need a new flag in ATOM_DISPLAY_PATH to identify USB4 mode in DMUB VBIOS
+2. SWDEV-3 - [GENERIC] Create a variable to identify whether DMCUB FW needs to use ucDPIAId or ucI2cId/ucHPDId.
+3. SWDEV-3 - correct atom_display_object_path_v3 size for backward compatible
+
+============================ Rembrandt 028 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 028
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.028   06/30/21,23:15:22   CL#2328073@20.11.0.28 ATOMBuild #570565
+
+Major feature:
+1. SWDEV-291748 RMB FP7: Update VBIOS for UMA Carveout Size Control via UI rev.0001 (RMBT-CR-119)
+
+============================ Rembrandt 027 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 027
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.027   06/19/21,00:43:56   CL#2322434@20.11.0.27 ATOMBuild #570565
+
+Major feature:
+SWDEV-3 - [RMB] clear bit 8 (INVALID_VBIOS_DATA) in DMCUB_SCRATCH14 register to indicate the VBIOS data is valid
+SWDEV-3 - [RMB] remove clear mmDMCUB_SCRATCH14 value action in case dmub fw set it 
+SWDEV-3 - [RMB] add inbox1 command for CW3_TABLE_LOADED
+
+============================ Rembrandt 026 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 026
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.026   05/26/21,01:54:31   CL#2310582@20.11.0.26 ATOMBuild #567096
+
+Major feature:
+PLAT-83555 Add new flags to RMB VBIOS
+PLAT-82966 [RMB] [vbios] [atomfirmware] The atom_smu_info_v3_1.core_refclk_10khz is incorrect.
+
+============================ Rembrandt 025 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 025
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.025   04/10/21,20:28:24   CL#2288722@20.11.0.24 ATOMBuild #560749
+
+Major feature:
+Support Dedicated Display on Combo PHY.
+
+
+============================ Rembrandt 024 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 024
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.024   03/19/21,17:23:45   CL#2278618@20.11.0.24 ATOMBuild #557552
+
+Major feature:
+This is a golden settings update from IPSE on March 16, 2021
+
+1. DCN GDB
+We updated Rembrandt A0 GDB based on display_init.c version 12.
+Please review and implement on your VBIOS.
+http://atlbiostoolv2/gdb/
+
+2. PHY setting data table
+We updated PHY settings according to discussion with SI team and Hoss.
+See attached file AmdCpmDisplayPhySettings_0223.c
+Please review and help us integrate it into sBIOS.
+
+============================ Rembrandt 023 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 023
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.023   03/12/21,14:17:50   CL#2258111@20.11.0.23 ATOMBuild #552544
+
+Major feature:
+1. correct the dcn reference clock to 24Mhz, the SMU reference clock to 100Mhz.
+
+============================ Rembrandt 022 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 022
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.022   01/05/21,18:28:58   CL#2235316@20.11.0.22 ATOMBuild #546693
+
+Major feature:
+1. PLAT-74651 [RMB] E.B.2.0 B0 firmware change list alignment CL# 1356865 - GOP/CSM.
+2. Update dphy_tx_term_ctrl from 4 to 7, tx_vboost_lvl from 3 to 5.
+3. Correct the mismatched location of DP2 and UBR10 capbility  bit. 
+
+============================ Rembrandt 021 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 021
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.021   12/19/20,23:21:33   CL#2227313@20.11.0.21 ATOMBuild #545324
+
+Major feature:
+1. Instead of the software I2C, use hardware I2C to read EDID.
+
+============================ Rembrandt 020 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 020
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.020   12/17/20,00:18:56   CL#2225326@20.11.0.20 ATOMBuild #545054
+
+Major feature:
+1. support all dispalys on DP ports, and the integratedsysteminfo table. Sbios provides the display connectors information 
+2. All Vbios function enabled.
+3. DP2/HDMI FRL enabled.
+
+============================ Rembrandt 019 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 019
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.019   12/08/20,22:09:09   CL#2219345@20.11.0.19 ATOMBuild #544049
+
+Major feature:
+1. support all dispalys on DP ports
+   eDP-->DP0, DP-->DP1, USB-C on DP2/3/4.
+2. Support DisplayPhySettings copy from Sbios.
+
+============================ Rembrandt 018 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 018
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.018   11/25/2020 2:40 PM  CL#2210043@20.11.0.0 ATOMBuild #542340
+
+Major feature:
+1. bug fix on checking dmcub command ring buffer full.
+
+
+============================ Rembrandt 017 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 017
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.017   11/12/2020 2:06 PM  CL#2200742@20.11.0.0 ATOMBuild #540546
+
+Major feature:
+1. Add eDP 2.16G/3.24G/4.32G/6.48G/6.75G DVI 3.0G/4.0G/6.0G HDMI_FRL 3G/4G/6G/8G/10G phy settings.
+2. Support eDP on DP0, DP on DP1,
+3. Platform Vbios Bring up ready.
+
+============================ Rembrandt 016 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 016
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.016   11/5/2020 3:20 PM  CL#2196847@stg  ATOMBuild #538751
+
+Major feature:
+1. PLAT-71316 [RMB] E.B.0.6 firmware change list alignment for B0 - CL# 1327134 - CSM/GOP
+Reg Headers: /proj/emu_release_ro/emu_drops/rembrandt_emu_drops/rmb_B0_1327134/PEMU_DELIVERY/Header_files/*
+
+============================ Rembrandt 015 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 015
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.015   10/22/2020 12:21 PM  CL#2189919@stg  ATOMBuild #537047
+
+Major feature:
+1. PLAT-71186 [RMB] A0 firmware MTO change list alignment - VBIOS/GOP.
+Register Spec Details on soc cl #1322172: http://mpdwww.amd.com/GNB_generic1/PROJECTS/RMB_MTO_1322172/index.html
+
+============================ Rembrandt 014 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 014
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.014   10/14/2020 5:27 PM  CL#2185498@stg  ATOMBuild #535978
+
+Major feature:
+1. Applied the new N6 Phy settings data structure.
+
+============================ Rembrandt 013 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 013
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.013   10/1/2020 12:14 AM  2180324@stg  ATOMBuild #533853
+
+Major feature:
+1. Datatable re-organize or some registers offset updates.
+
+
+============================ Rembrandt 012 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 012
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.012   9/23/2020 8:36 PM  2176695@stg  ATOMBuild #532956
+
+Major feature:
+1. Hard coded DP Display to DP0
+2. Sync the golden database to Renbrandt GDB.
+
+============================ Rembrandt 011 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 011
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.011   13/09/2020 9:52 PM  2170973@stg  ATOMBuild #531668
+
+Major feature:
+1. PLAT-69251 [RMB] B0 firmware change list alignment - CL# 1308269 - VBL/GOP/CSM
+
+============================ Rembrandt 009 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 009
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.009   8/29/2020 10:26 PM  2164947@stg  ATOMBuild #529180
+
+Major feature:
+1. PLAT-67798 - [RMB]LSE Emulation Drop CL:1294576- VBL/CSM/GOP (with E.0.1.1c support)
+2. DP0 hardcoded to eDP for PEMU Z9/Z10/PHY test.
+3. DID updated to 0x164D.
+4. set the Display reference clock to to use the display/DPP clock set by SMU.   
+
+
+============================ Rembrandt 010 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 010
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.010   01/09/2020 11:58 PM  2165940@stg  ATOMBuild #529516
+
+Major feature:
+1. set the Display reference clock to to use the display/DPP clock set by SMU.   
+2. Enable PHY for PEMU emulating RMB PHY
+
+============================ Rembrandt 009 VBIOS release  ========================================
+Rembrandt generic Baseline VBIOS 009
+Rembrandt A0 0x164D 102-D59501-00B  RmbGenericVbios.009   8/29/2020 10:26 PM  2164947@stg  ATOMBuild #529180
+
+Major feature:
+1. PLAT-67798 - [RMB]LSE Emulation Drop CL:1294576- VBL/CSM/GOP (with E.0.1.1c support)
+2. DP0 hardcoded to eDP for PEMU Z9/Z10/PHY test.
+3. DID updated to 0x164D.
+4. set the Display reference clock to to use the display/DPP clock set by SMU.   
+

@@ -1,0 +1,47 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchSmbusDxe
+  FILE_GUID                      = fd8dd4c4-b748-48e3-a932-ba68dd07bb06
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = InstallAmdSmbusLightEntryPoint
+
+[Sources]
+  SmbusLight.c
+  SmbusLight.h
+
+[LibraryClasses.common.DXE_DRIVER]
+  BaseLib 
+  UefiLib
+  HobLib
+  PrintLib
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  AmdBaseLib
+
+[Guids]
+
+[Protocols]
+  gEfiSmbusHcProtocolGuid           #PRODUCED
+  gEfiMetronomeArchProtocolGuid     #CONSUMED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+
+[Depex]
+  gEfiMetronomeArchProtocolGuid
+  AND
+  gEfiCpuIo2ProtocolGuid
+  AND
+  gAmdFchKTSmbusDepexProtocolGuid
+

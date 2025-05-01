@@ -1,0 +1,38 @@
+#/*****************************************************************************
+#*
+#* Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#*
+#*******************************************************************************
+#*/
+[Defines]
+  INF_VERSION         = 0x00010017
+  BASE_NAME           = SmmProtectionsTestApp
+  FILE_GUID           = 8441ED67-6678-4BC0-9D61-411E2D68612F
+  VERSION_STRING      = 1.0
+  MODULE_TYPE         = UEFI_APPLICATION
+  ENTRY_POINT         = ShellCEntryLib
+
+
+[Sources]
+  SmmProtectionsTestApp.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AmdTestPkg/AmdTestPkg.dec
+  ShellPkg/ShellPkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+
+[LibraryClasses]
+  ShellCEntryLib
+  DebugLib
+  UefiBootServicesTableLib
+  UefiLib
+  MemoryAllocationLib
+  BaseMemoryLib
+
+[Protocols]
+  gEfiSmmCommunicationProtocolGuid
+
+[Guids]
+  gSmmProtectionsTestGuid

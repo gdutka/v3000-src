@@ -1,0 +1,39 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2023 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdDxeTscTimerLib
+  FILE_GUID                      = 5C20E37E-8527-4d51-81D5-7B0611EEB267
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = TimerLib|DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER SMM_CORE
+
+  CONSTRUCTOR                    = AmdDxeTscTimerLibConstructor
+
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources.common]
+  AmdTscTimerLibShare.c
+  AmdDxeTscTimerLib.c
+  AmdTscTimerLibInternal.h
+  AmdGetCoreCOF.c
+  AmdGetCoreCOF.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  PcdLib
+  IoLib
+  BaseLib
+  UefiLib
+  DebugLib
+

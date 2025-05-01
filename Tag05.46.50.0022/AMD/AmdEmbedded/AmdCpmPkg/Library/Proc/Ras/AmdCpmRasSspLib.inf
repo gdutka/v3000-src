@@ -1,0 +1,50 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmRasSspLib
+  FILE_GUID             = AF32D1B6-4A2B-44A3-A394-088CC7DD2134
+  MODULE_TYPE           = BASE
+  VERSION_STRING        = 1.0
+  LIBRARY_CLASS         = AmdCpmRasSspLib|PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER
+
+[Sources.common]
+  AmdCpmRasSspLib.c
+  AmdCpmRasSspLib.h
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  IoLib
+  PciLib
+  DebugLib
+  LocalApicLib
+
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdMemErrFruDefaultStr
+  gAmdCpmPkgTokenSpaceGuid.PcdMemErrFruTextOemPrefixStr
+
+[Depex]
+

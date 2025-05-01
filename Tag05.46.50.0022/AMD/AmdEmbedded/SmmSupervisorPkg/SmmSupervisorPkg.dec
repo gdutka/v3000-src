@@ -1,0 +1,71 @@
+# *******************************************************************************
+#
+# Copyright(C) 2020 Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (c) Microsoft Corporation.
+#
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+# *******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = SmmSupervisorPkg
+  PACKAGE_GUID          = 92f41502-ddee-4180-b6eb-ec4ab0215e84
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+
+[Includes.common.Private]
+  Private/Include
+
+[LibraryClasses]
+  SmmPolicyGateLib|Include/Library/SmmPolicyGateLib.h
+  SysCallLib|Include/Library/SysCallLib.h
+  MemLogLib|Include/Library/MemLogLib.h
+  ErrorDataLogLib|Include/Library/ErrorDataLogLib.h
+  SmmErrorReportOemLib|Include/Library/SmmErrorReportOemLib.h
+  SmmSupervisorFeatureLib|Include/Library/SmmSupervisorFeatureLib.h
+  IhvDrtmLib|Include/Library/IhvDrtmLib.h
+  SmmSupvEntryLocateLib|Include/Library/SmmSupvEntryLocateLib.h
+  IhvPageProtectionLib|Include/Library/IhvPageProtectionLib.h
+  IhvPageSupervisionLib|Include/Library/IhvPageSupervisionLib.h
+  IhvSmmSaveStateSupervisionLib|Include/Library/IhvSmmSaveStateSupervisionLib.h
+  SmmSupvTestPointLib|Include/Library/SmmSupvTestPointLib.h
+
+  SmmSupervisorExceptionHandlerLib|Private/Include/Library/SmmSupervisorExceptionHandlerLib.h
+  SmmSupervisorPageMgmtLib|Private/Include/Library/SmmSupervisorPageMgmtLib.h
+  SmmSupervisorMemMgmtLib|Private/Include/Library/SmmSupervisorMemMgmtLib.h
+  SmmSupervisorPolicyMgmtLib|Private/Include/Library/SmmSupervisorPolicyMgmtLib.h
+
+[Guids]
+  gSmmSupervisorPkgTokenSpaceGuid = { 0xb32559a, 0xfa5c, 0x47d6, { 0xb5, 0xb0, 0x3c, 0xcc, 0xc9, 0x26, 0x6d, 0xa8 } }
+  ## The Guid in Smm Configuration Table to store SmmSupervisor public info
+  ## which can be retrieved by external SMM driver
+  #  Include\Guid\SmmSupervisorPublicInfoTable.h
+  #  {FCB34ADD-53EB-4D8B-AE9C-308C38F6FEFD}
+  gSmmSupervisorPublicInfoTableGuid = { 0xfcb34add, 0x53eb, 0x4d8b, { 0xae, 0x9c, 0x30, 0x8c, 0x38, 0xf6, 0xfe, 0xfd } }
+
+[PcdsFeatureFlag]
+  ## Feature flag to report legacy memory policy or not.<BR><BR>
+  #   FALSE  - SMM legacy memory policy report disabled<BR>
+  #   TRUE   - SMM legacy memory policy report supported<BR>
+  # @Prompt Configure whether to report legacy memory policies.
+  gSmmSupervisorPkgTokenSpaceGuid.SupportLegacyMemoryPolicy|TRUE|BOOLEAN|0x00000003
+
+[PcdsFixedAtBuild]
+  ## Switch to configure when to enable SMM isolation.<BR><BR>
+  #   0   - SMM isolation will be enabled at DRTM event if supported.<BR>
+  #   1   - SMM isolation will be enabled at Ready-To-Lock event and re-enforced at DRTM event if supported.<BR>
+  # @Prompt Configure when to enable SMM isolation.
+  gSmmSupervisorPkgTokenSpaceGuid.PcdTurnOnSmmIsolationEvent|0|UINT8|0x00000001
+
+[PcdsDynamicEx]
+  ## Switch to enable SMM isolation.<BR><BR>
+  #   FALSE  - SMM isolation disabled<BR>
+  #   TRUE   - SMM isolation enabled<BR>
+  # @Prompt Configure when to enable SMM isolation.
+  gSmmSupervisorPkgTokenSpaceGuid.PcdSmmIsolationEnable|TRUE|BOOLEAN|0x00000002
+
+[Protocols]
+  gSmmSupervisorProtocolGuid   = { 0x1738b3b1, 0x762f, 0x454b, { 0x97, 0x79, 0x43, 0x28, 0x77, 0xa0, 0x62, 0xf6 }}

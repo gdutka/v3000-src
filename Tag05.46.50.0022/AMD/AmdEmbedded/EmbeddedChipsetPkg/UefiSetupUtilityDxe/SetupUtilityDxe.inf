@@ -1,0 +1,181 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2017 - 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SetupUtility
+  FILE_GUID                      = FE3542FE-C1D3-4EF8-657C-8048606FF670
+  MODULE_TYPE                    = DXE_DRIVER
+  ENTRY_POINT                    = SetupUtilityInit
+  STRGATHER_RESERVE_SIZE         = 0x1000
+
+[Sources]
+  SetupVfrStrings.uni
+  Images/SetupImage.idf
+  Advance/AdvanceVfr.vfr
+  Advance/Advance.c
+  Advance/IdeConfig.c
+  Advance/SioConflict.c
+  Advance/DisplaySelection.c
+//[-start-220329-IB14740229-add]//
+  Advance/SetupPreProcTools.hfr
+  Advance/PcieSetupSinglePort.hfr
+  Advance/PcieSetupSinglePortMenu.hfr
+  Advance/PcieStringPool.hfr
+//[-end-220329-IB14740229-add]//
+
+//[-start-220329-IB14740229-add]//
+  Advance/UsbSingleHsPort.hfr
+  Advance/UsbSingleSsPort.hfr
+  Advance/UsbStringPool.hfr
+//[-end-220329-IB14740229-add]//
+
+  Power/PowerVfr.vfr
+  Power/Power.c
+
+#   Version/VersionVfr.vfr
+#   Version/Version.c
+
+  Main/UpdateMemInfo.c
+  Main/UpdateMemInfo.h
+
+  SetupUtility.c
+  SetupFuncs.c
+  GenericCallback.c
+  FormCallbackHook.c
+  ../../AmdCbsPkg/Build/ResourceRMB/AmdCbsVariable.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SecurityPkg/SecurityPkg.dec
+  InsydeOemServicesPkg/InsydeOemServicesPkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  $(PROJECT_PKG)/Project.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/$(PLATFORM_NAME)/AmdCpmOemPkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec  
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  SetupUtilityLib
+  BaseMemoryLib
+  BaseSetupDefaultLib
+  PciExpressLib
+  PostCodeLib
+  MultiConfigBaseLib
+  DebugLib
+  CmosLib
+  HobLib
+  PciLib
+  IoLib
+  VariableLib
+  DxeOemSvcChipsetLibDefault
+  BaseLib
+  AmdPbsConfigLib
+  CbsDxeFuncLib
+  PcdLib
+  ApcbLibV3
+
+[Pcd]
+#   gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang
+  gInsydeTokenSpaceGuid.PcdPortNumberMapTable
+  gInsydeTokenSpaceGuid.PcdPlatformBootTimeOut
+  gInsydeTokenSpaceGuid.PcdH2OTpmSupported
+  gInsydeTokenSpaceGuid.PcdH2OAhciSupported
+  gInsydeTokenSpaceGuid.PcdUseFastCrisisRecovery
+  gInsydeTokenSpaceGuid.PcdH2OTpm2Supported
+  gInsydeTokenSpaceGuid.PcdH2OHddPasswordMinLength
+  gInsydeTokenSpaceGuid.PcdH2OHddPasswordMaxLength
+  gInsydeTokenSpaceGuid.PcdH2OUsbSupported
+  gChipsetPkgTokenSpaceGuid.PcdH2ONvVariableFailDetect
+  gChipsetPkgTokenSpaceGuid.PcdH2OLegacyFreeSupported
+  gChipsetPkgTokenSpaceGuid.PcdH2OXhciSupported
+  gInsydeTokenSpaceGuid.PcdH2OFormBrowserLocalMetroDESupported
+  gLinkAdvancedTokenSpaceGuid
+  gLinkPowerTokenSpaceGuid
+  gChipsetPkgTokenSpaceGuid.PcdSetupConfigSize
+  gInsydeTokenSpaceGuid.PcdLegacyBootTypeOrder
+  gCbsSystemConfigurationGuid
+  gChipsetPkgTokenSpaceGuid.PcdH2OBdsReoveryLongRunSupport
+  gChipsetPkgTokenSpaceGuid.PcdH2OTpmType
+  gChipsetPkgTokenSpaceGuid.PcdH2OSpiOrLpcTPMSupported
+  gEfiSecurityPkgTokenSpaceGuid.PcdTpmInstanceGuid
+  gAmdCpmPkgTokenSpaceGuid.EcRamBaseAddr
+  gEfiMdePkgTokenSpaceGuid.PcdMaximumUnicodeStringLength
+  gEfiMdePkgTokenSpaceGuid.PcdMaximumAsciiStringLength
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdScpcLevel
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdIvInfoDmaReMap
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDmaProtection
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAntiRollbackLateSplFuse
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnableForLevel3
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdMultiConfigSupported
+  gChipsetPkgTokenSpaceGuid.PcdH2OPreferDtpmBootSupported
+#[-start-230206-IB14740276-remove]//
+#>>EnableAbove4GBMmio++
+#  gInsydeTokenSpaceGuid.Pcd64BitAmlSupported
+#<<EnableAbove4GBMmio++
+#[-end-230206-IB14740276-remove]//
+  gChipsetPkgTokenSpaceGuid.PcdDashSupported
+
+[Protocols]
+  gEfiAlertStandardFormatProtocolGuid
+  gEfiSetupUtilityProtocolGuid
+  gEfiSetupUtilityBrowserProtocolGuid
+  gEfiSetupUtilityApplicationProtocolGuid
+  gEfiSysPasswordServiceProtocolGuid
+  gH2ODialogProtocolGuid
+  gEfiDataHubProtocolGuid
+  gSetupMouseProtocolGuid
+  gEfiTcgProtocolGuid
+  gEdkiiFormBrowserEx2ProtocolGuid
+  gH2OFormBrowserProtocolGuid
+  gCbsSetupProtocolGuid
+  gAmdCpmTableProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiNvmExpressPassThruProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gAmdApcbDxeServiceProtocolGuid
+
+[Guids]
+  gEfiGenericVariableGuid
+  gEfiPowerOnPwSCUHobGuid
+  gEfiDiskInfoAhciInterfaceGuid
+  gEfiDiskInfoIdeInterfaceGuid
+  gNvVariableFailGuid
+  gHddPasswordModifiedGuid
+#   gEfiProcessorSubClassGuid
+#   gEfiGlobalVariableGuid
+  gEfiDiskInfoNvmeInterfaceGuid
+  gEfiHiiPlatformSetupFormsetGuid
+  gEfiTpmDeviceInstanceTpm12Guid
+  gEfiTpmDeviceInstanceTpm20DtpmGuid
+
+[BuildOptions]
+  MSFT:*_*_*_VFRPP_FLAGS = -DSETUP_IMAGE_SUPPORT /FI$(MODULE_NAME)IdfDefs.h
+  GCC:*_*_*_VFRPP_FLAGS  = -DSETUP_IMAGE_SUPPORT --include $(DEST_DIR_DEBUG)/$(MODULE_NAME)IdfDefs.h
+
+[Depex]
+  gEfiVariableArchProtocolGuid      AND
+  gEfiVariableWriteArchProtocolGuid AND
+  gEfiBdsArchProtocolGuid

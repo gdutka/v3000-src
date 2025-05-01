@@ -1,0 +1,79 @@
+## @file
+#  DXE driver for Storage Status Code Handler.
+#
+#******************************************************************************
+#* Copyright (c) 2023, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = StorageStatusCodeDxe
+  FILE_GUID                 = 60C83BC9-89FB-48D5-8962-A5DCE1D4C0FE
+  MODULE_TYPE               = DXE_DRIVER
+  PI_SPECIFICATION_VERSION  = 0x0001000A
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = StorageStatusCodeDxeEntryPoint
+
+[Sources]
+  StorageStatusCodeDxe.c
+  StorageStatusCodeDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  HobLib
+  PcdLib
+  PrintLib
+  ReportStatusCodeLib
+  DebugLib
+  BaseMemoryLib
+  UefiRuntimeServicesTableLib
+  BaseLib
+  UefiLib
+  DevicePathLib
+  H2OCpLib
+  H2OLib
+
+[Guids]
+  gEfiEventExitBootServicesGuid
+  gEfiStatusCodeDataTypeStringGuid
+  gH2OStatusCodeStorageHobGuid
+  gH2OBdsCpNoBootDeviceGuid
+  gH2OBdsCpBootBeforeGuid
+  gH2OBdsCpLegacyBootBeforeGuid
+
+[Protocols]
+  gEfiRscHandlerProtocolGuid
+  gEfiSimpleFileSystemProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiDevicePathProtocolGuid
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpNoBootDeviceSupported
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpBootBeforeSupported
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpLegacyBootBeforeSupported
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdStatusCodeStorageHobSize
+  gInsydeTokenSpaceGuid.PcdStatusCodeStorageMemorySize
+  gInsydeTokenSpaceGuid.PcdStatusCodeStorageDevicePath
+  gInsydeTokenSpaceGuid.PcdStatusCodeStorageFilePath
+  gInsydeTokenSpaceGuid.PcdStatusCodeStorageTimerPeriodMs
+  gInsydeTokenSpaceGuid.PcdStatusCodeStorageMemoryBase
+
+[Depex]
+  TRUE
+

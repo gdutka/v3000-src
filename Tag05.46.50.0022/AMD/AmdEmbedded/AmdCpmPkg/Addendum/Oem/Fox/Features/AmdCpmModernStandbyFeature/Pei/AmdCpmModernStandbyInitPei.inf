@@ -1,0 +1,67 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdCpmModernStandbyInitPei
+  FILE_GUID                      = E6427302-1B37-4B55-8DD5-F43A2F018DE2
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdCpmModernStandbyInitPeiEntryPoint
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+
+[Sources]
+  AmdCpmModernStandbyInitPei.c
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  BaseLib
+  AmdBaseLib
+  DebugLib
+  AmdCpmBaseLib
+  AmdCpmCpuLib
+  AmdCpmFchLib
+  AmdPbsConfigLib
+  PcdLib
+
+[Ppis]
+  gAmdCpmTablePpiGuid
+  gAmdFchInitPpiGuid
+
+[Guids]
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable
+  gAmdCpmPkgTokenSpaceGuid.PcdReduceHardwareEnable
+  gAmdCpmPkgTokenSpaceGuid.EcRamBaseAddr
+  gAmdCpmPkgTokenSpaceGuid.PcdPlatformLpiEn
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchAoacInitEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTD3ColdEnableMap
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdS0i2Enable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdS0i3Enable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchMiscModernStanbyEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdFchWdtEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtProcessorLpiC2ParentState
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtProcessorLpiC3ParentState
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiC3Ctrl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCstC3
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtProcessorContainerName
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiCpuSsdtProcessorContainerInSb
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchSataDummyD3ColdSupport
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyPlatformOscEnable
+
+[Depex]
+  gAmdCpmTablePpiGuid

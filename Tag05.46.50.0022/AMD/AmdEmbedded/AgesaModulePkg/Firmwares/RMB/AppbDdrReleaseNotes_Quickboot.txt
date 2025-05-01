@@ -1,0 +1,17 @@
+--------------------------------------------------------------------------------
+APPB Delivery Release Notes
+
+Copyright 2024, Advanced Micro Devices, Inc.
+
+Version: PMU Rev 0x0010 for Rembrandt
+--------------------------------------------------------------------------------
+Content:
+  Filename                                           AGESA V9 Destination Folder       Description
+  AppbDdrReleaseNotes_Quickboot.txt                  AgesaModulePkg\Firmwares\RMB\     This Release notes file
+  TypeId0x64_Appb_RMB_Ddr5QuickbootImem9.csbin       AgesaModulePkg\Firmwares\RMB\     Agesa PSP PMU Block instruction image 1
+  TypeId0x64_Appb_RMB_Ddr5QuickbootImem10.csbin      AgesaModulePkg\Firmwares\RMB\     Agesa PSP PMU Block instruction image 2
+  TypeId0x65_Appb_RMB_Ddr5QuickbootDmem9.csbin       AgesaModulePkg\Firmwares\RMB\     Agesa PSP PMU Block data image 1
+  TypeId0x65_Appb_RMB_Ddr5QuickbootDmem10.csbin      AgesaModulePkg\Firmwares\RMB\     Agesa PSP PMU Block data image 2
+
+Version String:
+  0x0010

@@ -1,0 +1,17 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = SnpDxePkg
+  PACKAGE_GUID                   = C517EB6F-DCB3-44DD-8876-D0B5034248B2
+  PACKAGE_VERSION                = 0.1
+
+#[Includes]
+#  Include
+
+[LibraryClasses]
+  SnpDxePortLib|SnpDxe.h
+  SnpDxePortLib|SnpDxeXgbe.h

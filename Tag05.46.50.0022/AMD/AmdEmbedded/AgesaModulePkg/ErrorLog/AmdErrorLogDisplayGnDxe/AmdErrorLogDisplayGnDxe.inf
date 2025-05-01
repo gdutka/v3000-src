@@ -1,0 +1,56 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdErrorLogDisplayGnDxe
+  FILE_GUID                      = 36D295A7-AF93-4EB1-81BC-496DD280F3C9
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdErrorLogDisplayGnDxeInit
+
+[sources]
+  AmdErrorLogDisplayGnDxe.c
+  AmdErrorLogDisplayGnDxe.h
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DebugLib
+  AmdErrorLogLib
+  HobLib
+  PcdLib
+  AmdSocBaseLib
+
+[Guids]
+  gErrorLogHobGuid
+  gAmdMemPmuTrainingFailureHobGuid
+  gAmdMemoryMbistHobGuid
+
+[Protocols]
+  gAmdErrorLogReadyProtocolGuid          #CONSUMED
+  gAmdErrorLogProtocolGuid               #PRODUCED
+  gAmdErrorLogServiceProtocolGuid        #PRODUCED
+  gAmdErrorLogFullProtocolGuid           #PRODUCED
+  gAmdErrorLogAvailableProtocolGuid      #PRODUCED
+  gAmdErrorLogDepexProtocolGuid          #CONSUMED
+  gAmdFabricTopologyServices2ProtocolGuid #CONSUMED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAgesaPrintEventLogToConsole
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintEnable
+
+[Depex]
+  gAmdErrorLogDepexProtocolGuid AND
+  gAmdErrorLogReadyProtocolGuid AND
+  gEfiPciEnumerationCompleteProtocolGuid AND
+  gAmdFabricTopologyServices2ProtocolGuid
+

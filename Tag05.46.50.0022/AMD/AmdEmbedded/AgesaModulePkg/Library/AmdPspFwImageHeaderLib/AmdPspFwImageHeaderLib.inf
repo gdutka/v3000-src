@@ -1,0 +1,44 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdPspFwImageHeaderLib
+  FILE_GUID                      = 837B6022-7F4D-4db0-8FCC-559ECC41B3F7
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdPspFwImageHeaderLib
+
+[Sources.common]
+  AmdPspFwImageHeaderLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  AmdBaseLib
+  AmdDirectoryBaseLib
+
+[Guids]
+
+
+[Protocols]
+
+
+[Ppis]
+
+
+[Pcd]
+
+
+[Depex]
+
+

@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = Pca9555aPei
+  FILE_GUID             = 2bfe7b9b-767a-44be-80f9-6e0212899fe0
+  MODULE_TYPE           = PEIM
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = Pca9555aPeiEntryPoint
+
+[Sources.common]
+  Pca9555aPei.c
+  Pca9555aPei.h
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[LibraryClasses]
+  PeimEntryPoint
+  DebugLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gEfiPeiI2cMasterPpiGuid
+  gPca9555aPpiGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+
+[Depex]
+  gEfiPeiI2cMasterPpiGuid

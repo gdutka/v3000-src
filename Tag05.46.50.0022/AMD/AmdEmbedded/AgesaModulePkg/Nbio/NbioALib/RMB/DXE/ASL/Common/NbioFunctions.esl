@@ -1,0 +1,33 @@
+/*
+*****************************************************************************
+*
+ * Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+* ***************************************************************************
+*
+*/
+
+// Port 80 block
+  OperationRegion (varNbioPort80Dword, SystemIO, 0x80, 0x4)
+    Field (varNbioPort80Dword, DWordAcc, NoLock, Preserve) {
+    bfNbPort80Dword, 32
+  }
+  OperationRegion (varNbioPort80Word, SystemIO, 0x80, 0x2)
+    Field (varNbioPort80Word, WordAcc, NoLock, Preserve) {
+    bfNbPort80Word, 16
+  }
+  OperationRegion (varNbioPort80Byte, SystemIO, 0x80, 0x1)
+    Field (varNbioPort80Byte, ByteAcc, NoLock, Preserve) {
+    bfNbPort80Byte, 8
+  }
+
+  /*----------------------------------------------------------------------------------------*/
+  /**
+   *  Output Post Code
+   *
+   *  Arg0 -  Post Code Value
+   */
+  Method (procPort80, 1) {
+    //Arg0 - post coe
+    store (Or (Arg0, NbioAlibPostCodePrefix), bfNbPort80Dword)
+  }

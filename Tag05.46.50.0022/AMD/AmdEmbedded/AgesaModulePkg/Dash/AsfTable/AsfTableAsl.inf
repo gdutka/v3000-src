@@ -1,0 +1,36 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010005
+  BASE_NAME             = AsfTableAsl
+  FILE_GUID             = 03721ef2-1801-4c91-a213-147323f75132
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = InstallAsfAcpiTableEntry
+
+[Sources]
+  InstallAsfAcpiTable.c
+  AsfTableAsl.c
+  AsfTableAsl.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseLib
+  DebugLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+
+[Protocols]
+  gEfiAcpiTableProtocolGuid
+
+[Depex]
+  gEfiAcpiTableProtocolGuid

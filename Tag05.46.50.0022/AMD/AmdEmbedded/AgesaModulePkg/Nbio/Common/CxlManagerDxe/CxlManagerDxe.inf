@@ -1,0 +1,58 @@
+## @file
+#
+# Cxl Manager DXE Driver.
+#
+##
+#;*****************************************************************************
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CxlManager
+  FILE_GUID                      = 0BF06027-29A4-447D-8FA4-D8A289F1DDDC
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CxlManagerEntryPoint
+
+[Sources]
+  CxlManagerDxe.h
+  CxlManagerDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  DxeServicesTableLib
+  HobLib
+  PcdLib
+  UefiLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiDriverEntryPoint
+  AmdCxlPcieLib
+  AmdPspApobLib
+
+[FixedPcd]
+  # This PCD is used as an '#if' to include SoC-specific header files (default set as 0x19 for GN)
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSocFamilyId
+
+[Protocols]
+  gAmdNbioCxlServicesProtocolGuid          ## CONSUMER
+  gAmdApcbDxeServiceProtocolGuid           ## CONSUMER
+  gAmdCxlManagerProtocolGuid               ## PRODUCER
+
+[Depex]
+  gAmdApcbDxeServiceProtocolGuid AND
+  gAmdNbioCxlServicesProtocolGuid 
+
+ 

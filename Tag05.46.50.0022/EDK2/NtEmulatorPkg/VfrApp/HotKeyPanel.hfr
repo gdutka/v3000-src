@@ -1,0 +1,378 @@
+/** @file
+
+  Hot Key panel test VFR file
+
+;******************************************************************************
+;* Copyright (c) 2015 - 2017, Insyde Software Corporation. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+#define VFR_APP_FORM_HOT_KEY_PANEL_DISCARD                                        0x4001
+#define VFR_APP_FORM_HOT_KEY_PANEL_LOAD_DEFAULT                                   0x4002
+#define VFR_APP_FORM_HOT_KEY_PANEL_SAVE                                           0x4003
+#define VFR_APP_FORM_HOT_KEY_PANEL_ENTER                                          0x4004
+#define VFR_APP_FORM_HOT_KEY_PANEL_CALLBACK                                       0x4005
+#define VFR_APP_FORM_HOT_KEY_PANEL_GOTO                                           0x4006
+#define VFR_APP_FORM_HOT_KEY_PANEL_SET_QUESTION_VALUE                             0x4007
+
+#define VFR_APP_FORM_HOT_KEY_PANEL_CHILD_FORM                                     0x4100
+#define VFR_APP_FORM_HOT_KEY_PANEL_OVERRIDE                                       0x4101
+#define VFR_APP_FORM_HOT_KEY_PANEL_COMBIND_HOT_KEY                                0x4102
+
+#define VFR_APP_FORM_HOT_KEY_PANEL_QUESTION_LEVEL                                 0x4200
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_TITLE);
+
+    subtitle
+      text = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_TEST);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_QUESTION_LEVEL,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_TITLE),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_HELP);
+
+    subtitle
+      text = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_ACTION_TEST);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_DISCARD,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_DISCARD_TITLE),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_DISCARD_HELP);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_LOAD_DEFAULT,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_LOAD_DEFAULT_TITLE),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_LOAD_DEFAULT_HELP);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_SAVE,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_SAVE_TITLE),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_SAVE_HELP);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_ENTER,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_ENTER_TITLE),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_ENTER_HELP);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_CALLBACK,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_CALLBACK_TITLE),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_CALLBACK_HELP);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_GOTO,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_GOTO_TITLE),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_GOTO_HELP);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_SET_QUESTION_VALUE,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_SET_QUESTION_VALUE_TITLE),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_SET_QUESTION_VALUE_HELP);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_OVERRIDE,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_OVERRIDE_FORM_TITLE),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_OVERRIDE_FORM_HELP);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_COMBIND_HOT_KEY,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_COMBIND_HOT_KEY_TITLE),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_COMBIND_HOT_KEY_TITLE);
+
+    subtitle
+      text = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_QUESTION_TEST);
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0001,
+      prompt      = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+
+    oneof
+      varid       = VfrAppVar.HotKeyPanelOneOf0001,
+      prompt      = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ZERO), value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ONE),  value = 1, flags = 0;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_TWO),  value = 2, flags = 0;
+    endoneof;
+
+    checkbox
+      varid       = VfrAppVar.HotKeyPanelCheckbox0001,
+      prompt      = STRING_TOKEN(STR_FORM_CHECKBOX_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_CHECKBOX_OPCODE_TITLE),
+      flags       = 0,
+      default     = FALSE,
+    endcheckbox;
+
+    string
+      varid       = VfrAppVar.HotKeyPanelString0001,
+      prompt      = STRING_TOKEN(STR_FORM_STRING_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_STRING_OPCODE_TITLE),
+      flags       = 0,
+      minsize     = 0,
+      maxsize     = 10,
+    endstring;
+
+    password
+      varid       = VfrAppVar.HotKeyPanelPassword0001,
+      prompt      = STRING_TOKEN(STR_FORM_PASSWORD_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_PASSWORD_OPCODE_TITLE),
+      minsize     = 6,
+      maxsize     = 20,
+    endpassword;
+
+    orderedlist
+      varid       = VfrAppVar.HotKeyPanelOrder1,
+      prompt      = STRING_TOKEN(STR_FORM_ORDERED_LIST_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_ORDERED_LIST_OPCODE_TITLE),
+      option text = STRING_TOKEN(STR_TEST_ORDERED_LIST_OPTION_ONE)    , value =  1, flags = 0;
+      option text = STRING_TOKEN(STR_TEST_ORDERED_LIST_OPTION_TWO)    , value =  2, flags = 0;
+      option text = STRING_TOKEN(STR_TEST_ORDERED_LIST_OPTION_THREE)  , value =  3, flags = 0;
+      option text = STRING_TOKEN(STR_TEST_ORDERED_LIST_OPTION_FOUR)   , value =  4, flags = 0;
+    endlist;
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_QUESTION_LEVEL,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_TITLE);
+
+    text
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_STATEMENT_ONE_HELP),
+      text   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_STATEMENT_ONE);
+    text
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_STATEMENT_TWO_HELP),
+      text   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_STATEMENT_TWO);
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0009,
+      questionid  = 0x4009,
+      prompt      = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_QUESTION_ONE),
+      help        = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_QUESTION_ONE_HELP),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0010,
+      questionid  = 0x400A,
+      prompt      = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_QUESTION_TWO),
+      help        = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_QUESTION_TWO_HELP),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_DISCARD,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_DISCARD_TITLE);
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0002,
+      questionid  = 0x4001,
+      prompt      = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+
+    oneof
+      varid       = VfrAppVar.HotKeyPanelOneOf0002,
+      prompt      = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ZERO), value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ONE),  value = 1, flags = 0;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_TWO),  value = 2, flags = 0;
+    endoneof;
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_LOAD_DEFAULT,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_LOAD_DEFAULT_TITLE);
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0003,
+      questionid  = 0x4002,
+      prompt      = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+
+    oneof
+      varid       = VfrAppVar.HotKeyPanelOneOf0003,
+      prompt      = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ZERO), value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ONE),  value = 1, flags = MANUFACTURING;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_TWO),  value = 2, flags = 0;
+    endoneof;
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_SAVE,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_SAVE_TITLE);
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0004,
+      questionid  = 0x4003,
+      prompt      = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+
+    oneof
+      varid       = VfrAppVar.HotKeyPanelOneOf0004,
+      prompt      = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ZERO), value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ONE),  value = 1, flags = 0;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_TWO),  value = 2, flags = 0;
+    endoneof;
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_ENTER,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_ENTER_TITLE);
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0005,
+      prompt      = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+
+    oneof
+      varid       = VfrAppVar.HotKeyPanelOneOf0005,
+      questionid  = 0x4004,
+      prompt      = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ZERO), value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ONE),  value = 1, flags = 0;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_TWO),  value = 2, flags = 0;
+    endoneof;
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_CALLBACK,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_ENTER_TITLE);
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0011,
+      questionid  = 0x400B,
+      prompt      = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_QUESTION_ONE),
+      help        = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_QUESTION_ONE),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0012,
+      questionid  = 0x400C,
+      prompt      = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_QUESTION_TWO),
+      help        = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_HOT_KEY_LEVEL_QUESTION_TWO),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_GOTO,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_GOTO_TITLE);
+
+    goto VFR_APP_FORM_HOT_KEY_PANEL_CHILD_FORM,
+      prompt = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_CHILD_FORM),
+      help   = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_CHILD_FORM);
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_SET_QUESTION_VALUE,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_SET_QUESTION_VALUE_TITLE);
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0006,
+      questionid  = 0x4007,
+      prompt      = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_CHILD_FORM,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_CHILD_FORM);
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_OVERRIDE,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_OVERRIDE_FORM_TITLE);
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0007,
+      prompt      = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+
+    numeric
+      varid       = VfrAppVar.HotKeyPanelNumeric0008,
+      prompt      = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_NUMERIC_OPCODE_TITLE),
+      flags       = 0,
+      minimum     = 0,
+      maximum     = 99,
+      step        = 1,
+      default     = 0,
+    endnumeric;
+  endform;
+
+  form
+    formid = VFR_APP_FORM_HOT_KEY_PANEL_COMBIND_HOT_KEY,
+    title  = STRING_TOKEN(STR_FORM_HOT_KEY_PANEL_COMBIND_HOT_KEY_TITLE);
+
+    oneof
+      varid       = VfrAppVar.HotKeyPanelOneOf0006,
+      questionid  = 0x4008,
+      prompt      = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      help        = STRING_TOKEN(STR_FORM_ONE_OF_OPCODE_TITLE),
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ZERO), value = 0, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_ONE),  value = 1, flags = 0;
+      option text = STRING_TOKEN(STR_QUESTION_ONE_OF_OPCODE_FOUR_VALUE_TWO),  value = 2, flags = 0;
+    endoneof;
+  endform;
+

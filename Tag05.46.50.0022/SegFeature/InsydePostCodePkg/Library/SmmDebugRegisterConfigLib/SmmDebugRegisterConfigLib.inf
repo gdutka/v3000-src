@@ -1,0 +1,42 @@
+## @file
+#  SmmDebugRegisterConfigLib instance 
+#
+#******************************************************************************
+#* Copyright (c) 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmDebugRegisterConfigLib
+  FILE_GUID                      = 531335BC-E513-474a-A7A8-5133132C640B
+  MODULE_TYPE                    = SMM_CORE
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  LIBRARY_CLASS                  = SmmDebugRegisterConfigLib|SMM_CORE
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  SmmDebugRegisterConfigLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydePostCodePkg/InsydePostCodePkg.dec
+
+[LibraryClasses]
+  SmmServicesTableLib
+
+[Protocols]
+  gH2OPostCodeSmmDebugRegProtocolGuid
+  

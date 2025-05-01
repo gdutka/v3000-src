@@ -1,0 +1,55 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = MpmDevLib
+  FILE_GUID                      = b5ea31ae-9b7f-4e38-8b56-9a4c708da294
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MpmDevLib
+
+[Sources.common]
+  MpmDevIntLib.c
+  Device/Aquantia_g.c
+  Device/Bcm5762.c
+  Device/QcaHastings.c
+  Device/Rtk8168.c
+  Device/Mediatek.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  AmdBaseLib
+  AmdHeapLib
+  AmdPspMboxLibV2
+  MpmMboxLib
+  PcdLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+
+[Guids]
+
+[Protocols]
+  gEfiPciIoProtocolGuid
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmEnable
+
+[Depex]
+
+
+
+

@@ -1,0 +1,55 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+Scope (\_SB) {
+    Device (APAD) {
+        Name (_HID, "ACPI000C")
+        Name (CpmIdleCoreCount, Package (2) {1, 0})
+
+        Method (_STA, 0) {
+            If (\_OSI ("Processor Aggregator Device")) {
+                Store (CpmReadTable16 (CpmMainTable, CpmProcessorAggregatorDevice), Local0)
+                If (LEqual (And (Local0, 0x80), 0x80)) {
+                    CpmDebugPrint ("  KER-ASL-\\_SB.APAD._STA = 0xF\n", 0, 0, 0, 0, 0, 0)
+                    Return (0xF)
+                } Else {
+                    CpmDebugPrint ("  KER-ASL-\\_SB.APAD._STA = 0x0\n", 0, 0, 0, 0, 0, 0)
+                    Return (0x0)
+                }
+            } Else {
+                CpmDebugPrint ("  KER-ASL-1-\\_SB.APAD._STA = 0x0\n", 0, 0, 0, 0, 0, 0)
+                Return (0x0)
+            }
+        } // End of Method (_STA, 0)
+
+        Method (_INI, 0) {
+            CpmDebugPrint ("  KER-ASL-\\_SB.APAD._INI\n", 0, 0, 0, 0, 0, 0)
+            Store (CpmReadTable16 (CpmMainTable, CpmProcessorAggregatorDevice), Local0)
+            If (LAnd (LEqual (And (Local0, 0xC0), 0xC0), LNotEqual (And (Local0, 0xFF00), 0xFF00))) {
+                Store (Buffer (8) {}, Local3)
+                CreateWordField (Local3, 0, CpmAlibStructureSize)     // Buffer Size
+                CreateByteField (Local3, 2, CpmAlibSubFunction)       // DPTCi Sub Function
+                CreateDwordField (Local3, 3, CpmAlibControlValue)     // DPTCi Control Value
+                Store (ShiftRight (Local0, 8), CpmAlibControlValue)
+                Store (7, CpmAlibStructureSize)                       // Size of Buffer
+                Store (0x31, CpmAlibSubFunction)                      // Message ID of core
+                If (CondRefOf (\_SB.ALIB)) {
+                    CpmDebugPrint ("  KER-ASL-Call \\_SB.ALIB (0x0C, 0x%X)\n", Local3, 0, 0, 0, 0, 0)
+                    \_SB.ALIB (0x0C, Local3)
+                }
+            }
+        }
+
+        Method (_PUR, 0) {
+            ToInteger (DeRefOf (Index (CpmIdleCoreCount, 0)), Local0)
+            ToInteger (DeRefOf (Index (CpmIdleCoreCount, 1)), Local1)
+            CpmDebugPrint ("  KER-ASL-\\_SB.APAD._PUR Return Package (2) (0x%X, 0x%X) to OSPM\n", Local0, Local1, 0, 0, 0, 0)
+            Return (CpmIdleCoreCount)
+        }
+    } // End of Device (APAD)
+} // End of Scope (\_SB)
+

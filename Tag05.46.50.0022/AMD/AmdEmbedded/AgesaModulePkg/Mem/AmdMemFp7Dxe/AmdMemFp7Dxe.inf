@@ -1,0 +1,42 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdMemFp7Dxe
+  FILE_GUID                      = B86B0E9F-9FAF-4368-A131-62416F3DD21B
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdMemFp7Dxe
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+
+[LibraryClasses.common.DXE_DRIVER]
+  BaseLib 
+  UefiLib
+  #HobLib
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+
+[sources]
+  AmdMemFp7Dxe.c
+
+[Guids]
+  #gAmdMemoryInitCompleteHobGuid    #Consume
+  #gEfiHobListGuid                  #Consume
+  
+[Pcd]
+
+[Protocols]
+
+[Depex]
+  gAmdMemFp7DxeDepexProtocolGuid
+

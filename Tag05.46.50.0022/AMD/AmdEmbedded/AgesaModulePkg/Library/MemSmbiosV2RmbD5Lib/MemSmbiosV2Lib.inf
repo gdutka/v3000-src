@@ -1,0 +1,31 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdMemSmbiosV2RmbD5Lib
+  FILE_GUID                      = D0455011-D4AE-47F0-9B1B-DC33A2549587
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdMemSmbiosV2Lib
+
+[sources.common]
+  MemSmbiosV2Lib.c
+  MemSmbios320V2Lib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdHeapLib
+  AmdCalloutLib
+  ApobCommonServiceLib
+
+[Pcd]
+
+

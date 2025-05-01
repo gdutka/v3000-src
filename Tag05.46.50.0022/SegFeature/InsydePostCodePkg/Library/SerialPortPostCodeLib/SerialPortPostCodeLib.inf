@@ -1,0 +1,78 @@
+## @file
+#  The SerialPortPostCodeLib instance
+#
+#******************************************************************************
+#* Copyright (c) 2016 - 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = SerialPortPostCodeLib
+  FILE_GUID                 = DE7A3D25-9723-4ca4-B0E4-BCC572860CAB
+  MODULE_TYPE               = BASE
+  VERSION_STRING            = 1.0
+  LIBRARY_CLASS             = SerialPortPostCodeLib
+
+[Sources]
+  SerialPortPostCodeLib.c
+  SerialPortFunc.c
+  SmmTimeStamp.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePostCodePkg/InsydePostCodePkg.dec
+  SegFeaturePkg/SegFeaturePkg.dec
+
+[LibraryClasses]  
+  PrintLib
+  PcdLib
+  IoLib
+  PlatformHookLib
+  PostCodeMiscLib
+  BaseTimeStampLib
+  CmosLib
+  DebugLib
+  HobLib
+  TimerLib
+  BaseMemoryLib
+
+[Guids]
+  gEfiHobListGuid
+  gPerformanceCounterReadyHobGuid
+
+[Protocols]
+  gEfiSmmReadyToLockProtocolGuid
+
+[FeaturePcd]
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeTimeStampSupported
+
+[Pcd]
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeSerialPortRegBase
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeSerialPortUseMmio
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialUseHardwareFlowControl
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialDetectCable
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialBaudRate
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialLineControl
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialFifoControl
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialRegisterStride
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSerialClockRate
+  
+  ##
+  ## SmmTimeStamp consumes
+  ##
+  gInsydeTokenSpaceGuid.PcdRealTimeClockInitYear
+  gInsydeTokenSpaceGuid.PcdRealTimeClockInitMonth
+  gInsydeTokenSpaceGuid.PcdRealTimeClockInitDay
+  gInsydeTokenSpaceGuid.PcdRealTimeClockInitHour
+  gInsydeTokenSpaceGuid.PcdRealTimeClockInitMinute
+  gInsydeTokenSpaceGuid.PcdRealTimeClockInitSecond
+  gH2OPostCodePkgTokenSpaceGuid.PcdPerformanceCounterReadyTick
+

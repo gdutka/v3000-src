@@ -1,0 +1,78 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPspPeiV2Rmb
+  FILE_GUID                      = e34ae77d-3314-43f6-b41c-6f19f3f1d6a8
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdPspPeiV2DriverEntry
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  PeiServicesLib
+  AmdBaseLib
+  AmdPspMboxLibV2
+  AmdPspBaseLibV2
+  AmdPspApobLib
+  AmdErrorLogLib
+  FchBaseLib
+  AmdCapsuleLib
+  HobLib
+  AmdPspPsbFusingLib
+  AmdPspHstiStateLib
+  AmdStbLib
+  SmnAccessLib
+  FabricResourceManagerLib
+  AmdSocBaseLib
+
+[Sources]
+  AmdPspPeiV2.c
+
+[Guids]
+  gAmdCapsuleStatusHobGuid
+  gEfiAmdAgesaSpecificWarmResetGuid
+
+[Ppis]
+  gEfiPeiMemoryDiscoveredPpiGuid  #Notify
+  gAmdPspCommonServicePpiGuid     #Publish
+  gAmdErrorLogPpiGuid             #Consume
+  gAmdErrorLogServicePpiGuid      #Consume
+  gAmdPspRecoveryDetectPpiGuid    #Publish
+  gAmdFabricTopologyServices2PpiGuid   #CONSUME
+  gEfiEndOfPeiSignalPpiGuid       #Notify
+  gAmdNbioSmuServicesPpiGuid         #Consume
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAntiRollbackLateSplFuse
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAntiRollbackInitialSpl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAutoPsb
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspPsbDisable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspRecoveryDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbEnable
+
+[Depex]
+  gAmdPspPeiV2RmbDepexPpiGuid AND
+  gAmdFabricTopologyServices2PpiGuid AND
+  gAmdNbioSmuServicesPpiGuid
+
+
+

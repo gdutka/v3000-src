@@ -1,0 +1,154 @@
+GopInfo: AMD GOP Release Driver Rev.3.2.8.Sep 30 2021.02:08:01
+==================================================================
+1. This is internal un-sign Pei/Dxe Gop driver for pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit 7a624416d611684afbad83999d16382222cb2f9b
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld417-202109300615.zip
+4. Changes list: 
+   SWDEV-3 - add more debug messages in gop for display issue tracking
+   SWDEV-3 - add gpu pci device ID debug message output
+   SWDEV-3 - optimize DPIA instance detect logic
+   SWDEV-3 - add dump atom tables support
+   SWDEV-3 - add extend EDID block support part 1
+   SWDEV-3 - Support both USB4 and DP-Alt mode per USB-C connector
+   SWDEV-3 - Support both USB4 and DP-Alt mode per USB-C connector part2
+   SWDEV-3 - support extend EDID blocks for edp panel
+   SWDEV-3 - support extend EDID blocks for edp panel part2
+   SWDEV-3 - add RequestDMCUBService debug messages
+   SWDEV-3 - fix display ID EDID edp panel shift issue
+   SWDEV-3 - Adding DisplayID different detail timing type support
+   SWDEV-3 - trigger udk2018 jenkins CI for Gop 3.2.8 release
+
+GopInfo: AMD GOP Release Driver Rev.3.2.7.Aug  2 2021.01:40:34
+==================================================================
+1. This is un-sign Pei/Dxe Gop driver for pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit e516992edeb77d3423532d09539eae7b008547d1
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld391-202108020552.zip
+4. Changes list: 
+   SWDEV-3 - move lsdma runtime reg access to data table
+   SWDEV-3 - move lsdma init action to command table
+   DERMBE-990 [RMB_B0_USB4] GOP Setting default display to DPIA-2 which doesn't have valid edid data
+   SWDEV-3 - optimize adding delay for some panel HPD pulse when HBR2 case
+
+GopInfo: AMD GOP Debug Driver Rev.3.2.6.Jul 28 2021.11:47:28
+==================================================================
+1. This is un-sign Pei/Dxe Gop driver for pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit c6572fbc9a2b66c604c75b22a5a1b1d360a3156a
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld386-202107270950.zip
+4. Changes list: 
+   SWDEV-3 - Gop 3.2.4 for RMB B0 DPIA change
+   SWDEV-295847 - gop: RMB FP7: Update data structure by VBIOS for UMA Carveout Size Control via UI rev.0001 (RMBT-CR-119)
+   SWDEV-3 - add delay for some panel HPD pulse when HBR2 case
+
+GopInfo AMD GOP Release Driver Rev.3.2.3.Jul  7 2021.02:17:11
+==================================================================
+1. This is un-sign Pei/Dxe Gop driver for pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit 880121889ce0c4bf1e0d8414c4ad0469875788b2
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld380-202107070635.zip
+4. Changes list: 
+   SWDEV-3 - switch PIO in videoToVideo case since RB mode overlapped
+   SWDEV-3 - gop:sync the atomfirmware.h header file to staging revision 253
+   SWDEV-3 - sync latest atomfirmware.h and dcn31 changes
+   SWDEV-3 - add debug messages in gop for non-null rdp
+
+GopInfo AMD GOP Debug Driver Rev.3.2.5. 
+==================================================================
+1. This is un-sign Pei/Dxe Gop driver for pre-OS use.
+2. Source code is in git repo master branch:  
+   ssh://gerritgit/amd/ec/uefigop/udk2018
+   commit f64995fa16c0e731e59959e598ab73f709e383da (HEAD -> master, origin/master, origin/HEAD)
+   Date:   Tue Jul 20 16:02:08 2021 -0400
+   change-Id: I27748e66f658233508f62e7c3f4820c05a2a8a28
+3. Binary is in https://mkmartifactory.amd.com/artifactory/amd-gop-Bld383-202107202023.zip
+4. Change lists:
+   SWDEV-295847 - gop: RMB FP7: Update data structure by VBIOS for UMA Carveout Size Control via UI rev.0001 (RMBT-CR-119)
+
+
+GopInfo AMD GOP Debug Driver Rev.3.2.4.Jul 16 2021.16:38:49
+==================================================================
+1. This is un-sign Pei/Dxe Gop driver for pre-OS use.
+2. UDC Debug version for RMB B0 DPIA bringup.
+
+
+GopInfo AMD GOP Release Driver Rev.3.2.3.Jul  7 2021.02:17:11
+==================================================================
+1. This is un-sign Pei/Dxe Gop driver for pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit 880121889ce0c4bf1e0d8414c4ad0469875788b2
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld380-202107070635.zip
+4. Changes list: 
+   SWDEV-3 - switch PIO in videoToVideo case since RB mode overlapped
+   SWDEV-3 - gop:sync the atomfirmware.h header file to staging revision 253
+   SWDEV-3 - sync latest atomfirmware.h and dcn31 changes
+   SWDEV-3 - add debug messages in gop for non-null rdp
+
+GopInfo AMD GOP Release Driver Rev.3.2.1.May 12 2021.02:16:52
+==================================================================
+1. This is un-signed Pei/Dxe Gop driver for RMB pre-OS use.
+2. Source code is in git repo master branch: 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  commit 5362a34d0eaac56bcc01a1f16152d933c09c79d7
+3. Binary is in https://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld356-202105120618.zip
+4. Changes/Bug fix: 
+   a) revert change of display_phy_tuning_info table issue for header missing
+   b) PLAT-75939 eDP is not working on DP1 port with eDP Nova.
+
+
+GopInfo AMD GOP Release Driver Rev.3.2.0.Apr 20 2021.00:22:02
+==================================================================
+1. This is not a Signing Certified Gop Driver for RMB pre-OS use.
+2. The source code to build this GOP driver is based on 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  @ Change-Id: I3882871477935e64547ec904ad24d1125ada679c
+3. Artifactory repo: http://mkmartifactory.amd.com/artifactory/gop-local/bin/amd-gop-Bld344-202104200423.zip
+4. Add second edp report support, but vbl or dmcub need to change as well to light up second edp.
+5. Remove I2C dump and move memory dump into start in case page fault in multiple support call.
+
+
+GopInfo AMD ver. 3.2.0 Generate Info for file AMDRMBGenericGop.efi: (Gop Driver)
+==========================================
+
+1. This is not a Signing Certified Gop Driver for RMB pre-OS use.
+2. The source code to build this GOP driver is based on 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  @ Change-Id: Ib6d9f0c49ac6e84b383347332e7fa716c586108b
+3. update LcdInfo_UpdateEDPPWMParam function for sbios RequestedPWMFreq equal 0
+
+GopInfo AMD ver. 3.0.3 Generate Info for file AMDRMBGenericGop.efi: (Gop Driver)
+==========================================
+
+1. This is not a Signing Certified Gop Driver for RMB pre-OS use.
+2. The source code to build this GOP driver is based on 
+   ssh://gerritgit/amd/ec/uefigop/udk2018  @ Change-Id: I5095fdf8d5f0285cfada3634d33fce48ddf510f2
+3. This is a debug version with the DMCUB FW call dump
+4. Support the DisplayPhySettings table copy from Sbios, support MXM so that give all connector control to SBIOS.
+
+
+GopInfo AMD ver. 3.0.2 Generate Info for file AMDRMBGenericGop.efi: (Gop Driver)
+==========================================
+
+1. This is not a Signing Certified Gop Driver for RMB pre-OS use.
+2. The source code to build this GOP driver is based on //depot/stg/atombios/bios/TestUtil/udk2018/ @CL2219308
+3. This is a debug version with the DMCUB FW call dump
+4. Support the DisplayPhySettings table copy from Sbios.
+
+
+GopInfo AMD ver. 3.0.1 Generate Info for file AMDRMBGenericGop.efi: (Gop Driver)
+==========================================
+
+1. This is not a Signing Certified Gop Driver for RMB pre-OS use.
+2. The source code to build this GOP driver is based on UDK2018 CL2172107, which is based on udk2018 git hash 
+   commit fe2f40db23185bf2c0d41c24d423d3eecd933a94 (HEAD -> master, origin/master, origin/HEAD)
+3. This is a debug version with the DMCUB FW call dump
+4. Increase HDMI max clock and PLAT-68097 add more hardcode value for pemu.
+
+
+GopInfo AMD ver. 3.0. Generate Info for file AMDRMBGenericGop.efi: (Gop Driver)
+==========================================
+
+1. This is not a Signing Certified Gop Driver for RMB pre-OS use.
+2. The source code to build this GOP driver is based on UDK2018 CL2165531
+3. This GOP supports DMCUB FW with eDP and PHY enabled.
+4. This is a debug version with the DMCUB FW call dump
+
+

@@ -1,0 +1,60 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION               = 0x00010006
+  BASE_NAME                 = AmdPspIntrusionDetectionDxe
+  FILE_GUID                 = 33D6ABF9-6CFB-4FFE-9E68-6FC63FE60252
+  MODULE_TYPE               = DXE_DRIVER
+  PI_SPECIFICATION_VERSION  = 0x0001000A
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = AmdPspIntrusionDetectionDxeEntry
+
+[Sources]
+  AmdPspIntrusionDetectionDxe.c
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  UefiRuntimeServicesTableLib
+  MemoryAllocationLib
+  AmdPspMboxLibV2
+  PcdLib
+  UefiBootServicesTableLib
+  AmdTpm2CommandLib
+  TimerLib
+  IdsLib
+
+[Guids]
+  gEfiEndOfDxeEventGroupGuid
+
+[Protocols]
+  gEfiTcg2ProtocolGuid
+  gAmdPspIntrusionLogProtocolGuid                 #publish
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSmmCommunicationAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspIntrusionDetectionEnabled
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspLogEventIfIntrusionDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspClearTpmIfIntrusionDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspPowerOffSystemIfIntrusionDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  SecurityPkg/SecurityPkg.dec
+
+[Depex]
+  gEfiVariableArchProtocolGuid AND
+  gEfiVariableWriteArchProtocolGuid
+
+

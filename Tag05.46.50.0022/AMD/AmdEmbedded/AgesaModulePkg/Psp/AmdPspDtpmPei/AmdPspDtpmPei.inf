@@ -1,0 +1,41 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPspDtpmPei
+  FILE_GUID                      = 1B06C65D-466E-35C9-154D-4D91BC4B9F8F
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdPspDtpmPeiDriverEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  AmdPspMboxLibV2
+
+[Sources]
+  AmdPspDtpmPei.c
+
+[Guids]
+
+
+[Protocols]
+
+[Ppis]
+  gAmdPspDtpmPpiGuid            #Publish
+  gAmdPspCommonServicePpiGuid   #Consume
+
+[Pcd]
+
+[Depex]
+  gAmdPspCommonServicePpiGuid
+

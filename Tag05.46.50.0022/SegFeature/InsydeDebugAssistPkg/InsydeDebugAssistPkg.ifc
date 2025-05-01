@@ -1,0 +1,36 @@
+<Features>
+  <!-- Trunk feature -->
+  <Feature>
+    <Name>InsydeDebugAssistPkg</Name>
+    <Root>InsydeDebugAssistPkg</Root>
+    <Version>05.41.44</Version>
+    <Revision>2</Revision>
+    <Repository>
+      <Type>Svn</Type>
+      <Url>http://svn-tc.insydesw.com/H2O-SEG-Feature/InsydeDebugAssistPkg</Url>
+    </Repository>
+    <Package>
+      <SourceDir>.</SourceDir>
+    </Package>
+    <File>
+      <SourcePath>InsydeDebugAssistPkg.ifc</SourcePath>
+    </File>
+  </Feature>
+  <!-- Version 0.0.0.1 feature -->
+  <Feature>
+    <Name>InsydeDebugAssistPkg</Name>
+    <Root>InsydeDebugAssistPkg</Root>
+    <Version>0.0.0.1</Version>
+    <Revision>2</Revision>
+    <Repository>
+      <Type>Svn</Type>
+      <Url>http://svn-tc.insydesw.com/H2O-SEG-Feature/InsydeDebugAssistPkg</Url>
+    </Repository>
+    <Package>
+      <SourceDir>.</SourceDir>
+    </Package>
+    <File>
+      <SourcePath>InsydeDebugAssistPkg.ifc</SourcePath>
+    </File>
+  </Feature>
+</Features>

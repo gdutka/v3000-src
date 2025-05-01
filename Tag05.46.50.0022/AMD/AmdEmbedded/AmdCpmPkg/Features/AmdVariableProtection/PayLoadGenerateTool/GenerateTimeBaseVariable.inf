@@ -1,0 +1,46 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2022-2023 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GenerateTimeBaseVariable
+  FILE_GUID                      = EDAF7B16-E15D-4A64-9398-E6CAC9F026AF
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = GenerateTimeBaseVariableUefiMain
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 EBC
+#
+
+[Sources]
+  GenerateTimeBaseVariable.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  CryptoPkg/CryptoPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  PcdLib
+  BaseCryptLib
+
+[Guids]
+  gEfiCertPkcs7Guid
+
+
+[Pcd]
+
+
+[FeaturePcd]
+
+[Pcd]
+
+

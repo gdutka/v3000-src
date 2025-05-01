@@ -1,0 +1,53 @@
+## @file
+#  Component description file for PciPlatformDxe driver.
+#
+#******************************************************************************
+#* Copyright (c) 2014 - 2017, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ASM1061Dxe
+  FILE_GUID                      = 79ec4f80-4043-4c57-bad2-35a18a041cd8
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = ASM1061DxeEntryPoint
+
+[Sources]
+  ASM1061Dxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  $(PROJECT_PKG)/Project.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  IoLib
+  MemoryAllocationLib
+  PciExpressLib
+  S3BootScriptLib
+  PcdLib
+  TimerLib
+  
+[Guids]
+  gSystemConfigurationGuid
+
+[Protocols]
+  gEfiPciHostBridgeEndResourceAllocationNotifyGuid            #CONSUME
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gInsydeTokenSpaceGuid.PcdAhciPcieBridgeAddress
+
+[Depex]
+  TRUE

@@ -1,0 +1,28 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = ApcbChecksumLibV3
+  FILE_GUID                      = 90B2AD55-8DD3-4B8D-A28F-56FB5A3C2CF5
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ApcbChecksumLibV3 | DXE_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER DXE_CORE SMM_CORE UEFI_DRIVER
+
+[Sources.common]
+  ApcbChecksumLibV3.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  AmdSocBaseLib
+
+[Depex]
+  TRUE
+
+

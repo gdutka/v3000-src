@@ -1,0 +1,57 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = KvmPlatformDxe
+  FILE_GUID                      = 67329203-BAA6-49CA-B3C2-3784EB517017
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = KvmPlatformDxeEntryPoint
+
+[Sources]
+  KvmPlatformDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCommonPkg/AmdCommonPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  UefiLib
+  DebugLib
+  MpmMboxLib
+  PcdLib
+
+[Protocols]
+  gEfiPciIoProtocolGuid
+  gAmdPspKvmServiceProtocolGuid
+  gAmdMpmKvmInitializedProtocolGuid
+  gAmdAfterConsoleEventProtocolGuid
+  gEfiResetNotificationProtocolGuid
+  gAmdMpmTcrInitializedProtocolGuid
+  gEfiSmbiosProtocolGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWiredKvmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessKvmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessTcrEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+
+[Guids]
+  gEfiGlobalVariableGuid
+
+[Depex]
+  gAmdMpmDepexProtocolGuid
+

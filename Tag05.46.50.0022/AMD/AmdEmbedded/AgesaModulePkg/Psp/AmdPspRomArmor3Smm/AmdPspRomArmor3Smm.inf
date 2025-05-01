@@ -1,0 +1,69 @@
+ #****************************************************************************
+ #
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+ #******************************************************************************
+
+[Defines]
+  INF_VERSION               = 0x00010019
+  BASE_NAME                 = AmdPspRomArmor3Smm
+  FILE_GUID                 = 0AE01967-8B3B-4572-85BD-EFD5C0F251EB
+  MODULE_TYPE               = DXE_SMM_DRIVER
+  VERSION_STRING            = 0.1
+  PI_SPECIFICATION_VERSION  = 0x0001000A
+  ENTRY_POINT               = AmdPspRomArmor3SmmEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  SmmMemLib
+  SmmServicesTableLib
+  BaseLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  AmdPspMboxLibV2
+  IdsLib
+  PcdLib
+  HobLib
+  FchSpiAccessLib
+  S3BootScriptLib
+  AmdHeapLib
+  AmdPspDxeSmmBufLib
+  AmdPspBaseLibV2
+
+[Sources]
+  AmdPspRomArmor3Smm.c
+  AmdPspRomArmor3Smm.h
+
+[Protocols]
+  gEfiSpiSmmNorFlashProtocolGuid             ## PROCUDES
+  gPspMboxSmmBufferAddressProtocolGuid
+  gFchSmmSwDispatch2ProtocolGuid             ## CONSUME
+  gPspFlashAccSmmCommReadyProtocolGuid       ## PROCUDES
+  gFchSmmMiscDispatchProtocolGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspRomArmorSelection        ## CONSUMES
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspRomArmorSpiConfigRegLock ## CONSUMES
+
+[FixedPcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchOemBeforePciRestoreSwSmi      ## CONSUMES
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPsp64KFlashEraseSupportForRomArmor
+
+[Guids]
+  gPspSmmCommHandleGuid                      ## CONSUMES
+
+[Depex]
+  gPspMboxSmmBufferAddressProtocolGuid AND
+  gEfiSmmConfigurationProtocolGuid
+
+[UserExtensions.TianoCore."ExtraFiles"]
+  AmdPspRomArmor3.uni

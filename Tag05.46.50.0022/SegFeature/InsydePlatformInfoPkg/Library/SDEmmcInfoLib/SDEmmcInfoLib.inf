@@ -1,0 +1,37 @@
+## @file
+#  Component description file of SDEmmcInfoLib.
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SDEmmcInfoLib
+  FILE_GUID                      = 1693dab3-d3be-4c83-af99-d9eafabc7a5b
+  MODULE_TYPE                    = UEFI_DRIVER
+  LIBRARY_CLASS                  = SDEmmcInfoLib
+
+[Sources]
+  SDEmmcInfoLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  PrintLib
+  SDEmmcInfoLib

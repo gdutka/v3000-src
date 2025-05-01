@@ -1,0 +1,93 @@
+/** @file
+
+  VFR file for VFR app legacy bios settings
+
+;******************************************************************************
+;* Copyright (c) 2017, Insyde Software Corporation. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+
+  form
+    formid = VFR_APP_FORM_LEGACY_BIOS,
+    title  = STRING_TOKEN(STR_FORM_LEGACY_BIOS_SETTINGS_TITLE);
+
+    subtitle
+      text = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_SETTING);
+
+    numeric
+      varid       = VfrAppVar.FloppyBootDevNum,
+      prompt      = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_FLOPPY_PROMPT),
+      help        = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_FLOPPY_HELP),
+      minimum     = 0,
+      maximum     = 100,
+      step        = 1,
+      default     = 2,
+    endnumeric;
+
+    numeric
+      varid       = VfrAppVar.HddBootDevNum,
+      prompt      = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_HDD_PROMPT),
+      help        = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_HDD_HELP),
+      minimum     = 0,
+      maximum     = 100,
+      step        = 1,
+      default     = 2,
+    endnumeric;
+
+    numeric
+      varid       = VfrAppVar.CdRomBootDevNum,
+      prompt      = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_CDROM_PROMPT),
+      help        = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_CDROM_HELP),
+      minimum     = 0,
+      maximum     = 100,
+      step        = 1,
+      default     = 2,
+    endnumeric;
+
+    numeric
+      varid       = VfrAppVar.PcmciaBootDevNum,
+      prompt      = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_PCMCIA_PROMPT),
+      help        = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_PCMCIA_HELP),
+      minimum     = 0,
+      maximum     = 100,
+      step        = 1,
+      default     = 2,
+    endnumeric;
+
+    numeric
+      varid       = VfrAppVar.UsbBootDevNum,
+      prompt      = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_USB_PROMPT),
+      help        = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_USB_HELP),
+      minimum     = 0,
+      maximum     = 100,
+      step        = 1,
+      default     = 2,
+    endnumeric;
+
+    numeric
+      varid       = VfrAppVar.NetworkBootDevNum,
+      prompt      = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_NETWORK_PROMPT),
+      help        = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_NETWORK_HELP),
+      minimum     = 0,
+      maximum     = 100,
+      step        = 1,
+      default     = 2,
+    endnumeric;
+
+    numeric
+      varid       = VfrAppVar.BevBootDevNum,
+      prompt      = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_BEV_PROMPT),
+      help        = STRING_TOKEN(STR_FORM_LEGACY_BOOT_DEVICE_NUMBER_BEV_HELP),
+      minimum     = 0,
+      maximum     = 100,
+      step        = 1,
+      default     = 2,
+    endnumeric;
+  endform;
+

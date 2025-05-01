@@ -1,0 +1,422 @@
+## @file
+#  File to declare variable default information
+#
+#******************************************************************************
+#* Copyright (c) 2015 - 2019, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+#
+# This file is ini format and Comments are prefixed with a # and continue to the end of the line.
+#
+
+!include InsydeModulePkg/Package.var
+!include CannonLakeChipsetPkg/Package.var
+#
+# Optional [Guids] section. uses to declare guid which used in this file.
+#
+[Guids]
+  gSetupVariableGuid    = {0xEC87D643, 0xEBA4, 0x4BB5, {0xA1, 0xE5, 0x3F, 0x3E, 0x36, 0xB2, 0x0D, 0xA9}}
+  gSaSetupVariableGuid  = {0x72c5e28c, 0x7783, 0x43a1, {0x87, 0x67, 0xfa, 0xd7, 0x3f, 0xcc, 0xaf, 0xa4}}
+  gCpuSetupVariableGuid = {0xb08f97ff, 0xe6e8, 0x4193, {0xa9, 0x97, 0x5e, 0x9e, 0x9b, 0xa,  0xdb, 0x32}}
+  gPchSetupVariableGuid = {0x4570b7f1, 0xade8, 0x4943, {0x8d, 0xc3, 0x40, 0x64, 0x72, 0x84, 0x23, 0x84}}
+  gMeSetupVariableGuid  = {0x5432122d, 0xd034, 0x49d2, {0xa6, 0xde, 0x65, 0xa8, 0x29, 0xeb, 0x4c, 0x74}}
+  gVfrAppVariableGuid   = {0xA04A27F4, 0xDF00, 0x1234, {0xB5, 0x52, 0x39, 0x51, 0x13, 0x02, 0x11, 0x3F}}
+
+#
+# The [Packages] section lists all of the package declaration files that contain
+# GUIDs or PCDs that are used by this variable declaration file.
+#
+[Packages]
+  CannonLakeChipsetPkg/CannonLakeChipsetPkg.dec
+
+#
+# Below can write Var section to introduce a single UEFI variable default value for the specified
+# default stores and specified SKU.
+#
+# Section format is [Var.VariableGUID.VariableName] for example [Var.gEfiFileInfoGuid.MyTestVar]
+#
+
+###########################################################################
+# CoffeeLake [SkuIds]
+#  0|DEFAULT
+[Var.gSetupVariableGuid.Setup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0
+  Struct = SETUP_DATA   
+  Data = offset=0x00fe               | L"Hid0"      # offset 0254 MipiCam_Link0_UserHid[9], minsize  = 6, maxsize  = 8
+         offset=0x0111               | L"A16V04E"   # offset 0273 MipiCam_Link0_ModuleName[16], minsize  = 1, maxsize  = 15
+         offset=0x016b               | L"Hid1"      # offset 0363 MipiCam_Link1_UserHid[9], minsize  = 6, maxsize  = 8
+         offset=0x017e               | L"6BF115T2"  # offset 0382 MipiCam_Link1_ModuleName[16], minsize  = 1, maxsize  = 15
+         offset=0x01eb               | L"D8V10L"    # offset 0491 MipiCam_Link2_ModuleName[16], minsize  = 1, maxsize  = 15
+         offset=0x01d8               | L"Hid2"      # offset 0472 MipiCam_Link2_UserHid[9], minsize  = 6, maxsize  = 8
+         offset=0x0245               | L"Hid3"      # offset 0581 MipiCam_Link3_UserHid[9], minsize  = 6, maxsize  = 8
+         offset=0x0258               | L"6BF115T2"  # offset 0600 MipiCam_Link3_ModuleName[16], minsize  = 1, maxsize  = 15
+         name=CpuTemp                | (72)         # offset 0944 CpuTemp
+         name=Rtd3WWAN               | (1)          # offset 1098 Rtd3WWAN
+         name=SdevNumberOfSensors[1] | (2)          # offset 1376 SdevNumberOfSensors[1]
+         name=SdevNumberOfSensors[2] | (0)          # offset 1378 SdevNumberOfSensors[2]
+         name=SdevNumberOfSensors[3] | (1)          # offset 1380 SdevNumberOfSensors[3]
+         name=SdevNumberOfSensors[4] | (1)          # offset 1382 SdevNumberOfSensors[4]
+         name=SdevSensorEntry1[1]    | (1)          # offset 1386 SdevSensorEntry1[1]
+         name=SdevSensorEntry1[2]    | (0)          # offset 1388 SdevSensorEntry1[2]
+         name=SdevSensorEntry1[3]    | (1)          # offset 1390 SdevSensorEntry1[3]
+         name=SdevSensorEntry1[4]    | (1)          # offset 1392 SdevSensorEntry1[4]
+         name=SdevSensorEntry2[1]    | (0x85)       # offset 1396 SdevSensorEntry2[1]
+         name=SdevSensorEntry2[2]    | (0)          # offset 1396 SdevSensorEntry2[2]
+         name=SdevSensorEntry2[3]    | (0)          # offset 1400 SdevSensorEntry2[3]
+         name=SdevSensorEntry2[4]    | (0)          # offset 1402 SdevSensorEntry2[4]
+
+[Var.gSaSetupVariableGuid.SaSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0
+  Struct = SA_SETUP  
+  Data = name=ApertureSize     | (1)    # offset 0060 ApertureSize
+         name=GtPsmiRegionSize | (0)    # offset 0062 GtPsmiRegionSize
+         name=RaplLim1Pwr      | (0)    # offset 0402 RaplLim1Pwr
+         name=RaplLim1WindX    | (0)    # offset 0399 RaplLim1WindX
+         name=RaplLim1WindY    | (0)    # offset 0400 RaplLim1WindY
+
+[Var.gCpuSetupVariableGuid.CpuSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0
+  Struct = CPU_SETUP  
+  Data = name=CstateLatencyControl1TimeUnit | (2)       # Offset 0071 CstateLatencyControl1TimeUnit
+         name=CstateLatencyControl2TimeUnit | (2)       # Offset 0072 CstateLatencyControl2TimeUnit   
+         name=CstateLatencyControl3TimeUnit | (0x02)    # offset 0073 CstateLatencyControl3TimeUnit  
+         name=CstateLatencyControl4TimeUnit | (0x02)    # offset 0074 CstateLatencyControl4TimeUnit  
+         name=CstateLatencyControl5TimeUnit | (0x02)    # offset 0075 CstateLatencyControl5TimeUnit                     
+         name=CstateLatencyControl1Irtl     | (0x76)    # Offset 0076 CstateLatencyControl1Irtl
+         name=CstateLatencyControl2Irtl     | (0x94)    # offset 0078 CstateLatencyControl2Irtl          
+         name=CstateLatencyControl3Irtl     | (0xFA)    # offset 0080 CstateLatencyControl3Irtl            
+         name=CstateLatencyControl4Irtl     | (0x14C)   # offset 0082 CstateLatencyControl4Irtl            
+         name=CstateLatencyControl5Irtl     | (0x3F2)   # offset 0084 CstateLatencyControl5Irtl            
+         name=MaxPrmrrSize                  | (0)       # offset 0227 MaxPrmrrSize
+         name=EpocFclkFreq                  | (1)       # offset 0257 EpocFclkFreq 
+         name=TdcEnable[0]                  | (1)       # offset 0377 TdcEnable[0]
+         name=TdcEnable[1]                  | (1)       # offset 0378 TdcEnable[1]
+         name=TdcEnable[3]                  | (1)       # offset 0380 TdcEnable[2]
+         name=TdcEnable[4]                  | (1)       # offset 0381 TdcEnable[3]
+                  
+[Var.gPchSetupVariableGuid.PchSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0
+  Struct = PCH_SETUP  
+  Data = name=DitoVal[2] | (625) # offset 0164 DitoVal[2]
+
+#--------------------------------------------------------------------------
+#  0x10|BoardIdCoffeeLakeULpddr3CpuBrd
+[Var.gSetupVariableGuid.Setup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x10
+  Struct = SETUP_DATA   
+  Data = name=PchI2cSensorDevicePort[0] | (1)    # offset 0689 PchI2cSensorDevicePort[SERIAL_IO_I2C0],default = SERIAL_IO_I2C_TOUCHPAD     1
+         name=PchI2cSensorDevicePort[1] | (2)    # offset 0690 PchI2cSensorDevicePort[SERIAL_IO_I2C1],default = SERIAL_IO_I2C_TOUCHPANEL   2
+         name=PchSpiSensorDevicePort[7] | (1)    # offset 0714 PchSpiSensorDevicePort[SERIAL_IO_SPI1],default = SERIAL_IO_SPI_FINGERPRINT  1
+         name=TbtSetupFormSupport       | (1)    # offset 1277 TbtSetupFormSupport
+
+[Var.gSaSetupVariableGuid.SaSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x10
+
+[Var.gCpuSetupVariableGuid.CpuSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x10
+  Struct = CPU_SETUP  
+  Data = name=BiosGuard            | (0)    # offset 0219 BiosGuard
+         name=EpocFclkFreq         | (1)    # offset 0257 EpocFclkFreq
+         name=EnergyEfficientTurbo | (1)    # offset 0431 EnergyEfficientTurbo
+                                            # EnergyEfficientTurbo = 0 if CPU_SETUP_VOLATILE_DATA.CpuFamilyModel == CpuCflDtHalo
+                                            # and CPU_SETUP_VOLATILE_DATA.CpuDid == V_SA_DEVICE_ID_CFL_DT_1
+
+[Var.gPchSetupVariableGuid.PchSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x10
+  Struct = PCH_SETUP    
+  Data = name=PchBiosLock         | (1)    # offset 0023 PchBiosLock = 0 if BiosGuard Disabled (refer BIOS_GUARD_SUPPORT)
+         name=PchScsSdCardEnabled | (0)    # offset 1664 PchScsSdCardEnabled
+
+[Var.gMeSetupVariableGuid.MeSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x10
+
+#--------------------------------------------------------------------------
+#  0x12|BoardIdCoffeeLakeUDdr4
+[Var.gSetupVariableGuid.Setup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x12
+  Struct = SETUP_DATA   
+  Data = name=PchI2cSensorDevicePort[0] | (1)    # offset 0689 PchI2cSensorDevicePort[SERIAL_IO_I2C0],default = SERIAL_IO_I2C_TOUCHPAD     1
+         name=PchI2cSensorDevicePort[1] | (2)    # offset 0690 PchI2cSensorDevicePort[SERIAL_IO_I2C1],default = SERIAL_IO_I2C_TOUCHPANEL   2
+         name=PchSpiSensorDevicePort[7] | (1)    # offset 0714 PchSpiSensorDevicePort[SERIAL_IO_SPI1],default = SERIAL_IO_SPI_FINGERPRINT  1
+         name=TbtSetupFormSupport       | (1)    # offset 1277 TbtSetupFormSupport
+
+[Var.gSaSetupVariableGuid.SaSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x12
+
+[Var.gCpuSetupVariableGuid.CpuSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x12
+  Struct = CPU_SETUP  
+  Data = name=EpocFclkFreq         | (1)    # offset 0257 EpocFclkFreq
+         name=EnergyEfficientTurbo | (1)    # offset 0431 EnergyEfficientTurbo
+                                            # EnergyEfficientTurbo = 0 if CPU_SETUP_VOLATILE_DATA.CpuFamilyModel == CpuCflDtHalo
+                                            # and CPU_SETUP_VOLATILE_DATA.CpuDid == V_SA_DEVICE_ID_CFL_DT_1
+
+[Var.gPchSetupVariableGuid.PchSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x12
+  Struct = PCH_SETUP    
+  Data = name=PchBiosLock         | (1)    # offset 0023 PchBiosLock = 0 if BiosGuard Disabled (refer BIOS_GUARD_SUPPORT)
+         name=PchScsSdCardEnabled | (0)    # offset 1664 PchScsSdCardEnabled
+
+[Var.gMeSetupVariableGuid.MeSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x12
+
+#--------------------------------------------------------------------------
+#  0x16|BoardIdCoffeeLakeHDdr4
+[Var.gSetupVariableGuid.Setup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x16
+  Struct = SETUP_DATA   
+  Data = name=PepI2c4                    | (0)    # offset 0049 PepI2c4
+         name=PepEmmc                    | (0)    # offset 0054 PepEmmc
+         name=PchI2cSensorDevicePort[2]  | (1)    # offset 0691 PchI2cSensorDevicePort[SERIAL_IO_I2C2],default = SERIAL_IO_I2C_TOUCHPAD     1
+         name=PchI2cSensorDevicePort[3]  | (2)    # offset 0692 PchI2cSensorDevicePort[SERIAL_IO_I2C3],default = SERIAL_IO_I2C_TOUCHPANEL   2
+         name=PchI2cTouchPadType         | (6)    # offset 0695 PchI2cTouchPadType
+         name=PchI2cTouchPadIrqMode      | (0)    # offset 0696 PchI2cTouchPadIrqMode
+         name=PchSpiSensorDevicePort[8]  | (1)    # offset 0715 PchSpiSensorDevicePort[SERIAL_IO_SPI2],default = SERIAL_IO_SPI_FINGERPRINT  1
+         name=PchSpiFingerPrintType      | (6)    # offset 0719 PchSpiFingerPrintType
+         name=Rtd3ZpoddSupport           | (1)    # offset 1096 Rtd3ZpoddSupport
+         name=TbtSetupFormSupport        | (1)    # offset 1277 TbtSetupFormSupport
+         name=TbtSetupDTbtPegTypeSupport | (1)    # offset 1278 TbtSetupDTbtPegTypeSupport
+
+[Var.gSaSetupVariableGuid.SaSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x16
+
+[Var.gCpuSetupVariableGuid.CpuSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x16
+  Struct = CPU_SETUP  
+  Data = name=EpocFclkFreq         | (1)    # offset 0257 EpocFclkFreq
+         name=EnergyEfficientTurbo | (1)    # offset 0431 EnergyEfficientTurbo
+                                            # EnergyEfficientTurbo = 0 if CPU_SETUP_VOLATILE_DATA.CpuFamilyModel == CpuCflDtHalo
+                                            # and CPU_SETUP_VOLATILE_DATA.CpuDid == V_SA_DEVICE_ID_CFL_DT_1
+
+[Var.gPchSetupVariableGuid.PchSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x16
+  Struct = PCH_SETUP  
+  Data = name=PchBiosLock |  (1)    # offset 0023 PchBiosLock = 0 if BiosGuard Disabled (refer BIOS_GUARD_SUPPORT)
+
+[Var.gMeSetupVariableGuid.MeSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x16
+
+#--------------------------------------------------------------------------
+#  0x17|BoardIdCoffeeLakeHDdr4mDvp
+[Var.gSetupVariableGuid.Setup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x17
+  Struct = SETUP_DATA   
+  Data = name=PepI2c4                    | (0)    # offset 0049 PepI2c4
+         name=PepEmmc                    | (0)    # offset 0054 PepEmmc
+         name=PchI2cSensorDevicePort[2]  | (1)    # offset 0691 PchI2cSensorDevicePort[SERIAL_IO_I2C2],default = SERIAL_IO_I2C_TOUCHPAD     1
+         name=PchI2cSensorDevicePort[3]  | (2)    # offset 0692 PchI2cSensorDevicePort[SERIAL_IO_I2C3],default = SERIAL_IO_I2C_TOUCHPANEL   2
+         name=PchI2cTouchPadType         | (6)    # offset 0695 PchI2cTouchPadType
+         name=PchI2cTouchPadIrqMode      | (0)    # offset 0696 PchI2cTouchPadIrqMode
+         name=PchSpiSensorDevicePort[8]  | (1)    # offset 0715 PchSpiSensorDevicePort[SERIAL_IO_SPI2],default = SERIAL_IO_SPI_FINGERPRINT  1
+         name=PchSpiFingerPrintType      | (6)    # offset 0719 PchSpiFingerPrintType
+         name=Rtd3ZpoddSupport           | (1)    # offset 1096 Rtd3ZpoddSupport
+         name=TbtSetupFormSupport        | (1)    # offset 1277 TbtSetupFormSupport
+         name=TbtSetupDTbtPegTypeSupport | (1)    # offset 1278 TbtSetupDTbtPegTypeSupport
+
+[Var.gSaSetupVariableGuid.SaSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x17
+
+[Var.gCpuSetupVariableGuid.CpuSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x17
+  Struct = CPU_SETUP  
+  Data = name=EpocFclkFreq         | (1)    # offset 0257 EpocFclkFreq
+         name=EnergyEfficientTurbo | (1)    # offset 0431 EnergyEfficientTurbo
+                                            # EnergyEfficientTurbo = 0 if CPU_SETUP_VOLATILE_DATA.CpuFamilyModel == CpuCflDtHalo
+                                            # and CPU_SETUP_VOLATILE_DATA.CpuDid == V_SA_DEVICE_ID_CFL_DT_1
+
+[Var.gPchSetupVariableGuid.PchSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x17
+  Struct = PCH_SETUP    
+  Data = name=PchBiosLock | (1)    # offset 0023 PchBiosLock = 0 if BiosGuard Disabled (refer BIOS_GUARD_SUPPORT)
+
+[Var.gMeSetupVariableGuid.MeSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x17
+
+#--------------------------------------------------------------------------
+#  0x18|BoardIdCoffeeLakeSUdimm
+[Var.gSetupVariableGuid.Setup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x18
+  Struct = SETUP_DATA   
+  Data = name=PepI2c4                    | (0)    # offset 0049 PepI2c4
+         name=PepEmmc                    | (0)    # offset 0054 PepEmmc
+         name=PchI2cSensorDevicePort[1]  | (2)    # offset 0690 PchI2cSensorDevicePort[SERIAL_IO_I2C1],default = SERIAL_IO_I2C_TOUCHPANEL   2
+         name=PchI2cSensorDevicePort[3]  | (4)    # offset 0692 PchI2cSensorDevicePort[SERIAL_IO_I2C3],default = SERIAL_IO_I2C_UCMC         4
+         name=PchSpiSensorDevicePort[7]  | (1)    # offset 0715 PchSpiSensorDevicePort[SERIAL_IO_SPI1],default = SERIAL_IO_SPI_FINGERPRINT  1
+         name=Rtd3ZpoddSupport           | (1)    # offset 1096 Rtd3ZpoddSupport
+         name=TbtSetupFormSupport        | (1)    # offset 1277 TbtSetupFormSupport
+         name=TbtSetupDTbtPegTypeSupport | (1)    # offset 1278 TbtSetupDTbtPegTypeSupport
+         name=NoEcLowPowerExitGpio       | (1)    # offset 1373 NoEcLowPowerExitGpio
+
+[Var.gSaSetupVariableGuid.SaSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x18
+
+[Var.gCpuSetupVariableGuid.CpuSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x18
+  Struct = CPU_SETUP  
+  Data = name=EpocFclkFreq         | (0)    # offset 0257 EpocFclkFreq
+         name=EnergyEfficientTurbo | (1)    # offset 0431 EnergyEfficientTurbo
+                                            # EnergyEfficientTurbo = 0 if CPU_SETUP_VOLATILE_DATA.CpuFamilyModel == CpuCflDtHalo
+                                            # and CPU_SETUP_VOLATILE_DATA.CpuDid == V_SA_DEVICE_ID_CFL_DT_1
+
+[Var.gPchSetupVariableGuid.PchSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x18
+  Struct = PCH_SETUP  
+  Data = name=PchBiosLock                  |  (1)    # offset 0023 PchBiosLock = 0 if BiosGuard Disabled (refer BIOS_GUARD_SUPPORT)
+         name=PchScsSdCardEnabled          |  (0)    # offset 1664 PchScsSdCardEnabled
+         name=PchIshEnable                 |  (0)    # offset 1666 PchIshEnable
+         name=SlpS0WithGBESupportAvailable |  (1)    # offset 1751 SlpS0WithGBESupportAvailable
+
+[Var.gMeSetupVariableGuid.MeSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x18
+
+#--------------------------------------------------------------------------
+#  0x19|BoardIdCoffeeLakeSSodimm
+[Var.gSetupVariableGuid.Setup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x19
+  Struct = SETUP_DATA   
+  Data = name=PepI2c4                    | (0)    # offset 0049 PepI2c4
+         name=PepEmmc                    | (0)    # offset 0054 PepEmmc
+         name=PchI2cSensorDevicePort[1]  | (2)    # offset 0690 PchI2cSensorDevicePort[SERIAL_IO_I2C1],default = SERIAL_IO_I2C_TOUCHPANEL   2
+         name=PchI2cSensorDevicePort[2]  | (4)    # offset 0691 PchI2cSensorDevicePort[SERIAL_IO_I2C2],default = SERIAL_IO_I2C_UCMC         4
+         name=PchSpiSensorDevicePort[7]  | (1)    # offset 0715 PchSpiSensorDevicePort[SERIAL_IO_SPI1],default = SERIAL_IO_SPI_FINGERPRINT  1
+         name=Rtd3ZpoddSupport           | (1)    # offset 1096 Rtd3ZpoddSupport
+         name=TbtSetupFormSupport        | (1)    # offset 1277 TbtSetupFormSupport
+         name=TbtSetupDTbtPegTypeSupport | (1)    # offset 1278 TbtSetupDTbtPegTypeSupport
+         name=NoEcLowPowerExitGpio       | (1)    # offset 1373 NoEcLowPowerExitGpio
+
+[Var.gSaSetupVariableGuid.SaSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x19
+
+[Var.gCpuSetupVariableGuid.CpuSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x19
+  Struct = CPU_SETUP  
+  Data = name=EpocFclkFreq         | (0)    # offset 0257 EpocFclkFreq
+         name=EnergyEfficientTurbo | (1)    # offset 0431 EnergyEfficientTurbo
+                                            # EnergyEfficientTurbo = 0 if CPU_SETUP_VOLATILE_DATA.CpuFamilyModel == CpuCflDtHalo
+                                            # and CPU_SETUP_VOLATILE_DATA.CpuDid == V_SA_DEVICE_ID_CFL_DT_1
+
+[Var.gPchSetupVariableGuid.PchSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x19
+  Struct = PCH_SETUP  
+  Data = name=PchBiosLock         |  (1)    # offset 0023 PchBiosLock = 0 if BiosGuard Disabled (refer BIOS_GUARD_SUPPORT)
+         name=PchScsSdCardEnabled |  (0)    # offset 1664 PchScsSdCardEnabled
+         name=PchIshEnable        |  (0)    # offset 1666 PchIshEnable
+
+[Var.gMeSetupVariableGuid.MeSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x19
+
+#--------------------------------------------------------------------------
+#  0x1A|BoardIdCoffeLakeSOcUdimm
+[Var.gSetupVariableGuid.Setup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x1A
+  Struct = SETUP_DATA  
+  Data = name=PchI2cSensorDevicePort[1] | (2)    # offset 0690 PchI2cSensorDevicePort[SERIAL_IO_I2C1],default = SERIAL_IO_I2C_TOUCHPANEL   2
+         name=PchI2cSensorDevicePort[3] | (4)    # offset 0692 PchI2cSensorDevicePort[SERIAL_IO_I2C3],default = SERIAL_IO_I2C_UCMC         4
+         name=PchSpiSensorDevicePort[7] | (1)    # offset 0715 PchSpiSensorDevicePort[SERIAL_IO_SPI1],default = SERIAL_IO_SPI_FINGERPRINT  1
+         name=TbtSetupFormSupport       | (1)    # offset 1277 TbtSetupFormSupport
+
+[Var.gSaSetupVariableGuid.SaSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x1A
+
+[Var.gCpuSetupVariableGuid.CpuSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x1A
+  Struct = CPU_SETUP  
+  Data = name=EpocFclkFreq         | (0)    # offset 0257 EpocFclkFreq
+         name=EnergyEfficientTurbo | (1)    # offset 0431 EnergyEfficientTurbo
+                                            # EnergyEfficientTurbo = 0 if CPU_SETUP_VOLATILE_DATA.CpuFamilyModel == CpuCflDtHalo
+                                            # and CPU_SETUP_VOLATILE_DATA.CpuDid == V_SA_DEVICE_ID_CFL_DT_1
+
+[Var.gPchSetupVariableGuid.PchSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x1A
+  Struct = PCH_SETUP  
+  Data = name=PchBiosLock |  (1)    # offset 0023 PchBiosLock = 0 if BiosGuard Disabled (refer BIOS_GUARD_SUPPORT)
+
+[Var.gMeSetupVariableGuid.MeSetup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0x1A
+
+[Var.gVfrAppVariableGuid.VfrAppVar]
+  Attribs = BS 
+  DefaultId = 0  

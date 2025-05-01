@@ -1,0 +1,124 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdNbioBaseRmbPei
+  FILE_GUID                      = 59C2B0BD-BC73-4428-AA7F-8EE98DEFB2C3
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdNbioBasePeiEntry
+
+[Sources]
+  AmdNbioBase.c
+  NbioTables.c
+  NbioTopMem.c
+  NbioIoapicTbl.h
+  NbioIohcTbl.h
+  NbioNbifTbl.h
+  NbioWorkaroundTbl.h
+  NbioB0Tables.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdBaseLib
+  IdsLib
+  PeimEntryPoint
+  PeiServicesLib
+  GnbCommonLib
+  PcdLib
+  HobLib
+  BaseMemoryLib
+  NbioHandleLib
+  PcieConfigLib
+  SmnAccessLib
+  NbioTableBlastLib
+  AmdIdsHookLib
+  NbioIdsHookRmbLibPei
+  GnbLib
+  GnbPciLib
+  GnbPciAccLib
+  FabricResourceManagerLib
+  NbioAzaliaLib
+  AmdSocBaseLib
+
+[Guids]
+  gGnbNbioBaseZPHobInfoGuid       #*NBIO_TODO : Need to change name of this GUID
+  gGnbPcieHobInfoGuid
+  gAmdMemoryInfoHobGuid
+
+[Ppis]
+  gAmdNbioBaseServicesRmbPpiGuid
+  gAmdNbioPcieServicesPpiGuid
+  gAmdMemoryInfoHobPpiGuid        #CONSUMED
+  gAmdSocLogicalIdPpiGuid         #CONSUMED
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbIoapicAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitSmu
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitDbg
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitFastReg
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitFastRegCtl
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitIommuVf
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitIommuVfCtl
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIOHCClkGatingSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSstunlClkGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIOHCPgEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNbifMgcgClkGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSyshubMgcgClkGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSyshubPg
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNbifPgClkGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdNbifPgHysteresis
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdNbifMgcgHysteresis
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSyshubMgcgHysteresis
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdNbioGlobalCgOverride
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdNbioAcpPowerOn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPcieAerReportMechanism
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdEdpcEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgACSEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgAEREnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIgpuContorl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdNbioAudioSelect
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgAzaliaEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPdmMicSelection
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgHdAudioEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAzaliaCodecVerbTable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAzaliaSsid
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdDxioCompatibleV1Lib
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdReservedSmuMemoryLo
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdReservedSmuMemoryHi
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEnableHspClkDs
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEnableNbifOBFF
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdEnableNbifDmaOBFF
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSyshubGdcMgcgClkGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSyshubGdcMgcgHysteresis
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgSyshubMgcgHspClkGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSyshubMgcgHspClkHysteresis
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbSysHubSelect
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIOAGRPgEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSyshubPgHysteresis
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgDxioPmaPowerGating
+
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4DpiaDisable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAthubClockGating
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgNbifDev0Epf7En
+[Depex]
+#[-start-240806-IB20840078-modify]#
+  gAmdNbioBaseRMBPeiDepexPpiGuid AND gPlatformCustomizePeiInitReadyPpiGuid
+#[-end-240806-IB20840078-modify]#
+
+
+

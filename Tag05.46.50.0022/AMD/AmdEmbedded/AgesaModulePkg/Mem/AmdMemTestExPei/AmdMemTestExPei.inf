@@ -1,0 +1,56 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdMemTestExPei
+  FILE_GUID                      = 60AC9815-473A-4FC5-8BC2-DFA13EBD1BC4
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdMemTestExEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaFamily17ModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  AmdBaseLib
+  IdsLib
+  AmdPspApobLib
+  MemRestoreLib
+
+[sources]
+  AmdMemTestExPei.c
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdFabricTopologyServices2PpiGuid  #Consumed
+  gAmdNbioSmuServicesPpiGuid  #Consumed
+  gEfiPeiReset2PpiGuid  #Consumed
+
+[Pcd]
+
+[FixedPcd]
+
+[Depex]
+  gAmdPspCommonServicePpiGuid AND
+  gAmdFabricTopologyServices2PpiGuid AND
+  gAmdNbioSmuServicesPpiGuid AND
+  gEfiPeiReset2PpiGuid
+

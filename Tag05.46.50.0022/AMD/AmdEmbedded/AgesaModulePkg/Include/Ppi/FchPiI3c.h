@@ -1,0 +1,296 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ *******************************************************************************
+ */
+
+#ifndef __PI_I3C_H__
+#define __PI_I3C_H__
+
+///
+/// A 10-bit slave address is or'ed with the following value enabling the
+/// I3C protocol stack to address the duplicated address space between 0
+//  and 127 in 10-bit mode.
+///
+#define I3C_ADDRESSING_10_BIT     0x80000000
+
+///
+/// I3C controller capabilities
+///
+/// The EFI_I3C_CONTROLLER_CAPABILITIES specifies the capabilities of the
+/// I3C host controller.  The StructureSizeInBytes enables variations of
+/// this structure to be identified if there is need to extend this
+/// structure in the future.
+///
+typedef struct {
+  ///
+  /// Length of this data structure in bytes
+  ///
+  UINT32 StructureSizeInBytes;
+
+  ///
+  /// The maximum number of bytes the I3C host controller is able to
+  /// receive from the I3C bus.
+  ///
+  UINT32 MaximumReceiveBytes;
+
+  ///
+  /// The maximum number of bytes the I3C host controller is able to send
+  /// on the I3C  bus.
+  ///
+  UINT32 MaximumTransmitBytes;
+
+  ///
+  /// The maximum number of bytes in the I3C bus transaction.
+  ///
+  UINT32 MaximumTotalBytes;
+} EFI_I3C_CONTROLLER_CAPABILITIES;
+
+///
+/// I3C device description
+///
+/// The EFI_I3C_ENUMERATE_PROTOCOL uses the EFI_I3C_DEVICE to describe
+/// the platform specific details associated with an I3C device.  This
+/// description is passed to the I3C bus driver during enumeration where
+/// it is made available to the third party I3C device driver via the
+/// EFI_I3C_IO_PROTOCOL.
+///
+typedef struct {
+  ///
+  /// Unique value assigned by the silicon manufacture or the third
+  /// party I3C driver writer for the I3C part.  This value logically
+  /// combines both the manufacture name and the I3C part number into
+  /// a single value specified as a GUID.
+  ///
+  CONST EFI_GUID *DeviceGuid;
+
+  ///
+  /// Unique ID of the I3C part within the system
+  ///
+  UINT32 DeviceIndex;
+
+  ///
+  /// Hardware revision - ACPI _HRV value.  See the Advanced
+  /// Configuration and Power Interface Specification, Revision 5.0
+  /// for the field format and the Plug and play support for I3C
+  /// web-page for restriction on values.
+  ///
+  /// http://www.acpi.info/spec.htm
+  ///
+  UINT32 HardwareRevision;
+
+  ///
+  /// I3C bus configuration for the I3C device
+  ///
+  UINT32 I3cBusConfiguration;
+
+  ///
+  /// Number of slave addresses for the I3C device.
+  ///
+  UINT32 SlaveAddressCount;
+
+  ///
+  /// Pointer to the array of slave addresses for the I3C device.
+  ///
+  CONST UINT32 *SlaveAddressArray;
+} EFI_I3C_DEVICE;
+
+///
+/// Define the I3C flags
+///
+/// I3C read operation when set
+#define I3C_FLAG_READ               0x00000001
+
+///
+/// Define the flags for SMBus operation
+///
+/// The following flags are also present in only the first I3C operation
+/// and are ignored when present in other operations.  These flags
+/// describe a particular SMB transaction as shown in the following table.
+///
+
+/// SMBus operation
+#define I3C_FLAG_SMBUS_OPERATION    0x00010000
+
+/// SMBus block operation
+///   The flag I3C_FLAG_SMBUS_BLOCK causes the I3C master protocol to update
+///   the LengthInBytes field of the operation in the request packet with
+///   the actual number of bytes read or written.  These values are only
+///   valid when the entire I3C transaction is successful.
+///   This flag also changes the LengthInBytes meaning to be: A maximum
+///   of LengthInBytes is to be read from the device.  The first byte
+///   read contains the number of bytes remaining to be read, plus an
+///   optional PEC value.
+#define I3C_FLAG_SMBUS_BLOCK        0x00020000
+
+/// SMBus process call operation
+#define I3C_FLAG_SMBUS_PROCESS_CALL 0x00040000
+
+/// SMBus use packet error code (PEC)
+///   Note that the I3C master protocol may clear the I3C_FLAG_SMBUS_PEC bit
+///   to indicate that the PEC value was checked by the hardware and is
+///   not appended to the returned read data.
+///
+#define I3C_FLAG_SMBUS_PEC          0x00080000
+
+//----------------------------------------------------------------------
+///
+/// QuickRead:          OperationCount=1,
+///                     LengthInBytes=0,   Flags=I3C_FLAG_READ
+/// QuickWrite:         OperationCount=1,
+///                     LengthInBytes=0,   Flags=0
+///
+///
+/// ReceiveByte:        OperationCount=1,
+///                     LengthInBytes=1,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_READ
+/// ReceiveByte+PEC:    OperationCount=1,
+///                     LengthInBytes=2,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_READ
+///                                            | I3C_FLAG_SMBUS_PEC
+///
+///
+/// SendByte:           OperationCount=1,
+///                     LengthInBytes=1,   Flags=I3C_FLAG_SMBUS_OPERATION
+/// SendByte+PEC:       OperationCount=1,
+///                     LengthInBytes=2,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_PEC
+///
+///
+/// ReadDataByte:       OperationCount=2,
+///                     LengthInBytes=1,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                     LengthInBytes=1,   Flags=I3C_FLAG_READ
+/// ReadDataByte+PEC:   OperationCount=2,
+///                     LengthInBytes=1,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_PEC
+///                     LengthInBytes=2,   Flags=I3C_FLAG_READ
+///
+///
+/// WriteDataByte:      OperationCount=1,
+///                     LengthInBytes=2,   Flags=I3C_FLAG_SMBUS_OPERATION
+/// WriteDataByte+PEC:  OperationCount=1,
+///                     LengthInBytes=3,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_PEC
+///
+///
+/// ReadDataWord:       OperationCount=2,
+///                     LengthInBytes=1,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                     LengthInBytes=2,   Flags=I3C_FLAG_READ
+/// ReadDataWord+PEC:   OperationCount=2,
+///                     LengthInBytes=1,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_PEC
+///                     LengthInBytes=3,   Flags=I3C_FLAG_READ
+///
+///
+/// WriteDataWord:      OperationCount=1,
+///                     LengthInBytes=3,   Flags=I3C_FLAG_SMBUS_OPERATION
+/// WriteDataWord+PEC:  OperationCount=1,
+///                     LengthInBytes=4,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_PEC
+///
+///
+/// ReadBlock:          OperationCount=2,
+///                     LengthInBytes=1,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_BLOCK
+///                     LengthInBytes=33,  Flags=I3C_FLAG_READ
+/// ReadBlock+PEC:      OperationCount=2,
+///                     LengthInBytes=1,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_BLOCK
+///                                            | I3C_FLAG_SMBUS_PEC
+///                     LengthInBytes=34,  Flags=I3C_FLAG_READ
+///
+///
+/// WriteBlock:         OperationCount=1,
+///                     LengthInBytes=N+2, Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_BLOCK
+/// WriteBlock+PEC:     OperationCount=1,
+///                     LengthInBytes=N+3, Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_BLOCK
+///                                            | I3C_FLAG_SMBUS_PEC
+///
+///
+/// ProcessCall:        OperationCount=2,
+///                     LengthInBytes=3,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_PROCESS_CALL
+///                     LengthInBytes=2,   Flags=I3C_FLAG_READ
+/// ProcessCall+PEC:    OperationCount=2,
+///                     LengthInBytes=3,   Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_PROCESS_CALL
+///                                            | I3C_FLAG_SMBUS_PEC
+///                     LengthInBytes=3,   Flags=I3C_FLAG_READ
+///
+///
+/// BlkProcessCall:     OperationCount=2,
+///                     LengthInBytes=N+2, Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_PROCESS_CALL
+///                                            | I3C_FLAG_SMBUS_BLOCK
+///                     LengthInBytes=33,  Flags=I3C_FLAG_READ
+/// BlkProcessCall+PEC: OperationCount=2,
+///                     LengthInBytes=N+2, Flags=I3C_FLAG_SMBUS_OPERATION
+///                                            | I3C_FLAG_SMBUS_PROCESS_CALL
+///                                            | I3C_FLAG_SMBUS_BLOCK
+///                                            | I3C_FLAG_SMBUS_PEC
+///                     LengthInBytes=34,  Flags=I3C_FLAG_READ
+///
+//----------------------------------------------------------------------
+
+///
+/// I3C device operation
+///
+/// The EFI_I3C_OPERATION describes a subset of an I3C transaction in which
+/// the I3C controller is either sending or receiving bytes from the bus.
+/// Some transactions will consist of a single operation while others will
+/// be two or more.
+///
+/// Note: Some I3C controllers do not support read or write ping (address
+/// only) operation and will return EFI_UNSUPPORTED status when these
+/// operations are requested.
+///
+/// Note: I3C controllers which do not support complex transactions requiring
+/// multiple repeated start bits return EFI_UNSUPPORTED without processing
+/// any of the transaction.
+///
+typedef struct {
+  ///
+  /// Flags to qualify the I3C operation.
+  ///
+  UINT32 Flags;
+
+  ///
+  /// Number of bytes to send to or receive from the I3C device.  A ping
+  /// (address only byte/bytes)  is indicated by setting the LengthInBytes
+  /// to zero.
+  ///
+  UINT32 LengthInBytes;
+
+  ///
+  /// Pointer to a buffer containing the data to send or to receive from
+  /// the I3C device.  The Buffer must be at least LengthInBytes in size.
+  ///
+  UINT8 *Buffer;
+} EFI_I3C_OPERATION;
+
+///
+/// I3C device request
+///
+/// The EFI_I3C_REQUEST_PACKET describes a single I3C transaction.  The
+/// transaction starts with a start bit followed by the first operation
+/// in the operation array.  Subsequent operations are separated with
+/// repeated start bits and the last operation is followed by a stop bit
+/// which concludes the transaction.  Each operation is described by one
+/// of the elements in the Operation array.
+///
+typedef struct {
+  ///
+  /// Number of elements in the operation array
+  ///
+  UINTN OperationCount;
+
+  ///
+  /// Description of the I3C operation
+  ///
+  EFI_I3C_OPERATION Operation [1];
+} EFI_I3C_REQUEST_PACKET;
+
+#endif  //  __PI_I3C_H__

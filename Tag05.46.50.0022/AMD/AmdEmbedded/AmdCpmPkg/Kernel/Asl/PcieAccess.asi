@@ -1,0 +1,718 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+//
+//  Read PCI config register through MMIO
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register offset
+//
+Method (CpmReadPci32, 4, Serialized) {
+    Return ( CpmReadPci (Arg0, Arg1, Arg2, Arg3, 0,32) )
+}
+
+//
+//  Write PCI config register through MMIO
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register offset
+//  Arg4 - Value
+//
+Method (CpmWritePci32, 5, Serialized) {
+    CpmWritePci (Arg0, Arg1, Arg2, Arg3, 0, 32, Arg4)
+}
+
+//
+//  Read PCIE P2P Indirect PCIE register in this PCIE P2P
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register index
+//
+Method (CpmReadPcieRegister, 4, Serialized) {
+    Add (CpmPcieMmioBaseAddr, ShiftLeft (Arg0, 20), Local0)
+    Add (Local0, ShiftLeft (Arg1, 15), Local0)
+    Add (Local0, ShiftLeft (Arg2, 12), Local0)
+    Add (0xE0, Local0, Local0)
+
+    OperationRegion (varM, SystemMemory, Local0, 0x8)
+    Field (varM, DWordAcc, NoLock, Preserve) {
+        Offset (0x0),
+        var1, 32,
+    }
+    BankField (varM, var1, Arg3, DwordAcc, NoLock, Preserve) {
+        Offset (0x4),
+        var2, 32,
+    }
+
+    Store (var2, Local0)
+    CpmDebugPrint ("  KER-ASL-CpmReadPcieRegister  (0x%X, 0x%X, 0x%X, 0x%X) = 0x%X\n", Arg0, Arg1, Arg2, Arg3, Local0, 0)
+    Return (Local0)
+}
+
+//
+//  Write PCIE P2P Indirect PCIE register in this PCIE P2P
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register index
+//  Arg4 - Value
+//
+Method (CpmWritePcieRegister, 5, Serialized) {
+    CpmDebugPrint ("  KER-ASL-CpmWritePcieRegister (0x%X, 0x%X, 0x%X, 0x%X, 0x%X)\n", Arg0, Arg1, Arg2, Arg3, Arg4, 0)
+    Add (CpmPcieMmioBaseAddr, ShiftLeft (Arg0, 20), Local0)
+    Add (Local0, ShiftLeft (Arg1, 15), Local0)
+    Add (Local0, ShiftLeft (Arg2, 12), Local0)
+    Add (0xE0, Local0, Local0)
+
+    OperationRegion (varM, SystemMemory, Local0, 0x8)
+    Field (varM, DWordAcc, NoLock, Preserve) {
+        Offset (0x0),
+        var1, 32,
+    }
+    BankField (varM, var1, Arg3, DwordAcc, NoLock, Preserve) {
+        Offset (0x4),
+        var2, 32,
+    }
+
+    Store (Arg4, var2)
+}
+
+//
+//  Clear presence detect change bit
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//
+Method (CpmClearPresenceDetectChangeBit, 3, Serialized) {
+    CpmWritePci (Arg0, Arg1, Arg2, 0x70, 3, 1, 0)
+    CpmWritePci (Arg0, Arg1, Arg2, 0x70, 19, 1, 1)
+}
+
+//
+//  Check virtual channel negotiation pending. Test PCIE P2P Data Link Negotiation bit, return Ones if bit=1, Zero if bit=0
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//
+Method (CpmCheckVirtualChannelNegotiationPending, 3, Serialized) {
+    Store (CpmReadPci32 (Arg0, Arg1, Arg2, 0x128), Local0)
+    If (And (Local0, 0x00020000)) {
+        Return (Ones)
+    } Else {
+        Return (Zero)
+    }
+}
+
+//
+//  Retraining Link: PCIE Port specific re-training using PCIE_LC_LINK_WIDTH_CNTL
+//  Retraining in this fashion takes the Link completely down and clears PCIE registers
+//  on both sides of the link as specified by PCIE spec. set b[2:0] = b[6:4] and b[8]=1
+//  of PCIEIND_P register 0xA2
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//
+Method (CpmReconfigPcieLink, 3, Serialized) {
+    Store (CpmReadPcieRegister (Arg0, Arg1, Arg2, 0xA2), Local0)
+    And (Local0, Not (0x07), Local0)
+    ShiftRight (Local0, 4, Local1)      // move b[6:4] to b[2:0]
+    And (Local1, 0x07, Local1)          // clear all except b[2:0]
+    Or (Local0, Local1, Local0)
+    Or (Local0, 0x100, Local0)
+    CpmWritePcieRegister (Arg0, Arg1, Arg2, 0xA2, Local0)
+}
+
+//
+//  Retrain this PCIE P2P's Link using PCIE specification defined LinkControl register.
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Target Link Speed  0 = Don't change Link Speed, 1 = Gen1, 2 = Gen2, 3 = Gen3, 4 = Gen4
+//
+Method (CpmRetrainPcieLink, 4, Serialized) {
+    CpmWritePci8 (Arg0, Arg1, Arg2, 0x68, 5, 1, 0)          // Bit5 = RetrainLink = 0
+    If (Arg3) {
+        CpmWritePci8 (Arg0, Arg1, Arg2, 0x88, 0, 4, Arg3)   // Bit[3:0] = TargetLinkSpeed
+    }
+    CpmWritePci8 (Arg0, Arg1, Arg2, 0x68, 5, 1, 1)          // Bit5 = RetrainLink = 1
+    Store (0x64, Local1)
+    Store (0x01, Local2)
+    While (LAnd (Local1, Local2)) {                         // Bit11 = LinkTraining = 0 or >100ms
+        Sleep (1)
+        Store (CpmGetPcieLinkStatus (Arg0, Arg1, Arg2), Local3)
+        If (And (Local3, 0x0800)) {
+            Decrement (Local1)
+        } Else {
+            Store (0, Local2)
+        }
+    }
+    CpmWritePci8 (Arg0, Arg1, Arg2, 0x68, 5, 1, 0)          // Bit5 = RetrainLink = 0
+    If (LNot (Local2)) {
+        Return (Ones)                                       // if LinkTraining = 0
+    } Else {
+        Return (Zero)                                       // if LinkTraining = 1
+    }
+}
+
+//
+//  Get data from PCIE Link Status register.
+//  Arg0        PCI address Bus
+//  Arg1        PCI address device
+//  Arg2        PCI address func
+//
+//  Return      Bit[3:0] = Link Speed
+//              Bit[9:4] = Link Width
+//              Bit[11] = LinkTraining
+//              Bit[12] = SlotClockCfg
+//              Bit[13] = DlActive
+//              Bit[14] = LinkBWManagementStatus
+//              Bit[15] = LinkAutonomousBWStatus
+//
+Method (CpmGetPcieLinkStatus, 3, Serialized) {
+    Store (CpmReadPci (Arg0, Arg1, Arg2, 0x68, 16, 16), Local0)
+    Return (Local0)
+}
+
+//
+//  Read PCI config register through MMIO
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register offset
+//  Arg4 - Start Bit
+//  Arg5 - Bit Width
+//
+Method (CpmReadPci, 6, Serialized) {
+    Store (CpmPcieMmioBaseAddr, Local0)
+    ShiftRight (CpmPcieMmioBaseAddr, 20, Local1)
+    And (Local1, 0xF00, Local2)
+    Add (Local2, 0x100, Local2)
+
+    If (LGreaterEqual (Add (Local1, Arg0), Local2)) {
+        Store (0x7FFFFFFF, Local3)
+        Or (Local3, 0x80000000, Local3)
+        And (ShiftRight (Local3, Arg4), ShiftRight (Local3, Subtract (32, Arg5)), Local4)
+        return (Local4)
+    }
+
+    Add (ShiftLeft (Arg0, 20), Local0, Local0)
+    Add (ShiftLeft (Arg1, 15), Local0, Local0)
+    Add (ShiftLeft (Arg2, 12), Local0, Local0)
+
+    return (CpmReadMem32 (Local0, Arg3, Arg4, Arg5))
+}
+
+//
+//  Write PCI config register through MMIO
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register offset
+//  Arg4 - Start Bit
+//  Arg5 - Bit Width
+//  Arg6 - Value
+//
+Method (CpmWritePci, 7, Serialized) {
+    Store (CpmPcieMmioBaseAddr, Local0)
+    ShiftRight (CpmPcieMmioBaseAddr, 20, Local1)
+    And (Local1, 0xF00, Local2)
+    Add (Local2, 0x100, Local2)
+
+    If (LLess (Add (Local1, Arg0), Local2)) {
+        Add (ShiftLeft (Arg0, 20), Local0, Local0)
+        Add (ShiftLeft (Arg1, 15), Local0, Local0)
+        Add (ShiftLeft (Arg2, 12), Local0, Local0)
+        Store (0x7FFFFFFF, Local3)
+        Or (Local3, 0x80000000, Local3)
+
+        // Check PCI device is present or not.
+        If (LNotEqual (CpmReadMem32 ( Local0, 0, 0, 32 ), Local3)) {
+            CpmWriteMem32 (Local0, Arg3, Arg4, Arg5, Arg6)
+        }
+    }
+}
+
+//
+//  Read one byte of PCI config register through MMIO
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register offset
+//  Arg4 - Start Bit
+//  Arg5 - Bit Width
+//
+Method (CpmReadPci8, 6, Serialized) {
+    Store (CpmPcieMmioBaseAddr, Local0)
+    ShiftRight (CpmPcieMmioBaseAddr, 20, Local1)
+    And (Local1, 0xF00, Local2)
+    Add (Local2, 0x100, Local2)
+
+    If (LGreaterEqual (Add (Local1, Arg0), Local2)) {
+        Store (0xFF, Local3)
+        And (ShiftRight (Local3, Arg4), ShiftRight (Local3, Subtract (8, Arg5)), Local4)
+        return (Local4)
+    }
+
+    Add (ShiftLeft (Arg0, 20), Local0, Local0)
+    Add (ShiftLeft (Arg1, 15), Local0, Local0)
+    Add (ShiftLeft (Arg2, 12), Local0, Local0)
+
+    return (CpmReadMem8 (Local0, Arg3, Arg4, Arg5))
+}
+
+//
+//  Write one byte of PCI config register through MMIO
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Register offset
+//  Arg4 - Start Bit
+//  Arg5 - Bit Width
+//  Arg6 - Value
+//
+Method (CpmWritePci8, 7, Serialized) {
+    Store (CpmPcieMmioBaseAddr, Local0)
+    ShiftRight (CpmPcieMmioBaseAddr, 20, Local1)
+    And (Local1, 0xF00, Local2)
+    Add (Local2, 0x100, Local2)
+
+    If (LLess (Add (Local1, Arg0), Local2)) {
+        Add (ShiftLeft (Arg0, 20), Local0, Local0)
+        Add (ShiftLeft (Arg1, 15), Local0, Local0)
+        Add (ShiftLeft (Arg2, 12), Local0, Local0)
+        Store (0x7FFFFFFF, Local3)
+        Or (Local3, 0x80000000, Local3)
+
+        // Check PCI device is present or not.
+        If (LNotEqual (CpmReadMem32 (Local0, 0, 0, 32), Local3)) {
+            CpmWriteMem8 (Local0, Arg3, Arg4, Arg5, Arg6)
+        }
+    }
+}
+
+//
+//  Get Clock PM Capability of PCI Device
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//
+//  Return 0: Device does not support Clock PM, 1: Device support Clock PM.
+Method (CpmGetPcieClockPmCapability, 3, Serialized) {
+    Store (0, Local0)
+    Store (CpmReadPci (Arg0, Arg1, Arg2, 0x34, 0, 8), Local1)
+
+    While (LNotEqual (Local1, 0)) {
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Local1, 0, 8), Local2)
+        If (LOr (LEqual (Local2, 0x00), LEqual (Local2, 0xFF))) {
+            Break
+        }
+
+        If (LEqual (Local2, 0x10)) {
+            Store (CpmReadPci (Arg0, Arg1, Arg2, Add (Local1,0x0C), 18, 1), Local3)
+            Store (CpmReadPci (Arg0, Arg1, Arg2, Add (Local1,0x10), 8, 1), Local4)
+            If (LAnd (LEqual (Local3, 1), LEqual (Local4, 1))) {
+                Store (1, Local0)
+            }
+            Break
+        }
+
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Add (Local1,1), 0, 8), Local1)
+    }
+    return (Local0)
+}
+
+//
+//  Get PM Capability of PCI Device
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+Method (CpmGetPciePmCapability, 3, Serialized) {
+    Store (0, Local0)
+    Store (CpmReadPci (Arg0, Arg1, Arg2, 0x34, 0, 8), Local1)
+
+    While (LNotEqual (Local1, 0)) {
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Local1, 0, 8), Local2)
+        If (LOr (LEqual (Local2, 0x00), LEqual (Local2, 0xFF))) {
+            Break
+        }
+
+        If (LEqual (Local2, 0x10)) {
+            Store (CpmReadPci (Arg0, Arg1, Arg2, Add (Local1,0x0C), 10, 2), Local0)
+            Break
+        }
+
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Add (Local1,1), 0, 8), Local1)
+    }
+    return (Local0)
+}
+
+//
+//  Get PmControl of PCI Device
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+Method (CpmGetPcieAspm, 3, Serialized) {
+    Store (0, Local0)
+    Store (CpmReadPci (Arg0, Arg1, Arg2, 0x34, 0, 8), Local1)
+
+    While (LNotEqual (Local1, 0)) {
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Local1, 0, 8), Local2)
+        If (LOr (LEqual (Local2, 0x00), LEqual (Local2, 0xFF))) {
+            Break
+        }
+
+        If (LEqual (Local2, 0x10)) {
+            Store (CpmReadPci (Arg0, Arg1, Arg2, Add (Local1,0x10), 0, 2), Local0)
+            Break
+        }
+
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Add (Local1,1), 0, 8), Local1)
+    }
+
+    CpmDebugPrint ("  KER-ASL-CpmGetPcieAspm (0x%X, 0x%X, 0x%X) = 0x%X\n", Arg0, Arg1, Arg2, Local0, 0, 0)
+    return (Local0)
+}
+
+//
+//  Set PmControl of PCI Device
+//  Arg0 - PCI address Bus
+//  Arg1 - PCI address device
+//  Arg2 - PCI address func
+//  Arg3 - Value of PmControl
+Method (CpmSetPcieAspm, 4, Serialized) {
+    CpmDebugPrint ("  KER-ASL-CpmSetPcieAspm (0x%X, 0x%X, 0x%X, 0x%X)\n", Arg0, Arg1, Arg2, Arg3, 0, 0)
+    Store (CpmReadPci (Arg0, Arg1, Arg2, 0x34, 0, 8), Local1)
+
+    While (LAnd (LNotEqual (Local1, 0), LLess (Local1, 0xFF))) {
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Local1, 0, 8), Local2)
+        If (LOr (LEqual (Local2, 0x00), LEqual (Local2, 0xFF))) {
+            Break
+        }
+
+        If (LEqual (Local2, 0x10)) {
+            CpmWritePci (Arg0, Arg1, Arg2, Add (Local1,0x10), 0, 2, Arg3)
+            Break
+        }
+
+        Store (CpmReadPci (Arg0, Arg1, Arg2, Add (Local1,1), 0, 8), Local1)
+    }
+}
+
+//
+// PCIe Device Hotplug Support
+//  Arg0 - Device Num of PCIe Bridge
+//  Arg1 - Function Num of PCIe Bridge
+//  Arg2 - 0: Remove. 1: Assert.
+//  Arg3 - 0: Basic Mode. 1: Enhanced Mode.
+//
+Method (CpmPcieHotplug, 4, Serialized) {
+    Store (0, Local7)
+    If (LNot (CpmIsFchPcie (Arg0, Arg1))) {
+        Name (CpmInterfaceBuffer, Buffer (0x05) {})                     // GNB-Platform BIOS interface buffer
+        CreateWordField (CpmInterfaceBuffer, 0, CpmStructureSizeField)  // Structure size field
+        CreateField (CpmInterfaceBuffer, 16, 3, CpmFunctionField)       // func field
+        CreateField (CpmInterfaceBuffer, 19, 5, CpmDeviceField)         // dev field
+        CreateByteField (CpmInterfaceBuffer, 3, CpmBusField)            // bus field
+        CreateByteField (CpmInterfaceBuffer, 4, CpmHotplugField)        // hotplug field
+
+        Store (5, CpmStructureSizeField)                                // size
+        Store (0, CpmBusField)                                          // bus
+        Store (Arg0, CpmDeviceField)                                    // device
+        Store (Arg1, CpmFunctionField)                                  // function
+
+        If (LEqual (Arg2, 0)) {                                         // hot remove
+            If (LNotEqual (Arg3, 1)) {
+                Store (0, CpmHotplugField)
+                \_SB.ALIB (6, CpmInterfaceBuffer)                       // notify plug event
+            }
+        } Else {                                                        // hot insert
+            If (LNotEqual (Arg3, 1)) {
+                Store (1, CpmHotplugField)
+                \_SB.ALIB (6, CpmInterfaceBuffer)                       // notify plug event
+            }
+            Store (CpmReadPci (0, Arg0, Arg1, 0x19, 0, 8), Local0)      // Secondary Bus
+
+            If (LAnd (LNotEqual (Local0, 0x00), LNotEqual (Local0, 0xFF))) {
+                Store (CpmReadPci32 (Local0, 0, 0, 0), Local1)          // SSID & VID
+                Store (0x7FFFFFFF, Local2)
+                Or (Local2, 0x80000000, Local2)
+                If (LAnd (LNotEqual (Local1, 0x00000000), LNotEqual (Local1, Local2))) {
+                    Store (1, Local7)
+                }
+            }
+        }
+
+    } Else {
+        If (LEqual (Arg2, 0)) {                                          // hot remove
+            CpmFchGppHotplugService (1, Arg1)                           // Lane Power Down
+        } Else {                                                        // hot insert
+            CpmFchGppHotplugService (0, Arg1)                           // Lane Power Up
+            Store (CpmReadPci (0, Arg0, Arg1, 0x19, 0, 8), Local0)      // Secondary Bus
+            If (LAnd (LNotEqual (Local0, 0x00), LNotEqual (Local0, 0xFF))) {
+                Store (CpmReadPci32 (Local0, 0, 0, 0), Local1)          // SSID & VID
+                Store (0x7FFFFFFF, Local2)
+                Or (Local2, 0x80000000, Local2)
+                If (LAnd (LNotEqual (Local1, 0x00000000), LNotEqual (Local1, Local2))) {
+                    Store (1, Local7)
+                }
+            }
+        }
+    }
+    Return (Local7)
+}
+
+//
+// Cpm Get Internal Bus Number interface method
+//  Arg0 - 0: Internal Bus A, 1: Internal Bus B, 2: Internal Bus C, 3: Internal Bus D
+//
+Method (CpmGetInternalBusNumber, 1, Serialized) {
+    If (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP)) {
+        If (LEqual (Arg0, 0)) {
+            return (CpmReadPci(0, 7, 1, 0x19, 0, 8))
+        } Else {
+            return (CpmReadPci(0, 8, 1, 0x19, 0, 8))
+        }
+    } Else {
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP)) {
+            If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RN)) {
+                return (CpmReadPci(0, 8, Add (Arg0, 1), 0x19, 0, 8))
+            } Else {
+                If (LEqual (Arg0, 0)) {
+                    return (CpmReadPci(0, 7, 1, 0x19, 0, 8))
+                } Else {
+                    return (CpmReadPci(0, 8, Arg0, 0x19, 0, 8))
+                }
+            }
+        } Else {
+            If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RV)) {
+                If (LEqual (Arg0, 0)) {
+                    return (CpmReadPci(0, 8, 1, 0x19, 0, 8))
+                } Else {
+                    return (CpmReadPci(0, 8, 2, 0x19, 0, 8))
+                }
+            } Else {
+                return (0x0)
+            }
+        }
+    }
+}
+
+//
+// Find PCIe Root Port Number
+//  Arg0 - PCIe root bridge number
+//  Arg1 - PCIe root port Device number
+//  Arg2 - PCIe root port Function number
+//
+Method (CpmFindPcieRootPortNumber, 3, Serialized) {
+    If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_MTS))) {
+        If (LLessEqual (Arg0, 3)) {
+            Subtract (6, Arg0, Local3)
+        } Else {
+            Store (6, Local3)
+        }
+    } Else {
+        Store (3, Local3)
+    }
+    Add (PBr_DevFnMap, ShiftLeft (Local3, 20), Local3)                          // PBr_DevFnMap
+    And (Arg1, 0x1F, Local0)
+    Or (ShiftLeft (Local0, 3), And (Arg2, 0x7), Local0)
+    Store (0, Local1)
+    If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RV), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RV2))) {
+        Store (9, Local2)                                                       // Total PCIe Port Number
+    } ElseIf (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_MTS))) {
+        Store (22, Local2)                                                      // Total PCIe Port Number
+    } ElseIf (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RN)) {
+        Store (13, Local2)                                                      // Total PCIe Port Number
+    } ElseIf (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_VN)) {
+        Store (10, Local2)                                                      // Total PCIe Port Number
+    } ElseIf (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RMB)) {
+        Store (16, Local2)                                                      // Total PCIe Port Number
+    } Else {
+        Store (18, Local2)                                                      // Total PCIe Port Number
+    }
+    Store (CpmReadSmnRegister (0, 0, 0, Add (Multiply (Local1, 4), Local3)), Local4)
+    While (LAnd (LLess (Local1, Local2), LNotEqual (Local4, Local0))) {
+        Increment (Local1)
+        Store (CpmReadSmnRegister (0, 0, 0, Add (Multiply (Local1, 4), Local3)), Local4)
+    }
+    If (LLessEqual (Local1, Local2)) {
+        return (Local1)
+    } Else {
+        return (0xFF)
+    }
+}
+
+//
+// Find PCIe Core/Port/RcCfg Registers Address
+//  Arg0 - PCIe Root Bridge Number
+//  Arg1 - PCIe Root Port Number
+//  Arg2 - 0x00 = PCIERCCFG: PCIe RcCfg Registers Address
+//         0x04 = PCIEPORT: PCIe Port Registers Address
+//         0x08 = PCIECORE: PCIe Core Registers Address
+//
+Method (CpmFindPcieRegAddress, 3, Serialized) {
+    If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_MTS))) {
+        If (LLessEqual (Arg0, 3)) {
+            Subtract (4, Arg0, Local5)
+        } Else {
+            Store (4, Local5)
+        }
+    } Else {
+        Add (Arg0, 1, Local5)
+    }
+    ToInteger (Arg1, Local4)
+
+    If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RN), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_VN))) {
+        If (LGreaterEqual (Local4, 3)) {
+            // PCIE1
+            Subtract (Local4, 3, Local4)
+            Add (Local5, 1, Local5)
+        }
+    } ElseIf (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RMB)) {
+        If (LGreaterEqual (Local4, 12)) {
+            // PCIE3
+            Subtract (Local4, 12, Local4)
+            Add (Local5, 3, Local5)
+        } ElseIf (LEqual (Local4, 11)) {
+            // PCIE2
+            Subtract (Local4, 11, Local4)
+            Add (Local5, 2, Local5)
+        } ElseIf (LGreaterEqual (Local4, 5)) {
+            // PCIE1
+            Subtract (Local4, 5, Local4)
+            Add (Local5, 1, Local5)
+        }
+    } Else {
+        If (LGreaterEqual (Local4, 8)) {
+            // PCIE1
+            Subtract (Local4, 8, Local4)
+            If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_MTS))) {
+                Add (Local5, 4, Local5)
+            } Else {
+                Add (Local5, 1, Local5)
+            }
+        }
+    }
+
+    Add (0x11000000, ShiftLeft (Local5, 20), Local6)
+    Add (Local6, ShiftLeft (Arg2, 16), Local6)
+    If (LOr (LEqual (Arg2, PCIERCCFG), LEqual (Arg2, PCIEPORT))) {
+        // PCIe Port and RcCfg Registers Address
+        Add (Local6, ShiftLeft (Local4, 12), Local6)
+    }
+
+    return (Local6)
+}
+
+//
+// Send PME_TURN_OFF message to dGPU
+//  Arg0 - PCIe root bridge number
+//  Arg1 - PCIe root port Device number
+//  Arg2 - PCIe root port Function number
+//
+Method (CpmSendPmeTurnOff, 3, Serialized) {
+    Store (CpmFindPcieRootPortNumber (Arg0, Arg1, Arg2), Local4)              // Local4 = PCIe Root Port Number
+    If (LNotEqual (Local4, 0xFF)) {
+        If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP))) {
+            Add (CpmFindPcieRegAddress (Arg0, Local4, PCIECORE), PCIE_RX_AD, Local7)  // PCIECORE::PCIE_RX_AD
+            Store (CpmReadSmnRegister (0, 0, 0, Local7), Local0)
+            And (Local0, 0xFFFFDFFF, Local0)
+            CpmWriteSmnRegister (0, 0, 0, Local7, Or (Local0, 0x2000))        // Write Bit[13] RX_RC_DROP_PME_TO_ACK = 1
+        }
+
+        And (CpmReadPci32 (0, 0, 0, 0x84), 0xFF00FCFF, Local1)                // Clear PMETarget[23:16], PMETurnOff[9] and PMEMode[8]
+        Or (ShiftLeft (Arg1, 19), ShiftLeft (Arg2, 16), Local2)
+        Or (Local1, Local2, Local1)
+        CpmWritePci32 (0, 0, 0, 0x84, Or (Local1, 0x100))                     // Write PMETarget[23:16] and PMEMode[8]
+        CpmWritePci32 (0, 0, 0, 0x84, Or (Local1, 0x300))                     // Write PMETarget[23:16], PMETurnOff[9] and PMEMode[8]
+
+        If (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_MTS)) {
+            Store (CpmReadPci32 (0, 0, 0, 0x84), Local3)
+            Store (20202, Local5)
+            While (LAnd (LGreater (Local5, 0), LNotEqual (And (Local3, 0x400), 0x400))) {
+                Store (Subtract (Local5, 1), Local5)
+                Stall (99)                                                    // 99us * 20202 = 1999ms time out
+                Store (CpmReadPci32 (0, 0, 0, 0x84), Local3)
+            }
+        }
+
+        Add (CpmFindPcieRegAddress (Arg0, Local4, PCIEPORT), PCIE_LC_STATE0, Local6)  // PCIEPORT::PCIE_LC_STATE0
+        Store (CpmReadSmnRegister (0, 0, 0, Local6), Local3)
+        Store (20202, Local5)
+        While (LAnd (LGreater (Local5, 0), LNotEqual (And (Local3, 0x3F), 0x1F))) {   // Check Bit[5:0] LC_CURRENT_STATE
+            Store (Subtract (Local5, 1), Local5)
+            Stall (99)                                                        // 99us * 20202 = 1999ms time out
+            Store (CpmReadSmnRegister (0, 0, 0, Local6), Local3)
+        }
+
+        CpmWritePci32 (0, 0, 0, 0x84, Or (Local1, 0x100))                     // Write PMETarget[23:16] and PMEMode[8]
+        If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_ZP), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_SSP))) {
+            CpmWriteSmnRegister (0, 0, 0, Local7, Local0)                     // Write Bit[13] RX_RC_DROP_PME_TO_ACK = 0
+        }
+    }
+}
+
+//
+// Triggers waking the Link from L2/L3 Ready
+//  Arg0 - PCIe root bridge number
+//  Arg1 - PCIe root port Device number
+//  Arg2 - PCIe root port Function number
+//  Arg3 - 1 = Wake Link, 0 = Normal Operation
+//
+Method (CpmWakeLink, 4, Serialized) {
+    Store (CpmFindPcieRootPortNumber (Arg0, Arg1, Arg2), Local4)                      // Local4 = PCIe Root Port Number
+    If (LNotEqual (Local4, 0xFF)) {
+        Add (CpmFindPcieRegAddress (Arg0, Local4, PCIEPORT), PCIE_LC_CNTL, Local2)    // PCIEPORT::PCIE_LC_CNTL
+        Store (CpmReadSmnRegister (0, 0, 0, Local2), Local0)
+        And (Local0, 0xFFBFFFFF, Local0)
+        Store (Arg3, Local1)
+        Or (Local0, ShiftLeft (Local1, 22), Local0)
+        CpmWriteSmnRegister (0, 0, 0, Local2, Local0)                                 // Write Bit[22] LC_WAKE_FROM_L23
+    }
+}
+
+//
+// Program PCIe Hold Training
+//  Arg0 - PCIe root bridge number
+//  Arg1 - PCIe root port Device number
+//  Arg2 - PCIe root port Function number
+//  Arg3 - 0 = Normal Operation. 1 = Block Training.
+//
+Method (CpmProgramHoldTraining, 4, Serialized) {
+    Store (CpmFindPcieRootPortNumber (Arg0, Arg1, Arg2), Local4)                      // Local4 = PCIe Root Port Number
+    If (LNotEqual (Local4, 0xFF)) {
+        Add (CpmFindPcieRegAddress (Arg0, Local4, PCIECORE), SWRST_CONTROL_6, Local7) // PCIECORE::SWRST_CONTROL_6
+        If (LAnd (LGreaterEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RN), LLessEqual (CpmSbChipId, CPM_FCH_REVISION_ID_VN))) {
+            If (LGreaterEqual (Local4, 3)) {
+                // PCIE1
+                Subtract (Local4, 3, Local4)
+            }
+        } ElseIf (LEqual (CpmSbChipId, CPM_FCH_REVISION_ID_RMB)) {
+            If (LGreaterEqual (Local4, 5)) {
+                // PCIE1
+                Subtract (Local4, 5, Local4)
+            }
+        } Else {
+            // RV, RV2, ZP, SSP, MTS
+            If (LGreaterEqual (Local4, 8)) {
+                // PCIE1
+                Subtract (Local4, 8, Local4)
+            }
+        }
+        Store (CpmReadSmnRegister (0, 0, 0, Local7), Local0)                          // PCIECORE::SWRST_CONTROL_6
+        ShiftLeft (1, Local4, Local1)
+        ShiftLeft (Arg3, Local4, Local2)
+        If (LNotEqual (And (Local0, Local1), Local2)) {
+            And (Local0, Xor (0xFFFFFFFF, Local1), Local3)
+            CpmWriteSmnRegister (0, 0, 0, Local7, Or (Local3, Local2))
+        }
+    }
+}
+

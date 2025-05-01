@@ -1,0 +1,166 @@
+## @file
+#  Implement the PEIM of PeiChipsetSvc.
+#
+#  ***************************************************************************
+#  * Copyright (c) 2020 - 2021, Insyde Software Corp. All Rights Reserved.
+#  *
+#  * You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#  * transmit, broadcast, present, recite, release, license or otherwise exploit
+#  * any part of this publication in any form, by any means, without the prior
+#  * written permission of Insyde Software Corporation.
+#  *
+#  ******************************************************************************
+#
+##
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = ChipsetSvcPei
+  FILE_GUID                 = FB3D20EE-CB5D-45ee-BBAE-C5AAA9C0FDFA
+  MODULE_TYPE               = PEIM
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = ChipsetSvcPeiEntryPoint
+
+[Packages]
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SecurityPkg/SecurityPkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  PcAtChipsetPkg/PcAtChipsetPkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  AmdCommonChipsetPkg/AmdCommonChipsetPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AmdPspFeaturePkg/AmdPspFeaturePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+
+[Sources]
+  ChipsetSvcPei.c
+  EnableFdWrites.c
+  LegacyRegionAccessCtrl.c
+  GetSleepState.c
+  HdaInitHook.c
+  PlatformStage1Init.c
+  Stage1MemoryDiscoverCallback.c
+  PlatformStage2Init.c
+  Stage2MemoryDiscoverCallback.c
+  ModifyMemoryRange.c
+  SetSetupVariableDefault.c
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  MemoryAllocationLib
+  PciLib
+  BaseLib
+  IoLib
+  PostCodeLib
+  HobLib
+  PeiServicesTablePointerLib
+  PcdLib
+  PciExpressLib
+  KernelConfigLib
+  ChipsetConfigLib
+  BaseMemoryLib
+  VariableLib
+  FlashRegionLib
+  PeiCapsuleLib
+  CmosLib
+  MtrrLib
+  VariableLib
+
+[Ppis]
+  gPeiCachePpiGuid
+  gH2OChipsetServicesPpiGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gPeiWarmResetDetectedGuid
+  gPeiPlatformMemoryRangePpiGuid
+  gPeiInstallVerbTablePpiGuid
+  gEfiPeiMemoryDiscoveredPpiGuid
+  gEfiPeiStallPpiGuid
+
+  gEfiPeiResetPpiGuid
+  gPeiS3RestoreAcpiCallbackPpiGuid
+  gEfiEndOfPeiSignalPpiGuid
+  gAmdFchInitPpiGuid
+  gAmdFtpmFactoryResetPpiGuid
+  gAmdPspRecoveryDetectPpiGuid
+  gPeiRomCorruptPpiGuid
+
+[Guids]
+  gUmaExistHobGuid
+  gAmdMemoryInfoHobGuid
+  gH2OFlashMapRegionFvGuid
+  gH2OPeiCpInitChipsetPolicyGuid
+  gH2OPeiCpSetBootModeBeforeGuid
+  gH2OPeiCpDxeFvCorruptedGuid
+  gH2OPeiCpCrisisRecoveryFlashGuid
+  gPreventFlashPowerLossGuid
+  gH2OPeiCpInitPlatformStage1Guid
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gChipsetPkgTokenSpaceGuid.PcdH2OPciExpressSize
+  gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress
+  gUefiCpuPkgTokenSpaceGuid.PcdCpuLocalApicBaseAddress
+  gInsydeTokenSpaceGuid.PcdFlashAreaBaseAddress
+  gInsydeTokenSpaceGuid.PcdFlashAreaSize
+  gInsydeTokenSpaceGuid.PcdUseFastCrisisRecovery
+  gInsydeTokenSpaceGuid.PcdH2OTpmSupported
+  gInsydeTokenSpaceGuid.PcdH2OTpm2Supported
+  gChipsetPkgTokenSpaceGuid.PcdH2OTpmType
+  gChipsetPkgTokenSpaceGuid.PcdH2OSpiOrLpcTPMSupported
+  gChipsetPkgTokenSpaceGuid.PcdH2OSvmEnable
+  gChipsetPkgTokenSpaceGuid.PcdH2OSvmLock
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspKvmEnable
+  gInsydeTokenSpaceGuid.PcdPeiTpmPolicy
+  gInsydeTokenSpaceGuid.PcdFlashFvMainSize
+  gInsydeTokenSpaceGuid.PcdFlashFvMainBase
+  gChipsetPkgTokenSpaceGuid.PcdH2OBootFirmwareVolumeBase
+  gChipsetPkgTokenSpaceGuid.PcdH2OBootFirmwareVolumeSize
+  gChipsetPkgTokenSpaceGuid.PcdH2OPreferDtpmBootSupported
+  gEfiSecurityPkgTokenSpaceGuid.PcdTpmBaseAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataPortPowerPort1
+  gChipsetPkgTokenSpaceGuid.PcdH2OTsegSize
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdAmdPspFactoryReset
+  gInsydeTokenSpaceGuid.PcdUseFastCrisisRecovery
+  gInsydeTokenSpaceGuid.PcdH2OFdmChainOfTrustSupported
+  gInsydeTokenSpaceGuid.PcdH2OChipsetUsbPortEnable
+  gInsydeTokenSpaceGuid.PcdH2OChipsetUsb3PortEnable
+  gInsydeTokenSpaceGuid.PcdH2OChipsetPciePortEnable
+  gInsydeTokenSpaceGuid.PcdH2OChipsetSataPortEnable
+  gInsydeTokenSpaceGuid.PcdDxeTpmPolicy
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmAlgSmx
+  gChipsetPkgTokenSpaceGuid.PcdSmmProtectionFeature
+  gSmmSupervisorPkgTokenSpaceGuid.PcdSmmIsolationEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspDrtmVirtualDevice
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSmmLock
+  gAmdCpmPkgTokenSpaceGuid.PcdSkipSelfHealing
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspCoreEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdScpcLevel
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdIvInfoDmaReMap
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdDmaProtection
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnableForLevel3
+#[-start-221003-IB14740266-add]#
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSrIovSupport
+#[-end-221003-IB14740266-add]#
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OPeiCpSetBootModeBeforeSupported
+  gInsydeTokenSpaceGuid.PcdH2OPeiCpInitChipsetPolicySupported
+  gInsydeTokenSpaceGuid.PcdH2OPeiCpDxeFvCorruptedSupported
+  gInsydeTokenSpaceGuid.PcdH2OPeiCpCrisisRecoveryFlashSupported
+  gChipsetPkgTokenSpaceGuid.PcdPeiGopSupported                     #CUMSUMED
+  gChipsetPkgTokenSpaceGuid.PcdH2OBiosUpdateFlashSequenceEnabled
+
+[Depex]
+  gAmdCcxPeiInitCompletePpiGuid

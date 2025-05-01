@@ -1,0 +1,39 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = FabricIdsHookRmbLibDxe
+  FILE_GUID                      = F188A246-91BC-4F8F-9CD6-0B1C3DA2F87F
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = FabricIdsHookRmbLibDxe
+
+[Sources.common]
+  FabricIdsHookRmbLibDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  AmdIdsDebugPrintLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[FeaturePcd]
+
+[Pcd]
+
+[Depex]
+  TRUE
+
+[BuildOptions]

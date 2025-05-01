@@ -1,0 +1,63 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PlatformCustomizePei
+  FILE_GUID                      = CC9F5B7E-254B-4F8A-A648-034A40AEDA35
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PlatformCustomizePeiEntryPoint
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+
+[Sources]
+  PlatformCustomizePei.c
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  AmdBaseLib
+  AmdCpmBaseLib
+  AmdPbsConfigLib
+  FchKeithPeiLib
+
+[Ppis]
+  gEfiPeiI2cMasterPpiGuid
+  gPca9535aPpiGuid
+  gPca9555aPpiGuid
+  gAmdCpmTablePpiGuid
+#[-start-240806-IB20840078-add]#
+  gPlatformCustomizePeiInitReadyPpiGuid
+#[-end-240806-IB20840078-add]#
+
+[Guids]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFabricResourceDefaultSizePtr
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag
+  gAmdCpmPkgTokenSpaceGuid.PcdPdFwVersion
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXgbeDisable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSrisCfgType
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieRpCorrectedErrorMask
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieRpUnCorrectedErrorMask
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieRpUnCorrectedErrorSeverity
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieDevCorrectedErrorMask
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieDevUnCorrectedErrorMask
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieDevUnCorrectedErrorSeverity
+
+[Depex]
+  gPca9535aPpiGuid AND gAmdCpmTablePpiGuid AND gPca9555aPpiGuid

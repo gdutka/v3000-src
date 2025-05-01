@@ -1,0 +1,1058 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+//
+//  Smbus Acquire Semaphore (internal helper function for SMBus operations)
+//
+//  Arg0 - Smbus controller base IO port
+//  Arg1 - Timeout               if 0, skip to acquire the semaphore
+//                               if 1 ~ 0xFFFFFE, wait for x ns (16.7s Max.) for acquiring the semaphore
+//                               if 0xFFFFFF or greater, wait semaphore indefinitely
+//
+//  Return                       0 - success
+//                               1 - timeout before gets the semaphore
+//
+Method (CpmSmbusAcquSem, 2, Serialized) {
+    If (LEqual (Arg1, 0)) {
+        return (0)
+    }
+
+    // create operation region for current SMBus controller
+    OperationRegion (varM, SystemIO, Arg0, 9)
+    Field (varM, ByteAcc, NoLock, Preserve) {
+        Offset (0x08),
+        SMB8, 8,              // SMBusSlaveControl
+    }
+
+    // Keep polling until gets HostSemaphore or timeout
+    Store (Arg1, Local0)
+    While (LGreater (Local0, 0)) {
+        //
+        // SMBusSlaveControl Bit4 = hostsemaphore
+        // SMBusSlaveControl Bit6 = ecsemaphore
+        //
+        Or (SMB8, 0x40, SMB8)
+
+        If (LLess (Local0, 0xFFFFFF)) {
+            If (LGreater (Local0, 5)) {
+                Store (Subtract (Local0, 5), Local0)
+            } Else {
+                Store (0, Local0)
+            }
+        }
+
+        Stall (5)
+
+        Store (SMB8, Local1)
+        If (LEqual (And (Local1, 0x50), 0x40)) {
+            return (0);
+        }
+    }
+
+    return (1)
+}
+
+//
+//  Smbus Release Semaphore (internal helper function for SMBus operations)
+//
+//  Arg0 - Smbus controller base IO port
+//
+//  Return                       none
+//
+Method (CpmSmbusRelsSem, 1, Serialized) {
+    // create operation region for current SMBus controller
+    OperationRegion (varM, SystemIO, Arg0, 9)
+    Field (varM, ByteAcc, NoLock, Preserve) {
+        Offset (0x08),
+        SMB8, 8,              // SMBusSlaveControl
+    }
+
+    // Set ClrEcSemaphore to release the Semaphore.
+    Or (SMB8, 0x80, SMB8)
+}
+
+//
+//  Smbus wait for bus ready (internal helper function for SMBus operations)
+//
+//  Arg0 - Smbus controller base IO port
+//  Arg1 - Timeout               if 0, skip to wait
+//                               if 1 ~ 0xFFFFFE, wait for x ns (16.7s Max.) for waiting bus ready
+//                               if 0xFFFFFF or greater, wait bus ready indefinitely
+//
+//  Return                       0 - success
+//                               1 - timeout
+//
+Method (CpmSmbusCheckReady, 2, Serialized) {
+    // create operation region for current SMBus controller
+    OperationRegion (varM, SystemIO, Arg0, 3)
+    Field (varM, ByteAcc, NoLock, Preserve) {
+        SMB0, 8,              // SMBusStatus
+        SMB1, 8,              // SMBusSlaveStatus
+        SMB2, 8,              // SMBusControl
+    }
+
+    // Check host status
+    Store (Arg1, Local0)
+    While (LGreater (Local0, 0)) {
+        Store (100, Local1)             // wait counter
+        Store (0x01, Local2)            // ensure the loop will be run at least once
+        While (LAnd (LGreater (Local1, 0), LNotEqual (And (Local2, 1), 0))) {
+            // Clear all status bits
+            // HostBusy + SMBInterrupt + DeviceErr + BusCollision + Failed
+            Store (0x1F, SMB0)
+
+            If (LLess (Local0, 0xFFFFFF)) {
+                // Local0 -= 5
+                If (LGreater (Local0, 5)) {
+                    Store (Subtract (Local0, 5), Local0)
+                } Else {
+                    Store (0, Local0)
+                }
+            }
+
+            // 5us * 100 = 500us time out in each try before kill current transaction
+            Decrement (Local1)
+            Stall (5)
+            Store (SMB0, Local2)
+        }
+
+        If (LNotEqual (And (Local2, 1), 0)) {
+            // Set SMBusControl Bit[1] = 1, Kill current host transaction
+            Store (0x02, SMB2)
+        } Else {
+            Break
+        }
+    }
+
+    // in case HostBusy still asserted
+    If (LNotEqual (And (SMB0, 1), 0)) {
+        return (1)
+    }
+
+    // Clear slave status (share the timeout durtion of checking host status)
+    While (LGreater (Local0, 0)) {
+        Store (100, Local1)             // wait counter
+        Store (0x01, Local2)            // ensure the loop will be run at least once
+        While (LAnd (LGreater (Local1, 0), LNotEqual (And (Local2, 1), 0))) {
+            // Clear all status bits
+            // SlaveBusy + SlaveInit + SlaveStatus + Shadow1Status + Shadow2Status + AlertStatus
+            Store (0x3F, SMB1)
+
+            If (LLess (Local0, 0xFFFFFF)) {
+                // Local0 -= 5
+                If (LGreater (Local0, 5)) {
+                    Store (Subtract (Local0, 5), Local0)
+                } Else {
+                    Store (0, Local0)
+                }
+            }
+
+            // 5us * 100 = 500us time out in each try before kill current transaction
+            Decrement (Local1)
+            Stall (5)
+            Store (SMB1, Local2)
+        }
+
+        If (LNotEqual (And (Local2, 1), 0)) {
+            // Set SMBusSlaveStatus BIT1 = 1, SlaveInit
+            Store (0x02, SMB1)
+        } Else {
+            Break
+        }
+    }
+
+    // in case SlaveBusy still asserted
+    If (LNotEqual (And (SMB1, 1), 0)) {
+        return (1)
+    }
+
+    return (0)
+}
+
+//
+//  Smbus Executor (internal helper function for SMBus operations)
+//
+//  Arg0 - Smbus Port Selector   0 - Smbus0; 1 - Smbus1
+//  Arg1 - Transmit directon     0 - Master Send (write)
+//                               1 - Master Receive (read)
+//  Arg2 - Smbus Protocol        0 - Quick       S [(SlvAddr << 1) | Rd/Wr] A P
+//                               1 - Byte        S [(SlvAddr << 1) | Rd/Wr] A [DataByte] A P
+//                               2 - Byte Data   S [(SlvAddr << 1) | Wr] A [CmdCode] A [DataByte] A P
+//                                               S [(SlvAddr << 1) | Wr] A [CmdCode] Sr [(SlvAddr << 1) | Rd] A [DataByte] A P
+//                               3 - Word Data   S [(SlvAddr << 1) | Wr] A [CmdCode] A [ByteLow] A [Byte High] A P
+//                                               S [(SlvAddr << 1) | Wr] A [CmdCode] Sr [(SlvAddr << 1) | Rd] A [ByteLow] A [ByteHigh] A P
+//                               5 - Block       S [(SlvAddr << 1) | Wr] A [CmdCode] A [ByteLow] A [Byte High] A P
+//  Arg3 - Slave Address
+//  Arg4 - Command code          (need if Protocol = 2, 3 and 5)
+//  Arg5 - Input buffer          (need if Protocol = 1, 2, 3 and 5)
+//
+//  Return                       package {
+//                                 UINT8 STAT;               0 - success; 0x8X - fail
+//                                 UINT8 LEN;                one-based data length
+//                                 union {
+//                                   UINT8  DATB;
+//                                   UINT16 DATW;
+//                                   UINT8  DTBF[32];
+//                                 } data;
+//                               } OutputBuffer in Local0
+//
+Mutex (CpmSmbusMutex, 0)
+
+Method (CpmSmbusExecutor, 6, Serialized) {
+    // LocalX assignment:
+    //     0:     the return buffer
+    //     1/2/3: local variables
+    //     4:     SMBus Controller IO base for OperationRegion
+    //     5/6:   SMBus controller status
+    //     7:     input buffer
+    //
+    // Input buffer format
+    // Struct {
+    //   UINT8 LEN;
+    //   union {
+    //     UINT8  DATB;
+    //     UINT16 DATW;
+    //     UINT8  DTBF[32];
+    //   } data;
+    // } InputBuffer in Local7
+    //
+    // Create the return buffer in Local0
+    //
+
+    Store (Buffer (34) {}, Local0)
+    CreateByteField (Local0, 0x00, STAT)          // STAT = Status (Byte), 0 = success
+    CreateByteField (Local0, 0x01, LEN)           // LEN  = Length (Byte)
+    CreateByteField (Local0, 0x02, DATB)          // DATB = Data (Bytes 2)               // dont use
+    CreateWordField (Local0, 0x02, DATW)          // DATW = Data (Word - Bytes 2 / 3)    // dont use
+    CreateField (Local0, 0x10, 256, DTBF)         // DTBF = Data Buffer (Block - Bytes 2 to 33)
+
+    Store (0xFF, STAT)                            // initialize STAT by 0xFF
+    Store (0, LEN)                                // initialize LEN by 0
+    Store (0, DTBF)                               // clear return data buffer
+
+    CpmSetPostCode (CpmSmbusExecutorEnter)
+    CpmDebugPrint ("  KER-ASL-CpmSmbusExecutor (Port%d, isRead %d, Potcl %d, DevAddr 0x%X, Cmd 0x%X)\n", Arg0, Arg1, Arg2, Arg3, Arg4, 0)
+
+    // Regularize and check parameters
+    If (LAnd (LNotEqual (Arg0, 0), LNotEqual (Arg0, 1))) {
+        Store (0x80, STAT)
+        CpmDebugPrintString ("  KER-ASL-CpmSmbusExecutor return 0x80\n", 0)
+        return (Local0)
+    }
+
+    If (LAnd (LNotEqual (Arg1, 0), LNotEqual (Arg1, 1))) {
+        Store (0x81, STAT)
+        CpmDebugPrintString ("  KER-ASL-CpmSmbusExecutor return 0x81\n", 0)
+        return (Local0)
+    }
+
+    // VALP holds all valid Smbus Protocols
+    Name (VALP, Package () {0, 1, 2, 3, 5})
+
+    // check if Arg2 is in the list of VALP
+    If (LEqual (Match (VALP, MEQ, Arg2, MTR, 0, 0), Ones)) {
+        Store (0x82, STAT)
+        CpmDebugPrintString ("  KER-ASL-CpmSmbusExecutor return 0x82\n", 0)
+        return (Local0)
+    }
+
+    // If Master Send Block, check data length
+    If (LAnd (LEqual (Arg1, 0), LEqual (Arg2, 5))) {
+        Store (Arg5, Local7)                                  // Store input buffer to Local7
+        Store (DeRefOf (Index (Local7, 0)), Local2)           // get Length
+        If (LOr (LLess (Local2, 1), LGreater (Local2, 32))) { // support from 1 to 32
+            Store (0x83, STAT)
+            CpmDebugPrint ("  KER-ASL-CpmSmbusExecutor return 0x83, Length %d\n", Local2, 0, 0, 0, 0, 0)
+            return (Local0)
+        }
+    }
+
+    // Acquire bus mutex
+    Acquire (CpmSmbusMutex, 0xFFFF)
+
+    // Local4 holds the base IO of the current SMBus controller
+    Add (CpmSmbusIoBaseAddr, ShiftLeft (Arg0, 5), Local4)
+    If (LEqual (Local4, 0)) {
+        Release (CpmSmbusMutex)
+
+        Store (0x84, STAT)
+        CpmDebugPrint ("  KER-ASL-CpmSmbusExecutor return 0x84, Local4 %d\n", Local4, 0, 0, 0, 0, 0)
+        return (Local0)
+    }
+
+    // create operation region for current SMBus controller
+    OperationRegion (varM, SystemIO, Local4, 9)
+    Field (varM, ByteAcc, NoLock, Preserve) {
+        SMB0, 8,              // SMBusStatus
+        SMB1, 8,              // SMBusSlaveStatus
+        SMB2, 8,              // SMBusControl
+        SMB3, 8,              // SMBusHostCmd
+        SMB4, 8,              // SMBusAddress
+        SMB5, 8,              // SMBusData0
+        SMB6, 8,              // SMBusData1
+        SMB7, 8,              // SMBusBlockData
+        SMB8, 8,              // SMBusSlaveControl
+    }
+
+    //
+    // Stage SMBus controller status to Local5 and Local6
+    //
+    Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8), Local5)
+    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Or (Local5, 0x1))
+
+    // Save SMBusControl for Smbus1
+    If (LEqual (Arg0, 1)) {
+        Store (SMB2, Local6)
+        Store (And (Local6, 0x7F), SMB2)
+    }
+
+    // Acquire Semaphore
+    If (CpmSmbusAcquSem (Local4, 20000)) {
+        // Restore SMBusControl for Smbus1
+        If (LEqual (Arg0, 1)) {
+            Store (Local6, SMB2)
+        }
+        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+
+        Release (CpmSmbusMutex)
+
+        Store (0x85, STAT)
+        CpmDebugPrintString ("  KER-ASL-CpmSmbusExecutor return 0x85\n", 0)
+        return (Local0)
+    }
+
+    If (CpmSmbusCheckReady (Local4, 20000)) {
+        // Restore SMBusControl for Smbus1
+        If (LEqual (Arg0, 1)) {
+            Store (Local6, SMB2)
+        }
+        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+
+        CpmSmbusRelsSem (Local4)
+        Release (CpmSmbusMutex)
+
+        Store (0x86, STAT)
+        CpmDebugPrintString ("  KER-ASL-CpmSmbusExecutor return 0x86\n", 0)
+        return (Local0)
+    }
+
+    // Store input buffer to Local7
+    Store (Arg5, Local7)
+
+    // do smbus transaction
+    // Set the retry counter to 3
+    Store (3, Local3)
+    While (LGreater (Local3, 0)) {
+        // Clear all status bits
+        // HostBusy + SMBInterrupt + DeviceErr + BusCollision + Failed
+        Store (0x1F, SMB0)
+
+        // Set SMBus slave address for the device to send/receive from
+        Or (ShiftLeft (Arg3, 1), Arg1, SMB4)
+
+        // Set Command register
+        Store (Arg4, SMB3)
+
+        // Select SMBus protocol
+        // SMBusControl Bit[4:2] = Arg2 - Smbus Protocol
+        Store (ShiftLeft (Arg2, 2), SMB2)
+
+        //
+        // Do a read from Reg02 to reset the counter if it's going to be a
+        // block read/write operation
+        //
+        Store (SMB2, Local1)
+
+        //
+        // Prepare the sending data
+        //
+        If (LEqual (Arg1, 0)) {      // (Arg1 == 0) menas Master Send
+            If (LOr (LEqual (Arg2, 1), LEqual (Arg2, 2))) {           // send byte or send byte data
+                Store (DeRefOf (Index (Local7, 1)), SMB5)             // set byte to SMBusData0
+            }
+            If (LEqual (Arg2, 3)) {                                   // receive word data
+                Store (DeRefOf (Index (Local7, 2)), SMB6)             // set high byte to SMBusData1
+                Store (DeRefOf (Index (Local7, 1)), SMB5)             // set low byte to SMBusData0
+            }
+            If (LEqual (Arg2, 5)) {                                   // Block access
+                Store (DeRefOf (Index (Local7, 0)), Local2)
+                Store (Local2, SMB5)                                  // Set the length
+                Store (1, Local1)
+                While (LLessEqual (Local1, Local2)) {
+                    Store (DeRefOf (Index (Local7, Local1)), SMB7)    // Set sending data to SMB7
+                    Increment (Local1)
+                }
+            }
+        } ElseIf (LEqual (Arg2, 5)) {                                 // Master receive block
+            Store (DeRefOf (Index (Local7, 0)), Local2)
+            Store (Local2, SMB5)                                      // Set the length
+        }
+
+        // Set Control Register (Initiate Operation, Interrupt disabled)
+        // SMBusControl Bit[4:2] = Arg2 + Bit[6] = Start
+        Or (ShiftLeft (Arg2, 2), 0x40, SMB2)
+
+        If (LEqual (Arg2, 5)) {         // (Arg2 == 5) means block access
+            Store (7000, Local1)        // Set a bigger counter for block read/write
+        } Else {
+            Store (1000, Local1)        // Set wait counter for byte access
+        }
+
+        // Wait for controller IO to finish work
+        Store (0x01, Local2)            // ensure the loop will be run at least once
+        While (LAnd (LGreater (Local1, 0), LEqual (And (Local2, 0x0E), 0))) {
+            If (LEqual (And (Local2, 1), 0)) { // Bit0 = 0, Host is not busy
+                Break
+            }
+
+            // timeout is Local1 * 5us = 5ms for byte access or 35ms for block access
+            Decrement (Local1)
+            Stall (5)
+            Store (SMB0, Local2)        // check smbus status
+        }
+
+        // if timeout (i.e. Local1 == 0) and host is busy (i.e. bit0 of Local2 is 1)
+        If (LAnd (LEqual (Local1, 0), LNotEqual (And (Local2, 1), 0))) {
+            // Set SMBusControl Bit[1] = 1, Kill current host transaction
+            Store (0x02, SMB2)
+
+            // Restore SMBusControl for Smbus1
+            If (LEqual (Arg0, 1)) {
+                Store (Local6, SMB2)
+            }
+            CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+
+            CpmSmbusRelsSem (Local4)
+            Release (CpmSmbusMutex)
+
+            Store (0x87, STAT)
+            CpmDebugPrintString ("  KER-ASL-CpmSmbusExecutor return 0x87\n", 0)
+            return (Local0)
+        }
+
+        // SMBus Status (SMB0) in Local2
+        If (LNotEqual (And (Local2, 0x04), 0)) {                // if bit2 DeviceErr = 1
+            Store (0, Local3)                                   //   Clear retry counter
+        } ElseIf (LNotEqual (And (Local2, 0x08), 0)) {          // if bit3 BusCollision = 1
+            Store (0x08, SMB0)                                  //   Clear bus error and decrease retry
+            Decrement (Local3)                                  //   counter for another try
+        } Else {
+            //
+            // Successful completion
+            //
+            Store (0, Local3)                                   // clear retry counter to break the outer loop
+            Store (0, STAT)                                     // clear STAT to indicate success
+
+            If (LNotEqual (Arg1, 0)) {                          // (Arg1 != 0) menas Master Receive
+                If (LOr (LEqual (Arg2, 1), LEqual (Arg2, 2))) { // receive byte or receive byte data
+                    Store (SMB5, DATB)                          // Read a byte from SMBusData0
+                    Store (1, LEN)                              // Set the length = 1
+                }
+                If (LEqual (Arg2, 3)) {                         // receive word data
+                    Store (SMB6, Index (Local0, 3))             // Read a byte from SMBusData1
+                    Store (SMB5, Index (Local0, 2))             // Read a byte from SMBusData0
+                    Store (2, LEN)                              // Set the length = 2
+                }
+                If (LEqual (Arg2, 5)) {                         // Block access
+                    Store (SMB2, Local2)                        // Do a read from Reg02 before load the actual block count from SMB5
+                    Store (SMB5, Local2)                        // Local2 is one-based count
+                    If (LGreater (Local2, 32)) {                // Ensure Local2 at max. 32
+                        Store (32, Local2)
+                    }
+                    Store (Local2, LEN)                         // Set the length
+                    Store (2, Local1)
+                    Add (Local2, 2, Local2)
+                    While (LLess (Local1, Local2)) {
+                        Store (0xCC, Index (Local0, Local1))    // Clear buffer to 0xCC for debug
+                        Store (SMB7, Index (Local0, Local1))    // Load received data from SMB7
+                        Increment (Local1)
+                    }
+                }
+            }
+        }
+    } // end of While (LGreater (Local3, 0)) ... where Local3 is the retry counter
+
+    // Clear host controller status
+    // Save HostBusy + DeviceErr + BusCollision + Failed to Local1 then clear SMBusStatus
+    Store (And (SMB0, 0x1D), Local1)
+    Store (Local1, STAT)
+    Store (0x1F, SMB0)
+
+    // Restore SMBusControl for Smbus1
+    If (LEqual (Arg0, 1)) {
+        Store (Local6, SMB2)
+    }
+    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+
+    CpmSmbusRelsSem (Local4)
+    Release (CpmSmbusMutex)
+
+    //
+    // return STAT = 0 means success (i.e. bit[4,3,2,0] of SMB0 are zero)
+    //
+    CpmDebugPrint ("  KER-ASL-CpmSmbusExecutor return St: 0x%X, Len %d, Data: 0x%X, 0x%X, 0x%X, 0x%X ...\n", STAT, LEN, DeRefOf (Index (Local0, 2)), DeRefOf (Index (Local0, 3)), DeRefOf (Index (Local0, 4)), DeRefOf (Index (Local0, 5)))
+    CpmSetPostCode (CpmSmbusExecutorExit)
+    return (Local0)
+}
+
+//
+//  Smbus Quick
+//
+//  Arg0 - SmbusSelect         0 = Smbus0, 1 = Smbus1.
+//  Arg1 - Transmit directon   0 - Master Send (write); 1 - Master Receive (read)
+//  Arg2 - SmbusAddress        7bit Smbus device address.
+//
+//  Return                     0 for success
+//
+Method (CpmSmbusQuick, 3, Serialized) {
+    Store (CpmSmbusExecutor (Arg0, Arg1, 0, Arg2, 0, 0), Local0)
+    return (DeRefOf (Index (Local0, 0)))
+}
+
+//
+//  Smbus Quick Byte
+//
+//  Arg0 - SmbusSelect         0 = Smbus0, 1 = Smbus1.
+//  Arg1 - Transmit directon   0 - Master Send (write); 1 - Master Receive (read)
+//  Arg2 - SmbusAddress        7bit Smbus device address.
+//  Arg3 - Byte to send (need if Arg1 == 0)
+//
+//  Return                     Buffer {STAT, LEN, Data0, Data1 ...}
+//
+Method (CpmSmbusQuickByte, 4, Serialized) {
+    Store (Buffer (2) {}, Local0)
+    CreateByteField (Local0, 0x00, LEN)
+    CreateByteField (Local0, 0x01, DATB)
+
+    Store (1, LEN)
+    Store (Arg3, DATB)
+
+    Store (CpmSmbusExecutor (Arg0, Arg1, 1, Arg2, 0, Local0), Local1)
+
+    return (Local1)
+}
+
+//
+//  Smbus Commnad Byte
+//
+//  Arg0 - SmbusSelect         0 = Smbus0, 1 = Smbus1.
+//  Arg1 - Transmit directon   0 - Master Send (write); 1 - Master Receive (read)
+//  Arg2 - SmbusAddress        7bit Smbus device address.
+//  Arg3 - Command
+//  Arg4 - Byte to send (need if Arg1 == 0)
+//
+//  Return                     Buffer {STAT, LEN, Data0, Data1 ...}
+//
+Method (CpmSmbusCmdByte, 5, Serialized) {
+    Store (Buffer (2) {}, Local0)
+    CreateByteField (Local0, 0x00, LEN)
+    CreateByteField (Local0, 0x01, DATB)
+
+    Store (1, LEN)
+    Store (Arg4, DATB)
+
+    Store (CpmSmbusExecutor (Arg0, Arg1, 2, Arg2, Arg3, Local0), Local1)
+
+    return (Local1)
+}
+
+//
+//  Smbus Commnad Word
+//
+//  Arg0 - SmbusSelect         0 = Smbus0, 1 = Smbus1.
+//  Arg1 - Transmit directon   0 - Master Send (write); 1 - Master Receive (read)
+//  Arg2 - SmbusAddress        7bit Smbus device address.
+//  Arg3 - Command
+//  Arg4 - Word to send (need if Arg1 == 0)
+//
+//  Return                     Buffer {STAT, LEN, Data0, Data1 ...}
+//
+Method (CpmSmbusCmdWord, 5, Serialized) {
+    Store (Buffer (3) {}, Local0)
+    CreateByteField (Local0, 0x00, LEN)
+    CreateByteField (Local0, 0x01, DATL)
+    CreateByteField (Local0, 0x02, DATH)
+
+    Store (2, LEN)
+    Store (And (Arg4, 0xFF), DATL)
+    Store (And (ShiftRight (Arg4, 8), 0xFF), DATH)
+
+    Store (CpmSmbusExecutor (Arg0, Arg1, 3, Arg2, Arg3, Local0), Local1)
+
+    return (Local1)
+}
+
+//
+//  Smbus Commnad Block
+//
+//  Arg0 - SmbusSelect         0 = Smbus0, 1 = Smbus1.
+//  Arg1 - Transmit directon   0 - Master Send (write); 1 - Master Receive (read)
+//  Arg2 - SmbusAddress        7bit Smbus device address.
+//  Arg3 - Command
+//  Arg4 - Buffer {LEN, Data0, Data1 ...}
+//
+//  Return                     Buffer {STAT, LEN, Data0, Data1 ...}
+//
+Method (CpmSmbusCmdBlock, 5, Serialized) {
+    Store (CpmSmbusExecutor (Arg0, Arg1, 5, Arg2, Arg3, Arg4), Local1)
+
+    return (Local1)
+}
+
+//
+//  Smbus Execute Read Byte (One Byte)
+//
+//  Arg0 - SmbusSelect         0 = Smbus0, 1 = Smbus1.
+//  Arg1 - SmbusSlaveAddress   7bit Smbus device address.
+//                             Bit[2:0] = A2/A1/A0 HW selectable pin.
+//                             Bit[6:3] = HW fixed device adress.
+//  Arg2 - SmbusOffset         Smbus Device Register Offset.
+//
+//  Return                     One byte read data.
+//
+Method (CpmReadSmbusByte, 3, Serialized) {
+    Acquire (CpmSmbusMutex, 0xFFFF)
+    Add (CpmSmbusIoBaseAddr, ShiftLeft (Arg0, 5), Local0)
+    OperationRegion (varM, SystemIO, Local0, 9)
+    Field (varM, ByteAcc, NoLock, Preserve) {
+        SMB0, 8,              // SMBusStatus
+        SMB1, 8,              // SMBusSlaveStatus
+        SMB2, 8,              // SMBusControl
+        SMB3, 8,              // SMBusHostCmd
+        SMB4, 8,              // SMBusAddress
+        SMB5, 8,              // SMBusData0
+        SMB6, 8,              // SMBusData1
+        SMB7, 8,              // SMBusBlockData
+        SMB8, 8,              // SMBusSlaveControl
+    }
+
+    Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8), Local5)
+    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Or (Local5, 0x1))
+    If (LEqual (Arg0, 1)) {
+        Store (SMB2, Local6)
+        Store (And (Local6, 0x7F), SMB2)
+    }
+
+    // Keep polling until host gets SMBUS control
+    Store (0, Local1)
+    Store (100, Local2)
+    While (LAnd (LGreater (Local2, 0), LNotEqual (And (Local1, 0x10), 0x10))) {
+        // SMBusSlaveControl Bit4 = HostSemaphore
+        Or (SMB8, 0x10, SMB8)
+        Store (Subtract (Local2, 1), Local2)
+        // 5us * 100 = max. 500us time out
+        Stall (5)
+        Store (SMB8, Local1)
+    }
+
+    // Clear host status and wait until host is idle
+    Store (3, Local3)
+    While (LGreater (Local3, 0)) {
+        Store (1, Local1)
+        Store (100, Local2)
+        While (LAnd (LGreater (Local2, 0), LNotEqual (And (Local1, 1), 0))) {
+            // Clear all status bits
+            // HostBusy + SMBInterrupt + DeviceErr + BusCollision + Failed
+            Store (0x1F, SMB0)
+            Store (Subtract (Local2, 1), Local2)
+            // 5us * 100 = max. 500us time out
+            Stall (5)
+            Store (SMB0, Local1)
+        }
+        If (LEqual (Local2, 0)) {
+            // Set SMBusControl Bit[1] = 1, Kill current host transaction
+            Store (0x02, SMB2)
+            Store (Subtract (Local3, 1), Local3)
+        } Else {
+            // SMBusStatus Bit0 = 0, controller is idle
+            Store (0, Local3)
+        }
+    }
+    If (LAnd (LEqual (Local2, 0), LEqual (Local3, 0))) {
+        If (LEqual (Arg0, 1)) {
+            Store (Local6, SMB2)
+        }
+        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+        Release (CpmSmbusMutex)
+        CpmDebugPrint ("  KER-ASL-CpmReadSmbusByte (%d, 0x%X, 0x%X) = 0 ERROR 1\n", Arg0, Arg1, Arg2, 0, 0, 0)
+        return (0)
+    }
+
+    // Clear slave status and wait until slave is idle
+    Store (3, Local3)
+    While (LGreater (Local3, 0)) {
+        Store (1, Local1)
+        Store (100, Local2)
+        While (LAnd (LGreater (Local2, 0), LNotEqual (And (Local1, 1), 0))) {
+            // Clear all slave status bits
+            // SlaveBusy + SlaveInit + SlaveStatus + Shadow1Status + Shadow2Status + AlertStatus
+            Store (0x3F, SMB1)
+            Store (Subtract (Local2, 1), Local2)
+            // 5us * 100 = max. 500us time out
+            Stall (5)
+            Store (SMB1, Local1)
+        }
+        If (LEqual (Local2, 0)) {
+            // Set SMBusSlaveStatus BIT1 = 1, SlaveInit
+            Store (0x02, SMB1)
+            Store (Subtract (Local3, 1), Local3)
+        } Else {
+            // SMBusSlaveStatus Bit0 = 0, slave is idle
+            Store (0, Local3)
+        }
+    }
+    If (LAnd (LEqual (Local2, 0), LEqual (Local3, 0))) {
+        If (LEqual (Arg0, 1)) {
+            Store (Local6, SMB2)
+        }
+        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+        Release (CpmSmbusMutex)
+        CpmDebugPrint ("  KER-ASL-CpmReadSmbusByte (%d, 0x%X, 0x%X) = 0 ERROR 2\n", Arg0, Arg1, Arg2, 0, 0, 0)
+        return (0)
+    }
+
+    // Initialize variables
+    // Process Operation
+    Store (3, Local3)
+    While (LGreater (Local3, 0)) {
+        // Clear all status bits
+        // HostBusy + SMBInterrupt + DeviceErr + BusCollision + Failed
+        Store (0x1F, SMB0)
+
+        // Set SMBus slave address for the device to send/receive from
+        Or (ShiftLeft (Arg1, 1), 1, SMB4)
+
+        // Set Command register
+        Store (Arg2, SMB3)
+
+        // Select SMBus protocol
+        // SMBusControl Bit[4:2] = 0x02 Byte Data Read or Write
+        Store (ShiftLeft (0x02, 2), SMB2)
+
+        //
+        // Do a read from Reg02 to reset the counter if it's going to be a
+        // block read/write operation
+        //
+        Store (SMB2, Local1)
+
+        // Set Control Register (Initiate Operation, Interrupt disabled)
+        // SMBusControl Bit[4:2] = 0x02 + Bit[6] = Start
+        Or (ShiftLeft (0x02, 2), 0x40, SMB2)
+
+        // Wait for controller IO to finish work
+        Store (1, Local1)
+        Store (1000, Local4)
+        While (LAnd (LGreater (Local4, 0), LEqual (And (Local1, 0xE), 0))) {
+            Store (1000, Local2)
+            While (LAnd (LGreater (Local2, 0), LNotEqual (And (Local1, 1), 0))) {
+                Store (Subtract (Local2, 1), Local2)
+                // 5us * 1000 = max. 5ms time out
+                Stall (5)
+                Store (SMB0, Local1)
+            }
+
+            If (LEqual (Local2, 0)) {
+                // Set SMBusControl Bit[1] = 1, Kill current host transaction
+                Store (0x02, SMB2)
+                If (LEqual (Arg0, 1)) {
+                    Store (Local6, SMB2)
+                }
+                CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+                Release (CpmSmbusMutex)
+                CpmDebugPrint ("  KER-ASL-CpmReadSmbusByte (%d, 0x%X, 0x%X) = 0 ERROR 3\n", Arg0, Arg1, Arg2, 0, 0, 0)
+                return (0)
+            }
+
+            Store (Subtract (Local4, 1), Local4)
+            // 5us * 1000 = max. 5ms time out
+            Stall (5)
+            Store (SMB0, Local1)
+        } // End of While (LAnd (LGreater (Local4, 0), LEqual (And (Local1, 0xE), 0)))
+
+        If (LNotEqual (And (Local1, 0x04), 0)) {
+            Store (0, Local3)
+            Store (0, Local4)
+        } ElseIf (LNotEqual (And (Local1, 0x08), 0)) {
+            // Clear bus error for another try
+            Store (0x08, SMB0)
+            Store (Subtract (Local3, 1), Local3)
+            Store (0, Local4)
+        } Else {
+            //
+            // Successful completion
+            //
+            // Read a byte from Host data 0
+            Store (0, Local3)
+            Store (SMB5, Local4)
+        }
+    }
+
+    // Clear host controller status
+    // HostBusy + SMBInterrupt + DeviceErr + BusCollision + Failed
+    Store (0x1F, SMB0)
+
+    // Release SMBUS ownership
+    // Clear Host Semaphore Bit[5]
+    Or (SMB8, 0x20, SMB8)
+
+    If (LEqual (Arg0, 1)) {
+        Store (Local6, SMB2)
+    }
+    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+    Release (CpmSmbusMutex)
+    CpmDebugPrint ("  KER-ASL-CpmReadSmbusByte (%d, 0x%X, 0x%X) = 0x%X Success\n", Arg0, Arg1, Arg2, Local4, 0, 0)
+    return (Local4)
+}
+
+//
+//  Smbus Execute Write Byte (One Byte)
+//
+//  Arg0 - SmbusSelect         0 = Smbus0, 1 = Smbus1.
+//  Arg1 - SmbusSlaveAddress   7bit Smbus device address.
+//                             Bit[2:0] = A2/A1/A0 HW selectable pin.
+//                             Bit[6:3] = HW fixed device adress.
+//  Arg2 - SmbusOffset         Smbus Device Register Offset.
+//  Arg3 - Value               One byte write data.
+//
+Method (CpmWriteSmbusByte, 4, Serialized) {
+    Acquire (CpmSmbusMutex, 0xFFFF)
+    Add (CpmSmbusIoBaseAddr, ShiftLeft (Arg0, 5), Local0)
+    OperationRegion (varM, SystemIO, Local0, 9)
+    Field (varM, ByteAcc, NoLock, Preserve) {
+        SMB0, 8,              // SMBusStatus
+        SMB1, 8,              // SMBusSlaveStatus
+        SMB2, 8,              // SMBusControl
+        SMB3, 8,              // SMBusHostCmd
+        SMB4, 8,              // SMBusAddress
+        SMB5, 8,              // SMBusData0
+        SMB6, 8,              // SMBusData1
+        SMB7, 8,              // SMBusBlockData
+        SMB8, 8,              // SMBusSlaveControl
+    }
+
+    Store (CpmReadMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8), Local5)
+    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Or (Local5, 0x1))
+    If (LEqual (Arg0, 1)) {
+        Store (SMB2, Local6)
+        Store (And (Local6, 0x7F), SMB2)
+    }
+
+    // Keep polling until host gets SMBUS control
+    Store (0, Local1)
+    Store (100, Local2)
+    While (LAnd (LGreater (Local2, 0), LNotEqual (And (Local1, 0x10), 0x10))) {
+        // SMBusSlaveControl Bit4 = HostSemaphore
+        Or (SMB8, 0x10, SMB8)
+        Store (Subtract (Local2, 1), Local2)
+        // 5us * 100 = max. 500us time out
+        Stall (5)
+        Store (SMB8, Local1)
+    }
+
+    // Clear host status and wait until host is idle
+    Store (3, Local3)
+    While (LGreater (Local3, 0)) {
+        Store (1, Local1)
+        Store (100, Local2)
+        While (LAnd (LGreater (Local2, 0), LNotEqual (And (Local1, 1), 0))) {
+            // Clear all status bits
+            // HostBusy + SMBInterrupt + DeviceErr + BusCollision + Failed
+            Store (0x1F, SMB0)
+            Store (Subtract (Local2, 1), Local2)
+            // 5us * 100 = max. 500us time out
+            Stall (5)
+            Store (SMB0, Local1)
+        }
+        If (LEqual (Local2, 0)) {
+            // Set SMBusControl Bit[1] = 1, Kill current host transaction
+            Store (0x02, SMB2)
+            Store (Subtract (Local3, 1), Local3)
+        } Else {
+            // SMBusStatus Bit0 = 0, controller is idle
+            Store (0, Local3)
+        }
+    }
+    If (LAnd (LEqual (Local2, 0), LEqual (Local3, 0))) {
+        If (LEqual (Arg0, 1)) {
+            Store (Local6, SMB2)
+        }
+        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+        Release (CpmSmbusMutex)
+        return (0)
+    }
+
+    // Clear slave status and wait until slave is idle
+    Store (3, Local3)
+    While (LGreater (Local3, 0)) {
+        Store (1, Local1)
+        Store (100, Local2)
+        While (LAnd (LGreater (Local2, 0), LNotEqual (And (Local1, 1), 0))) {
+            // Clear all slave status bits
+            // SlaveBusy + SlaveInit + SlaveStatus + Shadow1Status + Shadow2Status + AlertStatus
+            Store (0x3F, SMB1)
+            Store (Subtract (Local2, 1), Local2)
+            // 5us * 100 = max. 500us time out
+            Stall (5)
+            Store (SMB1, Local1)
+        }
+        If (LEqual (Local2, 0)) {
+            // Set SMBusSlaveStatus BIT1 = 1, SlaveInit
+            Store (0x02, SMB1)
+            Store (Subtract (Local3, 1), Local3)
+        } Else {
+            // SMBusSlaveStatus Bit0 = 0, slave is idle
+            Store (0, Local3)
+        }
+    }
+    If (LAnd (LEqual (Local2, 0), LEqual (Local3, 0))) {
+        If (LEqual (Arg0, 1)) {
+            Store (Local6, SMB2)
+        }
+        CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+        Release (CpmSmbusMutex)
+        return (0)
+    }
+
+    // Initialize variables
+    // Process Operation
+    Store (3, Local3)
+    While (LGreater (Local3, 0)) {
+        // Clear all status bits
+        // HostBusy + SMBInterrupt + DeviceErr + BusCollision + Failed
+        Store (0x1F, SMB0)
+
+        // Set SMBus slave address for the device to send/receive from
+        Store (ShiftLeft (Arg1, 1), SMB4)
+
+        // Set Command register
+        Store (Arg2, SMB3)
+
+        // Select SMBus protocol
+        // SMBusControl Bit[4:2] = 0x02 Byte Data Read or Write
+        Store (ShiftLeft (0x02, 2), SMB2)
+
+        //
+        // Do a read from Reg02 to reset the counter if it's going to be a
+        // block read/write operation
+        //
+        Store (SMB2, Local1)
+
+        // Write Data to SMBusData0 register
+        Store (Arg3, SMB5)
+
+        // Set Control Register (Initiate Operation, Interrupt disabled)
+        // SMBusControl Bit[4:2] = 0x02 + Bit[6] = Start
+        Or (ShiftLeft (0x02, 2), 0x40, SMB2)
+
+        // Wait for controller IO to finish work
+        Store (1, Local1)
+        Store (1000, Local4)
+        While (LAnd (LGreater (Local4, 0), LEqual (And (Local1, 0xE), 0))) {
+            Store (1000, Local2)
+            While (LAnd (LGreater (Local2, 0), LNotEqual (And (Local1, 1), 0))) {
+                Store (Subtract (Local2, 1), Local2)
+                // 5us * 1000 = max. 5ms time out
+                Stall (5)
+                Store (SMB0, Local1)
+            }
+
+            If (LEqual (Local2, 0)) {
+                // Set SMBusControl Bit[1] = 1, Kill current host transaction
+                Store (0x02, SMB2)
+                If (LEqual (Arg0, 1)) {
+                    Store (Local6, SMB2)
+                }
+                CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+                Release (CpmSmbusMutex)
+                return (0)
+            }
+
+            Store (Subtract (Local4, 1), Local4)
+            // 5us * 1000 = max. 5ms time out
+            Stall (5)
+            Store (SMB0, Local1)
+        } // End of While (LAnd (LGreater (Local4, 0), LEqual (And (Local1, 0xE), 0)))
+
+        If (LNotEqual (And (Local1, 0x04), 0)) {
+            Store (0, Local3)
+            Store (0, Local4)
+        } ElseIf (LNotEqual (And (Local1, 0x08), 0)) {
+            // Clear bus error for another try
+            Store (0x08, SMB0)
+            Store (Subtract (Local3, 1), Local3)
+            Store (0, Local4)
+        } Else {
+            //
+            // Successful completion
+            //
+            // Read a byte from Host data 0
+            Store (0, Local3)
+            Store (0, Local4)
+        }
+    }
+
+    // Clear host controller status
+    // HostBusy + SMBInterrupt + DeviceErr + BusCollision + Failed
+    Store (0x1F, SMB0)
+
+    // Release SMBUS ownership
+    // Clear Host Semaphore Bit[5]
+    Or (SMB8, 0x20, SMB8)
+
+    If (LEqual (Arg0, 1)) {
+        Store (Local6, SMB2)
+    }
+    CpmWriteMem8 (Add (CpmAcpiMmioBaseAddr, 0x300), 0x2, 0, 8, Local5)
+    Release (CpmSmbusMutex)
+    return (Local4)
+}
+
+//
+//  Check IO Expander GPIO Input Event
+//  Arg0 - Smbus IO Expander ACPI Event Table Entry Number
+//
+Method (CpmCheckExpanderInputEvent, 1, Serialized) {
+    CpmDebugPrint ("  KER-ASL-CpmCheckExpanderInputEvent (0x%X) Start\n", Arg0, 0, 0, 0, 0, 0)
+    Store (0, Local5)
+    If (LAnd (LGreaterEqual (Arg0, 0), LLessEqual (Arg0, 3))) {
+        Store (CpmIoExpanderAcpiEventTable, Local0)
+        If (LNotEqual (Local0, 0)) {
+            Add (Local0, CpmTableHeaderSize, Local0)
+            Add (Local0, Multiply (Arg0, CpmExpanderEntrySize), Local0)
+            If (LEqual (CpmReadTable (Local0, CpmEntryNumber), Arg0)) {
+                // Read Input port register (00h)
+                Store (CpmReadTable (Local0, CpmSmbusSelect), Local1)
+                Store (CpmReadTable (Local0, CpmSlaveAddress), Local2)
+                Store (CpmReadTable (Local0, CpmGpioCurrentStatus), Local3)
+                Store (CpmReadSmbusByte (Local1, Local2, 0), Local4)
+                CpmSetPostCode (Add (Local4, ShiftLeft (Arg0, 12)))
+                CpmWriteTable (Local0, CpmGpioCurrentStatus, Local4)
+
+                Xor (Local3, Local4, Local4)
+                And (Local4, CpmReadTable (Local0, CpmGpioMask), Local4)
+                Or (Local4, CpmReadTable (Local0, CpmGpioCheck), Local4)
+
+                If (LGreaterEqual (CpmReadTable (Local0, CpmChipsetType), 0x01)) {
+                    // Read Input port register (01h) - For 16-bit IO Expander
+                    Store (CpmReadTable (Local0, CpmPort1GpioCurrentStatus), Local3)
+                    Store (CpmReadSmbusByte (Local1, Local2, 1), Local5)
+                    CpmSetPostCode (Add (Add (Local5, 0x0100), ShiftLeft (Arg0, 12)))
+                    CpmWriteTable (Local0, CpmPort1GpioCurrentStatus, Local5)
+
+                    Xor (Local3, Local5, Local5)
+                    And (Local5, CpmReadTable (Local0, CpmPort1GpioMask), Local5)
+                    Or (Local5, CpmReadTable (Local0, CpmPort1GpioCheck), Local5)
+                    ShiftLeft (Local5, 8, Local5)
+                }
+                Or (Local4, Local5, Local5)
+            }
+        }
+    }
+    CpmDebugPrint ("  KER-ASL-CpmCheckExpanderInputEvent (0x%X) = 0x%X End\n", Arg0, Local5, 0, 0, 0, 0)
+    return (Local5)
+}
+

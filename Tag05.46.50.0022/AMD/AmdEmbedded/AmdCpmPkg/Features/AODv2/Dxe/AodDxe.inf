@@ -1,0 +1,102 @@
+##;*****************************************************************************
+#;
+#; Copyright (C) 2020-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+#;*****************************************************************************
+#;
+#; This software package can be used to enable the Overclocking of certain
+#; AMD processors and its use is subject to the terms and conditions of the
+#; AMD Overclocking Waiver. Enabling overclocking through use of the low-level
+#; routines included in this package and operating an AMD processor outside of
+#; the applicable AMD product specifications will void any AMD warranty and can
+#; result in damage to the processor or the system into which the processor has
+#; been integrated. The user of this software assumes, and AMD disclaims, all
+#; risk, liability, costs and damages relating to or arising from the overclocking
+#; of AMD processors.
+#;
+#;******************************************************************************
+
+[Defines]
+  BASE_NAME                      = AodDxe
+  FILE_GUID                      = 442BA91E-B0A8-499F-94F7-2E922C9AAE0D
+  MODULE_TYPE                    = DXE_DRIVER
+  INF_VERSION                    = 0x00010005
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AodDxeEntry
+
+[Sources]
+  AodDxe.c
+  AodCmdProtocol.c
+  AodIpml.c
+  AodAcpi.c
+  Acpi/AodSsdt.asl
+  Acpi/AodMof.asi
+
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+#[-start-220906-IB14740262-add]#
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+#[-end-220906-IB14740262-add]#
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  HiiLib
+  MemoryAllocationLib
+  PrintLib
+  UefiLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  PcdLib
+  DxeServicesLib
+  AodBaseLib
+  IoLib
+
+[Guids]
+  gAodSystemConfigurationGuid
+  gEfiIfrTianoGuid
+  gEfiEventReadyToBootGuid
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdAodUpdateMemClkTimings
+
+[Protocols]
+  gEfiHiiStringProtocolGuid                     ## CONSUMES
+  gEfiHiiConfigRoutingProtocolGuid              ## CONSUMES
+  gEfiHiiConfigAccessProtocolGuid               ## PRODUCES
+  gEfiHiiDatabaseProtocolGuid                   ## CONSUMES
+  gAmdAodCmdProtocolGuid
+  gEfiAcpiTableProtocolGuid
+  gAodNvAreaUpdatedProtocolGuid
+  gAmdFabricTopologyServices2ProtocolGuid
+  gAmdCoreTopologyServicesProtocolGuid
+  gAmdCoreTopologyServicesV2ProtocolGuid
+  gAmdApcbDxeServiceProtocolGuid
+  gAmdNbioSmuServicesProtocolGuid
+  gAmdAodFormsetManageProtocolGuid
+#[-start-220906-IB14740262-add]#
+  gH2OAodApcbSyncDoneProtocolGuid
+#[-end-220906-IB14740262-add]#
+
+[Depex]
+  gEfiVariableWriteArchProtocolGuid AND
+  gAmdApcbDxeServiceProtocolGuid AND
+  gAmdNbioSmuServicesProtocolGuid AND
+  gEfiHiiDatabaseProtocolGuid
+
+
+
+
+

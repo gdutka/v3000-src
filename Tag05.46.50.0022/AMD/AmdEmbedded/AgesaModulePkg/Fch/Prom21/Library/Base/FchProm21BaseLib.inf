@@ -1,0 +1,41 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = FchProm21BaseLib
+  FILE_GUID                      = D7ED4C1F-39F7-4ACB-9961-25D6E1BE8466
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = FchProm21BaseLib | PEIM DXE_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER DXE_CORE UEFI_APPLICATION
+
+[Sources]
+  FchProm21BaseLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/Fch/Prom21/FchProm21ModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdSocBaseLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21GppPcieAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21TempBusNum
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciMmio
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21GppPcieAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SecXhciMmio
+

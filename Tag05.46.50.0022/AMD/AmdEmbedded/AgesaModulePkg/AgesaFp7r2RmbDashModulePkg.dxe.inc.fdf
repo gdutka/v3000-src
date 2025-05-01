@@ -1,0 +1,130 @@
+#;*******************************************************************************
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;****************************************************************************
+    INF AgesaModulePkg/Debug/AmdIdsDebugPrintDxe/AmdIdsDebugPrintDxe.inf
+
+#   ##MEM Dxe Drivers
+    INF AgesaModulePkg/Mem/AmdMemFp7Dxe/AmdMemFp7Dxe.inf
+
+#   ##SOC Dxe Drivers
+    INF AgesaModulePkg/Soc/AmdSocFp7r2RmbDxe/AmdSocFp7r2RmbDxe.inf
+    INF AgesaModulePkg/ErrorLog/AmdErrorLogDxe/AmdErrorLogDxe.inf
+    INF AgesaModulePkg/ErrorLog/AmdErrorLogDisplayDxe/AmdErrorLogDisplayDxe.inf
+
+#   ##PSP Dxe Drivers
+    INF AgesaModulePkg/Psp/AmdPspFtpmDxe/AmdPspFtpmDxe.inf
+    INF AgesaModulePkg/Psp/AmdHspFtpmDxe/AmdHspFtpmDxe.inf
+    INF AgesaModulePkg/Psp/AmdPspDxeV2Rmb/AmdPspDxeV2.inf
+    INF RuleOverride = ACPITABLE AgesaModulePkg/Psp/AmdPspDxeV2Rmb/AmdDrtmAsl.inf
+    INF AgesaModulePkg/Psp/AmdPspP2CmboxV2/AmdPspP2CmboxV2.inf
+    INF AgesaModulePkg/Psp/AmdPspP2CmboxV2/AmdPspP2CmboxV2SmmBuffer.inf
+    INF AgesaModulePkg/Psp/AmdPspSmmV2/AmdPspSmmV2.inf
+    INF AgesaModulePkg/Psp/AmdHstiV2/AmdHstiV2.inf
+    INF AgesaModulePkg/Psp/ApobDrv/ApobRmbDxe/ApobRmbDxe.inf
+    INF AgesaModulePkg/Psp/AmdPspIntrusionDetection/AmdPspIntrusionDetectionDxe.inf
+    INF AgesaModulePkg/Psp/AmdPspIntrusionDetection/AmdPspIntrusionDetectionSmm.inf
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmDxe/MpmDxe.inf
+!endif
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF RuleOverride = ACPITABLE AgesaModulePkg/Mpm/MpmDxe/AmdMpmAsl.inf
+!endif
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmKvm/MpmKvm.inf
+!endif
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmAsf/MpmAsfDxe/MpmAsfDxe.inf
+!endif
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmBatteryInfo/MpmBatteryInfo.inf
+!endif
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmPldm/MpmPldmBase/MpmPldmBase.inf
+!endif
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmPldm/MpmPldmSmbios/MpmPldmSmbios.inf
+!endif
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmPldm/MpmPldmBcc/MpmPldmBcc.inf
+!endif
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmPldm/MpmPldmMonitor/MpmPldmSensor.inf
+!endif
+!ifndef $(AMD_MPM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Mpm/MpmSerialIoDxe/MpmSerialIoDxe.inf
+!endif
+
+#    ## DF Dxe Drivers
+    INF AgesaModulePkg/Fabric/RMB/FabricRmbDxe/AmdFabricRmbDxe.inf
+    INF AgesaModulePkg/Fabric/RMB/FabricRmbSmm/AmdFabricRmbSmm.inf
+
+#    ## CCX Dxe Drivers
+    INF AgesaModulePkg/Ccx/Zen3/Smm/AmdCcxZen3Smm.inf
+    INF AgesaModulePkg/Ccx/Zen3/Dxe/Rmb/AmdCcxZen3RmbDxe.inf
+
+#    ## Mem Dxe Drivers
+    INF AgesaModulePkg/Mem/AmdMemSmbiosV2Dxe/AmdMemSmbiosV2Dxe.inf
+    INF AgesaModulePkg/Mem/AmdMemRestoreDxe/MemRestoreDxe.inf
+    INF AgesaModulePkg/Mem/AmdMemRestoreDxeV2/MemRestoreDxe.inf
+
+#    ## GNb Dxe Drivers
+    INF AgesaModulePkg/Nbio/GFX/RMB/DXE/AmdNbioGfxRMBDxe.inf
+    INF AgesaModulePkg/Nbio/NbioBase/RMB/DXE/AmdNbioBaseRMBDxe.inf
+    INF AgesaModulePkg/Nbio/SMU/RMB/DXE/SmuV13DxeRMB.inf
+    INF AgesaModulePkg/Nbio/PCIe/RMB/DXE/AmdNbioPcieRMBDxe.inf
+    INF AgesaModulePkg/Nbio/IOMMU/RMB/DXE/AmdNbioIOMMURMBDxe.inf
+    INF AgesaModulePkg/Nbio/NbioALib/RMB/DXE/AmdNbioAlibRMBDxe.inf
+
+#   ## Fch Dxe Drivers
+    INF AgesaModulePkg/Fch/Keith/FchKeithDxe/FchDxe.inf
+    INF AgesaModulePkg/Fch/Keith/FchKeithDxe/FchKeithSsdt.inf
+    INF RuleOverride = ACPITABLE AgesaModulePkg/Fch/Keith/FchKeithDxe/FchKeithAml.inf
+    INF AgesaModulePkg/Fch/Keith/FchKeithSmm/FchSmm.inf
+    INF AgesaModulePkg/Fch/Keith/FchKeithSmbusDxe/SmbusLight.inf
+    INF AgesaModulePkg/Fch/Keith/FchKeithCf9ResetDxe/Cf9Reset.inf
+!ifndef $(AMD_CSM_SUPPORT_DISABLED)
+    INF AgesaModulePkg/Fch/Keith/FchKeithLegacyInterruptDxe/LegacyInterrupt.inf
+!endif
+    INF AgesaModulePkg/Fch/Keith/FchKeithSmmControlDxe/SmmControl.inf
+    INF AgesaModulePkg/Fch/Keith/FchKeithSmmDispatcher/FchSmmDiagDispatcher.inf
+    INF AgesaModulePkg/Fch/Keith/FchKeithSmmDispatcher/FchSmmDispatcher.inf
+    INF AgesaModulePkg/Fch/Keith/FchKeithComplement/FchKTSataD3Cold/FchKTSataD3ColdSmm.inf
+
+   ## APCB V3 Dxe Drivers
+    INF AgesaModulePkg/Psp/ApcbDrv/ApcbV3Dxe/ApcbV3Dxe.inf
+
+   ## APCB V3 Smm Drivers
+    INF AgesaModulePkg/Psp/ApcbDrv/ApcbV3Smm/ApcbV3Smm.inf
+
+#   ## Universal
+    INF AgesaModulePkg/Universal/Smbios/AmdSmbiosDxe.inf
+    INF AgesaModulePkg/Universal/Acpi/AmdAcpiDxe.inf
+    INF AgesaModulePkg/Universal/AmdSmmCommunication/AmdSmmCommunication.inf
+    INF AgesaModulePkg/Universal/Version/AmdVersionDxe/AmdVersionDxe.inf
+
+#   ## Ras Dxe Drivers
+    INF AgesaModulePkg/Ras/AmdRasRsServiceDxe/AmdRasRsServiceDxe.inf
+    INF AgesaModulePkg/Ras/AmdRasRsDxe/AmdRasRsDxe.inf
+    INF AgesaModulePkg/Ras/AmdRasRsServiceSmm/AmdRasRsServiceSmm.inf
+
+#   ## Usb4 Dxe Drivers
+    INF AgesaModulePkg/Usb4/AmdUsb4Dxe/AmdUsb4Dxe.inf
+
+  ## DASH
+  ## Mctp Dxe Driver
+    INF AgesaModulePkg/Dash/MctpSmbus/DashMctpSmbusDxe.inf
+  ## ASF Msg Dxe Drivers
+    INF AgesaModulePkg/Dash/AsfMsg/AsfMsg.inf
+    INF AgesaModulePkg/Dash/AsfTable/AsfTableAsl.inf
+  ## Pldm Data
+    INF AgesaModulePkg/Dash/DashPldm/DashPldmBase/DashPldmBase.inf
+    INF AgesaModulePkg/Dash/DashPldm/DashPldmBcc/DashPldmBcc.inf
+    INF AgesaModulePkg/Dash/DashPldm/DashPldmSmbios/DashPldmSmbios.inf
+  ## Add Smbios Data
+    INF AgesaModulePkg/Dash/SmbiosTypeAdd/SmbiosTypeAdd.inf
+
+  #SMM Protection Test Driver
+!if $(SMM_PROTECTION_TEST_SUPPORT) == TRUE
+    INF AgesaModulePkg/Universal/AmdTestPkg/SmmProtectionsTest/Smm/SmmProtectionsTestSmm.inf
+!endif

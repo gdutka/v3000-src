@@ -1,0 +1,78 @@
+## @file
+#  Implement the PEIM of PlatformNotifyDispatchPei.
+#
+#******************************************************************************
+#* Copyright (c) 2017 - 2020, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = InitPortConfigPei
+  FILE_GUID                 = 2A9A39D5-95D8-4e2e-9793-BFAAF0B6820C
+  MODULE_TYPE               = PEIM
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = InitPortConfigPcdsEntryPoint
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  InsydeOemServicesPkg/InsydeOemServicesPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[Sources]
+  InitPortConfig.c
+#[-start-220329-IB14740229-add]#
+  InitPortConfig.h
+#[-end-220329-IB14740229-add]#
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  BaseLib
+  PcdLib
+  PeiOemSvcKernelLib
+
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gAmdCpmTablePpiGuid
+  gAmdCpmOverrideTablePpiGuid
+  gAmdCbsHookPpiGuid
+
+[Guids]
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciUsb3PortDisable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciUsb2PortDisable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSataMultiDiePortShutDown
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgHdAudioEnable
+  gInsydeTokenSpaceGuid.PcdH2OChipsetUsbPortEnable
+  gInsydeTokenSpaceGuid.PcdH2OChipsetUsb3PortEnable
+  gInsydeTokenSpaceGuid.PcdH2OChipsetSataPortEnable
+  gInsydeTokenSpaceGuid.PcdH2OChipsetPciePortEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgAzaliaCodecVerbTable
+  gChipsetPkgTokenSpaceGuid.PcdH2OTpmType
+#[-start-220329-IB14740229-add]#
+  gChipsetPkgTokenSpaceGuid.PcdH2OChipsetPciePortSpeed
+#[-end-220329-IB14740229-add]#
+#[-start-220408-IB14740232-add]#
+  gChipsetPkgTokenSpaceGuid.PcdH2OChipsetPciePortAspm
+  gChipsetPkgTokenSpaceGuid.PcdH2OChipsetPciePortL1Sub
+#[-end-220408-IB14740232-add]#
+
+[Depex]
+  TRUE

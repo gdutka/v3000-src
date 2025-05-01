@@ -1,0 +1,41 @@
+## @file
+#  Flash Device Support Library Class
+#
+#******************************************************************************
+#* Copyright (c) 2014, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                 = 0x00010005
+  BASE_NAME                   = PeiSpiAccessInitLib
+  FILE_GUID                   = 547D2E85-65F0-4420-B57D-11EFCE5D7837
+  MODULE_TYPE                 = PEIM
+  LIBRARY_CLASS               = SpiAccessInitLib
+
+[Sources]
+  PeiSpiAccessInitLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  $(CHIPSET_REF_CODE_PKG)/$(CHIPSET_REF_CODE_DEC_NAME).dec
+  $(CHIPSET_REF_CODE_PKG)/$(CHIPSET_REF_CODE_PRIVATE_DEC_NAME).dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+
+[LibraryClasses]
+  PeiServicesLib
+  DebugLib
+  PchInitLib
+
+[Pcd]
+
+[FeaturePcd]
+
+[Ppis]
+  gPchSpiPpiGuid

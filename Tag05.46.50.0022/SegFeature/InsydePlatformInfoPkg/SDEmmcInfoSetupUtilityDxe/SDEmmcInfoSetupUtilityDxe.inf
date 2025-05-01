@@ -1,0 +1,73 @@
+## @file
+#  Component description file for SDEmmcInfoSetupUtilityDxe module
+#
+#******************************************************************************
+#* Copyright (c) 2024, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION       = 0x00010005
+  BASE_NAME         = SDEmmcInfoSetupUtilityDxe
+  FILE_GUID         = c9f1a91b-3ab2-4aea-8b5a-374876b941a3
+  MODULE_TYPE       = DXE_DRIVER
+  VERSION_STRING    = 1.0
+  ENTRY_POINT       = SDEmmcInfoSetupUtilityDxeEntry
+  UNLOAD_IMAGE      = SDEmmcInfoSetupUtilityDxeUnload
+
+[Sources]
+  SDEmmcInfoSetupUtilityDxe.c
+  SDEmmcInfoSetupUtilityDxe.uni
+  SDEmmcInfoSetupUtilityDxeVfr.vfr
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+  $(PROJECT_PKG)/Project.dec
+  SegFeaturePkg/SegFeaturePkg.dec
+
+[Guids]
+  gEfiIfrTianoGuid
+  gH2OSDEmmcInfoSetupFormsetGuid
+  gH2OSDEmmcInfoSetupVarstoreGuid
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  BaseLib
+  DebugLib
+  MemoryAllocationLib
+  HiiLib
+  HiiExLib
+  BaseMemoryLib
+  PrintLib
+  SDEmmcInfoLib
+  VariableLib
+  SetupVariableLib
+
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gEfiHiiConfigRoutingProtocolGuid
+  gEfiHiiConfigAccessProtocolGuid
+  gEfiSetupUtilityApplicationProtocolGuid
+  gH2OSDEmmcInfoProtocolGuid
+  gSdPassThruProtocolGuid
+  gH2OFormBrowserProtocolGuid
+
+[Pcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSDEmmcInfoLinkToFormsetGuid
+
+[FixedPcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSDEmmcDetailDisplayList
+
+[Depex]
+  gEfiHiiConfigRoutingProtocolGuid  AND
+  gEfiVariableArchProtocolGuid      AND
+  gEfiVariableWriteArchProtocolGuid

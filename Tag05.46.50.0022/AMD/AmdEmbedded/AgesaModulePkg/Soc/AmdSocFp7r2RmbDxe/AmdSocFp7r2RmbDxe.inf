@@ -1,0 +1,80 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2015-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdSocFp7r2RmbDxe
+  FILE_GUID                      = 1879BFDD-47FF-485b-88FB-4FCD206E49F4
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdSocFp7r2RmbDxeInit
+
+[sources]
+  AmdSocFp7r2RmbDxe.c
+  AmdSocFp7r2RmbDxe.h
+
+[LibraryClasses]
+  AmdSocBaseLib
+  UefiDriverEntryPoint
+  DebugLib
+  AmdIdsHookLib
+  SocCmnIdsHookRmbLibDxe
+  DxeSocLogicalIdServicesLib
+  DxeSocZen3ServicesLib
+
+[Guids]
+  gAmdMemSmbiosV2DepexProtocolGuid
+  gAmdRasRmbDepexProtocolGuid
+
+[Protocols]
+  gAmdErrorLogDepexProtocolGuid           #PRODUCED
+  #FCH
+  gAmdFchKeithDepexProtocolGuid           #PRODUCED
+  gAmdFchKTSmbusDepexProtocolGuid         #PRODUCED
+  gAmdFchKTSmmDispacherDepexProtocolGuid  #PRODUCED
+  gAmdFchKTSmmControlDepexProtocolGuid    #PRODUCED
+  #PSP
+  gAmdPspDxeV2RmbDepexProtocolGuid         #PRODUCED
+  gAmdPspP2CmboxV2DepexProtocolGuid       #PRODUCED
+  gAmdPspSmmV2DepexProtocolGuid           #PRODUCED
+  gAmdPspHstiV2DepexProtocolGuid          #PRODUCED
+  #Memory
+  gAmdMemFp7DxeDepexProtocolGuid          #PRODUCED
+  gAmdMemAmdDxeDepexProtocolGuid          #PRODUCED
+  gAmdMemRestoreDepexProtocolGuid         #PRODUCED
+  #NBIO
+  gAmdNbioBaseRMBDxeDepexProtocolGuid      #PRODUCED
+  gAmdNbioSmuV13DxeDepexProtocol          #PRODUCED
+  gAmdNbioPcieRMBDxeDepexProtocolGuid      #PRODUCED
+  gAmdNbioIOMMURMBDxeDepexProtocolGuid     #PRODUCED
+  gAmdNbioALIBRMBDxeDepexProtocolGuid      #PRODUCED
+  #CCX
+  gAmdCcxZen3RmbDepexProtocolGuid         #PRODUCED
+  gAmdCcxZen3DepexSmmProtocolGuid         #PRODUCED
+  #DF
+  gAmdFabricRmbDepexProtocolGuid           #PRODUCED
+  #APCB
+  gAmdApcbServiceV3DepexProtocolGuid      #PRODUCED
+  gApobRmbDxeDepexProtocolGuid             #PRODUCED
+  #MPM
+  gAmdMpmDepexProtocolGuid                #PRODUCED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleRasPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[Depex]
+  TRUE
+
+
+

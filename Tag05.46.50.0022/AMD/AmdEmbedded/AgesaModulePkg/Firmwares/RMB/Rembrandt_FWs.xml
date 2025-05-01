@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/*****************************************************************************
+ *
+ * Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ *******************************************************************************
+ */
+-->
+<catalog>
+    <artifactoryFile name="SMU_A0" server="mkmartifactory.amd.com"> fw-smu-release/Rembrandt/69.64.0/rembrandt.rev69.64.0.zip </artifactoryFile>
+    <artifactoryFile name="SMU_B0" server="mkmartifactory.amd.com"> fw-smu-emb-rel-local/PMFw/V3000/6.69.29.0/pmfw_emb_rembrandt_6.69.29.0.zip </artifactoryFile>
+    <artifactoryFile name="ZSC_A0" server="mkmartifactory.amd.com"> fw-zscfw-release-local/MSMU_RMB/255.69.41.0/rembrandt.zscfw.rev255.69.41.0.zip</artifactoryFile>
+    <artifactoryFile name="ZSC_B0" server="mkmartifactory.amd.com"> fw-zscfw-release-local/MSMU_RMB/255.69.46.0/rembrandt_b0.zscfw.rev255.69.46.0.zip</artifactoryFile>
+    <artifactoryFile name="ABL" server="mkmartifactory.amd.com"> fw-abl-release-local/Rembrandt/RABLRM4C09704E.zip </artifactoryFile>
+    <artifactoryFile name="ABLRT" server="mkmartifactory.amd.com"> fw-ablrt-release-local/Rembrandt/RABLRTRM1C017011.zip </artifactoryFile>
+    <artifactoryFile name="DfRib" server="mkmartifactory.amd.com"> fw-dfRib-release-local/Rembrandt/DfRib_1.0.2.B.zip </artifactoryFile>
+    <artifactoryFile name="uCode_A0" server="mkmartifactory.amd.com"> fw-uCode-release-local/Rembrandt/A0/mc_patch_0A400016.zip </artifactoryFile>
+    <artifactoryFile name="uCode_B0" server="mkmartifactory.amd.com"> fw-uCode-release-local/Rembrandt/B0/mc_patch_0A404002.zip </artifactoryFile>
+    <artifactoryFile name="uCode_B1" server="mkmartifactory.amd.com"> fw-uCode-release-local/Rembrandt/B1/mc_patch_0A40410A.zip </artifactoryFile>
+    <artifactoryFile name="PMU DDR5" server="mkmartifactory.amd.com"> fw-embbios-release-local/Platforms/V3000/Firmware/RMB_PMU_DDR5_016.zip </artifactoryFile>
+    <artifactoryFile name="PMU DDR5 MCR" server="mkmartifactory.amd.com"> fw-embbios-release-local/Platforms/V3000/Firmware/RMB_PMU_DDR5_MCR_010.zip </artifactoryFile>
+    <artifactoryFile name="PMU LPDDR5" server="mkmartifactory.amd.com"> fw-appbpmu-release-local/Rembrandt/RMB_PMU_LPDDR5_216A.zip </artifactoryFile>
+    <artifactoryFile name="PSP" server="mkmartifactory.amd.com">fw-psp-release-local/releases/cpu-client/Rembrandt-Embedded/PSPFW-v00.28.A8.70/00.28.A8.70.zip </artifactoryFile>
+    <artifactoryFile name="MP2_WALLE" server="mkmartifactory.amd.com"> fw-mp2fw-release-local/Rembrandt/WALLE/2.2.2.0/rembrandt.rev2.2.2.0.zip </artifactoryFile>
+    <artifactoryFile name="MP2_SFH" server="mkmartifactory.amd.com"> fw-mp2fw-release-local/Rembrandt/SFH/8.0.8.F/rembrandt.rev8.0.8.F.zip </artifactoryFile>
+    <artifactoryFile name="SpiRomConfig" server="mkmartifactory.amd.com"> fw-agesa-release-local/ec/Client/Rembrandt/SpiRomConfig/TypeId0x5C_SpiRomConfig_RMB_v00222601.zip </artifactoryFile>
+    <artifactoryFile name="Nvram" server="mkmartifactory.amd.com"> fw-sbios-release-local/ec/Client/Rembrandt/Misc/NvramPlaceHolder_v00.zip </artifactoryFile>
+    <artifactoryFile name="Secure_Keys" server="mkmartifactory.amd.com"> fw-sbios-release-local/ec/Client/Rembrandt/Security/SecureKeys/Seucre_Keys_RMB_v00.zip </artifactoryFile>
+    <artifactoryFile name="Secure_Policy" server="mkmartifactory.amd.com"> fw-agesa-release-local/ec/Client/Rembrandt/Security/SecurePolicy/SecurePolicy_RM_v72.zip </artifactoryFile>
+    <artifactoryFile name="Secure_Policy_NPU" server="mkmartifactory.amd.com"> fw-agesa-release-local/ec/Client/Rembrandt/Security/SecurePolicy/SecurePolicy_RM_v82.zip </artifactoryFile>
+    <artifactoryFile name="HwIpCfg_A0" server="mkmartifactory.amd.com"> fw-sbios-release-local/ec/Client/Rembrandt/Security/HwIpCfg/A0/TypeId0x20_HwIpCfg_RMB_v00.zip </artifactoryFile>
+    <artifactoryFile name="HwIpCfg_B0" server="mkmartifactory.amd.com"> fw-sbios-release-local/ec/Client/Rembrandt/Security/HwIpCfg/B0/TypeId0x120_HwIpCfg_RMB_B0_v01.zip </artifactoryFile>
+    <artifactoryFile name="HSP" server="mkmartifactory.amd.com"> fw-agesa-release-local/ec/Client/Rembrandt/Security/HSP/TypeId0x5F_PlutonPlatFw_v6.3.1.615.zip </artifactoryFile>
+    <artifactoryFile name="UsbPhy_Ax" server="mkmartifactory.amd.com"> fw-agesa-release-local/ec/Client/Rembrandt/UsbPhy/Ax/TypeId0x44_UnifiedUsb_RMB_v00010010.zip </artifactoryFile>
+    <artifactoryFile name="UsbPhy_Bx" server="mkmartifactory.amd.com"> fw-agesa-release-local/ec/Client/Rembrandt/UsbPhy/Bx/TypeId0x144_UnifiedUsb_RMB_B1_v00010021.zip </artifactoryFile>
+    <artifactoryFile name="DMCUB_A0" server="mkmartifactory.amd.com"> dmcub-local/release/Rembrandt/A0/TypeId0x71_DmcubFw_RMB_v0.0.50.4A.zip </artifactoryFile>
+    <artifactoryFile name="DMCUB_B0" server="mkmartifactory.amd.com"> dmcub-local/release/Rembrandt/B0/TypeId0x71_DmcubFw_RMB_B0_v04.00.15.47.zip </artifactoryFile>
+    <artifactoryFile name="UefiGop" server="mkmartifactory.amd.com"> fw-gop-release-local/GOP_3.8.8.zip </artifactoryFile>
+    <artifactoryFile name="Prom" server="mkmartifactory.amd.com"> fw-promfw-release-local/Promontory/21/230215_A0_01_82.zip </artifactoryFile>
+    <artifactoryFile name="MPM_MTK" server="mkmartifactory.amd.com"> fw_mpm_dev_local/releases/Rembrandt/MPM-v28.28.00.25/AMD-RMB-MPM-28.28.00.25.zip </artifactoryFile>
+    <artifactoryFile name="MPM_QCOM" server="mkmartifactory.amd.com"> fw_mpm_dev_local/releases/Rembrandt/MPM-v28.28.00.25/AMD-RMB-MPM-QCOM-28.28.00.25.zip </artifactoryFile>
+    <artifactoryFile name="MPM_1-0" server="mkmartifactory.amd.com"> fw_mpm_dev_local/releases/Rembrandt/MPM-v28.28.03.A7/AMD-RMB-MPM-28.28.03.A7.zip </artifactoryFile>
+    <artifactoryFile name="VBL" server="mkmartifactory.amd.com"> dmcub-local/Temp/Rembrandt/vbl/TypeId0x3C_VbiosBootLoader_RMB_20.11.0.1C.zip </artifactoryFile>
+    <artifactoryFile name="Turner" server="mkmartifactory.amd.com"> fw-dUSB4FW-release-local/Turner/TypeId0x8F_TurnerFw-Pre-01.zip </artifactoryFile>
+
+<!--
+    SMU/PMFW Firmware Components
+      SmuReleaseNotesRMB.txt
+      TypeId0x08_SmuFirmware_RMB.sbin
+      TypeId0x12_SmuFirmware2_RMB.sbin
+-->
+    <package name="SMU_A0" scatter="true">
+        <file name="PMFU/SMU Release Notes">
+            <source> release_notes.txt  </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\SmuReleaseNotesRMB.txt </destination>
+        </file>
+        <file name="PMFU/SMU IOD MP1 binary 1 (PSP Type 0x8)">
+            <source> TypeId0x08_SmuFirmware_RMB.sbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x08_SmuFirmware_RMB.sbin</destination>
+        </file>
+        <file name="PMFU/SMU IOD MP1 binary 2 (PSP Type 0x12)">
+            <source> TypeId0x12_SmuFirmware2_RMB.sbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x12_SmuFirmware2_RMB.sbin</destination>
+        </file>
+    </package>
+
+    <package name="SMU_B0" scatter="true">
+        <file name="PMFU/SMU Release Notes">
+            <source> release_notes.txt  </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\SmuReleaseNotesRMB_B0.txt </destination>
+        </file>
+        <file name="PMFU/SMU IOD MP1 binary 1 (PSP Type 0x108)">
+            <source> TypeId0x108_SmuFirmware_RMB_B0.sbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x108_SmuFirmware_RMB_B0.sbin</destination>
+        </file>
+        <file name="PMFU/SMU IOD MP1 binary 2 (PSP Type 0x112)">
+            <source> TypeId0x112_SmuFirmware2_RMB_B0.sbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x112_SmuFirmware2_RMB_B0.sbin</destination>
+        </file>
+    </package>
+
+<!--
+    ZSC_A0 Firmware Components
+      MSMU_ReleaseNoteRMB.txt
+      TypeId0x5A_Msmu_RMB.sbin
+-->
+    <package name="ZSC_A0" scatter="true">
+        <file name="Release Notes">
+            <source>release_notes.txt</source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\MSMU_ReleaseNoteRMB.txt</destination>
+        </file>
+        <file name="Msmu binary (PSP Type 0x5A)">
+            <source>TypeId0x5A_Msmu_RMB.sbin</source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x5A_Msmu_RMB.sbin</destination>
+        </file>
+    </package>
+
+<!--
+    ZSC_B0 Firmware Components
+      MSMU_ReleaseNoteRMB_B0.txt
+      TypeId0x15A_Msmu_RMB_B0.sbin
+-->
+    <package name="ZSC_B0" scatter="true">
+        <file name="Release Notes">
+            <source>release_notes.txt</source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\MSMU_ReleaseNoteRMB_B0.txt</destination>
+        </file>
+        <file name="Msmu binary (PSP Type 0x15A)">
+            <source>TypeId0x15A_Msmu_RMB_B0.sbin</source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x15A_Msmu_RMB_B0.sbin</destination>
+        </file>
+    </package>
+-->
+
+<!--
+    ABL Firmware Components
+      AblPostCode.h
+      AgesaBLReleaseNotes.txt
+      TypeId0x30_AgesaBootloaderU_RMB_DDR5.sbin
+      TypeId0x30_AgesaBootloaderU_RMB_LPDDR5.sbin
+-->
+    <package name="ABL" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    ABLRT Firmware Components
+      AgesaRTReleaseNote.txt
+      TypeId0x2D_AgesaRunTimeDrv_prod_RMB.sbin
+-->
+    <package name="ABLRT" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    DfRib Firmware Components
+      DfRib_release_notes.txt
+      TypeId0x76_DfRib_RMB.sbin
+-->
+    <package name="DfRib" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    uCode Firmware Components
+      TypeId0x66_UcodePatch_RMB_A0.sbin
+      TypeId0x66_UcodePatch_RMB_B0.sbin
+-->
+    <package name="uCode_A0" scatter="true">
+        <file name="RMB A0 uCode">
+            <source> TypeId0x66_UcodePatch_RMB_A0.sbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x66_UcodePatch_RMB_A0.sbin </destination>
+        </file>
+    </package>
+
+    <package name="uCode_B0" scatter="true">
+        <file name="RMB B0 uCode">
+            <source> TypeId0x66_UcodePatch_RMB_B0.sbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x66_UcodePatch_RMB_B0.sbin </destination>
+        </file>
+    </package>
+
+    <package name="uCode_B1" scatter="true">
+        <file name="RMB B1 uCode">
+            <source> TypeId0x66_UcodePatch_RMB_B1.sbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x66_UcodePatch_RMB_B1.sbin </destination>
+        </file>
+    </package>
+
+<!--
+    MP2 Firmware Components
+      MP2FWReleaseNote.txt
+      TypeId0x25_Mp2Fw_RMB.sbin
+      TypeId0x6a_Mp2FwConig_RMB.sbin
+    MP2_WALLE
+      TypeId0x125_Mp2Walle_RMB.sbin
+      TypeId0x6a_Mp2FwConig_RMB.sbin  -Same as TypeId0x25_Mp2Fw_RMB.sbin
+-->
+    <package name="MP2_WALLE" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+    <package name="MP2_SFH" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    DDR5 PMU Firmware Components for Training
+      AppbDdrReleaseNotes.txt
+      TypeId0x64_Appb_RMB_Ddr5Imem1.csbin
+      TypeId0x64_Appb_RMB_Ddr5Imem2.csbin
+      TypeId0x65_Appb_RMB_Ddr5Dmem1.csbin
+      TypeId0x65_Appb_RMB_Ddr5Dmem2.csbin
+-->
+    <package name="PMU DDR5" scatter="true">
+        <file name="PMU DDR5 Release Notes">
+            <source> AppbDdrReleaseNotes.txt </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AppbDdrReleaseNotes.txt </destination>
+        </file>
+        <file name="PMU DDR5 IMEM1">
+            <source> TypeId0x64_Appb_RMB_Ddr5Imem1.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x64_Appb_RMB_Ddr5Imem1.csbin </destination>
+        </file>
+        <file name="PMU DDR5 IMEM2">
+            <source> TypeId0x64_Appb_RMB_Ddr5Imem2.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x64_Appb_RMB_Ddr5Imem2.csbin </destination>
+        </file>
+        <file name="PMU DDR5 DMEM1">
+            <source> TypeId0x65_Appb_RMB_Ddr5Dmem1.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x65_Appb_RMB_Ddr5Dmem1.csbin </destination>
+        </file>
+        <file name="PMU DDR5 DMEM2">
+            <source> TypeId0x65_Appb_RMB_Ddr5Dmem2.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x65_Appb_RMB_Ddr5Dmem2.csbin </destination>
+        </file>
+    </package>
+
+<!--
+    DDR5 PMU Firmware Components for Quickboot
+      AppbDdrReleaseNotes_Quickboot.txt
+      TypeId0x64_Appb_RMB_Ddr5QuickbootImem9.csbin
+      TypeId0x64_Appb_RMB_Ddr5QuickbootImem10.csbin
+      TypeId0x65_Appb_RMB_Ddr5QuickbootDmem9.csbin
+      TypeId0x65_Appb_RMB_Ddr5QuickbootDmem10.csbin
+-->
+    <package name="PMU DDR5 MCR" scatter="true">
+        <file name="PMU DDR5 Quickboot Release Notes">
+            <source> AppbDdrReleaseNotes_Quickboot.txt </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AppbDdrReleaseNotes_Quickboot.txt </destination>
+        </file>
+        <file name="PMU DDR5 IMEM9">
+            <source> TypeId0x64_Appb_RMB_Ddr5QuickbootImem9.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x64_Appb_RMB_Ddr5QuickbootImem9.csbin </destination>
+        </file>
+        <file name="PMU DDR5 IMEM10">
+            <source> TypeId0x64_Appb_RMB_Ddr5QuickbootImem10.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x64_Appb_RMB_Ddr5QuickbootImem10.csbin </destination>
+        </file>
+        <file name="PMU DDR5 DMEM9">
+            <source> TypeId0x65_Appb_RMB_Ddr5QuickbootDmem9.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x65_Appb_RMB_Ddr5QuickbootDmem9.csbin </destination>
+        </file>
+        <file name="PMU DDR5 DMEM10">
+            <source> TypeId0x65_Appb_RMB_Ddr5QuickbootDmem10.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x65_Appb_RMB_Ddr5QuickbootDmem10.csbin </destination>
+        </file>
+    </package>
+
+<!--
+    LPDDR5 PMU Firmware Components for Training
+      AppbLpddrReleaseNotes.txt
+      TypeId0x64_Appb_RMB_Lpddr5Imem1.csbin
+      TypeId0x64_Appb_RMB_Lpddr5Imem2.csbin
+      TypeId0x65_Appb_RMB_Lpddr5Dmem1.csbin
+      TypeId0x65_Appb_RMB_Lpddr5Dmem2.csbin
+-->
+    <package name="PMU LPDDR5" scatter="true">
+        <file name="PMU LPDDR5 Release Notes">
+            <source> AppbLpddrReleaseNotes.txt </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AppbLpddrReleaseNotes.txt </destination>
+        </file>
+        <file name="PMU LPDDR5 IMEM1">
+            <source> TypeId0x64_Appb_RMB_Lpddr5Imem1.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x64_Appb_RMB_Lpddr5Imem1.csbin </destination>
+        </file>
+        <file name="PMU LPDDR5 IMEM2">
+            <source> TypeId0x64_Appb_RMB_Lpddr5Imem2.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x64_Appb_RMB_Lpddr5Imem2.csbin </destination>
+        </file>
+        <file name="PMU LPDDR5 DMEM1">
+            <source> TypeId0x65_Appb_RMB_Lpddr5Dmem1.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x65_Appb_RMB_Lpddr5Dmem1.csbin </destination>
+        </file>
+        <file name="PMU LPDDR5 DMEM2">
+            <source> TypeId0x65_Appb_RMB_Lpddr5Dmem2.csbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x65_Appb_RMB_Lpddr5Dmem2.csbin </destination>
+        </file>
+    </package>
+
+<!--
+    PSP Firmware Components
+      bl_errorcodes.h
+      PSP_ReleaseNotes.txt
+      TypeId0x01_PspBootLoader_RMB.sbin
+      TypeId0x02_PspOS_RMB.sbin
+      TypeId0x0C_FtpmDrv_RMB.csbin
+      TypeId0x13_PspEarlyUnlock_RMB.sbin
+      TypeId0x28_PspSystemDriver_RMB.sbin
+      TypeId0x47_DrtmTA_RMB.sbin
+      TypeId0x50_KeyDbBl_RMB.sbin
+      TypeId0x51_KeyDbTos_RMB.sbin
+      TypeId0x55_SplTableBl_RMB.sbin
+      TypeId0x73_PspBootLoaderStage2_RMB.sbin
+-->
+    <package name="PSP" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    SPI ROM Config
+      SpiRomConfig_Release.txt
+      TypeId0x5C_SpiRomConfig_RMB.sbin
+-->
+    <package name="SpiRomConfig" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    NVRAM
+      PspNvram_RMB.bin
+      TypeId0x54_PspNvramForRpmc_RMB.bin
+      TypeId0x63_ApobNvram_RMB.bin
+-->
+    <package name="Nvram" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    Secure Keys
+      TypeId0x00_RootKey_RMB.tkn
+      TypeId0x05_RtmPubSigned_RMB.key
+      TypeId0x09_SecureDebugUnlockKey_RMB.stkn
+      TypeId0x21_PspiKek_RMB.bin
+      TypeId0x22_SecureEmptyToken_RMB.bin
+      TypeId0x8D_IkekTa_RMB.bin
+-->
+    <package name="Secure_Keys" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    Secure Policy
+      PolicyReleaseNotes.txt
+      TypeId0x24_SecPolicy_RMB.sbin
+      TypeId0x45_SecPolicytOS_RMB.sbin
+-->
+    <package name="Secure_Policy" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+    <package name="Secure_Policy_NPU" scatter="true">
+        <file name="TypeId0x24_SecPolicy_RMB NPU binary">
+            <source> TypeId0x24_SecPolicy_RMB.sbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x24_SecPolicy_RMB_NPU.sbin </destination>
+        </file>
+        <file name="TypeId0x45_SecPolicytOS_RMB NPU binary">
+            <source> TypeId0x45_SecPolicytOS_RMB.sbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x45_SecPolicytOS_RMB_NPU.sbin </destination>
+        </file>
+    </package>
+
+<!--
+    HwIpCfg A0
+      TypeId0x20_HwIpCfg_RMB.sbin
+-->
+    <package name="HwIpCfg_A0" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    HwIpCfg B0
+      TypeId0x120_HwIpCfg_RMB_B0.sbin
+-->
+    <package name="HwIpCfg_B0" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    Pluton
+      PlutonReleaseNoteRMB.txt
+      TypeId0x5F_PlutonPlatFw_RMB.sbin
+-->
+    <package name="HSP" scatter="true">
+        <file name="TypeId0x5F_Pluton binary">
+            <source> TypeId0x5F_PlutonPlatFw.sbin </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x5F_PlutonPlatFw_RMB.sbin </destination>
+        </file>
+        <file name="TypeId0x5F_Pluton Release Note">
+            <source> PlutonReleaseNote.txt </source>
+            <destination> AGESA\AgesaModulePkg\Firmwares\RMB\PlutonReleaseNoteRMB.txt </destination>
+        </file>
+    </package>
+
+
+<!--
+    UsbPhy_Ax
+      TypeId0x44_UnifiedUsb_RMB.sbin
+-->
+    <package name="UsbPhy_Ax" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    UsbPhy_Bx
+      TypeId0x144_UnifiedUsb_RMB_B1.sbin
+-->
+    <package name="UsbPhy_Bx" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    DMCUB_A0
+      TypeId0x71_DmcubFw_RMB.sbin
+-->
+    <package name="DMCUB_A0" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    DMCUB_B0
+      RMB_DMCUB_FW_Release_Notes.txt
+      TypeId0x71_DmcubFw_RMB_B0.sbin
+-->
+    <package name="DMCUB_B0" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    UefiGop
+      AmdGenericGopReleaseNotes.txt
+      AmdIA32GenericGop.depex
+      AmdIa32GenericGop.efi
+      AmdX64GenericGop.efi
+-->
+    <package name="UefiGop" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    Promontory Firmware Components
+      TypeId0x93_Prom21Fw_RMB.sbin
+-->
+    <package name="Prom" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    MPM Firmware Components
+      MpmReleaseNotes.txt
+      AMD_AIM-T_MPM_ Firmware_EULA(28.28.00.25_RMB-R).docx
+      Third-Party_Notices_AIM-T_MPM_Firmware.txt
+      TypeId0x85_MTK_AmfSram_RMB.sbin
+      TypeId0x86_MTK_MPMDram_RMB.sbin
+      TypeId0x88_MTK_WLAN_RMB.sbin
+      TypeId0x89_MTK_MFD_RMB.sbin
+      TypeId0x98_AIM-T_Enable.bin
+      TypeId0x98_AIM-T_Disable.bin
+-->
+
+    <package name="MPM_MTK" scatter="true">
+      <file name="releasenote">
+        <source> releasenotes.txt </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\MpmReleaseNotes.txt </destination>
+      </file>
+      <file name="EULA">
+        <source> AMD_AIM-T_MPM_Firmware_End_User_License_Agreement_version_28-28-00-25_RMB-R.docx </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AMD_AIM-T_MPM_Firmware_End_User_License_Agreement_version_28-28-00-25_RMB-R.docx </destination>
+      </file>
+      <file name="Third-Party-Notices">
+        <source> Third-Party_Notices_AIM-T_MPM_Firmware_.+.txt </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\Third-Party_Notices_AIM-T_MPM_Firmware.txt </destination>
+      </file>
+      <file name="TypeId0x85_MTK">
+        <source> TypeId0x85_MPMSram_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x85_MTK_MPMSram_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x86_MTK">
+        <source> TypeId0x86_MPMDram_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x86_MTK_MPMDram_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x88_MTK">
+        <source> TypeId0x88_WLAN_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x88_MTK_WLAN_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x89_MTK">
+        <source> TypeId0x89_MFD_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x89_MTK_MFD_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x98_Enable">
+        <source> TypeId0x98_AIM-T_Enable.bin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x98_AIM-T_Enable.bin </destination>
+      </file>
+      <file name="TypeId0x98_Disable">
+        <source> TypeId0x98_AIM-T_Disable.bin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x98_AIM-T_Disable.bin </destination>
+      </file>
+    </package>
+
+
+<!--
+    MPM Firmware Components
+      TypeId0x85_QCOM_AmfSram_RMB.sbin
+      TypeId0x86_QCOM_MPMDram_RMB.sbin
+      TypeId0x88_QCOM_WLAN_RMB.sbin
+      TypeId0x89_QCOM_MFD_RMB.sbin
+-->
+    <package name="MPM_QCOM" scatter="true">
+      <file name="TypeId0x85_QCOM">
+        <source> TypeId0x85_MPMSram_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x85_QCOM_MPMSram_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x86_QCOM">
+        <source> TypeId0x86_MPMDram_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x86_QCOM_MPMDram_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x88_QCOM">
+        <source> TypeId0x88_WLAN_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x88_QCOM_WLAN_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x89_QCOM">
+        <source> TypeId0x89_MFD_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x89_QCOM_MFD_RMB.sbin </destination>
+      </file>
+    </package>
+
+<!--
+
+    MPM Firmware Components AIM-T 1.0
+      MpmReleaseNotes.txt
+      AMD_AIM-T_MPM_ Firmware_EULA(28-28-1-A7_RMB).docx
+      TypeId0x85_MTK_AmfSram_RMB.sbin
+      TypeId0x86_MTK_MPMDram_RMB.sbin
+      TypeId0x88_MTK_WLAN_RMB.sbin
+      TypeId0x89_MTK_MFD_RMB.sbin
+      TypeId0x98_AIM-T_Enable.bin
+      TypeId0x98_AIM-T_Disable.bin
+
+-->
+    <package name="MPM_1-0" scatter="true">
+      <file name="releasenote">
+        <source> AIMT-ReleaseNotes.txt </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\MpmReleaseNotes.txt </destination>
+      </file>
+      <file name="EULA">
+        <source> AMD_AIM-T_MPM_Firmware_End_User_License_Agreement_Version_28-28-3-A7_RMB.docx </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AMD_AIM-T_MPM_Firmware_End_User_License_Agreement_Version_28-28-3-A7_RMB.docx </destination>
+      </file>
+      <file name="TypeId0x85_1-0">
+        <source> TypeId0x85_AmfSram_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AIM-T_1-0_TypeId0x85_MPMSram_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x86_1-0">
+        <source> TypeId0x86_AmfDram_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AIM-T_1-0_TypeId0x86_MPMDram_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x88_1-0_NFA725">
+        <source> TypeId0x88_AmfWlan_NFA725_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AIM-T_1-0_TypeId0x88_WLAN_RMB_NFA725.sbin </destination>
+      </file>
+      <file name="TypeId0x88_1-0_NFA765">
+        <source> TypeId0x88_AmfWlan_NFA765_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AIM-T_1-0_TypeId0x88_WLAN_RMB_NFA765.sbin </destination>
+      </file>
+      <file name="TypeId0x89_1-0">
+        <source> TypeId0x89_AmfDrMfd_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AIM-T_1-0_TypeId0x89_MFD_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x98_Enable">
+        <source> TypeId0x98_AIM-T_Enable.bin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x98_AIM-T_Enable.bin </destination>
+      </file>
+      <file name="TypeId0x98_Disable">
+        <source> TypeId0x98_AIM-T_Disable.bin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\TypeId0x98_AIM-T_Disable.bin </destination>
+      </file>
+    </package>
+
+<!--
+    MPM Firmware Components AIM-T 1.0
+      TypeId0x85_QCOM_AmfSram_RMB.sbin
+      TypeId0x86_QCOM_MPMDram_RMB.sbin
+      TypeId0x88_QCOM_WLAN_RMB.sbin
+      TypeId0x89_QCOM_MFD_RMB.sbin
+-->
+
+<!--
+    <package name="MPM_1-0" scatter="true">
+      <file name="TypeId0x85_1-0">
+        <source> TypeId0x85_AmfSram_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AIM-T_1-0_TypeId0x85_MPMSram_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x86_1-0">
+        <source> TypeId0x86_AmfDram_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AIM-T_1-0_TypeId0x86_MPMDram_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x88_1-0">
+        <source> TypeId0x88_AmfWlan_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AIM-T_1-0_TypeId0x88_WLAN_RMB.sbin </destination>
+      </file>
+      <file name="TypeId0x89_1-0">
+        <source> TypeId0x89_AmfDrMfd_RMB.sbin </source>
+        <destination> AGESA\AgesaModulePkg\Firmwares\RMB\AIM-T_1-0_TypeId0x89_MFD_RMB.sbin </destination>
+      </file>
+    </package>
+-->
+
+
+<!--
+    VBL Firmware Components
+      Rembrandt VBL Release Notes.txt
+      TypeId0x3C_VbiosBootLoader_RMB.sbin
+-->
+    <package name="VBL" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+<!--
+    Turner Firmware Components
+      TypeId0x8F_TurnerFw.sbin
+-->
+    <package name="Turner" scatter="false">
+        <folder> AGESA\AgesaModulePkg\Firmwares\RMB\ </folder>
+    </package>
+
+</catalog>
+

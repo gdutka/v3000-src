@@ -1,0 +1,47 @@
+## @file
+#  Implement the driver of DxeChipsetSvc.
+#
+#  ***************************************************************************
+#  * Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#  *
+#  * You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#  * transmit, broadcast, present, recite, release, license or otherwise exploit
+#  * any part of this publication in any form, by any means, without the prior
+#  * written permission of Insyde Software Corporation.
+#  *
+#  ******************************************************************************
+#
+##
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = ChipsetSvcDxe
+  FILE_GUID                 = 9b0ff2c0-e245-11e1-8eff-d0df9a35c106
+  MODULE_TYPE               = DXE_DRIVER
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = ChipsetSvcDxeEntryPoint
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[Sources]
+  ChipsetSvcDxe.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+
+[Protocols]
+  gH2OChipsetServicesProtocolGuid
+
+[Guids]
+
+[Pcd]
+
+[FeaturePcd]
+
+[Depex]
+  TRUE

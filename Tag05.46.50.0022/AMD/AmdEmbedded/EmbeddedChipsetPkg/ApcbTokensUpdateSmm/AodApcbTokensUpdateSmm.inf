@@ -1,0 +1,66 @@
+## @file
+#  Component description file for ApcbTokensUpdateSmm module
+#
+#******************************************************************************
+#* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+INF_VERSION                    = 0x00010005
+BASE_NAME                      = AodApcbTokensUpdateSmm
+FILE_GUID                      = 4841A320-3764-49AC-BD7C-93AF8239C8CD
+MODULE_TYPE                    = DXE_SMM_DRIVER
+PI_SPECIFICATION_VERSION       = 0x0001000A
+VERSION_STRING                 = 1.0
+ENTRY_POINT                    = ApcbTokensUpdateSmmEntryPoint
+
+[Sources]
+  ApcbTokensUpdateSmm.h
+  ApcbTokensUpdateSmm.c
+  AodApcbTokensUpdate.h
+  AodApcbTokensUpdate.c
+
+[Packages]
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  $(PROJECT_PKG)/Project.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  InsydeH2OUvePkg/InsydeH2OUvePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  UefiDriverEntryPoint
+  DebugLib
+  SmmServicesTableLib
+  BaseLib
+  BaseMemoryLib
+  VariableLib
+  H2OLib
+
+[Protocols]
+  gH2OIhisiProtocolGuid
+  gAmdApcbSmmServiceProtocolGuid
+  
+[Guids]
+  gAodSystemConfigurationGuid
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OIhisiAuthSupported
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdIhisiRegisterTable
+  gH2OUvePkgTokenSpaceGuid.PcdH2OUveSecurityLevelAllowed
+
+[Depex]
+  gH2OIhisiProtocolGuid
+

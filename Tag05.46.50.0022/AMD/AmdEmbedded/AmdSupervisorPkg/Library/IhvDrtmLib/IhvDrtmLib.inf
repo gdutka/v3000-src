@@ -1,0 +1,34 @@
+##
+#  IHV DRTM abstraction layer to perform silicon specific operations.
+#
+#  Copyright (c) Microsoft Corporation.
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = IhvDrtmLibAmd
+  FILE_GUID                      = E6DA6299-E9E0-471A-B034-A2EBFF2CC0BE
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = IhvDrtmLib
+
+[Sources]
+  IhvDrtmLib.c
+
+[LibraryClasses]
+  DebugLib
+  SmmServicesTableLib
+  AmdPspMboxLibV2
+  BaseMemoryLib
+
+[Protocols]
+  gPspMboxSmmBufferAddressProtocolGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec

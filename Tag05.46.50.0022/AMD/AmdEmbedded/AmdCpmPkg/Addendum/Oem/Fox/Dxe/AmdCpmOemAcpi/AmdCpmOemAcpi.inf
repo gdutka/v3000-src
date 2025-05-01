@@ -1,0 +1,76 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmOemAcpi
+  FILE_GUID             = 3821290E-B8DD-4821-8182-0361DE51609D
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmOemAcpiEntryPoint
+
+[Sources]
+  AmdCpmOemAcpi.c
+  Asl/AmdCpmOemCommon.asi
+  Asl/AmdCpmOemCommon_PRx.asi
+  Asl/AmdCpmOemCommon_PRx_PSx.asi
+  Asl/AmdCpmOemGpio.asl
+  Asl/AmdCpmOemIntGpp01Ssdt.asl
+  Asl/AmdCpmOemIntGpp03Ssdt.asl
+  Asl/AmdCpmOemThermalSsdt.asl
+
+[BuildOptions]
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  AmdCpmBaseLib
+  AmdPbsConfigLib
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Protocols]
+  gAmdCpmTableProtocolGuid
+
+[Ppis]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.EcAslName
+  gAmdCpmPkgTokenSpaceGuid.EcMutexAslName
+  gAmdCpmPkgTokenSpaceGuid.LpcAslName
+  gAmdCpmPkgTokenSpaceGuid.OkEcAslName
+  gAmdCpmPkgTokenSpaceGuid.IGpuAslName
+  gAmdCpmPkgTokenSpaceGuid.HdauAslName
+  gAmdCpmPkgTokenSpaceGuid.Xhci0AslName
+  gAmdCpmPkgTokenSpaceGuid.Xhci1AslName
+  gAmdCpmPkgTokenSpaceGuid.AcpAslName
+  gAmdCpmPkgTokenSpaceGuid.AzaliaAslName
+  gAmdCpmPkgTokenSpaceGuid.Xhci2AslName
+  gAmdCpmPkgTokenSpaceGuid.Xhci3AslName
+  gAmdCpmPkgTokenSpaceGuid.Xhci4AslName
+  gAmdCpmPkgTokenSpaceGuid.Usb4Rt0AslName
+  gAmdCpmPkgTokenSpaceGuid.Usb4Rt1AslName
+  gAmdCpmPkgTokenSpaceGuid.Xhci3Xhci4RootHubAslName
+  gAmdCpmPkgTokenSpaceGuid.Xhci3Xhci4Usb3PortAslName
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdUsb4DepSupport
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdUsb4PSxSupport
+
+[Depex]
+  gAmdCpmTableProtocolGuid
+  AND
+  gEfiVariableArchProtocolGuid
+

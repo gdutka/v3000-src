@@ -1,0 +1,51 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME               = PldmBcc
+  MODULE_TYPE             = DXE_DRIVER
+  FILE_GUID               = 206E7181-A935-4BAF-949F-A875136CD46F
+  ENTRY_POINT             = PldmBccEntry
+
+[Sources]
+  MpmPldmBcc.c
+  BiosStringTable.c
+  BiosAttributeTable.c
+  BiosAttributeValueTable.c
+  BiosAttributePendingValueTable.c
+  SetBiosTablesTags.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  DebugLib
+  PrintLib
+  MpmLib
+
+[Protocols]
+  gAmdPldmProtocolGuid
+  gAmdMpmBccBiosPasswordProtocolGuid
+  gAmdMpmBccGetOemBiosPasswordProtocolGuid
+  gAmdMpmPldmBccProtocolGuid
+
+[Guids]
+  gEfiGlobalVariableGuid
+  gEfiEventReadyToBootGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Depex]
+  gAmdPldmProtocolGuid

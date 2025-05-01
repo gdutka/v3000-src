@@ -1,0 +1,63 @@
+## @file
+#  Component description file of NvmeInfoDxe.
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                          = 0x00010005
+  BASE_NAME                            = NvmeInfoDxe
+  FILE_GUID                            = 9b2756fc-bb82-44d8-9f2b-bcfca688e3c1
+  MODULE_TYPE                          = DXE_DRIVER
+  VERSION_STRING                       = 1.0
+  ENTRY_POINT                          = NvmeInfoDxeEntry
+
+[Sources]
+  NvmeInfoDxe.c
+  NvmeInfoDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  H2OCpLib
+  MemoryAllocationLib
+  PrintLib
+  SortLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  NvmeInfoLib
+
+[Guids]
+  gEfiDiskInfoAhciInterfaceGuid
+  gH2OBdsCpConnectAllAfterGuid
+
+[Protocols]
+  gEfiPciIoProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gH2ONvmeInfoProtocolGuid   ## PRODUCES
+  gEfiNvmExpressPassThruProtocolGuid
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdH2OCcbVersion
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ODeviceInfoAttributeStr
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpConnectAllAfterSupported
+
+[Depex]
+  TRUE

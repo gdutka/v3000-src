@@ -1,0 +1,58 @@
+## @file
+# Auto Generate OemRomSig
+#
+#******************************************************************************
+#* Copyright (c) 2013 - 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GenOemRomSig
+  FILE_GUID                      = 91FF9FD4-C910-4a67-98FE-356D7DD9BD7E
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 0.1
+
+  MODULE_AUTORUN_TOOL            = $(BIN_DIR)\$(BASE_NAME)
+  AUTORUN_PARAM                  = $(BUILD_DIR)\FV\OemRomSig.fv
+
+[Sources]
+  GenOemRomSig.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  AmdPspFeaturePkg/AmdPspFeaturePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  DebugLib
+  PrintLib
+
+[Ppis]
+
+[Protocols]
+
+[Guids]
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvSigBase
+  gInsydeTokenSpaceGuid.PcdFlashAreaBaseAddress
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPSPComboHdrBase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPSPComboHdrSize
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashBIOSComboHdrBase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashBIOSComboHdrSize
+
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdSPI2ndGenEFS
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdPspSpiReadMode
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdPspSpiFastSpeed
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdPspMicronDetectFlag
+
+[BuildOptions]
+  MSFT:*_*_IA32_DLINK_FLAGS == /out:"$(BIN_DIR)\$(BASE_NAME).exe" /base:0x10000000 /NOLOGO /SUBSYSTEM:CONSOLE /NODEFAULTLIB /IGNORE:4086 /MAP /OPT:REF /DEBUG /MACHINE:I386 /LTCG Kernel32.lib MSVCRT.lib
+  MSFT:*_*_*_CC_FLAGS = /wd4996 /D PLATFORM_NAME=$(PLATFORM_NAME)

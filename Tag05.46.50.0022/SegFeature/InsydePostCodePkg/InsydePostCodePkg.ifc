@@ -1,0 +1,19 @@
+<Features>
+  <!-- Trunk feature -->
+  <Feature>
+    <Name>InsydePostCodePkg</Name>
+    <Root>SegFeature/InsydePostCodePkg</Root>
+    <Version>01.02.04.0001</Version>
+    <Revision>4</Revision>
+    <Repository>
+      <Type>Svn</Type>
+      <Url>http://svn-tc.insydesw.com/H2O-SEG-Feature/InsydePostCodePkg</Url>
+      <Tag>01.02.04.0001</Tag>
+    </Repository>
+    <Package>
+      <Dsc>Package</Dsc>
+      <Fdf>Package</Fdf>
+      <SourceDir>.</SourceDir>
+    </Package>
+  </Feature>
+</Features>

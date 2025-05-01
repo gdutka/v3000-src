@@ -1,0 +1,38 @@
+/** @file
+
+;******************************************************************************
+;* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+#define _USB_STRING_POOL_HFR_
+#ifndef _USB_STRING_POOL_HFR_
+suppressif TRUE;
+
+SUBTITLE(STRING_TOKEN(STR_USB_SS_PORT0_PROMPT))
+SUBTITLE(STRING_TOKEN(STR_USB_SS_PORT1_PROMPT))
+
+SUBTITLE(STRING_TOKEN(STR_USB_SS_PORT0_HELP))
+SUBTITLE(STRING_TOKEN(STR_USB_SS_PORT1_HELP))
+
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT0_PROMPT))
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT1_PROMPT))
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT2_PROMPT))
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT3_PROMPT))
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT4_PROMPT))
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT5_PROMPT))
+
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT0_HELP))
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT1_HELP))
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT2_HELP))
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT3_HELP))
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT4_HELP))
+SUBTITLE(STRING_TOKEN(STR_USB_HS_PORT5_HELP))
+
+endif;
+#endif

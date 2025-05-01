@@ -1,0 +1,30 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PcieComplexDefaultsLib
+  FILE_GUID                      = DCF55E8D-78C0-4EF3-A807-2365C22AC7A6
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PcieComplexDefaultsLib
+
+[Sources]
+  PcieComplexDefaultsLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+ PcieComplexDefaultsLib          #PRODUCED
+
+[Ppis]
+
+[Pcd]
+
+[Depex]
+TRUE

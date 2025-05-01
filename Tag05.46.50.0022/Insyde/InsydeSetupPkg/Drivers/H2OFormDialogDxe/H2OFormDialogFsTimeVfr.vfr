@@ -1,0 +1,53 @@
+/** @file
+
+  H2O Form Dialog Configuration DXE VFR implementation.
+
+;******************************************************************************
+;* Copyright (c) 2019, Insyde Software Corporation. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+
+#include "H2OFormDialogConfig.h"
+#include "Format.hfr"
+
+formset
+  guid      = H2O_FORM_DIALOG_FORMSET_ID_LMDE_TIME,
+  title     = STRING_TOKEN(STR_FORMSET_TITLE_TIME),
+  help      = STRING_TOKEN(STR_FORMSET_TITLE_TIME),
+  classguid = H2O_FORM_DIALOG_FORMSET_CLASS_ID_LMDE_COMMON_QUESTION,
+
+  efivarstore H2O_FORM_DIALOG_CONFIGURATION,
+    varid = H2O_FORM_DIALOG_CONFIGURATION_VARSTORE_ID,
+    attribute = 0x07, // EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS
+    name  = H2OFormDialogConfig,
+    guid  = H2O_FORM_DIALOG_CONFIGURATION_GUID;
+
+  form
+    formid = H2O_FORM_DIALOG_FORM_ID_ROOT, title = STRING_TOKEN(STR_STR_H2O_FORM_DIALOG_TITLE);
+
+    #include "DialogHeader.hfr"
+
+    import
+      property {
+        control-type : H2O_CONTROL_TYPE_SETUP_LMDE_TIME_ROLLER_GUID;
+        top : 50%;
+        left : 10%;
+        width : 80%;
+        height : 180px;
+      }
+    endimport;
+
+    #include "DialogOkCancel.hfr"
+
+  endform;
+
+  #include "DialogLastForm.hfr"
+
+endformset;
+

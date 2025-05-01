@@ -1,0 +1,65 @@
+## @file
+#  CPU device info setup module information file.
+#
+#******************************************************************************
+#* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                          = 0x00010005
+  BASE_NAME                            = CpuInfoSetupUtilityDxe
+  FILE_GUID                            = 3AC9D717-A920-4BB2-8EC8-F235094C7E50
+  MODULE_TYPE                          = DXE_DRIVER
+  VERSION_STRING                       = 1.0
+  ENTRY_POINT                          = CpuInfoEntry
+  UNLOAD_IMAGE                         = CpuInfoUnload
+
+[Sources]
+  CpuInfoSetupUtilityDxe.c
+  CpuDetailDisplay.c
+  CpuInfoVfr.uni
+  CpuInfoVfr.vfr
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+  $(PROJECT_PKG)/Project.dec ##
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+  BaseLib
+  BaseMemoryLib
+  DevicePathLib
+  MemoryAllocationLib
+  HiiLib
+  HiiExLib
+  PrintLib
+  CpuDeviceInfoLib
+  CpuMiscLib
+  LanguageDataLib
+
+[Guids]
+  gH2OCpuInfoFormsetGuid
+  gEfiIfrTianoGuid
+
+[Protocols]
+  gEfiHiiConfigAccessProtocolGuid
+  gEfiSetupUtilityApplicationProtocolGuid
+  gH2OCpuDeviceInfoProtocolGuid
+
+[FixedPcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OCpuInfoLinkToFormsetGuid
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OCpuDetailDisplayList
+
+[Depex]
+  gEfiHiiConfigRoutingProtocolGuid

@@ -1,0 +1,137 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = AgesaCcxPkg
+  PACKAGE_GUID          = df325429-029e-40f0-82db-0e69be7f6560
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+
+
+[LibraryClasses]
+  CcxBaseX86Lib|Include/Library/CcxBaseX86Lib.h
+  CcxBistLib|Include/Library/CcxBistLib.h
+  CcxPspLib|Include/Library/CcxPspLib.h
+  CcxHaltLib|Include/Library/CcxHaltLib.h
+  CcxMicrocodePatchLib|Include/Library/CcxMicrocodePatchLib.h
+  CcxRolesLib|Include/Library/CcxRolesLib.h
+  CcxDownCoreLib|Include/Library/CcxDownCoreLib.h
+  CcxResetTablesLib|Include/Library/CcxResetTablesLib.h
+  CcxPstatesLib|Include/Library/CcxPstatesLib.h
+  CcxSmbiosLib|Include/Library/CcxSmbiosLib.h
+  CcxBtcLib|Include/Library/CcxBtcLib.h
+  CcxStallLib|Include/Library/CcxStallLib.h
+  CcxSetMcaLib|Include/Library/CcxSetMcaLib.h
+  CcxMpServicesLib|Include/Library/CcxMpServicesLib.h
+  CcxIdsCustomPstateLib|Include/Library/CcxIdsCustomPstatesLib.h
+  CcxSmmAccess2Lib|Include/Library/CcxSmmAccess2Lib.h
+  CcxPeiSmmAccesLib|Include/Library/CcxPeiSmmAccessLib.h
+  CcxSetMmioCfgBaseLib|Include/Library/CcxSetMmioCfgBaseLib.h
+  CcxCppcLib|Include/Library/CcxCppcLib.h
+
+
+[Guids]
+  gAmdDownCoreStatusGuid                   = {0x29749bad, 0x401b, 0x4f6d, {0xb1, 0x24, 0xce, 0xce, 0x8c, 0x59, 0xc, 0x48}}
+  gAmdTscFrequencyGuid                     = {0x614facf7, 0x1ac6, 0x4b15, {0xa8, 0x8c, 0x2c, 0x1a, 0x70, 0xd7, 0x77, 0xec}}
+
+[Protocols]
+  gAmdCcxDxeInitCompleteProtocolGuid       = {0xaddf9be3, 0x1eb8, 0x4472, {0x95, 0xd1, 0xf8, 0xcd, 0xde, 0x58, 0xe5, 0xbb}}
+  gAmdCcxSmbiosServicesProtocolGuid        = {0x2575123e, 0x2878, 0x4a72, {0xb9, 0xd5, 0xa, 0xa3, 0x48, 0x53, 0x91, 0x66}}
+  gAmdCcxAcpiCratServicesProtocolGuid      = {0x6e773b37, 0xf799, 0x4355, {0x9f, 0xe8, 0x60, 0xe, 0x7, 0x34, 0xe5, 0xf}}
+  gAmdCcxAcpiSratServicesProtocolGuid      = {0x9b6cdfc1, 0xe996, 0x4f52, {0x8e, 0x63, 0xe3, 0xff, 0xe5, 0x72, 0x45, 0xc}}
+  gAmdAcpiCpuSsdtServicesProtocolGuid      = {0x42de07da, 0x21d4, 0x4132, {0x9d, 0xbf, 0x4e, 0xfd, 0xd7, 0x8b, 0x7b, 0x86}}
+  gAmdCcxOcCompleteProtocolGuid            = {0x1fbe6f3d, 0x6dbb, 0x47df, {0x82, 0xb8, 0x22, 0x5, 0x6, 0x99, 0xe4, 0xb7}}
+  gAmdCcxBaseServicesProtocolGuid          = {0xf6f234ea, 0xc633, 0x41fc, {0xae, 0x1f, 0xd8, 0x89, 0x52, 0x1b, 0x57, 0x6f}}
+  gAmdCcxAcpiPcctServicesProtocolGuid      = {0x468202ff, 0x7784, 0x4744, {0xa8, 0x13, 0x3f, 0x69, 0x9f, 0xdd, 0x50, 0x4}}
+  gAmdCcxAcpiCppcServicesProtocolGuid      = {0x5b333a0a, 0xe571, 0x4b0f, {0x93, 0x24, 0x77, 0xd1, 0x6a, 0x74, 0xc2, 0xa5}}
+
+[Ppis]
+  gAmdCcxPeiInitCompletePpiGuid            = {0xa1192fdd, 0xbf51, 0x49cb, {0x97, 0x67, 0x87, 0x81, 0xdf, 0x7a, 0xbb, 0x8c}}
+
+[PcdsFeatureFlag]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxStallEnable|TRUE|BOOLEAN|0x000CC0E1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSvmControl|FALSE|BOOLEAN|0x000CC0E2   # Enable SVM MSRs control code
+
+[PcdsFixedAtBuild]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxS3SaveSmi|0xEE|UINT8|0x000CC0A1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC1MinResCZN|0x00000002|UINT32|0x000CC0A3   # CZN. 2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC2MinResCZN|0x00000024|UINT32|0x000CC0A4   # CZN. 36
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC3MinResCZN|0x000002BC|UINT32|0x000CC0A5   # CZN. 700
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC1WorstCaseWakeupLatencyCZN|0x00000001|UINT32|0x000CC0A6 # CZN. 1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC2WorstCaseWakeupLatencyCZN|0x00000012|UINT32|0x000CC0A7 # CZN. 18
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC3WorstCaseWakeupLatencyCZN|0x0000015E|UINT32|0x000CC0A8 # CZN. 350
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC1MinResRN|0x00000002|UINT32|0x000CC0A9   # RN. 2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC2MinResRN|0x00000024|UINT32|0x000CC0AA   # RN. 36
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC3MinResRN|0x000002BC|UINT32|0x000CC0AB   # RN. 700
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC1WorstCaseWakeupLatencyRN|0x00000001|UINT32|0x000CC0AC # RN. 1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC2WorstCaseWakeupLatencyRN|0x00000012|UINT32|0x000CC0AD # RN. 18
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiCpuLpiC3WorstCaseWakeupLatencyRN|0x0000015E|UINT32|0x000CC0AE # RN. 350
+
+[PcdsDynamic]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxCfgApmEnable|TRUE|BOOLEAN|0x000CC001
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxCfgCFOHEnable|TRUE|BOOLEAN|0x000CC002
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdAcpiPstateObjEnable|TRUE|BOOLEAN|0x000CC004
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCpuWdtSeverity|0xFF|UINT8|0x000CC005                  # For VH, Control MSRC001_0074[CpuWdTmrCfgSeverity], 0xFF means leave it at reset value
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdApicMode|0xFF|UINT8|0x000CC006                        # For CB, Apic mode:
+                                                                                                  #  0xFF (auto)
+                                                                                                  #  0x00 (CompatibilityMode) - threads below 255 run in xAPIC with xAPIC ACPI structures and threads 255 & above run in x2 mode with x2 ACPI structures
+                                                                                                  #  0x01 (xApicMode) - force legacy xApic mode (downcores if enabled threads are >= 255)
+                                                                                                  #  0x02 (x2ApicMode) - force x2Apic mode independent of thread count
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdRedirectForReturnDis|0xFF|UINT8|0x000CC007            # MSR_C001_1029[14]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdOpcacheCtrl|0xFF|UINT8|0x000CC008                     # MSR_C001_1021[5]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdStreamingStoresCtrl|0xFF|UINT8|0x000CC009             # MSR_C001_1020[28]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Setting|0x2|UINT8|0x000CC00A                     # 1- Custom; 2- Auto (For all)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Fid|0xF|UINT8|0x000CC00B                         # FID (For ZP, RV)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Did|0x8|UINT8|0x000CC00C                         # DID (For ZP, RV)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Vid|0xFF|UINT8|0x000CC00D                        # VID (For all)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxP0Freq|0xFFFFFFFF|UINT32|0x000CC00E                # Frequency (For VH, PCO AM4)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSmmLock|TRUE|BOOLEAN|0x000CC00F                       # Set MSR_C001_0015[0][SmmLock]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd0|0|UINT16|0x000CC010                       # CoreDis bit map for physical CCD0.  Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd1|0|UINT16|0x000CC011                       # CoreDis bit map for physical CCD1.  Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd2|0|UINT16|0x000CC012                       # CoreDis bit map for physical CCD2.  Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd3|0|UINT16|0x000CC013                       # CoreDis bit map for physical CCD3.  Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd4|0|UINT16|0x000CC014                       # CoreDis bit map for physical CCD4.  Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd5|0|UINT16|0x000CC015                       # CoreDis bit map for physical CCD5.  Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd6|0|UINT16|0x000CC016                       # CoreDis bit map for physical CCD6.  Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd7|0|UINT16|0x000CC017                       # CoreDis bit map for physical CCD7.  Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd8|0|UINT16|0x000CC018                       # CoreDis bit map for physical CCD8.  Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd9|0|UINT16|0x000CC019                       # CoreDis bit map for physical CCD9.  Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd10|0|UINT16|0x000CC01A                      # CoreDis bit map for physical CCD10. Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd11|0|UINT16|0x000CC01B                      # CoreDis bit map for physical CCD11. Set bit[x] = 1 could down logical core x#
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGameMode|FALSE|BOOLEAN|0x000CC01C                     # CP. Game mode.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdDownCoreSmtWarmResetStall|0x20000|UINT32|0x000CC01D   # PCO Microseconds to delay before warm reset request after downcore and SMT disable control
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdIbrsEn|FALSE|BOOLEAN|0x000CC01E                       # MTS. Enable Indirect Branch Prediction Speculation
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxEnabledFeatures|0|UINT32|0x000CC01F                # Capabilities about current running processor
+                                                                                                  #  Bit 0: LPI capable (For RN, CZN)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSvmLock|TRUE|BOOLEAN|0x000CC020                       # Set MSR_C001_0114[3]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdSvmEnable|TRUE|BOOLEAN|0x000CC021                     # Clear MSR_C001_0114[4]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdBranchSampling|FALSE|BOOLEAN|0x000CC022               # For MSR_C001_10DC[31] of GN Bx
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdVmplEnable|TRUE|BOOLEAN|0x000CC023                    # GN. Enable VMPL
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxSingleBitErrLogging|FALSE|BOOLEAN|0x000CC024       # GN. Single bit transparent error logging
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnSpecStFill|TRUE|BOOLEAN|0x000CC025                  # For MSR_LS_CFG3[26][EnSpecStFill] (for GN)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnableFSRM|FALSE|BOOLEAN|0x000CC026                   # Fast Short REP MOVSB (For Zen3 and Zen4)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnableERMS|FALSE|BOOLEAN|0x000CC027                   # Enhanced REP MOVSB/STOSB (For Zen3 and Zen4)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnableSvmAVIC|FALSE|BOOLEAN|0x000CC028                # GN. Enable SVM AVIC
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdIbsHardwareEn|FALSE|BOOLEAN|0x000CC029                # For core Cerberus B0, set MSR_C001_1020[54]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnableRMSS|FALSE|BOOLEAN|0x000CC02A                   # REP-MOV/STOS Streaming (For Zen3 and Zen4)
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPsdGrouping|0xFF|UINT8|0x000CC02B                     # GN. Switch the grouping of Pstate Dependencty (_PSD)
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxPxAutoSetting|0x2|UINT8|0x000CC02C                 # GN Pstate default 2- Auto
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxPxAutoFreq|0xFFFFFFFF|UINT32|0x000CC02D            # GN Default Frequency
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdNewDownCoreSequence|FALSE|BOOLEAN|0x000CC02E          # 0 - Downcore in x86 AGESA; 1 - Downcore in ABL
+
+  # RS
+  ### Enable SVM x2AVIC.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnableSvmX2AVIC|TRUE|BOOLEAN|0x000CC02F
+
+  ### Enable AVX512.
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCcxEnableAvx512|0xFF|UINT8|0x000CC030
+
+  #PMem
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPmemRetention|0xFF|UINT8|0x000CC035  

@@ -1,0 +1,111 @@
+## @file  InsydeDebugAssistPkg.dec
+#
+# This package provides the modules that conform to UEFI/PI Industry standards.
+# It also provides the defintions(including PPIs/PROTOCOLs/GUIDs and library classes)
+# and libraries instances, which are used for those modules.
+#
+# Copyright (c) 2007 - 2014, Intel Corporation. All rights reserved.<BR>
+# This program and the accompanying materials are licensed and made available under 
+# the terms and conditions of the BSD License that accompanies this distribution.  
+# The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php.                                                                          
+# 
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,                     
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.  
+#
+##
+
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = InsydeDebugAssistPkg
+  PACKAGE_GUID                   = 990C601D-141C-420e-8B49-18173F0F6282
+  PACKAGE_VERSION                = 0.10
+
+[Includes]
+  Include
+
+[LibraryClasses]
+
+
+[Guids]
+  ## MdeModule package token space guid
+  # Include/Guid/MdeModulePkgTokenSpace.h
+  # {8B7395A6-AE95-4e9d-BA91-C86D5E75F2F0}
+  gH2ODebugAssistTokenSpaceGuid       = { 0x8b7395a6, 0xae95, 0x4e9d, { 0xba, 0x91, 0xc8, 0x6d, 0x5e, 0x75, 0xf2, 0xf0 } }
+
+[Ppis]
+
+[Protocols]
+  gH2ODebugAssistDriverArpServiceProtocolGuid       = { 0x3fd52e9e, 0x2e4e, 0x11e4, {0x86, 0x51, 0x94, 0x39, 0xe5, 0x61, 0x61, 0x3a} }
+  gH2ODebugAssistMemoryDataAnalysisProtocolGuid     = { 0xaba57610, 0x9003, 0x4092, { 0xaf, 0xf0, 0xce, 0x55, 0xfd, 0xa2, 0xd8, 0x32 } }
+
+[PcdsFeatureFlag]
+  ## Enable/disable Event Trace feature
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEventTraceSupported|TRUE|BOOLEAN|0x10000002
+  ## Enable/disable Memory Data Analysis feature
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistMemoryDataAnalysisSupported|TRUE|BOOLEAN|0x10000003
+
+[PcdsFeatureFlag.IA32, PcdsFeatureFlag.X64]
+
+[PcdsFixedAtBuild]
+  #
+  # PCD for EventTraceDxe driver
+  #
+  ## EVT_TIMER | EVT_NOTIFY_SIGNAL,
+  ## 0x00000001       Timer event with a notification function that is
+  ## queue when the event is signaled with SignalEvent()
+  ##
+  ## EVT_NOTIFY_WAIT,
+  ## 0x00000002       Generic event with a notification function that
+  ## can be waited on with CheckEvent() or WaitForEvent()
+  ##
+  ## EVT_NOTIFY_SIGNAL,
+  ## 0x00000004       Generic event with a notification function that
+  ## is queue when the event is signaled with SignalEvent()
+  ##
+  ## EVT_SIGNAL_EXIT_BOOT_SERVICES,
+  ## 0x00000008       ExitBootServicesEvent.
+  ##
+  ## EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE,
+  ## 0x00000010       SetVirtualAddressMapEvent.
+  ##
+  ## EVT_TIMER | EVT_NOTIFY_WAIT,
+  ## 0x00000020       Timer event with a notification function that can be
+  ## waited on with CheckEvent() or WaitForEvent()
+  ##
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtTraceTypeBitMap|0x0000000E|UINT32|0x30000001
+  ## 0         : Output tracing messages un-limited times
+  ## otherwise : The maximum trace times per event
+  ##
+  ## Note that, set this value to 0 will get infinite tracing messages
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtTraceTimes|3|UINT32|0x30000002
+  ## 0  : Trace all drivers
+  ## 1  : Trace specific drivers
+  ## 2  : Do not Trace specific drivers
+  ## Other: Undefined
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtTraceMethod|0|UINT32|0x30000003
+  #
+  # The analysis length, in bytes, is used by DebugAssert () in DxeDebugLib.c
+  # The actual length will be aligned to sizeof (UINTN)
+  #
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistAnalysisLength|640|UINT64|0x30000004
+  
+[PcdsFixedAtBuild,PcdsPatchableInModule]
+
+[PcdsPatchableInModule, PcdsDynamic, PcdsDynamicEx]
+
+[PcdsFixedAtBuild, PcdsDynamic, PcdsDynamicEx]
+
+[PcdsFixedAtBuild, PcdsPatchableInModule, PcdsDynamic, PcdsDynamicEx]
+
+[PcdsPatchableInModule]
+
+[PcdsDynamic, PcdsDynamicEx]
+
+[PcdsDynamicEx]
+  #
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtTraceGroupList|{0}|VOID*|0x50000001
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtTraceList|{0}|VOID*|0x50000002
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtNotTraceList|{0}|VOID*|0x50000003
+

@@ -1,0 +1,101 @@
+## @file
+#  PostCode package Declaration file
+#
+#******************************************************************************
+#* Copyright (c) 2016 - 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = InsydePostCodePkg
+  PACKAGE_GUID                   = 81892BCA-097D-422d-B3EF-97FC1D4DF9C1
+  PACKAGE_VERSION                = 0.1
+
+[Includes]
+  Include
+
+[LibraryClasses]
+  PostCodeConfigLib|Include/Library/PostCodeConfigLib.h
+  SerialPortPostCodeLib|Include/Library/SerialPortPostCodeLib.h
+  VgaPostCodeLib|Include/Library/VgaPostCodeLib.h
+  PostCodeMiscLib|Include/Library/PostCodeMiscLib.h
+  SmmDebugRegisterConfigLib|Include/Library/SmmDebugRegisterConfigLib.h
+
+[Guids]
+  gH2OPostCodeDxeEnableVarGuid = { 0xa0f59c91, 0x9764, 0x44d5, {0x91, 0x55, 0x3f, 0x8a, 0x5e, 0x96, 0xac, 0x60} }
+  gH2OPostCodeSmmDxeEnableVarGuid = { 0x528b48a9, 0xc5dc, 0x409b, {0x9a, 0x7a, 0xa0, 0x18, 0x5e, 0xa4, 0x41, 0x90} }
+  gH2OCrConfigurationAliasGuid = { 0x7EC07B9F, 0x66E3, 0x43d4, {0x9B, 0x52, 0x38, 0xFB, 0xB4, 0x63, 0x90, 0xCC} }
+  gH2OPostCodePkgTokenSpaceGuid = { 0x13ab8793, 0x4ba3, 0x4e29, { 0xaa, 0xa7, 0x1b, 0xa3, 0x4e, 0xdc, 0x6e, 0x2f } }
+
+  #  
+  #  The Variable ShowModeSet for indicating Console Redirection show mode   
+  #  serial mode   = 0   (default)
+  #  Consolt mode  = 1
+  #
+  gH2OPostcodeSerialModeVariableGuid = { 0x9928ef28, 0x8be3, 0x4298, { 0xa0, 0x7b, 0xa8, 0x81, 0x8b, 0xf4, 0xcb, 0x9 } }
+
+[Protocols]
+  gH2OPostCodeSmmDebugRegProtocolGuid = { 0xe3c14cce, 0x647e, 0x4f23, { 0x85, 0x4d, 0x53, 0x2a, 0x3d, 0x0b, 0x89, 0x35 } }
+  gH2OPostCodeVgaProtocolGuid = { 0x83b868fe, 0xac0c, 0x4fb9, { 0x87, 0x8e, 0x8f, 0x51, 0xcc, 0x94, 0xc, 0xac } }
+
+[PcdsFixedAtBuild]
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeDxeEnableVarName|L"PostCodeDxeEnableVar"|VOID*|0x000ABF14
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeDxeEnable|TRUE|BOOLEAN|0x000ABF13
+
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeSmmDxeEnableVarName|L"PostCodeSmmDxeEnableVar"|VOID*|0x000ABF16
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeSmmDxeEnable|TRUE|BOOLEAN|0x000ABF15
+# value == 0x00: serial mode
+# value == 0x01: console mode
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostcodeSerialModeDefault|0x01|UINT8|0x000ABF12
+
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeSerialPortRegBase|0x03F8|UINT64|0x000ABF01
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeSerialPortUseMmio|FALSE|BOOLEAN|0x000ABF09
+  #
+  # The PPIs and/or Protocols which are registered a enable PostCode features notify function
+  #
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeTrapDebugPortNotifyList|{0}|VOID*|0x000ABF05
+  #
+  # The PPIs and/or Protocols which are registered a disable PostCode features notify function
+  #
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeNonTrapDebugPortNotifyList|{0}|VOID*|0x000ABF06
+
+  #
+  # The CheckPoint which are registered a enable PostCode features notify function
+  #
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeTrapDebugPortCpNotifyList|{0}|VOID*|0x000ABF10
+  #
+  # The CheckPoint which are registered a disable PostCode features notify function
+  #
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeNonTrapDebugPortCpNotifyList|{0}|VOID*|0x000ABF11
+
+
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeDebugPortAddress|0x0080|UINT16|0x000ABF07
+  #
+  # The length of the Post Code which is printed on Monitor and COM Port
+  # Valid value: 1, 2, 4 byte (Other values will be considered to be 1 byte)
+  #
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeDisplayLength|0x01|UINT8|0x000ABF08
+
+[PcdsDynamic, PcdsDynamicEx]
+  #
+  # used to record base timestamp tick got by BaseTimeStampLibConstructor
+  # base timestamp tick will be used by PostCodeSmm driver
+  #
+  # base timestamp tick is originally recorded in HOB,
+  # but HOB is not accessible to smm drivers after smm is locked
+  # so PostCodeDxe gets base timestamp tick, sets it in pcd, and therefore makes base timestamp tick visible to PostCodeSmm
+  # 
+  gH2OPostCodePkgTokenSpaceGuid.PcdPerformanceCounterReadyTick|0|UINT64|0x000ABF0B
+
+[PcdsFeatureFlag]
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeSupported|TRUE|BOOLEAN|0x000ABF02
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeSerialPortSupported|TRUE|BOOLEAN|0x000ABF03
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeScreenSupported|TRUE|BOOLEAN|0x000ABF04
+  gH2OPostCodePkgTokenSpaceGuid.PcdH2OPostCodeTimeStampSupported|FALSE|BOOLEAN|0x000ABF0A 
+

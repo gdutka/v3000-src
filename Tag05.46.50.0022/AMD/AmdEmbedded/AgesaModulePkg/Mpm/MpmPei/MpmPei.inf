@@ -1,0 +1,58 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MpmPei
+  FILE_GUID                      = ef2b91d1-1847-4d88-9115-2835a0befbdc
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = MpmPeiDriverEntry
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  AmdBaseLib
+  AmdPspMboxLibV2
+  AmdPspBaseLibV2
+  SmnAccessLib
+  FabricResourceManagerLib
+  MpmMboxLib
+  AmdHeapLib
+  MpmFuncLib
+
+
+[Sources]
+  MpmPei.c
+
+[Guids]
+
+[Ppis]
+  gAmdMpmDataInitializedPpiGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWiredKvmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessKvmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmKvmMouseProtocol
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessTcrEnable
+
+[Depex]
+  gAmdMpmPeiDepexPpiGuid AND
+  gAmdPspCommonServicePpiGuid  #Make it depend on PspPei driver to initial the PSP BAR
+
+
+

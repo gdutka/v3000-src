@@ -1,0 +1,51 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdMemSh5Pei
+  FILE_GUID                      = 9CDD2B26-2411-4637-BAEA-A1A8F197B1DC
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdMemSh5Peim
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  AmdBaseLib
+  IdsLib
+  AmdPspApobLib
+
+[sources]
+  AmdMemSh5Pei.c
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdMemoryInitCompletePpiGuid    #Publish
+  
+[Pcd]
+  
+
+[Depex]
+  gAmdMemSh5PeimDepexPpiGuid AND
+  gAmdCcxPeiInitCompletePpiGuid AND
+  gAmdPspCommonServicePpiGuid
+
+

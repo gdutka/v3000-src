@@ -1,0 +1,395 @@
+/*
+*****************************************************************************
+*
+* Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+*
+* ***************************************************************************
+*
+*/
+
+/*----------------------------------------------------------------------------------------*/
+/**
+ *  ALIB interface method
+ *
+ *  Arg0 - Function ID
+ *  Arg1 - Function specific data buffer
+ */
+Method (ALIB, 2, NotSerialized) {
+
+  if (Lequal (Arg0, 0x0)) {
+    procPort80 (NbioAlib_0_Entry)
+    // Define Arg1 for function 0
+    CreateWordField(Arg1, 0, varStructureSize)                          // Structure size field
+    CreateWordField(Arg1, 2, varInterfaceVersion)                       // Interface field
+    CreateDWordField(Arg1, 4, varSupportedFunctionsBitVector)           // Supported field
+
+    Store (Buffer (256) {}, Local0)
+    CreateWordField (Local0, 0x0, varReturnBufferLength)
+    Store (varStructureSize, varReturnBufferLength)
+    CreateWordField (Local0, 0x2, varReturn0)
+    Store (varInterfaceVersion, varReturn0)
+    CreateDWordField (Local0, 0x4, varReturn1)
+    Store (varSupportedFunctionsBitVector, varReturn1)
+    And (varReturn1, Not (0xF),varReturn1)
+    if (LGreater (PsppPolicy, FALSE)) {
+      Store (0x0F, Local1)
+    } else {
+      Store (0x01, Local1)
+    }
+    Or (varReturn1, Local1, varReturn1)
+    procPort80 (NbioAlib_0_Exit)
+    return (Local0)
+  }
+
+  if (Lequal (Arg0, 0x1)) {
+    procPort80 (NbioAlib_1_Entry)
+    Store (DeRefOf (Index (Arg1, 0x2)), Local0)
+    return (procAcDc (Local0))
+    procPort80 (NbioAlib_1_Exit)
+  }
+
+  if (LEqual (Arg0, 0x2)) {
+    procPort80 (NbioAlib_2_Entry)
+  #if PSPP_SUPPORT
+    return (procPsppPerfRequest (Arg1))
+    procPort80 (NbioAlib_2_Exit)
+  #else
+    Store (Buffer (256) {0x3, 0, 0}, Local0)
+    procPort80 (NbioAlib_2_Exit)
+    return (Local0)
+  #endif
+   }
+
+   if (LEqual (Arg0, 0x3)) {
+    procPort80 (NbioAlib_3_Entry)
+   #if PSPP_SUPPORT
+     Store (DerefOf (Index (Arg1, 0x2)), Local0)
+     return (procPsppManage (Local0))
+     procPort80 (NbioAlib_3_Exit)
+   #else
+     Store (Buffer (256) {0x3, 0, 0}, Local0)
+     procPort80 (NbioAlib_3_Exit)
+     return (Local0)
+   #endif
+   }
+/*
+   if (LEqual (Arg0, 0x4)) {
+     return (procPcieSetBusWidth (Arg1))
+   }
+   if (LEqual (Arg0, 0x5)) {
+     return (procAlibInit ())
+   }
+*/
+   if (LEqual (Arg0, 0x6)) {
+     procPort80 (NbioAlib_6_Entry)
+   #if HOTPLUG_SUPPORT
+     Store (DerefOf (Index (Arg1, 4)), Local0)
+     Store (DerefOf (Index (Arg1, 2)), Local1)
+     return (procHotplug (Local0, Local1))
+     procPort80 (NbioAlib_6_Exit)
+   #else
+     Store (Buffer (256) {0x3, 0, 0}, Local0)
+     procPort80 (NbioAlib_6_Exit)
+     return (Local0)
+   #endif
+   }
+   #ifdef DEBUG_OUT
+   // debug service to test sleep
+   if (LEqual (Arg0, 0x8)) {
+     Store (DeRefOf (Index (Arg1, 0x2)), Local0)
+     Store (DeRefOf (Index (Arg1, 0x3)), Local1)
+     if (LEqual (Local0, 1)) {
+       // Sleep
+       APTS (Local1)
+     } else {
+       AWAK (Local1)
+     }
+   }
+   // debug service to dump port data
+   if (LEqual (Arg0, 0x9)) {
+     Store (DeRefOf (Index (Arg1, 0x2)), Local0)
+     procPsppDebugDump (Local0)
+   }
+   #endif
+   if (Lequal (Arg0, 0xa)) {
+     procPort80 (NbioAlib_A_Entry)
+     Store (DeRefOf (Index (Arg1, 0x2)), Local0)
+     return (procDockUndock (Local0))
+     procPort80 (NbioAlib_A_Exit)
+   }
+
+   if (Lequal (Arg0, 0xB)) {
+     procPort80 (NbioAlib_B_Entry)
+     Store (DeRefOf (Index (Arg1, 0x2)), Local0)
+     Store (DeRefOf (Index (Arg1, 0x3)), Local1)
+
+     Store (DeRefOf (Index (Arg1, 0x4)), Local2)
+     Or (ShiftLeft (DeRefOf (Index (Arg1, 0x5)), 8), Local2, Local2)
+     Or (ShiftLeft (DeRefOf (Index (Arg1, 0x6)), 16), Local2, Local2)
+     Or (ShiftLeft (DeRefOf (Index (Arg1, 0x7)), 24), Local2, Local2)
+
+     Store (DeRefOf (Index (Arg1, 0x8)), Local3)
+     Or (ShiftLeft (DeRefOf (Index (Arg1, 0x9)), 8), Local3, Local3)
+     Or (ShiftLeft (DeRefOf (Index (Arg1, 0xA)), 16), Local3, Local3)
+     Or (ShiftLeft (DeRefOf (Index (Arg1, 0xB)), 24), Local3, Local3)
+
+     Store (DeRefOf (Index (Arg1, 0xC)), Local4)
+     Or (ShiftLeft (DeRefOf (Index (Arg1, 0xD)), 8), Local4, Local4)
+     Or (ShiftLeft (DeRefOf (Index (Arg1, 0xE)), 16), Local4, Local4)
+     Or (ShiftLeft (DeRefOf (Index (Arg1, 0xF)), 24), Local4, Local4)
+
+     return (procBBBManage (Local0, Local1, Local2, Local3, Local4))
+    procPort80 (NbioAlib_B_Exit)
+   }
+
+   if (Lequal (Arg0, 0xC)) {
+     procPort80 (NbioAlib_C_Entry)
+     return (procDPTCi (Arg1))
+     procPort80 (NbioAlib_C_Exit)
+   }
+
+   if (Lequal (Arg0, 0x10)) {
+     procPort80 (NbioAlib_10_Entry)
+      // Local7 as an input buffer and passed to procSmuServiceReq
+      Store (Buffer (24) {}, Local7)
+      CreateDWordField (Local7, 0,  varaSmuArg0)
+      CreateDWordField (Local7, 4,  varaSmuArg1)
+      CreateDWordField (Local7, 8,  varaSmuArg2)
+      CreateDWordField (Local7, 12, varaSmuArg3)
+      CreateDWordField (Local7, 16, varaSmuArg4)
+      CreateDWordField (Local7, 20, varaSmuArg5)
+
+      Store (0, varaSmuArg0)
+      Store (0, varaSmuArg1)
+      Store (0, varaSmuArg2)
+      Store (0, varaSmuArg3)
+      Store (0, varaSmuArg4)
+      Store (0, varaSmuArg5)
+
+     procSmuServiceReq (0x28, Local7)       // BIOSSMC_MSG_StopGpuLink                         0x28
+     procPort80 (NbioAlib_10_Exit)
+   }
+
+   if (Lequal (Arg0, 0x11)) {
+     procPort80 (NbioAlib_11_Entry)
+     Store (Buffer (24) {}, Local6)         // Local6 as an input buffer and passed to procGnbSmuServiceReq
+     CreateDWordField (Local6, 0,  varSmuArg0)
+     CreateDWordField (Local6, 4,  varSmuArg1)
+     CreateDWordField (Local6, 8,  varSmuArg2)
+     CreateDWordField (Local6, 12, varSmuArg3)
+     CreateDWordField (Local6, 16, varSmuArg4)
+     CreateDWordField (Local6, 20, varSmuArg5)
+
+     Store (0, varSmuArg0)
+     Store (0, varSmuArg1)
+     Store (0, varSmuArg2)
+     Store (0, varSmuArg3)
+     Store (0, varSmuArg4)
+     Store (0, varSmuArg5)
+
+     procSmuServiceReq (0x27, Local6)       // BIOSSMC_MSG_StartGpuLink                        0x27
+     procPort80 (NbioAlib_11_Exit)
+   }
+
+   if (Lequal (Arg0, 0x12)) {  // DXIO Entry D3 64
+     procPort80 (NbioAlib_12_Entry)
+     Store (Buffer (24) {}, Local6)         // Local6 as an input buffer and passed to procGnbSmuServiceReq
+      CreateDWordField (Local6, 0,  var12SmuArg0)
+      CreateDWordField (Local6, 4,  var12SmuArg1)
+      CreateDWordField (Local6, 8,  var12SmuArg2)
+      CreateDWordField (Local6, 12, var12SmuArg3)
+      CreateDWordField (Local6, 16, var12SmuArg4)
+      CreateDWordField (Local6, 20, var12SmuArg5)
+
+      Store ( 64, var12SmuArg0)
+      Store (  0, var12SmuArg1)
+      Store (  0, var12SmuArg2)
+      Store (  0, var12SmuArg3)
+      Store (  0, var12SmuArg4)
+      Store (  0, var12SmuArg5)
+      //
+      // check All behind Non Z10 Capability phy goes to L23 ready
+      //
+      //Local5 = TRUE;
+      // if (local0 != 0x1F && Local0 != 0x00) {Local5 = FALSE}
+      // if (local1 != 0x1F && Local1 != 0x00) {Local5 = FALSE}
+      // if (local2 != 0x1F && Local1 != 0x00) {Local5 = FALSE}
+      // if (local3 != 0x1F && Local1 != 0x00) {Local5 = FALSE}
+
+      Store (1, Local5)
+
+      Acquire (\_SB.AlibSmnMutex, 0xFFFF)
+      Store (bfPcieLCStateFPort0, Local0)
+      Store (bfPcieLCStateFPort1, Local1)
+      Store (bfPcieLCStateFPort2, Local2)
+      Store (bfPcieLCStateFPort3, Local3)
+      Release (\_SB.AlibSmnMutex)
+
+      ALIB_DEBUG (Concatenate ("  Lc State port0 = ", ToHexString (Local0), ADBG))
+      ALIB_DEBUG (Concatenate ("  Lc State port1 = ", ToHexString (Local1), ADBG))
+      ALIB_DEBUG (Concatenate ("  Lc State port2 = ", ToHexString (Local2), ADBG))
+      ALIB_DEBUG (Concatenate ("  Lc State port3 = ", ToHexString (Local3), ADBG))
+
+      If (LAnd ( LNotEqual(And(Local0, 0x3F), 0x1F) , LNotEqual(And(Local0, 0x3F), 0x00) )) {
+        If ( LNotEqual(And(Local0, 0x3F), 0x08)) {
+          Store (0, Local5)
+        }
+      } ElseIf (LAnd ( LNotEqual(And(Local1, 0x3F), 0x1F) , LNotEqual(And(Local1, 0x3F), 0x00) )) {
+        If ( LNotEqual(And(Local1, 0x3F), 0x08)) {
+          Store (0, Local5)
+        }
+      } ElseIf (LAnd ( LNotEqual(And(Local2, 0x3F), 0x1F) , LNotEqual(And(Local2, 0x3F), 0x00) )) {
+        If ( LNotEqual(And(Local2, 0x3F), 0x08)) {
+          Store (0, Local5)
+        }
+      } ElseIf (LAnd ( LNotEqual(And(Local3, 0x3F), 0x1F) , LNotEqual(And(Local3, 0x3F), 0x00) )) {
+        If ( LNotEqual(And(Local3, 0x3F), 0x08)) {
+          Store (0, Local5)
+        }
+      }
+
+      If (Lequal(Local5, 1)) {
+        procSmuServiceReq (0x9, Local6)
+      }
+     procPort80 (NbioAlib_12_Exit)
+   }
+
+   if (Lequal (Arg0, 0x13)) {  // DXIO Exit D3 65
+     procPort80 (NbioAlib_13_Entry)
+     Store (Buffer (24) {}, Local6)         // Local6 as an input buffer and passed to procGnbSmuServiceReq
+      CreateDWordField (Local6, 0,  var13SmuArg0)
+      CreateDWordField (Local6, 4,  var13SmuArg1)
+      CreateDWordField (Local6, 8,  var13SmuArg2)
+      CreateDWordField (Local6, 12, var13SmuArg3)
+      CreateDWordField (Local6, 16, var13SmuArg4)
+      CreateDWordField (Local6, 20, var13SmuArg5)
+
+      Store (65, var13SmuArg0)
+      Store ( 0, var13SmuArg1)
+      Store ( 0, var13SmuArg2)
+      Store ( 0, var13SmuArg3)
+      Store ( 0, var13SmuArg4)
+      Store ( 0, var13SmuArg5)
+
+      Store (1, Local5)
+
+      Acquire (\_SB.AlibSmnMutex, 0xFFFF)
+      Store (bfPcieLCStateFPort0, Local0)
+      Store (bfPcieLCStateFPort1, Local1)
+      Store (bfPcieLCStateFPort2, Local2)
+      Store (bfPcieLCStateFPort3, Local3)
+      Release (\_SB.AlibSmnMutex)
+
+      //
+      // check All behind Non Z10 Capability phy as LC STATE 00
+      //
+      //Local5 = TRUE;
+      // if (local0 != 0x08 && Local0 != 0x00) {Local5 = FALSE}
+      // if (local1 != 0x08 && Local1 != 0x00) {Local5 = FALSE}
+      // if (local2 != 0x08 && Local1 != 0x00) {Local5 = FALSE}
+      // if (local3 != 0x08 && Local1 != 0x00) {Local5 = FALSE}
+      If (LAnd ( LNotEqual(And(Local0, 0x3F), 0x8) , LNotEqual(And(Local0, 0x3F), 0x00) )) {
+        Store (0, Local5)
+
+      } ElseIf (LAnd ( LNotEqual(And(Local1, 0x3F), 0x8) , LNotEqual(And(Local1, 0x3F), 0x00) )) {
+        Store (0, Local5)
+
+      } ElseIf (LAnd ( LNotEqual(And(Local2, 0x3F), 0x8) , LNotEqual(And(Local2, 0x3F), 0x00) )) {
+        Store (0, Local5)
+
+      } ElseIf (LAnd ( LNotEqual(And(Local3, 0x3F), 0x8) , LNotEqual(And(Local3, 0x3F), 0x00) )) {
+        Store (0, Local5)
+      }
+
+      If (Lequal(Local5, 1)) {
+        procSmuServiceReq (0x9, Local6)
+      }
+     procPort80 (NbioAlib_13_Exit)
+
+   }
+
+   if (Lequal (Arg0, 0x14)) {
+     Store (Buffer (24) {}, Local6)         // Local6 as an input buffer and passed to procGnbSmuServiceReq
+     CreateDWordField (Local6, 0,  vareSmuArg0)
+     CreateDWordField (Local6, 4,  vareSmuArg1)
+     CreateDWordField (Local6, 8,  vareSmuArg2)
+     CreateDWordField (Local6, 12, vareSmuArg3)
+     CreateDWordField (Local6, 16, vareSmuArg4)
+     CreateDWordField (Local6, 20, vareSmuArg5)
+
+     Store (Arg1, vareSmuArg0)
+     Store (0, vareSmuArg1)
+     Store (0, vareSmuArg2)
+     Store (0, vareSmuArg3)
+     Store (0, vareSmuArg4)
+     Store (0, vareSmuArg5)
+
+     procSmuServiceReq (0x61, Local6)       // BIOSSMC_MSG_Usb4PS3SleepEvent                   0x61
+   }
+
+   if (Lequal (Arg0, 0x15)) {
+     Store (Buffer (24) {}, Local6)         // Local6 as an input buffer and passed to procGnbSmuServiceReq
+     CreateDWordField (Local6, 0,  varfSmuArg0)
+     CreateDWordField (Local6, 4,  varfSmuArg1)
+     CreateDWordField (Local6, 8,  varfSmuArg2)
+     CreateDWordField (Local6, 12, varfSmuArg3)
+     CreateDWordField (Local6, 16, varfSmuArg4)
+     CreateDWordField (Local6, 20, varfSmuArg5)
+
+     Store (Arg1, varfSmuArg0)
+     Store (0, varfSmuArg1)
+     Store (0, varfSmuArg2)
+     Store (0, varfSmuArg3)
+     Store (0, varfSmuArg4)
+     Store (0, varfSmuArg5)
+
+     procSmuServiceReq (0x65, Local6)       // BIOSSMC_MSG_Usb4RouterHostReset                 0x65
+   }
+
+   if (Lequal (Arg0, 0x16)) {
+     procPort80 (NbioAlib_16_Entry)
+     Store (Buffer (24) {}, Local6)         // Local6 as an input buffer and passed to procGnbSmuServiceReq
+     CreateDWordField (Local6, 0,  vargSmuArg0)
+     CreateDWordField (Local6, 4,  vargSmuArg1)
+     CreateDWordField (Local6, 8,  vargSmuArg2)
+     CreateDWordField (Local6, 12, vargSmuArg3)
+     CreateDWordField (Local6, 16, vargSmuArg4)
+     CreateDWordField (Local6, 20, vargSmuArg5)
+
+     // Arg1:  Aclk Frequency  -0x0 : Aclk Deep sleep
+     //                        -0xC8: Aclk frequency
+     Store (Arg1, vargSmuArg0)
+     Store (0, vargSmuArg1)
+     Store (0, vargSmuArg2)
+     Store (0, vargSmuArg3)
+     Store (0, vargSmuArg4)
+     Store (0, vargSmuArg5)
+
+     procSmuServiceReq (0x66, Local6)       // BIOSSMC_MSG_SetHardMinAclkByFreq                0x66
+     procPort80 (NbioAlib_16_Exit)
+   }
+
+   if (Lequal (Arg0, 0xAA)) {
+     procPort80 (NbioAlib_AA_Entry)
+     Store (Buffer (24) {}, Local6)         // Local6 as an input buffer and passed to procGnbSmuServiceReq
+     CreateDWordField (Local6, 0,  varcSmuArg0)
+     CreateDWordField (Local6, 4,  varcSmuArg1)
+     CreateDWordField (Local6, 8,  varcSmuArg2)
+     CreateDWordField (Local6, 12, varcSmuArg3)
+     CreateDWordField (Local6, 16, varcSmuArg4)
+     CreateDWordField (Local6, 20, varcSmuArg5)
+
+     Store (0, varcSmuArg0)
+     Store (0, varcSmuArg1)
+     Store (0, varcSmuArg2)
+     Store (0, varcSmuArg3)
+     Store (0, varcSmuArg4)
+     Store (0, varcSmuArg5)
+
+     procALibAplusA (Arg1)
+     procPort80 (NbioAlib_AA_Exit)
+   }
+   return (0)
+}
+
+

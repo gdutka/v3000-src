@@ -1,0 +1,169 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+
+  INF_VERSION                   = 0x00010005
+  BASE_NAME                     = FchProm21Pei
+  FILE_GUID                     = C681ED8F-FC2E-41A4-8F3F-2C2A1961A81B
+  MODULE_TYPE                   = PEIM
+  VERSION_STRING                = 1.0
+  ENTRY_POINT                   = FchProm21PeiInit
+
+[Sources]
+  FchProm21Pei.c
+  FchProm21Pei.h
+  FchProm21PeiLoadFw.c
+
+[LibraryClasses]
+  PeimEntryPoint
+  BaseLib
+  FchProm21BaseLib
+  FabricResourceManagerLib
+  BaseMemoryLib
+  FchSpiAccessLib
+  AmdSocBaseLib
+  AmdPspMboxLibV2
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciLock
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciID
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21GpioID
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21FwVersion
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21GppPcieAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Msi
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Msix
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21DbC
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Msi
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Msix
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21DbC
+
+  # PROM21L.1/2/3 USB Port
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P5
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P6
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P7
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P8
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P9
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P10
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P11
+
+  # PROM21L.4 USB Port
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb3P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb3P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb3P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb3P3
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P6
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P7
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P8
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P9
+
+  # Secondary PROM21L.1/2/3 USB Port
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P5
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P6
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P7
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P8
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P9
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P10
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P11
+
+  # Secondary PROM21L.4 USB Port
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb3P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb3P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb3P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb3P3
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P6
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P7
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P8
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P9
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21RootBridgeNum
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21FwInRamAddress
+
+  ## Define in AgesaCommonModulePkg.dec ## for NBIO
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieTargetSpeed
+  ## Define in AgesaCommonModulePkg.dec ## for CBS
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetIdentifiedId
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetVisableFlag0
+  ## Define in AgesaModuleNbioPkg.dec   ## for NBIO DxioLibV1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPTPortID
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21TempBusNum
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciMmio
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21IohcBridgeCntl
+
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21ForceGppPcieAddress
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciLock
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciID
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21GppPcieAddress
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SecXhciMmio
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21DbgLoadFw
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21FWLoading
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SecondPortNumber
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gAmdFchProm21InitPpiGuid              #PRODUCED
+  gAmdFchProm21FwLoadingPassPpiGuid     #PRODUCED
+  gAmdFchProm21FwChecksumFailPpiGuid    #PRODUCED
+  gAmdNbioPcieServicesPpiGuid           #CONSUMED
+  gAmdNbioEarlyLinkPpiGuid              #CONSUMED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/Fch/Prom21/FchProm21ModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[Depex]
+  gAmdNbioPcieTrainingDonePpiGuid
+

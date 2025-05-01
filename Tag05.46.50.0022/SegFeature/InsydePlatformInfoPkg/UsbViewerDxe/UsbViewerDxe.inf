@@ -1,0 +1,91 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2022 - 2024, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                          = 0x00010005
+  BASE_NAME                            = UsbViewerDxe
+  FILE_GUID                            = 3dab18de-976c-40b9-972b-6cfd196e0c92
+  MODULE_TYPE                          = DXE_DRIVER
+  VERSION_STRING                       = 1.0
+  ENTRY_POINT                          = H2OUsbViewerEntry
+  UNLOAD_IMAGE                         = H2OUsbViewerUnload
+
+[Sources]
+  HiiConfigAccess.c
+  UsbViewerDxe.c
+  UsbViewerDxe.h
+  UsbViewerSetup.h
+  UsbViewerStr.uni
+  UsbViewerVfr.vfr
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+  SegFeaturePkg/SegFeaturePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  MemoryAllocationLib
+  PcdLib
+  PrintLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+  UefiUsbLib
+  UefiRuntimeServicesTableLib
+  HiiLib
+  SortLib
+  HiiExLib
+  VariableLib
+  BlockIoCapacityLib
+  DeviceInfoLookupDataLib
+  UsbHandleRoutineLib
+  UefiHiiServicesLib
+  SetupVariableLib
+
+[Guids]
+  gH2OUsbViewerFormsetGuid
+  gEfiIfrTianoGuid
+
+[Protocols]
+  gEfiDevicePathProtocolGuid               ## PRODUCES
+  gEfiHiiConfigAccessProtocolGuid          ## PRODUCES
+  gH2ODeviceInfoLookupProtocolGuid         ## CONSUMES
+  gEfiSetupUtilityApplicationProtocolGuid  ## CONSUMES
+  gEfiPciIoProtocolGuid                    ## SOMETIMES_CONSUMES
+  gEfiUsbIoProtocolGuid                    ## SOMETIMES_CONSUMES
+  gEfiUsb3HcProtocolGuid                   ## SOMETIMES_CONSUMES
+  gEfiBlockIoProtocolGuid                  ## SOMETIMES_CONSUMES
+  gEfiBlockIo2ProtocolGuid                 ## SOMETIMES_CONSUMES
+  gH2OUsbTextLookupProtocolGuid            ## SOMETIMES_CONSUMES
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OFormBrowserLocalTextDESupported|TRUE  ## CONSUMES
+
+[FixedPcd]
+  gInsydeTokenSpaceGuid.PcdH2OCcbVersion                              ## CONSUMES
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OUsbViewerLinkToFormsetGuid  ## CONSUMES
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdUsbTransferTimeoutValue                      ## CONSUMES
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ODeviceInfoAttributeStr|"name"    ## SOMETIMES_CONSUMES
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OUsbViewerFormRefreshPeriod|1000  ## CONSUMES
+
+[Depex]
+  gEfiVariableArchProtocolGuid AND
+  gEfiVariableWriteArchProtocolGuid AND
+  gH2ODeviceInfoLookupProtocolGuid

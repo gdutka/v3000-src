@@ -1,0 +1,39 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2019-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = DisplayCbsLibBr
+  FILE_GUID             = 1AE9D38F-5F4B-4615-B946-027E560CD71F
+  MODULE_TYPE           = BASE
+  VERSION_STRING        = 1.0
+  LIBRARY_CLASS         = DisplayCbsLibBr|PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER
+
+[Sources.common]
+  DisplayCbsLibBr.c
+
+[LibraryClasses]
+
+[Guids]
+  gCbsSystemConfigurationGuid            #CONSUMED
+
+[Protocols]
+  gAmdCpmDisplayFeatureProtocolGuid      #CONSUMED
+  gEfiSmmVariableProtocolGuid            #CONSUMED
+
+[Ppis]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+
+[Pcd]
+
+[Depex]

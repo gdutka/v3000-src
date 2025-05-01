@@ -1,0 +1,69 @@
+## @file
+#
+#Brief description of file's purpose. Detailed description of file's purpose.
+#
+#;******************************************************************************
+#;* Copyright (c) 2014-2014, Insyde Software Corporation. All Rights Reserved.
+#;*
+#;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#;* transmit, broadcast, present, recite, release, license or otherwise exploit
+#;* any part of this publication in any form, by any means, without the prior
+#;* written permission of Insyde Software Corporation.
+#;*
+#;******************************************************************************
+#
+#
+#other copy right statement
+##
+## @file
+#  TODO: Brief Description of UEFI Driver EventTraceDxe
+#  
+#  TODO: Detailed Description of UEFI Driver EventTraceDxe
+#
+#  TODO: Copyright for UEFI Driver EventTraceDxe
+#  
+#  TODO: License for UEFI Driver EventTraceDxe
+#  
+##
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = EventTraceDxe
+  FILE_GUID                 = 31439b00-2e90-11e4-aca8-b870f4fd9ca5
+  MODULE_TYPE               = UEFI_DRIVER
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = EventTraceDxeDriverEntryPoint
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeDebugAssistPkg/InsydeDebugAssistPkg.dec
+
+[Sources]
+  EventTraceDxe.h
+  EventTraceDxe.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  BaseLib
+  UefiLib
+  DevicePathLib
+  DebugLib
+
+[Protocols]
+  gH2ODebugAssistDriverArpServiceProtocolGuid  ## Consume
+
+[Guids]
+  gZeroGuid
+
+[Pcd]
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtTraceTypeBitMap
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtTraceTimes
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtTraceGroupList
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtTraceMethod
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtTraceList
+  gH2ODebugAssistTokenSpaceGuid.PcdH2ODebugAssistEvtNotTraceList
+

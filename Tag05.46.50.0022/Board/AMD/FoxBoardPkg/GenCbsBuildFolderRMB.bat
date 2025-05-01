@@ -1,0 +1,2 @@
+@if exist %WORKSPACE%\%CHIPSET_REL_PATH%\AmdCbsPkg\Tools\IdsIdGen.bat call %WORKSPACE%\%CHIPSET_REL_PATH%\AmdCbsPkg\Tools\IdsIdGen.bat
+@if exist %WORKSPACE%\%CHIPSET_REL_PATH%\AmdCbsPkg\Library\Family\0x19\RMB\External\xmlparse.bat call %WORKSPACE%\%CHIPSET_REL_PATH%\AmdCbsPkg\Library\Family\0x19\RMB\External\xmlparse.bat EMBFP7

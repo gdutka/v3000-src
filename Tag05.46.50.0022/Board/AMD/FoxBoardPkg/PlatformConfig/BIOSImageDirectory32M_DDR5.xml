@@ -1,0 +1,368 @@
+<?xml version='1.0' encoding='ascii'?>
+<DIRS AddressMode="2" Writable="0x1">
+    <!-- AddressMode 1 indicate physical address -->
+    <!-- AddressMode 2 indicate relative address -->
+    <!-- Tag: "PSP_DIR"  Specify the entries belong to PSP Directory -->
+    <!-- Attribute SIZE: -->
+    <!-- If "Size" attribute has been declared, it will be used to specify the whole size reserve for PSP entries, tool will automatically calculate the address for child "IMAGE_ENTRY"-->
+    <!-- Tag: "BIOS_DIR"  Specify the entries belong to BIOS Directory, the difference between BIOS and PSP directory,is the "Destination" filed only valid for BIOS directory -->
+    <!-- Attribute SIZE: -->
+    <!-- If "Size" attribute has been declared, it will be used to specify the whole size reserve for PSP entries, tool will automatically calculate the address for child "IMAGE_ENTRY"-->
+    <!-- If "Size" attribute has NOT been declared explicitly, the "address" should be declared in all child "IMAGE_ENTRY"s -->
+
+
+<!-- PSP L1 DIR -->
+  <PSP_DIR AddressMode="0x1" Base="0x000C1000" Level="0x1" SpiBlockSize="0x1000">
+    <POINT_ENTRY Type="0x48" Address="0x000C3000" Size="0x0"/>
+    <POINT_ENTRY Type="0x4a" Address="0x000C4000" Size="0x0"/>
+  </PSP_DIR>
+
+<!-- PSP L1 Backup DIR -->
+  <PSP_DIR AddressMode="0x1" Base="0x000C2000" Level="0x1" SpiBlockSize="0x1000">
+    <POINT_ENTRY Type="0x48" Address="0x000C3000" Size="0x0"/>
+    <POINT_ENTRY Type="0x4a" Address="0x000C4000" Size="0x0"/>
+  </PSP_DIR>
+
+
+<!-- ISH (Image Slot Header) DIR -->
+  <ISH_HEADER AddressMode="0x1" Base="0x000C3000" PspId="0xbc0d0200" Location="0x000C5000" BootPriority="0xffffffff" GlitchRetries="0x0" Reserved_1="0xffffffff" SlotMaxSize="0xffffffff" UpdateRetries="0xf" SpiBlockSize="0x1000"/>
+  <ISH_HEADER AddressMode="0x1" Base="0x000C4000" PspId="0xbc0d0200" Location="0x0048D000" BootPriority="0x2" GlitchRetries="0x0" Reserved_1="0xffffffff" SlotMaxSize="0xffffffff" UpdateRetries="0xf" SpiBlockSize="0x1000"/>
+
+<!-- ISH (Image Slot Header) DIR Backup for ISH-A; location ISH-B 0x4A address + 0x100 -->
+  <ISH_HEADER AddressMode="0x1" Base="0x000C4100" PspId="0xbc0d0200" Location="0x000C5000" BootPriority="0xffffffff" GlitchRetries="0x0" Reserved_1="0xffffffff" SlotMaxSize="0xffffffff" UpdateRetries="0xf" SpiBlockSize="0x1000"/>
+
+<!-- Image slot A PSP DIR-->
+  <PSP_DIR Level="2" Base="0x000C5000" Size="0x00380000" SpiBlockSize="0x1000">
+    <!-- AMD Public Key -->
+    <IMAGE_ENTRY Type="0x00" File="TypeId0x00_RootKey_RMB.tkn"/>
+    <!-- PSP Boot Loader firmware -->
+    <IMAGE_ENTRY Type="0x01" File="TypeId0x01_PspBootLoader1_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x73" File="TypeId0x73_PspBootLoader2_RMB.sbin"/>
+    <!-- PSP Secure OS firmware -->
+    <IMAGE_ENTRY Type="0x02" File="TypeId0x02_PspOS_RMB.sbin"/>
+    <!-- PSP Non Volatile data -->
+    <POINT_ENTRY Type="0x04" Address="0x00855000" Size="0x00020000" AddressMode="1"/>
+    <!-- SMU offchip firmware -->
+    <IMAGE_ENTRY Type="0x08" File="TypeId0x08_SmuFirmware_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x108" File="TypeId0x108_SmuFirmware_RMB_B0.sbin"/>
+    <!-- AMD Secure Debug Key -->
+    <IMAGE_ENTRY Type="0x09" File="TypeId0x09_SecureDebugUnlockKey_RMB.stkn"/>
+    <VALUE_ENTRY Type="0x0B" Value="0x1000004041"/>
+    <!-- PSP boot-loaded trustlet binaries -->
+    <IMAGE_ENTRY Type="0x0C" File="TypeId0x0C_FtpmDrv_RMB.csbin"/>
+    <!-- Trustlet public key signed with AMD key -->
+<!--    <IMAGE_ENTRY Type="0x0D" File="ZeppelinTrustlet.tkn"/> -->
+    <!-- SMU offchip firmware 2-->
+    <IMAGE_ENTRY Type="0x12" File="TypeId0x12_SmuFirmware2_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x112" File="TypeId0x112_SmuFirmware2_RMB_B0.sbin"/>
+    <!-- PSP secure unlock debug image -->
+    <IMAGE_ENTRY Type="0x13" File="TypeId0x13_PspEarlyUnlock_RMB.sbin"/>
+    <!-- HW IP configuration file -->
+    <IMAGE_ENTRY Type="0x20" File="TypeId0x20_HwIpCfg_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x120" File="TypeId0x120_HwIpCfg_RMB_B0.sbin"/>
+    <!-- Wrapped iKEK -->
+    <IMAGE_ENTRY Type="0x21" File="TypeId0x21_PspiKek_RMB.bin"/>
+    <!-- Token unlock Data -->
+    <IMAGE_ENTRY Type="0x22" File="TypeId0x22_SecureEmptyToken_RMB.bin"/>
+    <!-- Entry to load security gasket binary -->
+    <IMAGE_ENTRY Type="0x24" Instance="0x00" File="TypeId0x24_SecPolicy_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x24" Instance="0x01" File="TypeId0x24_SecPolicy_RMB_NPU.sbin"/>
+    <IMAGE_ENTRY Type="0x8024" File="8024_rsmu_sec_policy.rmb_L0.0d190073.sbin"/>
+
+    <!-- RV1 MP2 SFI firmware -->
+    <IMAGE_ENTRY Type="0x25" File="TypeId0x25_Mp2Fw_RMB.sbin"/>
+
+    <!-- AMD-TEE OS -->
+    <IMAGE_ENTRY Type="0x28" File="TypeId0x28_PspSystemDriver_RMB.sbin"/>
+<!--    <IMAGE_ENTRY Type="0x29" File="KvmEngineDummy.csbin"/> -->
+    <!-- PSP AGESA RT Driver -->
+    <IMAGE_ENTRY Type="0x2D" File="TypeId0x2D_AgesaRunTimeDrv_prod_RMB.sbin"/>
+    <!-- PSP AGESA Bootloader -->
+    <IMAGE_ENTRY Type="0x30" File="TypeId0x30_AgesaBootloaderU_RMB_DDR5.sbin"/>
+    <!-- RN VBIOS_PSP FW -->
+    <IMAGE_ENTRY Type="0x3C" File="TypeId0x3C_VbiosBootLoader_RMB.sbin"/>
+    <!-- Entry to load security gasket binary -->
+    <IMAGE_ENTRY Type="0x45" Instance="0x00" File="TypeId0x45_SecPolicytOS_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x45" Instance="0x01" File="TypeId0x45_SecPolicytOS_RMB_NPU.sbin"/>
+    <IMAGE_ENTRY Type="0x8045" File="8045_rsmu_sec_policy.rmb_L1.0d190173.sbin"/>
+
+    <!-- USB unified PHY FW -->
+    <IMAGE_ENTRY Type="0x44" File="TypeId0x44_UnifiedUsb_RMB.sbin"/>
+
+    <!-- USB unified PHY B1 FW -->
+    <IMAGE_ENTRY Type="0x144" File="TypeId0x144_UnifiedUsb_RMB_B1.sbin"/>
+    <!-- Prom-21 entry -->
+    <IMAGE_ENTRY Type="0x93" File="TypeId0x93_Prom21Fw.sbin"/>
+    <!-- DRTM-TA -->
+    <IMAGE_ENTRY Type="0x47" File="TypeId0x47_DrtmTA_RMB.sbin"/>
+    <!-- PspBlPubKey-->
+    <IMAGE_ENTRY Type="0x50" File="TypeId0x50_KeyDbBl_RMB.sbin"/>
+    <!-- PspTosPubKey-->
+    <IMAGE_ENTRY Type="0x51" File="TypeId0x51_KeyDbTos_RMB.sbin"/>
+    <!-- SPL (Security Patch Level) table-->
+    <IMAGE_ENTRY Type="0x55" File="TypeId0x55_SplTableBl_RMB.sbin"/>
+    <!-- MSMU -->
+    <IMAGE_ENTRY Type="0x5A" File="TypeId0x5A_Msmu_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x15A" File="TypeId0x15A_Msmu_RMB_B0.sbin"/>
+
+    <!-- SPI-ROM configuration/Instruction -->
+    <IMAGE_ENTRY Type="0x5C" File="TypeId0x5C_SpiRomConfig_RMB.sbin"/>
+    <!-- Pluton -->
+    <IMAGE_ENTRY Type="0x5F" File="TypeId0x5F_PlutonPlatFw_RMB.sbin"/>
+    <!-- DMCUB -->
+    <IMAGE_ENTRY Type="0x71" File="TypeId0x71_DmcubFw_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x171" File="TypeId0x71_DmcubFw_RMB_B0.sbin"/>
+    <IMAGE_ENTRY Type="0x76" File="TypeId0x76_DfRib_RMB.sbin"/>
+    <!-- iKEK_TA -->
+    <IMAGE_ENTRY Type="0x8D" File="TypeId0x8D_IkekTa_RMB.bin"/>
+    <!-- PSP Nvme For RPMC -->
+    <POINT_ENTRY Type="0x54" Address="0x00875000" Size="0x00040000" AddressMode="1"/>
+<!--[-start-231102-IB20840032-remove]-->
+    <!-- AMF Firmware 0x85 part 1 SRAM -->
+    <IMAGE_ENTRY Type="0x85" File="AIM-T_1-0_TypeId0x85_MPMSram_RMB.sbin"/>
+    <!-- MPM 0x86 Firmware -->
+    <POINT_ENTRY Address="0x008B5000" AddressMode="0x1" Size="0x001EA000" Type="0x86" Instance="0x00"/>
+    <POINT_ENTRY Address="0x00C53000" AddressMode="0x1" Size="0x001EA000" Type="0x86" Instance="0x01"/>
+    <!-- MPM 0x88 Wlan Firmware -->
+    <POINT_ENTRY Address="0x00A9F000" AddressMode="0x1" Size="0x001B4000" Type="0x88" Instance="0x00"/>
+    <POINT_ENTRY Address="0x00E3D000" AddressMode="0x1" Size="0x001B4000" Type="0x88" Instance="0x01"/>
+    <!-- MPM 0x89 Amf MFD -->
+    <IMAGE_ENTRY Type="0x89" File="AIM-T_1-0_TypeId0x89_MFD_RMB.sbin"/>
+    <!-- MPM 0x87 Persistent Object -->
+    <POINT_ENTRY Type="0x87" Address="0x00FF1000" Size="0x00040000" AddressMode="1"/>
+<!--[-end-231102-IB20840032-remove]-->
+<!--[-start-240202-IB20840047-remove]-->
+    <!-- Generic Feature Configuration Table -->
+    <IMAGE_ENTRY Type="0x98" File="TypeId0x98_AIM-T_Enable.bin"/>
+<!--[-end-240202-IB20840047-remove]-->
+    <!-- Point to BIOS Hdr, the adress should be Relative address -->
+    <POINT_ENTRY Type="0x49" Address="0x00380000" Size="0x400"/>
+  </PSP_DIR>
+
+<!-- Image slot A BIOS DIR-->
+  <BIOS_DIR Level="2" Base="0x00445000" Size="0x00048000" SpiBlockSize="0x1000">
+    <!-- Refer to BIOS guide for detail requirement of each Type -->
+    <!-- All definition is same as PSP_DIR except Destination -->
+    <!-- Attribute Destination:(Optional)-->
+    <!-- Destination: Used to specify the destination memory address PSP FW need copy to -->
+    <IMAGE_ENTRY Type="0x05" File="TypeId0x05_RtmPubSigned_RMB.key"/>
+    <!-- The RTMSignature.bin is NOT ready when generate Header with "BD" command, Use explicit "Size" to avoid open file fail  -->
+    <!-- <IMAGE_ENTRY Type="0x07" File="RTMSignature.bin" Size="0x100"/> -->
+
+    <!-- Agesa PSP Customization Block (PSP Agesa variable) NVRAM (APCB)-->
+    <IMAGE_ENTRY Type="0x60" Instance="0x00" File="APCB_FP7r2_Updatable.bin" Size="0x3000"/>
+    <!-- Agesa PSP Customization Block (PSP Agesa variable) NVRAM (APCB)-->
+    <IMAGE_ENTRY Type="0x68" Instance="0x00" File="APCB_FP7r2_DefaultRecovery.bin" Size="0x3600"/>
+    <IMAGE_ENTRY Type="0x68" Instance="0x08" File="APCB_FP7r2_Updatable_68.bin" Size="0x3000"/>
+
+    <!-- APOB will be filled @0x09F00000 which specify by the Destination -->
+    <POINT_ENTRY Type="0x61" Address="0" Size="0" Destination="0x09F00000"/>
+
+    <!-- FV_RECOVERY will copy to Temp Memory 0x09B00000 as specified by the Destination, also will
+        authenticate due the ResetImage Flag set to 1 -->
+    <POINT_ENTRY Address="0x01200000" Destination="0x09B00000" Size="0x300000" Type="0x62" AddressMode="1" Instance="0x00">
+      <TypeAttrib Copy="0x1" ReadOnly="0x0" RegionType="0x0" ResetImage="0x1" Compressed="0x1"/>
+    </POINT_ENTRY>
+    <POINT_ENTRY Address="0x012E0000" Destination="0x09B00000" Size="0x300000" Type="0x62" AddressMode="1" Instance="0x01">
+       <TypeAttrib Copy="0x1" ReadOnly="0x0" RegionType="0x0" ResetImage="0x1" Compressed="0x1"/>
+    </POINT_ENTRY>
+    <!-- APOB NVRAM COPY-->
+    <IMAGE_ENTRY Type="0x63" File="TypeId0x63_ApobNvram_RMB.bin"/>
+
+    <!-- APPB PMU Firmware -->
+    <IMAGE_ENTRY Type="0x64" Instance="0x01" SubProgram="0x0" File="TypeId0x64_Appb_RMB_Ddr5Imem1.csbin"/>
+    <IMAGE_ENTRY Type="0x65" Instance="0x01" SubProgram="0x0" File="TypeId0x65_Appb_RMB_Ddr5Dmem1.csbin"/>
+    <IMAGE_ENTRY Type="0x64" Instance="0x02" SubProgram="0x0" File="TypeId0x64_Appb_RMB_Ddr5Imem2.csbin"/>
+    <IMAGE_ENTRY Type="0x65" Instance="0x02" SubProgram="0x0" File="TypeId0x65_Appb_RMB_Ddr5Dmem2.csbin"/>
+    <IMAGE_ENTRY Type="0x64" Instance="0x09" SubProgram="0x0" File="TypeId0x64_Appb_RMB_Ddr5QuickbootImem9.csbin"/>
+    <IMAGE_ENTRY Type="0x65" Instance="0x09" SubProgram="0x0" File="TypeId0x65_Appb_RMB_Ddr5QuickbootDmem9.csbin"/>
+    <IMAGE_ENTRY Type="0x64" Instance="0x0A" SubProgram="0x0" File="TypeId0x64_Appb_RMB_Ddr5QuickbootImem10.csbin"/>
+    <IMAGE_ENTRY Type="0x65" Instance="0x0A" SubProgram="0x0" File="TypeId0x65_Appb_RMB_Ddr5QuickbootDmem10.csbin"/>
+
+    <!-- MICROCODE PATCH -->
+    <IMAGE_ENTRY Type="0x66" Instance="0x00" File="TypeId0x66_UcodePatch_RMB_A0.sbin"/>
+    <IMAGE_ENTRY Type="0x66" Instance="0x01" File="TypeId0x66_UcodePatch_RMB_B0.sbin"/>
+    <IMAGE_ENTRY Type="0x66" Instance="0x02" File="TypeId0x66_UcodePatch_RMB_B1.sbin"/>
+
+    <!-- MP2 Configuration File -->
+    <IMAGE_ENTRY Type="0x6A" File="TypeId0x6a_Mp2FwConig_RMB.sbin"/>
+
+    <!-- BIOS NV storage region - Variable storgae -->
+    <POINT_ENTRY Type="0x6D" Instance="0" Address="0x01F8F000" Size="0x00025000" AddressMode="1"/>
+    <POINT_ENTRY Type="0x6D" Instance="1" Address="0x01FB4000" Size="0x00001000" AddressMode="1"/>
+    <POINT_ENTRY Type="0x6D" Instance="2" Address="0x01FB5000" Size="0x00026000" AddressMode="1"/>
+
+    <!-- BIOS NV storage region - DMI -->
+    <POINT_ENTRY Type="0x6D" Instance="3" Address="0x01F88000" Size="0x00001000" AddressMode="1"/>
+
+    <!-- BIOS NV storage region - MSDM -->
+    <POINT_ENTRY Type="0x6D" Instance="4" Address="0x01F8E000" Size="0x00001000" AddressMode="1"/>
+
+  </BIOS_DIR>
+
+<!-- Image slot B PSP DIR-->
+  <PSP_DIR Level="2" Base="0x0048D000" Size="0x00380000" SpiBlockSize="0x1000">
+    <!-- AMD Public Key -->
+    <IMAGE_ENTRY Type="0x00" File="TypeId0x00_RootKey_RMB.tkn"/>
+    <!-- PSP Boot Loader firmware -->
+    <IMAGE_ENTRY Type="0x01" File="TypeId0x01_PspBootLoader1_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x73" File="TypeId0x73_PspBootLoader2_RMB.sbin"/>
+    <!-- PSP Secure OS firmware -->
+    <IMAGE_ENTRY Type="0x02" File="TypeId0x02_PspOS_RMB.sbin"/>
+    <!-- PSP Non Volatile data -->
+    <POINT_ENTRY Type="0x04" Address="0x00855000" Size="0x00020000" AddressMode="1"/>
+    <!-- SMU offchip firmware -->
+    <IMAGE_ENTRY Type="0x08" File="TypeId0x08_SmuFirmware_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x108" File="TypeId0x108_SmuFirmware_RMB_B0.sbin"/>
+    <!-- AMD Secure Debug Key -->
+    <IMAGE_ENTRY Type="0x09" File="TypeId0x09_SecureDebugUnlockKey_RMB.stkn"/>
+    <VALUE_ENTRY Type="0x0B" Value="0x1000004041"/>
+    <!-- PSP boot-loaded trustlet binaries -->
+    <IMAGE_ENTRY Type="0x0C" File="TypeId0x0C_FtpmDrv_RMB.csbin"/>
+    <!-- Trustlet public key signed with AMD key -->
+<!--    <IMAGE_ENTRY Type="0x0D" File="ZeppelinTrustlet.tkn"/> -->
+    <!-- SMU offchip firmware 2-->
+    <IMAGE_ENTRY Type="0x12" File="TypeId0x12_SmuFirmware2_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x112" File="TypeId0x112_SmuFirmware2_RMB_B0.sbin"/>
+    <!-- PSP secure unlock debug image -->
+    <IMAGE_ENTRY Type="0x13" File="TypeId0x13_PspEarlyUnlock_RMB.sbin"/>
+    <!-- HW IP configuration file -->
+    <IMAGE_ENTRY Type="0x20" File="TypeId0x20_HwIpCfg_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x120" File="TypeId0x120_HwIpCfg_RMB_B0.sbin"/>
+    <!-- Wrapped iKEK -->
+    <IMAGE_ENTRY Type="0x21" File="TypeId0x21_PspiKek_RMB.bin"/>
+    <!-- Token unlock Data -->
+    <IMAGE_ENTRY Type="0x22" File="TypeId0x22_SecureEmptyToken_RMB.bin"/>
+    <!-- Entry to load security gasket binary -->
+    <IMAGE_ENTRY Type="0x24" Instance="0x00" File="TypeId0x24_SecPolicy_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x24" Instance="0x01" File="TypeId0x24_SecPolicy_RMB_NPU.sbin"/>
+    <IMAGE_ENTRY Type="0x8024" File="8024_rsmu_sec_policy.rmb_L0.0d190073.sbin"/>
+    
+    <!-- RV1 MP2 SFI firmware -->
+    <IMAGE_ENTRY Type="0x25" File="TypeId0x25_Mp2Fw_RMB.sbin"/>
+    <!-- AMD-TEE OS -->
+    <IMAGE_ENTRY Type="0x28" File="TypeId0x28_PspSystemDriver_RMB.sbin"/>
+<!--    <IMAGE_ENTRY Type="0x29" File="KvmEngineDummy.csbin"/> -->
+    <!-- PSP AGESA RT Driver -->
+    <IMAGE_ENTRY Type="0x2D" File="TypeId0x2D_AgesaRunTimeDrv_prod_RMB.sbin"/>
+    <!-- PSP AGESA Bootloader -->
+    <IMAGE_ENTRY Type="0x30" File="TypeId0x30_AgesaBootloaderU_RMB_DDR5.sbin"/>
+    <!-- RN VBIOS_PSP FW -->
+    <IMAGE_ENTRY Type="0x3C" File="TypeId0x3C_VbiosBootLoader_RMB.sbin"/>
+    <!-- Entry to load security gasket binary -->
+    <IMAGE_ENTRY Type="0x45" Instance="0x00" File="TypeId0x45_SecPolicytOS_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x45" Instance="0x01" File="TypeId0x45_SecPolicytOS_RMB_NPU.sbin"/>
+    <IMAGE_ENTRY Type="0x8045" File="8045_rsmu_sec_policy.rmb_L1.0d190173.sbin"/>
+	
+    <!-- USB unified PHY FW -->
+    <IMAGE_ENTRY Type="0x44" File="TypeId0x44_UnifiedUsb_RMB.sbin"/>
+    <!-- USB unified PHY B1 FW -->
+    <IMAGE_ENTRY Type="0x144" File="TypeId0x144_UnifiedUsb_RMB_B1.sbin"/>
+    <!-- Prom-21 entry -->
+    <IMAGE_ENTRY Type="0x93" File="TypeId0x93_Prom21Fw.sbin"/>
+    <!-- DRTM-TA -->
+    <IMAGE_ENTRY Type="0x47" File="TypeId0x47_DrtmTA_RMB.sbin"/>
+    <!-- PspBlPubKey-->
+    <IMAGE_ENTRY Type="0x50" File="TypeId0x50_KeyDbBl_RMB.sbin"/>
+    <!-- PspTosPubKey-->
+    <IMAGE_ENTRY Type="0x51" File="TypeId0x51_KeyDbTos_RMB.sbin"/>
+    <!-- SPL (Security Patch Level) table-->
+    <IMAGE_ENTRY Type="0x55" File="TypeId0x55_SplTableBl_RMB.sbin"/>
+    <!-- MSMU -->
+    <IMAGE_ENTRY Type="0x5A" File="TypeId0x5A_Msmu_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x15A" File="TypeId0x15A_Msmu_RMB_B0.sbin"/>
+    <!-- SPI-ROM configuration/Instruction -->
+    <IMAGE_ENTRY Type="0x5C" File="TypeId0x5C_SpiRomConfig_RMB.sbin"/>
+    <!-- Pluton -->
+    <IMAGE_ENTRY Type="0x5F" File="TypeId0x5F_PlutonPlatFw_RMB.sbin"/>
+    <!-- DMCUB -->
+    <IMAGE_ENTRY Type="0x71" File="TypeId0x71_DmcubFw_RMB.sbin"/>
+    <IMAGE_ENTRY Type="0x171" File="TypeId0x71_DmcubFw_RMB_B0.sbin"/>
+    <IMAGE_ENTRY Type="0x76" File="TypeId0x76_DfRib_RMB.sbin"/>
+    <!-- iKEK_TA -->
+    <IMAGE_ENTRY Type="0x8D" File="TypeId0x8D_IkekTa_RMB.bin"/>
+    <!-- PSP Nvme For RPMC -->
+    <POINT_ENTRY Type="0x54" Address="0x00875000" Size="0x00040000" AddressMode="1"/>
+<!--[-start-231102-IB20840032-remove]-->  
+    <!-- AMF Firmware 0x85 part 1 SRAM -->
+    <IMAGE_ENTRY Type="0x85" File="AIM-T_1-0_TypeId0x85_MPMSram_RMB.sbin"/>
+    <!-- MPM 0x86 Firmware -->
+    <POINT_ENTRY Address="0x008B5000" AddressMode="0x1" Size="0x001EA000" Type="0x86" Instance="0x00"/>
+    <POINT_ENTRY Address="0x00C53000" AddressMode="0x1" Size="0x001EA000" Type="0x86" Instance="0x01"/>
+    <!-- MPM 0x88 Wlan Firmware -->
+    <POINT_ENTRY Address="0x00A9F000" AddressMode="0x1" Size="0x001B4000" Type="0x88" Instance="0x00"/>
+    <POINT_ENTRY Address="0x00E3D000" AddressMode="0x1" Size="0x001B4000" Type="0x88" Instance="0x01"/>
+    <!-- MPM 0x89 Amf MFD -->
+    <IMAGE_ENTRY Type="0x89" File="AIM-T_1-0_TypeId0x89_MFD_RMB.sbin"/>
+    <!-- MPM 0x87 Persistent Object -->
+    <POINT_ENTRY Type="0x87" Address="0x00FF1000" Size="0x00040000" AddressMode="1"/>
+<!--[-end-231102-IB20840032-remove]-->
+<!--[-start-240202-IB20840047-remove]-->
+    <!-- Generic Feature Configuration Table -->
+    <IMAGE_ENTRY Type="0x98" File="TypeId0x98_AIM-T_Enable.bin"/>
+<!--[-end-240202-IB20840047-remove]-->
+    <!-- Point to BIOS Hdr, the adress should be Relative address -->
+    <POINT_ENTRY Type="0x49" Address="0x00380000" Size="0x400"/>
+  </PSP_DIR>
+
+<!-- Image slot B BIOS DIR-->
+  <BIOS_DIR Level="2" Base="0x0080D000" Size="0x00048000" SpiBlockSize="0x1000">
+    <!-- Refer to BIOS guide for detail requirement of each Type -->
+    <!-- All definition is same as PSP_DIR except Destination -->
+    <!-- Attribute Destination:(Optional)-->
+    <!-- Destination: Used to specify the destination memory address PSP FW need copy to -->
+    <IMAGE_ENTRY Type="0x05" File="TypeId0x05_RtmPubSigned_RMB.key"/>
+    <!-- The RTMSignature.bin is NOT ready when generate Header with "BD" command, Use explicit "Size" to avoid open file fail  -->
+    <!-- <IMAGE_ENTRY Type="0x07" File="RTMSignature.bin" Size="0x100"/> -->
+
+    <!-- Agesa PSP Customization Block (PSP Agesa variable) NVRAM (APCB)-->
+    <IMAGE_ENTRY Type="0x60" Instance="0x00" File="APCB_FP7r2_Updatable.bin" Size="0x3000"/>
+    <!-- Agesa PSP Customization Block (PSP Agesa variable) NVRAM (APCB)-->
+    <IMAGE_ENTRY Type="0x68" Instance="0x00" File="APCB_FP7r2_DefaultRecovery.bin" Size="0x3600"/>
+    <IMAGE_ENTRY Type="0x68" Instance="0x08" File="APCB_FP7r2_Updatable_68.bin" Size="0x3000"/>
+
+    <!-- APOB will be filled @0x09F00000 which specify by the Destination -->
+    <POINT_ENTRY Type="0x61" Address="0" Size="0" Destination="0x09F00000"/>
+
+    <!-- FV_RECOVERY will copy to Temp Memory 0x09B00000 as specified by the Destination, also will
+        authenticate due the ResetImage Flag set to 1 -->
+    <POINT_ENTRY Address="0x01200000" Destination="0x09B00000" Size="0x300000" Type="0x62" AddressMode="1" Instance="0x00">
+      <TypeAttrib Copy="0x1" ReadOnly="0x0" RegionType="0x0" ResetImage="0x1" Compressed="0x1"/>
+    </POINT_ENTRY>
+    <POINT_ENTRY Address="0x012E0000" Destination="0x09B00000" Size="0x300000" Type="0x62" AddressMode="1" Instance="0x01">
+       <TypeAttrib Copy="0x1" ReadOnly="0x0" RegionType="0x0" ResetImage="0x1" Compressed="0x1"/>
+    </POINT_ENTRY>
+    <!-- APOB NVRAM COPY-->
+    <IMAGE_ENTRY Type="0x63" File="TypeId0x63_ApobNvram_RMB.bin"/>
+
+    <!-- APPB PMU Firmware -->
+    <IMAGE_ENTRY Type="0x64" Instance="0x01" SubProgram="0x0" File="TypeId0x64_Appb_RMB_Ddr5Imem1.csbin"/>
+    <IMAGE_ENTRY Type="0x65" Instance="0x01" SubProgram="0x0" File="TypeId0x65_Appb_RMB_Ddr5Dmem1.csbin"/>
+    <IMAGE_ENTRY Type="0x64" Instance="0x02" SubProgram="0x0" File="TypeId0x64_Appb_RMB_Ddr5Imem2.csbin"/>
+    <IMAGE_ENTRY Type="0x65" Instance="0x02" SubProgram="0x0" File="TypeId0x65_Appb_RMB_Ddr5Dmem2.csbin"/>
+    <IMAGE_ENTRY Type="0x64" Instance="0x09" SubProgram="0x0" File="TypeId0x64_Appb_RMB_Ddr5QuickbootImem9.csbin"/>
+    <IMAGE_ENTRY Type="0x65" Instance="0x09" SubProgram="0x0" File="TypeId0x65_Appb_RMB_Ddr5QuickbootDmem9.csbin"/>
+    <IMAGE_ENTRY Type="0x64" Instance="0x0A" SubProgram="0x0" File="TypeId0x64_Appb_RMB_Ddr5QuickbootImem10.csbin"/>
+    <IMAGE_ENTRY Type="0x65" Instance="0x0A" SubProgram="0x0" File="TypeId0x65_Appb_RMB_Ddr5QuickbootDmem10.csbin"/>
+
+    <!-- MICROCODE PATCH -->
+    <IMAGE_ENTRY Type="0x66" Instance="0x00" File="TypeId0x66_UcodePatch_RMB_A0.sbin"/>
+    <IMAGE_ENTRY Type="0x66" Instance="0x01" File="TypeId0x66_UcodePatch_RMB_B0.sbin"/>
+    <IMAGE_ENTRY Type="0x66" Instance="0x02" File="TypeId0x66_UcodePatch_RMB_B1.sbin"/>
+
+    <!-- MP2 Configuration File -->
+    <IMAGE_ENTRY Type="0x6A" File="TypeId0x6a_Mp2FwConig_RMB.sbin"/>
+
+    <!-- BIOS NV storage region - Variable storgae -->
+    <POINT_ENTRY Type="0x6D" Instance="0" Address="0x01F8F000" Size="0x00025000" AddressMode="1"/>
+    <POINT_ENTRY Type="0x6D" Instance="1" Address="0x01FB4000" Size="0x00001000" AddressMode="1"/>
+    <POINT_ENTRY Type="0x6D" Instance="2" Address="0x01FB5000" Size="0x00026000" AddressMode="1"/>
+
+    <!-- BIOS NV storage region - DMI -->
+    <POINT_ENTRY Type="0x6D" Instance="3" Address="0x01F88000" Size="0x00001000" AddressMode="1"/>
+
+    <!-- BIOS NV storage region - MSDM -->
+    <POINT_ENTRY Type="0x6D" Instance="4" Address="0x01F8E000" Size="0x00001000" AddressMode="1"/>
+
+  </BIOS_DIR>
+</DIRS>

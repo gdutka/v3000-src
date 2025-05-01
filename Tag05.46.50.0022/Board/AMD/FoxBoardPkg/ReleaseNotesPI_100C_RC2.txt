@@ -1,0 +1,2478 @@
+(This document refers to the AMD Secure Processor technology as Platform Security Processor (PSP))
+
+                        Release Notes for
+                        -----------------
+                 EmbeddedPI FP7r2 Platform Initialization
+=================================================================================
+Version:  1.0.0.C RC2                             Release Date: 24 December 2024
+File:     EmbeddedPI-FP7r2_1.0.0.C.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_100C for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     RABLRM4C09704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 16
+    AMF FW            - 28.28.0.25
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A8.70
+      PSP fTPM        - 3.77.0.5
+      DRTM            - 4.11.0.2E
+    Security Policy
+      B0              - D.19.0.73
+    SMU FW
+      B0              - 6.69.29.0
+    SPL Table         - 5.28.0.6D
+      SecPatchLevel   - 5
+    UCODE
+      B0              - 0A404002
+      B1              - 0A40410A
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.8.8
+  PlatformBIOS        - Fox platform BIOS RFX100CB
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+	EMBDEV-21588:Updated latest PSP FW 0.28.A8.70
+	
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+	-None
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+	-None
+	
+[SWPSIRT]:
+    -None
+  
+[Known Issues/Limitations]:
+	EMBDEV-19572:V3000: System don't boot and stuck at Post code b000a5f3 on using X2522 NIC card
+	EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+	EMBDEV-13848: PD Firmware update doesn't start after G3
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.A_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+  Four XGBE LED GPIO numbers should not be duplicated values and only unused GPIOs should be used for these LEDs otherwise behavior will be unknown.
+  Persistent memory feature is validated upto 0~48GB in size. By default Pmem feature is disabled, To enable use persistent memory settings from "Amd CBS -> DF common options".
+  LPDDR5 not supported by ABL.
+=================================================================================
+Version:  1.0.0.C RC1                             Release Date: 11 December 2024
+File:     EmbeddedPI-FP7r2_1.0.0.C.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_100C for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     RABLRM4C09704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 16
+    AMF FW            - 28.28.0.25
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A7.70
+      PSP fTPM        - 3.77.0.5
+      DRTM            - 4.11.0.2E
+    Security Policy
+      B0              - D.19.0.73
+    SMU FW
+      B0              - 6.69.29.0
+    SPL Table         - 5.28.0.6D
+      SecPatchLevel   - 5
+    UCODE
+      B0              - 0A404002
+      B1              - 0A40410A
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.8.8
+  PlatformBIOS        - Fox platform BIOS RFX100CA
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+	EMBDEV-20962:Update latest FW for 100C RC1 PI
+	EMBDEV-20861:[V3000] Unable to disable "Chipselect Interleaving" from BIOS menu.
+	
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+	EMBDEV-20861:[V3000] Unable to disable "Chipselect Interleaving" from BIOS menu.
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+	EMBDEV-20676: Changes to support the PXE boot both ports setup option as per the requirement
+	
+[SWPSIRT]:
+	EMBDEV-:BIOS PSIRT update for embedded PI 100C RC1
+  
+[Known Issues/Limitations]:
+	EMBDEV-19572:V3000: System don't boot and stuck at Post code b000a5f3 on using X2522 NIC card
+	EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+	EMBDEV-13848: PD Firmware update doesn't start after G3
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.A_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+  Four XGBE LED GPIO numbers should not be duplicated values and only unused GPIOs should be used for these LEDs otherwise behavior will be unknown.
+  Persistent memory feature is validated upto 0~48GB in size. By default Pmem feature is disabled, To enable use persistent memory settings from "Amd CBS -> DF common options".
+  LPDDR5 not supported by ABL.				 
+=================================================================================
+Version:  1.0.0.B RC1                             Release Date: 23 September 2024
+File:     EmbeddedPI-FP7r2_1.0.0.B.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_100B for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     RABLRM4919704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 16
+    AMF FW            - 28.28.0.25
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A4.70
+      PSP fTPM        - 3.77.0.5
+      DRTM            - 4.11.0.2E
+    Security Policy
+      B0              - D.19.0.72
+    SMU FW
+      B0              - 6.69.26.0
+    SPL Table         - 5.28.0.6C
+      SecPatchLevel   - 4
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404107
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.8.8
+  PlatformBIOS        - Fox platform BIOS RFX100BA
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+	Updated PSP,ABL and SMU to latest version	
+	EMBDEV-18949: BIOS menu option to set Fclk and Lclk
+	EMBDEV-20112: Add setup option for Rest on MP1 SMN Timeout
+	EMBDEV-20151: Implement new PSP command for cold reset on SMN timeout on MP0
+	EMBDEV-20379: New setup option for Memory clear timeout
+	EMBDEV-20348: New setup option for MP exception recovery handling
+	EMBDEV-14223: SUT hung at 0000 postcode after disabling USB controllers in BIOS
+ 
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+	EMBDEV-20091: Add setup option for memory restore valid days
+ 	EMBDEV-18949: BIOS menu option to set Fclk and Lclk
+	EMBDEV-20112: Add setup option for Rest on MP1 SMN Timeout
+	EMBDEV-17792:[V3000] Disable SW Persisted DRAM Feature By Default
+	EMBDEV-20379: New setup option for Memory clear timeout
+	EMBDEV-20348: New setup option for MP exception recovery handling
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+	-None
+	
+[SWPSIRT]:
+	EMBDEV-20470:V3000: PSIRT fix to consume from RembrandtPI-FP7_100B as part of EMB 100B RC1 release
+  
+[Known Issues/Limitations]:
+	EMBDEV-19572:V3000: System don't boot and stuck at Post code b000a5f3 on using X2522 NIC card
+	EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+	EMBDEV-13848: PD Firmware update doesn't start after G3
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.A_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+  Four XGBE LED GPIO numbers should not be duplicated values and only unused GPIOs should be used for these LEDs otherwise behavior will be unknown.
+  Persistent memory feature is validated upto 0~48GB in size. By default Pmem feature is disabled, To enable use persistent memory settings from "Amd CBS -> DF common options".
+  LPDDR5 not supported by ABL.
+=================================================================================
+Version:  1.0.0.A RC1                             Release Date: 14 June 2024
+File:     EmbeddedPI-FP7r2_1.0.0.A.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_100A for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     RABLRM4614704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 16
+    AMF FW            - 28.28.0.25
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A1.70
+      PSP fTPM        - 3.77.0.5
+      DRTM            - 4.11.0.2E
+    Security Policy
+      B0              - D.19.0.72
+    SMU FW
+      B0              - 6.69.24.0
+    SPL Table         - 5.28.0.6B
+      SecPatchLevel   - 3
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404105
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.7.10
+  PlatformBIOS        - Fox platform BIOS RFX100AA
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+	ABL,PMU & PSP updated to latest version
+  	EMBDEV-18458:UDIMM support in Embedded AGESA PI for V3000
+	EMBDEV-18060: NBIOEgressPoison Severity [Hi,Lo] expected values are inot matching
+	EMBDEV-17934:[V3000] [DDR5] BIOS to integrate PMU FW 16 along with updated termination table
+	EMBDEV-17315 :Security requirement: Need access SPD hub MR12 and MR13 to confirm it is write-protected
+	EMBDEV-18865:V3000 : CCB: DRAM SPD CRC Enablement for V3000
+	EMBDEV-18911:Bios to wait until PMfw service request completed
+	EMBDEV-18027:[V3000]Inject PCIe ECRC will trigger OS crush to cause occurring POST loop
+	EMBDEV-18719: [V3000]PCIe lane 16-19 configured to 2 x2 port will occur PCIe AER
+	EMBDEV-18898:[V3000]-USB4: Thunderbolt™ 4 can't use when plug Type C port at Ubuntu
+	EMBDEV-18636:Request for eSPI support in BIOS
+ 
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+	EMBDEV-18865:V3000 : CCB: DRAM SPD CRC Enablement for V3000
+	EMBDEV-18060: NBIOEgressPoison Severity [Hi,Lo] expected values are inot matching
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+	EMBDEV-18719: [V3000]PCIe lane 16-19 configured to 2 x2 port will occur PCIe AER
+	
+[SWPSIRT]:
+  -None
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.A_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+  Four XGBE LED GPIO numbers should not be duplicated values and only unused GPIOs should be used for these LEDs otherwise behavior will be unknown.
+=================================================================================
+Version:  1.0.0.9 RC2                             Release Date: 03 April 2024
+File:     EmbeddedPI-FP7r2_1.0.0.9.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1009 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     RABLRM4329704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.25
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A0.70
+      PSP fTPM        - 3.77.0.5
+      DRTM            - 4.11.0.2E
+    Security Policy
+      B0              - D.19.0.72
+    SMU FW
+      B0              - 6.69.24.0
+    SPL Table         - 5.28.0.6B
+      SecPatchLevel   - 3
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404105
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.7.10
+  PlatformBIOS        - Fox platform BIOS RFX1009B
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-18320:Firmware update for V3000 release 1009 RC2
+  EMBDEV-18005:V3000:HPE_Aruba_CS3_SPI Chip select change is not successful
+  EMBDEV-18136:Setup option to control persistent memory retention during warm boot
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-18136:Added Setup option to control persistent memory retention during warm boot
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+	-None
+	
+[Platform ENHANCEMENTS and FIXED BUGS]:
+ EMBDEV-18200:CL37 AN sequence enhancement to sync with Linux kernel code to SnpDxe UEFI driver
+ EMBDEV-18328: Implemented Marvell PHY init code for AIC2 changes to boot PXE across the cold resets
+
+[SWPSIRT]:
+  -None
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+  EMBDEV-15074: Warmreset button results in system hang 00000000
+  EMBDEV-18016:V3000: Unable to configure the BIOS Settings using SetupCfg file
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.A_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+  Four XGBE LED GPIO numbers should not be duplicated values and only unused GPIOs should be used for these LEDs otherwise behavior will be unknown.				 
+=================================================================================
+Version:  1.0.0.9 RC1                             Release Date: 22 February 2024
+File:     EmbeddedPI-FP7r2_1.0.0.9.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1009 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     RABLRM4219704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.25
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A0.70
+      PSP fTPM        - 3.77.0.5
+      DRTM            - 4.11.0.2E
+    Security Policy
+      B0              - D.19.0.72
+    SMU FW
+      B0              - 6.69.23.0
+    SPL Table         - 5.28.0.6B
+      SecPatchLevel   - 3
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404105
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.7.10
+  PlatformBIOS        - Fox platform BIOS RFX1009A
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  ABL,PSP & SMU updated to latest version.
+  EMBDEV-17835:V3000: Add Setup option with APCB token for eSPI CRC
+  EMBDEV-17746:V3000: Remove dynamic PCD from S3 SMM flow
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-17835:V3000: Add Setup option with APCB token for eSPI CRC
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-16988: [V3000][AIC1] [Inphi] Single port is not working, when other port not in connected state
+
+[SWPSIRT]:
+  EMBDEV-17882:V3000: PSIRT fix as part PI merge from 100A_RC1
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+  EMBDEV-15074: Warmreset button results in system hang 00000000
+  EMBDEV-17773: V3000: RAS: System hang observed at POST code B0003F44 while running ACS and ECRC Fatal error injection test for multiple iterations.
+  EMBDEV-18005: V3000 : HPE_Aruba_CS3_SPI Chip select change is not successful   
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.A_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+  Four XGBE LED GPIO numbers should not be duplicated values and only unused GPIOs should be used for these LEDs otherwise behavior will be unknown.			 
+=================================================================================
+Version:  1.0.0.8 RC2                             Release Date: 28 December 2023
+File:     EmbeddedPI-FP7r2_1.0.0.8.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1008 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     RABLRM3B22704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.25
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A0.6F
+      PSP fTPM        - 3.77.0.5
+      DRTM            - 4.11.0.2E
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.22.0
+    SPL Table         - 5.28.0.6B
+      SecPatchLevel   - 3
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404105
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1008B
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-17548: Added changes to fix accessing secondary SPI content after switching to CS3
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+  EMBDEV-15074: Warmreset button results in system hang 00000000
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.9b_RC2
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+  Four XGBE LED GPIO numbers should not be duplicated values and only unused GPIOs should be used for these LEDs otherwise behavior will be unknown
+=================================================================================
+Version:  1.0.0.8 RC1                             Release Date: 12 December 2023
+File:     EmbeddedPI-FP7r2_1.0.0.8.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1008 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     RABLRM3B22704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.25
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A0.6F
+      PSP fTPM        - 3.77.0.5
+      DRTM            - 4.11.0.2E
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.22.0
+    SPL Table         - 5.28.0.6B
+      SecPatchLevel   - 3
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404105
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1008A
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  ABL,SMU and PSP FW updated to latest version.
+  EMBDEV-13537: Wrong data is observed while reading from spirom via spidev0.0 node
+  EMBDEV-17307: [RAS Spec] Update PcdAmdNbioRASControlV2 value to 0
+  EMBDEV-17363: [Internal] Add CBS for L2 Cache Size
+  EMBDEV-17387: ACPI change for including espi controller and exposing it to OS
+  EMBDEV-17484: V3000: PSIRT fix as part PI merge from 1009B_RC2
+  
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-17363: [Internal] Add CBS for L2 Cache Size
+  EMBDEV-17308: Update UCP Mask CBS help text
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-17425: V3000:AGPIO32 changes for RESET_L
+  EMBDEV-17484: V3000: PSIRT fix as part PI merge from 1009B_RC2
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+  EMBDEV-15074: Warmreset button results in system hang 00000000
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.9b_RC2
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+  Four XGBE LED GPIO numbers should not be duplicated values and only unused GPIOs should be used for these LEDs otherwise behavior will be unknown				 			
+=================================================================================
+Version:  1.0.0.7 RC1                             Release Date: 29 September 2023
+File:     EmbeddedPI-FP7r2_1.0.0.7.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1007 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     RABLRM3925704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.A7
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A0.6E
+      PSP fTPM        - 6.1D.0.6
+      DRTM            - 4.11.0.34
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.21.0
+    SPL Table         - 5.28.0.6B
+      SecPatchLevel   - 3
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1007A
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  ABL FW updated to latest version.
+  EMBDEV-16003: V3000: PCI express fatal error injection is failing 
+  
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-17008: CCB: SW ETHERNET LED - Part2 this will include 3 new setup options coming from field Engineer
+  EMBDEV-16934: V3000 - Irrelevant help text on Release BIOS RFX1006A option - PCIe Dynamic PG
+  EMBDEV-16999: Make "DDR Bus Configuration" visible in bios setup option
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-16906: XGBE Port 0 speed status LED liting continuously when setting 0x0 value in BIOS
+  EMBDEV-16474: V3000: PCIe endpoints are not detecting with combiner card after shutdown cycle.
+  EMBDEV-16003: Enable BERT entry for PCIE uncorrectable errors
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+  EMBDEV-15074: Warmreset button results in system hang 00000000
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.9_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+  Four XGBE LED GPIO numbers should not be duplicated values and only unused GPIOs should be used for these LEDs otherwise behavior will be unknown				 
+=================================================================================
+Version:  1.0.0.6 RC1                                  Release Date: 31 August 2023
+File:     EmbeddedPI-FP7r2_1.0.0.6.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1006 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     RABLRM3831704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.A7
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A0.6E
+      PSP fTPM        - 6.18.0.6
+      DRTM            - 4.11.0.30
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.21.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1006A
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  PSP,SMU and ABL FW updated to latest version.
+  EMBDEV-16836: IOHC register programming for APML
+  EMBDEV-16636: V3000: XGBE LED support for status of XGBE link
+  EMBDEV-16835: Enable sync flood in acpiconfig register for APML
+  EMBDEV-16804: CCB:Soc Performance specific setup option to move from internal to external CBS
+  EMBDEV-16559: BERT log doesn't decode physical address for memory errors
+  
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-16636: V3000: XGBE LED support for status of XGBE link
+  EMBDEV-16833: Add CBS to control NBIO RAS and Poison Consumption
+  EMBDEV-16804: CCB:Soc Performance specific setup option to move from internal to external CBS
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-16636: V3000: XGBE LED support for status of XGBE link
+  EMBDEV-16810: Update HEST for NBIO and PCIe AER
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+  EMBDEV-15074: Warmreset button results in system hang 00000000
+  EMBDEV-16003: V3000: PCI express fatal error injection is failing 
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.9_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+  Four XGBE LED GPIO numbers should not be duplicated values and only unused GPIOs should be used for these LEDs otherwise behavior will be unknown				 
+=================================================================================
+Version:  1.0.0.5 RC3                                  Release Date: 21 July 2023
+File:     EmbeddedPI-FP7r2_1.0.0.5.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1005 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM3320704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.A7
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A2.69
+      PSP fTPM        - 6.18.0.6
+      DRTM            - 4.11.0.30
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.20.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1005C
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  SMU FW updated to latest version.
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-15074: Warmreset button results in system hang 00000000
+  EMBDEV-15480:[V3000][AMPL] ALERT_L signal doesn't toggle on MCE/fatal errors
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.7_RC2
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+=================================================================================
+Version:  1.0.0.5 RC2                                  Release Date: 04 July 2023
+File:     EmbeddedPI-FP7r2_1.0.0.5.ZIP
+=================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1005 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM3320704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.A7
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A2.69
+      PSP fTPM        - 6.18.0.6
+      DRTM            - 4.11.0.30
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.19.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+    Prom-21 FW        - 230215_A0_01_82
+    PD FW             - 0310.00.5.3
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1005B
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-16436: UART unused code removal for XGBE LED
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-16428:AC Power Loss option default value updated to "Always on"
+  EMBDEV-16428:Added setup option for PcdSyncFloodToApml(NBIO SyncFlood Reporting) and PcdResetCpuOnSyncFlood(Reset after sync flood)
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-16435: AIC3 REV-B implementation
+  EMBDEV-16436: GPIO Programming for XGBE LED
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+  EMBDEV-15074: Warmreset button results in system hang 00000000
+  EMBDEV-15480:[V3000][AMPL] ALERT_L signal doesn't toggle on MCE/fatal errors
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.7_RC2
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.
+  UMC error injection will cause system hang if the value of "NBIO SyncFlood Reporting" and "Reset after sync flood" modified from default.
+==================================================================================
+Version:  1.0.0.5 RC1                                  Release Date: 26 June 2023
+File:     EmbeddedPI-FP7r2_1.0.0.5.ZIP
+==================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+==================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1005 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM3320704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.A7
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A2.69
+      PSP fTPM        - 6.18.0.6
+      DRTM            - 4.11.0.30
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.19.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+	Prom-21 FW        - 230215_A0_01_82
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1005A
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-16392: Updating PSP and SMU firmware to latest version
+  EMBDEV-16376: Send ResetCpuOnSyncFlood and SyncFloodToApml commands to SMU
+  EMBDEV-15867: Enable SYSHUB Watchdog timer
+  EMBDEV-15946: Read serial number and update it in SMBIOS table
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-16166: Enable DDR memory controller configuration on external BIOS
+  EMBDEV-15867: Enable SYSHUB Watchdog timer
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-15867: Enable SYSHUB Watchdog timer
+  EMBDEV-16364: Add a setup option to control SPI CS3
+
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-15074: Warmreset button results in system hang 00000000
+  EMBDEV-15480:[V3000][APML] ALERT_L signal doesn't toggle on MCE/fatal errors
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.7_RC2
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 NPU OPNs.
+
+Note:
+  TSME will work only on B1 samples, not B0.
+  Persistent memory feature is validated upto 0~30GB in size.				 
+==================================================================================
+Version:  1.0.0.4 RC2                                  Release Date: 14 April 2023
+File:     EmbeddedPI-FP7r2_1.0.0.4.ZIP
+==================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+==================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1004 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM3320704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.A7
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A1.69
+      PSP fTPM        - 6.18.0.6
+      DRTM            - 4.11.0.30
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.18.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+	Prom-21 FW        - 230215_A0_01_82
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1004BB
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-15891: ABL and SMU FWs updated for 1004_RC2
+  EMBDEV-15940: APCB token update for downcore selection
+  EMBDEV-15937: Added APCB token for extended size for persistent memory
+  EMBDEV-15933: Enable scrubber init functionality in PEI and removed scrubber enable and valid fields in DXE
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-15940: Added APCB token as a WA to fix the CPU down-core
+  EMBDEV-15939: SMT PCD added to send SMU command to disable the SMT
+  EMBDEV-15937: Added CBS setup option to support the persistent memory size upto 20~30GB
+  EMBDEV-15933: To set the PCDs corresponding to the APCB tokens for DRAM error injection
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-15921,EMBDEV-15919,EMBDEV-15917: Added condition to fix the AIC3 changes specific to 10G PHY
+
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.7_RC2
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i,V3C44,V3C16 and V3C14 [B0 & B1 NPU]
+
+Note:
+TSME will work only on B1 samples, not B0.
+Persistent memory feature is validated upto 0~30GB in size.
+==================================================================================
+Version:  1.0.0.4 RC1                                  Release Date: 03 April 2023
+File:     EmbeddedPI-FP7r2_1.0.0.4.ZIP
+==================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+==================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1004 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM3320704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.A7
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A1.69
+      PSP fTPM        - 6.18.0.6
+      DRTM            - 4.11.0.30
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.17.1
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+	Prom-21 FW        - 230215_A0_01_82
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1004A
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-15891: ABL, SMU, PSP FWs updated for 1004_RC1
+  EMBDEV-14946: Promontory FW update
+  EMBDEV-15899: Setting DramScrubValid and DramScrubEn bits at EndOfDXE event to inject the DRAM errors
+  EMBDEV-15849: Implemented MBOX for SetCfg PSP command to meet the HPE Aruba dual SPI use case.
+  EMBDEV-15194: NBIO Sync Flood Generation disable PCD feature is failing
+  EMBDEV-15195: NBIO RAS UCP MasK PCD feature is failing
+  EMBDEV-15839: Enable Egress Port Poisoned Data Severity
+  EMBDEV-15828: Enable AGESA down core function for RAS
+  EMBDEV-14736: AB recovery structure change for L2A PSP directory
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14946: CBS setup option to control the PROM-21 chipset PCIe Lanes
+  EMBDEV-15892: Enabled CBS setup option to change the FMAX frequency for extended capability
+  EMBDEV-15849: Implemented CBS setup option to control SetCfg PSP command
+  EMBDEV-15194: NBIO Sync Flood Generation disable PCD feature is failing
+  EMBDEV-15195: NBIO RAS UCP MasK PCD feature is failing
+  EMBDEV-15839: Enable Egress Port Poisoned Data Severity
+  EMBDEV-15828: Enable AGESA down core function for RAS
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-15869: AIC3 10G PHY changes for Polarity reversal, MDIO ID change
+  EMBDEV-15518: PPS output enablement for onboard XGBE ports
+  EMBDEV-14946: Implemented Prom-21 changes for pcie and added setup option to control it
+  EMBDEV-14736: AB recovery structure change for L2A PSP directory
+
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+  EMBDEV-14090: System getting hung by enabling Read and Write CRC feature
+  EMBDEV-15315: Redirect and patrol scrub changes in ABL results in hang at EEE50002
+  EMBDEV-15810: Sync Flood fails and system fails to reboot after exit from PDM mode
+  RAS DRAM error injection with syncflood enabled causes system hang with 0000 postcode
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.7_RC2
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 & B1 NPU]
+
+Note:
+TSME will work only on B1 samples, not B0.
+==================================================================================
+Version:  1.0.0.3 RC2                               Release Date: 09 January 2023
+File:     EmbeddedPI-FP7r2_1.0.0.3.ZIP
+==================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+==================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1003 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM2C20704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.9E
+    DF RIB FW         - 1.0.2.11
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A2.63
+      PSP fTPM        - 6.14.0.6
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.15.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1003B
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  SMU FW updated for 1003_RC2
+  EMBDEV-15165: ACS and multifunctionality enablement.
+  EMBDEV-15143: Added APCB tokens, APOB structure, SMU command to enable Persistent memory.
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-15143: Enable setup option to control reserved Persistent memory.
+
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-15314: AMPL MCA Bank - Mail Box command Enablement
+  EMBDEV-14090: System getting hung by enabling Read and Write CRC feature
+  EMBDEV-15315: Redirect and patrol scrub changes in ABL results in hang at EEE50002
+  EMBDEV-15317: V3C1x B1A2 Silicon Fails with Memory Margin CS
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.5_RC4
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 & B1 NPU]
+
+Note:
+TSME will work only on B1 samples, not B0.
+==================================================================================
+Version:  1.0.0.3 RC1                               Release Date: 26 December 2022
+File:     EmbeddedPI-FP7r2_1.0.0.3.ZIP
+==================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+==================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1003 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM2C20704E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.9E
+    DF RIB FW         - 1.0.2.11
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A2.63
+      PSP fTPM        - 6.14.0.6
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.14.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1003A
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  ABL,PSP and SMU FW updated for 1003_RC1
+  EMBDEV-14871: [RAS] Implement failed DIMM identification
+  EMBDEV-15140: Add setup options under CBS for read CRC
+  EMBDEV-15046: Add APCB tokens for UMC as per RAS spec
+  EMBDEV-14945: Enable Core BIST failure reporting to OS
+  EMBDEV-15233: Fix to resolve the hang issue due to downcore configuration
+  Added UDIMM Apcb data for UDIMM based CRBs.
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-15140: Added setup options under CBS to read CRC in Internal BIOS
+  EMBDEV-14871: [RAS] Implemented failed DIMM identification
+  EMBDEV-15046: Added APCB tokens and setup options for UMC as per RAS spec
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-15139: Add a PBS to control SRIS configuration type
+  EMBDEV-14945: Enable Core BIST failure reporting to OS
+  EMBDEV-15172: Configured Sata as first index of DXIO config table to enable Sata and 2 X8 PCIE slot support.
+  EMBDEV-15211: Disabled PD FW update to resolve the hang issue
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+  EMBDEV-14675: System hangs at Postcode b000AA09 during reboot stress
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.5_RC4
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 & B1 NPU]
+
+Note:
+TSME will work only on B1 samples, not B0.
+===============================================================================
+Version:  1.0.0.2 RC3                               Release Date: 20 October 2022
+File:     EmbeddedPI-FP7r2_1.0.0.2.ZIP
+================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1002 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM2916701E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.9E
+    DF RIB FW         - 1.0.2.11
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A1.63
+      PSP fTPM        - 6.14.0.6
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.13.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1002C
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14834: ABL,PSP and SMU FW update for 1002_RC3
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-14857: System hang observed at POST code EA00E090 after triggering warm reset using SW27 button
+  EMBDEV-14675: System hangs at Postcode b000AA09 during reboot stress
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.5_RC4
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 & B1 NPU]
+
+Note:
+TSME will work only on B1 samples, not B0.
+===============================================================================
+Version:  1.0.0.2 RC2                               Release Date: 11 October 2022
+File:     EmbeddedPI-FP7r2_1.0.0.2.ZIP
+================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1002 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM2916701E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.9E
+    DF RIB FW         - 1.0.2.11
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A1.63
+      PSP fTPM        - 6.14.0.6
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.13.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1002B
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14834: ABL,PSP and SMU FW update for 1001_RC2
+  EMBDEV-14665: Add APCB token for core BIST feature
+  EMBDEV-14366: BIOS changes to modify the PSP RECOVERY_REASON_2 structure as per PSP FW changes
+  EMBDEV-12617: ToggleAllPwrGoodOnCf9 set to False to trigger warmreset.
+  EMBDEV-14663: Enable ECRC feature in BIOS
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14719: Power down enable setup option added in AMD CBS setup page
+  EMBDEV-14676: DDR timing configuration setup option added in AMD CBS setup page
+  EMBDEV-14665: Add APCB token for core BIST feature
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14729: Configured IO expander for AIC3.
+  EMBDEV-14748: AIC-1 TI retimer port 1 GPIO issue and Polarity reversal
+  EMBDEV-14663: Enable ECRC feature in BIOS
+  EMBDEV-14834: M.2 SSD RST GPIO pin modified w.r.t Fox schematic
+  EMBDEV-14834: Aspm is disabled to detect the m.2 nvme during Warmresets
+  
+[Known Issues/Limitations]:
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-14857: System hang observed at POST code EA00E090 after triggering warm reset using SW27 button
+  EMBDEV-14675: System hangs at Postcode b000AA09 during reboot stress
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.5_RC4
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 & B1 NPU]
+
+Note:
+TSME will work only on B1 samples, not B0.
+===============================================================================
+Version:  1.0.0.2 RC1                               Release Date: 08 September 2022
+File:     EmbeddedPI-FP7r2_1.0.0.2.ZIP
+================================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+================================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1002 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM27147010
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 0000216A
+    AMF FW            - 28.28.0.9E
+    DF RIB FW         - 1.0.2.11
+    DMCUB FW
+      B0              - 4.0.15.47
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A0.63
+      PSP fTPM        - 6.14.0.6
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.12.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.15
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.22.26.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1002A
+  SmmSupervisorPkg    - 3.011X
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.50
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13906: Controlled USB4 ports enablement/disablement
+  EMBDEV-14581: Revert the Manual RX tuning changes from 1001_RC3
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14655: CPU Downcore setup option added in AMD CBS setup page
+  EMBDEV-13906: Controlled USB4 ports enablement/disablement
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14655: PCIE 2x8 Slots Support added.
+  EMBDEV-14606: Updated MDIO ID value to both ports of AIC3.
+  EMBDEV-13939: Fixed PCIe device speed issue with Hotplug enabled.
+  EMBDEV-14573: AIC-3 MDIO changes to configure single MDIO for both ports of AIC3.
+  
+[Known Issues/Limitations]:
+  EMBDEV-12617: Warmreset/kbreset results in system hang, when ToggleAllPwrGoodOnCf9 is set to 0
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13848: PD Firmware update doesn't start after G3
+  EMBDEV-14612: V3C18i: Link stability issues (573 failues in port 0 and 89 failures in Port1 out of 600 cycles) 
+                        in 10G/1G Backplane (with SUT,SUPPORT-10G/1G) 
+  
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.5_RC4
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 & B1 NPU]
+
+Note:
+TSME will work only on B1 samples, not B0.
+=============================================================================
+Version:  1.0.0.1 RC3                               Release Date: 25 July 2022
+File:     EmbeddedPI-FP7r2_1.0.0.1.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1001 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM2414701E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 00002106
+    AMF FW            - 28.28.0.7E
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.14.41
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A5.53
+      PSP fTPM        - 6.14.0.6
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.11.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.A
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1001C
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.48
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14456: Detection of AIC/onboard Ethernet port and provided to DXIO
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14456: Detection of AIC/onboard Ethernet port and provided to DXIO
+  EMBDEV-14399: Manual tune the rx Adaption values for AIC1 (Retimer) and AIC2(10G PHY)
+
+[Known Issues/Limitations]:
+  EMBDEV-12617: Warmreset/kbreset results in system hang, when ToggleAllPwrGoodOnCf9 is set to 0
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.2a_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 & B1 NPU]
+
+Note:
+TSME will work only on B1 samples, not B0.
+=============================================================================
+Version:  1.0.0.1 RC2                               Release Date: 05 July 2022
+File:     EmbeddedPI-FP7r2_1.0.0.1.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1001 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM2414701E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 00002106
+    AMF FW            - 28.28.0.7E
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.14.41
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A5.53
+      PSP fTPM        - 6.14.0.6
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.9.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.A
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1001B
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.48
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14257: MCA error reporting to OS through BERT
+  EMBDEV-14238: Unmask NBIO parity error by default in AGESA
+  EMBDEV-14307: Slew Rate code changes according to PMFW 6.69.9.0
+  
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14257: MCA error reporting to OS through BERT
+  EMBDEV-13593: Link Detection fails on AIC1 Addincards for TI Re-timer Ports
+  EMBDEV-14055: XGBE Addin Card AIC2- Link up fails on 10G PHY AQR113C in AIC2- H552
+  EMBDEV-13975: Error Pop up observed on changing the AIC PHY selection in BIOS Setup  
+  EMBDEV-14157: BIOS update for Ethernet AIC-2
+  EMBDEV-14018: I2C register values to set the clock frequency to 100 KHz
+  EMBDEV-13942: Accessing the Pointer table properly to avoid S3 hang with Hot plug enabled case
+
+[Known Issues/Limitations]:
+  EMBDEV-12617: Warmreset/kbreset results in system hang, when ToggleAllPwrGoodOnCf9 is set to 0
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-14357: Stability issue with PXE boot for RJ45 with all speeds
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.2a_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 & B1 NPU]
+
+Note:
+TSME will work only on B1 samples, not B0.
+=============================================================================
+Version:  1.0.0.1 RC1                               Release Date: 25 May 2022
+File:     EmbeddedPI-FP7r2_1.0.0.1.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1001 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM2414701E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 00002106
+    AMF FW            - 28.28.0.7E
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.14.41
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A4.53
+      PSP fTPM        - 6.14.0.6
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.8.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.A
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1001A
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.48
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14143: V3000 Slew Rate changed to 2.5mV/us
+  
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-14105: Fix for "S3 hang at post code "EECb0d43"
+  EMBDEV-14139: Configure IO expander for AIC in S3 path
+  EMBDEV-13975: Error Pop up observed on changing the AIC PHY selection in BIOS Setup
+  
+[Known Issues/Limitations]:
+  EMBDEV-13563: PXE Boot fails on Onboard RJ45 Ports
+  EMBDEV-12617: Warmreset/kbreset results in system hang, when ToggleAllPwrGoodOnCf9 is set to 0
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.2a_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 & B1 NPU]
+
+Note:
+TSME will work only on B1 samples, not B0.
+=============================================================================
+Version:  1.0.0.0 RC2                               Release Date: 26 Apr 2022
+File:     EmbeddedPI-FP7r2_1.0.0.0.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1000 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM2414701E
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 00002106
+    AMF FW            - 28.28.0.7E
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.14.41
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A4.53
+      PSP fTPM        - 6.14.0.6
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.7.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+      B1              - 0A404102
+    USB FW            - 0.1.0.A
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1000B
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.48
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13887: [V3C18i] cTDP values exceeding the limits in OS, compared to the values set in BIOS
+  EMBDEV-13879: [V3C48] Platform fan doesn't run in pre-boot & OS environment
+  EMBDEV-13885: PPT Value shows Higher value in System IDLE state
+  EMBDEV-13841: Performance Drop in V3C18i
+  EMBDEV-13884: PWM Value shows 100 in idle state when CPU Temp is below 50 C
+  EMBDEV-13913: [V3C18i] P-State transition is not working as expected
+  EMBDEV-13904: Pass mark memtest fails
+  EMBDEV-13985: Add a setup option to control UMC data poison
+  EMBDEV-13789: PCIe SRIS feature enablement from BIOS
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13985: Add a setup option to control UMC data poison
+  EMBDEV-13789: PCIe SRIS feature enablement from BIOS
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13973: Modification / Removal of unknown speeds in BIOS setup for xgbe.
+  EMBDEV-13867: Fix for System Autowake from S3
+  EMBDEV-13552: Interfaces are not getting detected via AIC1 and observed I2C error reading SFP GPIOS in dmesg
+
+[Known Issues/Limitations]:
+  EMBDEV-13563: PXE Boot fails on Onboard RJ45 Ports
+  EMBDEV-12617: Warmreset/kbreset results in system hang, when ToggleAllPwrGoodOnCf9 is set to 0
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13975: Error Pop up observed on changing the AIC PHY selection in BIOS Setup
+  
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.2a_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48 [B0 & B1 NPU],V3C18i and V3C44 [B0 NPU] .
+
+Note:
+TSME will work only on B1 samples, not B0.
+
+=============================================================================
+Version:  1.0.0.0 RC1                               Release Date: 28 Mar 2022
+File:     EmbeddedPI-FP7r2_1.0.0.0.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_1000 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM22257010
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 00002106
+    AMF FW            - 28.28.0.7E
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.14.41
+    MSMU FW           - FF.45.2E.0
+    PSP FW            - 0.28.A4.53
+      PSP fTPM        - 6.14.0.6
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.6E
+    SMU FW
+      B0              - 6.69.4.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+    USB FW            - 0.1.0.A
+    VBL               - 20.11.00.1C
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX1000A
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.48
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13807: PSP and SMU FW update for 1000_RC1
+  EMBDEV-13648: Disable iGPU by default
+  EMBDEV-13434: PCIE enhanced hotplug changes
+  EMBDEV-13810: Handling of UCP - IOHUB default programming
+  EMBDEV-12053: BIOS CBS options Require to support PCIE error injection
+  EMBDEV-13573: "XGBE_PORT0_PROPERTY_n"(n=1,2) showing invalid data in V3000
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-12053: BIOS CBS options Require to support PCIE error injection
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13434: PCIE enhanced hotplug changes
+  EMBDEV-13418: Enabled PCIe resource table for PCIe tunneling
+  EMBDEV-13821: XGBE Addin Card AIC2- Link up fails on 1G PHY 88E1512P in AIC2- H552
+  EMBDEV-13805: Remove unsupported option from XGBE PBS bios setup
+  EMBDEV-13094: S3 Not resuming | System hung in first cycle
+  EMBDEV-13805: Removed unsupported XGBE modes from bios setup.
+  EMBDEV-13808: Enable UCSI driver support without EC 
+  EMBDEV-13809: Enable PD firmware update through BIOS
+  EMBDEV-13552: Interfaces are not getting detected via AIC1 and observed I2C error reading SFP GPIOS in dmesg
+
+[Known Issues/Limitations]:
+  EMBDEV-13563: PXE Boot fails on Onboard RJ45 Ports
+  EMBDEV-12617: Warmreset/kbreset results in system hang, when ToggleAllPwrGoodOnCf9 is set to 0
+  EMBDEV-13556: USB4 device Pre-boot Hot-plug functionality Failed
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13097: Link stability issue observed on both ports with DAC and SFP + modules on AN-ON and AN-OFF modes
+  EMBDEV-13841: Performance Drop in V3C18i
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.2a_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48 [B0 & B1 NPU],V3C18i and V3C44 [B0 NPU] .
+
+Note:
+TSME will work only on B1 samples, not B0.
+
+=============================================================================
+Version:  0.0.8.1 RC2                               Release Date: 24 Feb 2022
+File:     EmbeddedPI-FP7r2_0.0.8.1.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_0081 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM21287010
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 00002106
+    AMF FW            - 28.28.0.7A
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.11.67
+    MSMU FW           - FF.45.2B.0
+    PSP FW            - 0.28.A3.4A
+      PSP fTPM        - 3.4E.2.5
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.67
+    SMU FW
+      B0              - 6.69.3.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+    USB FW            - 0.1.0.A
+    VBL               - 20.11.00.1B
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX0081B
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.48
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13590: PSP FW Security Policy updated to D.19.0.67
+  EMBDEV-13590: SMU FW updated to 6.69.3.0
+  EMBDEV-13658: DramScrubValid bit needs to be set for error injection
+  EMBDEV-13051: V3000 Eth ports 2.5G speed switch - Not switching to 1G/10G back from 2.5G
+  EMBDEV-13289: 10G SFI link not coming up when DAC cables are used (Rx Adaption logic implementation for new modes 10G SFi DAC and 10G KR AN OFF)
+  EMBDEV-13637: ROM Armor enable functionality broken.
+
+[Known Issues/Limitations]:
+  EMBDEV-12540: [FOX][Ubuntu 20.04.2]:System hang observed while performing sleep.
+  EMBDEV-13563: PXE Boot fails on Onboard RJ45 Ports
+  EMBDEV-12617: Warmreset/kbreset results in system hang, when ToggleAllPwrGoodOnCf9 is set to 0
+  EMBDEV-13568: Link detection fails when we perform hot plug tests from port-0 to port-1 vice-versa on RJ45 setup
+  EMBDEV-13556: USB4 device Pre-boot Hot-plug functionality Failed
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.0_RC5
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 NPU].
+
+Note:
+1.TSME will work only on B1 samples, not B0.
+2.Ubuntu should be verified with nomodeset grub parameter
+
+=============================================================================
+Version:  0.0.8.1 RC1                               Release Date: 04 Feb 2022
+File:     EmbeddedPI-FP7r2_0.0.8.1.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_0081 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM21287010
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 00002106
+    AMF FW            - 28.28.0.7A
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.11.67
+    MSMU FW           - FF.45.2B.0
+    PSP FW            - 0.28.A3.4A
+      PSP fTPM        - 3.4E.2.5
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.5F
+    SMU FW
+      B0              - 6.69.2.0
+    SPL Table         - 5.28.0.4A
+      SecPatchLevel   - 2
+    UCODE
+      B0              - 0A404002
+    USB FW            - 0.1.0.A
+    VBL               - 20.11.00.1B
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX0081A
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.48
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13590: PSP FW updated to  00.28.A3.4A & ABL FW updated to WABLRM21287010
+  EMBDEV-13590: SMU FW updated to 6.69.2.0
+  EMBDEV-13627: CPU max frequency set it as default to utilize max freq.
+  EMBDEV-13622: TDP,sPPT and fPPT programmed according to 15w and 45w silicons.
+  EMBDEV-13561: [V3C48] [DDR5] PMU training failure with ECC SODIMM
+  
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13623: Created "Rom Armor Support" option in Release BIOS
+  EMBDEV-13622: System Configuration values changed according to SMU
+  EMBDEV-13021: As overclocking is not POR, removed the setup options 'Custom Core Pstates' and 'Performance'
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13630: Ported 0080C Changes to 0081A for USB ports issue.
+  EMBDEV-13552 : Interfaces are not getting detected via AIC1 and observed I2C error reading SFP GPIOS in dmesg
+
+[Known Issues/Limitations]:
+  EMBDEV-12540: [FOX][Ubuntu 20.04.2]:System hang observed while performing sleep.
+  EMBDEV-13563: PXE Boot fails on Onboard RJ45 Ports
+  EMBDEV-12617: Warmreset/kbreset results in system hang, when ToggleAllPwrGoodOnCf9 is set to 0
+  EMBDEV-13568: Link detection fails when we perform hot plug tests from port-0 to port-1 vice-versa on RJ45 setup
+  EMBDEV-13556: USB4 device Pre-boot Hot-plug functionality Failed
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+
+Client PI as Base:
+ RembrandtPI-FP7_1.0.0.0_RC5
+
+Board Tested: Fox Board
+This BIOS Supports V3C48,V3C18i and V3C44 [B0 NPU].
+
+Note: TSME will work only on B1 samples, not B0.
+
+=============================================================================
+Version:  0.0.8.0 RC3                              Release Date: 11 Jan 2022
+File:     EmbeddedPI-FP7r2_0.0.8.0.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_0080 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM1C017012
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 00002106
+    AMF FW            - 28.28.0.70
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.11.64
+    MSMU FW           - FF.45.2A.0
+    PSP FW            - 0.28.A0.49
+      PSP fTPM        - 3.4D.2.5
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.5E
+    SMU FW
+      B0              - 6.69.1.0
+    SPL Table         - 5.28.0.46
+      SecPatchLevel   - 1
+    UCODE
+      B0              - 0A404002
+    USB FW            - 0.1.0.A
+    VBL               - 20.11.0.1A
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX0080C
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.48
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13570: ~30% Perf Drop in CoreMark(1T) Score with Ubuntu 20.04.3
+
+[Known Issues/Limitations]:
+  PLAT-88181: [RMB B0] System hard hang at PC AA2A when resume from S3.
+  EMBDEV-13563: PXE Boot fails on Onboard RJ45 Ports
+  EMBDEV-13525: TSME is not enabled on RMB Pro parts
+  EMBDEV-12617: Warmreset/kbreset results in system hang, when ToggleAllPwrGoodOnCf9 is set to 0
+  EMBDEV-13568: Link detection fails when we perform hot plug tests from port-0 to port-1 vice-versa on RJ45 setup
+  EMBDEV-13556: USB4 device Pre-boot Hot-plug functionality Failed
+  EMBDEV-13020: System Hung Observed at PC b000AF44 when eSPI disabled
+  EMBDEV-13561: [V3C48] [DDR5] PMU training failure with ECC SODIMM
+
+Client PI as Base:
+ RembrandtPI-FP7_0.0.9.0_RC6
+
+Board Tested: Fox Board
+This BIOS Supports V3C48 [B0 NPU].
+=============================================================================
+Version:  0.0.8.0 RC2                               Release Date: 20 Dec 2021
+File:     EmbeddedPI-FP7r2_0.0.8.0.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_0080 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM1C017012
+    ABL RT            - AGESA Run Time Driver: RABLRTRM1C017011
+    ABL PMU           - 00002106
+    AMF FW            - 28.28.0.70
+    DF RIB FW         - 1.0.2.B
+    DMCUB FW
+      B0              - 4.0.11.64
+    MSMU FW           - FF.45.2A.0
+    PSP FW            - 0.28.A0.49
+      PSP fTPM        - 3.4D.2.5
+      DRTM            - 4.11.0.2F
+    Security Policy
+      B0              - D.19.0.5E
+    SMU FW
+      B0              - 6.69.1.0
+    SPL Table         - 5.28.0.46
+      SecPatchLevel   - 1
+    UCODE
+      B0              - 0A404002
+    USB FW            - 0.1.0.A
+    VBL               - 20.11.0.1A
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX0080B
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.12
+                      - BIOSTestSuite: 15.1.124.740
+                      - PSP tool: 4.0.48
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+ B0 SMU updated to 6.69.1.0
+ PSP FW updated to 0.28.A0.49
+ EMBDEV-11783: RMB - vboost/iboost tuning feature request
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13450: Removing WWAN setup option which is not applicable to Fox
+  EMBDEV-13424: [FOX-RMB-XGBE] Expose Soldered down 10G BaseR in BIOS
+  EMBDEV-12195: AGESA / CPM Rx Eq setting implementation
+  EMBDEV-13368: AIC1 BIOS requirement for IO expander(For data signals)
+  EMBDEV-13499: Sync with Client CPM except SpecialVgaFeature option.
+  EMBDEV-13125: PXE Boot Option not listing for Onboard SFP Ports
+  EMBDEV-13354: TX Polarity is not required on Lane 0 for AQR113C
+
+[Known Issues/Limitations]:
+  PLAT-88181:  [RMB B0] System hard hang at PC AA2A when resume from S3.
+  
+Client PI as Base:
+ RembrandtPI-FP7_0.0.9.0_RC6
+
+Board Tested: Fox Board
+This BIOS Supports V3C48 [B0 NPU].
+=============================================================================
+Version:  0.0.8.0 RC1                               Release Date: 29 Nov 2021
+File:     EmbeddedPI-FP7r2_0.0.8.0.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_0080 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM1A287010
+    ABL RT            - AGESA Run Time Driver: RABLRTRM00070001
+    ABL PMU           - 00002106
+    AMF FW            - 28.28.0.55
+    DF RIB FW         - 1.0.2.A
+    DMCUB FW
+      B0              - 0.0.91.42
+    MSMU FW           - FF.45.29.0 
+    PSP FW            - 00.28.A0.42
+      PSP fTPM        - 3.4C.2.5
+      DRTM            - 4.11.0.2E
+    Security Policy
+      B0              - D.19.0.5E
+    SMU FW
+      B0              - 4.69.17.0
+    SPL Table         - 5.28.0.3A
+      SecPatchLevel   - 1
+    UCODE
+      B0              - 0A404002
+    USB FW            - 0.1.0.3
+    VBL               - 20.11.0.18
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX0080A
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.11
+                      - BIOSTestSuite: 15.1.124.740
+                      - CheckAblVersion: N/A
+                      - PSP tool: 4.0.48
+                      - RPMC: 1.6.1.0
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+ B0 SMU updated to 4.69.17.0
+ PSP FW updated to 00.28.A0.3F
+ EMBDEV-13115: SFP port 1 is not functioning when SFP port 0 disabled in BIOS
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+ EMBDEV-13028: Memory Overclock under "UMC Common Options" removed.
+ EMBDEV-13019: Updated Help String.
+
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+ EMBDEV-13098: RJ45 option set as Port controller in BIOS, SFP ports are getting enumerated in OS in whenever we set BIOS settings in KR mode.
+ EMBDEV-13347: Updated help text in BIOS setup for XGBE supported port modes
+ EMBDEV-13115: SFP port 1 is not functioning when SFP port 0 disabled in BIOS
+ EMBDEV-13332: Combophyconfig setup changes for USB
+ EMBDEV-13031: Update IOMUX configuration register related to XGBE to default when XGBE disabled
+
+[Known Issues/Limitations]:
+  PLAT-88181:  [RMB B0] System hard hang at PC 02A3 when resume from S3.
+  
+Client PI as Base:
+ RembrandtPI-FP7_0.0.8.1_RC5
+
+Board Tested: Fox Board
+This BIOS Supports V3C48 [B0 NPU].
+=============================================================================
+Version:  0.0.7.0 RC4                               Release Date: 19 Nov 2021
+File:     EmbeddedPI-FP7r2_0.0.7.0.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_0070 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM18287012
+    ABL RT            - AGESA Run Time Driver: RABLRTRM09017010
+    ABL PMU           - 00002103
+    AMF FW            - 28.28.0.45
+    DF RIB FW         - 1.0.2.8
+    DMCUB FW
+      B0              - 0.0.74.68
+    MSMU FW           - FF.45.26.0 
+    PSP FW            - 0.28.A0.3F
+      PSP fTPM        - 3.4B.2.5
+      DRTM            - 4.11.0.2B
+    Security Policy
+      B0              - D.19.0.56
+    SMU FW
+      B0              - 4.69.14.0
+    SPL Table         - 5.28.0.3A
+      SecPatchLevel   - 1
+    UCODE
+      B0              - 0A404002
+    USB FW            - 0.1.0.2
+    VBL               - 20.11.0.16
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX0070D
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.11
+                      - BIOSTestSuite: 15.1.99.663
+                      - CheckAblVersion: N/A
+                      - PSP tool: 4.0.46
+                      - RPMC: 1.0.4.
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+  EMBDEV-13306: Fix for "~30% Perf Drop in CoreMark(1T) Score"
+  EMBDEV-13057: Fixed "C6 Residency not hitting when system is in IDLE"
+
+[Known Issues/Limitations]:
+  PLAT-88181: [RMB B0] System hard hang at PC AA2A when resume from S3.
+  
+Client PI as Base:
+ RembrandtPI-FP7_0.0.8.0_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48 [B0 NPU].
+=============================================================================
+Version:  0.0.7.0 RC3                                    Release Date: 22 Oct 2021
+File:     EmbeddedPI-FP7r2_0.0.7.0.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_0070 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM18287012
+    ABL RT            - AGESA Run Time Driver: RABLRTRM09017010
+    ABL PMU           - 00002103
+    AMF FW            - 28.28.0.45
+    DF RIB FW         - 1.0.2.8
+    DMCUB FW
+      B0              - 0.0.74.68
+    MSMU FW           - FF.45.26.0 
+    PSP FW            - 0.28.A0.3F
+      PSP fTPM        - 3.4B.2.5
+      DRTM            - 4.11.0.2B
+    Security Policy
+      B0              - D.19.0.56
+    SMU FW
+      B0              - 4.69.14.0
+    SPL Table         - 5.28.0.3A
+      SecPatchLevel   - 1
+    UCODE
+      B0              - 0A404002
+    USB FW            - 0.1.0.2
+    VBL               - 20.11.0.16
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX0070C
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.11
+                      - BIOSTestSuite: 15.1.99.663
+                      - CheckAblVersion: N/A
+                      - PSP tool: 4.0.46
+                      - RPMC: 1.0.4.
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+ EMBDEV-13186: PSP FW updated to 00.28.A0.3F
+ EMBDEV-13045: PPT Limit mismatch for CPU TDP 35W and 45W
+ EMBDEV-12664: Configure TDP,PPT values according to FOX
+ EMBDEV-12358: SPI driver module loading is getting failed
+ EMBDEV-12973: RLU bit from reg SR_XS_PCS_STS1 SHOWING false link status in 10G mode.
+               B0 SMU updated to 4.69.14.0
+ EMBDEV-13176: CPU Boost Frequency set to 3.1 GHZ by default
+ EMBDEV-13170: Set 45W as default TDP for V3C48 instead of 54W
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+ EMBDEV-13150: Remove Platform First Error Handling (PFEH) option
+ EMBDEV-13045: PPT Limit mismatch for CPU TDP 35W and 45W
+ EMBDEV-12664: Configure TDP,PPT values according to FOX
+ 
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+ EMBDEV-13041: System hung observed when disabling SATA controller
+ EMBDEV-13164: Display PD firmware version in BIOS setup
+ EMBDEV-12358: SPI driver module loading is getting failed
+ EMBDEV-13173: Change XGBE Port1 configuration to default SFP
+ EMBDEV-12205 :Remove Lilac specific PBS Setup Options
+ 
+[Known Issues/Limitations]:
+  PLAT-88181:  [RMB B0] System hard hang at PC AA2A when resume from S3.
+  
+[Note]:
+  Dual SPI support has been enabled in PSP.
+  
+Client PI as Base:
+ RembrandtPI-FP7_0.0.8.0_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48 [B0 NPU].
+=============================================================================
+Version:  0.0.7.0 RC2                                   Release Date: Oct 2021
+File:     EmbeddedPI-FP7r2_0.0.7.0.ZIP
+=============================================================================
+Compliant to specs:                                                      PID#
+- PPR for AMD Family 19h Models 40h, Revision B0(Rembrandt) Rev 3.12    (#56558)
+- AGESA V9 Interface Specification, Revision 3.12                       (#55483)
+=============================================================================
+Package contents
+  AGESA               - AGESA-V9 EmbeddedPI-FP7r2_0070 for Family 19h Model 40h (Rembrandt)
+    ABL (DDR5)        - AGESA Boot Loader:     WABLRM18287012
+    ABL RT            - AGESA Run Time Driver: RABLRTRM09017010
+    ABL PMU           - 00002103
+    AMF FW            - 28.28.0.45
+    DF RIB FW         - 1.0.2.8
+    DMCUB FW
+      B0              - 0.0.74.68
+    MSMU FW           - FF.45.26.0 
+    PSP FW            - 0.28.A0.3C
+      PSP fTPM        - 3.49.2.5
+      DRTM            - 4.11.0.28
+    Security Policy
+      B0              - D.19.0.56
+    SMU FW
+      B0              - 4.69.07.0
+    SPL Table         - 5.28.0.3A
+      SecPatchLevel   - 1
+    UCODE
+      B0              - 0A404002
+    USB FW            - 0.1.0.2
+    VBL               - 20.11.0.16
+    SpiRomConfig      - 0.19.40.1
+  AmdCbsPkg           - Common BIOS Setup Options
+  AmdCpmPkg           - Common Platform Module v065
+  GOP                 - Rembrandt GOP driver signed v3.2.7
+  PlatformBIOS        - Fox platform BIOS RFX0070B
+  SmmSupervisorPkg    - 3.002x
+  VBIOS               - 032
+  *PD FW              - Cypress
+  *Tools              - AMDBIOSDBG: 2.06.14.01
+                      - ApcbV3BinTool: 1.0.0.11
+                      - BIOSTestSuite: 15.1.99.663
+                      - CheckAblVersion: N/A
+                      - PSP tool: 4.0.46
+                      - RPMC: 1.0.4.
+-----------------------------------------------------------------------------
+[AGESA ENHANCEMENTS and FIXED BUGS]:
+ EMBDEV-12226: Verify Fox build and fix Build issues
+ Fox build creation & sync with Client Code
+ EMBDEV-12982: Integrating XGBE changes over EB20B branch
+ EMBDEV-12602: FOX Bring up Activities
+ EMBDEV-12199: FOX- XGBE Port specific implementation
+ EMBDEV-11733: xGbE ds_allow implementation.
+ EMBDEV-12708: XGBE Engine name not displayed in bios debug log
+ EMBDEV-12217: XGBE - PBS setup options - Port independent - On board Phy
+ EMBDEV-12974: NPU PSP and Sec Policy FW
+ EMBDEV-12980 : SFP link up failure with error "I2C error reading SFP GPIOs"
+
+[AmdCbsPkg ENHANCEMENTS and FIXED BUGS]:
+ EMBDEV-12226: Verify Fox build and fix Build issues
+ Fox build creation & sync with Client Code
+ EMBDEV-12982: Integrating XGBE changes over EB20B branch
+ EMBDEV-12602: FOX Bring up Activities
+ 
+[AmdCpmPkg ENHANCEMENTS and FIXED BUGS]:
+ EMBDEV-12229: Created Setup Options required for Fox
+ EMBDEV-12230: IO Expander porting for FOX platform
+ EMBDEV-12226: Verify Fox build and fix Build issues
+ EMBDEV-12514: PCA9535 IO Expander failed to get Ouput Port Register
+ EMBDEV-12979: Fixed 'Debug log messages get Overwritten'
+ EMBDEV-12403: Configure FCH UART for Fox Platform
+ EMBDEV-12228: Port Clock Requests according to Fox
+ EMBDEV-12227: DXIO Topology Table Porting for SATA and PCIe
+ EMBDEV-12234: Port USB according to Fox
+ EMBDEV-12225: Port GPIOs according to Fox Platform
+ EMBDEV-12224: Remove EC related code
+ Fox build creation & sync with Client Code
+ EMBDEV-12467: PCIE Endpoint cards are not detected during PCIE bringup
+ Enable S3 and disable ASL debug print for release build
+ EMBDEV-12485: System is frequently rebooting and BSOD observed with MSB only
+ EMBDEV-12452: System crash observed consistently (2/2 iterations) while running Cinebench R20 single thread workload
+ EMBDEV-12481: Frequently System hard hang in idle condition in OS for 10 to 15 minutes , with MSB enabled only
+ EMBDEV-12982: Integrating XGBE changes over EB20B branch
+ EMBDEV-12602: FOX Bring up Activities
+ EMBDEV-12600: Fox Eth ports - MAC address is wrong or invalid
+ EMBDEV-12599: Fox SFP ports - XGBE polarity reversal
+ EMBDEV-12656: I2C Abort for target 0x50 for SFP+
+ EMBDEV-12199: XGBE Port specific implementation
+ EMBDEV-12251: Disabled XGBE functions based on PCDxgbedisable value
+ EMBDEV-12217: XGBE - PBS setup options - Port independent - On board Phy
+ EMBDEV-12986: Sporadically PCIE X4 Slot3 card is not detected
+ EMBDEV-12980 : SFP link up failure with error "I2C error reading SFP GPIOs"
+ 
+[Known Issues/Limitations]:
+  EMBDEV-12973: RLU bit from reg SR_XS_PCS_STS1 SHOWING false link status in 10G mode.
+  PLAT-88181:  [RMB B0] System hard hang at PC AA2A when resume from S3.
+  EMBDEV-12568: Console redirection not working for FCH UART.
+  EMBDEV-12597: USB3.1 Gen1 and Gen2 speed is not working on J55, J84 and J63 USB ports.
+  
+Client PI as Base:
+ RembrandtPI-FP7_0.0.8.0_RC1
+
+Board Tested: Fox Board
+This BIOS Supports V3C48 [B0 NPU].

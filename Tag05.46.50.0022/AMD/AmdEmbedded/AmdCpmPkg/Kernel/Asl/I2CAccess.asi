@@ -1,0 +1,531 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+Mutex (CpmI2CMutex, 0)
+Name (CpmI2CScl, 0x5A)
+Name (CpmI2CSda, 0x5A)
+Name (CpmI2CIoMux, 0x5A)
+Name (CpmI2CAoAcBar, 0x5a5a5a5a)
+Name (CpmI2CMmioBar, 0x5a5a5a5a)
+Name (CpmI2CFchConfig,
+  Package () {
+    3,
+    Package (){
+      CPM_FCH_REVISION_ID_RMB,
+      Package (){"I2C0", 145, 146, 0, 0xFED81E4A, 0xFEDC2000},
+      Package (){"I2C1", 147, 148, 0, 0xFED81E4C, 0xFEDC3000},
+      Package (){"I2C2", 113, 114, 1, 0xFED81E4E, 0xFEDC4000},
+      Package (){"I2C3", 19,  20,  1, 0xFED81E50, 0xFEDC5000},
+    },
+    Package (){
+      CPM_FCH_REVISION_ID_RPL,
+      Package (){"I2C0", 145, 146, 0, 0xFED81E4A, 0xFEDC2000},
+      Package (){"I2C1", 147, 148, 0, 0xFED81E4C, 0xFEDC3000},
+      Package (){"I2C2", 113, 114, 1, 0xFED81E4E, 0xFEDC4000},
+      Package (){"I2C3", 19,  20,  1, 0xFED81E50, 0xFEDC5000},
+    },
+    Package (){
+      CPM_FCH_REVISION_ID_STP,
+      Package (){"I2C0", 145, 146, 1, 0xFED81E4A, 0xFEDC2000},
+      Package (){"I2C1", 147, 148, 1, 0xFED81E4C, 0xFEDC3000},
+      Package (){"I2C2", 149, 150, 1, 0xFED81E4E, 0xFEDC4000},
+      Package (){"I2C3", 151, 152, 1, 0xFED81E50, 0xFEDC5000},
+      Package (){"I2C4", 13,  14,  0, 0xFED81E52, 0xFEDC6000},
+      Package (){"I2C5", 19,  20,  0, 0xFED81E54, 0xFEDCB000},
+    },
+  }
+)
+//
+//  I2C Found FCH Config (I2C Scl/Sda/AoAcBar/MmioBar)
+//
+//  Arg0   - Select              0 = I2C0, 1 = I2C1, 2 = I2C2, 3 = I2C3 , 4 = I2C4, 5 = I2C5
+//  Return:
+//     0   - not found matched I2C Config
+//     1   - found matched I2C Config
+//
+Method (CpmI2CFindConfig, 1) {
+  Store (CpmSbChipId, Local0) //SB chip id
+  Store (DeRefOf (Index (CpmI2CFchConfig, 0)), Local1) //Support FCH count
+  Store (1, Local2)
+  While (LLessEqual (Local2, Local1)) {
+    Store (DeRefOf(Index (CpmI2CFchConfig, Local2)), Local3)
+    Store (DeRefOf(Index (Local3, 0)), Local4)
+    If (LEqual (Local4, Local0)) { // Found matched SB chip ID
+      Break
+    }
+    Increment (Local2)
+  }
+  If (LGreater (Local2, Local1)) {
+    Return (0) //Failure not found the matched SB chip id
+  }
+  Store (1, Local2)
+  Store (Sizeof(Local3), Local1)
+  Switch (ToInteger (Arg0)) {
+    Case (0) {
+      Store ("I2C0", Local0)
+    }
+    Case (1) {
+      Store ("I2C1", Local0)
+    }
+    Case (2) {
+      Store ("I2C2", Local0)
+    }
+    Case (3) {
+      Store ("I2C3", Local0)
+    }
+    Case (4) {
+      Store ("I2C4", Local0)
+    }
+    Case (5) {
+      Store ("I2C5", Local0)
+    }
+  }
+  While (LLessEqual (Local2, Local1)) {
+    Store(DeRefOf(Index (Local3, Local2)), Local4)
+    Store(DeRefOf(Index (Local4, 0)), Local5)
+    If (LEqual (Local5, Local0)) { // Found matched I2C
+      Break
+    }
+    Increment (Local2)
+  }
+  If (LGreater (Local2, Local1)) {
+    Return (0) //Failure not found the matched i2c
+  }
+  Store (DeRefOf(Index (Local4, 1)), CpmI2CScl)
+  Store (DeRefOf(Index (Local4, 2)), CpmI2CSda)
+  Store (DeRefOf(Index (Local4, 3)), CpmI2CIoMux)
+  Store (DeRefOf(Index (Local4, 4)), CpmI2CAoAcBar)
+  Store (DeRefOf(Index (Local4, 5)), CpmI2CMmioBar)
+
+  Return (1)
+}
+
+//
+//  I2C Execute Read/Write
+//
+//  Arg0   - Select              0 = I2C0, 1 = I2C1, 2 = I2C2, 3 = I2C3 , 4 = I2C4, 5 = I2C5
+//  Arg1   - DeviceAddress       7bit  device address.
+//  Arg2   - ReadLength          must less than 32
+//  Arg3   - WriteLength         must less than 32
+//  Arg4   - WriteBuffer
+//  Return - Value {
+//    UINT16  Status
+//    UINT8   *Data
+//  }
+//    0xFF00 input invalid parameter
+//    0xFF01 I2C not stay D0
+//    0xFF02 TimeOut For wait I2C Idle
+//    0xFF03 TimeOut For wait I2C Disable first time
+//    0xFF04 TimeOut For wait I2C Enable
+//    0xFF05 I2C Tx Abort
+//    0xFF06 I2cTimeout for Tx
+//    0xFF07 I2cTimeout for Rx
+//    0xFF08 I2cTimeout for IDE2
+//    0xFF09 I2cTimeout for wait I2C Disable second time
+//    0xFF10 I2C not stay D3
+//
+Method (CpmReadWriteI2C, 5, Serialized) {
+    Store (CpmI2CFindConfig (Arg0), Local0)
+    If (LEqual (Local0, 0)) {
+      Return (0xFF00)
+    }
+
+    Name (RTFF, Buffer (0x100) {0})
+    Store (CpmI2CAoAcBar, Local0)
+    Store (CpmI2CMmioBar, Local1)
+
+    // AoacD3ControlRegister
+    OperationRegion (VAR0, SystemMemory, Local0, 0x02)
+    Field (VAR0, ByteAcc, NoLock, Preserve) {
+        ADTD, 2,
+        ADPS, 1,
+        ADPD, 1,
+        ADSO, 1,
+        ADSC, 1,
+        ADSR, 1,
+        ADIS, 1,
+        ADDS, 3,
+    }
+
+    // I2CControlRegister
+    OperationRegion (VAR1, SystemMemory, Local1, 0x100)
+    Field (VAR1, DWordAcc, NoLock, Preserve) {
+        IC00, 32,          // IC_CON
+        IC04, 32,          // IC_TAR
+        Offset (0x10),
+        IC10, 32,          // IC_DATA_CMD
+        IC14, 32,          // IC_SS_SCL_HCNT
+        IC18, 32,          // IC_SS_SCL_LCNT
+        IC1C, 32,          // IC_SS_SCL_HCNT
+        IC20, 32,          // IC_SS_SCL_LCNT
+        Offset (0x30),
+        IC30, 32,          // IC_INTR_MASK
+        IC34, 32,          // IC_RAW_INTR_STAT
+        IC38, 32,          // IC_RX_TL
+        IC3C, 32,          // IC_TX_TL
+        IC40, 32,          // IC_CLR_INTR
+        IC44, 32,          // IC_CLR_RX_UNDER
+        IC48, 32,          // IC_CLR_RX_OVER
+        Offset (0x54),
+        IC54, 32,          // IC_CLR_TX_ABRT
+        Offset (0x6C),
+        IC6C, 32,          // IC_ENABLE
+        IC70, 32,          // IC_STATUS
+        IC74, 32,          // IC_RXFLR
+        IC78, 32,          // IC_RXFLR
+        IC7C, 32,          // IC_RXFLR
+        IC80, 32,          // IC_TX_ABRT_SOURCE
+        Offset (0x9C),
+        IC9C, 32,          // IC_ENABLE_STATUS
+        Offset (0xF4),
+        ICF4, 32,          // IC_COMP_PARAM_1
+    }
+
+    // Local0 Status
+    // Local1 TimeOut
+    Name (BUFF, Buffer (3) {00, 00, 00})
+    CreateByteField (BUFF, 0x00, AOAC)            // offset 0, AoAc Save State
+    CreateByteField (BUFF, 0x01, ISCL)            // offset 1, IoMux Scl Save State
+    CreateByteField (BUFF, 0x02, ISDA)            // offset 2, IoMux Sda Save State
+    Acquire (CpmI2CMutex, 0xFFFF)
+    Store (100000, Local1)                        // Total 1s
+    Store (0, Local0)                             // Status Success
+    Store (ADTD, AOAC)                            // AoAc State Save
+    Store (CpmReadMem8 (0xfed80d00, CpmI2CScl, 0, 8), ISCL) //I2C SCL State Save
+    Store (CpmReadMem8 (0xfed80d00, CpmI2CSda, 0, 8), ISDA) //I2C SDA State Save
+    CpmWriteMem8 (0xfed80d00, CpmI2CScl, 0, 8, CpmI2CIoMux) //Change IoMux for scl
+    CpmWriteMem8 (0xfed80d00, CpmI2CSda, 0, 8, CpmI2CIoMux) //Change IoMux for sda
+    //
+    // Check If I2C Mmio is decoded
+    // Put device into D0
+    //
+    Store (AOAC, Local2)
+    If (LEqual (Local2, 3)) {
+        Store (0x00, ADTD)
+        Store (0x1,  ADPD)
+        Store (ADDS, Local3)
+        While (LNotEqual (Local3, 0x7)) {
+            Decrement (Local1)
+            Stall (10)
+            Store (ADDS, Local3)
+            If (LEqual (Local1, 0)) {
+                Store (0xFF01, Local0)
+                Break
+            }
+        }
+    }
+
+    //
+    // Check if master is idle
+    //
+    If (LEqual (Local0, 0)) {
+        // if successful
+        Store (IC70, Local2)
+        While (LEqual (0x20, And (Local2, 0x20))) {
+            If (LEqual (Local1, 0)) {
+                CpmDebugPrint ("  I2cTimeout for IDE : (0x%X)\n", Local2, 0, 0, 0, 0, 0)
+                Store (0xFF02, Local0)
+                Break
+            }
+            Store (IC70, Local2)
+            Decrement (Local1)
+            Stall (10)
+        }
+    }
+
+    //
+    // Program 0 to IC_ENABLE to Disable I2C
+    //
+    If (LEqual (Local0, 0)) {
+        // if successful
+        Store (0, IC6C)
+        Store (IC9C, Local2)
+        While (LNotEqual (0, And (Local2, 1))) {
+            If (LEqual (Local1, 0)) {
+                CpmDebugPrint ("  I2cTimeout for fI2cDisable : (0x%X)\n", Local2, 0, 0, 0, 0, 0)
+                Store (0xFF03, Local0)
+                Break
+            }
+            Store (IC9C, Local2)
+            Decrement (Local1)
+            Stall (10)
+        }
+    }
+
+    //
+    // Init I2C Control Registers
+    //
+    If (LEqual (Local0, 0)) {
+        // if successful
+
+        // Program IC_CON register fields:
+        //  1. Set IC_SALVE_DSIABLE to 1      - Slave Disable
+        //  2. Set IC_RESTART_EN to 1         - enable restart mode
+        //  3. Set IC_10BIT Master/Slave to 0 - enable 7-bit addressing
+        //  4. Set IC_MAX_SPPED_MODE to 2     - Fast mode
+        //  5. Set IC_MASTER_MODE to 1        - enable master
+        Store (0x65, IC00)
+
+        // Program address of target slave by writing to TAR register
+        Store (Arg1, IC04)
+
+        // Program IC_SS_LCNT/IC_SS_HCNT to set Low preiod of SCL
+        Store (0x87, IC1C)                        // fast speed high, 4us
+        Store (0xf0, IC20)                        // fast speed high, 4us
+        Store (0x300030, IC7C)                    // fast speed hold
+        Store (0, IC38)
+        Store (0, IC34)
+
+        // Program IC_INTR_MASK to enable all interruputs and Clear interrupt status
+        Store (0, IC30)
+        Store (IC40, Local2)
+        Store (IC54, Local2)
+    }
+
+    //
+    // Program 1 to IC_ENABLE to Enable I2C
+    //
+    If (LEqual (Local0, 0)) {
+        // if successful
+        Store (1, IC6C)
+        Store (IC9C, Local2)
+        While (LEqual (0, And (Local2, 1))) {
+            If (LEqual (Local1, 0)) {
+                CpmDebugPrint ("  I2cTimeout for I2cEnable : (0x%X)\n", Local2, 0, 0, 0, 0, 0)
+                Store (0xFF04, Local0)
+                Break
+            }
+            Store (IC9C, Local2)
+            Decrement (Local1)
+            Stall (10)
+        }
+    }
+
+    //
+    // Start Write Tx and Read Rx
+    //
+    If (LEqual (Local0, 0)) {
+        // if successful
+        Store (Arg3, Local3)                      // Write Length
+        Store (Arg2, Local4)                      // Read Length
+        Store (0, Local5)                         // Write Index
+        Store (0, Local6)                         // Read Flag
+        Store (2, Local7)                         // Read Index
+
+        While (LGreater (Add (Local3, Local4), 0)) {
+            If (LEqual (Local1, 0)) {
+                // time out
+                CpmDebugPrint ("  I2cTimeout for TxRx: (0x%X, 0x%X)\n", Local3, Local4, 0, 0, 0, 0)
+                Store (0xFF06, Local0)
+                Break
+            }
+
+            // Wait Rx Empty
+            Store (IC70, Local2)
+            If (LNotEqual (And (Local2, 0x8), 0)) {
+                Store (IC10, Local2)
+                Decrement (Local1)
+                Stall (10)
+                Continue
+            }
+
+            // Wait Tx Fifo Empty
+            Store (IC74, Local2)
+            If (LNotEqual (Local2, 0)) {
+                Decrement (Local1)
+                Stall (10)
+                Continue
+            }
+
+            // Start Write Tx
+            If (LGreater (Local3, 1)) {
+                Store (And (ToInteger (DeRefOf (Index (Arg4, Local5))), 0xFF), IC10)
+                Decrement (Local3)                // Write Length --
+                Increment (Local5)                // Write Index ++
+            } ElseIf (LAnd (LEqual (Local3, 1), LNotEqual (Local4,0))) {
+                // If Write prepare end and Read Not End
+                Store (And (ToInteger (DeRefOf (Index (Arg4, Local5))), 0xFF), IC10)
+                Decrement (Local3)                // Write Length --
+                Increment (Local5)                // Write Index ++
+            } ElseIf (LAnd (LEqual (Local3, 1), LEqual (Local4,0))) {
+                // If Write prepare end and Read is End
+                Store (Or (And (ToInteger (DeRefOf (Index (Arg4, Local5))), 0xFF), 0x200), IC10)
+                Decrement (Local3)                // Write Length --
+                Increment (Local5)                // Write Index ++
+            } ElseIf (LAnd (LEqual (Local3, 0), LGreater (Local4, 1))) {
+                // If write is end and Read is Not End
+                Store (0x100, IC10)
+                Store (1, Local6)                 // Need Read TRUE
+                Decrement (Local4)                // Read Length --
+            } ElseIf (LAnd (LEqual (Local3, 0), LEqual (Local4, 1))) {
+                // If write is end and Read prepare End
+                Store (0x300, IC10)
+                Store (1, Local6)                 // Need Read TRUE
+                Decrement (Local4)                // Read Length --
+            }
+            Decrement (Local1)
+            Stall (10)
+            Store (IC34, Local2)
+            If (LNotEqual (0, And (Local2, 0x40))) {
+                // TX Abrt
+                Store (IC54, Local7)
+                Store (IC80, Local2)
+                CpmDebugPrint ("  I2cTX Abrt Source: (0x%X)\n", Local2, 0, 0, 0, 0, 0)
+                Store (0xFF05, Local0)
+                Break
+            }
+
+            //
+            // Wait Rx Not EMPTY
+            //
+            If (LNotEqual (Local6, 0)) {
+                // Need Read
+                Store (IC70, Local2)
+                While (LNotEqual (And (Local2, 0x8), 0x8)) {
+                    Store (IC70, Local2)
+                    If (LEqual (Local1, 0)) {
+                        CpmDebugPrint ("  I2cTimeout for Rx : (0x%X)\n", Local2, 0, 0, 0, 0, 0)
+                        Store (0xFF07, Local0)
+                        Break
+                    }
+                    Decrement (Local1)
+                    Stall (10)
+                }
+            }
+
+            //
+            // Read Rx
+            //
+            If (LNotEqual (Local6, 0)) {
+                // Need Read
+                Store (IC10, Local2)
+                Store (Local2, Index (RTFF, Local7))
+                Decrement (Local1)
+                Stall (20)
+                Store (0, Local6)
+            }
+        }
+    }
+    Release (CpmI2CMutex)
+
+    //
+    // Check if master is idle
+    //
+    If (LEqual (Local0, 0)) {
+        // if successful
+        Store (IC70, Local2)
+        While (LEqual (0x20, And (Local2, 0x20))) {
+            If (LEqual (Local1, 0)) {
+                CpmDebugPrint ("  I2cTimeout for IDE2 : (0x%X)\n", Local2, 0, 0, 0, 0, 0)
+                Store (0xFF08, Local0)
+                Break
+            }
+            Store (IC70, Local2)
+            Decrement (Local1)
+            Stall (10)
+        }
+    }
+
+    //
+    // Program 0 to IC_ENABLE to Disable I2C
+    //
+    If (LAnd (LGreater (Local0, 0xFF04), LLess (Local0, 0xFF08))) {
+        // if I2C is enabled
+        Store (0, IC6C)
+        Store (IC9C, Local2)
+        While (LNotEqual (0, And (Local2, 1))) {
+            If (LEqual (Local1, 0)) {
+                CpmDebugPrint ("  I2cTimeout for fI2cDisable : (0x%X)\n", Local2, 0, 0, 0, 0, 0)
+                Store (0xFF09, Local0)
+                Break
+            }
+            Store (IC9C, Local2)
+            Decrement (Local1)
+            Stall (10)
+        }
+    }
+
+    //
+    // put device into D3 if method enter state is D3
+    //
+    Store (AOAC, Local3)
+    If (LEqual (Local3, 3)) {
+        // D3
+        Store (0x00, ADPD)
+        Store (ADDS, Local2)
+        While (LNotEqual (Local2, 0)) {
+            If (LEqual (Local1, 0)) {
+                CpmDebugPrint ("  I2cTimeout for AOAC Off : (0x%X)\n", Local2, 0, 0, 0, 0, 0)
+                Store (0xFF10, Local0)
+                Break
+            }
+            Decrement (Local1)
+            Stall (10)
+            Store (ADDS, Local2)
+        }
+        Store (0x03, ADTD)
+    }
+
+    // Restore IoMux
+    CpmWriteMem8 (0xfed80d00, CpmI2CScl, 0, 8, ISCL) //Change IoMux for scl
+    CpmWriteMem8 (0xfed80d00, CpmI2CSda, 0, 8, ISDA) //Change IoMux for sda
+    // Store Status at head
+    CreateWordField (RTFF, 0, STAT)
+    Store (Local0, STAT)
+    Return (RTFF)
+}
+
+//
+//  I2C Execute Read Byte (One Byte)
+//
+//  Arg0 - I2C                 0 = I2C0, 1 = I2C1, 2 = I2C2, 3 = I2C3 , 4 = I2C4, 5 = I2C5
+//  Arg1 - DeviceAddress       7bit device address.
+//                             Bit[2:0] = A2/A1/A0 HW selectable pin.
+//                             Bit[6:3] = HW fixed device adress.
+//  Arg2 - Offset              Device Register Offset.
+//
+//  Return                     One byte read data.
+//
+Method (CpmReadI2CByte, 3, Serialized) {
+    Name (RTFF, Buffer (0x100) {0})
+    Name (WRFF, Buffer (1) {00})
+    CreateByteField (WRFF, 0, WDAT)
+    Store (Arg2, WDAT)
+    Store (CpmReadWriteI2C (Arg0, Arg1, 1, 1, WRFF), RTFF)
+    CreateWordField (RTFF, 0, STAT)
+    CreateByteField (RTFF, 2, RDAT)
+    Store (STAT, Local0)
+    Store (RDAT, Local1)
+    CpmDebugPrint ("  Read I2C Byte (0x%X, 0x%X)\n", Local0, Local1, 0, 0, 0, 0)
+    If (LEqual (Local0, 0)) {
+        Return (And (RDAT, 0xFF))
+    }
+    Return (0)
+}
+
+//
+//  I2C Execute Write Byte (One Byte)
+//
+//  Arg0 - I2C                 0 = I2C0, 1 = I2C1, 2 = I2C2, 3 = I2C3 , 4 = I2C4, 5 = I2C5
+//  Arg1 - DeviceAddress       7bit device address.
+//                             Bit[2:0] = A2/A1/A0 HW selectable pin.
+//                             Bit[6:3] = HW fixed device adress.
+//  Arg2 - Offset              Device Register Offset.
+//  Arg3 - Value
+//
+Method (CpmWriteI2CByte, 4, Serialized) {
+    Name (WRFF, Buffer (2) {00, 00})
+    CreateByteField (WRFF, 0, WDA1)
+    CreateByteField (WRFF, 1, WDA2)
+    Store (Arg2, WDA1)
+    Store (And (Arg3, 0xff), WDA2)
+    Store (CpmReadWriteI2C (Arg0, Arg1, 0, 2, WRFF), Local0)
+    CreateWordField (Local0, 0, STAT)
+    Store (STAT, Local1)
+    CpmDebugPrint ("  Write I2C Byte(0x%X)\n", Local1, 0, 0, 0, 0, 0)
+}
+

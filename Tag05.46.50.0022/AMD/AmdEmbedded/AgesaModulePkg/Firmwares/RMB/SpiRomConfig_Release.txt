@@ -1,0 +1,2073 @@
+// How to check the support SPI List.
+// Please check match with "Mfg_ID" and "mem_cap"
+// For "mem_type" : 0xFF be common, else for specific device.
+//
+
+  How to check:
+  Using the Depiprog SPI flash program to identify the JEDEC ID:
+  It will list the Mfg_ID and JEDEC ID.
+  example:
+    Winbond W74M25JW
+    Depiprog SPI read the JEDEC ID: 0xef6019
+    Mfg_ID   : 0xef
+    mem_type : 0x60
+    mem_cap  : 0x19
+  
+  Mfg_ID List sample:
+    0xef : winbond (W)
+    0x90 : Macronix(MX)
+    0xc2 : Macronix(MX)
+    0x20 : Wuhan Xinxin Semiconductor Manufacturing Corp (XMC)
+    0xc8 : GigaDevice (GD)
+    
++----------------------------------------+
+| SpiRom5C Version [00222601]            |
++----------------------------------------+
+
+  Support Spi List :
+  =======================================
+    Mfg_ID   : 0xef
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff0304ec
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x39
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xd
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x3a
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xd
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xba
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0x8
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xbb
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0x8
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0x70
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xf
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x10000c8
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x10000c5
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff0304ec
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff0304ec
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x1
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x17
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000065
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0x1000071
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xc
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0x40
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x2000005
+    read_sts_reg2  : 0x2000035
+    read_sts_reg3  : 0x2000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4dc
+    sector_erase   : 0x420
+    read_data      : 0xff0304ec
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01045a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xff
+    mem_cap  : 0x20
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0x67
+    mem_cap  : 0x1a
+    Rom_Size : 0x4000000
+    ReadMode : NORMAL_66M
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0xff
+    mem_cap  : 0x1a
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xef
+    mem_type : 0xff
+    mem_cap  : 0x20
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xd
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff0304ec
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xb0
+    resume         : 0x30
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+
++----------------------------------------+
+| SpiRom5C Version [00222501]            |
++----------------------------------------+
+
+  Support Spi List :
+  =======================================
+    Mfg_ID   : 0xef
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff0304ec
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x39
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xd
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x3a
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xd
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xba
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0x8
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xbb
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0x8
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0x70
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xf
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x10000c8
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x10000c5
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff0304ec
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff0304ec
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x1
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x17
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000065
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0x1000071
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xc
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0x40
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x2000005
+    read_sts_reg2  : 0x2000035
+    read_sts_reg3  : 0x2000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4dc
+    sector_erase   : 0x420
+    read_data      : 0xff0304ec
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01045a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xff
+    mem_cap  : 0x20
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0xff
+    mem_cap  : 0x1a
+    Rom_Size : 0x4000000
+    ReadMode : NORMAL_66M
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xef
+    mem_type : 0xff
+    mem_cap  : 0x20
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xd
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff0304ec
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xb0
+    resume         : 0x30
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
++----------------------------------------+
+| SpiRom5C Version [00222401]            |
++----------------------------------------+
+
+  Support Spi List :
+  =======================================
+    Mfg_ID   : 0xef
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x39
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xd
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x3a
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xd
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xba
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0x8
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xbb
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0x8
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0x70
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xf
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x10000c8
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x10000c5
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x1
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x17
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000065
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0x1000071
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xc
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xff
+    mem_cap  : 0x20
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0xff
+    mem_cap  : 0x1a
+    Rom_Size : 0x4000000
+    ReadMode : NORMAL_66M
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0x75
+    resume         : 0x7a
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xef
+    mem_type : 0xff
+    mem_cap  : 0x20
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+
++----------------------------------------+
+| SpiRom5C Version [00194001]            |
++----------------------------------------+
+
+Initial Release, include the follow Support List
+
+Change notes:
+01. WINBOND W25Q128JW, W74M12JW [v1]
+02. WINBOND W25Q256JW, W74M25JW [v1]
+03. MACRONIX MX25U12832F, MX25U12835F, MX25U12872F [v1]
+04. MACRONIX MX25U25645G, MX25U25673G, MX77U25650F [v1]
+05. MACRONIX MX25U51245G [v1]
+06. MICRON MT25QU128ABA [v1]
+07. MICRON MT25QU128ABB [v1]
+08. MICRON MT25QU256ABA [v1]
+09. MICRON MT25QU256ABB [v1]
+10. XMC XM25QU128B [v1]
+11. XMC XM25QU256B, XM25QH256B [v1]
+12. XMC XM25QU128C, XM25RU128C [v1]
+13. XMC XM25QU256C, XM25RU256C [v1]
+14. CYPRESS S25FS128S [v1]
+15. CYPRESS S25FS256S [v1]
+16. GIGADEVICE GD25LQ128E, GD25LQ128D, GD25LR128D, GD25LB128D [v1]
+17. GIGADEVICE GD25LB256E, GD25LR256E [v1]
+18. FUDAN FM25W128 [v1]
+
+
+
+  Support Spi List :
+  =======================================
+    Mfg_ID   : 0xef
+    mem_type : 0xff
+    mem_cap  : 0x18
+    Rom_Size : 0x1000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0xff
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x3d8
+    sector_erase   : 0x320
+    read_data      : 0xff000303
+    page_program   : 0xff000302
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xffffffff
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xef
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x38
+    Rom_Size : 0x1000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xff
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x3d8
+    sector_erase   : 0x320
+    read_data      : 0xff000303
+    page_program   : 0xff000302
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xffffffff
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x39
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xd
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc2
+    mem_type : 0xff
+    mem_cap  : 0x3a
+    Rom_Size : 0x4000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xd
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000015
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xba
+    mem_cap  : 0x18
+    Rom_Size : 0x1000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x1
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0xff
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0xffffffff
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x3d8
+    sector_erase   : 0x320
+    read_data      : 0xff000303
+    page_program   : 0xff000302
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xffffffff
+    DPR_dummy_cycles_to_set  : 0x8
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xbb
+    mem_cap  : 0x18
+    Rom_Size : 0x1000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x1
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0xff
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0xffffffff
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x3d8
+    sector_erase   : 0x320
+    read_data      : 0xff000303
+    page_program   : 0xff000302
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xffffffff
+    DPR_dummy_cycles_to_set  : 0x8
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xba
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0x8
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xbb
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0x8
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0x50
+    mem_cap  : 0x18
+    Rom_Size : 0x1000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x1
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xff
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0xffffffff
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x3d8
+    sector_erase   : 0x320
+    read_data      : 0xff000303
+    page_program   : 0xff000302
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xffffffff
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0x70
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x6
+    ads_bit_pos    : 0xf
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x10000c8
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x10000c5
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xff
+    mem_cap  : 0x18
+    Rom_Size : 0x1000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0xff
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x3d8
+    sector_erase   : 0x320
+    read_data      : 0xff000303
+    page_program   : 0xff000302
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xffffffff
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x20
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x10
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000015
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0x1000011
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0x1
+    mem_type : 0xff
+    mem_cap  : 0x18
+    Rom_Size : 0x1000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0xff
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x3d8
+    sector_erase   : 0x320
+    read_data      : 0xff000303
+    page_program   : 0xff000302
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xffffffff
+    DPR_dummy_cycles_to_set  : 0xc
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0x1
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x3
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0x17
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0x1000065
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0x1000071
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0xffffffff
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xc
+    QPR_dummy_cycles_to_set  : 0xa
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0xff
+    mem_cap  : 0x18
+    Rom_Size : 0x1000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0xff
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x2000001
+    write_sts_reg2 : 0x2000001
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x3d8
+    sector_erase   : 0x320
+    read_data      : 0xff000303
+    page_program   : 0xff000302
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xffffffff
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xc8
+    mem_type : 0xff
+    mem_cap  : 0x19
+    Rom_Size : 0x2000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0xff
+    ads_bit_pos    : 0x8
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000070
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0xffffffff
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x4d8
+    sector_erase   : 0x420
+    read_data      : 0xff000403
+    page_program   : 0xff000402
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xb7
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff
+    
+  =======================================
+    Mfg_ID   : 0xa1
+    mem_type : 0xff
+    mem_cap  : 0x18
+    Rom_Size : 0x1000000
+    ReadMode : DUAD_IO_144
+    Speed    : 66.66MHz
+    
+    StsRegNum      : 0x2
+    we_bit_pos     : 0x1
+    busy_bit_pos   : 0x0
+    qe_bit_pos     : 0x9
+    ads_bit_pos    : 0xff
+    read_sts_reg1  : 0x1000005
+    read_sts_reg2  : 0x1000035
+    read_sts_reg3  : 0xffffffff
+    read_sts_reg4  : 0xffffffff
+    write_sts_reg1 : 0x1000001
+    write_sts_reg2 : 0x1000031
+    write_sts_reg3 : 0xffffffff
+    write_sts_reg4 : 0xffffffff
+    write_enable   : 0x6
+    block_erase    : 0x3d8
+    sector_erase   : 0x320
+    read_data      : 0xff000303
+    page_program   : 0xff000302
+    read_sfdp_data : 0xff01035a
+    suspend        : 0xffffffff
+    resume         : 0xffffffff
+    volatile_write_enable    : 0x50
+    enter_4byte_addr_mode    : 0xffffffff
+    DPR_dummy_cycles_to_set  : 0xff
+    QPR_dummy_cycles_to_set  : 0xff

@@ -1,0 +1,47 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = HspLib
+  FILE_GUID                      = 097fa776-7816-4d0c-8856-3fcf0f57458e
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = HspLib
+
+[Sources.common]
+  HspLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  AmdBaseLib
+  IdsLib
+  AmdPspCommonLib
+  SmnAccessLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFtpmTimeout1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdFtpmTimeout2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIohcNonPCIBarInitFastReg
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdHspMmioBase
+
+[Depex]
+

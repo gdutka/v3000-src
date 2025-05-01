@@ -1,0 +1,58 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdNbioGfxRMBDxe
+  FILE_GUID                      = CCF949FC-F831-4CEA-BFA1-C44983B99B91
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdNbioGfxRMBDxeEntry
+
+[Sources]
+  DriverEntry.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  IdsLib
+  UefiLib
+  HobLib
+  BaseMemoryLib
+  ApcbLibV3
+  IoLib
+  UefiRuntimeServicesTableLib
+  ApobCommonServiceLib
+
+[Guids]
+  gGnbPcieHobInfoGuid
+  gEfiHobListGuid
+  gGnbIntegratedSysInfoV4HobGuid
+  gAmdUmaCarveOutDefaultVarGuid
+
+[Protocols]
+  gAmdNbioPcieServicesProtocolGuid
+  gAmdApcbDxeServiceProtocolGuid
+  gPspFlashAccSmmCommReadyProtocolGuid
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnvironmentFlag
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDisplayPhyTuningSettingTableHeader
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDisplayPhyTuningSettingTableContent
+
+[Depex]
+  gAmdNbioPcieRMBDxeDepexProtocolGuid AND
+  gAmdApcbDxeServiceProtocolGuid AND
+  gEfiVariableArchProtocolGuid
+

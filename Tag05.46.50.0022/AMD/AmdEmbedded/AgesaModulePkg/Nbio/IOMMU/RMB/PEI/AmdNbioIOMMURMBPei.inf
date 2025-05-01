@@ -1,0 +1,75 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdNbioIOMMURMBPei
+  FILE_GUID                      = 63FF8EF1-20A2-41A7-AE88-1E262E8AF33F
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdNbioIOMMUPeiEntry
+
+[Sources]
+  IommuDriverEntry.c
+  IommuTables.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  IdsLib
+  PeimEntryPoint
+  PeiServicesLib
+  GnbCommonLib
+  PcdLib
+  HobLib
+  BaseMemoryLib
+  NbioHandleLib
+  SmnAccessLib
+  FabricResourceManagerLib
+  GnbPciLib
+  GnbLib
+  GnbPciAccLib
+  NbioTableBlastLib
+  AmdIOMMUDmarLib
+  FchBaseLib
+  BaseCoreLogicalIdLib
+
+[Guids]
+  gGnbPcieHobInfoGuid
+  gAmdMemoryInfoHobGuid
+
+[Ppis]
+  gAmdNbioPcieServicesPpiGuid
+  gAmdMemoryInfoHobPpiGuid
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIommuMMIOAddressReservedEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdApicMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIommuL1ClockGatingEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdIommuL2ClockGatingEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIOMMUDynamicPgEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIOMMUL1MemoryPGEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgIOMMUL2MemoryPGEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdNbioGlobalCgOverride
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdIvInfoDmaReMap
+
+[Depex]
+  gAmdNbioIOMMURMBPeiDepexPpiGuid AND
+  gAmdNbioPcieServicesPpiGuid AND
+  gEfiPeiMemoryDiscoveredPpiGuid
+
+
+

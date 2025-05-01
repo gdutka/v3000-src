@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME               = PldmSmbios
+  MODULE_TYPE             = DXE_DRIVER
+  FILE_GUID               = 2982a69d-a952-4a2a-a19b-0be61b296199
+  ENTRY_POINT             = PldmSmbiosEntry
+
+[Sources]
+  MpmPldmSmbios.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  DebugLib
+  PrintLib
+  MpmLib
+  ApcbLibV3
+
+[Protocols]
+  gAmdPldmProtocolGuid
+  gEfiSmbiosProtocolGuid
+  gAmdApcbDxeServiceProtocolGuid
+
+[Guids]
+  gEfiSmbiosTableGuid
+  gEfiEndOfDxeEventGroupGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmCreateSmBiosTypeA1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmCreateSmBiosTypeA2
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmProvisioned
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Depex]
+  gAmdPldmProtocolGuid

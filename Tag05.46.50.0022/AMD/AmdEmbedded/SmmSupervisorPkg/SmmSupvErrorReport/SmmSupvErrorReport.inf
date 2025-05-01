@@ -1,0 +1,60 @@
+## @file -- SmmSupvErrorReport.inf
+#
+# This Smm driver will register error reporter to Smm supervisor.
+#
+# When error occurs, SyscallDispatcher will sysret to this registered.
+#
+# Copyright (C) Microsoft Corporation. All rights reserved.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010017
+  PI_SPECIFICATION_VERSION       = 0x00010014
+  BASE_NAME                      = SmmSupvErrorReport
+  FILE_GUID                      = 000F42D0-283C-46AB-9287-ACB6C9941FCD
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SmmSupvErrorReportEntry
+
+#
+# The following information is for reference only and not required by the
+# build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  SmmSupvErrorReport.c
+
+[Sources.X64]
+  SysCallErrorx64.nasm
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+
+[LibraryClasses]
+  DebugLib
+  PcdLib
+  ReportStatusCodeLib
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  SmmErrorReportOemLib
+  ResetSystemLib
+  SysCallLib
+
+[Protocols]
+  gSmmSupervisorProtocolGuid          ## CONSUMES
+  gEfiSmmCpuServiceProtocolGuid       ## CONSUMES
+
+[Pcd]
+  gSmmSupervisorPkgTokenSpaceGuid.PcdSmmIsolationEnable
+
+[Guids]
+
+[Depex]
+  gSmmSupervisorProtocolGuid AND
+  gEfiSmmCpuServiceProtocolGuid

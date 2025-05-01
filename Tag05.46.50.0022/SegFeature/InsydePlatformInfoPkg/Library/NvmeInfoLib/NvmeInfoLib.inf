@@ -1,0 +1,44 @@
+## @file
+#  Component description file of NvmeInfoLib.
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NvmeInfoLib
+  FILE_GUID                      = 1693d1b3-d3fe-4283-ad99-d97afa1c89ea
+  MODULE_TYPE                    = UEFI_DRIVER
+  LIBRARY_CLASS                  = NvmeInfoLib
+
+[Sources]
+  NvmeInfoLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  DevicePathLib
+  PrintLib
+  PciSegmentLib
+  HiiLib
+  UefiLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+
+[Protocols]
+  gEfiPciIoProtocolGuid

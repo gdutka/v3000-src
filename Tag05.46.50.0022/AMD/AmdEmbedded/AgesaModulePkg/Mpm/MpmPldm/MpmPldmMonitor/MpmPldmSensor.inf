@@ -1,0 +1,44 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME               = MpmSensorInfoDxe
+  MODULE_TYPE             = DXE_DRIVER
+  FILE_GUID               = 837b3e7e-4259-4e35-87ed-397a24ca1593
+  ENTRY_POINT             = MpmSensorInfoEntry
+
+[Sources]
+  MpmPldmSensor.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  DebugLib
+  MpmLib
+  IdsLib
+  UefiLib
+
+[Protocols]
+  gAmdMpmGetSensorInfoProtocol
+  gAmdPldmProtocolGuid
+
+[Guids]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Depex]
+  gAmdMpmDepexProtocolGuid AND
+  gAmdPldmProtocolGuid

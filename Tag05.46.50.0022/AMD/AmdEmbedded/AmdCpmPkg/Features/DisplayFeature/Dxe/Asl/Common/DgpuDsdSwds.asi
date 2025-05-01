@@ -1,0 +1,15 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2020-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+  Method (_DSD, 0, Serialized) {
+    // This is only for SWUS/SWDS dGPU and must put it under SWDS, ex: Vega 1x/Navi 1x/Navi 2x.
+    Return (Package (2) {
+      ToUUID("6B4AD420-8FD3-4364-ACF8-EB94876FD9EB"),
+      Package (0) { }
+    })
+  }
+

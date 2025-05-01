@@ -1,0 +1,74 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPspPeiV2
+  FILE_GUID                      = 0C556BFF-B16A-439D-A3EC-1164378E2C2A
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdPspPeiV2DriverEntry
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  PeiServicesLib
+  AmdBaseLib
+  AmdPspMboxLibV2
+  AmdPspBaseLibV2
+  AmdPspApobLib
+  AmdErrorLogLib
+  FchBaseLib
+  AmdCapsuleLib
+  HobLib
+  AmdPspPsbFusingLib
+  AmdPspHstiStateLib
+  AmdStbLib
+
+[Sources]
+  AmdPspPeiV2.c
+
+[Guids]
+  gAmdCapsuleStatusHobGuid
+  gEfiAmdAgesaSpecificWarmResetGuid
+
+[Ppis]
+  gEfiPeiMemoryDiscoveredPpiGuid  #Notify
+  gAmdPspCommonServicePpiGuid     #Publish
+  gAmdErrorLogPpiGuid             #Consume
+  gAmdErrorLogServicePpiGuid      #Consume
+  gAmdPspRecoveryDetectPpiGuid    #Publish
+  gAmdFabricTopologyServices2PpiGuid   #CONSUME
+  gEfiEndOfPeiSignalPpiGuid       #Notify
+  gAmdNbioSmuServicesPpiGuid         #Consume
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAntiRollbackLateSplFuse
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAntiRollbackInitialSpl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAutoPsb
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPspRecoveryDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdStbEnable
+
+[Depex]
+  gAmdPspPeiV2DepexPpiGuid AND
+  gAmdFabricTopologyServices2PpiGuid AND
+  gAmdNbioSmuServicesPpiGuid
+
+
+

@@ -1,0 +1,20 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+Scope (\_SB.GPIO) {
+    Method (XINI) {
+        CpmDebugPrint ("  KER-ASL-\\_SB.GPIO._INI Start\n", 0, 0, 0, 0, 0, 0)
+        If (LNotEqual (CpmIoExpanderAcpiEventTable, 0)) {
+            Store (CpmCheckExpanderInputEvent (0), Local0)
+            Store (CpmCheckExpanderInputEvent (1), Local0)
+            Store (CpmCheckExpanderInputEvent (2), Local0)
+            Store (CpmCheckExpanderInputEvent (3), Local0)
+        }
+        CpmDebugPrint ("  KER-ASL-\\_SB.GPIO._INI End\n", 0, 0, 0, 0, 0, 0)
+    }
+} // End of Scope (\_SB.GPIO)
+

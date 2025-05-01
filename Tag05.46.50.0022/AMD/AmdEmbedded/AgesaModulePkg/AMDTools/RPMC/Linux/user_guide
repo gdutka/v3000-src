@@ -1,0 +1,13 @@
+1. unzip RPMC_xx.tar.gz
+2. start Terminal and go to RPMC directory
+3. run commands as below
+   sudo sh ./run.sh --check  -n
+   sudo sh ./run.sh --set 0
+   sudo sh ./run.sh --set 1
+   sudo sh ./run.sh --set 2
+   sudo sh ./run.sh --set 3
+
+Note: If you encounter any errors, please make sure you have permission to execute these commands. try 'sudo chmod a+x run.sh' and 'sudo chmod a+x main.out'.
+If you have any questions, please contact me.
+Harvey.Chen@amd.com
+

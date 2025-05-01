@@ -1,0 +1,35 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BaseSocLogicalIdXlatZen3DieLib
+  FILE_GUID                      = A6CE0BDE-CDE7-4433-A257-7CB2F11327E4
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BaseSocLogicalIdXlatLib
+
+[Sources]
+  BaseSocLogicalIdXlatZen3DieLib.c
+  BaseSocLogicalIdXlatZen3DieLib.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  AmdBaseLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+
+[Depex]

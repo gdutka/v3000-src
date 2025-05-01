@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchProm21Dxe
+  FILE_GUID                      = D432C4A5-D473-4067-9CF7-02CE92A3CBFD
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = FchProm21DxeInit
+
+[Sources]
+  FchProm21Dxe.c
+
+[LibraryClasses]
+  BaseLib
+  FchProm21BaseLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+
+[Guids]
+
+[Protocols]
+  gAmdFchProm21InitProtocolGuid     #PRODUCED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/Fch/Prom21/FchProm21ModulePkg.dec
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciID
+
+[Depex]
+   TRUE
+

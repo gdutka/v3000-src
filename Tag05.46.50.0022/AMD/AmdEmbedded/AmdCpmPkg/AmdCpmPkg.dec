@@ -1,0 +1,456 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2012-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = CpmPkg
+  PACKAGE_GUID          = ABE128BA-1061-4A53-A1B8-D07329AA7A67
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include/EDKII
+  Include
+  Library
+  Library/Proc/Base
+  Library/Proc/Cpu
+  Library/Proc/Fch
+  Library/Proc/Ras
+  Kernel/Asl
+
+[LibraryClasses]
+
+[Guids]
+  gAmdCpmTableHobGuid            = { 0x8DC90853, 0x5793, 0x4244, {0xA2, 0xF1, 0xE3, 0xB8, 0x2, 0x40, 0xB7, 0x68 }}
+  gAmdBootTimeRecordHobGuid      = { 0xd0800033, 0xc743, 0x4565, {0xa1, 0xe3, 0x11, 0x1a, 0x37, 0x1f, 0x2a, 0x4b }}
+  gAmdCpmPkgTokenSpaceGuid       = { 0x916e0ddd, 0x2bd2, 0x4704, {0x93, 0xb9, 0x59, 0x4b, 0x1, 0xa5, 0xfa, 0x9f }}
+  gAmdPbsSystemConfigurationGuid = { 0xa339d746, 0xf678, 0x49b3, {0x9f, 0xc7, 0x54, 0xce, 0xf, 0x9d, 0xf2, 0x26 }}
+  gAodSystemConfigurationGuid    = { 0x5ed15dc0, 0xedef, 0x4161, {0x91, 0x51, 0x60, 0x14, 0xc4, 0xcc, 0x63, 0xc }}
+  gAmdCpmRasHobGuid              = { 0xFA83FCD0, 0x4871, 0x76BF, {0x13, 0x4D, 0x5C, 0xB8, 0xAF, 0x45, 0x09, 0x52}}
+  gAmdPlatformRasSspDxeFileGuid  = { 0x820F3F0D, 0x4D08, 0x6C35, {0x85, 0x8A, 0xD9, 0x8E, 0xF4, 0x2C, 0x05, 0x1D }}
+  gPlatformPkgEnvironmentGuid    = { 0x7d836190, 0x49a7, 0x44d3, {0x92, 0x44, 0x72, 0xbe, 0x28, 0xb2, 0x5e, 0xe2 }}
+  gRasLateInitEndSignalGuid      = { 0xb1511275, 0x0d04, 0x46e6, {0xbd, 0x42, 0xe8, 0x6d, 0x76, 0xb2, 0x7f, 0xea}}
+  gPlatformPkgEmulationGuid      = { 0xb1511275, 0x1265, 0x1863, {0x92, 0x44, 0x72, 0xbe, 0x28, 0x98, 0x5e, 0x11 }}
+  PcdEmuLinuxLoaderFileGuid      = { 0x68198a68, 0xd249, 0x4826, {0xbc, 0x5e, 0x45, 0xdf, 0x0c, 0xca, 0x2a, 0x53 }}
+  gAmdPlatformRasRnDxeFileGuid   = { 0xa2656162, 0x2ab4, 0x47c4, {0x95, 0xf5, 0x80, 0xf3, 0xd9, 0xe0, 0x53, 0xcf }}
+  gAmdVariableProtectionVariableGuid = { 0x408F573D, 0x65EE, 0x49ED, {0x8B, 0xC5, 0x5A, 0x32, 0xBB, 0xEA, 0xE7, 0x45 }}
+
+[Protocols]
+  gAmdCpmAllPciIoProtocolsInstalledProtocolGuid = { 0x676D7012, 0x139B, 0x485A, {0x96, 0xF1, 0x98, 0x6F, 0xC4, 0x8A, 0x86, 0x4B }}
+  gAmdCpmDisplayFeatureProtocolGuid = { 0xdb4a79ac, 0x5bbb, 0x4625, {0x6a, 0x9e, 0xfe, 0xbf, 0x9d, 0x6d, 0x95, 0xeb }}
+  gAmdCpmNvDataProtocolGuid = { 0xdb4a79ac, 0x87ba, 0x4625, {0x6a, 0x9e, 0xfe, 0xbf, 0x9d, 0x6d, 0x95, 0xeb }}
+  gAmdCpmOemTableProtocolGuid = { 0x38d91956, 0xd5f1, 0x40fc, {0x8e, 0x61, 0xcb, 0x5e, 0x1a, 0xa9, 0x5c, 0xb7 }}
+  gAmdCpmTableProtocolGuid = { 0x3724cf01, 0x00c2, 0x9762, {0x11, 0xb3, 0x0e, 0xa8, 0xaa, 0x89, 0x72, 0x00 }}
+  gAmdCpmTableSmmProtocolGuid = { 0xaf6efacf, 0x7a13, 0x45a3, {0xb1, 0xa5, 0xaa, 0xfc, 0x06, 0x1c, 0x4b, 0x79 }}
+  gBootTimeRecordProtocolGuid = { 0x91599780, 0x50b0, 0x43d0, {0x9f, 0x21, 0x42, 0xd1, 0xeb, 0x0c, 0x00, 0x3f }}
+  gAodNvAreaUpdatedProtocolGuid = { 0xab776607, 0x6169, 0x44e8, { 0xb8, 0xf1, 0x50, 0x12, 0x9d, 0x4a, 0x25, 0xdb }}
+  gAmdPlatformApeiDataProtocolGuid = { 0x57479323, 0x4342, 0xCA2C, { 0x3D, 0xC7, 0xBD, 0xAE, 0x22, 0xC0, 0x62, 0x8C }}
+  gRasOemDimmMapProtocolGuid = { 0xE0D9E2B0, 0x4C04, 0xE0C5, { 0x77, 0xA5, 0x11, 0xAA, 0xE3, 0xEE, 0x75, 0xA0 }}
+  gRasMaintPcieActivePortMapProtocolGuid = { 0xb358dc6f, 0x78d0, 0x4d72, { 0xef, 0xa2, 0x38, 0x5a, 0xa5, 0x11, 0x73, 0x86 }}
+  gAmdCpmManageabilityProtocolGuid = { 0x201D3039, 0xFEFB, 0x4A35, { 0x05, 0x93, 0x6C, 0x4F, 0xD0, 0x93, 0xAF, 0x61 }}
+  gAmdCpmLaunchManageabilityOsProtocolGuid = {0x925c256d, 0x26f2, 0x4a76, { 0xa7, 0xba, 0x5e, 0x01, 0x88, 0xd2, 0x53, 0x01 }}
+  gRasPciIoProtEarlyProtocolGuid = { 0x75E83B58, 0xC619, 0x46E8, { 0x95, 0x09, 0x12, 0x0B, 0xC2, 0xB0, 0x3A, 0xA2 }}
+  gAmdCpmOemModsSsdtTableProtocol = { 0x30f1236a, 0xed27, 0x4436, { 0x96, 0xf4, 0x3c, 0x2b, 0x9b, 0x69, 0xc2, 0x9f }}
+  gAmdAodCmdProtocolGuid = { 0x7942d0a0, 0xfd6b, 0x4e9a, { 0x8b, 0x49, 0xc5, 0x47, 0x1f, 0xf8, 0x38, 0x6 }}
+  gAmdAodFormsetManageProtocolGuid =  {0x1ffb2c8a, 0xe3a7, 0x4acc, { 0x97, 0x52, 0x50, 0x28, 0x8c, 0x74, 0x4b, 0x99 }}
+  gAmdAodSmmCmdProtocolGuid = { 0x3fa551a5, 0xb58, 0x4efb, { 0xbb, 0x2b, 0x32, 0xc7, 0x6, 0x6c, 0x62, 0xc9 } }
+  gAmdCpmABRecoveryProtocolGuid = { 0xE53A0254, 0x77CF, 0x4C30, {0x93, 0xB1, 0xAC, 0x08, 0x89, 0x45, 0xFC, 0x1C }}
+  gAmdCpmVariableHookProtocolGuid = {0x29e22ccd, 0xfd53, 0x4a54, {0xb7, 0xde, 0x2c, 0x5b, 0x26, 0x9b, 0x80, 0x8f}}
+
+  ## Include/Protocol/AmdCslManagerProtocol.h
+  gAmdCxlManagerProtocolGuid  =   {0x3926B776, 0xF572, 0x4659, {0x82, 0xD2, 0xED, 0xB1, 0xFA, 0x32, 0x3E, 0xF0}}
+
+[Ppis]
+  gBootTimeRecordPpiGuid = { 0x90599780, 0x50b0, 0x43d1, {0x9f, 0x22, 0x43, 0xd1, 0xeb, 0xc, 0x0, 0x3f }}
+  gPeiLastS3RestorePointPpiGuid = { 0x90599782, 0x50c0, 0x63d1, {0x9f, 0x22, 0x48, 0xd6, 0xeb, 0xc, 0x0, 0x3f }}
+  gAmdCpmGpioInitFinishedPpiGuid = { 0xfd4e6776, 0x2482, 0x48ba, {0xbf, 0x3e, 0x27, 0x65, 0xf2, 0xd6, 0x7d, 0xcb }}
+  gAmdCpmPtGpioInitFinishedPpiGuid = { 0x1248c135, 0x1f84, 0x433e, {0xba, 0xb3, 0xc9, 0x6f, 0xe5, 0x2f, 0x9a, 0x9e }}
+  gAmdCpmOemTablePpiGuid = { 0xfd1fe103, 0x40f1, 0x459c, {0x98, 0x3e, 0x11, 0x0b, 0x69, 0x5e, 0xd1, 0x1a }}
+  gAmdCpmTableHobPpiGuid = { 0xc02c596b, 0xcd04, 0x486e, {0x86, 0x66, 0x30, 0x3e, 0x55, 0x67, 0xc0, 0x48 }}
+  gAmdCpmTablePpiGuid = { 0xd71cf893, 0xa8b5, 0x49d3, {0xa2, 0x1b, 0x31, 0xe2, 0xf5, 0xc4, 0xa7, 0x47 }}
+  gAmdCpmOverrideTablePpiGuid = { 0x25d79807, 0x7b43, 0x4767, {0xb9, 0xfa, 0x72, 0x62, 0xa7, 0x4f, 0x85, 0xc3 }}
+  gPcieTopologyTablePpiGuid = { 0x433f54b5, 0x50ed, 0x48a8, {0xa0, 0xe7, 0xa7, 0x85, 0x0c, 0x4b, 0x32, 0xfe }}
+  gAmdCpmManageabilityBootPpiGuid = { 0xd1063bff, 0x417b, 0x45c2, {0xb5, 0xbc, 0x60, 0x39, 0xb9, 0xfb, 0x12, 0xf7 }}
+
+[PcdsFeatureFlag]
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbySupport|FALSE|BOOLEAN|0x20000001
+  gAmdCpmPkgTokenSpaceGuid.PcdReduceHardwareSupport|FALSE|BOOLEAN|0x20000002
+  gAmdCpmPkgTokenSpaceGuid.PcdPlatformLpiEn|TRUE|BOOLEAN|0x20000022
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmManageabilityFeatureEn|FALSE|BOOLEAN|0x20000027
+
+[PcdsFixedAtBuild]
+  gAmdCpmPkgTokenSpaceGuid.Cpu0AslName|0x00000000|UINT32|0x00000001
+  gAmdCpmPkgTokenSpaceGuid.EcAslName|0x00000000|UINT32|0x00000002
+  gAmdCpmPkgTokenSpaceGuid.EcMutexAslName|0x00000000|UINT32|0x00000003
+  gAmdCpmPkgTokenSpaceGuid.OemCallBackAslName|0x00000000|UINT32|0x00000004
+  gAmdCpmPkgTokenSpaceGuid.ApuSupportMask|0xFFFFFFFF|UINT32|0x00000005
+  gAmdCpmPkgTokenSpaceGuid.OemMLibAslName|0x00000000|UINT32|0x00000006
+  gAmdCpmPkgTokenSpaceGuid.FchPcieGpp0AslName|0x00000000|UINT32|0x00000030
+  gAmdCpmPkgTokenSpaceGuid.FchPcieGpp1AslName|0x00000000|UINT32|0x00000031
+  gAmdCpmPkgTokenSpaceGuid.FchPcieGpp2AslName|0x00000000|UINT32|0x00000032
+  gAmdCpmPkgTokenSpaceGuid.FchPcieGpp3AslName|0x00000000|UINT32|0x00000033
+  gAmdCpmPkgTokenSpaceGuid.AcpiRestoreSwSmi|0xE3|UINT8|0x00000040
+  gAmdCpmPkgTokenSpaceGuid.AcpiEnableSwSmi|0xA0|UINT8|0x00000041
+  gAmdCpmPkgTokenSpaceGuid.PcdSimpleSltSupport|0x0|UINT8|0x00000043
+  gAmdCpmPkgTokenSpaceGuid.EcRamBaseAddr|0x0062|UINT16|0x00000044
+  gAmdCpmPkgTokenSpaceGuid.EcRamGpioOffset|0xAB|UINT8|0x00000045
+  gAmdCpmPkgTokenSpaceGuid.X86IoRemapBase|0x000000FDFC000000|UINT64|0x00000046
+  gAmdCpmPkgTokenSpaceGuid.PciMmioBase|0x0000000080000000|UINT64|0x00000047
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdSetAutoUmaMode|0xDF|UINT8|0x00000048
+  gAmdCpmPkgTokenSpaceGuid.LpcAslName|0x00000000|UINT32|0x00000049
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdSetUmaSizeId|0xDE|UINT8|0x0000004A
+  gAmdCpmPkgTokenSpaceGuid.OkEcAslName|0x00000000|UINT32|0x00000050
+  gAmdCpmPkgTokenSpaceGuid.PcdSerialClock|48000000|UINT32|0x00000051
+  gAmdCpmPkgTokenSpaceGuid.PcdFchUartPort|2|UINT8|0x00000052
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdAodUpdateMemClkTimings|0x9D|UINT8|0x00000063
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdAodUpdateMemOnboardVoltages|0x9E|UINT8|0x00000064
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdAodHeaderOemTableId|"AMD AOD"|VOID*|0x00000065   # Less than or equal to 8 bytes
+  gAmdCpmPkgTokenSpaceGuid.AcpiDisableDgpuAudioSwSmi|0xE9|UINT8|0x00000066
+  gAmdCpmPkgTokenSpaceGuid.AcpAslName|0x00000000|UINT32|0x00000067
+  gAmdCpmPkgTokenSpaceGuid.AzaliaAslName|0x00000000|UINT32|0x00000068
+  gAmdCpmPkgTokenSpaceGuid.LanAslName|0x00000000|UINT32|0x00000069
+  gAmdCpmPkgTokenSpaceGuid.PcdSwSmiCmdtoBuildContext|0xDD|UINT8|0x00000070
+  gAmdCpmPkgTokenSpaceGuid.PcdBspStackSize|0x40000|UINT32|0x00000071
+  gAmdCpmPkgTokenSpaceGuid.PcdApStackSize|0x4000|UINT32|0x00000072
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_CPU_OVERCLOCKING|TRUE|BOOLEAN|0x00000076
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_DDR_DF|TRUE|BOOLEAN|0x00000077
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_PBO|TRUE|BOOLEAN|0x00000078
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_SOC_VOL|TRUE|BOOLEAN|0x00000079
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_SOC_OC|TRUE|BOOLEAN|0x0000007A
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_VDDP|TRUE|BOOLEAN|0x0000007B
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_VDDG|TRUE|BOOLEAN|0x0000007C
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_VDDIO|TRUE|BOOLEAN|0x0000007D
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_VTT|TRUE|BOOLEAN|0x0000007E
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_VPP|TRUE|BOOLEAN|0x0000007F
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_SETUP_DOWNCORE|TRUE|BOOLEAN|0x00000080
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_DDR|TRUE|BOOLEAN|0x00000081
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_DF|TRUE|BOOLEAN|0x00000082
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_DRAM_TIMING_CONFIGURATION|TRUE|BOOLEAN|0x00000083
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_DRAM_CONTROLLER_CONFIGURATION|TRUE|BOOLEAN|0x00000084
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_CAD_BUS_CONFIGURATION|TRUE|BOOLEAN|0x00000085
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_DATA_BUS_CONFIGURATION|TRUE|BOOLEAN|0x00000086
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_DRAM_POWER_OPTIONS|TRUE|BOOLEAN|0x00000087
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodCpuCoreCtrl|TRUE|BOOLEAN|0x0000008C
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodCpuSmtCtrl|TRUE|BOOLEAN|0x0000008E
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodFclkFrequency|TRUE|BOOLEAN|0x0000008F
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemOverclockDdr4|TRUE|BOOLEAN|0x00000090
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemSpeedDdr4|TRUE|BOOLEAN|0x00000091
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTclDdr4|TRUE|BOOLEAN|0x00000092
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrcdrdDdr4|TRUE|BOOLEAN|0x00000093
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrcdwrDdr4|TRUE|BOOLEAN|0x00000094
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrpDdr4|TRUE|BOOLEAN|0x00000095
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrasDdr4|TRUE|BOOLEAN|0x00000096
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrcCtrlDdr4|TRUE|BOOLEAN|0x00000097
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrrdSDdr4|TRUE|BOOLEAN|0x00000098
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrrdLDdr4|TRUE|BOOLEAN|0x00000099
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTfawCtrlDdr4|TRUE|BOOLEAN|0x0000009A
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTwtrSDdr4|TRUE|BOOLEAN|0x0000009B
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTwtrLDdr4|TRUE|BOOLEAN|0x0000009C
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTwrCtrlDdr4|TRUE|BOOLEAN|0x0000009D
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrcpageCtrlDdr4|TRUE|BOOLEAN|0x0000009E
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrdrdScLCtrlDdr4|TRUE|BOOLEAN|0x0000009F
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTwrwrScLCtrlDdr4|TRUE|BOOLEAN|0x000000A0
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrfcCtrlDdr4|TRUE|BOOLEAN|0x000000A1
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrfc2CtrlDdr4|TRUE|BOOLEAN|0x000000A2
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrfc4CtrlDdr4|TRUE|BOOLEAN|0x000000A3
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTcwlDdr4|TRUE|BOOLEAN|0x000000A4
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrtpDdr4|TRUE|BOOLEAN|0x000000A5
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTckeDdr4|TRUE|BOOLEAN|0x000000A6
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrdwrDdr4|TRUE|BOOLEAN|0x000000A7
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTwrrdDdr4|TRUE|BOOLEAN|0x000000A8
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTwrwrScDdr4|TRUE|BOOLEAN|0x000000A9
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTwrwrSdDdr4|TRUE|BOOLEAN|0x000000AA
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTwrwrDdDdr4|TRUE|BOOLEAN|0x000000AB
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrdrdScDdr4|TRUE|BOOLEAN|0x000000AC
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrdrdSdDdr4|TRUE|BOOLEAN|0x000000AD
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrdrdDdDdr4|TRUE|BOOLEAN|0x000000AE
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCtrllerProcOdtDdr4|TRUE|BOOLEAN|0x000000AF
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCtrller2TModeDdr4|TRUE|BOOLEAN|0x000000B0
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemGearDownModeDdr4|TRUE|BOOLEAN|0x000000B1
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCtrllerPwrDnEnDdr4|TRUE|BOOLEAN|0x000000B2
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCadBusTimingCtlDdr4|TRUE|BOOLEAN|0x000000B3
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCadBusDrvStrenCtlDdr4|TRUE|BOOLEAN|0x000000B4
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCadBusClkDrvStrenDdr4|TRUE|BOOLEAN|0x000000B5
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCadBusAddrCmdDrvStrenDdr4|TRUE|BOOLEAN|0x000000B6
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCadBusCsOdtDrvStrenDdr4|TRUE|BOOLEAN|0x000000B7
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCadBusCkeDrvStrenDdr4|TRUE|BOOLEAN|0x000000B8
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemDataBusConfigCtlDdr4|TRUE|BOOLEAN|0x000000B9
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCtrllerRttNomDdr4|TRUE|BOOLEAN|0x000000BA
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCtrllerRttWrDdr4|TRUE|BOOLEAN|0x000000BB
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCtrllerRttParkDdr4|TRUE|BOOLEAN|0x000000BC
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbioPBOCtl|TRUE|BOOLEAN|0x000000BD
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbioPBOAdvancedCtl|TRUE|BOOLEAN|0x000000BE
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbioPBOScalarCtl|TRUE|BOOLEAN|0x000000BF
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbioPBOScalar|TRUE|BOOLEAN|0x000000C0
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbiocHTCCtl|TRUE|BOOLEAN|0x000000C1
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodGnbFclkOcFlag|TRUE|BOOLEAN|0x000000C2
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodCpuPst0Freq|TRUE|BOOLEAN|0x000000C3
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodCpuPst0Vid|TRUE|BOOLEAN|0x000000C4
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrcDdr4|TRUE|BOOLEAN|0x000000C5
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTfawDdr4|TRUE|BOOLEAN|0x000000C6
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTwrDdr4|TRUE|BOOLEAN|0x000000C7
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrcpageDdr4|TRUE|BOOLEAN|0x000000C8
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrdrdScLDdr4|TRUE|BOOLEAN|0x000000C9
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTwrwrScLDdr4|TRUE|BOOLEAN|0x000000CA
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrfcDdr4|TRUE|BOOLEAN|0x000000CB
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrfc2Ddr4|TRUE|BOOLEAN|0x000000CC
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemTimingTrfc4Ddr4|TRUE|BOOLEAN|0x000000CD
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemAddrCmdSetupDdr4|TRUE|BOOLEAN|0x000000CE
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCsOdtSetupDdr4|TRUE|BOOLEAN|0x000000CF
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodMemCkeSetupDdr4|TRUE|BOOLEAN|0x000000D0
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbioSocketPPTLimit|TRUE|BOOLEAN|0x000000D1
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbioTDCVDDLimit|TRUE|BOOLEAN|0x000000D2
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbioEDCVDDLimit|TRUE|BOOLEAN|0x000000D3
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbioTDCSOCLimit|TRUE|BOOLEAN|0x000000D4
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbioEDCSOCLimit|TRUE|BOOLEAN|0x000000D5
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodFMaxFreq|TRUE|BOOLEAN|0x000000D6
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodGfxFMaxFreq|TRUE|BOOLEAN|0x000000D7
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNbiocHTC|TRUE|BOOLEAN|0x000000D8
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodGnbSocOverclockVid|TRUE|BOOLEAN|0x000000D9
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrText_AOD_DF_ZP_RV|TRUE|BOOLEAN|0x000000DA
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_ONBOARD_VOLTAGE_CONTROL|TRUE|BOOLEAN|0x000000DB
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodCpuBoostClock|FALSE|BOOLEAN|0x000000DC
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodGpuBoostClock|FALSE|BOOLEAN|0x000000DD
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrForm_AOD_GFX_OVERCLOCKING|TRUE|BOOLEAN|0x000000DE
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodGfxOverclockingFreq|TRUE|BOOLEAN|0x000000DF
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodGfxOverclockingVoltage|TRUE|BOOLEAN|0x000000E0
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodSocOverclockingVoltage|TRUE|BOOLEAN|0x000000E1
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodEcoMode|TRUE|BOOLEAN|0x000000E2
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodEcoMode45W|TRUE|BOOLEAN|0x000000E3
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodEcoMode65W|TRUE|BOOLEAN|0x000000E4
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodLN2ModeCtrl|TRUE|BOOLEAN|0x000000EA
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodCLDOVDDGIODvoltageCtrl|FALSE|BOOLEAN|0x000000EB
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodGameModeCtrl|FALSE|BOOLEAN|0x000000EC
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodNpsCtrl|FALSE|BOOLEAN|0x000000ED
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodCurveOptimizer|TRUE|BOOLEAN|0x000000EE
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodAllCoreCurveOptimizerSign|TRUE|BOOLEAN|0x000000EF
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodPerCoreCurveOptimizerSign|TRUE|BOOLEAN|0x000000F0
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodDramLatencyEnhance|TRUE|BOOLEAN|0x000000F1
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodLLCKCtrl|TRUE|BOOLEAN|0x000000F2
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodLClkDpm|TRUE|BOOLEAN|0x000000F3
+  gAmdCpmPkgTokenSpaceGuid.PcdVfrOneof_AodGfxCurveOptimizer|TRUE|BOOLEAN|0x000000F4
+
+  # PT ZPODD with SMBUS event - default value on Artic.
+  # AMD_CPM_IO_EXPANDER_ACPI_EVENT_TABLE must be configed also.
+  gAmdCpmPkgTokenSpaceGuid.PcdPtZpoddPtSataName|0x31305450|UINT32|0x000000FC      # PT01
+  gAmdCpmPkgTokenSpaceGuid.PcdPtZpoddPtSataPort|0x00|UINT8|0x000000FD             # Port 0
+  gAmdCpmPkgTokenSpaceGuid.PcdPtZpoddPowerPin|0x306|UINT32|0x000000FE             # PT GPIO 6
+  # SMBUS GPIO Setting for BIT[15:8] = 0x06.
+  #                    BIT[31]:            The Smbus number. 0 = Smbus0, 1 = Smbus1.
+  #                    BIT[30:27]:         Fixed address of Slave Address.
+  #                    BIT[26:24]:         Programmable or HW Selectable address of Slave Address (A2/A1/A0).
+  #                    BIT[23:16]:         Reserved
+  # GPIO Controller Selection.
+  #                    BIT[15:8] = 0x06:   SMBUS IO Expander GPIO Pin
+  # SMBUS GPIO Pin Number for BIT[15:8] = 0x06.
+  #                    BIT[7:6] = 0x0:     SMBUS IO Expander 8-bit Controller
+  #                    BIT[7:6] = 0x1:     SMBUS IO Expander 16-bit Controller
+  #                    BIT[5:4] = 0x0:     SMBUS IO Expander Port 0
+  #                    BIT[5:4] = 0x1:     SMBUS IO Expander Port 1
+  #                    BIT[3:0]:           SMBUS GPIO Pin Number
+  gAmdCpmPkgTokenSpaceGuid.PcdPtZpoddEventPinHotPlug|0xA4000600|UINT32|0x000000FF # SMBUS GPIO 0
+
+  # ACPI
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdAcpiHestTableHeaderOemTableId|"AMD HEST"|VOID*|0x200AC001
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdAcpiBertTableHeaderOemTableId|"AMD BERT"|VOID*|0x200AC002
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdAcpiEinjTableHeaderOemTableId|"AMD EINJ"|VOID*|0x200AC003
+
+  # Platform RAS
+  gAmdCpmPkgTokenSpaceGuid.PcdMemErrFruDefaultStr|"DIMM# Sourced"|VOID*|0x200AC004 #Max 20 bytes include NULL terminal byte.
+  gAmdCpmPkgTokenSpaceGuid.PcdMemErrFruTextOemPrefixStr|"DIMM Locate:"|VOID*|0x200AC005 #Max 14 bytes include NULL terminal byte.
+  gAmdCpmPkgTokenSpaceGuid.PcdHaltOnBmcFailure|FALSE|BOOLEAN|0x20010001
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSpiRomProtectRange1|0|UINT32|0x21000000          # {RomBase, 12'h0} ~ {RomBase, 12'h0} + (Range+1) * (RangeUnit 4K or 64K)
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSpiRomProtectRange2|0|UINT32|0x21000001          #    Bit 31:12 -> RomBase: ROM Base.
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSpiRomProtectRange3|0|UINT32|0x21000002          #    Bit 10    -> WriteProtect,                Bit 9   -> ReadProtect
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSpiRomProtectRange4|0|UINT32|0x21000003          #    Bit  8    -> RangeUnit 0=4 KB. 1=64 KB,   Bit 7:0 -> Range
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSpiLockWhiteListSupport|FALSE|BOOLEAN|0x21000004
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSpiLockWhiteListOptions|0x07|UINT8|0x21000005    # Set Bit = 0 -> not require additional check.
+                                                                                  #    Bit = 1 -> Enforce Address checking
+                                                                                  #    (Bit0 -> Write Check, Bit1 -> Read Check, Bit2 -> Erase Check)
+
+  # AB Recovery
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPEICompressSize|0|UINT64|0x21000006
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmBIOSPointAddressCZN|0|UINT64|0x21000007
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPEIPointAddressCZN|0|UINT64|0x21000008
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmBIOSPointAddressLCN|0|UINT64|0x21000009
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPEIPointAddressLCN|0|UINT64|0x2100000A
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmBIOSPointAddressL2A|0|UINT64|0x2100000B
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPEIPointAddressL2A|0|UINT64|0x2100000C
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPSPNVDataL2A|0|UINT64|0x2100000D
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmBIOSPointAddressL2B|0|UINT64|0x21000010
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPEIPointAddressL2B|0|UINT64|0x21000011
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPSPNVDataL2B|0|UINT64|0x21000012
+
+  # PMF static policy binary
+  # 0xFFFFFFFF  - No static policy binary
+  # Other value - Static policy binary is available in ROM offset
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPmfStaticPolicyBinRomOffset|0xFFFFFFFF|UINT32|0x21000013
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPmfStaticPolicySize|0xFFFFFFFF|UINT32|0x21000014
+
+  # AMD PBS SETUP variable size
+  # Note: If change sizeof(AMD_PBS_SETUP_OPTION) in AmdPbsConfig.h, must update this PCD value in AmdCpmPkgXXX.inc.dsc!!!
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdPbsSetupSize|0x00|UINT32|0x21000016
+
+  # Enable debug message (BIT[x] = 0 means disable serial out)
+  # Bit[0]: 1 - enable ESPI UART serail out, including UDC(unversial debug card) or EC ESIP UART
+  # Bit[1]: 1 - enable LPC UART serail out
+  # Bit[2]: 1 - enable port80 redirect serail out
+  # Bit[3]: 1 - enable FCH UART0 serail out
+  # Bit[4]: 1 - enable FCH UART1 serail out
+  # Bit[5]: 1 - enable FCH UART2 serail out
+  # Bit[6]: 1 - enable FCH UART3 serail out
+  # Bit[7]: 1 - enable FCH UART4 serail out
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdUnifyMessage|0x00|UINT32|0x2100000E
+
+  # This PCD is used as an '#if' to include SoC-specific header files (default set as 0x19 for GN)
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSocFamilyId|0x19|UINT32|0x11000010
+  # SW SMI command for USB4 ACPI _DEP Support. Set to 0x00 is not allowed
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdUsb4DepSupport|0xCF|UINT8|0x11000011
+  # SW SMI command for USB4 ACPI _PSx Support. Set to 0x00 is not allowed
+  gAmdCpmPkgTokenSpaceGuid.SwSmiCmdUsb4PSxSupport|0xCE|UINT8|0x11000012
+  # gAmdCpmPkgTokenSpaceGuid.PcdAmdVariableProtectionTable|{0x0}|AMD_VARIABLE_PROTECTION_TABLE|0x21000025 {
+  #   <HeaderFiles>
+  #     AmdVariableProtectionItem.h
+  #   <Packages>
+  #     AmdCpmPkg/AmdCpmPkg.dec
+  # }
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdVariableProtectionTable|{0x0}|VOID*|0x21000025
+
+[PcdsDynamic]
+  gAmdCpmPkgTokenSpaceGuid.CurrentPlatformId|0x0000|UINT16|0x10000000
+  gAmdCpmPkgTokenSpaceGuid.OriginalPlatformId|0x0000|UINT16|0x10000001
+  gAmdCpmPkgTokenSpaceGuid.CpmBootModeOverride|0x00|UINT8|0x10000002
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmDgpuSsid|0x00000000|UINT32|0x10000003
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmDgpuAudioSsid|0x00000000|UINT32|0x10000004
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmIgnoreOemTableId|0x0000000000000000|UINT64|0x10000005
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVddioMin|0x00|UINT16|0x10000019
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVddioMax|0x00|UINT16|0x10000020
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVddioStepping|0x00|UINT16|0x10000021
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVddioMv|0x00|UINT16|0x10000022
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVttMin|0x00|UINT16|0x10000023
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVttMax|0x00|UINT16|0x10000024
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVttMv|0x00|UINT16|0x10000025
+  gAmdCpmPkgTokenSpaceGuid.PcdMemVppMv|0x00|UINT16|0x10000026
+  gAmdCpmPkgTokenSpaceGuid.PcdIoPort80LpcDecodeEn|0x01|UINT8|0x10000027           # D14F3x048_Bit[21]   IOPortEnable4   1: Enable   0: Disable
+  gAmdCpmPkgTokenSpaceGuid.PcdMITTWITTControl|0x02|UINT8|0x10000028               # 0 - MITT, 1 - WITT, 2 - Disable
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable|FALSE|BOOLEAN|0x10000029
+  gAmdCpmPkgTokenSpaceGuid.PcdReduceHardwareEnable|FALSE|BOOLEAN|0x10000030
+  gAmdCpmPkgTokenSpaceGuid.PlatformIdOverride|0xFFFF|UINT16|0x10000031
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyPlatformOscEnable|FALSE|BOOLEAN|0x10000032
+  gAmdCpmPkgTokenSpaceGuid.CpmPciTbtGppAslName|0x00000000|UINT32|0x10000038
+  gAmdCpmPkgTokenSpaceGuid.CpmPciTbtAicAslName|0x00000000|UINT32|0x10000039
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnableForLevel3|FALSE|BOOLEAN|0x1000003A
+  gAmdCpmPkgTokenSpaceGuid.PcdActualCoreNumber|0x00|UINT8|0x10000040
+  gAmdCpmPkgTokenSpaceGuid.PcieGfx0AslName|0x00000000|UINT32|0x10000050
+  gAmdCpmPkgTokenSpaceGuid.PcieGfx1AslName|0x00000000|UINT32|0x10000051
+  gAmdCpmPkgTokenSpaceGuid.PcieGfx2AslName|0x00000000|UINT32|0x10000052
+  gAmdCpmPkgTokenSpaceGuid.PcieGfx3AslName|0x00000000|UINT32|0x10000053
+  gAmdCpmPkgTokenSpaceGuid.PcieGfx4AslName|0x00000000|UINT32|0x10000054
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp0AslName|0x00000000|UINT32|0x10000060
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp1AslName|0x00000000|UINT32|0x10000061
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp2AslName|0x00000000|UINT32|0x10000062
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp3AslName|0x00000000|UINT32|0x10000063
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp4AslName|0x00000000|UINT32|0x10000064
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp5AslName|0x00000000|UINT32|0x10000065
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp6AslName|0x00000000|UINT32|0x10000066
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp7AslName|0x00000000|UINT32|0x10000067
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp8AslName|0x00000000|UINT32|0x10000068
+  gAmdCpmPkgTokenSpaceGuid.PcieGpp9AslName|0x00000000|UINT32|0x10000069
+  gAmdCpmPkgTokenSpaceGuid.PcieGppAAslName|0x00000000|UINT32|0x10000070
+  gAmdCpmPkgTokenSpaceGuid.PcieGppBAslName|0x00000000|UINT32|0x10000071
+  gAmdCpmPkgTokenSpaceGuid.PcieGppCAslName|0x00000000|UINT32|0x10000072
+  gAmdCpmPkgTokenSpaceGuid.PcieGppDAslName|0x00000000|UINT32|0x10000073
+  gAmdCpmPkgTokenSpaceGuid.PcieGppEAslName|0x00000000|UINT32|0x10000074
+  gAmdCpmPkgTokenSpaceGuid.PcieGppFAslName|0x00000000|UINT32|0x10000075
+  gAmdCpmPkgTokenSpaceGuid.PcieGppGAslName|0x00000000|UINT32|0x10000076
+  gAmdCpmPkgTokenSpaceGuid.PcieGppHAslName|0x00000000|UINT32|0x10000077
+  gAmdCpmPkgTokenSpaceGuid.PcieGp17AslName|0x00000000|UINT32|0x10000080
+  gAmdCpmPkgTokenSpaceGuid.PcieGp18AslName|0x00000000|UINT32|0x10000081
+  gAmdCpmPkgTokenSpaceGuid.PcieGp28AslName|0x00000000|UINT32|0x10000082
+  gAmdCpmPkgTokenSpaceGuid.PcieGp38AslName|0x00000000|UINT32|0x10000083
+  gAmdCpmPkgTokenSpaceGuid.PcieGp13AslName|0x00000000|UINT32|0x10000084
+  gAmdCpmPkgTokenSpaceGuid.PcieGp14AslName|0x00000000|UINT32|0x10000085
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmDebugPrintInAsl|FALSE|BOOLEAN|0x10000100
+
+  # Platform RAS
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmEinjSwSmiData|0x83|UINT8|0x20000003
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmMcaPollInterval|0x1388|UINT32|0x20000004
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmNbioPollInterval|0x1388|UINT32|0x20000005
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPciePollInterval|0x1388|UINT32|0x20000006
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSmiThreshold|5|UINT32|0x20000007                 # (default: 5 interrupts)
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSmiScale|1000|UINT32|0x20000008                  # (default: 1000, unit: ms)
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmThresholdPeriodicSmiEn|1|BOOLEAN|0x20000009    #(default: Enable)
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmRasRetryCount|0x3|UINT32|0x2000000A
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmEinjTrigErrSwSmiId|0x84|UINT8|0x2000000B
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSpiLockingSupport|FALSE|BOOLEAN|0x2000000C
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmGhesNotifyType|FALSE|BOOLEAN|0x2000000D
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieGhesNotifyType|FALSE|BOOLEAN|0x2000000E
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieRpCorrectedErrorMask|0x00000000|UINT32|0x2000000F       # Value from PPR NDA 3.8.1
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieRpUnCorrectedErrorMask|0x00080000|UINT32|0x20000010
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieRpUnCorrectedErrorSeverity|0x07EF6030|UINT32|0x20000011
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieDevCorrectedErrorMask|0x00100000|UINT32|0x20000012
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieDevUnCorrectedErrorMask|0x00180000|UINT32|0x20000013
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieDevUnCorrectedErrorSeverity|0x07EF6030|UINT32|0x20000014
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmCcixGhesCorrectedNotifyType|FALSE|BOOLEAN|0x20000015
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmCcixGhesDeferredNotifyType|FALSE|BOOLEAN|0x20000016  #need review default value.
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmHardPprEnable|FALSE|BOOLEAN|0x20000017
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmFchAlinkErrPollInterval|0x1388|UINT32|0x20000018
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSmiScaleUnit|0x0|UINT8|0x20000019    #0: ms(default), 1: sec, 2: min
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSmiPeriod|1000|UINT32|0x2000001A    #(default: 1000, unit: ms)
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmUsbErrPollInterval|0x1388|UINT32|0x2000001B
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmGhesUnCorrNotifyType|TRUE|BOOLEAN|0x2000001C
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieUnCorrGhesNotifyType|TRUE|BOOLEAN|0x2000001D
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmEinjBeginInjOptSwSmiData|0x85|UINT8|0x2000001E
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmEinjEndOptSwSmiData|0x86|UINT8|0x2000001F
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmSlotInfoOverride|0xFFFF|UINT16|0x20000020
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmHestDmcStrucEn|TRUE|BOOLEAN|0x20000021
+  gAmdCpmPkgTokenSpaceGuid.PcdRsmInfoLocation|0|UINT64|0x20000023
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmManageabilityRtEn|FALSE|BOOLEAN|0x20000024
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmManageabilityRsvdMem|0x00000000|UINT64|0x20000025
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmManageabilityIpLibRsvdMem|0x0|UINT64|0x20000026
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmManageabilityConfigRsvdMem|0x0|UINT64|0x20000028
+
+  # PT ZPODD with SMBUS event
+  gAmdCpmPkgTokenSpaceGuid.PcdPtZpoddEnabled|FALSE|BOOLEAN|0x20000029
+  gAmdCpmPkgTokenSpaceGuid.PcdPtZpoddPtBridgeName|0x31505047|UINT32|0x2000002A    # GPP1
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdCpmPciHotPlugSupport|FALSE|BOOLEAN|0x2000002B
+
+  # AB Recovery
+  gAmdCpmPkgTokenSpaceGuid.PcdSkipSelfHealing|FALSE|BOOLEAN|0x2000002C
+
+  # ECRC workaround
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieBridgeCorrectedErrorMask|0x00000000|UINT32|0x2000002D
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieBridgeUnCorrectedErrorMask|0x00080000|UINT32|0x2000002E
+  gAmdCpmPkgTokenSpaceGuid.PcdCpmPcieBridgeUnCorrectedErrorSeverity|0x07EF6030|UINT32|0x2000002F
+
+  # Aod Init Table List
+  gAmdCpmPkgTokenSpaceGuid.PcdAodPeiInitTableList|0|UINT32|0x20000030
+  gAmdCpmPkgTokenSpaceGuid.PcdAodDxeInitTableList|0|UINT64|0x20000031
+  gAmdCpmPkgTokenSpaceGuid.PcdAodSmmInitTableList|0|UINT64|0x20000032
+  gAmdCpmPkgTokenSpaceGuid.PcdAodRamDebugAddress|0|UINT32|0x20000033
+
+  gAmdCpmPkgTokenSpaceGuid.PcdNvmeRaidEnabled|0x00|UINT8|0x20000034
+
+  # Wake on Voice
+  gAmdCpmPkgTokenSpaceGuid.PcdWakeOnVoiceEnabled|FALSE|BOOLEAN|0x20000035
+
+  # USB4 OSC control
+  # _OSC GUID:23A0D13A-26AB-486C-9C5F-0FFA525A575A
+  # BIT0 - USB Tunneling
+  # BIT1 - DisplayPort Tunneling
+  # BIT2 - PCI Express Tunneling
+  # BIT3 - Inter-domain USB4
+  # 0xFF - Not report USB4 OSC
+  gAmdCpmPkgTokenSpaceGuid.PcdUsb4PlatformOSCControl|0xFF|UINT8|0x20000036
+
+  # Non Z10 Capable Pcie Zstate support
+  gAmdCpmPkgTokenSpaceGuid.NonZ10CapPcieZstateSupport|FALSE|BOOLEAN|0x20000037
+
+  # Record the address for SMM communication
+  gAmdCpmPkgTokenSpaceGuid.PcdPbsSmmCommunicationAddress|0|UINT64|0x20000038
+
+  gAmdCpmPkgTokenSpaceGuid.PcdSoundWireSsdtSupport|0x00|UINT8|0x20000039
+# Amd Variable Protection Control
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdVariableProtection|TRUE|BOOLEAN|0x20000057

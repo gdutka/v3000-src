@@ -1,0 +1,47 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdBaseLib
+  FILE_GUID                      = 49895416-27E9-4453-B528-5D6E0425772A
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdBaseLib
+
+[Sources.common]
+  AmdBaseLib.c
+
+[Sources.IA32]
+  Ia32/AmdBaseLib32.nasm
+  Ia32/ms_shift.asm | MSFT
+  Ia32/msmemcpy.asm | MSFT
+
+[Sources.X64]
+  x64/AmdBaseLib64.nasm
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  BaseLib
+  IdsLib
+  IoLib
+  PciLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+
+[Depex]
+
+

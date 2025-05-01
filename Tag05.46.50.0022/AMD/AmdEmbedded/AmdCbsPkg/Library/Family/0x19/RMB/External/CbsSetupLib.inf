@@ -1,0 +1,72 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CbsSetupLibInstance
+  FILE_GUID                      = 459DA508-2545-4B34-A45A-4BDB1BE3343D
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CbsSetupLib
+
+[Sources]
+  CbsSetupLib/CbsSetupLib.c
+  CbsSetupLib/CbsCustomCorePstates.c
+  CbsSetupLib/CbsCustomCorePstates.h
+  CbsFuncLib/CbsBaseLib.c
+  CbsFuncLib/CbsComboFlag.c
+  ../../../../../Build/ResourceRMB/ApcbSetDataRMB.c
+  ../../../../../Build/ResourceRMB/AmdCbsDefault.c
+  ../../../../../Build/ResourceRMB/AmdCbsForm.vfr
+  ../../../../../Build/ResourceRMB/AmdCbsStrings.uni
+  ../../../../../Build/ResourceRMB/AmdCbsFormID.h
+  ../../../../../Build/ResourceRMB/AmdCbsVariable.h
+
+[LibraryClasses]
+  AmdPspBaseLibV2
+  BaseLib
+  AmdPspMboxLibV2
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaFamily17ModulePkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+
+[Guids]
+  gAmdCbsFormsetIDGuid
+  gEfiIfrTianoGuid                  #Consumes
+
+[Protocols]
+  gAmdNbioSmuServicesProtocolGuid         #CONSUME
+  gAmdApcbDxeServiceProtocolGuid          #CONSUME
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSmuFeatureControlDefines
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdScpcLevel
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetIdentifiedId
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetVisableFlag0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdChipsetVisableFlag1
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdPsppPolicy
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgIommuSupport
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdCfgAzaliaEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAntiRollbackInitialSpl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAntiRollbackLateSplFuse
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessNicDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessKvmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessTcrEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWiredNicDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWiredKvmEnable
+
+[FixedPcd]
+  gAmdCbsPkgTokenSpaceGuid.PcdAmdCbsVariableAttribute

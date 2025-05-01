@@ -1,0 +1,51 @@
+## @file
+#  Library Implementation for FchSpiAccessLib
+#
+#******************************************************************************
+#* Copyright 2020 Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchMmioSpiAccessLib
+  FILE_GUID                      = 6C11DCB8-414D-47b7-B485-9CA369CD1558
+  MODULE_TYPE                    = BASE
+  LIBRARY_CLASS                  = FchMmioSpiAccessLib
+
+[Sources]
+  FchMmioSpiAccessLib.c
+  SpiAccessCommon.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  #$(AGESA_PKG_PATH)/$(AGESA_PKG_DEC).dec
+  $(AGESA_PKG_PATH)/AgesaCommonModulePkg.dec
+  $(FCH_PKG_PATH)/$(FCH_PKG_DEC).dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+
+[LibraryClasses]
+  BaseLib
+  IoLib
+  PciLib
+  BaseMemoryLib
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.PcdBiosImageInBottomSpiRom
+  gInsydeTokenSpaceGuid.PcdFlashAreaBaseAddress
+
+[Guids]
+
+[FeaturePcd]
+  gChipsetPkgTokenSpaceGuid.PcdSpiMmioAccessEnable
+  gChipsetPkgTokenSpaceGuid.PcdSpiRomEntry4ByteAddressMode
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /Od

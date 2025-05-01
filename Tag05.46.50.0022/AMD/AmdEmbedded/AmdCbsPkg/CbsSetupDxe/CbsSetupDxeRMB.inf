@@ -1,0 +1,67 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CbsSetupDxeRMB
+  FILE_GUID                      = 372079F5-0070-4907-922A-4C18A1F562A2
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CbsSetupDxeInit
+
+[Sources]
+  CbsSetupDxe.c
+  CbsSetupDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+#[-start-220906-IB14740262-add]#
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+#[-end-220906-IB14740262-add]#
+
+[LibraryClasses]
+  BaseLib
+  AmdBaseLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  HiiLib
+  PrintLib
+  UefiLib
+  CbsSetupLib
+  AmdPspBaseLibV2
+  AmdPspApobLib
+  ApobCommonServiceLib
+
+[Guids]
+  gEfiIfrTianoGuid                              ## CONSUMES ## Guid
+  gCbsSystemConfigurationGuid                   ## PRODUCES
+
+[Protocols]
+  gEfiHiiStringProtocolGuid                     ## CONSUMES
+  gEfiHiiConfigRoutingProtocolGuid              ## CONSUMES
+  gEfiHiiConfigAccessProtocolGuid               ## PRODUCES
+  gEfiHiiDatabaseProtocolGuid                   ## CONSUMES
+  gCbsSetupProtocolGuid                         ## CONSUMES
+  gAmdApcbDxeServiceProtocolGuid                ## CONSUMES
+#[-start-220906-IB14740262-add]#
+  gH2OCbsApcbSyncDoneProtocolGuid
+#[-end-220906-IB14740262-add]#
+
+[FixedPcd]
+  gAmdCbsPkgTokenSpaceGuid.PcdAmdCbsVariableAttribute
+
+[Depex]
+  gEfiHiiDatabaseProtocolGuid AND gEfiVariableArchProtocolGuid AND gEfiVariableWriteArchProtocolGuid AND gPspFlashAccSmmCommReadyProtocolGuid
+

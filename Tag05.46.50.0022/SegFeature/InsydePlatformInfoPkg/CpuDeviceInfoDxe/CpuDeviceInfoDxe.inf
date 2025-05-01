@@ -1,0 +1,77 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2020 - 2024, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                          = 0x00010005
+  BASE_NAME                            = CpuDeviceInfoDxe
+  FILE_GUID                            = 0F92508B-F17C-4EFB-8722-BCA5531F8B53
+  MODULE_TYPE                          = DXE_DRIVER
+  VERSION_STRING                       = 1.0
+  ENTRY_POINT                          = CpuDeviceInfoEntry
+
+[Sources]
+  CpuDeviceInfoDxe.h
+  CpuDeviceInfoDxe.c
+
+[Sources.X64]
+  X64/CpuDeviceInfo.h
+  X64/CpuDeviceInfo.c
+
+[Sources.AARCH64]
+  AArch64/CpuDeviceInfo.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  BaseLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  PrintLib
+  DebugLib
+  H2OCpLib
+  CpuMiscLib
+  SmbiosCommonLib
+
+[LibraryClasses.X64]
+  PciLib
+
+[Guids]
+  gH2OBdsCpDisplayBeforeGuid
+
+[Protocols]
+  gEfiSmbiosProtocolGuid          ## CONSUMES
+  gH2OCpuDeviceInfoProtocolGuid   ## PRODUCES
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpDisplayBeforeSupported
+
+[FixedPcd.X64]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OIntelMsrRaplPwrUnitAddress
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OIntelMsrPkgPwrLimitAddress
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdBiosSmcMsgTdpRequestId
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgMessageAddress
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgResponseAddress
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument0Address
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument1Address
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument2Address
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument3Address
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument4Address
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OAmdMp1C2pmsgArgument5Address
+
+[Depex]
+  TRUE

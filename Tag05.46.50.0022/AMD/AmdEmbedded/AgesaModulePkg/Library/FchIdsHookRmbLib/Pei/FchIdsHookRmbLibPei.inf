@@ -1,0 +1,43 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = FchIdsHookRmbLibPei
+  FILE_GUID                      = a64ef2b2-9934-4b6f-a3a5-65ca87d93296
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = FchIdsHookRmbLibPei
+
+[Sources.common]
+  FchIdsHookRmbLibPei.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  AmdIdsDebugPrintLib
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+[FeaturePcd]
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciUsb3PortDisable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdXhciUsb2PortDisable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdUsbOemConfigurationTableAuto
+
+[Depex]
+  TRUE
+
+[BuildOptions]

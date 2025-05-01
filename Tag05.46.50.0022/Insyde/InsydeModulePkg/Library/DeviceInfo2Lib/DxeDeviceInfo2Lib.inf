@@ -1,0 +1,50 @@
+## @file
+#  Component description file for the Device Information library.
+#
+#******************************************************************************
+#* Copyright (c) 2019 - 2020, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DeviceInfo2Lib
+  FILE_GUID                      = 1457BF66-C917-42a5-9DF7-D7BAB371D2AF
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DeviceInfo2Lib
+  CONSTRUCTOR                    = DeviceInfo2LibInitialize
+
+[Sources]
+  DeviceInfo2LibShare.c
+  DxeDeviceInfo2Lib.c
+  DeviceInfo2LibInternal.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  MemoryAllocationLib
+  PcdLib
+  UefiBootServicesTableLib
+  SmmServicesTableLib
+  BaseMemoryLib
+  DevicePathLib
+
+[Protocols]
+  gEfiSmmBase2ProtocolGuid
+
+[Guids]
+
+[Pcd]
+  gH2ODeviceInfo2TokenSpaceGuid
+

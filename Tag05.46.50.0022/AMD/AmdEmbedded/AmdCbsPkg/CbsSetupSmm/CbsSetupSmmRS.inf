@@ -1,0 +1,50 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CbsSetupSmmRs
+  FILE_GUID                      = 96e9ca61-6c2e-4ff3-b265-f21904c44181
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = CbsSetupSmmInit
+
+[Sources]
+  CbsSetupSmm.c
+  CbsSetupSmm.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCbsPkg/AmdCbsPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  DebugLib
+  CbsSetupLib
+  SmmServicesTableLib
+  SmmMemLib
+
+[Pcd]
+   gAmdCbsPkgTokenSpaceGuid.PcdCbsSmmCommunicationAddress
+   gAmdCbsPkgTokenSpaceGuid.PcdCbsSmmCommunicationBufferSize
+
+[Guids]
+  gCbsSystemConfigurationGuid                   ## PRODUCES
+
+[Protocols]
+  gCbsProtocolGuid
+  gCbsSetupProtocolGuid                         ## CONSUMES
+  gAmdApcbSmmServiceProtocolGuid                ## CONSUMES
+
+[Depex]
+  TRUE
+

@@ -1,0 +1,29 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchSpiAccessRomV2Null
+  FILE_GUID                      = 2a70b4c7-c00c-43b2-aa15-97bbd802da77
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = FchSpiAccessLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  FchSpiAccessCommon.c
+  FchSpiAccessRomV2Null.c
+
+[Packages]
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]

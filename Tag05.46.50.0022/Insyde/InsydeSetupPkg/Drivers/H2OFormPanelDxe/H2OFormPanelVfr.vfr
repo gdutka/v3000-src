@@ -1,0 +1,347 @@
+/** @file
+
+  H2O Form Panel Configuration DXE VFR implementation.
+
+;******************************************************************************
+;* Copyright (c) 2019, Insyde Software Corporation. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+
+#include "H2OFormPanelConfig.h"
+#include "Format.hfr"
+
+formset
+  guid      = H2O_FORM_PANEL_FORMSET_ID,
+  title     = STRING_TOKEN(STR_H2O_FORM_PANEL_TITLE),
+  help      = STRING_TOKEN(STR_H2O_FORM_PANEL_TITLE),
+  classguid = H2O_FORM_PANEL_FORMSET_CLASS_ID,
+
+  efivarstore H2O_FORM_PANEL_CONFIGURATION,
+    varid = H2O_FORM_PANEL_CONFIGURATION_VARSTORE_ID,
+    attribute = 0x07, // EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS
+    name  = H2OFormPanelConfig,
+    guid  = H2O_FORM_PANEL_CONFIGURATION_GUID;
+
+  form
+    formid = H2O_FORM_PANEL_FORM_ID_ROOT, title = STRING_TOKEN(STR_H2O_FORM_PANEL_TITLE);
+
+    modal;
+
+    text
+      help    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      image   = IMAGE_TOKEN (IMG_BKG),
+      property {
+        width  : 100%;
+        height : 100%;
+        top    : 0px;
+        left   : 0px;
+      }
+      ;
+
+    text
+      help    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      image   = IMAGE_TOKEN (IMG_LOGO),
+      property {
+        width  : 180px;
+        height : 50px;
+        top    : 10px;
+        left   : 10px;
+      }
+      ;
+
+    text
+      help    = STRING_TOKEN(STR_PROCESSOR_SYSTEM_INFO),
+      text    = STRING_TOKEN(STR_PROCESSOR_SYSTEM_INFO),
+      text    = STRING_TOKEN(STR_BLANK),
+      property {
+        color     : black;
+        font-size : 9;
+        width     : 180px;
+        height    : 2px;
+        top       : 60px;
+        left      : 10px;
+      }
+      ;
+
+    text
+      help    = STRING_TOKEN(STR_MEMORY_SYSTEM_INFO),
+      text    = STRING_TOKEN(STR_MEMORY_SYSTEM_INFO),
+      text    = STRING_TOKEN(STR_BLANK),
+      property {
+        color     : black;
+        font-size : 9;
+        width     : 180px;
+        height    : 2px;
+        top       : 70px;
+        left      : 10px;
+      }
+      ;
+
+    text
+      help    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      image   = IMAGE_TOKEN (IMG_CLOCK),
+      property {
+        width  : 36px;
+        height : 36px;
+        top    : 10px;
+        left   : 250px;
+      }
+      ;
+
+    //
+    // Date
+    //
+    action
+      questionid  = DATE_REFRESH_QUESTION_ID,
+      prompt      = STRING_TOKEN(STR_DATE_VALUE),
+      help        = STRING_TOKEN(STR_DATE_VALUE),
+      flags       = INTERACTIVE,
+      config      = STRING_TOKEN(STR_BLANK),
+      text        = STRING_TOKEN(STR_DATE_VALUE),
+      refresh interval = 1
+      property {
+        color     : 0xFFC69842;
+        font-size : 18;
+        width     : 120px;
+        height    : 20px;
+        top       : 10px;
+        left      : 300px;
+      },
+    endaction;
+
+    //
+    // Week
+    //
+    action
+      questionid  = WEEK_REFRESH_QUESTION_ID,
+      prompt      = STRING_TOKEN(STR_WEEKDAY_PROMPT),
+      help        = STRING_TOKEN(STR_WEEKDAY_PROMPT),
+      flags       = INTERACTIVE,
+      config      = STRING_TOKEN(STR_BLANK),
+      text        = STRING_TOKEN(STR_WEEKDAY_PROMPT),
+      refresh interval = 1
+      property {
+        color     : 0xFFC69842;
+        font-size : 18;
+        width     : 80px;
+        height    : 20px;
+        top       : 30px;
+        left      : 300px;
+      },
+    endaction;
+
+    //
+    // Time
+    //
+    action
+      questionid  = TIME_REFRESH_QUESTION_ID,
+      prompt      = STRING_TOKEN(STR_TIME_VALUE),
+      help        = STRING_TOKEN(STR_TIME_VALUE),
+      flags       = INTERACTIVE,
+      config      = STRING_TOKEN(STR_BLANK),
+      text        = STRING_TOKEN(STR_TIME_VALUE),
+      refresh interval = 1
+      property {
+        color     : black;
+        font-size : 20;
+        width     : 120px;
+        height    : 20px;
+        top       : 50px;
+        left      : 300px;
+      },
+    endaction;
+
+    text
+      help    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      image   = IMAGE_TOKEN (IMG_SEPARATOR),
+      property {
+        width  : 22px;
+        height : 80px;
+        top    : 10px;
+        left   : 435px;
+      }
+      ;
+
+    text
+      help    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      image   = IMAGE_TOKEN (IMG_TEMPERATURE),
+      property {
+        width  : 36px;
+        height : 36px;
+        top    : 10px;
+        left   : 470px;
+      }
+      ;
+
+    text
+      help    = STRING_TOKEN(STR_MAINBOARD_PROMPT),
+      text    = STRING_TOKEN(STR_MAINBOARD_PROMPT),
+      text    = STRING_TOKEN(STR_BLANK),
+      property {
+        color     : 0xFFC69842;
+        font-size : 18;
+        width     : 150px;
+        height    : 20px;
+        top       : 10px;
+        left      : 510px;
+      }
+      ;
+
+    text
+      help    = STRING_TOKEN(STR_SYSTEM_PROMPT),
+      text    = STRING_TOKEN(STR_SYSTEM_PROMPT),
+      text    = STRING_TOKEN(STR_BLANK),
+      property {
+        color     : 0xFFC69842;
+        font-size : 18;
+        width     : 150px;
+        height    : 20px;
+        top       : 30px;
+        left      : 510px;
+      }
+      ;
+
+    //
+    // Main board temperature
+    //
+    action
+      questionid  = MAIN_BOARD_TEMPERATURE_REFRESH_QUESTION_ID,
+      prompt      = STRING_TOKEN(STR_MAINBOARD_TEMPERATURE_VALUE),
+      help        = STRING_TOKEN(STR_MAINBOARD_TEMPERATURE_VALUE),
+      flags       = INTERACTIVE,
+      config      = STRING_TOKEN(STR_BLANK),
+      text        = STRING_TOKEN(STR_MAINBOARD_TEMPERATURE_VALUE),
+      refresh interval = 1
+      property {
+        color     : black;
+        font-size : 43;
+        width     : 120px;
+        height    : 20px;
+        top       : 50px;
+        left      : 500px;
+      },
+    endaction;
+
+    text
+      help    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      image   = IMAGE_TOKEN (IMG_SEPARATOR),
+      property {
+        width  : 22px;
+        height : 80px;
+        top    : 10px;
+        left   : 635px;
+      }
+      ;
+
+    text
+      help    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      image   = IMAGE_TOKEN (IMG_TEMPERATURE),
+      property {
+        width  : 36px;
+        height : 36px;
+        top    : 10px;
+        left   : 670px;
+      }
+      ;
+
+    text
+      help    = STRING_TOKEN(STR_CPU_PROMPT),
+      text    = STRING_TOKEN(STR_CPU_PROMPT),
+      text    = STRING_TOKEN(STR_BLANK),
+      property {
+        color     : 0xFFC69842;
+        font-size : 18;
+        width     : 150px;
+        height    : 20px;
+        top       : 10px;
+        left      : 710px;
+      }
+      ;
+
+    text
+      help    = STRING_TOKEN(STR_CPU_TEMPERATURE_PROMPT),
+      text    = STRING_TOKEN(STR_CPU_TEMPERATURE_PROMPT),
+      text    = STRING_TOKEN(STR_BLANK),
+      property {
+        color     : 0xFFC69842;
+        font-size : 18;
+        width     : 150px;
+        height    : 20px;
+        top       : 30px;
+        left      : 710px;
+      }
+      ;
+
+    action
+      questionid  = CPU_TEMPERATURE_REFRESH_QUESTION_ID,
+      prompt      = STRING_TOKEN(STR_CPU_TEMPERATURE_VALUE),
+      help        = STRING_TOKEN(STR_CPU_TEMPERATURE_VALUE),
+      flags       = INTERACTIVE,
+      config      = STRING_TOKEN(STR_BLANK),
+      text        = STRING_TOKEN(STR_CPU_TEMPERATURE_VALUE),
+      refresh interval = 1
+      property {
+        color     : black;
+        font-size : 43;
+        width     : 120px;
+        height    : 20px;
+        top       : 50px;
+        left      : 700px;
+      },
+    endaction;
+
+    text
+      help    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      text    = STRING_TOKEN(STR_BLANK),
+      image   = IMAGE_TOKEN (IMG_LOGO_BIG),
+      property {
+        width  : 100px;
+        height : 84px;
+        top    : 10px;
+        left   : 900px;
+      }
+      ;
+
+  endform;
+
+  form
+    formid = H2O_FORM_PANEL_FORM_ID_LAST, title = STRING_TOKEN(STR_BLANK);
+
+    subtitle text = STRING_TOKEN(STR_BLANK);
+
+    numeric
+      varid   = H2OFormPanelConfig.Empty,
+      prompt  = STRING_TOKEN(STR_BLANK),
+      help    = STRING_TOKEN(STR_BLANK),
+      flags   = 0,
+      minimum = 0,
+      maximum = 0xff,
+      step    = 1,
+      default = 0,
+    endnumeric;
+
+  endform;
+
+endformset;
+

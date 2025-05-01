@@ -1,0 +1,100 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdCcxZen3Pei
+  FILE_GUID                      = E947CBDB-858A-423e-95F6-019D1814DE2A
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdCcxZen3PeiInit
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  AmdBaseLib
+  IdsLib
+  CcxBaseX86Lib
+  CcxRolesLib
+  CcxResetTablesLib
+  CcxApicZen3Lib
+  AmdIdsHookLib
+  CcxZen3IdsHookLibPei
+  FchBaseLib
+  AmdCapsuleLib
+  AmdPspApobLib
+  BaseMemoryLib
+  AmdErrorLogLib
+  ApobCommonServiceLib
+  MemRestoreLib
+  CcxSetMcaLib
+
+[sources]
+  AmdCcxZen3Pei.c
+  CcxZen3BrandString.c
+  CcxZen3BrandString.h
+  CcxZen3CacheInit.c
+  CcxZen3CacheInit.h
+  CcxZen3DownCoreInit.c
+  CcxZen3DownCoreInit.h
+
+[Guids]
+  gApSyncFlagNvVariableGuid
+  gEfiAmdAgesaSpecificWarmResetGuid
+
+[Protocols]
+
+[Ppis]
+  gAmdFabricTopologyServices2PpiGuid #CONSUMED
+  gAmdCcxPeiInitCompletePpiGuid      #PRODUCED
+  gAmdCoreTopologyServicesV2PpiGuid  #CONSUMED
+  gAmdNbioSmuServicesPpiGuid         #CONSUMED
+  gAmdErrorLogPpiGuid                #CONSUMED
+  gAmdSocZen3ServicesPpiGuid         #CONSUMED
+  gEfiPeiReset2PpiGuid               #CONSUMED
+  gEfiPeiReadOnlyVariable2PpiGuid    #CONSUMED
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCcdMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDownCoreMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmtMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiS3Support
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdLN2ModeEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCStateMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdApicMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd6
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd7
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGameMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspS3WakeFromSmm
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdNewDownCoreSequence
+
+[Depex]
+  gAmdCcxZen3DepexPpiGuid AND
+  gAmdFabricTopologyServices2PpiGuid AND
+  gAmdCoreTopologyServicesV2PpiGuid AND
+  gAmdNbioSmuServicesPpiGuid AND
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gApobCommonServicePpiGuid
+

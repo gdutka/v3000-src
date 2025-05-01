@@ -1,0 +1,189 @@
+/**
+ * @file
+ *
+ * ALIB ASL library
+ *
+ *
+ *
+ * @xrefitem bom "File Content Label" "Release Content"
+ * @e project:     AGESA
+ * @e sub-project: NBIO
+ * @e \$Revision: 309090 $   @e \$Date: 2014-12-10 02:28:05 +0800 (Wed, 10 Dec 2014) $
+ *
+ */
+/*
+*****************************************************************************
+*
+* Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+*
+* ***************************************************************************
+*
+*/
+
+  /*----------------------------------------------------------------------------------------*/
+  /**
+   *  A+A feature
+   *
+   *
+   *  Arg0 - buffer contains Power or thermal parameters
+   */
+  Method (procAPlusAFeature, 1, Serialized) {
+    if (LEqual (PeApmEnable, ENABLE)) {
+      ALIB_DEBUG ("procPeApmFeature - Enable")
+      Store (0, Local0)
+      while (LLess (Local0, NUM_OF_PORTS)) {
+        procAplusAFeaturePort (Local0, Arg0)
+        Increment (Local0)
+      }
+    }
+  }
+
+  /*----------------------------------------------------------------------------------------*/
+  /**
+   *  A+A Service Request Interface
+   *
+   *
+   *  Arg0 - A+A Service Request #
+   *  Arg1 - SMU Request Arg0
+   *  Arg2 - SMU Request Arg1
+   */
+    Method (procAPlusAServiceReq, 3) {
+      ALIB_DEBUG (Concatenate ("procAPlusAServiceReq ", ToHexString (Arg0), ADBG))
+      // Local7 as an input buffer and passed to procSmuServiceReq
+      Store (Buffer (24) {}, Local7)
+      CreateDWordField (Local7, 0,  varSmuArg0)
+      CreateDWordField (Local7, 4,  varSmuArg1)
+      CreateDWordField (Local7, 8,  varSmuArg2)
+      CreateDWordField (Local7, 12, varSmuArg3)
+      CreateDWordField (Local7, 16, varSmuArg4)
+      CreateDWordField (Local7, 20, varSmuArg5)
+      Store (Arg1, varSmuArg0)
+      Store (Arg2, varSmuArg1)
+      procSmuServiceReq (Arg0, Local7)
+    }
+
+  /*----------------------------------------------------------------------------------------*/
+  /**
+   *  A+A feature for PCIe port
+   *
+   *  Arg0 - port index
+   */
+  Method (procAplusAFeaturePort, 2) {
+  ALIB_DEBUG (Concatenate (" procAplusAFeaturePort Port  ", ToHexString (Arg0), ADBG))
+  #ifdef BR0
+    if (LEqual(Arg0, 0)) {
+      return (BR0.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  #ifdef BR1
+    if (LEqual(Arg0, 1)) {
+      return (BR1.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  #ifdef BR2
+    if (LEqual(Arg0, 2)) {
+      return (BR2.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  #ifdef BR3
+    if (LEqual(Arg0, 3)) {
+      return (BR3.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  #ifdef BR4
+    if (LEqual(Arg0, 4)) {
+      return (BR4.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  #ifdef BR5
+    if (LEqual(Arg0, 5)) {
+      return (BR5.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  #ifdef BR6
+    if (LEqual(Arg0, 6)) {
+      return (BR6.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  #ifdef BR7
+    if (LEqual(Arg0, 7)) {
+      return (BR7.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  #ifdef BR8
+    if (LEqual(Arg0, 8)) {
+      return (BR8.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  #ifdef BR9
+    if (LEqual(Arg0, 9)) {
+      return (BR9.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  #ifdef BR10
+    if (LEqual(Arg0, 10)) {
+      return (BR10.procPciePortAPlusA (Arg1))
+    }
+  #endif
+  }
+
+  /*----------------------------------------------------------------------------------------*/
+  /**
+   *  Manage ALibAplusA
+   *
+   *
+   *  Arg0 - buffer contains A plus A parameters
+   */
+  Method (procALibAplusA, 1, Serialized) {
+
+    Store (0, Local0)                             // Use Local0 as buffer index
+    Store (DeRefOf (Index (Arg0, Local0)), Local6)
+
+    Store (Buffer (24) {}, Local7)                // Local7 as an input buffer and passed to procGnbSmuServiceReq
+    CreateDWordField (Local7, 0,  varSmuArg0)
+    CreateDWordField (Local7, 4,  varSmuArg1)
+    CreateDWordField (Local7, 8,  varSmuArg2)
+    CreateDWordField (Local7, 12, varSmuArg3)
+    CreateDWordField (Local7, 16, varSmuArg4)
+    CreateDWordField (Local7, 20, varSmuArg5)
+
+    Store (2, Local0)                             // Use Local0 as buffer index
+
+    Store (DeRefOf (Index (Arg0, Local0)), Local1)
+    Increment (Local0)
+    Store (DeRefOf (Index (Arg0, Local0)), Local2)
+    Increment (Local0)
+    Or (ShiftLeft (DeRefOf (Index (Arg0, Local0)), 8), Local2, Local2)
+
+    Store (0, varSmuArg0)
+    Store (0, varSmuArg1)
+    Store (0, varSmuArg2)
+    Store (0, varSmuArg3)
+    Store (0, varSmuArg4)
+    Store (0, varSmuArg5)
+
+    // dGPUAddress (WORD) - This value identifies the PCI address of the dGPU. If this value is 0x0000 then ALIB will attempt to locate the dGPU based on device class.
+    //Bits 2-0: Function number, always 0.
+    //Bits 7-3: Device number.
+    //Bits 15-8: Bus numbe
+
+    if (LEqual (Local1, 0x0)) {   //0x0 - DISABLE
+      Store (Local2, varSmuArg0)
+      procAPlusAFeature(0)
+    }
+
+    if (LEqual (Local1, 0x1)) {   //0x1 - ENABLE
+      Store (Local2, varSmuArg0)
+      procAPlusAFeature (1)
+    }
+
+    if (LEqual (Local1, 0x2)) {   //0x2 - Start GPU
+      Store (Local2, varSmuArg0)
+      procSmuServiceReq (0x27, Local7)    // BIOSSMC_MSG_StartGpuLink
+    }
+
+    if (LEqual (Local1, 0x3)) {   //0x3 - Stop GPU
+      Store (Local2, varSmuArg0)
+      procSmuServiceReq (0x28, Local7)    // BIOSSMC_MSG_StopGpuLink
+    }
+  }

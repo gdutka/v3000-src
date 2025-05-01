@@ -1,0 +1,97 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+INF RuleOverride = ACPITABLE AmdCpmPkg/Kernel/Asl/AmdCpm3InitAsl.inf
+INF AmdCpmPkg/Kernel/Dxe/AmdCpm3InitDxe.inf
+INF AmdCpmPkg/Kernel/Smm/AmdCpm3InitSmm.inf
+
+INF RuleOverride = DRIVER_ACPITABLE AmdCpmPkg/Features/AcpPowerGating/Dxe/AmdCpmAcpPowerGatingDxe.inf
+INF RuleOverride = DRIVER_ACPITABLE AmdCpmPkg/Features/DisplayFeature/Dxe/AmdCpm3DisplayFeatureDxe.inf
+INF AmdCpmPkg/Features/DisplayFeature/Smm/AmdCpm3DisplayFeatureSmm.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Features/ZeroPowerOdd/Asl/Fm17/AmdCpm3ZeroPowerOddFm17Asl.inf
+INF AmdCpmPkg/Features/ZeroPowerOdd/Dxe/AmdCpm3ZeroPowerOddDxe.inf
+#INF RuleOverride = ACPITABLE AmdCpmPkg/Features/PcieInit/Asl/ExpressCard/AmdCpmExpressCardAsl.inf
+#INF RuleOverride = ACPITABLE AmdCpmPkg/Features/PcieInit/Asl/LowPowerEthernet/AmdCpmLowPowerEthernetAsl.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Features/PcieInit/Asl/WirelessLanRecovery/AmdCpmWirelessLanRecoveryAsl.inf
+#INF RuleOverride = ACPITABLE AmdCpmPkg/Features/PcieInit/Asl/OtherHotplug/AmdCpmOtherHotplugAsl.inf
+#INF RuleOverride = ACPITABLE AmdCpmPkg/Features/PcieInit/Asl/WirelessButton/AmdCpmWirelessButtonAsl.inf
+INF AmdCpmPkg/Features/PcieInit/Dxe/AmdCpm3PcieInitDxe.inf
+INF AmdCpmPkg/Features/GpioInit/Dxe/AmdCpm3GpioInitDxe.inf
+INF AmdCpmPkg/Features/GpioInit/Smm/AmdCpm3GpioInitSmm.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Features/EcInit/Asl/AmdCpm3EcInitAsl.inf
+INF AmdCpmPkg/Features/EcInit/Dxe/AmdCpm3EcInitDxe.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Features/Ucsi/Asl/AmdCpm3UcsiAsl.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Features/Ucsi/Asl/AmdCpm3Ucsi3PortsAsl.inf
+INF AmdCpmPkg/Features/Ucsi/Dxe/AmdCpm3UcsiDxe.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Features/SensorFusion/Asl/AmdCpm3SensorFusionAsl.inf
+INF AmdCpmPkg/Features/SensorFusion/Dxe/AmdCpm3SensorFusionDxe.inf
+INF AmdCpmPkg/Features/ModernStandbyFeature/Dxe/AmdCpmModernStandbyFeatureDxe.inf
+INF RuleOverride = DRIVER_ACPITABLE AmdCpmPkg/Features/PlatformOsc/AmdCpmPlatformOscTableInstall.inf
+INF RuleOverride = DRIVER_ACPITABLE AmdCpmPkg/Features/ModernStandbyFeature/Dxe/AmdCpmModernStandbyAcpiTableInstall.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Features/WirelessButtonHid/Asl/WirelessButtonHid.inf
+INF AmdCpmPkg/Features/WirelessButtonHid/Dxe/AmdCpmWirelessButtonHidDxe.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Features/PMF/Asl/AmdCpmPmfAsl.inf
+INF AmdCpmPkg/Features/PMF/Dxe/AmdCpmPmfDxe.inf
+INF AmdCpmPkg/Features/PciHotPlugInit/Dxe/AmdCpmPciHotPlugInitDxe.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Features/I2cMaster/Dxe/AmdI2cMasterDxe.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Features/xGbEI2cMaster/xGbEI2cMasterDxe.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Devices/Pca9535a/Dxe/Pca9535aDxe.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Devices/Pca9545a/Dxe/Pca9545aDxe.inf
+
+INF RuleOverride = DRIVER_ACPITABLE AmdCpmPkg/Addendum/Oem/Fox/Dxe/AmdCpmOemAcpi/AmdCpmOemAcpi.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Dxe/PspPlatformDriver/PspPlatform.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Dxe/AmdPbsSetupDxe/AmdPbsSetupDxe.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Dxe/AmdCpmOemInitDxe/AmdCpmOemInitDxe.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Smm/AmdCpmOemSmm.inf
+
+!if $(MODERN_STANDBY_SUPPORT) == YES
+INF RuleOverride = ACPITABLE AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmModernStandbyFeature/Asl/Gpp0/AmdCpmGpp0Asl.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmModernStandbyFeature/Asl/Nvme/AmdCpmNvmeD3Asl.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmModernStandbyFeature/Asl/Nvme/AmdCpmNvmeRtd3Asl.inf
+#INF RuleOverride = ACPITABLE AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmModernStandbyFeature/Asl/GppMs/AmdCpmGppMsAsl.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmModernStandbyFeature/Asl/uPEP/AmdCpmUpepAsl.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmModernStandbyFeature/Dxe/AmdCpmModernStandbyInitDxe/AmdCpmModernStandbyInitDxe.inf
+!endif
+#INF RuleOverride = ACPITABLE AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmWwanFeature/Asl/Wwan/AmdCpmWwanFibocomL860RPlusAsl.inf
+#INF AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmWwanFeature/Dxe/AmdCpmWwanInitDxe/AmdCpmWwanInitDxe.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmPmfBoard/Asl/AmdCpmPmfBoardAsl.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmPmfBoard/Dxe/AmdCpmPmfBoardDxe.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Dxe/AmdXgbeWorkaround/AmdXgbeWorkaround.inf
+
+#!endif
+
+# AOD
+
+INF RuleOverride = DRIVER_ACPITABLE AmdCpmPkg/Features/AODv2/Dxe/AodDxe.inf
+INF AmdCpmPkg/Features/AODv2/Smm/AodSmm.inf
+
+
+
+
+## AMD AIMT ASF
+#INF AmdCpmPkg/Features/AIMT/Asf/AsfDxe/AsfDxe.inf
+
+#
+# MPM Battery Info
+#
+INF AmdCpmPkg/Addendum/Oem/Fox/Dxe/PlatformDataCollection/PlatformBatteryInfo/PlatformBatteryInfoDxe.inf
+
+#
+# MPM Sensor Info
+#
+INF AmdCpmPkg/Addendum/Oem/Fox/Dxe/PlatformDataCollection/PlatformSensorInfo/PlatformSensorInfoDxe.inf
+INF RuleOverride = DRIVER_ACPITABLE AmdCpmPkg/Addendum/Oem/Fox/Features/Mpm/AmdMpmSensor.inf
+
+INF AmdCpmPkg/Features/ABRecovery/Smm/AmdCpmABRecoverySmm.inf
+
+INF AmdCpmPkg/Features/ABRecovery/Dxe/AmdCpmABRecoveryDxe.inf
+
+INF RuleOverride = DRIVER_ACPITABLE AmdCpmPkg/Features/SoundWire/Dxe/AmdCpmSoundWireDxe.inf
+INF AmdCpmPkg/Addendum/Oem/Fox/Dxe/MemTest/MemTest.inf
+INF AmdCpmPkg/Features/AmdVariableProtection/AmdVariableProtection.inf
+
+INF AmdCpmPkg/Features/PlatformRas/Rmb/Dxe/AmdPlatformRasRmbDxe.inf
+INF RuleOverride = ACPITABLE AmdCpmPkg/Features/PlatformRas/Rmb/Asl/PlatformRasRmbAsl.inf

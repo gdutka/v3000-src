@@ -1,0 +1,58 @@
+## @file
+#  Component description file for H2OCpSampleBds Driver.
+#
+#******************************************************************************
+#* Copyright (c) 2017, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = H2OCpSampleBds
+  FILE_GUID                      = C2B40C81-4F96-4cf6-B0A7-E3543FB08B12
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = H2OCpSampleBdsEntryPoint
+
+
+[Sources]
+  H2OCpSampleBds.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  UefiLib
+  DebugLib
+  BaseLib
+  BaseMemoryLib
+  UefiDriverEntryPoint
+  PcdLib
+#[-start-H2OCpSampleBds-add]#
+  H2OCpLib
+#[-end-H2OCpSampleBds-add]#
+
+[Guids]
+#[-start-H2OCpSampleBds-add]#
+  gH2OBdsCpXxxYyyZzzGuid
+#[-end-H2OCpSampleBds-add]#
+
+
+[FeaturePcd]
+#[-start-H2OCpSampleBds-add]#
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpXxxYyyZzzSupported
+#[-end-H2OCpSampleBds-add]#
+
+[Depex]
+  TRUE
+
+

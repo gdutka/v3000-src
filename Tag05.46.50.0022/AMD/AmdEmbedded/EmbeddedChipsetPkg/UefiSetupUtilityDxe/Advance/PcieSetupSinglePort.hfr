@@ -1,0 +1,57 @@
+/** @file
+
+;******************************************************************************
+;* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;******************************************************************************
+*/
+  form
+    formid = CONCATENATE3(PCIE,PORT_INDEX,_OPTIONS_FORM_ID),
+    title  = STRING_TOKEN(CONCATENATE3(STR_PCIE,PORT_INDEX,_OPTIONS_FORM_TITLE));
+
+    oneof
+      varid       = SystemConfig.PciePortEn[PORT_INDEX],
+      prompt      = STRING_TOKEN(CONCATENATE3(STR_PCIE,PORT_INDEX,_PROMPT)),
+      help        = STRING_TOKEN(CONCATENATE3(STR_PCIE,PORT_INDEX,_HELP)),
+      option text = STRING_TOKEN(STR_DISABLED_TEXT), value = 0, flags = 0;
+      option text = STRING_TOKEN(STR_ENABLED_TEXT),  value = 1, flags = DEFAULT;
+    endoneof;
+
+    suppressif ideqval SystemConfig.PciePortEn[PORT_INDEX] == 0x0;
+      oneof varid   = SystemConfig.PciePortSpeed[PORT_INDEX],
+        prompt      = STRING_TOKEN (CONCATENATE2(STR_PCIE_SPEED_PROMPT,PORT_INDEX)),
+        help        = STRING_TOKEN (STR_PCIE_SPEED_HELP),
+        option text = STRING_TOKEN (STR_AUTO), value = 0, flags = DEFAULT;
+        option text = STRING_TOKEN (STR_GEN1), value = 1, flags = 0;
+        option text = STRING_TOKEN (STR_GEN2), value = 2, flags = 0;
+        option text = STRING_TOKEN (STR_GEN3), value = 3, flags = 0;
+        option text = STRING_TOKEN (STR_GEN4), value = 4, flags = 0;
+      endoneof;
+
+//[-start-220408-IB14740232-add]//
+      oneof varid   = SystemConfig.PciePortAspm[PORT_INDEX],
+        prompt      = STRING_TOKEN (CONCATENATE2(STR_PCIE_ASPM_PROMPT,PORT_INDEX)),
+        help        = STRING_TOKEN (STR_PCIE_ASPM_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_TEXT), value = 0, flags = 0;
+        option text = STRING_TOKEN (STR_PCIE_ASPM_L1_STRING), value = 2, flags = DEFAULT;
+      endoneof;
+
+      suppressif ideqval SystemConfig.PciePortAspm[PORT_INDEX] == 0x0;
+        oneof varid   = SystemConfig.PciePortL1SubStates[PORT_INDEX],
+          prompt      = STRING_TOKEN (CONCATENATE2(STR_PCIE_L1SUB_PROMPT,PORT_INDEX)),
+          help        = STRING_TOKEN (STR_PCIE_L1SUB_HELP),
+          option text = STRING_TOKEN (STR_DISABLED_TEXT), value = 0, flags = 0;
+          option text = STRING_TOKEN (STR_PCIE_L1SUB_1_STRING), value = 1, flags = 0;
+          option text = STRING_TOKEN (STR_PCIE_L1SUB_2_STRING), value = 2, flags = 0;
+          option text = STRING_TOKEN (STR_PCIE_L1SUB_1_2_STRING), value = 3, flags = DEFAULT;
+        endoneof;
+      endif;
+//[-end-220408-IB14740232-add]//
+    endif;
+
+  endform;

@@ -1,0 +1,153 @@
++-----------------------------------------+
+| MP2 SFH Firmware Release Notes - REMBRANDT
++-----------------------------------------+
++----------------------------------------------------------------------------------------------
+| Version 8.E.0.6
++----------------------------------------------------------------------------------------------
+|   * Date (dd/mm/yy)
+|           16/07/20
+|
+|   * Features enabled
+|       - Process 32 C2P Message Interupt
+|       - Process 6 GPIO Interupt
+|       - P2C Message Register is enabled
+|       - Support S3/S0ix Entry/Exit
+|       - Enable Z-state support
+|       - Enable Sign Firmware
+|
+|   Jira ID : [DERMBE-229] MP2 FW configuration file isnt signed in E011C BIOS
+|
+|   * Limitation
+|
++----------------------------------------------------------------------------------------------
+| Version 8.E.0.7
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           20/08/20
+|
+|   Jira ID : [PLAT-67518] [RMB] LSE Emulation Drop CL : 1294576- MP2
+|
+|   * Updated chip_offset_byte.h file only
+|
++----------------------------------------------------------------------------------------------
+| Version 8.E.2D.A
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           30/10/20
+|
+|   Jira ID : [DERMBE-480] RMB ZSC continuously aborts Z9 reentry after DCN SOC_ACCESS based Z9 exit(MP2 not idle)
+|
+|   * Set MP Busy only if any sensor processing
+|
++----------------------------------------------------------------------------------------------
+| Version 8.0.6.1
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           12/10/20
+|   Jira ID :
+|      [PLAT-70778] MP2 - AGESA FW Interface definition with Doxygen
+|      [PLAT-70779] MP2 - PM FW interface definition with Doxygen
+|
+|   * Doxygen comments updated
+|   * Clear ZSC_IF_ENABLE bit
+|
++----------------------------------------------------------------------------------------------
+| Version 8.0.6.3
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           21/01/21
+|   Jira ID :
+|      [PLAT-76410] [RMB][MP2] Update MP2 Device ID
+|      [PLAT-75480] MP2 SHUB CLK DS sideband signal mistakenly connected
+|
+|   * Update MP2 Device ID
+|   * SHUB CLK DS enable/disable during HUBIF NB request
+|
++----------------------------------------------------------------------------------------------
+| Version 8.0.6.6
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           11/02/21
+|   Jira ID :
+|      PLAT-77996 [MP2][SFH] Update config file support
+|
+|   * Optimized Config file to support platform and sensor specific parameters specific to platform.
+|   * Default sensors can be directly mounted on AMD CRB
+|
++----------------------------------------------------------------------------------------------
+| Version 8.0.7.5
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           22/05/21
+|   Jira ID :
+|      PLAT-82350 [RMB] Higher VCN activity during VPB with MP2
+|
+|   *  Update SMN_CLK only when system state change
+|   *  SMN_CLK change during MP2 Idle is causing VCN activity
+|
++----------------------------------------------------------------------------------------------
+| Version 8.0.7.D
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           19/07/21
+|   Jira ID :
+|      PLAT-83976[RMB_FP7][MP2][Zstate] System can't enter Zstate once MP2 SFH FW is loaded
+|      PLAT-85574[RMB_FP7][MP2][Zstate] System can't enter Zstate with SFH UMDF driver enabled
+|
+|   *  Changing the SHUBCLK to enter DS causing the issue for Z-state residency
+|
++----------------------------------------------------------------------------------------------
+| Version 8.0.7.E
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           06/08/21
+|   Jira ID :
+|      PLAT-88243[RMB_FP7][MP2_FW]Do no update MP2 Device ID on S0i3 exit
+|
+|   *  Do no update MP2 Device ID on S0i3 exit
+|
++----------------------------------------------------------------------------------------------
+| Version 8.0.8.1
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           15/09/21
+|   Jira ID :
+|      PLAT-90032[RMB_FP7][Zstate] MP1 is in RTOS_WatiForNextInterrupt while in Z-State sequence
+|
+|   *  DRAM write with Z-state & S3 check
+|   *  MP2 sends BUSY to MP1 for Z-state entry
+|   *  Add check for MP2 clock switch
+|
++----------------------------------------------------------------------------------------------
+| Version 8.0.8.6
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           22/11/21
+|   Jira ID :
+|      PLAT-92005[RMB-B0] MP2 CLK Deep Sleep Should Be Enabled Without Sensors
+|
+|   *  Config file updated with min clock to 1Mhz
+|   *  Color sensor support with color calibration data
+|
++----------------------------------------------------------------------------------------------
+| Version 8.0.8.9
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           22/11/21
+|   Jira ID :
+|      [PLAT-97849] [RMB] System hang when entering Z-state with BIOS included MP2_ALS FW
+|
+|   *  Minimum MP2 clock is set at 12Mhz
+|
++----------------------------------------------------------------------------------------------
+| Version 8.0.8.F
++----------------------------------------------------------------------------------------------
+|  * Date (dd/mm/yy)
+|           16/03/22
+|   Jira ID :
+|      PLAT-103509 RMB_FP7 MP2_SFH MP2 is not able to access the SPI ROM for PSP read / write
+|
+|   *  Update Modes and GPIO customization for customer platform
+|   *  Fix: ringDoorBell logic updated for PSP read / write
+|
++----------------------------------------------------------------------------------------------

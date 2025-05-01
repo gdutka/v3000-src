@@ -1,0 +1,19 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = JedecNvdimmAsl
+  FILE_GUID             = FC987C70-6DAA-46E7-AF60-B0B0F24001B0
+  MODULE_TYPE           = USER_DEFINED
+  VERSION_STRING        = 1.0
+
+[Sources.common]
+  JedecNvdimm.asl
+
+[Packages]
+  MdePkg/MdePkg.dec
+

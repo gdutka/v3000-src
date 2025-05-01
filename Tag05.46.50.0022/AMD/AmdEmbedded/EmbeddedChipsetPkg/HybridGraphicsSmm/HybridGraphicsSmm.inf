@@ -1,0 +1,61 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2018, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = HybridGraphicsSmm
+  FILE_GUID                      = D684FB08-8B0E-4caf-8CFF-1EA386279809
+  MODULE_TYPE                    = COMBINED_SMM_DXE
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = HybridGraphicsSmmInitEntry
+
+[Sources]
+  HybridGraphicsSmm.c
+  HybridGraphicsSmm.h
+
+[Packages]
+  InsydeModulePkg/InsydeModulePkg.dec
+  MdePkg/MdePkg.dec 
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  TimerLib
+  PciExpressLib
+
+[Guids]
+
+[Protocols]
+  gEfiSmmBase2ProtocolGuid
+  gEfiSmmInt15ServiceProtocolGuid
+  gH2OHybridGraphicsInfoProtocolGuid
+  gEfiSmmIoTrapDispatch2ProtocolGuid
+  gFchSmmIoTrapDispatch2ProtocolGuid
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaGPUEvent
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+
+[FeaturePcd]
+  gChipsetPkgTokenSpaceGuid.PcdHybridGraphicsSupported
+  gChipsetPkgTokenSpaceGuid.PcdNvidiaOptimusSupported
+
+[Depex]
+  <DXE_DEPEX>
+  gH2OHybridGraphicsInfoProtocolGuid
+  <SMM_DEPEX>
+  gEfiSmmBase2ProtocolGuid                  AND  
+  gFchSmmIoTrapDispatch2ProtocolGuid        
+  

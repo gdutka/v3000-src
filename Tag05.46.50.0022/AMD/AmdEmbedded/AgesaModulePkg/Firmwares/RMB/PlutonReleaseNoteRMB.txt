@@ -1,0 +1,187 @@
+release_6.3.1.615 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.615
+
+Merged PR 9205726: Recognize Hawkpoint 2 as equivalent SMN mapping to Phoenix.
+
+release_6.3.1.610 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.610
+
+Merged PR 8797245: Add 'PHX N4 A2' and 'GNR B0' DFIDs to PHX and RPL SMN address maps
+
+release_6.3.1.607 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.607
+
+* Merged PR 8707428: Create Hardening defense in depth to protect the TPM input buffer
+
+release_6.3.1.605 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.605
+
+Merged PR 8653213: FIPS switch support for HSP NV.
+
+release_6.3.1.603 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.603
+
+* Merged PR 8548598: Fix hard crash of Zeroization with HSP_HAL_FUSE_PARAMETER_VALIDATION_ERROR
+
+release_6.3.1.601 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.601
+
+* Merged PR 8514780: Merged PR 8511652: Add distinct error codes for Zeroization and account for lingering EMC AEB
+* Merged PR 8479534: Merged PR 8408183: Fix Hashstick Seed usage on Rembrandt through Raphael
+* Merged PR 8257128: Merged PR 8256245: Maintain HSP state as input to Access Enablement Block during FW SecureUnlock
+
+release_6.3.1.593 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.593
+
+* Merged PR 8140127: HSP Warm reset on any interrupt from MP1
+* Merged PR 8139150: Add postcodes, reverse order of doorbell/status writes for resume
+
+dev_6.3.0.586 - **Real Signed**
+===============================
+git tag: builds/build_6.3.0.586
+
+* Merged PR 8041098: Add DFID of PHX2
+* Merged PR 8060601: Dynamically get number of EK ICA authority keys
+* Merged PR 7950263: Sign TpmLoaders and PhxMfg under Iris Global Key
+* Merged PR 7951009: Remove hashstick seed from the key derivation in Phoenix and beyond.
+* Merged PR 7925974: Modify Capability checks so they are backwards compatible with old loaders
+* Merged PR 7879275: Archive PHX factory certificates
+* Merged PR 7858348: Update EKICA CSR message version for integration test
+* Merged PR 7836294: Create PHX manufacturing firmware
+* Merged PR 7826161: Upgrade: move sleepbuffer usage after version check
+* Merged PR 7825543: Fix sleep failure as a consequence of an attempted downgrade
+* Merged PR 7669786: Put devkit capabilities into the right resident page slot
+
+release_6.3.1.580 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.580
+
+* Merged PR 7948507: Change fence configuration to support Mendocino changes
+
+release_6.3.1.568 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.568
+
+* Merged PR 7825543: Fix sleep failure as a consequence of an attempted downgrade
+
+release_6.3.1.567 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.567
+
+* Merged PR 7647790: Delay RSA and OAEP tests from being run during TPM2_Selftest for performance concerns
+
+dev_6.3.0.560 - **Real Signed**
+===============================
+git tag: builds/build_6.3.0.560
+
+* Merged PR 7663628: Add the four cases in which to request NV clear in TCG_INIT
+* Merged PR 7647790: Delay RSA and OAEP tests from being run during TPM2_Selftest for performance concerns.
+
+release_6.3.1.555 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.555
+
+* Merged PR 7626971: Integrate dev commits from build 548-554 into Release.
+
+dev_6.3.0.551 - **Real Signed**
+===============================
+git tag: builds/build_6.3.0.551
+
+* Merged PR 7586570: Raphael S3 Support
+* Merged PR 7573160: Fix MDN MP2_FIFO_POP SMN address
+
+release_6.3.1.547 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.547
+
+* Merged PR 7395553: Merge the latest dev builds (up to 6.3.0.546) into the release branch.
+
+dev_6.3.0.546 - **Real Signed**
+===============================
+git tag: builds/build_6.3.0.546
+
+
+dev_6.3.0.545 - **Real Signed**
+===============================
+git tag: builds/build_6.3.0.545
+
+* Merged PR 7467304: Add Phoenix CpuId, PSN, DeepSleep, and Fifo addresses.
+
+
+dev_6.3.0.543 - **Real Signed**
+===============================
+git tag: builds/build_6.3.0.543
+
+* Merged PR 7442035: Support using Fifo for sleep-resume on Raphael
+* Merged PR 7442173: Fill Resident Page Dfid during firmware upgrade if blank
+
+dev_6.3.0.541 - **Real Signed**
+===============================
+git tag: builds/build_6.3.0.541
+
+* Merged PR 7422049: Firmware Warm Reset
+
+release_6.3.1.540 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.540
+
+* Merged PR 7395553: Merge the latest dev builds (up to 6.3.0.538) into the release branch.
+
+dev_6.3.0.534 - **Real Signed**
+===============================
+git tag: builds/build_6.3.0.534
+
+* Merged PR 7297448: Fix Issuer Common Name and Organization Unit of EK cert
+* Merged PR 7347473: Fix FIPS mode enablement and EKICA Cert retrieval in FIPS mode
+
+dev_6.3.0.532 - **Real Signed**
+===============================
+git tag: builds/build_6.3.0.532
+
+* Merged PR 7325234: Update CSR message format version in M1SP
+* Merged PR 7323823: Add debug info to JMBOX0 data
+
+dev_6.3.0.526 - **Real Signed**
+===============================
+git tag: builds/build_6.3.0.526
+
+* PR 7044874: Merge commit '6.3.1.521' fixes into dev.
+* PR 7174885: Fix TPM's GetCapability to return the current firmware's version number.
+* PR 7207293: Zeroization command in firmware
+* PR 7230425: Support Mendocino Manufacturing
+
+release_6.3.1.524 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.524
+
+* PR 7206364: Fix TPM's GetCapability to return the current firmware's version number.
+
+release_6.3.1.521 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.521
+
+* PR 7033866: Reduce data disclosure risk.
+* PR 7029077: Fix Time-of-Check/Time-Of-Use issue in PSP NV Read function
+* PR 7027267: Replace memcmp calls used to check sensitive values with timing-invariant alt
+* PR 7028806: random stall on postcode output.
+
+release_6.3.1.514 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.514
+
+* PR 6992130: Harden SPI_REQ_SET_OUTPUT_IRQ to accept only expected SMN register address.
+* PR 6991663: Fix Orderly NV Ram bounds check
+
+release_6.3.1.512 - **Real Signed**
+===============================
+git tag: builds/build_6.3.1.512
+
+* PR 6957894: Merged PR 6879192: Modify EK expiration date and name to production parameters.
+

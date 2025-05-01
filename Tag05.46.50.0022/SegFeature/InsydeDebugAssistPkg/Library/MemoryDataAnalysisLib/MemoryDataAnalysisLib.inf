@@ -1,0 +1,38 @@
+## @file
+#  Memory Data Analysis Library implementation.
+#
+#******************************************************************************
+#* Copyright (c) 2018, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MemoryDataAnalysisLib
+  FILE_GUID                      = B300BF72-E82B-46fa-AA8D-E4E94692496E
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MemoryDataAnalysisLib|DXE_CORE DXE_DRIVER SMM_CORE DXE_SMM_DRIVER
+  CONSTRUCTOR                    = MemoryDataAnalysisLibConstructor
+
+[Sources]
+  MemoryDataAnalysisLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeDebugAssistPkg/InsydeDebugAssistPkg.dec
+  SegFeaturePkg/SegFeaturePkg.dec
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  DebugLib
+
+[Protocols]
+  gH2ODebugAssistMemoryDataAnalysisProtocolGuid
+

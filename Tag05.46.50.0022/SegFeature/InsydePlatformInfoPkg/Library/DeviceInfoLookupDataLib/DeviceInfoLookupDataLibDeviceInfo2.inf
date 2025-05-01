@@ -1,0 +1,56 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2023 - 2024, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = DeviceInfoLookupDataLibDeviceInfo2
+  FILE_GUID      = 93a5718d-1593-42b6-993d-ac5c9ab81087
+  MODULE_TYPE    = DXE_DRIVER
+  VERSION_STRING = 1.0
+  LIBRARY_CLASS  = DeviceInfoLookupDataLib
+
+[Sources]
+  DeviceInfoLookupDataLibDeviceInfo2.c
+  FindDevicePathNode.c
+  InitDeviceInfoLookup.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  DevicePathLib
+  HiiLib
+  HiiExLib
+  MemoryAllocationLib
+  PcdLib
+  UefiBootServicesTableLib
+  UefiLib
+  DeviceInfo2Lib
+
+[Protocols]
+  gH2ODeviceInfoLookupProtocolGuid  ## SOMETIMES_CONSUMES
+
+[FeaturePcd]
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSetupUsbViewerSupported  ## CONSUMES
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSataDriveInfoSupported   ## CONSUMES
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ONvmeInfoSupported        ## CONSUMES
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OPciDeviceInfoSupported   ## CONSUMES
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2OSDEmmcInfoSupported      ## CONSUMES
+
+[Pcd]
+  gH2ODeviceInfo2TokenSpaceGuid                                          ## CONSUMES
+  gInsydePlatformInfoTokenSpaceGuid.PcdH2ODeviceInfoAttributeStr|"name"  ## CONSUMES

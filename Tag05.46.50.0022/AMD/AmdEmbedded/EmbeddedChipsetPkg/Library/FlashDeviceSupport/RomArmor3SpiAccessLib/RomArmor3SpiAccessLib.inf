@@ -1,0 +1,66 @@
+## @file
+#  Library Implementation for RomArmorSpiAccessLib
+#
+#******************************************************************************
+#* Copyright 2022 Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RomArmorSpiAccessLib
+  FILE_GUID                      = 56F11BC6-FC57-4DC4-8B12-A47C88BBB280
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  LIBRARY_CLASS                  = RomArmorSpiAccessLib|DXE_SMM_DRIVER COMBINED_SMM_DXE SMM_CORE DXE_RUNTIME_DRIVER DXE_DRIVER
+  CONSTRUCTOR                    = RomArmorLibInit
+
+[Sources]
+  RomArmor3SpiAccessLib.c
+
+[Packages]
+  $(PROJECT_PKG)/Project.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  IoLib
+  PciLib
+  BaseMemoryLib
+#[-start-220905-IB14740261-remove]#
+#  SpiAccessInitLib
+#  IrsiRegistrationLib
+#  FdSupportLib
+#[-end-220905-IB14740261-remove]#
+  SmmServicesTableLib
+  UefiBootServicesTableLib
+
+[Protocols]
+  gPspMboxSmmBufferAddressProtocolGuid
+  gPspRomArmorProtocolGuid
+  gEfiSmmBase2ProtocolGuid
+  gEfiSpiSmmNorFlashProtocolGuid
+  gPspFlashAccSmmCommReadyProtocolGuid
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.PcdBiosImageInBottomSpiRom
+  gInsydeTokenSpaceGuid.PcdFlashAreaBaseAddress
+
+[Guids]
+
+[FeaturePcd]
+  gChipsetPkgTokenSpaceGuid.PcdSpiMmioAccessEnable
+  gChipsetPkgTokenSpaceGuid.PcdSpiRomEntry4ByteAddressMode
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /Od

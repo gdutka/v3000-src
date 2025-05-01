@@ -1,0 +1,36 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2019-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+#For EDKII use Only
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DxeSocZen3ServicesRmbLib
+  FILE_GUID                      = 220594B2-25F8-4A58-959E-BD49311F2694
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DxeSocZen3ServicesLib
+
+[Sources]
+  SocZen3ServicesRmbDxe.c
+  SocZen3ServicesRmbDxe.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+
+[Guids]
+
+[Protocols]
+  gAmdSocZen3ServicesProtocolGuid       # PRODUCED
+  gAmdNbioSmuServicesProtocolGuid       # CONSUMED
+
+[Ppis]
+
+[Pcd]
+
+[Depex]

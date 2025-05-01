@@ -1,0 +1,107 @@
+	cd %WORKSPACE%\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64 & %WORKSPACE%\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\SecMain.exe
+
+EDK II SEC Main NT Emulation Environment from www.TianoCore.org
+  BootMode 0x01
+  SEC passing in 131072 bytes of temp RAM to PEI
+  FD loaded from..\Fv\NtEmulator.fd contains SEC Core
+
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\MdeModulePkg\Core\Pei\PeiMain\DEBUG\PeiCore.DLL,
+               NULL, DONT_RESOLVE_DLL_REFERENCES)
+PROGRESS CODE: V3020003 I0
+Loading PEIM B7611005-1F26-45BA-A3DB-01F39DDB2785
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\NtEmulatorPkg\BootModePei\BootModePei\DEBUG\BootMode.DLL,
+               NULL, DONT_RESOLVE_DLL_REFERENCES)
+Loading PEIM at 0x2471CD5F000 EntryPoint=0x000664910A4 BootMode.efi
+PROGRESS CODE: V3020002 I0
+NT32 Boot Mode PEIM Loaded
+Install PPI: 7408D748-FC8C-4EE6-9288-C4BEC092A410
+PROGRESS CODE: V3020003 I0
+Loading PEIM 6807217E-E8DE-42D0-91D9-60AECED7420D
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\NtEmulatorPkg\StallPei\StallPei\DEBUG\Stall.DLL,
+               NULL, DONT_RESOLVE_DLL_REFERENCES)
+Loading PEIM at 0x2471CD6D000 EntryPoint=0x000664810A4 Stall.efi
+PROGRESS CODE: V3020002 I0
+Install PPI: 1F4C6F90-B06B-48D8-A201-BAE5F1CD7D56
+PROGRESS CODE: V3020003 I0
+Loading PEIM 681F3771-6F1D-42DE-9AA2-F82BBCDBC5F9
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\NtEmulatorPkg\WinNtFlashMapPei\WinNtFlashMapPei\DEBUG\WinNtFlashMapPei.DLL,
+               NULL, DONT_RESOLVE_DLL_REFERENCELoading PEIM at 0x2471CD7A000 EntryPoint=0x000664710A4 WinNtFlashMapPei.efi
+PROGRESS CODE: V3020002 I0
+NT 32 Flash Map PEIM Loaded
+PROGRESS CODE: V3020003 I0
+Loading PEIM 86D70125-BAA3-4296-A62F-602BEBBB9081
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\MdeModulePkg\Core\DxeIplPeim\DxeIpl\DEBUG\DxeIpl.DLL,
+               NULL, DONT_RESOLVE_DLL_REFERENCES)
+Loading PEIM at 0x2471CDC7000 EntryPoint=0x00066451184 DxeIpl.efi
+PROGRESS CODE: V3020002 I0
+PROGRESS CODE: V3020003 I0
+Loading PEIM DA684985-A9F7-4190-8ECA-0D2F442DB34B
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\NtEmulatorPkg\Override\Board\Intel\CoffeeLakeMultiBoardPkg\ChipsetWinNtPei\ChipsetWinNtPei\DEBUG\ChipsetWinNtPei.DLL,
+     Loading PEIM at 0x2471D1E7000 EntryPoint=0x000664410A4 ChipsetWinNtPei.efi
+PROGRESS CODE: V3020002 I0
+Install PPI: CD196962-2E90-4B9C-91C1-3543EAE0087F
+PROGRESS CODE: V3020003 I0
+Loading PEIM 34C8C28F-B61C-45A2-8F2E-89E46BECC63B
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\InsydeModulePkg\Universal\Variable\VariablePei\VariablePei\DEBUG\PeiVariable.DLL,
+               NULL, DONT_RESOLVE_DLL_REFLoading PEIM at 0x2471CDA6000 EntryPoint=0x000664210C4 PeiVariable.efi
+PROGRESS CODE: V3020002 I0
+Install PPI: 2AB86EF5-ECB5-4134-B556-3854CA1FE1B4
+PROGRESS CODE: V3020003 I0
+Loading PEIM BE0FEABA-3443-4919-9F3A-2D4216329EA9
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\NtEmulatorPkg\WinNtAutoScanPei\WinNtAutoScanPei\DEBUG\WinNtAutoScan.DLL,
+               NULL, DONT_RESOLVE_DLL_REFERENCES)Loading PEIM at 0x2471CD88000 EntryPoint=0x000664110A4 WinNtAutoScan.efi
+PROGRESS CODE: V3020002 I0
+NT 32 Autoscan PEIM Loaded
+PeiInstallPeiMemory MemoryBegin 0x7FF474170000, MemoryLength 0x10000000
+PROGRESS CODE: V3020003 I0
+Temp Stack : BaseAddress=0x7FF484190000 Length=0x10000
+Temp Heap  : BaseAddress=0x7FF4841A0000 Length=0x10000
+Total temporary memory:    131072 bytes.
+  temporary memory stack ever used:       65532 bytes.
+  temporary memory heap used for HobList: 4808 bytes.
+  temporary memory heap occupied by memory pages: 0 bytes.
+Old Stack size 65536, New stack size 131072
+Stack Hob: BaseAddress=0x7FF474170000 Length=0x20000
+Heap Offset = 0x10010000 Stack Offset = 0x10010000
+Loading PEIM 52C05B14-0B98-496C-BC3B-04B50211D680
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\MdeModulePkg\Core\Pei\PeiMain\DEBUG\PeiCore.DLL,
+               NULL, DONT_RESOLVE_DLL_REFERENCES)
+Loading PEIM at 0x7FF484153000 EntryPoint=0x000664E1118 PeiCore.efi
+Reinstall PPI: 8C8CE578-8A3D-4F1C-9935-896185C32DD3
+Reinstall PPI: 5473C07A-3DCB-4DCA-BD6F-1E9689E7349A
+Reinstall PPI: B9E0ABFE-5979-4914-977F-6DEE78C278A6
+Install PPI: F894643D-C449-42D1-8EA8-85BDD8C65BDE
+Loading PEIM 9B3ADA4F-AE56-4C24-8DEA-F03B7558AE50
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\MdeModulePkg\Universal\PCD\Pei\Pcd\DEBUG\PcdPeim.DLL,
+               NULL, DONT_RESOLVE_DLL_REFERENCES)
+Loading PEIM at 0x7FF484143000 EntryPoint=0x000664D10A4 PcdPeim.efi
+Reinstall PPI: 06E81C58-4AD7-44BC-8390-F10265F72480
+Reinstall PPI: 01F34D25-4DE2-23AD-3FF3-36353FF323F1
+Reinstall PPI: 4D8B155B-C059-4C8F-8926-06FD4331DB8A
+Reinstall PPI: A60C6B59-E459-425D-9C69-0BCC9CB27D81
+Loading PEIM 86D70125-BAA3-4296-A62F-602BEBBB9081
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\MdeModulePkg\Core\DxeIplPeim\DxeIpl\DEBUG\DxeIpl.DLL,
+               NULL, DONT_RESOLVE_DLL_REFERENCES)
+Loading PEIM at 0x7FF484131000 EntryPoint=0x00066451184 DxeIpl.efi
+Install PPI: 1A36E4E7-FAB6-476A-8E75-695A0576FDD7
+Install PPI: 0AE8CE5D-E448-4437-A8D7-EBF5F194F731
+Loading PEIM F0384FFD-8633-452F-9010-F6B7D2EAE2F1
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\NtEmulatorPkg\WinNtFirmwareVolumePei\WinNtFirmwareVolumePei\DEBUG\WinNtFirmwareVolumePei.DLL,
+               NULL, DONT_RESLoading PEIM at 0x7FF484124000 EntryPoint=0x000664010C4 WinNtFirmwareVolumePei.efi
+PROGRESS CODE: V3020002 I0
+NT 32 Firmware Volume PEIM Loaded
+PROGRESS CODE: V3020003 I0
+Loading PEIM D3AAD8DC-3A48-46AC-B1C7-28A9D3CF6755
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\NtEmulatorPkg\WinNtThunkPPIToProtocolPei\WinNtThunkPPIToProtocolPei\DEBUG\WinNtThunkPPIToProtocolPei.DLL,
+               NULoading PEIM at 0x7FF484118000 EntryPoint=0x000663F10A4 WinNtThunkPPIToProtocolPei.efi
+PROGRESS CODE: V3020002 I0
+NT 32 WinNT Stuff PEIM Loaded
+PROGRESS CODE: V3020003 I0
+DXE IPL Entry
+Loading PEIM D6A2CB7F-6A18-4E2F-B43B-9920A733700A
+LoadLibraryEx (g:\proj\rev54git2\Build\NtEmulatorPkg\DEBUG_DEVTLSxVC14\X64\MdeModulePkg\Core\Dxe\DxeMain\DEBUG\DxeCore.DLL,
+               NULL, DONT_RESOLVE_DLL_REFERENCES)
+Loading PEIM at 0x7FF48408F000 EntryPoint=0x000663A1324 DxeCore.efi
+PROGRESS CODE: V3021001 I0
+Loading DXE CORE at 0x7FF48408F000 EntryPoint=0x000663A1324
+Install PPI: 605EA650-C65C-42E1-BA80-91A52AB618C6

@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME               = MpmAsfPei
+  MODULE_TYPE             = PEIM
+  FILE_GUID               = 7604b120-a55c-4a36-a9f6-420e5ada995c
+  ENTRY_POINT             = MpmAsfPeiEntry
+  PEI_SPECIFICATION_VERSION = 0x0001000A
+
+[Sources]
+  MpmAsfPei.c
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  DebugLib
+  SerialPortLib
+  PrintLib
+  MpmLib
+  IdsLib
+  PcdLib
+  IoLib
+  RtcLib
+
+[Ppis]
+  gEfiPeiRscHandlerPpiGuid
+  gAmdMpmPeiDepexPpiGuid
+  gEfiPeiMemoryDiscoveredPpiGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Depex]
+  gAmdMpmDataInitializedPpiGuid
+  AND
+  gEfiPeiRscHandlerPpiGuid

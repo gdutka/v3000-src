@@ -1,0 +1,58 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2019-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+#*****************************************************************************
+#*
+#* This software package can be used to enable the Overclocking of certain
+#* AMD processors and its use is subject to the terms and conditions of the
+#* AMD Overclocking Waiver. Enabling overclocking through use of the low-level
+#* routines included in this package and operating an AMD processor outside of
+#* the applicable AMD product specifications will void any AMD warranty and
+#* can result in damage to the processor or the system into which the processor
+#* has been integrated. The user of this software assumes, and AMD disclaims,
+#* all risk, liability, costs and damages relating to or arising from the
+#* overclocking of AMD processors.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AodPei
+  FILE_GUID                      = C8F6D366-DDF1-4960-9D57-82F2655A1294
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AodPeiEntryPoint
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+
+[Sources]
+  AodPei.c
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  AodBaseLib
+  HobLib
+  BaseMemoryLib
+
+[Ppis]
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gEfiEndOfPeiSignalPpiGuid
+
+
+[Guids]
+
+
+[Depex]
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gEfiPeiMemoryDiscoveredPpiGuid

@@ -1,0 +1,33 @@
+## @file
+#  PSP MMIO library instance for SMM modules.
+#
+#  Copyright (C) 2020-2023 Advanced Micro Devices, Inc. All rights reserved.
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmSupvPspMmioLib
+  FILE_GUID                      = 952c7a5a-1d66-4174-8a11-e8b874bd49d7
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.1
+  LIBRARY_CLASS                  = SmmSupvPspMmioLib|DXE_SMM_DRIVER
+
+[Sources]
+  SmmSupvPspMmioLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+  AmdSupervisorPkg/AmdSupervisorPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  SmmSupvSmnLib
+  DebugLib
+
+

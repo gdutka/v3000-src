@@ -1,0 +1,48 @@
+/** @file
+  Nvme Information DXE VFR implementation for Config page.
+
+;******************************************************************************
+;* Copyright (c) 2021 - 2023, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corp.
+;*
+;******************************************************************************
+*/
+
+#include <VfrCompatMacros.h>
+
+#include "NvmeInfoFormset.h"
+
+formset
+  guid      = H2O_NVME_INFO_FORMSET_GUID,
+  title     = STRING_TOKEN (STR_NVME_INFO_FORMSET),
+  help      = STRING_TOKEN (STR_NVME_INFO_FORMSET_HELP),
+  classguid = VFR_GUID_FROM_PCD (PcdGetPtr (PcdH2ONvmeInfoLinkToFormsetGuid)),
+
+  //
+  // Form H2O_NVME_INFO_CONTROLLER_LIST_FORM_ID
+  //
+  form
+    formid = H2O_NVME_INFO_CONTROLLER_LIST_FORM_ID,
+    title = STRING_TOKEN (STR_NVME_INFO_FORMSET);
+
+    label H2O_NVME_INFO_LABEL_START;
+    label H2O_NVME_INFO_LABEL_END;
+
+  endform;
+
+  //
+  // Form H2O_NVME_INFO_CONTROLLER_INFO_FORM_ID
+  //
+  form
+    formid = H2O_NVME_INFO_CONTROLLER_INFO_FORM_ID,
+    title = STRING_TOKEN (STR_NVME_DEVICE_FORM);
+
+    label H2O_NVME_INFO_LABEL_START;
+    label H2O_NVME_INFO_LABEL_END;
+
+  endform;
+endformset;

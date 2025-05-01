@@ -1,0 +1,143 @@
+## @file
+#
+#******************************************************************************
+#* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+!import ArmVirtPkg/Package.fdf
+
+################################################################################
+#
+# FV Section
+#
+# [FV] section is used to define what components or modules are placed within a flash
+# device file.  This section also defines order the components and modules are positioned
+# within the image.  The [FV] section consists of define statements, set statements and
+# module statements.
+#
+################################################################################
+[FV.FVMAIN_COMPACT]
+  #
+  # PEI Phase modules
+  #
+[FV.FvMain]
+  #
+  # HII
+  #
+  INF InsydeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
+  INF InsydeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
+  INF InsydeModulePkg/Universal/Console/JpegDecoderDxe/JpegDecoderDxe.inf
+  INF InsydeModulePkg/Universal/Console/GifDecoderDxe/GifDecoderDxe.inf
+  INF InsydeModulePkg/Universal/Console/BmpDecoderDxe/BmpDecoderDxe.inf
+  INF InsydeModulePkg/Universal/Console/PngDecoderDxe/PngDecoderDxe.inf
+  INF InsydeModulePkg/Universal/UserInterface/EnglishDxe/EnglishDxe.inf
+  INF InsydeModulePkg/Universal/UserInterface/HiiDatabaseDxe/HiiDatabaseDxe.inf
+  INF InsydeModulePkg/Universal/UserInterface/H2OKeyDescDxe/H2OKeyDescDxe.inf
+  FILE FREEFORM = 2132D258-DCB6-42E9-A243-064A9568D512 {
+    SECTION RAW = $(WORKSPACE)/$(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/Font.hpk
+  }
+  #
+  # H2O Form Browser / Display Engine
+  #
+  INF InsydeModulePkg/Universal/UserInterface/SetupMouseDxe/SetupMouseDxe.inf
+  INF InsydeModulePkg/Universal/UserInterface/Fonts/TrueTypeDecoderDxe/TrueTypeDecoderDxe.inf
+  INF InsydeSetupPkg/Drivers/DisplayTypeDxe/DisplayTypeDxe.inf
+  INF InsydeSetupPkg/Drivers/HiiLayoutPkgDxe/HiiLayoutPkgDxe.inf
+  INF InsydeSetupPkg/Drivers/H2OFormBrowserDxe/H2OFormBrowserDxe.inf
+  INF InsydeSetupPkg/Drivers/H2OFormDialogDxe/H2OFormDialogDxe.inf
+!if gInsydeTokenSpaceGuid.PcdH2OFormBrowserLocalTextDESupported
+  INF InsydeSetupPkg/Drivers/H2ODisplayEngineLocalTextDxe/H2ODisplayEngineLocalTextDxe.inf
+!endif
+!if gInsydeTokenSpaceGuid.PcdH2OFormBrowserLocalMetroDESupported
+  INF InsydeSetupPkg/Drivers/H2ODisplayEngineLocalMetroDxe/H2ODisplayEngineLocalMetroDxe.inf
+  INF InsydeModulePkg/Universal/UserInterface/MicrowindowsDxe/MicrowindowsDxe.inf
+!endif
+!if gInsydeTokenSpaceGuid.PcdH2OSetupChangeDisplaySupported
+  INF InsydeSetupPkg/Drivers/H2OSetupChangeDxe/H2OSetupChangeDxe.inf
+!endif
+!if gInsydeTokenSpaceGuid.PcdH2OFormBrowserLocalMetroDESupported
+  FILE FREEFORM = 17772369-D262-4b90-9F31-BDC41F2663B0 {
+    SECTION RAW = InsydeModulePkg/Universal/UserInterface/Fonts/TtfDxe/DFPSc_Sans.TTF
+  }
+  FILE FREEFORM = gH2OHiiLayoutFileGuid {
+    SECTION RAW = $(WORKSPACE)/$(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/Layout.hpk
+  }
+!endif
+  #
+  # VFRs
+  #
+  INF InsydeModulePkg/Universal/UserInterface/BootManagerDxe/BootManagerDxe.inf
+  INF InsydeModulePkg/Universal/UserInterface/BootMaintDxe/BootMaintDxe.inf
+  INF InsydeModulePkg/Universal/UserInterface/DeviceManagerDxe/DeviceManagerDxe.inf
+!if gInsydeTokenSpaceGuid.PcdH2OSecureBootSupported
+  INF InsydeModulePkg/Universal/UserInterface/SecureBootMgrDxe/SecureBootMgrDxe.inf
+!endif
+  #
+  # Setup Utility
+  #
+  INF InsydeModulePkg/Universal/Security/SysPasswordDxe/SysPasswordDxe.inf
+!if gInsydeTokenSpaceGuid.PcdH2OHddPasswordSupported
+  INF InsydeModulePkg/Universal/Security/HddPassword/HddPassword.inf
+!endif
+  INF InsydeModulePkg/Universal/UserInterface/SetupUtilityApp/SetupUtilityApp.inf
+  #
+  # BDS
+  #
+  INF InsydeModulePkg/Universal/BdsDxe/BdsDxe.inf
+  INF InsydeModulePkg/Universal/CommonPolicy/BootOptionPolicyDxe/BootOptionPolicyDxe.inf
+  INF InsydeModulePkg/Universal/MemoryTest/GenericMemoryTestDxe/GenericMemoryTestDxe.inf
+  #
+  # FDM
+  #
+  FILE FREEFORM = gH2OFlashMapRegionVarDefaultGuid {
+    SECTION RAW = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/VarDefault.varrc
+  }
+  FILE FREEFORM = gH2OFlashMapRegionBvdtGuid {
+    SECTION RAW = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/Bvdt.bin
+  }
+  FILE FREEFORM = gH2OFlashMapRegionLogoGuid {
+    SECTION RAW = InsydeModulePkg/Universal/Console/Logo/InsydeBoot/InsydeBoot.jpg
+  }
+  #
+  # QEMU customized drivers.
+  #
+  INF ArmVirtPkg/Override/EDK2/ArmVirtPkg/FrontPageDxe/FrontPageDxe.inf
+  INF ArmVirtPkg/Override/EDK2/ArmVirtPkg/ChipsetSvcDxe/ChipsetSvcDxe.inf
+  INF ArmVirtPkg/Override/EDK2/ArmVirtPkg/UefiSetupUtilityDxe/SetupUtilityDxe.inf
+
+################################################################################
+#
+# Rules are use with the [FV] section's module INF type to define
+# how an FFS file is created for a given INF file. The following Rule are the default
+# rules for the different module type. User can add the customized rules to define the
+# content of the FFS file.
+#
+################################################################################
+
+[Rule.Common.DXE_DRIVER.BINARY]
+  FILE DRIVER = $(NAMED_GUID) {
+    DXE_DEPEX    DXE_DEPEX Optional      $(INF_OUTPUT)/$(MODULE_NAME).depex
+    COMPRESS PI_STD {
+      GUIDED {
+        PE32     PE32                    $(INF_OUTPUT)/$(MODULE_NAME).efi
+        UI       STRING="$(MODULE_NAME)" Optional
+        VERSION  STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+      }
+    }
+  }
+
+[Rule.Common.COMBINED_SMM_DXE]
+  FILE COMBINED_SMM_DXE = $(NAMED_GUID) {
+    SMM_DEPEX SMM_DEPEX Optional       $(INF_OUTPUT)/$(MODULE_NAME).SMM.depex
+    DXE_DEPEX DXE_DEPEX Optional       $(INF_OUTPUT)/$(MODULE_NAME).DXE.depex
+    PE32      PE32                     $(INF_OUTPUT)/$(MODULE_NAME).efi
+    UI        STRING="$(MODULE_NAME)" Optional
+    VERSION   STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+  }
+

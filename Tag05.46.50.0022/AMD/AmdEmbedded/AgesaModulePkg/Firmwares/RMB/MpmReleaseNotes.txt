@@ -1,0 +1,347 @@
+AIM-T 1.0 Release Notes
+Release date: December 12, 2023
+
+
+
+NOTE: The signed binaries of AIM-T is for Production platform. It has below updates 
+1) Source code security audit/recommendtaion completed
+2) MPM-FW memory region protected through FMR
+3) Address Space Layout Randomization for tasks is implemented
+4) Only HTTPs support is enabled 
+5) KVM traffic is encrypted
+6) WPA3 (SAE/Enterprise) & 6GHz are not supported
+7) SSC bit to be enabled in BIOS for G3 state to work for AIM-T
+8) Cloud Manageability feature is not supported
+9) For Provisioning the target, AMD Provisioning Console 1.0.0.244 to be used
+10) Text Redirection feature is not supported for AIM-T 1.0
+
+System requirements:
+
+AIM-T Hardware: 
+* Mayan or Lilac AMD CRB platform equivalent platform
+* Rembrandt (RMB) secure silicon (B0/B1) PRO
+* QCOM WLAN (Hastings Prime)
+
+AIM-T Software:
+* MPM FW - v28.28.03.A7
+* AMS - v3.0.0.666
+
+Dependency:
+ASP Version  : 00.28.00.6F  
+
+Bugs Fixed in Production Release - 10 (November-2023):
+
+SWCM-1332 - If vnc viewer is closed with no option system might not be manageable until next reboot
+SWCM-525  - For hibernate/ sleep power commands, the response in DASHCLI is failure but operation is successful
+SWCM-633  - Bootconfig not showing Boot Device list
+SWCM-1147 - When user connect 64GB RAM (2 X 32GB) then total memory is displaying as 0 Bytes
+SWCM-1101 - DASH command may not work if there is above 0x7F type in SMBIOS table
+
+
+Bugs Fixed in Production Release - 8 (October-2022):
+PLAT-94081	[Mayan-RMB][BSOD] KVM VNC Viewer is failing to launch and while booting target to OS using key-F1, hitting BSOD issue with BIOS version-VRMB259187N.FD
+PLAT-93473	[AIM-T][Mayan/Lilac] Low HW DRIPS (30% - 40%) observed when Qualcoomm hastings prime wlan card is connected to system and S0I3 entry fails
+PLAT-91145	[AIM-T] Keyboard and Mouse events not working when we perform KVM in NDA BIOS
+PLAT-87536	[MPM] With PI BIOS MPM is not working properly
+PLAT-85269	[MPM] In EDK-II BIOS few types are missing in SMBIOS table
+PLAT-85201	[MPM] With EDK-II BIOS In x86-not-released mode we are not getting the IP address
+EDKII-1531	[AIM-T] BIOS tables are not sent to MPM in W1M1804X_112
+PLAT-90810	TA load fail on RMB B0 SoC
+PLAT-92123	PCIe interrupt programming for AIM-T Wlan device
+PLAT-92452	Device id not getting exposed consistently even when MPM is enabled in bios
+PLAT-92134      [RMB FP7] Resource conflict in AMS-MailBox Drv with 1929 bios
+PLAT-87536	[MPM] With PI BIOS MPM is not working properly
+PLAT-85201	[MPM] With EDK-II BIOS In x86-not-released mode we are not getting the IP address
+PLAT-87536	[MPM] With PI BIOS MPM is not working properly
+PLAT-85201	[MPM] With EDK-II BIOS In x86-not-released mode we are not getting the IP address
+PLAT-84198	RMB: Unable to change MPM options in BIOS setup
+PLAT-83964	WLAN is unable to access DRAM in x86 not released case
+PLAT-83200	RMB PI BIOS: APCB tokens for WLAN start lane and end lane is missing for AMD CRB's
+PLAT-77357	RMB/MPM: MPM could not access DRAM reserverd by BIOS for WLAN FB
+PLAT-76251	[RMB] PCI CFG read from MPM returns 0xFFFFFFFF
+PLAT-76106	[RMB] System hangs at 0xEEDA0700 when warm reset happens after GFX power up
+PLAT-75372	RMB/MPM: DRAM access from MPM returning LoadStorePIFDataErrorCause exception
+PLAT-72052	[RMB] BIOS support for Fan and Sensor Information
+PLAT-71078	[RMB] AME BIOS support -BIOS WLAN firmware loading support for KVM and Text Console
+PLAT-70566	[RMB] Mandatory support of SMBIOS table types
+PLAT-68731	[RMB] AGESA Enable WLAN ACCESS for MPM
+PLAT-66995	[RMB] BIOS shall query AMF for pending events
+PLAT-66994	[RMB] BIOS shall send list of PCI devices present in system to AMF
+PLAT-66992	[RMB] BIOS shall provide BATTERY INFORMATION to AMF
+PLAT-66991	[RMB] BIOS SHALL NOTIFY SIGNIFICANT SYSTEM EVENTS/STATE-CHANGES TO AMF
+PLAT-66214	Please add entries for AMF
+PLAT-64434	[RMB] AMF DV support
+PLAT-62771	[RMB] AMF PSP FW support - PSP Support for secure storage- TEE object update at pre X86 time
+PLAT-61579	[RMB] Inter-SOC communication - AGESA mailbox driver for AME
+PLAT-61578	[RMB] Inter-SOC communication between AMF & BIOS/X86
+SWCM-686    In case of Wired KVM intermittently observed IP not getting acquired   
+SWCM-707    AMD Viewer(KVM) may close after bios to OS transition.
+SWCM-401	[RMB][DASH][OS-KVM] Distorted VNC viewer is launching with OS KVM redirection.
+SWCM-392	[RMB][BIOS-KVM] VNC Viewer is going to not responding state within 3min of viewer launch.
+SWCM-391	[RMB][BIOS-KVM] Keyboard and mouse events are not working from VNC viewer.
+SWCM-372	[RMBT][APC 1.0.0.187] Updating provisining package multiple times deleting _oMT and _M packages and fails to generate provisioning package
+SWCM-363	[RMB][DASH] DASH stops working with HTTP after running few commands.
+SWCM-362	[RMB][AMS 1.0.0.187] Intermittently AMS UI shows red color coding for AMD manageability status --> on
+SWCM-361	[RMB][AMS 1.0.0.187] AMS UI not listing MPM fw version
+SWCM-357	[RMB][APC UI] Default roles option selected is not proper in user creation window.
+SWCM-356	[RMB][APC UI] Readme link is not functional in result page on provisioning console.
+SWCM-355	[RMB][APC UI] Secure Location field tooltip is not implemented properly.
+SWCM-350	[RMB][APC UI] Secure Location field description is not available in Help file.
+SWCM-346	[RMB][KVM][Wired] KVM Redirection is not working with latest weekly BIOS(1818).
+SWCM-344	[RMB][Mayan/Lilac][KVM][Wireless] KVM Redirection is not working with latest weekly BIOS(1818).
+SWCM-341	[RMB][MFD 28.28.00.07] Provisioning is not working on Mayan board with B0 silicon.
+SWCM-340	[RMBT][MFD 28.28.00.07] "TEE Dead" error seen while Provisioning with _oMT package
+SWCM-338	[RMB][APU UI] Links are not navigating to a folder below "Result" in "AMD Provisioning Console 1.0.0.169"
+SWCM-335	[RMB][APU UI] Manageability is misspelled in the "Result Page" of "AMD Provisioning Console 1.0.0.169"
+SWCM-332	[RMB][APU UI] In "Network & Wifi" below "Network tab" Scroll is not required and it overlaps the text alignment & the Border line on "AMD Provisioning Console 1.0.0.169"
+SWCM-324	[RMBT][APC UI] Static Preferred DNS is misspelled in provisioning console.
+SWCM-295	[RMB][APC UI] SSID is displaying instead of SID under Roles in summary page.
+SWCM-289	[RMBT APC 1.0.0.169 ] Duplicate entries listed under enabled profiles for all profiles
+SWCM-283	[RMB][APC UI] Wi-Fi Additional Settings description is not added in Help file.
+SWCM-282	[RMBT][APC UI] Additional settings is misspelled in provisioning console.
+SWCM-281	[RMBT][APC UI] Wi-Fi Band frequency is not correct for 2.4GHz band in dropdown list.
+SWCM-280	[RMB][APC UI] Invalid email warning message is displaying if user enters email id name having less than 4 characters.
+SWCM-277	[RMBT][APC UI] Wi-Fi configuration details are not displaying in summary page.
+SWCM-275	[RMBT][DASH][MFD]Under software profile " version String for MPM firmware is not populating full version details"
+SWCM-274	[RMBT][DASH][MFD] Dash commands continue to work with deleted user credentials and deleted user gets enumerated after system reboot
+SWCM-268	[RMBT][DASH] Network Speed is displaying as Zero in x86 not released case.
+SWCM-264	[RMBT][DASH][MFD] Realtek PCI NIC fails to enumerate under pcidevice profile
+SWCM-263	[RMBT][AMS] Power operation displays failure message intermittently even though operation is successful.
+SWCM-261	[RMBT][APC UI] System Certificates path link is not opening the correct certificates folder.
+SWCM-260	[RMBT][DASH][MFD] In x86 not released case "power on" command fails to make the system up
+SWCM-255	[RMBT][DASH][MFD] In x86 not released case "power status" dash command returns current Power state as on
+SWCM-248	[RMBT APC 1.0.0.139 ] Contact details restricts contact number to 10 digits only and doesn't allow country code
+SWCM-247	[RMBT APC 1.0.0.139 ] Second instance launched for provisioning app is not functional
+SWCM-243	[RMBT][AMS] MailBox Drivers are not updating after AMS upgrade.
+SWCM-231	[DASH][AMS 1.0.0.136][Lilac] Power availablestates commands list incorrect power states
+SWCM-230	[DASH][AMS] Power status shows as Off-Soft when system is Windows OS
+SWCM-229	[RMBT][AMS] VC x86 redist package is required as part of AMS Installer.
+SWCM-228	[RMBT][APC UI] User is allowed to create provisioning package without WIFI password.
+SWCM-227	[DASH] DASH commands are working with empty user name and password
+SWCM-226	[RMBT][APC UI] Next button is not displaying when user clicks on New Base Configuration.
+SWCM-225	[RMBT][APC UI] Warning strings are not matching with actual field strings on UI.
+SWCM-224	[RMBT][APC UI] APC application name is not proper in About window.
+SWCM-221	[RMBT][APC UI] Next button is not pointing to the second section of the same window.
+SWCM-220	[RMBT][APC UI] Tooltip strings are not matching with actual field strings on UI.
+SWCM-219	[RMBT][APC UI] AMD Provisioning Console build version is not correct in About window.
+SWCM-218	[Provisioing] Option to add Multiple Wifi configuration is not available in tool
+SWCM-217	[AMS] AMS mailbox driver still exists after uninstalling the AMS
+SWCM-216	[AMS] AMS-MailBox Driver crash observed during windows shutdown
+SWCM-213	[AMS 1.0.0.124][MAYAN] AMS stops responding to Dash commands after 5 to 10 consecutive commands
+SWCM-212	[AMS 1.0.0.124][MAYAN] Latency of 30 seconds to 2 minutes observed in getting DASHCLI command output
+SWCM-209	[AMS][MAYAN][1.0.0.105] By default app should prompt user to run it in admin mode
+SWCM-208	[AMS][MAYAN][1.0.0.105] Tray icon is missing after AMS installation.
+SWCM-207	[AMS][MAYAN][1.0.0.105] AMS service fails to start after system reboot
+SWCM-201	[AMS] Windows getting crashed after installing the AMS
+SWCM-194	[MPM] WLAN IP is not getting when we use different Routers
+SWCM-193	[AMS][MAYAN][1.0.0.86] AMD managebility service fails to start after AMS installation
+SWCM-192	[AMS][MAYAN][1.0.0.86] Start Menu shortcut is missing after installation
+SWCM-191	[AMS][MAYAN][1.0.0.86] Component name in control panel entry has unwanted strings appended
+SWCM-190	[AMS][MAYAN][1.0.0.86] License agreement page is blank during installation
+SWCM-182	[DASH MPM] In asset info , memory data is not mapped properly for respective attributes
+SWCM-67	        [DASH MP1/MPM] Text redirection enumeration does not show any info
+SWCM-63	        [DASH MP1/MPM ] Power Operations are not working
+SWCM-18	        [DASH MP1/MPM ] OMI Server stops responding for DASH queries if we run the commands continuously
+
+Remote Console:
+* Windows 10/11
+* DASH CLI v5.0.0.1757 (Release version )
+* AMD Provisioning Console v1.0.0.244 (obtain this from OEM Collaborate portal)
+	NOTE: oT or oMT configuration package generated by AMD Provisioning Console should be used only in Trusted environment
+
+Quick steps:
+1. Prepare BIOS with MPM FW, PSP, AGESA. Refer AIM-T Integration Guide for detailed information.
+2. Flash this BIOS on the AIM-T platform and enable Manageability options in BIOS Set up screen.
+3. Boot to Windows and install AMS
+4. On Remote Console, generate provisioning package using AMD Provisioning Console.
+5. On the AIM-T platform, run the provisioning application.
+6. AIM-T system is ready and can be managed remotely from DASH CLI, AMC or any other DASH supported Management Console.
+7. oT and oMT (Trusted) packages should always be privsioned in Trusted environemnt
+8. Make sure to generate KVM key during provisoning
+
+Features supported in Production Releaase-11 (December 2023- MPM 28.28.03.A7)
+
+* Add new mailbox command (0x13) to disable BIOS Un-provision
+* Do not Allow Un-provision through BIOS once disable command received
+
+Features supported in Production Releaase-10 (November 2023- MPM 28.28.02.A7)
+
+* Fix for SWCM-1332 - If vnc viewer is closed with no option system might not be manageable until next reboot
+* Fix for SWCM-525 - For hibernate/ sleep power commands, the response in DASHCLI is failure but operation is successful
+* Fix for SWCM-633 - Bootconfig not showing Boot Device list
+* Fix for SWCM-1147 - When user connect 64GB RAM (2 X 32GB) then total memory is displaying as 0 Bytes
+* Fix for SWCM-1101 - DASH command may not work if there is above 0x7F type in SMBIOS table
+
+Features supported in Production Releaase-9 (September 2023- MPM 28.28.01.A7)
+
+*Addded support to unprovision the system through BIOS Setting
+
+Features supported in Production Release-8(October 2022) :
+* Fix for Power Consumption issue.
+
+Features supported in Production Release-7(September 2022) :
+* Fix for TIC-101941:VNC Viewer show garbage in Host UUT after send KVM dash command to client UUT and  boot to OS.
+
+Features supported in Production Release-6(September 2022) :
+* Added support for KVM feature with Static IP only for Wired Manageability
+
+Features supported in Production Release-5(July 2022) :
+* Added support to shutdown system in x86NRC if any exception occurs
+
+Features supported in Production Release-4(July 2022) :
+* Support for AMD Provisioning Service Profile(v1.0.0 ) feature
+
+Features supported in Production Release-3(April 2022) :
+* Fix for IP not getting issue in Wired KVM
+* Stability fix for BIOS to OS transistion
+* DASH Profiles Supported:
+	1.Base Desktop and Mobile Profile (DSP1058)
+	2.Profile Registration Profile (DSP1033)
+	3.WS-Management Specification (DSP0226)
+	4.WS-Management CIM Binding Specification (DSP0227)
+	5.WS-CIM Mapping Specification (DSP0230)
+	6.OS Status Profile (DSP1029)
+	7.Physical Asset Profile (DSP1011)
+	8.CPU Profile (DSP1022)
+	9.System Memory Profile (DSP1026)
+	10.Ethernet Port Profile (DSP1014)
+	11.DHCP Client Profile (DSP1037)
+	12.DNS Client Profile (DSP103)
+	13.Host LAN Network Port Profile (DSP1035)
+	14.IP Interface Profile (DSP1036)
+	15.Power State Management Profile (DSP1027)
+	16.PCI Device Profile (DSP1075)
+	17.Simple Identity Management Profile (DSP1034)
+	18.IP Configuration Profile (DSP1116)
+	19.Service Processor Profile (DSP1018)
+	20.Software Inventory Profile (DSP1023)
+	21.SSH Service Profile (DSP1017)
+	22.Role Based Authorization Profile (DSP1039)
+	23.BIOS Management Profile (DSP1061)
+	24.Boot Control Profile (DSP1012)
+	25.Fan Profile (DSP1013)
+	26.Sensors Profile (DSP1009)
+	27.Record Log Profile (DSP1010)
+	28.Indications Profile (DSP1054)
+	29.KVM Redirection (DSP1076)
+	30.Battery Profile (DSP1030)
+	31.Software Update Profile (DSP1025)
+
+Features supported in Production Release-2(April 2022) :
+* Fix for MPM Crash when IP is not getting in BIOS mode
+
+Features supported in Production Release-1(April 2022) :
+* Fix for S0i3 entry issue after IP change
+* Support for Wired Managebility (Tested with Realtek DASH FW v5.1.16-d9df4498)
+
+Features supported in Production Release-3(March 2022) :
+* Improved DASH Stability 
+
+Features supported in Production Release-2(March 2022) :
+* Improved KVM Performance 
+
+Features supported in Production Release-1(March 2022) :
+* Stability improvement 
+* Support added for handling of power button event or AC power removal event when system is in S5 state
+
+Features supported in Production Release :
+* KVM encrypted support.
+* Updated SPL level to 2 for FAR support
+* Battery profile- DSP1030 v1.0.0 support
+
+Features supported in Pre-Production Release:
+* Support for B1 PRO Silicon
+* DASH HTTPS support in all modes (Inband and Out of Band)
+* Software Upgrade (Tested on EDK II BIOS)- DSP1025 v1.0.0 support
+* Indication Profile (Filter collection, Dynamic filter of AMD_ indication) - DSP1054 v1.2.0 support
+* On-Demand KVM support
+* Boot Control profile is supported in x86-not-released case
+* Power commands are supported (In band and Out of Band)
+* Power hibernate and Power-On operations are supported 
+* CR-135 SMBIOS info 
+
+Features supported in Beta 5 release:
+* Support for B0 secure silicon
+* DASH KVM Redirection profile (DSP1076 v1.0.1)
+* Support for DASH HTTPS
+* In OS mode, MPM will enter low power mode after 3 mins if no DASH command. MPM frequency goes down to 48 MHz from 600 MHz
+
+Features supported in Beta 4 release:
+* Versioning format finalized and is based on PSP versioning scheme
+	* This release MPM FW version is v28.28.00.48
+		* First 28 is AIM-T product
+		* Second 28 is Rembrandt program
+		* 0 is AIM-T patch release number
+		* 048 is AIM-T build number in HEX
+* DASH Record Log profile
+* WPA2 Enterprise Authentication
+* POST CODES (primarily for x86 not released case)
+* Stability fixes, performance and memory optimizations.
+
+Features supported in Beta 3 (July 2021) release:
+* Dynamic reading of IOAPIC interrupt.
+* Additional DASH profile supported:
+	* Software Inventory Profile (DSP1023 v1.0.1)
+	* Simple Identity Management Profile (DSP1032 v1.1.0)
+	* Role Based Authorization Profile (DSPP1039 v1.0.0)
+	* Fan Profile (DSP1013 v1.0.1)
+	* Sensors Profile (DSP1009 v1.1.1)
+	* BIOS Management Profile (DSP1061 v1.0.1)
+	* Boot Control Profile (DSP1012 v1.0.2) (Only enumeration of Boot devices)
+	* IP Configuration Profile (DSP1116 v1.0.1)
+	* SSH Service Profile (DSP1017 v1.0.1)
+	* Service Processor Profile (DSP1018 v1.1.2) 
+
+Features supported in Beta 2 (June 2021) release:
+* Manageability is supported in S0 /S5 states.
+* Support for up to 3 WPA2-PSK and up to 2 WPA2-Enterprise profiles
+* Additional DASH profile supported:
+	* PCI Device Profile (DSP1075 v1.0.0)
+
+Features supported in Beta 1 (May 2021) release:
+* Manageability is supported when the platform is booted to Windows (S0 state only)
+* DASH profiles supported:
+	* Base Desktop and Mobile Profile (DSP1058 v1.0.1)
+	* Profile Registration Profile (DSP1033 v1.0.0)
+	* WS-Management Specification (DSP0226 v1.2.0)
+	* WS-Management CIM Binding Specification (DSP0227 v1.2.0)
+	* WS-CIM Mapping Specification (DSP0230 v1.0.0)
+	* CPU Profile (DSP1022 v1.0.1)
+	* DHCP Client Profile (DSP1037 v1.0.4)
+	* DNS Client Profile (DSP1038 v1.0.3)
+	* Ethernet Port Profile (DSP1014 v1.0.1)
+	* Host LAN Network Port Profile (DSP1035 v1.0.2)
+	* IP Interface Profile (DSP1036 v1.1.1)
+	* OS Status Profile (DSP1029 v1.1.0)
+	* Physical Asset Profile (DSP1011 v1.0.3)
+	* Power State Management Profile (DSP1027 v2.0.1) (Supporting reset, shutdown operations only)
+	* System Memory Profile (DSP1026 v1.0.1)
+* The provisioning package can be generated using AMD Provisioning Console
+* AMS Tray UI in the system tray displays useful information.
+
+AIM-T Solution Integration Guide v1.1:
+This document provides detailed information on hardware requirements, BIOS changes and the requires software components for building a platform with the AIM-T manageability solution. The relevant chapters for current release are 1, 2, 3, 4, 5, 6, 8, 10 & 11. Chapters 7 & 9 are under development. AIM-T OEM Integration guide can be obtained from the OEM Collaborate portal.
+
+Known issues (in this release):
+
+*[SWCM-1579] MPM is automatically waking up from sleep in x86NRC mode when connected to WPA2 Enterprise
+*[SWCM-793]TOTP token is not changing when MPM is getting into a sleep state
+*[SWCM-347]In S5 state, Software Inventory profile provides only BIOS version details
+*BIOS mode KVM performance is good, OS mode KVM performance may have latency and in few systems (~1/10), we noticed "startoskvm" command is failing or exiting without graceful closure.
+*If any ungraceful exit of vnc-viewer, wait for 3 min and if the system is still not manageable then reboot the system
+*In some Wired Network configurations, viewer might face intermittent disconnections
+*AIM-T supports DASH-CTS currently on OS mode only.
+*To end the KVM session,the KVM viewer must be closed.In case Windows OS is shut down without closing the KVM Viewer, the system will enter into KVM mode the next time when it is powered on.
+*[SWCM-1256] Ctrl + Alt + Del button in KVM viewer may not function as expected in certain Windows build during OSKVM
+
+
+Troubleshooting:
+* If DASH is not responding in Windows, try to restart the AMS service in Service Manager. If that does not work, then reboot the system.
+* After DASH power shutdown, if the platform is unresponsive, then manually power down and power on the platform.
+
+Validated configurations:
+1) AMD Reference Board: Mayan with Secure B1 PRO Rembrandt part & on Windows 11 22H2
+*BIOS: Tested_VRMB821725N.FD (Base BIOS supporting Unprovisioning via BIOS feature)
+
+2) AMD Reference Board: Lilac with Secure B1 PRO Rembrandt part & on Windows 11 22H2 
+*BIOS: Tested_VRMB821801N.FD (Base BIOS supporting Unprovisioning via BIOS feature)

@@ -1,0 +1,353 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+//***************************************************************************
+//
+//  APMF.asi - ACPI APMF Method
+//
+//***************************************************************************
+
+    Name(CpmApmfBuffer0, Buffer(255){})
+
+    Method (APMF, 2 ,Serialized)
+    {
+        Switch (Arg0)
+        {
+           Case (0)
+           {
+              PMF0()
+              Return (CpmApmfBuffer0)
+           }
+
+           Case (1)
+           {
+              PMF1()
+              Return (CpmApmfBuffer0)
+           }
+
+           Case (2)
+           {
+              PMF2()
+              Return (CpmApmfBuffer0)
+           }
+
+           Case (3)
+           {
+              PMF3()
+              Return (CpmApmfBuffer0)
+           }
+
+           Case (4)
+           {
+              PMF4()
+           }
+
+           Case (5)
+           {
+              PMF5()
+              Return (CpmApmfBuffer0)
+           }
+
+           Case (6)
+           {
+              PMF6()
+              Return (CpmApmfBuffer0)
+           }
+
+           Case (7)
+           {
+              PMF7(Arg1)
+           }
+
+           Case (8)
+           {
+              PMF8(Arg1)
+           }
+
+           Case (9)
+           {
+              PMF9()
+              Return (CpmApmfBuffer0)
+           }
+
+           Case (10)
+           {
+              PMFA(Arg1)
+           }
+
+           Case (11)
+           {
+              PMFB()
+              Return (CpmApmfBuffer0)
+           }
+
+           Case (12)
+           {
+              PMFC()
+              Return (CpmApmfBuffer0)
+           }
+
+           Case (13)
+           {
+              PMFD()
+              Return (CpmApmfBuffer0)
+           }
+
+           Case (14)
+           {
+              PMFE(Arg1)
+           }
+        }
+    }
+
+    // Verify Interface
+    Method (PMF0, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 0 call PMF0\n", 0, 0, 0, 0, 0, 0)
+        CreateWordField  (CpmApmfBuffer0, 0, CpmStructureSize)                          // Structure size field
+        CreateWordField  (CpmApmfBuffer0, 2, CpmInterfaceVersion)                       // Interface field
+        CreateDWordField (CpmApmfBuffer0, 4, CpmSupportedNotificationsMask)             // Supported Notifications Mask
+        CreateDWordField (CpmApmfBuffer0, 8, CpmSupportedFunctionsBitVector)            // Supported Functions Bit Vector
+        Store (12, CpmStructureSize)
+        Store (1, CpmInterfaceVersion)
+        Store (CpmApmfSupportedNotificationsMask, CpmSupportedNotificationsMask)
+        Store (CpmApmfSupportedFunctionsBitVector, CpmSupportedFunctionsBitVector)
+    }
+
+    // Get System Parameters
+    Method (PMF1, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 1 call PMF1\n", 0, 0, 0, 0, 0, 0)
+        CreateWordField  (CpmApmfBuffer0, 0,  CpmStructureSize)                          // Structure size field
+        CreateDWordField (CpmApmfBuffer0, 2,  CpmValidFlagsMask)                         // Valid Flags Mask
+        CreateDWordField (CpmApmfBuffer0, 6,  CpmFlags)                                  // Flags
+        CreateByteField  (CpmApmfBuffer0, 10, CpmNotifyCommandCode)                      // Notify Command Code
+        CreateDWordField (CpmApmfBuffer0, 11, CpmHeartbeatTimeInterval)                  // Heartbeat time interval
+
+        Store(15, CpmStructureSize)
+        Store(3, CpmValidFlagsMask)
+        If (LEqual(CpmApmfPmfNotifyCommandCode, 0x81))
+        {
+           //Indicates that Notify (PMF, 0x81) is used as a general-purpose notification.
+           Store (1, CpmFlags)
+        }
+        ElseIf (LAnd (LGreaterEqual(CpmApmfPmfNotifyCommandCode, 0xD0), LLessEqual(CpmApmfPmfNotifyCommandCode, 0xD9)))
+        {
+           // Indicates that Notify (PMF, n) is used as a general-purpose notification where n is defined by Notify Command Code field.
+           Store (2, CpmFlags)
+           Store (CpmApmfPmfNotifyCommandCode, CpmNotifyCommandCode)
+        }
+        Else
+        {
+           // Indicates that Notify (PMF, 0x81) is not used as a general-purpose notification.
+           Store (0, CpmFlags)
+        }
+
+        // Assign the heartbeat time interval
+        Store (CpmApmfHeartbeatTimeInterval, CpmHeartbeatTimeInterval)
+    }
+
+    // Get System BIOS Requests
+    Method (PMF2, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 2 call PMF2.\n", 0, 0, 0, 0, 0, 0)
+        CreateWordField  (CpmApmfBuffer0,  0, CpmStructureSize)                               // Structure size field
+        CreateDWordField (CpmApmfBuffer0,  2, CpmApmfPendingSystemBIOSRequests)               // Pending System BIOS Requests
+        CreateByteField  (CpmApmfBuffer0,  7, CpmApmfDytcCqlEvent)                            // DYTC IC Event
+        CreateByteField  (CpmApmfBuffer0,  8, CpmApmfDytcAmtEvent)                            // DYTC AMT Event
+        CreateDWordField (CpmApmfBuffer0,  9, CpmApmfUpdatePowerLimitsfPPT)                   // Update Power Limits fPPT
+        CreateDWordField (CpmApmfBuffer0, 13, CpmApmfUpdatePowerLimitssPPT)                   // Update Power Limits sPPT
+        CreateDWordField (CpmApmfBuffer0, 17, CpmApmfUpdatePowerLimitssPPTAPUOnly)            // Update Power Limits sPPT_APUOnly
+        CreateDWordField (CpmApmfBuffer0, 21, CpmApmfUpdatePowerLimitsSPL)                    // Update Power Limits SPL
+        CreateDWordField (CpmApmfBuffer0, 25, CpmApmfUpdatePowerLimitsSTTMinLimit)            // Update Power Limits STTMinLimit
+        CreateByteField  (CpmApmfBuffer0, 29, CpmApmfUpdatePowerLimitsSTTSkinTempLimitAPU)    // Update Power Limits STT_SkinTempLimit_APU
+        CreateByteField  (CpmApmfBuffer0, 30, CpmApmfUpdatePowerLimitsSTTSkinTempLimitHS2)    // Update Power Limits STT_SkinTempLimit_HS2
+        CreateByteField  (CpmApmfBuffer0, 31, CpmApmfEnableDisableCnQF)                       // Enable/Disable CnQF
+        CreateDWordField (CpmApmfBuffer0, 32, CpmApmfCustomPolicyInput1)                      // Customize a BIOS input event in Smart PC Solutions.
+        CreateDWordField (CpmApmfBuffer0, 36, CpmApmfCustomPolicyInput2)                      // Customize a BIOS input event in Smart PC Solutions.
+
+        Store (31, CpmStructureSize)
+        Store (CpmPmfPendingSystemBIOSRequests, CpmApmfPendingSystemBIOSRequests)
+        Store (CpmPmfPendingDytcCqlEvent, CpmApmfDytcCqlEvent)
+        Store (CpmPmfPendingDytcCqlEvent, CpmApmfDytcCqlEvent)
+        Store (CpmPmfPendingDytcAmtEvent, CpmApmfDytcAmtEvent)
+        Store (CpmPmfPendingUpdatePowerLimitsfPPT, CpmApmfUpdatePowerLimitsfPPT)
+        Store (CpmPmfPendingUpdatePowerLimitssPPT, CpmApmfUpdatePowerLimitssPPT)
+        Store (CpmPmfPendingUpdatePowerLimitssPPTAPUOnly, CpmApmfUpdatePowerLimitssPPTAPUOnly)
+        Store (CpmPmfPendingUpdatePowerLimitsSPL, CpmApmfUpdatePowerLimitsSPL)
+        Store (CpmPmfPendingUpdatePowerLimitsSTTMinLimit, CpmApmfUpdatePowerLimitsSTTMinLimit)
+        Store (CpmPmfPendingUpdatePowerLimitsSTTSkinTempLimitAPU, CpmApmfUpdatePowerLimitsSTTSkinTempLimitAPU)
+        Store (CpmPmfPendingUpdatePowerLimitsSTTSkinTempLimitHS2, CpmApmfUpdatePowerLimitsSTTSkinTempLimitHS2)
+        Store (CpmPmfPendingEnableDisableCnQF, CpmApmfEnableDisableCnQF)
+        Store (CpmPmfPendingCustomPolicyInput1, CpmApmfCustomPolicyInput1)
+        Store (CpmPmfPendingCustomPolicyInput2, CpmApmfCustomPolicyInput2)
+    }
+
+    // Get Static Power Slider Data
+    Method (PMF3, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 3 call PMF3.\n", 0, 0, 0, 0, 0, 0)
+        Store (CpmReadMem32(PF3A, 0, 0, 16), Local0)
+        Store (0, Local1)
+        While (LLess (Local1, Local0))
+        {
+            Store (CpmReadMem8(PF3A, Local1, 0, 8), Local2)
+            Store (Local2, Index(CpmApmfBuffer0, Local1))
+            Increment (Local1)
+        }
+    }
+
+    // Notify System BIOS heartbeat
+    Method (PMF4, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 4 call PMF4.\n", 0, 0, 0, 0, 0, 0)
+        If (CondRefOf (\_SB.OPM4))
+        {
+            CpmDebugPrint ("  Call OEM ACPI OPM4\n", 0, 0, 0, 0, 0, 0)
+            \_SB.OPM4 ()
+        }
+    }
+
+    // Get Auto Mode Defaults
+    Method (PMF5, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 5 call PMF5.\n", 0, 0, 0, 0, 0, 0)
+        Store (CpmReadMem32(PF5A, 0, 0, 16), Local0)
+        Store (0, Local1)
+        While (LLess (Local1, Local0))
+        {
+            Store (CpmReadMem8(PF5A, Local1, 0, 8), Local2)
+            Store (Local2, Index(CpmApmfBuffer0, Local1))
+            Increment (Local1)
+        }
+    }
+
+    // Get In Bag Policy Data
+    Method (PMF6, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 6 call PMF6.\n", 0, 0, 0, 0, 0, 0)
+        Store (CpmReadMem32(PF6A, 0, 0, 16), Local0)
+        Store (0, Local1)
+        While (LLess (Local1, Local0))
+        {
+            Store (CpmReadMem8(PF6A, Local1, 0, 8), Local2)
+            Store (Local2, Index(CpmApmfBuffer0, Local1))
+            Increment (Local1)
+        }
+    }
+
+    // Set Fan Table Index
+    Method (PMF7, 1, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 7 call PMF7\n", 0, 0, 0, 0, 0, 0)
+        CreateByteField (Arg0, 0x2, CpmApmfFanControlMode)
+        CreateDWordField(Arg0, 0x3, CpmApmfFanControlIndex)
+        CpmDebugPrint ("  FanControlMode: 0x%x\n", CpmApmfFanControlMode, 0, 0, 0, 0, 0)
+        CpmDebugPrint ("  FanControlIndex: 0x%x\n", CpmApmfFanControlIndex, 0, 0, 0, 0, 0)
+        If (CondRefOf (\_SB.OPM7))
+        {
+            CpmDebugPrint ("  Call OEM ACPI OPM7\n", 0, 0, 0, 0, 0, 0)
+            \_SB.OPM7 (CpmApmfFanControlMode, CpmApmfFanControlIndex)
+        }
+    }
+
+    // OS Power Slider Update
+    Method (PMF8, 1, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 8 call PMF8\n", 0, 0, 0, 0, 0, 0)
+        CreateByteField (Arg0, 0x2, CpmApmfSliderEventNotification)
+        CpmDebugPrint ("  Slider Event Notification: 0x%x\n", CpmApmfSliderEventNotification, 0, 0, 0, 0, 0)
+        If (CondRefOf (\_SB.OPM8))
+        {
+            CpmDebugPrint ("  Call OEM ACPI OPM8\n", 0, 0, 0, 0, 0, 0)
+            \_SB.OPM8 (CpmApmfSliderEventNotification)
+        }
+    }
+
+    // Get Auto Mode Defaults
+    Method (PMF9, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 9 call PMF9.\n", 0, 0, 0, 0, 0, 0)
+        Store (CpmReadMem32(PF9A, 0, 0, 16), Local0)
+        Store (0, Local1)
+        While (LLess (Local1, Local0))
+        {
+            Store (CpmReadMem8(PF9A, Local1, 0, 8), Local2)
+            Store (Local2, Index(CpmApmfBuffer0, Local1))
+            Increment (Local1)
+        }
+    }
+
+    // Notify In Bag Policy Update
+    Method (PMFA, 1, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 10 call PMFA\n", 0, 0, 0, 0, 0, 0)
+        CreateByteField (Arg0, 0x2, CpmApmfPolicyMask)
+        CpmDebugPrint ("  Policy Mask: 0x%x\n", CpmApmfPolicyMask, 0, 0, 0, 0, 0)
+        If (CondRefOf (\_SB.OPMA))
+        {
+            CpmDebugPrint ("  Call OEM ACPI OPMA\n", 0, 0, 0, 0, 0, 0)
+            \_SB.OPMA (CpmApmfPolicyMask)
+        }
+    }
+
+    // Get Fine Grain Dynamic Power Slider Data - AC
+    Method (PMFB, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 11 call PMFB.\n", 0, 0, 0, 0, 0, 0)
+        Store (CpmReadMem32(PFBA, 0, 0, 16), Local0)
+        Store (0, Local1)
+        While (LLess (Local1, Local0))
+        {
+            Store (CpmReadMem8(PFBA, Local1, 0, 8), Local2)
+            Store (Local2, Index(CpmApmfBuffer0, Local1))
+            Increment (Local1)
+        }
+    }
+
+    // Get Fine Grain Dynamic Power Slider Data - DC
+    Method (PMFC, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 12 call PMFC.\n", 0, 0, 0, 0, 0, 0)
+        Store (CpmReadMem32(PFCA, 0, 0, 16), Local0)
+        Store (0, Local1)
+        While (LLess (Local1, Local0))
+        {
+            Store (CpmReadMem8(PFCA, Local1, 0, 8), Local2)
+            Store (Local2, Index(CpmApmfBuffer0, Local1))
+            Increment (Local1)
+        }
+    }
+
+    // Get Auto Mode Defaults - DC
+    Method (PMFD, 0, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 13 call PMFD.\n", 0, 0, 0, 0, 0, 0)
+        Store (CpmReadMem32(PFDA, 0, 0, 16), Local0)
+        Store (0, Local1)
+        While (LLess (Local1, Local0))
+        {
+            Store (CpmReadMem8(PFDA, Local1, 0, 8), Local2)
+            Store (Local2, Index(CpmApmfBuffer0, Local1))
+            Increment (Local1)
+        }
+    }
+
+    // Notify Smart PC Solution Updates
+    Method (PMFE, 1, Serialized)
+    {
+        CpmDebugPrint ("FEA-ASL-\\_SB.PMF.APMF Function 14 call PMFE\n", 0, 0, 0, 0, 0, 0)
+        CreateDWordField (Arg0, 0x2, CpmApmfPendingRequestsBits)
+        CreateDWordField (Arg0, 0x6, CustomBiosOutput1)
+        CreateDWordField (Arg0, 0xA, CustomBiosOutput2)
+        CpmDebugPrint ("  Pending requests Bits: 0x%x, Custom BIOS output 1: 0x%x, Custom BIOS output 2: 0x%x\n", CpmApmfPendingRequestsBits, CustomBiosOutput1, CustomBiosOutput2, 0, 0, 0)
+        If (CondRefOf (\_SB.OPME))
+        {
+            CpmDebugPrint ("  Call OEM ACPI OPME\n", 0, 0, 0, 0, 0, 0)
+            \_SB.OPME (CpmApmfPendingRequestsBits, CustomBiosOutput1, CustomBiosOutput2)
+        }
+    }

@@ -1,0 +1,310 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  DEC_SPECIFICATION     = 0x00010005
+  PACKAGE_NAME          = FchProm21ModulePkg
+  PACKAGE_GUID          = A31C26D0-9F84-4665-AB4E-C49FCD07CEDD
+  PACKAGE_VERSION       = 0.1
+
+[Includes]
+  Include
+
+[LibraryClasses]
+
+[Guids]
+  gEfiAmdPTPkgTokenSpaceGuid            = { 0x7A35F736, 0x4D06, 0xA6CE, {0x99, 0x73, 0x23, 0x9A, 0x4C, 0x27, 0x61, 0xA9} }
+
+[Protocols]
+  gAmdFchProm21InitProtocolGuid         = { 0x53F9A3C8, 0x8A2B, 0x43DA, {0x94, 0x59, 0x5D, 0x7B, 0x5C, 0x91, 0xF9, 0x36} }
+  gFchProm21SmmInitProtocolGuid         = { 0x3DF956E9, 0xEBC3, 0x41FF, {0xA4, 0x00, 0xFA, 0xDD, 0x20, 0x40, 0x6A, 0x50} }
+  gEfiPromontoryGpioProtocolGuid        = { 0x0617bd2e, 0x01c1, 0x4432, {0xbb, 0xf6, 0x28, 0x42, 0x93, 0xcc, 0x0d, 0xb9} }
+  gEfiPromontoryGpioSmmProtocolGuid     = { 0x9bb1624d, 0xf007, 0x4041, {0xb8, 0x45, 0x6b, 0xea, 0xd5, 0xb0, 0x7d, 0x34} }
+
+[Ppis]
+  gAmdFchProm21InitPpiGuid              = { 0xB3CCB71A, 0x7E56, 0x452F, {0xAB, 0x6B, 0xBB, 0x64, 0x12, 0xCA, 0xD8, 0x8E} }
+  gAmdFchProm21FwLoadingPassPpiGuid     = { 0x32260E47, 0x98EF, 0x4EFD, {0x80, 0x2B, 0xD2, 0xF8, 0x4F, 0x66, 0xF8, 0xC4} }
+  gAmdFchProm21FwChecksumFailPpiGuid    = { 0xD5838839, 0x6B27, 0x4291, {0x80, 0x48, 0x5F, 0x18, 0xEA, 0xA2, 0x24, 0xDD} }
+  gEfiPeiPromotoryGpioPpiGuid           = { 0x31859c50, 0x2845, 0x42da, {0x9f, 0x37, 0xe7, 0x18, 0x67, 0xe3, 0xe0, 0x5e} }
+
+[PcdsFixedAtBuild]
+  ### Force Prom21 Gpp Pcie Address
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21ForceGppPcieAddress|0x00000000|UINT32|0x02010000
+
+[PcdsDynamic]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21FwInRamAddress|0x0B000000|UINT32|0x02000001
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Msi|0xf|UINT8|0x02000003
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Msix|0xf|UINT8|0x02000004
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21HW_LPM|0xf|UINT8|0x02000005
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21DbC|0xf|UINT8|0x02000006
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XHC_PME|0xf|UINT8|0x02000007
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Msi|0xf|UINT8|0x02000100
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Msix|0xf|UINT8|0x02000101
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21HW_LPM|0xf|UINT8|0x02000102
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21DbC|0xf|UINT8|0x02000103
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XHC_PME|0xf|UINT8|0x02000104
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Lock|0x01|UINT8|0x02000105
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataMode|0xf|UINT8|0x02000009
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataAggressiveDevSlpP0|0xf|UINT8|0x0200000A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataAggressiveDevSlpP1|0xf|UINT8|0x0200000B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataAggressiveDevSlpP2|0xf|UINT8|0x0200000C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataAggressiveDevSlpP3|0xf|UINT8|0x0200000D
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataMode|0x00|UINT8|0x02000106
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataAggressiveDevSlpP0|0xf|UINT8|0x02000107
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataAggressiveDevSlpP1|0xf|UINT8|0x02000108
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataAggressiveDevSlpP2|0xf|UINT8|0x02000109
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataAggressiveDevSlpP3|0xf|UINT8|0x0200010A
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataAggrLinkPmCap|0xf|UINT8|0x0200000E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataPscCap|0xf|UINT8|0x0200000F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataSscCap|0xf|UINT8|0x02000010
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataAggrLinkPmCap|0xf|UINT8|0x0200010B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataPscCap|0xf|UINT8|0x0200010C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataSscCap|0xf|UINT8|0x0200010D
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataPortMdPort0|0xf|UINT8|0x02000011
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataPortMdPort1|0xf|UINT8|0x02000012
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataPortMdPort2|0xf|UINT8|0x02000013
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataPortMdPort3|0xf|UINT8|0x02000014
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataPortMdPort0|0xf|UINT8|0x0200010E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataPortMdPort1|0xf|UINT8|0x0200010F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataPortMdPort2|0xf|UINT8|0x02000110
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataPortMdPort3|0xf|UINT8|0x02000111
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataHotPlug|0xf|UINT8|0x02000015
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataPTSataCCCSCap|0x00|UINT8|0x02000016
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataHotPlug|0xf|UINT8|0x02000112
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataPTSataCCCSCap|0x00|UINT8|0x02000113
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataPort0Enable|0xf|UINT8|0x02000017
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataPort1Enable|0xf|UINT8|0x02000018
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataPort2Enable|0xf|UINT8|0x02000019
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SataPort3Enable|0xf|UINT8|0x0200001A
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataPort0Enable|0xf|UINT8|0x02000114
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataPort1Enable|0xf|UINT8|0x02000115
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataPort2Enable|0xf|UINT8|0x02000116
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21SataPort3Enable|0xf|UINT8|0x02000117
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciLock|0x00|UINT8|0x02000020
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciID|0x00000000|UINT32|0x02000021
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21GpioID|0x00000000|UINT32|0x02000022
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21FwVersion|0x0000000000000000|UINT64|0x02000023
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21GppPcieAddress|0x00000000|UINT32|0x02000024
+
+# PROM21L.1/2/3 USB Port
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P0|0xf|UINT8|0x02000025
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P1|0xf|UINT8|0x02000026
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P2|0xf|UINT8|0x02000027
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P3|0xf|UINT8|0x02000028
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P4|0xf|UINT8|0x02000029
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb3P5|0xf|UINT8|0x0200002A
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P0|0xf|UINT8|0x0200002B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P1|0xf|UINT8|0x0200002C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P2|0xf|UINT8|0x0200002D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P3|0xf|UINT8|0x0200002E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P4|0xf|UINT8|0x0200002F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P5|0xf|UINT8|0x02000030
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P6|0xf|UINT8|0x02000031
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P7|0xf|UINT8|0x02000032
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P8|0xf|UINT8|0x02000033
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P9|0xf|UINT8|0x02000034
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P10|0xf|UINT8|0x02000035
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21Usb2P11|0xf|UINT8|0x02000036
+
+# PROM21L.4 USB Port
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb3P0|0xf|UINT8|0x02000037
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb3P1|0xf|UINT8|0x02000038
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb3P2|0xf|UINT8|0x02000039
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb3P3|0xf|UINT8|0x0200003A
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P0|0xf|UINT8|0x0200003B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P1|0xf|UINT8|0x0200003C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P2|0xf|UINT8|0x0200003D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P3|0xf|UINT8|0x0200003E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P4|0xf|UINT8|0x0200003F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P5|0xf|UINT8|0x02000040
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P6|0xf|UINT8|0x02000041
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P7|0xf|UINT8|0x02000042
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P8|0xf|UINT8|0x02000043
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21L4Usb2P9|0xf|UINT8|0x02000044
+
+# Secondary PROM21L.1/2/3 USB Port
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P0|0xf|UINT8|0x02000045
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P1|0xf|UINT8|0x02000046
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P2|0xf|UINT8|0x02000047
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P3|0xf|UINT8|0x02000048
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P4|0xf|UINT8|0x02000049
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb3P5|0xf|UINT8|0x0200004A
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P0|0xf|UINT8|0x0200004B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P1|0xf|UINT8|0x0200004C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P2|0xf|UINT8|0x0200004D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P3|0xf|UINT8|0x0200004E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P4|0xf|UINT8|0x0200004F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P5|0xf|UINT8|0x02000050
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P6|0xf|UINT8|0x02000051
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P7|0xf|UINT8|0x02000052
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P8|0xf|UINT8|0x02000053
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P9|0xf|UINT8|0x02000054
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P10|0xf|UINT8|0x02000055
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21Usb2P11|0xf|UINT8|0x02000056
+
+# Secondary PROM21L.4 USB Port
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb3P0|0xf|UINT8|0x02000057
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb3P1|0xf|UINT8|0x02000058
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb3P2|0xf|UINT8|0x02000059
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb3P3|0xf|UINT8|0x0200005A
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P0|0xf|UINT8|0x0200005B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P1|0xf|UINT8|0x0200005C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P2|0xf|UINT8|0x0200005D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P3|0xf|UINT8|0x0200005E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P4|0xf|UINT8|0x0200005F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P5|0xf|UINT8|0x02000060
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P6|0xf|UINT8|0x02000061
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P7|0xf|UINT8|0x02000062
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P8|0xf|UINT8|0x02000063
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21L4Usb2P9|0xf|UINT8|0x02000064
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21TempBusNum|0x08|UINT8|0x02000067
+
+# PROM21 Xhci Configuration
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciP0Gen|0xf|UINT8|0x02000070
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciP1Gen|0xf|UINT8|0x02000071
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciP2Gen|0xf|UINT8|0x02000072
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciP3Gen|0xf|UINT8|0x02000073
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciP4Gen|0xf|UINT8|0x02000074
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciP5Gen|0xf|UINT8|0x02000075
+
+# Secondary PROM21 Xhci Configuration
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciP0Gen|0xf|UINT8|0x02000076
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciP1Gen|0xf|UINT8|0x02000077
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciP2Gen|0xf|UINT8|0x02000078
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciP3Gen|0xf|UINT8|0x02000079
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciP4Gen|0xf|UINT8|0x0200007A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciP5Gen|0xf|UINT8|0x0200007B
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort0Enable|0xf|UINT8|0x02000080
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort1Enable|0xf|UINT8|0x02000081
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort2Enable|0xf|UINT8|0x02000082
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort3Enable|0xf|UINT8|0x02000083
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort4Enable|0xf|UINT8|0x02000084
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort5Enable|0xf|UINT8|0x02000085
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort6Enable|0xf|UINT8|0x02000086
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort7Enable|0xf|UINT8|0x02000087
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort8Enable|0xf|UINT8|0x02000088
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort9Enable|0xf|UINT8|0x02000089
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort10Enable|0xf|UINT8|0x0200008A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort11Enable|0xf|UINT8|0x0200008B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort12Enable|0xf|UINT8|0x0200008C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PciePort13Enable|0xf|UINT8|0x0200008D
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort0Enable|0xf|UINT8|0x0200011B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort1Enable|0xf|UINT8|0x0200011C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort2Enable|0xf|UINT8|0x0200011D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort3Enable|0xf|UINT8|0x0200011E
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort4Enable|0xf|UINT8|0x0200011F
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort5Enable|0xf|UINT8|0x02000120
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort6Enable|0xf|UINT8|0x02000121
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort7Enable|0xf|UINT8|0x02000122
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort8Enable|0xf|UINT8|0x02000123
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort9Enable|0xf|UINT8|0x02000124
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort10Enable|0xf|UINT8|0x02000125
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort11Enable|0xf|UINT8|0x02000126
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort12Enable|0xf|UINT8|0x02000127
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PciePort13Enable|0xf|UINT8|0x02000128
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq0PinSelect|0x8|UINT8|0x02000090
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq1PinSelect|0x4|UINT8|0x02000091
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq2PinSelect|0x0|UINT8|0x02000092
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq3PinSelect|0x2|UINT8|0x02000093
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq4PinSelect|0x3|UINT8|0x02000094
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq5PinSelect|0x4|UINT8|0x02000095
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq0Mode|0x0|UINT8|0x02000096
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq1Mode|0x0|UINT8|0x02000097
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq2Mode|0x0|UINT8|0x02000098
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq3Mode|0x0|UINT8|0x02000099
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq4Mode|0x0|UINT8|0x0200009A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieClkreq5Mode|0x0|UINT8|0x0200009B
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq0PinSelect|0x8|UINT8|0x02000190
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq1PinSelect|0x4|UINT8|0x02000191
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq2PinSelect|0x0|UINT8|0x02000192
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq3PinSelect|0x2|UINT8|0x02000193
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq4PinSelect|0x3|UINT8|0x02000194
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq5PinSelect|0x4|UINT8|0x02000195
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq0Mode|0x0|UINT8|0x02000196
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq1Mode|0x0|UINT8|0x02000197
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq2Mode|0x0|UINT8|0x02000198
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq3Mode|0x0|UINT8|0x02000199
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq4Mode|0x0|UINT8|0x0200019A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieClkreq5Mode|0x0|UINT8|0x0200019B
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciLock|0x00|UINT8|0x02000352
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciID|0x00000000|UINT32|0x02000353
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21GppPcieAddress|0x00000000|UINT32|0x02000354
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SecXhciMmio|0x00000000|UINT32|0x02000355
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21RootBridgeNum|0x00|UINT8|0x02000250
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieTargetSpeed|0x04|UINT8|0x02000251
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciSsid|0x33281B21|UINT32|0x02000260
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21AhciSsid|0x33281B21|UINT32|0x02000261
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieUspSsid|0x33281B21|UINT32|0x02000262
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21XhciSsid|0x33281B21|UINT32|0x02000118
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21AhciSsid|0x33281B21|UINT32|0x02000119
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21PcieUspSsid|0x33281B21|UINT32|0x0200011A
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp0Ssid|0x33281B21|UINT32|0x02000263
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp1Ssid|0x33281B21|UINT32|0x02000264
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp2Ssid|0x33281B21|UINT32|0x02000265
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp3Ssid|0x33281B21|UINT32|0x02000266
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp4Ssid|0x33281B21|UINT32|0x02000267
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp5Ssid|0x33281B21|UINT32|0x02000268
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp6Ssid|0x33281B21|UINT32|0x02000269
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp7Ssid|0x33281B21|UINT32|0x0200026A
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp8Ssid|0x33281B21|UINT32|0x0200026B
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp9Ssid|0x33281B21|UINT32|0x0200026C
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp10Ssid|0x33281B21|UINT32|0x0200026D
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21PcieDsp11Ssid|0x33281B21|UINT32|0x0200026E
+
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21XhciMmio|0x00000000|UINT32|0x02000270
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21IohcBridgeCntl|0x00000000|UINT32|0x02000271
+
+  ###
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21FWLoading|0x1|UINT8|0x02000273
+
+  # 0: Load fw from BIOS (default)
+  # 1: Use onboard fw
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21DbgLoadFw|0x00|UINT8|0x02000274
+
+  # 0x0: Not disable un-used PCIe ports
+  # 0x1: Disable un-used PCIe ports
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21DisableUnusedPciePort|0xf|UINT8|0x02000275
+
+   #
+  # Second PT21 GPP device number 0/4/8
+  # Default is Port 8
+  #
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21SecondPortNumber|0xf|UINT8|0x02000280
+
+  # Thermal Throttling
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21ThermalThrottle|0xf|UINT8|0x02000276
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdPT21ThermalThreshold|0xC0|UINT8|0x02000277
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21ThermalThrottle|0xf|UINT8|0x02000278
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdSecPT21ThermalThreshold|0xC0|UINT8|0x02000279

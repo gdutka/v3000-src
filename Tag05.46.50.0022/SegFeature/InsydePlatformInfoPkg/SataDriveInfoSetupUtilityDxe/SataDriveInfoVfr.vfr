@@ -1,0 +1,140 @@
+/** @file
+  VFR of SataDriveInfoSetupUtilityDxe.
+
+;******************************************************************************
+;* Copyright (c) 2023, Insyde Software Corp. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corp.
+;*
+;******************************************************************************
+*/
+
+#include <VfrCompatMacros.h>
+
+#include <Guid/SataDriveInfoSetupUtilityHii.h>
+
+#include "SataDriveInfoSetupNVDataStruc.h"
+
+formset
+  guid      = SATA_DRIVE_INFO_SETUP_FORMSET_GUID,
+  title     = STRING_TOKEN (STR_ROOT_FORM_TITLE),
+  help      = STRING_TOKEN (STR_ROOT_FORM_TITLE),
+  classguid = VFR_GUID_FROM_PCD (PcdGetPtr (PcdH2OSataDriveInfoLinkToFormsetGuid)),
+
+  varstore SATA_DRIVE_INFO_CONFIGURATION,
+    varid = SATA_DRIVE_INFO_CONFIGURATION_VARSTORE_ID,
+    name  = SataDriveInfoSetupConfig,
+    guid  = SATA_DRIVE_INFO_CONFIGURATION_GUID;
+
+  form
+    formid = H2O_SATA_DRIVE_INFO_ROOT_FORM_ID,
+    title  = STRING_TOKEN (STR_ROOT_FORM_TITLE);
+
+    suppressif TRUE;
+      numeric varid = SataDriveInfoSetupConfig.NumberOfPhysicalPorts,
+        questionid = H2O_SATA_DRIVE_INFO_NUMBER_OF_PHYSICAL_PORTS_QUESTION_ID,
+        prompt  = STRING_TOKEN(STR_EMPTY),
+        help    = STRING_TOKEN(STR_EMPTY),
+        flags   = READ_ONLY | INTERACTIVE,
+        minimum = 0,
+        maximum = 0xFF,
+        step    = 1,
+        default = 0,
+      endnumeric;
+    endif;
+
+    grayoutif ideqval SataDriveInfoSetupConfig.NumberOfPhysicalPorts == 0;
+      oneof varid = SataDriveInfoSetupConfig.DisplayMode,
+        questionid  = H2O_SATA_DRIVE_INFO_DISPLAY_MODE_QUESTION_ID,
+        prompt      = STRING_TOKEN (STR_DISPLAY_MODE_PROMPT),
+        help        = STRING_TOKEN (STR_DISPLAY_MODE_HELP),
+        flags       = INTERACTIVE,
+        option text = STRING_TOKEN (STR_DISPLAY_MODE_OPTION_BY_CONTROLLERS),     value = 0, flags = DEFAULT;
+        option text = STRING_TOKEN (STR_DISPLAY_MODE_OPTION_BY_PHYSICAL_PORTS),  value = 1, flags = 0;
+      endoneof;
+    endif;
+
+    suppressif ideqval SataDriveInfoSetupConfig.DisplayMode == 0;
+      checkbox varid = SataDriveInfoSetupConfig.HideEmptyPorts,
+        prompt   = STRING_TOKEN (STR_HIDE_EMPTY_PORTS_PROMPT),
+        help     = STRING_TOKEN (STR_HIDE_EMPTY_PORTS_HELP),
+        flags    = INTERACTIVE,
+        key      = H2O_SATA_DRIVE_INFO_HIDE_EMPTY_PORTS_QUESTION_ID,
+        default  = 0,
+      endcheckbox;
+    endif;
+
+    suppressif TRUE;
+      checkbox varid = SataDriveInfoSetupConfig.FormRefresh,
+        prompt   = STRING_TOKEN (STR_FORM_REFRESH_PROMPT),
+        help     = STRING_TOKEN (STR_FORM_REFRESH_HELP),
+        flags    = INTERACTIVE,
+        key      = H2O_SATA_DRIVE_INFO_FORM_REFRESH_QUESTION_ID,
+        default  = 0,
+      endcheckbox;
+    endif;
+
+    subtitle text = STRING_TOKEN (STR_EMPTY);
+    subtitle text = STRING_TOKEN (STR_STATISTICS);
+    subtitle text = STRING_TOKEN (STR_EMPTY);
+
+    label H2O_SATA_DRIVE_INFO_DRIVE_LIST_LABEL_START;
+    label H2O_SATA_DRIVE_INFO_DRIVE_LIST_LABEL_END;
+  endform;
+
+  form
+    formid = H2O_SATA_DRIVE_INFO_DRIVE_INFO_FORM_ID,
+    title  = STRING_TOKEN (STR_SUBFORM_TITLE);
+
+    text
+      help    = STRING_TOKEN(STR_DEVICE_PATH_HELP),
+      text    = STRING_TOKEN(STR_DEVICE_PATH_TEXT),
+      text    = STRING_TOKEN(STR_DEVICE_PATH_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_SATA_DRIVE_INFO_DEVICE_PATH_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_PARENT_DEVICE_PATH_HELP),
+      text    = STRING_TOKEN(STR_PARENT_DEVICE_PATH_TEXT),
+      text    = STRING_TOKEN(STR_PARENT_DEVICE_PATH_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_SATA_DRIVE_INFO_PARENT_DEVICE_PATH_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_SERIAL_NUMBER_HELP),
+      text    = STRING_TOKEN(STR_SERIAL_NUMBER_TEXT),
+      text    = STRING_TOKEN(STR_SERIAL_NUMBER_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_SATA_DRIVE_INFO_SERIAL_NUMBER_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_CAPACITY_HELP),
+      text    = STRING_TOKEN(STR_CAPACITY_TEXT),
+      text    = STRING_TOKEN(STR_CAPACITY_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_SATA_DRIVE_INFO_CAPACITY_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_FORM_FACTOR_HELP),
+      text    = STRING_TOKEN(STR_FORM_FACTOR_TEXT),
+      text    = STRING_TOKEN(STR_FORM_FACTOR_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_SATA_DRIVE_INFO_FORM_FACTOR_QUESTION_ID;
+
+    text
+      help    = STRING_TOKEN(STR_ROTATION_RATE_HELP),
+      text    = STRING_TOKEN(STR_ROTATION_RATE_TEXT),
+      text    = STRING_TOKEN(STR_ROTATION_RATE_VALUE),
+      flags   = INTERACTIVE,
+      key     = H2O_SATA_DRIVE_INFO_ROTATION_RATE_QUESTION_ID;
+
+    subtitle text = STRING_TOKEN (STR_EMPTY);
+
+    label H2O_SATA_DRIVE_INFO_SMART_ATTRIB_LIST_LABEL_START;
+    label H2O_SATA_DRIVE_INFO_SMART_ATTRIB_LIST_LABEL_END;
+  endform;
+
+endformset;

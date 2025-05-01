@@ -1,0 +1,57 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2017-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmWwanInitDxe
+  FILE_GUID             = ABFC0212-9344-439C-8653-699234CFAD03
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmWwanInitDxeEntryPoint
+
+[Sources.common]
+  AmdCpmWwanInitDxe.c
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[BuildOptions]
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  AmdCpmBaseLib
+  AmdPbsConfigLib
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Protocols]
+  gAmdCpmTableProtocolGuid
+
+[Ppis]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdModernStandbyEnable
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+
+[Depex]
+ gAmdCpmTableProtocolGuid
+ AND
+ gEfiVariableArchProtocolGuid

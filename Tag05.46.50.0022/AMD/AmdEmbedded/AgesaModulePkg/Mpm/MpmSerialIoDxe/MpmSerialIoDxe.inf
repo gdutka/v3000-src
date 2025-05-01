@@ -1,0 +1,52 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MpmSerialIoDxe
+  FILE_GUID                      = BC09EAD4-8094-432D-A4C8-381F87D5F531
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = InitMpmSerialIo
+
+[Sources.common]
+  MpmSerialIoDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  PcdLib
+  MpmLib
+  MpmFuncLib
+  MpmDevLib
+  MpmBiosCmdLib
+
+[Protocols]
+  gEfiSerialIoProtocolGuid                                ## PRODUCES
+  gEfiDevicePathProtocolGuid                              ## PRODUCES
+  gAmdMpmTcrInitializedProtocolGuid                       ## PRODUCES
+  gAmdMpmWifiFwloadedProtocolGuid                         ## CONSUMES
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmEnable              ## CONSUMES
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessTcrEnable   ## CONSUMES
+  gEfiMdePkgTokenSpaceGuid.PcdUartDefaultBaudRate         ## CONSUMES
+  gEfiMdePkgTokenSpaceGuid.PcdUartDefaultDataBits         ## CONSUMES
+  gEfiMdePkgTokenSpaceGuid.PcdUartDefaultParity           ## CONSUMES
+  gEfiMdePkgTokenSpaceGuid.PcdUartDefaultStopBits         ## CONSUMES
+  gEfiMdePkgTokenSpaceGuid.PcdUartDefaultReceiveFifoDepth ## CONSUMES
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdIvInfoDmaReMap         ## CONSUMES
+
+[Depex]
+  TRUE

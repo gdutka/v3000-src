@@ -1,0 +1,30 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = IvrsDeviceInfoLib
+  FILE_GUID                      = A8BB1B2E-ACE4-40AC-8E8B-AA8073592EFD
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = IvrsDeviceInfoLib
+
+[Sources]
+  IvrsDeviceInfoLib.c
+  IvmdInfoTable.c
+
+[Packages]
+  AgesaPkg/AgesaPkg.dec
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  IvrsDeviceInfoLib
+
+[Pcd]
+
+[Depex]
+  TRUE
+
+

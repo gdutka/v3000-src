@@ -1,0 +1,70 @@
+
+modal;
+
+text
+  help    = STRING_TOKEN(STR_BLANK),
+  text    = STRING_TOKEN(STR_BLANK),
+  text    = STRING_TOKEN(STR_BLANK),
+  image   = IMAGE_TOKEN (IMG_DIALOG_BKG),
+  property {
+    width  : 100%;
+    height : 100%;
+    top    : 0px;
+    left   : 0px;
+  }
+  ;
+
+text
+  help    = STRING_TOKEN(STR_BLANK),
+  text    = STRING_TOKEN(STR_POPUP_CURRENT_Q_PROMPT),
+  text    = STRING_TOKEN(STR_BLANK),
+  property {
+    color     : black;
+    font-size : 29px;
+    left      : 30px;
+    top       : 40px;
+    right     : 70px;
+    height    : 110px;
+  }
+  ;
+
+text
+  help    = STRING_TOKEN(STR_BLANK),
+  text    = STRING_TOKEN(STR_BLANK),
+  text    = STRING_TOKEN(STR_BLANK),
+  image   = IMAGE_TOKEN (IMG_POPUP_CURRENT_FS_TITLE),
+  property {
+    filter    : brightness;
+    left      : 75%;
+    top       : 40px;
+    width     : 50px;
+    height    : 50px;
+  }
+  ;
+
+text
+  help    = STRING_TOKEN(STR_BLANK),
+  text    = STRING_TOKEN(STR_POPUP_CURRENT_Q_HELP),
+  text    = STRING_TOKEN(STR_BLANK),
+  property {
+    color     : lightgray;
+    font-size : 19px;
+    left      : 30px;
+    top       : 20%;
+    width     : 90%;
+    height    : 100px;
+  }
+  ;
+
+text
+  help    = STRING_TOKEN(STR_BLANK),
+  text    = STRING_TOKEN(STR_BLANK),
+  text    = STRING_TOKEN(STR_BLANK),
+  property {
+    background-color : white;
+    left             : 30px;
+    top              : 45%;
+    width            : 80%;
+    height           : 2px;
+  }
+  ;

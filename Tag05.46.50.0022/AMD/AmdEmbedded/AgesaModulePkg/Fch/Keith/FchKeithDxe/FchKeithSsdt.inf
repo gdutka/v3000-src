@@ -1,0 +1,71 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FchKeithSsdt
+  FILE_GUID                      = CC3CE225-D9E0-4AB1-AD66-B857C2D16D2E
+  MODULE_TYPE                    = DXE_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = FchKeithSsdtInitEntry
+
+
+[sources]
+  FchKeithSsdt.c
+  FchKeithSsdt.h
+
+[LibraryClasses]
+  BaseLib 
+  UefiLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  NbioHandleLib
+  NbioSmuV13Lib
+  FchKeithDxeLib
+
+[Guids]
+  gEfiEventReadyToBootGuid
+
+[Protocols]
+  gEfiPciRootBridgeIoProtocolGuid        #CONSUMED
+  gFchInitProtocolGuid                   #CONSUMED
+#  gFchAcpiTableInstallGuid               #CONSUMED
+  gEfiAcpiTableProtocolGuid              #CONSUMED
+  gEfiAcpiSdtProtocolGuid                #CONSUMED
+  gEfiFirmwareVolume2ProtocolGuid        #CONSUMED
+  gFchSsdtInstalledProtocolGuid          #PRODUCED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/Fch/Keith/FchKeith.dec
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAcdcTimerEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSataAcpiTableRootBridgeName
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSata0AcpiTableDeviceName
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdSata1AcpiTableDeviceName
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchRTD3ColdEnableMap
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.FchSataDummyD3ColdSupport
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchSataD3EntrySwSmi
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchSataD3ExitSwSmi
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchAcdcTimerTimezoneDaylightValid
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchAcdcTimerTimezoneCmosOffsetLow
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchAcdcTimerTimezoneCmosOffsetHigh
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdFchAcdcTimerDaylightCmosOffset
+
+[Depex]
+  gFchInitProtocolGuid
+  AND
+  gEfiAcpiTableProtocolGuid
+  AND
+  gEfiAcpiSdtProtocolGuid
+  AND
+  gAmdFchKeithDepexProtocolGuid
+

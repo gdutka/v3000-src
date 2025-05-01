@@ -1,0 +1,47 @@
+## @file
+#  File to declare variable default information
+#
+#******************************************************************************
+#* Copyright (c) 2016, Insyde Software Corporation. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+#
+# This file is ini format and Comments are prefixed with a # and continue to the end of the line.
+#
+
+!include InsydeModulePkg/Package.var
+!include EmbeddedChipsetPkg/Package.var
+
+#
+# Optional [Guids] section. uses to declare guid which used in this file.
+#
+[Guids]
+
+#
+# The [Packages] section lists all of the package declaration files that contain
+# GUIDs or PCDs that are used by this variable declaration file.
+#
+[Packages]
+#[-start-220920-IB14740263-add]#
+  InsydeModulePkg/InsydeModulePkg.dec
+#[-end-220920-IB14740263-add]#
+
+#
+# Below can write Var section to introduce a single UEFI variable default value for the specified
+# default stores and specified SKU.
+#
+# Section format is [Var.VariableGUID.VariableName] for example [Var.gEfiFileInfoGuid.MyTestVar]
+#
+#[-start-220920-IB14740263-add]#
+[Var.gSystemConfigurationGuid.Setup]
+  Attribs = BS | RT
+  DefaultId = 0
+  SkuId = 0
+  Struct = KERNEL_CONFIGURATION
+  Data = name=ActivePcrBanks         | (7)
+#[-end-220920-IB14740263-add]#

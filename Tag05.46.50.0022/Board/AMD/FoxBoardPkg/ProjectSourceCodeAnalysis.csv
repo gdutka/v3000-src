@@ -1,0 +1,847 @@
+FileName,LineNo,Code,FileHash,Status,Message
+amd\amdembedded\agesamodulepkg\ccx\zen3\pei\ccxzen3cacheinit.c,66,C6297,aba83d56d16adbbcba221708286c05d7,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\ccx\zen3\pei\ccxzen3downcoreinit.c,646,C6031,8193c5e57547abb96e97ae43c255d876,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\ccx\zen3\pei\rmb\amdccxzen3rmbpei.c,536,C6387,c07ad97e1a1fa1845260c1c4d5dabb63,New,"'*MemoryContentCopy' could be '0':  this does not adhere to the specification for the function 'CopyMem'. See line 532 for an earlier location where this can occur: Lines: 402, 403, 404, 405, 406, 407, 408, 411, 412, 413, 415, 464, 476, 486, 489, 490, 506, 507, 508, 510, 513, 514, 516, 517, 518, 520, 521, 522, 525, 529, 532, 536"
+amd\amdembedded\agesamodulepkg\ccx\zen3\pei\rmb\amdccxzen3rmbpei.c,586,C6387,c07ad97e1a1fa1845260c1c4d5dabb63,New,"'ApGdt' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 402, 403, 404, 405, 406, 407, 408, 411, 412, 413, 415, 464, 476, 486, 489, 490, 506, 507, 508, 510, 513, 514, 516, 517, 518, 520, 521, 522, 525, 529, 532, 536, 537, 540, 542, 543, 547, 551, 553, 555, 558, 560, 565, 567, 570, 572, 574, 575, 578, 582, 584, 586"
+amd\amdembedded\agesamodulepkg\ccx\zen3\pei\rmb\amdccxzen3rmbpei.c,959,C6385,c07ad97e1a1fa1845260c1c4d5dabb63,New,"Reading invalid data from 'CpuWdtTimeBaseDecode':  the readable size is '16' bytes, but '2048' bytes may be read.: Lines: 944, 945, 946, 947, 948, 949, 952, 953, 954, 959"
+amd\amdembedded\agesamodulepkg\fabric\rmb\fabricrmbdxe\fabricpiepwrmgmt.c,82,C6031,9d4e6849a3bbe75fcbb837b49fcadea5,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\fabric\rmb\fabricrmbpei\fabricscrubinit.c,248,C6297,4c9b13c2076c5b4b7e1d149807041d07,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithcore\keith\kthwacpi\kthwacpilateservice.c,191,C6001,a579252018233b9e6d6ad417a23a8c59,New,"Using uninitialized memory 'Usb3GpeNum'.: Lines: 158, 159, 160, 162, 164, 165, 166, 168, 173, 175, 180, 185, 190, 191"
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithcore\keith\kthwacpi\kthwacpilateservice.c,196,C6001,a579252018233b9e6d6ad417a23a8c59,New,"Using uninitialized memory 'Usb4GpeNum'.: Lines: 158, 159, 160, 162, 164, 165, 166, 168, 173, 175, 180, 185, 190, 191, 196"
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithdxe\fchdxe.c,112,C6031,f8f3ab6b368bb563dbf0f83a91448d7f,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithdxe\fchdxe.c,584,C6031,f8f3ab6b368bb563dbf0f83a91448d7f,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithdxe\fchkeithssdt.c,351,C6011,614abc8f8fb8fb1b45c74e236e5b0a5d,New,"Dereferencing NULL pointer 'FwVol'. : Lines: 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 289, 290, 291, 294, 300, 306, 309, 314, 322, 348, 349, 350, 351"
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithpei\fchpei.c,384,C6031,48f3d22541377b2c1fae91f44ca2fa2d,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithpei\fchpei.c,385,C6031,48f3d22541377b2c1fae91f44ca2fa2d,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithpei\fchpei.c,816,C6031,48f3d22541377b2c1fae91f44ca2fa2d,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithpei\fchpei.c,817,C6031,48f3d22541377b2c1fae91f44ca2fa2d,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithpei\fchpei.c,818,C6031,48f3d22541377b2c1fae91f44ca2fa2d,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\fch\keith\fchkeithsmm\fchsmm.c,101,C6001,b5f31e9701d475b8c90854b40f6f4fcc,New,"Using uninitialized memory 'UsbConfigData'.: Lines: 52, 53, 54, 55, 56, 57, 58, 59, 60, 62, 64, 66, 69, 72, 74, 75, 76, 78, 80, 84, 88, 92, 96, 100, 101"
+amd\amdembedded\agesamodulepkg\library\amdidshooklibdxe\amdidshooklib.c,165,C6011,aa76029aec07a8620e79228cc81e1666,New,"Dereferencing NULL pointer 'AllocateHeapParams.BufferPtr+IdsNvTableSize+100'. : Lines: 123, 124, 125, 126, 127, 128, 129, 130, 133, 134, 135, 136, 137, 141, 142, 143, 144, 149, 151, 152, 155, 156, 157, 159, 165"
+amd\amdembedded\agesamodulepkg\library\amdidshooklibdxe\amdidshooklib.c,184,C6011,aa76029aec07a8620e79228cc81e1666,New,"Dereferencing NULL pointer 'IdsNvTable'. See line 165 for an earlier location where this can occur: Lines: 123, 124, 125, 126, 127, 128, 129, 130, 133, 134, 135, 136, 137, 141, 142, 143, 144, 149, 151, 152, 155, 156, 157, 159, 165, 167, 169, 174, 179, 183, 184"
+amd\amdembedded\agesamodulepkg\library\amdidshooklibpei\amdidshooklib.c,165,C6011,c585768764e2cadc2d243f630bbad298,New,"Dereferencing NULL pointer 'AllocateHeapParams.BufferPtr+IdsNvTableSize+100'. : Lines: 123, 124, 125, 126, 127, 128, 129, 130, 133, 134, 135, 136, 137, 141, 142, 143, 144, 149, 151, 152, 155, 156, 157, 159, 165"
+amd\amdembedded\agesamodulepkg\library\amdidshooklibpei\amdidshooklib.c,184,C6011,c585768764e2cadc2d243f630bbad298,New,"Dereferencing NULL pointer 'IdsNvTable'. See line 165 for an earlier location where this can occur: Lines: 123, 124, 125, 126, 127, 128, 129, 130, 133, 134, 135, 136, 137, 141, 142, 143, 144, 149, 151, 152, 155, 156, 157, 159, 165, 167, 169, 174, 179, 183, 184"
+amd\amdembedded\agesamodulepkg\library\amdpspapoblib\amdpspapoblib.c,309,C6297,8d357b921bc36fb149e9b424c8a51967,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\amdpspdxesmmbuflib\amdpspdxesmmbuflib.c,147,C6031,21aa4b2c701b95d78d223c55fa0516db,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\agesamodulepkg\library\amdpspflashupdatelib\amdpspflashupdatelib.c,324,C6031,2f595081c6ba37fcdccb27456e9987fa,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\agesamodulepkg\library\amds3savelib\s3save\amds3savelib.c,821,C6031,9b898da5fe395ca2211bd79e2b49a30c,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\agesamodulepkg\library\amds3savelib\s3save\amds3savelib.c,868,C6031,9b898da5fe395ca2211bd79e2b49a30c,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\agesamodulepkg\library\amds3savelib\s3save\amds3savelib.c,872,C6011,9b898da5fe395ca2211bd79e2b49a30c,New,"Dereferencing NULL pointer 'AmdS3LibTableHeader'. : Lines: 794, 795, 796, 797, 798, 801, 802, 806, 857, 859, 860, 861, 862, 865, 866, 868, 870, 872"
+amd\amdembedded\agesamodulepkg\library\amdsocbaselib\amdsocbaselib.c,212,C6031,cb4777887ac5779208743506e0914a9a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\library\amdsocbaselib\amdsocbaselib.c,215,C6031,cb4777887ac5779208743506e0914a9a,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\amdsocbaselib\amdsocbaselib.c,219,C6031,cb4777887ac5779208743506e0914a9a,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\agesamodulepkg\library\amdsocbaselib\amdsocbaselib.c,223,C6031,cb4777887ac5779208743506e0914a9a,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\library\amdsocbaselib\amdsocbaselib.c,227,C6031,cb4777887ac5779208743506e0914a9a,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\agesamodulepkg\library\amdsocbaselib\amdsocbaselib.c,232,C6031,cb4777887ac5779208743506e0914a9a,New,Return value ignored: 'LibPcdSetExPtrS'.
+amd\amdembedded\agesamodulepkg\library\amdusb4lib\bandwidth.c,294,C6011,32b9a1849a39da8d7b1c6d8cda8daa44,New,"Dereferencing NULL pointer 'pDpAdapter'. : Lines: 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 124, 126, 127, 132, 285, 286, 294"
+amd\amdembedded\agesamodulepkg\library\amdusb4lib\bandwidth.c,441,C6011,32b9a1849a39da8d7b1c6d8cda8daa44,New,"Dereferencing NULL pointer 'pDpAdapter'. : Lines: 335, 336, 337, 338, 339, 341, 342, 343, 344, 345, 347, 349, 350, 355, 432, 433, 441"
+amd\amdembedded\agesamodulepkg\library\amdusb4lib\core.c,1012,C6297,599dd3260cbfebf69d9126c4e6fa7852,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+AMD\AmdEmbedded\AgesaModulePkg\Library\AmdUsb4Lib\DpTunneling14.c,20,C4005,d71304531c469d48887bbe2325ac9841,New,'CR': macro redefinition
+AMD\AmdEmbedded\AgesaModulePkg\Library\AmdUsb4Lib\Path.c,36,C4005,4a3d17d47c3f6981855248af3e8847ef,New,'CR': macro redefinition
+amd\amdembedded\agesamodulepkg\library\apcbhmacchecksumlibv3\apcbhmacchecksumlibv3.c,225,C6011,e77ea47296350bc82fede22f8659d963,New,"Dereferencing NULL pointer 'pApcbVariableStruct'. : Lines: 179, 180, 181, 182, 183, 184, 185, 187, 190, 191, 192, 193, 194, 195, 196, 197, 198, 200, 201, 202, 203, 204, 208, 209, 210, 219, 220, 221, 222, 225"
+amd\amdembedded\agesamodulepkg\library\apcbhmacchecksumlibv3\apcbhmacchecksumlibv3.c,255,C6387,e77ea47296350bc82fede22f8659d963,New,"'ApcbPtr' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 179, 180, 181, 182, 183, 184, 185, 187, 190, 191, 192, 193, 194, 195, 196, 197, 198, 200, 201, 202, 203, 204, 208, 209, 210, 219, 220, 221, 225, 226, 231, 243, 251, 254, 255"
+amd\amdembedded\agesamodulepkg\library\apcbhmacchecksumlibv3\apcbhmacchecksumlibv3.c,421,C6011,e77ea47296350bc82fede22f8659d963,New,"Dereferencing NULL pointer 'pApcbVariableStruct'. : Lines: 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 353, 354, 358, 359, 360, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 373, 374, 375, 380, 381, 382, 383, 387, 389, 390, 391, 392, 393, 397, 398, 406, 415, 416, 417, 418, 421"
+amd\amdembedded\agesamodulepkg\library\apcbvariablelibv3\apcbvariablelibv3.c,151,C6031,8bca4689fadc30c4a2b00e2d307798e7,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\agesamodulepkg\library\ccxnonsmmresumeseclib\ccxnonsmmresumesec.c,59,C6011,3091ceb6b33af0c62511454f378aa179,New,"Dereferencing NULL pointer 'PspSmmHdrData->CcxEarlyInit'. : Lines: 31, 32, 33, 34, 36, 42, 44, 48, 52, 53, 54, 59"
+amd\amdembedded\agesamodulepkg\library\dxeccxsmmaccess2lib\ccxsmmaccess2lib.c,425,C6011,aef755415f16769fdfe54b1029849e31,New,"Dereferencing NULL pointer 'mSmramMap'. : Lines: 387, 388, 389, 390, 391, 392, 394, 400, 404, 406, 410, 412, 414, 416, 417, 425"
+amd\amdembedded\agesamodulepkg\library\dxiolibv2\dxiolibv2.c,155,C6031,f2a0051890cfc35a3755c2c061ec1549,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\library\dxiolibv2\dxiolibv2.c,156,C6031,f2a0051890cfc35a3755c2c061ec1549,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\library\fabricresourcemanagerdf3rmblib\fabricresourceinit3.c,699,C6386,0e0c70601229793598cb217d8d1a0e58,New,"Buffer overrun while writing to 'FabricIoManager->IoRegion':  the writable size is '288' bytes, but 'PhySktLoop' bytes might be written.: Lines: 629, 630, 631, 632, 633, 634, 635, 636, 637, 638, 639, 640, 641, 642, 643, 644, 646, 647, 648, 649, 653, 656, 658, 659, 660, 661, 664, 665, 666, 665, 664, 665, 666, 665, 664, 674, 675, 676, 678, 682, 683, 684, 687, 692, 694, 699"
+amd\amdembedded\agesamodulepkg\library\fabricresourcemanagerdf3rmblib\fabricresourceinit3.c,709,C6385,0e0c70601229793598cb217d8d1a0e58,New,"Reading invalid data from 'FabricIoManager->IoRegion':  the readable size is '288' bytes, but 'PhySktLoop' bytes may be read.: Lines: 629, 630, 631, 632, 633, 634, 635, 636, 637, 638, 639, 640, 641, 642, 643, 644, 646, 647, 648, 649, 653, 656, 658, 659, 660, 661, 664, 665, 666, 665, 664, 665, 666, 665, 664, 674, 675, 676, 678, 682, 683, 684, 687, 692, 694, 699, 700, 702, 704, 709"
+amd\amdembedded\agesamodulepkg\library\fabricresourcemanagerdf3rmblib\fabricresourcemanager3.c,226,C6385,e21005a54857492b3af8268464cc55e6,New,"Reading invalid data from 'FabricMmioManager->MmioRegionBelow4G':  the readable size is '2112' bytes, but '16896' bytes may be read.: Lines: 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 127, 129, 130, 131, 133, 134, 135, 136, 139, 141, 142, 146, 151, 155, 162, 163, 164, 165, 190, 191, 193, 198, 203, 204, 205, 207, 214, 220, 221, 222, 224, 225, 226"
+amd\amdembedded\agesamodulepkg\library\fabricresourcemanagerdf3rmblib\fabricresourcemanager3.c,489,C6011,e21005a54857492b3af8268464cc55e6,New,"Dereferencing NULL pointer 'FabricMmioManager'. : Lines: 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 444, 446, 447, 449, 450, 454, 455, 456, 459, 463, 464, 465, 467, 468, 469, 470, 471, 472, 474, 488, 489"
+amd\amdembedded\agesamodulepkg\library\fabricresourcemanagerdf3rmblib\fabricresourcemanager3.c,523,C6011,e21005a54857492b3af8268464cc55e6,New,"Dereferencing NULL pointer 'FabricIoManager'. : Lines: 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 444, 446, 447, 449, 450, 451, 454, 455, 459, 463, 464, 465, 467, 468, 469, 470, 471, 472, 474, 488, 489, 497, 498, 499, 500, 501, 502, 503, 506, 514, 515, 516, 517, 518, 519, 520, 523"
+amd\amdembedded\agesamodulepkg\library\fabricresourcemanagerdf3rmblib\fabricresourcemanager3.c,540,C6385,e21005a54857492b3af8268464cc55e6,New,"Reading invalid data from 'FabricMmioManager->MmioRegionBelow4G':  the readable size is '2112' bytes, but '16896' bytes may be read.: Lines: 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 444, 446, 447, 449, 450, 454, 455, 456, 459, 463, 464, 465, 467, 468, 469, 470, 471, 472, 474, 488, 489, 497, 498, 499, 500, 501, 502, 503, 506, 514, 515, 516, 517, 518, 519, 520, 523, 524, 525, 526, 528, 529, 530, 531, 468, 467, 537, 538, 539, 540"
+amd\amdembedded\agesamodulepkg\library\fabricresourcemanagerdf3rmblib\fabricresourcemanager3.c,928,C6011,e21005a54857492b3af8268464cc55e6,New,"Dereferencing NULL pointer 'FabricIoManager'. : Lines: 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 874, 875, 876, 878, 879, 880, 883, 884, 888, 892, 893, 895, 896, 897, 905, 906, 911, 912, 913, 914, 917, 922, 923, 924, 925, 928"
+amd\amdembedded\agesamodulepkg\library\fabricresourcemanagerdf3rmblib\fabricresourcemanager3.c,939,C6385,e21005a54857492b3af8268464cc55e6,New,"Reading invalid data from 'FabricMmioManager->MmioRegionBelow4G':  the readable size is '2112' bytes, but '16896' bytes may be read.: Lines: 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 874, 875, 876, 878, 879, 880, 883, 884, 888, 892, 893, 895, 896, 897, 905, 906, 911, 912, 913, 914, 917, 922, 923, 924, 925, 928, 929, 930, 896, 895, 936, 937, 938, 939"
+amd\amdembedded\agesamodulepkg\library\fabricresourcereporttogcdlib\fabricresourcereporttogcdlib.c,215,C6385,df90ca03cb443d4c98f5a089ae1a49c0,New,"Reading invalid data from 'FabricMmioManager->MmioRegionBelow4G':  the readable size is '2112' bytes, but '16896' bytes may be read.: Lines: 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 77, 78, 80, 83, 84, 85, 88, 94, 95, 96, 100, 101, 103, 110, 112, 113, 114, 117, 118, 119, 143, 153, 163, 187, 197, 118, 119, 143, 153, 163, 187, 197, 118, 117, 118, 117, 210, 211, 212, 213, 215"
+amd\amdembedded\agesamodulepkg\library\fchidshookrmblib\dxe\fchidshookrmblibdxe.c,227,C6031,1d85d93d20eccfc03140b76b50c34bcd,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\library\fchidshookrmblib\dxe\fchidshookrmblibdxe.c,228,C6031,1d85d93d20eccfc03140b76b50c34bcd,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\fchidshookrmblib\dxe\fchidshookrmblibdxe.c,229,C6031,1d85d93d20eccfc03140b76b50c34bcd,New,Return value ignored: 'LibPcdSetExPtrS'.
+amd\amdembedded\agesamodulepkg\library\fchidshookrmblib\pei\fchidshookrmblibpei.c,130,C6031,800dec1a3b0a3256f09019591cc46cea,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\library\fchidshookrmblib\pei\fchidshookrmblibpei.c,190,C6031,800dec1a3b0a3256f09019591cc46cea,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\library\mpmfunclib\mpmfunclib.c,145,C6387,3c315b1f2671e1fe8efc721bfe1fa191,New,"'MpmData' could be '0':  this does not adhere to the specification for the function 'SetMem'. : Lines: 122, 123, 124, 125, 126, 127, 128, 129, 131, 133, 134, 135, 136, 137, 138, 139, 144, 145"
+amd\amdembedded\agesamodulepkg\library\mpmfunclib\mpmfunclib.c,146,C6011,3c315b1f2671e1fe8efc721bfe1fa191,New,"Dereferencing NULL pointer 'MpmData'. See line 145 for an earlier location where this can occur: Lines: 122, 123, 124, 125, 126, 127, 128, 129, 131, 133, 134, 135, 136, 137, 138, 139, 144, 145, 146"
+amd\amdembedded\agesamodulepkg\library\mpmfunclib\mpmfunclib.c,159,C6031,3c315b1f2671e1fe8efc721bfe1fa191,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\library\mpmfunclib\mpmfunclib.c,169,C6031,3c315b1f2671e1fe8efc721bfe1fa191,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,110,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,168,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,303,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,306,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,310,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,314,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,318,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,322,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,326,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,330,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,334,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,339,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,344,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,361,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\nbioidshookrmblib\dxe\nbioidshookrmblibdxe.c,364,C6031,eecc305f8450c7aa32546238164d4f03,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\library\pciemisccommlib\pciearilib.c,276,C6011,e5d0cbd2441b48d6ab07cc599fe60b24,New,"Dereferencing NULL pointer 'Engine'. See line 270 for an earlier location where this can occur: Lines: 265, 267, 273, 275, 276"
+amd\amdembedded\agesamodulepkg\library\pciemisccommlib\pciemaxcplpayloadlib.c,191,C6011,1a6eee6081a8b1076c3b6450d0c55d11,New,"Dereferencing NULL pointer 'Engine'. : Lines: 182, 183, 184, 186, 189, 191"
+amd\amdembedded\agesamodulepkg\library\peiccxsmmaccesslib\peiccxsmmaccesslib.c,454,C6011,439964aecd8296e2403207988817c4aa,New,"Dereferencing NULL pointer 'PeiSmmAccessInstance'. : Lines: 425, 426, 427, 428, 429, 430, 431, 432, 433, 435, 443, 447, 449, 453, 454"
+amd\amdembedded\agesamodulepkg\library\peiccxsmmaccesslib\peiccxsmmaccesslib.c,472,C6011,439964aecd8296e2403207988817c4aa,New,"Dereferencing NULL pointer 'PeiSmmAccessInstance->SmramMap'. : Lines: 425, 426, 427, 428, 429, 430, 431, 432, 433, 435, 443, 447, 449, 453, 454, 456, 458, 460, 461, 463, 464, 472"
+amd\amdembedded\agesamodulepkg\library\peiccxsmmaccesslib\peiccxsmmaccesslib.c,489,C6011,439964aecd8296e2403207988817c4aa,New,"Dereferencing NULL pointer 'SmmAccessPpiDesc'. : Lines: 425, 426, 427, 428, 429, 430, 431, 432, 433, 435, 443, 447, 449, 453, 454, 456, 458, 460, 461, 463, 464, 472, 473, 475, 477, 486, 488, 489"
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,2755,C6001,0b422a2ddf1562e36100c40e5c93e110,New,"Using uninitialized memory 'csId'.: Lines: 2592, 2594, 2595, 2596, 2597, 2598, 2599, 2600, 2602, 2603, 2605, 2607, 2610, 2614, 2621, 2625, 2635, 2644, 2677, 2681, 2740, 2744, 2747, 2748, 2749, 2750, 2751, 2752, 2753, 2754, 2755"
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3756,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3760,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3764,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3768,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3772,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3776,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3780,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3784,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3788,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3792,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,3796,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,4045,C6336,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic operator has precedence over question operator, use parentheses to clarify intent."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,4046,C6336,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic operator has precedence over question operator, use parentheses to clarify intent."
+amd\amdembedded\agesamodulepkg\library\rasrmbbaselib\rasrmbbaselib.c,5521,C6297,0b422a2ddf1562e36100c40e5c93e110,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\mpm\mpmdxe\mpmdxe.c,379,C6031,01a5d8b098d462c145a229aeb40c4df5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmdxe\mpmdxe.c,380,C6031,01a5d8b098d462c145a229aeb40c4df5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmdxe\mpmdxe.c,544,C6031,01a5d8b098d462c145a229aeb40c4df5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmdxe\mpmdxe.c,549,C6031,01a5d8b098d462c145a229aeb40c4df5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmdxe\mpmdxe.c,594,C6031,01a5d8b098d462c145a229aeb40c4df5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmdxe\mpmdxe.c,595,C6031,01a5d8b098d462c145a229aeb40c4df5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmdxe\mpmdxe.c,596,C6031,01a5d8b098d462c145a229aeb40c4df5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmdxe\mpmdxe.c,599,C6031,01a5d8b098d462c145a229aeb40c4df5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmdxe\mpmdxe.c,610,C6387,01a5d8b098d462c145a229aeb40c4df5,New,"'DmaBuf' could be '0':  this does not adhere to the specification for the function 'ZeroMem'. : Lines: 570, 571, 572, 573, 574, 575, 576, 577, 580, 581, 582, 585, 589, 603, 604, 608, 609, 610"
+amd\amdembedded\agesamodulepkg\mpm\mpmkvm\mpmkvm.c,276,C6011,7bb11387efff33a7334dc7fd51f9fd91,New,"Dereferencing NULL pointer 'KvmIpInfo'. : Lines: 248, 249, 250, 251, 252, 253, 254, 256, 261, 262, 263, 266, 267, 268, 269, 270, 271, 272, 273, 276"
+amd\amdembedded\agesamodulepkg\mpm\mpmkvm\mpmkvm.c,309,C6387,7bb11387efff33a7334dc7fd51f9fd91,New,"'KvmIpInfo' could be '0':  this does not adhere to the specification for the function 'CopyMem'. See line 276 for an earlier location where this can occur: Lines: 248, 249, 250, 251, 252, 253, 254, 256, 261, 262, 263, 266, 267, 268, 269, 270, 271, 272, 273, 276, 279, 280, 281, 282, 283, 284, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 299, 300, 301, 302, 303, 305, 306, 307, 308, 309"
+amd\amdembedded\agesamodulepkg\mpm\mpmkvm\mpmkvm.c,922,C6001,7bb11387efff33a7334dc7fd51f9fd91,New,"Using uninitialized memory '*Info'.: Lines: 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 873, 876, 877, 882, 883, 887, 888, 892, 897, 898, 899, 900, 907, 911, 912, 917, 920, 921, 922, 929, 930, 920, 921, 922"
+amd\amdembedded\agesamodulepkg\mpm\mpmpei\mpmpei.c,141,C6031,4f7512cee65514fe55e86e58fc15c818,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmpei\mpmpei.c,146,C6031,4f7512cee65514fe55e86e58fc15c818,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmpei\mpmpei.c,147,C6031,4f7512cee65514fe55e86e58fc15c818,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmpldm\mpmpldmbcc\biosattributetable.c,73,C28183,a31c11a8aedb973e178762f600ea3af5,New,"'BiosAttributeTableEntriesTail' could be '0', and is a copy of the value found in 'BiosAttributeTableBuffer->BiosAttributeTableEntries':  this does not adhere to the specification for the function 'ZeroMem'. : Lines: 33, 37, 41, 43, 46, 66, 69, 73"
+amd\amdembedded\agesamodulepkg\mpm\mpmpldm\mpmpldmbcc\biosattributevaluetable.c,75,C28183,4dcb23c97a85035eb3d51be2f063fb7f,New,"'BiosAttributeValueTableEntriesTail' could be '0', and is a copy of the value found in 'BiosAttributeValueTableBuffer->BiosAttributeValueTableEntries':  this does not adhere to the specification for the function 'ZeroMem'. : Lines: 35, 39, 43, 45, 48, 68, 71, 75"
+amd\amdembedded\agesamodulepkg\mpm\mpmpldm\mpmpldmbcc\biosstringtable.c,148,C6001,ae7635c3c3f33bac503f833de8525b71,New,"Using uninitialized memory 'Status'.: Lines: 132, 134, 138, 148"
+amd\amdembedded\agesamodulepkg\mpm\mpmpldm\mpmpldmsmbios\mpmpldmsmbios.c,86,C6031,9dbca37b03a10e7d8332dc8113448b3d,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\mpm\mpmserialiodxe\mpmserialiodxe.c,418,C6001,d4764596f5b98c1e84c59a2a8994afe0,New,"Using uninitialized memory 'Status'.: Lines: 404, 405, 406, 408, 410, 418"
+amd\amdembedded\agesamodulepkg\nbio\earlyphase\amdnbioearlyphasermbpei\amdnbioearlyphasermbpei.c,89,C6031,f643904f4f2a26e84a6bf1d591aa8745,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\gfx\rmb\pei\gfxdriverentry.c,346,C6031,b4e46bcff58e6698abd7c2aba6be94f7,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\gfx\rmb\pei\gfxdriverentry.c,347,C6031,b4e46bcff58e6698abd7c2aba6be94f7,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\gfx\rmb\pei\gfxdriverentry.c,348,C6031,b4e46bcff58e6698abd7c2aba6be94f7,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\gfx\rmb\pei\gfxdriverentry.c,684,C6001,b4e46bcff58e6698abd7c2aba6be94f7,New,"Using uninitialized memory 'TableHeaderPtr'.: Lines: 559, 560, 561, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 577, 578, 579, 581, 582, 584, 585, 586, 587, 591, 592, 593, 598, 600, 607, 608, 610, 613, 620, 621, 622, 625, 627, 628, 629, 630, 632, 638, 639, 640, 642, 643, 644, 645, 647, 653, 656, 657, 659, 662, 667, 668, 669, 676, 682, 684"
+amd\amdembedded\agesamodulepkg\nbio\iommu\rmb\dxe\amdnbioiommu.c,85,C28278,c79bb290d11ce93b4894aca671db8cac,New,Function GnbIommuIvrsTable appears with no prototype in scope.  Only limited analysis can be performed. Include the appropriate header or add a prototype. This warning also occurs if parameter or return types are omitted in a function definition.
+amd\amdembedded\agesamodulepkg\nbio\iommu\rmb\pei\iommudriverentry.c,171,C6031,0d7742b00a319ab6468c5273e46991e7,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\iommu\rmb\pei\iommudriverentry.c,172,C6031,0d7742b00a319ab6468c5273e46991e7,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\iommu\rmb\pei\iommudriverentry.c,173,C6031,0d7742b00a319ab6468c5273e46991e7,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\iommu\rmb\pei\iommudriverentry.c,174,C6031,0d7742b00a319ab6468c5273e46991e7,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\iommu\rmb\pei\iommudriverentry.c,175,C6031,0d7742b00a319ab6468c5273e46991e7,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\library\iommudmarlib\dxe\iommuprotocol.c,371,C6011,1087e074dd7656d117b4aa7bc0829255,New,"Dereferencing NULL pointer 'MapInfo'. : Lines: 338, 339, 340, 341, 344, 345, 347, 355, 356, 357, 371"
+amd\amdembedded\agesamodulepkg\nbio\library\iommudmarlib\pei\amdiommumemoryinit.c,720,C6297,a12d58bbf970bc6dac378349f5318965,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\nbio\library\iommudmarlib\pei\amdiommumemoryinit.c,724,C6297,a12d58bbf970bc6dac378349f5318965,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\nbio\library\iommudmarlib\pei\iommuppi.c,223,C6297,858f2b4fe7d86fcea0d3b97845ea4fe2,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\nbio\library\iommudmarlib\pei\iommuppi.c,275,C6011,858f2b4fe7d86fcea0d3b97845ea4fe2,New,"Dereferencing NULL pointer 'MapInfo'. : Lines: 252, 253, 254, 256, 257, 259, 267, 268, 275"
+amd\amdembedded\agesamodulepkg\nbio\library\iommudmarlib\pei\iommuppi.c,278,C6297,858f2b4fe7d86fcea0d3b97845ea4fe2,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\nbio\library\iommudmarlib\pei\iommuppi.c,90,C6297,858f2b4fe7d86fcea0d3b97845ea4fe2,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioioapicinit.c,111,C6031,c8f23dc5d584e0680b98395428204096,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioioapicinit.c,120,C6031,c8f23dc5d584e0680b98395428204096,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioioapicinit.c,136,C28182,c8f23dc5d584e0680b98395428204096,New,"Dereferencing NULL pointer. 'GnbHandle' contains the same NULL value as 'NbioHandle' did. : Lines: 107, 108, 110, 114, 116, 117, 119, 122, 124, 125, 136"
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioivrstable.c,227,C6297,fd49cfe3577078ce7f0ed3f048a98ff8,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioivrstable.c,498,C6387,fd49cfe3577078ce7f0ed3f048a98ff8,New,"'Ivrs' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 479, 482, 485, 486, 487, 488, 494, 497, 498"
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioivrstable.c,501,C6011,fd49cfe3577078ce7f0ed3f048a98ff8,New,"Dereferencing NULL pointer 'Ivrs'. See line 498 for an earlier location where this can occur: Lines: 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 479, 482, 485, 486, 487, 488, 494, 497, 498, 501"
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioivrstable.c,537,C6031,fd49cfe3577078ce7f0ed3f048a98ff8,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioivrstable.c,539,C6031,fd49cfe3577078ce7f0ed3f048a98ff8,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioivrstable.c,545,C6031,fd49cfe3577078ce7f0ed3f048a98ff8,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioivrstable.c,567,C6031,fd49cfe3577078ce7f0ed3f048a98ff8,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\library\ivrslibv2\nbioivrstable.c,568,C6031,fd49cfe3577078ce7f0ed3f048a98ff8,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\nbioalib\rmb\dxe\amdnbioalibcallback.c,397,C6011,19ca323678fea934ba513a49853f7b1b,New,"Dereferencing NULL pointer 'Engine'. See line 350 for an earlier location where this can occur: Lines: 346, 347, 348, 350, 351, 352, 354, 392, 393, 394, 395, 396, 397"
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1001,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1002,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1003,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1004,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1005,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1006,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1007,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1008,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1009,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1225,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1231,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,1234,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,955,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,971,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,981,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\amdnbiobase.c,989,C6031,e92887eceee8d33b61574f4e9b012c8b,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\nbiotopmem.c,163,C6031,8e7b9b766e477da848c7a6c2d39c4c92,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\nbiobase\rmb\pei\nbiotopmem.c,164,C6031,8e7b9b766e477da848c7a6c2d39c4c92,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\amdnbiopciepei.c,276,C6011,d52d15c1f0ad188961db2a0ecc5bc218,New,"Dereferencing NULL pointer 'Base'. See line 273 for an earlier location where this can occur: Lines: 273, 274, 276"
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\dxiocfgpoints.c,2181,C28199,bc3c274fc5e0f3ccc396c3f7cff28c24,New,"Using possibly uninitialized memory 'MappingResult':  The variable has had its address taken but no assignment to it has been discovered.: Lines: 2111, 2112, 2113, 2115, 2134, 2141, 2143, 2144, 2145, 2146, 2147, 2148, 2150, 2152, 2153, 2155, 2157, 2161, 2162, 2169, 2161, 2162, 2169, 2161, 2152, 2153, 2155, 2157, 2161, 2152, 2180, 2181"
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\dxioinit.c,451,C6031,1430e61670718ed526bdb2dba357fc61,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\dxiotopology.c,202,C6031,333ec96c1bbca6f535ca0444d9cde095,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\dxiotopology.c,204,C6031,333ec96c1bbca6f535ca0444d9cde095,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\dxiotopology.c,304,C6031,333ec96c1bbca6f535ca0444d9cde095,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\dxiotopology.c,307,C6031,333ec96c1bbca6f535ca0444d9cde095,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\dxiotopology.c,310,C6031,333ec96c1bbca6f535ca0444d9cde095,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\dxiotopology.c,873,C6001,333ec96c1bbca6f535ca0444d9cde095,New,"Using uninitialized memory '*ComplexTable->PciePortList'.: Lines: 831, 832, 833, 835, 842, 843, 844, 847, 854, 855, 858, 859, 862, 868, 870, 873"
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\pkgtypefixups.c,379,C6031,73ac00dae12a6d231d72897b6d0788ee,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\pcie\rmb\pei\pkgtypefixups.c,383,C6031,73ac00dae12a6d231d72897b6d0788ee,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\infocollection.c,259,C6031,c1bf71c9f0046c08ab05df6486db0a75,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,125,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,156,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,157,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,158,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,165,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,168,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,197,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,219,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,236,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,297,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,300,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,365,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,401,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,411,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,463,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,481,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,483,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,487,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,489,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,512,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,514,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,64,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,65,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,66,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,72,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,73,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\pkgtypefixups.c,74,C6031,2f12dd1dea56f9ff7f4a42e1e8590249,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\smudriverentry.c,541,C6031,b3532a3b3c1a91d434fb07685fb31695,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\agesamodulepkg\nbio\smu\rmb\dxe\smudriverentry.c,545,C6031,b3532a3b3c1a91d434fb07685fb31695,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmdxe\amdhspftpmdxe.c,1195,C6031,793e2dda7d0ff35f104f5f88d99fc01b,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,633,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,718,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,767,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,770,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,775,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,777,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,868,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,956,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,970,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,976,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdhspftpmpei\amdhspftpmpei.c,981,C6031,ef06b7a7899bb6e4d01c24ad92ca048e,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdpspdxev2rmb\amdpspdxev2.c,1622,C6031,6c069a6b3a7536fe4d457f108a22304e,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\agesamodulepkg\psp\amdpspdxev2rmb\amdpspdxev2.c,455,C6387,6c069a6b3a7536fe4d457f108a22304e,New,"'Buffer' could be '0':  this does not adhere to the specification for the function 'SetMem'. : Lines: 432, 433, 434, 437, 439, 440, 441, 443, 453, 454, 455"
+amd\amdembedded\agesamodulepkg\psp\amdpspftpmpei\amdpspftpmpei.c,169,C6031,3e5e1080e19c0093b9b3d568a43cefe5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdpspftpmpei\amdpspftpmpei.c,172,C6031,3e5e1080e19c0093b9b3d568a43cefe5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdpspftpmpei\amdpspftpmpei.c,177,C6031,3e5e1080e19c0093b9b3d568a43cefe5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdpspftpmpei\amdpspftpmpei.c,179,C6031,3e5e1080e19c0093b9b3d568a43cefe5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdpspftpmpei\amdpspftpmpei.c,266,C6031,3e5e1080e19c0093b9b3d568a43cefe5,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdpspp2cmboxv2\amdpspp2cmboxv2smmbuffer.c,52,C6387,b0984e24493b1a789ed7178e7d81c91a,New,"'LocalPspMboxSmmBuffer' could be '0':  this does not adhere to the specification for the function 'ZeroMem'. : Lines: 34, 35, 36, 37, 38, 40, 41, 42, 43, 45, 47, 48, 51, 52"
+amd\amdembedded\agesamodulepkg\psp\amdpsppeiv2rmb\amdpsppeiv2.c,558,C6031,81511e468e8e2f19a113f4fc4b121cb8,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\psp\amdpspromarmor3smm\amdpspromarmor3smm.c,753,C6387,1c492edc172dd76d8f67f51b5dbcfbb3,New,"'mPspToBiosMbox' could be '0':  this does not adhere to the specification for the function 'ZeroMem'. : Lines: 719, 720, 721, 722, 723, 725, 727, 728, 731, 732, 737, 738, 739, 743, 744, 747, 748, 751, 752, 753"
+amd\amdembedded\agesamodulepkg\psp\amdpspromarmor3smm\amdpspromarmor3smm.c,755,C6011,1c492edc172dd76d8f67f51b5dbcfbb3,New,"Dereferencing NULL pointer 'mPspToBiosMbox'. See line 753 for an earlier location where this can occur: Lines: 719, 720, 721, 722, 723, 725, 727, 728, 731, 732, 737, 738, 739, 743, 744, 747, 748, 751, 752, 753, 755"
+amd\amdembedded\agesamodulepkg\ras\amdrasrmbdxe\amdrasrmbdxe.c,217,C6031,55292e89fa2222329c1070f34a6a9b8f,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\agesamodulepkg\ras\amdrasrmbdxe\amdrasrmbdxe.c,219,C6031,55292e89fa2222329c1070f34a6a9b8f,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\agesamodulepkg\soc\amdsocfp7r2rmbpei\amdsocfp7r2rmbpei.c,252,C6031,5b2826375d14672d0505cf45913e4c48,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\soc\amdsocfp7r2rmbpei\amdsocfp7r2rmbpei.c,255,C6031,5b2826375d14672d0505cf45913e4c48,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\soc\amdsocfp7r2rmbpei\amdsocfp7r2rmbpei.c,256,C6031,5b2826375d14672d0505cf45913e4c48,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\soc\amdsocfp7r2rmbpei\amdsocfp7r2rmbpei.c,257,C6031,5b2826375d14672d0505cf45913e4c48,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\agesamodulepkg\universal\acpi\amdacpicpussdt.c,205,C6031,dfbbcec6c19a5ccfe30a9b5510a43611,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\universal\acpi\amdacpicpussdt.c,214,C6031,dfbbcec6c19a5ccfe30a9b5510a43611,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\agesamodulepkg\usb4\amdusb4dxe\amdusb4dxe.c,1464,C6326,0d003afdf199bd712c9f2ae1522aace7,New,Potential comparison of a constant with another constant.
+amd\amdembedded\agesamodulepkg\usb4\amdusb4pei\amdusb4pei.c,483,C6326,178a8682c85359883e70f0e1ef758486,New,Potential comparison of a constant with another constant.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1001,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1005,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1009,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1013,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1017,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,102,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1021,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1025,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1029,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1033,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1037,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1041,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1045,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1049,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1053,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1057,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1063,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1068,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1072,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1076,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,108,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1080,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1084,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1088,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1092,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1096,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1100,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1104,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1108,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1112,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1116,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1120,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1124,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1128,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1132,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1136,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1140,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1144,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1148,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,115,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1152,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1156,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1160,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1164,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1168,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1172,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1176,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1180,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,1184,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,120,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,124,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,128,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,132,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,136,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,140,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,144,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,148,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,151,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,154,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,160,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,167,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,172,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,176,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,180,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,186,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,191,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,195,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,198,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,200,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,203,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,207,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,210,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,212,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,214,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,216,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,218,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,220,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,223,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,227,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,231,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,235,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,239,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,243,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,249,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,256,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,263,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,27,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,270,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,277,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,282,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,288,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,295,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,300,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,304,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,308,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,31,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,312,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,316,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,322,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,327,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,331,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,335,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,340,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,344,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,349,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,35,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,353,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,357,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,361,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,365,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,369,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,373,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,379,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,386,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,39,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,393,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,400,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,405,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,409,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,413,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,416,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,418,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,420,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,422,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,425,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,429,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,43,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,435,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,440,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,446,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,451,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,455,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,458,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,463,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,469,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,47,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,474,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,479,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,484,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,489,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,494,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,499,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,504,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,509,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,51,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,514,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,519,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,524,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,529,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,534,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,539,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,544,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,548,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,55,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,553,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,557,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,561,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,564,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,569,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,575,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,58,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,580,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,585,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,590,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,596,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,601,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,605,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,609,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,612,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,614,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,617,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,62,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,621,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,627,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,632,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,636,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,640,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,646,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,653,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,660,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,667,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,67,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,674,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,680,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,685,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,690,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,694,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,698,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,702,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,706,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,710,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,714,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,718,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,72,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,722,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,726,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,730,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,734,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,738,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,742,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,746,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,750,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,754,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,758,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,76,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,762,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,766,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,770,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,774,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,778,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,782,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,786,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,790,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,794,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,798,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,80,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,802,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,806,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,810,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,816,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,821,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,825,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,829,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,833,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,837,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,841,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,845,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,849,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,85,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,853,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,857,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,861,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,865,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,869,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,873,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,877,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,881,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,885,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,889,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,893,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,897,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,90,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,901,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,905,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,909,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,913,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,917,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,921,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,925,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,929,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,933,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,937,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,94,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,941,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,945,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,949,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,953,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,957,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,961,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,965,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,969,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,973,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,977,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,98,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,981,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,985,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,989,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,993,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcbspkg\build\resourcermb\cbssetagesapcdlibrmb.c,997,C6031,49c9f326c437d9c64f2dc1c41c078552,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\dxe\amdcpmoeminitdxe\amdcpmoeminitdxe.c,472,C6031,f558bc3c2d95e6bdb40cf06d943b2d2f,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\dxe\amdxgbeworkaround\amdxgbeworkaround.c,455,C6001,08e88b3e01c56f79c79bd8cce6367b67,New,"Using uninitialized memory 'XgbeBaseAdd'.: Lines: 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 426, 427, 431, 432, 433, 437, 438, 447, 455"
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\dxe\memtest\memtest.c,72,C6011,a4c77971b15ce0b1901990c5013cd0e3,New,"Dereferencing NULL pointer 'gMemTestErrorCounter'. : Lines: 59, 60, 61, 62, 63, 65, 67, 70, 71, 72"
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\dxe\memtest\memtestalogrithm.c,24,C6011,3627b645343e832d70d723dbac3b1584,New,"Dereferencing NULL pointer 'mPatternArray'. : Lines: 17, 18, 19, 21, 23, 24"
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\library\gpioresetcontrollib\gpioresetcontrollib.c,324,C6031,489a046d77ba7d83207c5ffb0a8a1e23,New,Return value ignored: 'LibPcdSetExPtrS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,223,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,228,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,233,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,238,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,244,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,248,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,252,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,254,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,283,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,284,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,312,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,313,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,314,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,315,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,316,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,317,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,318,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,319,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,320,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,321,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,322,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,323,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,329,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,330,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,701,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoeminitpeim.c,710,C6031,d34abf2b39da806c089a84b224dc139a,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2088,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2097,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2101,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2112,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2122,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2129,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2140,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2146,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2302,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2310,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExPtrS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2361,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2407,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2410,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2415,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2420,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2441,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2472,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2473,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2484,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2485,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2648,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2945,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2946,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2947,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2948,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2955,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2956,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2957,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2958,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2959,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2960,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2967,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2986,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2987,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2988,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2989,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2990,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2991,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2992,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2993,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,2994,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3000,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3001,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3002,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3003,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3004,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3005,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3006,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3007,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3008,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3167,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExPtrS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3183,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3184,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3188,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3202,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3319,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3323,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3462,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3464,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3550,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,3650,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,4750,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,4754,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,4755,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,4757,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,4758,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,4769,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5057,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5058,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5060,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5061,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5097,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5098,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5100,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5101,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5105,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5106,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5109,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5110,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5160,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5161,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5162,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5163,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5210,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5211,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5212,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdcpmoeminitpei\amdcpmoemtable.c,5213,C6031,890cb93188800a445e4a3018c18010df,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\amdxgbeworkaround\amdxgbeworkaround.c,508,C6001,c4610cd508e772fcbd2c8993a3d27eac,New,"Using uninitialized memory 'XgbeBaseAdd'.: Lines: 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 477, 478, 483, 485, 486, 490, 491, 500, 508"
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\platformcustomizepei\platformcustomizepei.c,107,C6031,3424e687e429fc428b2e5d56904aaf12,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\platformcustomizepei\platformcustomizepei.c,292,C6031,3424e687e429fc428b2e5d56904aaf12,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\platformcustomizepei\platformcustomizepei.c,294,C6031,3424e687e429fc428b2e5d56904aaf12,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\platformcustomizepei\platformcustomizepei.c,300,C6031,3424e687e429fc428b2e5d56904aaf12,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\platformcustomizepei\platformcustomizepei.c,301,C6031,3424e687e429fc428b2e5d56904aaf12,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\platformcustomizepei\platformcustomizepei.c,302,C6031,3424e687e429fc428b2e5d56904aaf12,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\platformcustomizepei\platformcustomizepei.c,303,C6031,3424e687e429fc428b2e5d56904aaf12,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\platformcustomizepei\platformcustomizepei.c,304,C6031,3424e687e429fc428b2e5d56904aaf12,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\platformcustomizepei\platformcustomizepei.c,305,C6031,3424e687e429fc428b2e5d56904aaf12,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\addendum\oem\fox\pei\platformcustomizepei\platformcustomizepei.c,370,C6031,3424e687e429fc428b2e5d56904aaf12,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\amdcpmpkg\features\abrecovery\library\abrecoverybaselib.c,356,C6001,e7d5dea2e70e8a7fd3d992277856003b,New,"Using uninitialized memory 'ImageSlotEntryV2'.: Lines: 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 275, 279, 280, 285, 286, 288, 289, 290, 291, 293, 294, 295, 296, 297, 299, 300, 301, 302, 303, 309, 311, 312, 314, 316, 338, 340, 341, 343, 348, 351, 356"
+amd\amdembedded\amdcpmpkg\features\abrecovery\pei\amdcpmabrecoverypeim.c,844,C6001,10ba0ba6be382d095422d1d53eda25ff,New,"Using uninitialized memory 'Slot'.: Lines: 722, 723, 724, 725, 726, 727, 728, 729, 730, 731, 732, 733, 734, 735, 736, 737, 738, 739, 740, 741, 742, 743, 744, 745, 746, 747, 748, 749, 750, 751, 752, 755, 756, 757, 758, 759, 760, 761, 762, 763, 764, 765, 766, 768, 776, 777, 786, 787, 788, 794, 795, 796, 797, 798, 810, 813, 842, 844"
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodbaselib\aodbasedxelib.c,218,C6031,f43b90e3b68e696bc955ae0e89488139,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodbaselib\aodbasepeilib.c,238,C6031,bd58a7530dd89ebe927ac32b6e1d1227,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodbaselib\aodbasepeilib.c,360,C6031,bd58a7530dd89ebe927ac32b6e1d1227,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodbaselib\aodbasesmmlib.c,226,C6031,5a6a2c53d4f3b4e77a2c8cdca735cd8c,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodbitmapdowncore.c,764,C6011,15740595205ae919bd9e87b12be61b31,New,"Dereferencing NULL pointer 'pInfo'. : Lines: 747, 748, 749, 750, 751, 752, 755, 756, 757, 764"
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodbitmapdowncore.c,850,C6011,15740595205ae919bd9e87b12be61b31,New,"Dereferencing NULL pointer 'pInfo'. : Lines: 817, 818, 819, 820, 821, 822, 823, 824, 825, 826, 827, 828, 830, 834, 837, 838, 839, 846, 850"
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,229,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,230,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,235,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,236,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,240,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,246,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,247,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,248,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,249,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,250,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,251,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,256,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,261,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,266,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,271,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,276,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,281,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,285,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,290,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,295,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,299,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx8S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,303,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,308,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,313,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetExBoolS'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,320,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,324,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx32S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,329,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcpmpkg\features\aodv2\library\aodsoclib\rmb\aodsoclibpei.c,96,C6031,61acb6f89f48518cad46b366fe564706,New,Return value ignored: 'LibPcdSetEx64S'.
+amd\amdembedded\amdcpmpkg\features\platformras\rmb\dxe\amdplatformrasrmbdxe.c,3115,C6011,a23c00c78527f2518dcbd70cf4d05cea,New,"Dereferencing NULL pointer 'FwVol'. : Lines: 3054, 3055, 3056, 3057, 3058, 3059, 3060, 3061, 3062, 3063, 3064, 3065, 3066, 3067, 3069, 3075, 3079, 3087, 3112, 3113, 3114, 3115"
+amd\amdembedded\amdcpmpkg\kernel\dxe\amdcpminitdxe.c,944,C6011,0d2940c26ba5230f69a7aba0e646526e,New,"Dereferencing NULL pointer 'FwVol'. : Lines: 823, 824, 825, 826, 827, 828, 829, 830, 831, 832, 833, 834, 835, 836, 837, 838, 839, 842, 843, 844, 845, 846, 847, 849, 855, 865, 872, 880, 928, 940, 941, 943, 944"
+amd\amdembedded\amdcpmpkg\kernel\pei\amdcpminitpeim.c,1000,C6031,8d1502d150869d607443de1956ef8467,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcpmpkg\kernel\pei\amdcpminitpeim.c,1022,C6031,8d1502d150869d607443de1956ef8467,New,Return value ignored: 'LibPcdSetEx16S'.
+amd\amdembedded\amdcpmpkg\library\proc\fch\amdcpmfch.c,2933,C6336,5c8ae7054978c1878702d170b4d288e8,New,"Arithmetic operator has precedence over question operator, use parentheses to clarify intent."
+amd\amdembedded\amdcpmpkg\library\proc\fch\amdcpmfch.c,2934,C6336,5c8ae7054978c1878702d170b4d288e8,New,"Arithmetic operator has precedence over question operator, use parentheses to clarify intent."
+amd\amdembedded\amdcpmpkg\library\proc\fch\amdcpmfch.c,639,C6001,5c8ae7054978c1878702d170b4d288e8,New,"Using uninitialized memory 'Status'.: Lines: 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 409, 412, 415, 416, 417, 418, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 452, 453, 454, 455, 459, 460, 475, 486, 505, 509, 513, 514, 515, 516, 517, 521, 522, 523, 528, 529, 537, 538, 543, 544, 550, 551, 556, 557, 562, 566, 570, 571, 572, 573, 583, 584, 585, 594, 543, 613, 621, 625, 626, 637, 638, 639"
+amd\amdembedded\amdcpmpkg\library\proc\rasrmb\amdcpmrasrmblib.c,1878,C6294,23c56cca47fbb4da9075d1c033f1c1b8,New,Ill-defined for-loop:  initial condition does not satisfy test.  Loop body not executed.
+amd\amdembedded\embeddedchipsetpkg\snpdxe\amdxgbe.c,410,C6011,8656389fe515e7bc452cb7a17bfc771e,New,"Dereferencing NULL pointer 'gPrivate'. : Lines: 369, 370, 371, 372, 373, 377, 385, 389, 392, 396, 398, 399, 409, 410"
+amd\amdembedded\embeddedchipsetpkg\snpdxe\mdio.c,826,C6001,3981e63730d8f072e489e23a4f5c9bf3,New,"Using uninitialized memory 'changed'.: Lines: 797, 798, 800, 804, 806, 810, 812, 815, 817, 821, 823, 826"
+amd\amdembedded\embeddedchipsetpkg\snpdxe\snpdxexgbe.c,2348,C28199,5d5a165cb784e6b194ad10793b3b8c0f,New,"Using possibly uninitialized memory 'Data':  The variable has had its address taken but no assignment to it has been discovered.: Lines: 2304, 2305, 2306, 2307, 2308, 2309, 2310, 2311, 2312, 2316, 2317, 2319, 2321, 2326, 2327, 2329, 2330, 2334, 2335, 2336, 2337, 2338, 2339, 2340, 2341, 2342, 2343, 2344, 2346, 2348"
+amd\amdembedded\embeddedchipsetpkg\snpdxe\snpdxexgbe.c,4174,C6001,5d5a165cb784e6b194ad10793b3b8c0f,New,"Using uninitialized memory 'RegVal'.: Lines: 4151, 4152, 4153, 4154, 4155, 4156, 4157, 4158, 4161, 4167, 4168, 4169, 4171, 4172, 4174"
+amd\amdembedded\embeddedchipsetpkg\snpdxe\snpdxexgbe.c,601,C6285,5d5a165cb784e6b194ad10793b3b8c0f,New,(<non-zero constant> || <non-zero constant>) is always a non-zero constant.  Did you intend to use the bitwise-and operator?
+amd\amdembedded\embeddedchipsetpkg\snpdxe\snpdxexgbe.c,602,C6285,5d5a165cb784e6b194ad10793b3b8c0f,New,(<non-zero constant> || <non-zero constant>) is always a non-zero constant.  Did you intend to use the bitwise-and operator?
+amd\amdembedded\embeddedchipsetpkg\tools\genoemromsig\genoemromsig.c,73,C6031,26c2b75d5dd86443f8cefb270b7271db,New,Return value ignored: 'snprintf'.
+amd\amdembedded\smmsupervisorpkg\library\baselibsyscall\safestring.c,1462,C6305,1e218702f8e80faa295d70131f75f38b,New,"Potential mismatch between sizeof and countof quantities. Use sizeof() to scale byte sizes.: Lines: 1442, 1443, 1448, 1449, 1454, 1455, 1461, 1462"
+amd\amdembedded\smmsupervisorpkg\library\baselibsyscall\safestring.c,1475,C6305,1e218702f8e80faa295d70131f75f38b,New,"Potential mismatch between sizeof and countof quantities. Use sizeof() to scale byte sizes.: Lines: 1442, 1443, 1448, 1449, 1454, 1455, 1461, 1462, 1467, 1468, 1474, 1475"
+amd\amdembedded\smmsupervisorpkg\library\baselibsyscall\safestring.c,1488,C6305,1e218702f8e80faa295d70131f75f38b,New,"Potential mismatch between sizeof and countof quantities. Use sizeof() to scale byte sizes.: Lines: 1442, 1443, 1448, 1449, 1454, 1455, 1461, 1462, 1467, 1468, 1474, 1475, 1480, 1481, 1487, 1488"
+AMD\AmdEmbedded\SmmSupervisorPkg\Library\BaseLibSysCall\String.c,1354,C4996,dba9ad9e7ed9d7a759de705d2c85266b,New,'AsciiStrCpy': was declared deprecated
+AMD\AmdEmbedded\SmmSupervisorPkg\Library\BaseLibSysCall\String.c,1413,C4996,dba9ad9e7ed9d7a759de705d2c85266b,New,'AsciiStrnCpy': was declared deprecated
+AMD\AmdEmbedded\SmmSupervisorPkg\Library\BaseLibSysCall\String.c,356,C4996,dba9ad9e7ed9d7a759de705d2c85266b,New,'StrCpy': was declared deprecated
+AMD\AmdEmbedded\SmmSupervisorPkg\Library\BaseLibSysCall\String.c,417,C4996,dba9ad9e7ed9d7a759de705d2c85266b,New,'StrnCpy': was declared deprecated
+amd\amdembedded\smmsupervisorpkg\library\smmsupervisorfeaturelib\smmsupervisorfeaturelib.c,93,C6011,c269d42da84c0b0b9d0d6c2859d701c5,New,"Dereferencing NULL pointer 'gSmst'. : Lines: 78, 79, 81, 85, 86, 89, 93"
+edk2\fatpkg\enhancedfatdxe\diskcache.c,480,C6297,64b14550a50453296dfc9afbd5b7e033,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\fmpdevicepkg\library\fmpdependencylib\fmpdependencylib.c,547,C28182,59dfba3fc29cbadcc46f7c5d531fb5da,New,"Dereferencing NULL pointer. 'Dependencies' contains the same NULL value as '*Depex' did. See line 546 for an earlier location where this can occur: Lines: 536, 538, 542, 546, 547, 548, 552, 553, 547"
+edk2\mdemodulepkg\core\dxe\fwvol\fwvolread.c,175,C28182,190bc3d0a5ef0dfd62ec4dfa7415533b,New,"Dereferencing NULL pointer. 'FfsFileEntry' contains the same NULL value as '*KeyValue' did. : Lines: 124, 125, 126, 127, 128, 129, 130, 132, 134, 135, 142, 146, 153, 154, 155, 159, 167, 174, 175, 180, 182, 189, 196, 154, 155, 159, 167, 174, 175"
+edk2\mdemodulepkg\core\dxe\gcd\gcd.c,1198,C6011,94c8621b8952435cc1a0e9a32661b2eb,New,"Dereferencing NULL pointer 'Map'. : Lines: 1093, 1094, 1095, 1096, 1097, 1098, 1099, 1100, 1101, 1102, 1103, 1104, 1109, 1114, 1119, 1124, 1129, 1134, 1139, 1144, 1145, 1148, 1155, 1156, 1157, 1161, 1163, 1198"
+edk2\mdemodulepkg\core\dxe\gcd\gcd.c,2283,C6297,94c8621b8952435cc1a0e9a32661b2eb,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\core\dxe\gcd\gcd.c,628,C28182,94c8621b8952435cc1a0e9a32661b2eb,New,"Dereferencing NULL pointer. 'Link' contains the same NULL value as '*StartLink' did. : Lines: 604, 605, 609, 610, 612, 613, 614, 615, 616, 619, 628"
+edk2\mdemodulepkg\core\dxe\mem\heapguard.c,1203,C6385,25cfe963c8a33333a6f95a9b2ca0935f,New,"Reading invalid data from 'Indices':  the readable size is '40' bytes, but '-8' bytes may be read.: Lines: 1111, 1112, 1113, 1114, 1115, 1116, 1117, 1118, 1119, 1120, 1121, 1124, 1130, 1131, 1133, 1134, 1135, 1137, 1138, 1139, 1140, 1142, 1146, 1147, 1148, 1149, 1199, 1203, 1204, 1205, 1146, 1147, 1148, 1149, 1199, 1203"
+edk2\mdemodulepkg\core\dxe\mem\heapguard.c,1204,C6385,25cfe963c8a33333a6f95a9b2ca0935f,New,"Reading invalid data from 'Addresses':  the readable size is '40' bytes, but '-16' bytes may be read.: Lines: 1111, 1112, 1113, 1114, 1115, 1116, 1117, 1118, 1119, 1120, 1121, 1124, 1130, 1131, 1133, 1134, 1135, 1137, 1138, 1139, 1140, 1142, 1146, 1147, 1148, 1149, 1199, 1203, 1204, 1205, 1146, 1147, 1148, 1149, 1199, 1203, 1204"
+edk2\mdemodulepkg\core\dxe\mem\heapguard.c,1205,C6385,25cfe963c8a33333a6f95a9b2ca0935f,New,"Reading invalid data from 'Shifts':  the readable size is '40' bytes, but '-8' bytes may be read.: Lines: 1111, 1112, 1113, 1114, 1115, 1116, 1117, 1118, 1119, 1120, 1121, 1124, 1130, 1131, 1133, 1134, 1135, 1137, 1138, 1139, 1140, 1142, 1146, 1147, 1148, 1149, 1199, 1203, 1204, 1205, 1146, 1147, 1148, 1149, 1199, 1203, 1204, 1205"
+edk2\mdemodulepkg\core\dxe\mem\heapguard.c,1437,C6385,25cfe963c8a33333a6f95a9b2ca0935f,New,"Reading invalid data from 'Indices':  the readable size is '40' bytes, but '-8' bytes may be read.: Lines: 1361, 1362, 1363, 1364, 1365, 1366, 1367, 1368, 1369, 1370, 1371, 1374, 1380, 1381, 1383, 1384, 1385, 1387, 1388, 1389, 1390, 1391, 1393, 1394, 1395, 1396, 1433, 1437, 1438, 1439, 1393, 1394, 1395, 1396, 1433, 1437"
+edk2\mdemodulepkg\core\dxe\mem\heapguard.c,1438,C6385,25cfe963c8a33333a6f95a9b2ca0935f,New,"Reading invalid data from 'Addresses':  the readable size is '40' bytes, but '-16' bytes may be read.: Lines: 1361, 1362, 1363, 1364, 1365, 1366, 1367, 1368, 1369, 1370, 1371, 1374, 1380, 1381, 1383, 1384, 1385, 1387, 1388, 1389, 1390, 1391, 1393, 1394, 1395, 1396, 1433, 1437, 1438, 1439, 1393, 1394, 1395, 1396, 1433, 1437, 1438"
+edk2\mdemodulepkg\core\dxe\mem\heapguard.c,1439,C6385,25cfe963c8a33333a6f95a9b2ca0935f,New,"Reading invalid data from 'Shifts':  the readable size is '40' bytes, but '-8' bytes may be read.: Lines: 1361, 1362, 1363, 1364, 1365, 1366, 1367, 1368, 1369, 1370, 1371, 1374, 1380, 1381, 1383, 1384, 1385, 1387, 1388, 1389, 1390, 1391, 1393, 1394, 1395, 1396, 1433, 1437, 1438, 1439, 1393, 1394, 1395, 1396, 1433, 1437, 1438, 1439"
+edk2\mdemodulepkg\core\dxe\mem\heapguard.c,1743,C6385,25cfe963c8a33333a6f95a9b2ca0935f,New,"Reading invalid data from 'Indices':  the readable size is '40' bytes, but '-8' bytes may be read.: Lines: 1650, 1651, 1652, 1653, 1654, 1655, 1656, 1657, 1658, 1659, 1660, 1661, 1663, 1668, 1674, 1675, 1686, 1687, 1689, 1690, 1691, 1693, 1694, 1695, 1696, 1698, 1699, 1700, 1701, 1702, 1739, 1743, 1744, 1745, 1698, 1699, 1700, 1701, 1702, 1739, 1743"
+edk2\mdemodulepkg\core\dxe\mem\heapguard.c,1744,C6385,25cfe963c8a33333a6f95a9b2ca0935f,New,"Reading invalid data from 'Addresses':  the readable size is '40' bytes, but '-16' bytes may be read.: Lines: 1650, 1651, 1652, 1653, 1654, 1655, 1656, 1657, 1658, 1659, 1660, 1661, 1663, 1668, 1674, 1675, 1686, 1687, 1689, 1690, 1691, 1693, 1694, 1695, 1696, 1698, 1699, 1700, 1701, 1702, 1739, 1743, 1744, 1745, 1698, 1699, 1700, 1701, 1702, 1739, 1743, 1744"
+edk2\mdemodulepkg\core\dxe\mem\heapguard.c,1745,C6385,25cfe963c8a33333a6f95a9b2ca0935f,New,"Reading invalid data from 'Shifts':  the readable size is '40' bytes, but '-8' bytes may be read.: Lines: 1650, 1651, 1652, 1653, 1654, 1655, 1656, 1657, 1658, 1659, 1660, 1661, 1663, 1668, 1674, 1675, 1686, 1687, 1689, 1690, 1691, 1693, 1694, 1695, 1696, 1698, 1699, 1700, 1701, 1702, 1739, 1743, 1744, 1745, 1698, 1699, 1700, 1701, 1702, 1739, 1743, 1744, 1745"
+edk2\mdemodulepkg\core\dxe\mem\memoryprofilerecord.c,561,C28182,36122cda6bbb568cb6b1faabc5b735eb,New,"Dereferencing NULL pointer. 'DxeCoreHob.MemoryAllocationModule' contains the same NULL value as 'DxeCoreHob.Raw=GetNextHob(2, DxeCoreHob.Raw)' did. : Lines: 535, 536, 537, 538, 539, 546, 547, 560, 561"
+edk2\mdemodulepkg\core\dxe\mem\page.c,486,C6297,bdf8b87e95569652accfb297f2f43a28,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\core\dxe\mem\page.c,487,C6297,bdf8b87e95569652accfb297f2f43a28,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\core\dxe\mem\page.c,797,C6011,bdf8b87e95569652accfb297f2f43a28,New,"Dereferencing NULL pointer 'Entry'. : Lines: 735, 736, 737, 738, 739, 740, 741, 743, 744, 745, 753, 761, 765, 766, 768, 765, 773, 783, 794, 797, 801, 805, 809, 854, 859, 863, 897, 901, 902, 908, 909, 910, 918, 921, 924, 942, 947, 761, 765, 773, 783, 794, 797"
+edk2\mdemodulepkg\core\dxe\sectionextraction\coresectionextraction.c,631,C6011,450f1c2ea6e64a15d5c63a92e554013c,New,"Dereferencing NULL pointer 'Context'. : Lines: 623, 628, 631"
+edk2\mdemodulepkg\core\pei\dispatcher\dispatcher.c,1480,C6011,ac4237cd195e8e2f725d831059c4c801,New,"Dereferencing NULL pointer 'Private->CurrentFvFileHandles'. : Lines: 1353, 1354, 1355, 1356, 1357, 1358, 1359, 1360, 1361, 1362, 1363, 1364, 1365, 1366, 1367, 1369, 1370, 1371, 1372, 1374, 1443, 1447, 1450, 1451, 1457, 1461, 1463, 1475, 1476, 1479, 1480, 1482, 1477, 1476, 1630, 1631, 1632, 1450, 1451, 1457, 1461, 1463, 1469, 1475, 1476, 1479, 1480"
+edk2\mdemodulepkg\core\pei\dispatcher\dispatcher.c,307,C6297,ac4237cd195e8e2f725d831059c4c801,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\core\pei\dispatcher\dispatcher.c,97,C6011,ac4237cd195e8e2f725d831059c4c801,New,"Dereferencing NULL pointer 'TempFileHandles'. : Lines: 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 47, 48, 49, 54, 59, 60, 65, 66, 68, 69, 70, 74, 78, 83, 84, 88, 93, 94, 97"
+edk2\mdemodulepkg\core\pei\fwvol\fwvol.c,2252,C6387,7f583b69351fb523c32bc4f82610a324,New,"'TempPtr' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 2241, 2242, 2244, 2248, 2252"
+edk2\mdemodulepkg\core\pei\fwvol\fwvol.c,2261,C6011,7f583b69351fb523c32bc4f82610a324,New,"Dereferencing NULL pointer 'PrivateData->UnknownFvInfo'. See line 2253 for an earlier location where this can occur: Lines: 2241, 2242, 2244, 2248, 2252, 2257, 2258, 2261"
+edk2\mdemodulepkg\core\pei\fwvol\fwvol.c,2406,C6387,7f583b69351fb523c32bc4f82610a324,New,"'TempPtr' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 2350, 2351, 2352, 2353, 2354, 2355, 2356, 2357, 2358, 2359, 2360, 2361, 2362, 2364, 2365, 2368, 2369, 2376, 2377, 2385, 2386, 2387, 2386, 2394, 2398, 2402, 2406"
+edk2\mdemodulepkg\core\pei\fwvol\fwvol.c,2418,C6011,7f583b69351fb523c32bc4f82610a324,New,"Dereferencing NULL pointer 'PrivateData->Fv'. : Lines: 2350, 2351, 2352, 2353, 2354, 2355, 2356, 2357, 2358, 2359, 2360, 2361, 2362, 2364, 2365, 2368, 2369, 2376, 2377, 2385, 2386, 2394, 2398, 2402, 2406, 2411, 2412, 2418"
+edk2\mdemodulepkg\core\pei\fwvol\fwvol.c,516,C6011,7f583b69351fb523c32bc4f82610a324,New,"Dereferencing NULL pointer 'PrivateData->Fv'. : Lines: 470, 471, 472, 473, 478, 483, 485, 490, 496, 501, 507, 509, 511, 516"
+edk2\mdemodulepkg\core\pei\fwvol\fwvol.c,645,C6387,7f583b69351fb523c32bc4f82610a324,New,"'TempPtr' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 571, 572, 574, 584, 585, 586, 589, 606, 612, 616, 617, 625, 626, 625, 637, 641, 645"
+edk2\mdemodulepkg\core\pei\fwvol\fwvol.c,657,C6011,7f583b69351fb523c32bc4f82610a324,New,"Dereferencing NULL pointer 'PrivateData->Fv'. : Lines: 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 571, 572, 574, 584, 585, 586, 589, 606, 612, 616, 617, 625, 637, 641, 645, 650, 651, 657"
+edk2\mdemodulepkg\core\pei\memory\memoryservices.c,626,C6326,6a992eaff2f196cc1d091fc2f7777d14,New,Potential comparison of a constant with another constant.
+edk2\mdemodulepkg\core\pei\ppi\ppi.c,497,C6387,6e67d8bb79c828010baaf8bcabd65d06,New,"'TempPtr' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 455, 456, 457, 458, 459, 461, 465, 467, 468, 469, 477, 483, 489, 493, 497"
+edk2\mdemodulepkg\core\pei\ppi\ppi.c,507,C6011,6e67d8bb79c828010baaf8bcabd65d06,New,"Dereferencing NULL pointer 'PpiListPointer->PpiPtrs'. See line 498 for an earlier location where this can occur: Lines: 455, 456, 457, 458, 459, 461, 465, 467, 468, 469, 477, 483, 489, 493, 497, 502, 503, 507"
+edk2\mdemodulepkg\core\pei\ppi\ppi.c,786,C6387,6e67d8bb79c828010baaf8bcabd65d06,New,"'CallbackNotifyListPointer->NotifyPtrs' could be '0':  this does not adhere to the specification for the function 'CopyMem'. See line 787 for an earlier location where this can occur: Lines: 737, 738, 739, 740, 741, 742, 743, 744, 746, 750, 752, 753, 754, 756, 757, 758, 766, 770, 777, 778, 782, 786, 791, 792, 795, 796, 797, 823, 828, 840, 766, 770, 777, 778, 782, 786"
+edk2\mdemodulepkg\core\pei\ppi\ppi.c,795,C6011,6e67d8bb79c828010baaf8bcabd65d06,New,"Dereferencing NULL pointer 'CallbackNotifyListPointer->NotifyPtrs'. See line 787 for an earlier location where this can occur: Lines: 737, 738, 739, 740, 741, 742, 743, 744, 746, 750, 752, 753, 754, 756, 757, 758, 766, 770, 777, 778, 782, 786, 791, 792, 795"
+edk2\mdemodulepkg\core\pei\ppi\ppi.c,807,C6387,6e67d8bb79c828010baaf8bcabd65d06,New,"'TempPtr' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 737, 738, 739, 740, 741, 742, 743, 744, 746, 750, 752, 753, 754, 756, 757, 758, 766, 770, 777, 799, 803, 807"
+edk2\mdemodulepkg\core\pei\ppi\ppi.c,816,C6011,6e67d8bb79c828010baaf8bcabd65d06,New,"Dereferencing NULL pointer 'DispatchNotifyListPointer->NotifyPtrs'. See line 808 for an earlier location where this can occur: Lines: 737, 738, 739, 740, 741, 742, 743, 744, 746, 750, 752, 753, 754, 756, 757, 758, 766, 770, 777, 799, 803, 807, 812, 813, 816"
+edk2\mdemodulepkg\core\pismmcore\dispatcher.c,1153,C6011,d2e955af949f15d526512a3264d6d939,New,"Dereferencing NULL pointer 'KnownHandle'. : Lines: 1148, 1150, 1153"
+edk2\mdemodulepkg\core\pismmcore\dispatcher.c,1243,C6011,d2e955af949f15d526512a3264d6d939,New,"Dereferencing NULL pointer 'DriverEntry'. : Lines: 1234, 1240, 1243"
+edk2\mdemodulepkg\core\pismmcore\dispatcher.c,156,C6297,d2e955af949f15d526512a3264d6d939,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\core\pismmcore\heapguard.c,1194,C6385,94d62722f194ae9552cd36b282176250,New,"Reading invalid data from 'Indices':  the readable size is '40' bytes, but '-8' bytes may be read.: Lines: 1102, 1103, 1104, 1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1115, 1121, 1122, 1124, 1125, 1126, 1128, 1129, 1130, 1131, 1133, 1137, 1138, 1139, 1140, 1190, 1194, 1195, 1196, 1137, 1138, 1139, 1140, 1190, 1194"
+edk2\mdemodulepkg\core\pismmcore\heapguard.c,1195,C6385,94d62722f194ae9552cd36b282176250,New,"Reading invalid data from 'Addresses':  the readable size is '40' bytes, but '-16' bytes may be read.: Lines: 1102, 1103, 1104, 1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1115, 1121, 1122, 1124, 1125, 1126, 1128, 1129, 1130, 1131, 1133, 1137, 1138, 1139, 1140, 1190, 1194, 1195, 1196, 1137, 1138, 1139, 1140, 1190, 1194, 1195"
+edk2\mdemodulepkg\core\pismmcore\heapguard.c,1196,C6385,94d62722f194ae9552cd36b282176250,New,"Reading invalid data from 'Shifts':  the readable size is '40' bytes, but '-8' bytes may be read.: Lines: 1102, 1103, 1104, 1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1115, 1121, 1122, 1124, 1125, 1126, 1128, 1129, 1130, 1131, 1133, 1137, 1138, 1139, 1140, 1190, 1194, 1195, 1196, 1137, 1138, 1139, 1140, 1190, 1194, 1195, 1196"
+edk2\mdemodulepkg\core\pismmcore\heapguard.c,1348,C6385,94d62722f194ae9552cd36b282176250,New,"Reading invalid data from 'Indices':  the readable size is '40' bytes, but '-8' bytes may be read.: Lines: 1259, 1260, 1261, 1262, 1263, 1264, 1265, 1266, 1267, 1268, 1269, 1270, 1273, 1279, 1280, 1291, 1292, 1294, 1295, 1296, 1298, 1299, 1300, 1301, 1303, 1304, 1305, 1306, 1307, 1344, 1348, 1349, 1350, 1303, 1304, 1305, 1306, 1307, 1344, 1348"
+edk2\mdemodulepkg\core\pismmcore\heapguard.c,1349,C6385,94d62722f194ae9552cd36b282176250,New,"Reading invalid data from 'Addresses':  the readable size is '40' bytes, but '-16' bytes may be read.: Lines: 1259, 1260, 1261, 1262, 1263, 1264, 1265, 1266, 1267, 1268, 1269, 1270, 1273, 1279, 1280, 1291, 1292, 1294, 1295, 1296, 1298, 1299, 1300, 1301, 1303, 1304, 1305, 1306, 1307, 1344, 1348, 1349, 1350, 1303, 1304, 1305, 1306, 1307, 1344, 1348, 1349"
+edk2\mdemodulepkg\core\pismmcore\heapguard.c,1350,C6385,94d62722f194ae9552cd36b282176250,New,"Reading invalid data from 'Shifts':  the readable size is '40' bytes, but '-8' bytes may be read.: Lines: 1259, 1260, 1261, 1262, 1263, 1264, 1265, 1266, 1267, 1268, 1269, 1270, 1273, 1279, 1280, 1291, 1292, 1294, 1295, 1296, 1298, 1299, 1300, 1301, 1303, 1304, 1305, 1306, 1307, 1344, 1348, 1349, 1350, 1303, 1304, 1305, 1306, 1307, 1344, 1348, 1349, 1350"
+edk2\mdemodulepkg\core\pismmcore\memoryattributestable.c,1258,C6011,a01a5d99911b8ed587fb583e566daff8,New,"Dereferencing NULL pointer 'MemoryAttributesTable'. : Lines: 1210, 1211, 1212, 1213, 1214, 1215, 1216, 1217, 1218, 1219, 1220, 1222, 1223, 1224, 1235, 1239, 1246, 1249, 1254, 1255, 1256, 1258"
+edk2\mdemodulepkg\core\pismmcore\memoryattributestable.c,1268,C6387,a01a5d99911b8ed587fb583e566daff8,New,"'MemoryMap' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 1210, 1211, 1212, 1213, 1214, 1215, 1216, 1217, 1218, 1219, 1220, 1222, 1223, 1224, 1235, 1239, 1246, 1249, 1254, 1255, 1256, 1258, 1259, 1260, 1261, 1266, 1267, 1268"
+edk2\mdemodulepkg\core\pismmcore\pool.c,173,C6297,9582491d019f161aba5dd41fef06288d,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\library\pidxes3bootscriptlib\bootscriptexecute.c,145,C6297,6368a0bf5ee9ed78d8ccc82a5fc0bf93,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\library\smmlockboxlib\smmlockboxpeilib.c,105,C6239,84cddab711fa3c75850da72a16414fd0,New,(<non-zero constant> && <expression>) always evaluates to the result of <expression>.  Did you intend to use the bitwise-and operator?
+edk2\mdemodulepkg\library\smmlockboxlib\smmlockboxpeilib.c,171,C6239,84cddab711fa3c75850da72a16414fd0,New,(<non-zero constant> && <expression>) always evaluates to the result of <expression>.  Did you intend to use the bitwise-and operator?
+edk2\mdemodulepkg\library\smmlockboxlib\smmlockboxpeilib.c,582,C6239,84cddab711fa3c75850da72a16414fd0,New,(<non-zero constant> && <expression>) always evaluates to the result of <expression>.  Did you intend to use the bitwise-and operator?
+edk2\mdemodulepkg\library\smmlockboxlib\smmlockboxpeilib.c,590,C6239,84cddab711fa3c75850da72a16414fd0,New,(<non-zero constant> && <expression>) always evaluates to the result of <expression>.  Did you intend to use the bitwise-and operator?
+edk2\mdemodulepkg\library\smmlockboxlib\smmlockboxpeilib.c,705,C6239,84cddab711fa3c75850da72a16414fd0,New,(<non-zero constant> && <expression>) always evaluates to the result of <expression>.  Did you intend to use the bitwise-and operator?
+edk2\mdemodulepkg\library\smmlockboxlib\smmlockboxpeilib.c,712,C6239,84cddab711fa3c75850da72a16414fd0,New,(<non-zero constant> && <expression>) always evaluates to the result of <expression>.  Did you intend to use the bitwise-and operator?
+edk2\mdemodulepkg\library\smmlockboxlib\smmlockboxpeilib.c,83,C6239,84cddab711fa3c75850da72a16414fd0,New,(<non-zero constant> && <expression>) always evaluates to the result of <expression>.  Did you intend to use the bitwise-and operator?
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmboot.c,2324,C6011,33421d7462746ce25855a5c4d66d88a2,New,"Dereferencing NULL pointer 'BootOptions'. : Lines: 2171, 2172, 2173, 2174, 2175, 2176, 2177, 2178, 2182, 2183, 2188, 2196, 2197, 2196, 2197, 2196, 2245, 2252, 2259, 2294, 2301, 2308, 2312, 2316, 2317, 2324"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmbootdescription.c,223,C6011,67dc5c6815c1d8483478563caaa52979,New,"Dereferencing NULL pointer 'Description'. : Lines: 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 156, 158, 163, 167, 198, 199, 200, 205, 206, 214, 215, 216, 217, 218, 223"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmbootdescription.c,886,C6011,67dc5c6815c1d8483478563caaa52979,New,"Dereferencing NULL pointer 'Visited'. : Lines: 862, 863, 864, 865, 866, 867, 869, 877, 878, 879, 878, 882, 885, 886"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmdriverhealth.c,256,C6011,72884fdb84dff79ef24064c9ac3449e4,New,"Dereferencing NULL pointer '*DriverHealthInfo'. : Lines: 200, 201, 202, 203, 204, 210, 215, 217, 242, 243, 248, 249, 250, 256"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmhotkey.c,178,C6001,f7480cd013558c1b7a49d8a6ef1e186f,New,"Using uninitialized memory '*Param->KeyOptions'.: Lines: 156, 157, 158, 159, 160, 162, 164, 165, 167, 168, 177, 178"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmhotkey.c,183,C6011,f7480cd013558c1b7a49d8a6ef1e186f,New,"Dereferencing NULL pointer 'Param->KeyOptions'. : Lines: 156, 157, 158, 159, 160, 162, 164, 165, 167, 168, 177, 183"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmhotkey.c,694,C6011,f7480cd013558c1b7a49d8a6ef1e186f,New,"Dereferencing NULL pointer 'Hotkey'. : Lines: 664, 665, 666, 667, 668, 669, 670, 671, 675, 676, 678, 682, 683, 686, 688, 690, 691, 694"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmloadoption.c,1046,C6011,105855116eb1521b2b7a1006444e2458,New,"Dereferencing NULL pointer 'Param->Options'. : Lines: 1017, 1018, 1019, 1020, 1021, 1022, 1024, 1026, 1032, 1033, 1034, 1040, 1046"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmloadoption.c,1104,C6011,105855116eb1521b2b7a1006444e2458,New,"Dereferencing NULL pointer 'Options'. : Lines: 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1082, 1083, 1085, 1089, 1090, 1094, 1096, 1099, 1100, 1101, 1102, 1104"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmloadoption.c,311,C6387,105855116eb1521b2b7a1006444e2458,New,"'NewOptionOrder' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 285, 286, 287, 288, 289, 294, 297, 298, 305, 306, 308, 310, 311"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmloadoption.c,315,C6011,105855116eb1521b2b7a1006444e2458,New,"Dereferencing NULL pointer 'NewOptionOrder'. : Lines: 285, 286, 287, 288, 289, 294, 297, 298, 305, 306, 308, 310, 315"
+edk2\mdemodulepkg\library\uefibootmanagerlib\bmloadoption.c,447,C6011,105855116eb1521b2b7a1006444e2458,New,"Dereferencing NULL pointer 'OptionOrder'. : Lines: 423, 424, 425, 426, 427, 429, 434, 444, 446, 447"
+edk2\mdemodulepkg\override\core\dxe\dispatcher\dispatcher.c,781,C6011,b981c2e2c507a32c78a977b0c351c62d,New,"Dereferencing NULL pointer 'KnownHandle'. : Lines: 699, 700, 701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 712, 717, 718, 719, 724, 725, 727, 761, 765, 778, 781"
+edk2\mdemodulepkg\override\core\dxe\dispatcher\dispatcher.c,878,C6011,b981c2e2c507a32c78a977b0c351c62d,New,"Dereferencing NULL pointer 'DriverEntry'. : Lines: 866, 872, 874, 878"
+edk2\mdemodulepkg\override\core\dxe\event\event.c,207,C6297,b0458d295e8b2f9db10aeaab051df894,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\override\core\dxe\event\event.c,241,C6297,b0458d295e8b2f9db10aeaab051df894,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\override\core\dxe\image\image.c,165,C6011,cf3363e08bd097dbddf95894966444d9,New,"Dereferencing NULL pointer 'Entry'. : Lines: 128, 129, 130, 131, 132, 134, 135, 137, 138, 139, 146, 153, 158, 162, 165"
+edk2\mdemodulepkg\override\core\dxe\image\image.c,210,C28182,cf3363e08bd097dbddf95894966444d9,New,"Dereferencing NULL pointer. 'DxeCoreHob.MemoryAllocationModule' contains the same NULL value as 'DxeCoreHob.Raw=GetNextHob(2, DxeCoreHob.Raw)' did. : Lines: 186, 187, 188, 189, 190, 191, 196, 197, 210"
+edk2\mdemodulepkg\override\core\dxe\image\image.c,359,C6297,cf3363e08bd097dbddf95894966444d9,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\override\core\dxe\misc\memoryattributestable.c,401,C6011,c4682e68f07d92fd608affbb1207359c,New,"Dereferencing NULL pointer 'MemoryAttributesTable'. : Lines: 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 333, 340, 346, 356, 357, 358, 368, 371, 378, 381, 383, 384, 385, 399, 401"
+edk2\mdemodulepkg\override\core\pei\image\image.c,87,C6297,2142dfbf2552f0e7e5c27bb559359ffe,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\override\core\pei\image\image.c,93,C6297,2142dfbf2552f0e7e5c27bb559359ffe,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\override\library\pidxes3bootscriptlib\bootscriptsave.c,203,C6297,289ac588964086c26117ba296dbb9a78,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\override\universal\acpi\firmwareperformancedatatabledxe\firmwareperformancedxe.c,581,C6387,97386a57694e96538df5b78836f73299,New,"'(UINT8 *)SmmBootRecordData+SmmCommData->BootRecordOffset' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499, 500, 501, 502, 503, 508, 509, 516, 517, 518, 519, 520, 521, 522, 527, 531, 533, 534, 543, 548, 549, 550, 551, 552, 554, 555, 556, 561, 562, 563, 564, 566, 570, 571, 572, 574, 575, 576, 577, 578, 579, 580, 581"
+edk2\mdemodulepkg\override\universal\acpi\firmwareperformancedatatabledxe\firmwareperformancedxe.c,853,C6387,97386a57694e96538df5b78836f73299,New,"'mBootRecordBuffer+mBootRecordSize' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 758, 763, 767, 774, 775, 787, 799, 816, 837, 841, 845, 846, 848, 853"
+edk2\mdemodulepkg\universal\ebcdxe\ebcexecute.c,3954,C6297,eb67eadd3cb83c319043fd51a4cb5005,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\mdemodulepkg\universal\pcd\pei\service.c,137,C6011,36e76b62e52e24229ae278c26eb94f83,New,"Dereferencing NULL pointer 'Name'. : Lines: 91, 92, 93, 94, 95, 96, 101, 110, 112, 117, 118, 119, 121, 130, 131, 136, 137"
+edk2\mdemodulepkg\universal\smmcommunicationbufferdxe\smmcommunicationbufferdxe.c,61,C6387,f731459d63645934cb4bd4ff017189ed,New,"'PiSmmCommunicationRegionTable' could be '0':  this does not adhere to the specification for the function 'ZeroMem'. : Lines: 43, 44, 45, 46, 48, 54, 59, 61"
+edk2\mdemodulepkg\universal\smmcommunicationbufferdxe\smmcommunicationbufferdxe.c,63,C6011,f731459d63645934cb4bd4ff017189ed,New,"Dereferencing NULL pointer 'PiSmmCommunicationRegionTable'. See line 61 for an earlier location where this can occur: Lines: 43, 44, 45, 46, 48, 54, 59, 61, 63"
+edk2\mdemodulepkg\universal\statuscodehandler\smm\memorystatuscodeworker.c,33,C6011,cc7444b1935854c4fc2ac3bc0d003dd3,New,"Dereferencing NULL pointer 'mMmMemoryStatusCodeTable'. : Lines: 25, 30, 33"
+edk2\mdepkg\library\basememorylibrepstr\copymemwrapper.c,41,C6101,3f827e4dec72150dafd08820752a3297,New,"Returning uninitialized memory '*DestinationBuffer'.  A successful path through the function does not set the named _Out_ parameter. : Lines: 41, 47, 54, 55, 41"
+edk2\mdepkg\library\basememorylibrepstr\memlibguid.c,44,C6001,e6a153f472f3d3f90031c3017a2668a8,New,"Using uninitialized memory 'DestinationGuid'.: Lines: 39, 44"
+edk2\mdepkg\library\basememorylibrepstr\setmem16wrapper.c,57,C6001,8a8b9c210c9b7b0fff1b50409ebaeb80,New,"Using uninitialized memory 'Buffer'.: Lines: 42, 48, 57"
+edk2\mdepkg\library\basememorylibrepstr\setmem32wrapper.c,57,C6001,57f20d2c9034309bbd65e9b1f1be08fe,New,"Using uninitialized memory 'Buffer'.: Lines: 42, 48, 57"
+edk2\mdepkg\library\basememorylibrepstr\setmem64wrapper.c,57,C6001,aaa8254366a99c583d8e2daf35112329,New,"Using uninitialized memory 'Buffer'.: Lines: 42, 48, 57"
+edk2\mdepkg\library\basememorylibrepstr\setmemwrapper.c,50,C6001,2a81b5c984f5527e84bf8533b83c3537,New,"Using uninitialized memory 'Buffer'.: Lines: 38, 44, 50"
+edk2\mdepkg\library\basememorylibrepstr\setmemwrapper.c,81,C6001,2a81b5c984f5527e84bf8533b83c3537,New,"Using uninitialized memory 'Buffer'.: Lines: 74, 80, 81"
+edk2\mdepkg\library\basememorylibrepstr\setmemwrapper.c,83,C6001,2a81b5c984f5527e84bf8533b83c3537,New,"Using uninitialized memory 'Buffer'.: Lines: 74, 80, 83"
+edk2\mdepkg\library\basememorylibrepstr\zeromemwrapper.c,49,C6001,be343545d2e3d19cf442ee23b910ffdc,New,"Using uninitialized memory 'Buffer'.: Lines: 38, 43, 49"
+edk2\mdepkg\library\dxehstilib\hstidxe.c,113,C6001,b69fd3955800a50bafb7c9711aa37e29,New,"Using uninitialized memory '*InformationBlock'.: Lines: 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47, 54, 58, 59, 60, 61, 62, 63, 68, 75, 80, 84, 85, 86, 87, 92, 94, 101, 102, 108, 112, 113, 118, 119, 62, 63, 68, 75, 80, 84, 85, 86, 87, 92, 94, 101, 102, 108, 112, 113"
+edk2\mdepkg\library\peiserviceslib\peiserviceslib.c,653,C6011,05bac004001c72cf3d740c3662e3dcab,New,"Dereferencing NULL pointer 'FvInfoPpi'. : Lines: 631, 632, 633, 634, 635, 636, 638, 639, 640, 651, 653"
+edk2\mdepkg\library\peiserviceslib\peiserviceslib.c,690,C6011,05bac004001c72cf3d740c3662e3dcab,New,"Dereferencing NULL pointer 'FvInfoPpiDescriptor'. : Lines: 631, 632, 633, 634, 635, 636, 638, 639, 640, 651, 653, 654, 657, 660, 673, 674, 675, 681, 687, 690"
+edk2\mdepkg\library\smmmemlib\smmmemlib.c,547,C6387,9bc49c8b8cbe99df3e322ac1a0773904,New,"'mMemoryMap' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 486, 487, 488, 498, 501, 508, 511, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 530, 520, 533, 538, 540, 541, 542, 543, 544, 545, 546, 547"
+edk2\mdepkg\library\uefidevicepathlib\devicepathfromtext.c,3673,C6011,a33f32aa622ccd5041f2a248482ed44d,New,"Dereferencing NULL pointer 'DeviceNode'. : Lines: 3642, 3643, 3644, 3645, 3646, 3647, 3648, 3650, 3654, 3656, 3658, 3660, 3661, 3662, 3664, 3665, 3666, 3667, 3669, 3670, 3672, 3673"
+edk2\mdepkg\library\uefidevicepathlib\devicepathfromtext.c,997,C6011,a33f32aa622ccd5041f2a248482ed44d,New,"Dereferencing NULL pointer 'AcpiAdr'. : Lines: 968, 969, 970, 971, 973, 980, 981, 982, 986, 997, 980, 981, 982, 986, 987, 988, 994, 997"
+edk2\mdepkg\library\uefidevicepathlib\devicepathtotext.c,1828,C6387,2eadcef3b923bf6ac1f6c775a024b727,New,"'UriStr' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 1816, 1817, 1818, 1823, 1824, 1825, 1828"
+edk2\mdepkg\library\uefidevicepathlib\devicepathtotext.c,1829,C6011,2eadcef3b923bf6ac1f6c775a024b727,New,"Dereferencing NULL pointer 'UriStr'. See line 1828 for an earlier location where this can occur: Lines: 1816, 1817, 1818, 1823, 1824, 1825, 1828, 1829"
+edk2\mdepkg\library\uefidevicepathlib\devicepathtotext.c,52,C6011,2eadcef3b923bf6ac1f6c775a024b727,New,"Dereferencing NULL pointer 'Str->Str'. : Lines: 34, 35, 37, 38, 39, 41, 42, 43, 51, 52"
+edk2\mdepkg\library\uefidevicepathlib\devicepathtotext.c,990,C6011,2eadcef3b923bf6ac1f6c775a024b727,New,"Dereferencing NULL pointer 'NewStr'. : Lines: 975, 976, 977, 978, 980, 982, 983, 984, 988, 990"
+edk2\mdepkg\library\uefilib\acpi.c,68,C6011,08438da4e9b39feedd2d474db8b7c1f0,New,"Dereferencing NULL pointer 'PreviousTableLocated'. : Lines: 40, 41, 42, 43, 44, 46, 53, 57, 59, 60, 61, 62, 63, 64, 65, 66, 68"
+edk2\mdepkg\library\uefilib\console.c,485,C6387,9548dd3c6530316429d891456d0dbb28,New,"'Line' could be '0':  this does not adhere to the specification for the function 'SetMem16'. : Lines: 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 419, 420, 421, 422, 427, 442, 447, 452, 457, 458, 463, 468, 473, 474, 479, 485"
+edk2\mdepkg\library\uefilib\console.c,486,C6011,9548dd3c6530316429d891456d0dbb28,New,"Dereferencing NULL pointer 'Line'. See line 485 for an earlier location where this can occur: Lines: 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 419, 420, 421, 422, 427, 442, 447, 452, 457, 458, 463, 468, 473, 474, 479, 485, 486"
+edk2\mdepkg\library\uefilib\uefilibprint.c,424,C6011,3dd4eb05bc0666c2e4aa126d126b2437,New,"Dereferencing NULL pointer 'Blt'. : Lines: 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 362, 363, 364, 365, 367, 371, 377, 378, 391, 395, 401, 405, 406, 407, 416, 417, 421, 424"
+edk2\mdepkg\library\uefiruntimelib\runtimelib.c,609,C28182,d0eb1fbbd238fd6691442cde619edd8a,New,"Dereferencing NULL pointer. 'Link' contains the same NULL value as 'Link->ForwardLink' did. : Lines: 594, 595, 600, 607, 609, 611, 616, 621, 622, 609"
+edk2\mdepkg\override\library\baselib\safestring.c,1503,C6305,8232e09ea07598856182b3fa3e37ca8c,New,"Potential mismatch between sizeof and countof quantities. Use sizeof() to scale byte sizes.: Lines: 1482, 1483, 1488, 1489, 1494, 1495, 1502, 1503"
+edk2\mdepkg\override\library\baselib\safestring.c,1517,C6305,8232e09ea07598856182b3fa3e37ca8c,New,"Potential mismatch between sizeof and countof quantities. Use sizeof() to scale byte sizes.: Lines: 1482, 1483, 1488, 1489, 1494, 1495, 1502, 1503, 1508, 1509, 1516, 1517"
+edk2\mdepkg\override\library\baselib\safestring.c,1531,C6305,8232e09ea07598856182b3fa3e37ca8c,New,"Potential mismatch between sizeof and countof quantities. Use sizeof() to scale byte sizes.: Lines: 1482, 1483, 1488, 1489, 1494, 1495, 1502, 1503, 1508, 1509, 1516, 1517, 1522, 1523, 1530, 1531"
+edk2\mdepkg\override\library\uefidevicepathlib\devicepathfromtext.c,3673,C6011,a33f32aa622ccd5041f2a248482ed44d,New,"Dereferencing NULL pointer 'DeviceNode'. : Lines: 3642, 3643, 3644, 3645, 3646, 3647, 3648, 3650, 3654, 3656, 3658, 3660, 3661, 3662, 3664, 3665, 3666, 3667, 3669, 3670, 3672, 3673"
+edk2\mdepkg\override\library\uefidevicepathlib\devicepathfromtext.c,997,C6011,a33f32aa622ccd5041f2a248482ed44d,New,"Dereferencing NULL pointer 'AcpiAdr'. : Lines: 968, 969, 970, 971, 973, 980, 981, 982, 986, 997, 980, 981, 982, 986, 987, 988, 994, 997"
+edk2\mdepkg\override\library\uefidevicepathlib\devicepathtotext.c,1828,C6387,2eadcef3b923bf6ac1f6c775a024b727,New,"'UriStr' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 1816, 1817, 1818, 1823, 1824, 1825, 1828"
+edk2\mdepkg\override\library\uefidevicepathlib\devicepathtotext.c,1829,C6011,2eadcef3b923bf6ac1f6c775a024b727,New,"Dereferencing NULL pointer 'UriStr'. See line 1828 for an earlier location where this can occur: Lines: 1816, 1817, 1818, 1823, 1824, 1825, 1828, 1829"
+edk2\mdepkg\override\library\uefidevicepathlib\devicepathtotext.c,52,C6011,2eadcef3b923bf6ac1f6c775a024b727,New,"Dereferencing NULL pointer 'Str->Str'. : Lines: 34, 35, 37, 38, 39, 41, 42, 43, 51, 52"
+edk2\mdepkg\override\library\uefidevicepathlib\devicepathtotext.c,990,C6011,2eadcef3b923bf6ac1f6c775a024b727,New,"Dereferencing NULL pointer 'NewStr'. : Lines: 975, 976, 977, 978, 980, 982, 983, 984, 988, 990"
+edk2\networkpkg\dpcdxe\dpc.c,153,C6011,053b4ce22f98b96c76b2523c912a4bba,New,"Dereferencing NULL pointer 'DpcEntry'. : Lines: 76, 77, 78, 79, 84, 91, 98, 104, 109, 115, 123, 127, 132, 137, 143, 144, 153"
+edk2\networkpkg\library\dxeipiolib\dxeipiolib.c,299,C6297,e27e921eeaab57f60281c4e98a69493d,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\networkpkg\library\dxeipiolib\dxeipiolib.c,382,C6297,e27e921eeaab57f60281c4e98a69493d,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\networkpkg\library\dxeipiolib\dxeipiolib.c,718,C6011,e27e921eeaab57f60281c4e98a69493d,New,"Dereferencing NULL pointer 'OverrideData'. : Lines: 639, 640, 641, 642, 643, 644, 645, 646, 647, 649, 653, 654, 655, 660, 661, 665, 672, 676, 681, 685, 692, 693, 698, 703, 713, 714, 716, 718"
+edk2\networkpkg\library\dxenetlib\netbuffer.c,1485,C6011,1dc12d5b690e87a06a23dcdb3d7d78ed,New,"Dereferencing NULL pointer 'Nbuf'. : Lines: 1445, 1446, 1447, 1448, 1449, 1450, 1455, 1459, 1466, 1467, 1469, 1484, 1485"
+edk2\networkpkg\override\library\dxenetlib\dxenetlib.c,1273,C6011,0f22e88ea5ebc656ae006994191cecef,New,"Dereferencing NULL pointer 'Ptr'. : Lines: 1235, 1236, 1237, 1238, 1239, 1241, 1245, 1247, 1248, 1249, 1273"
+edk2\securitypkg\library\tpm2devicelibdtpm\tpm2devicelibdtpmbase.c,59,C6031,109406290a07f59103c8943216ff1cd5,New,Return value ignored: 'LibPcdSetEx8S'.
+edk2\securitypkg\library\tpm2devicelibdtpm\tpm2devicelibdtpmbase.c,64,C6031,109406290a07f59103c8943216ff1cd5,New,Return value ignored: 'LibPcdSetEx8S'.
+edk2\ueficpupkg\cpudxe\cpupagetable.c,1226,C6011,3bae121525a8c75eff221fe64a173883,New,"Dereferencing NULL pointer 'mPageTablePool'. : Lines: 1209, 1211, 1218, 1221, 1226"
+edk2\ueficpupkg\library\cpuexceptionhandlerlib\dxeexception.c,136,C6387,0f63ca920d9392930b076388ae6b08df,New,"'IdtTable' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 104, 110, 111, 119, 125, 126, 127, 134, 136"
+edk2\ueficpupkg\library\cpuexceptionhandlerlib\peicpuexception.c,136,C6011,d1b6a5c0b49f7d6460e9c619b8ba1cce,New,"Dereferencing NULL pointer 'ExceptionHandlerData'. : Lines: 127, 128, 129, 131, 134, 136"
+edk2\ueficpupkg\library\cpuexceptionhandlerlib\peicpuexception.c,75,C6011,d1b6a5c0b49f7d6460e9c619b8ba1cce,New,"Dereferencing NULL pointer 'Exception0StubHeader'. : Lines: 62, 63, 64, 70, 71, 73, 75"
+edk2\ueficpupkg\library\mpinitlib\amdsev.c,180,C6011,e97edf37647ef6f80b6f28b9af559b87,New,"Dereferencing NULL pointer 'JmpFar'. : Lines: 155, 156, 157, 159, 167, 168, 169, 170, 179, 180"
+edk2\ueficpupkg\library\mpinitlib\dxemplib.c,569,C6297,7bb1e3d1dd24201080151cdb872b856d,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\ueficpupkg\library\mpinitlib\mplib.c,1760,C6011,e00518f2ae4db4d488ddade9c59a3776,New,"Dereferencing NULL pointer '*CpuMpData->FailedCpuList'. : Lines: 1665, 1666, 1667, 1668, 1669, 1670, 1672, 1674, 1679, 1718, 1725, 1735, 1736, 1741, 1743, 1759, 1760"
+edk2\ueficpupkg\library\mpinitlib\mplib.c,805,C6297,e00518f2ae4db4d488ddade9c59a3776,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\ueficpupkg\library\mpinitlib\x64\amdsev.c,86,C6297,2da0e083354f54ab3e0bc1509b40b397,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\ueficpupkg\library\mtrrlib\mtrrlib.c,2638,C6262,0ffb9ec1eefcfaf34386590e5b6b9b72,New,Function uses '16436' bytes of stack:  exceeds /analyze:stacksize '16384'.  Consider moving some data to heap.
+edk2\ueficpupkg\library\mtrrlib\mtrrlib.c,513,C6385,0ffb9ec1eefcfaf34386590e5b6b9b72,New,"Reading invalid data from 'mMtrrLibFixedMtrrTable':  the readable size is '132' bytes, but 'MsrIndex' bytes may be read.: Lines: 486, 487, 488, 489, 494, 513"
+edk2\ueficpupkg\pismmcommunication\pismmcommunicationpei.c,195,C6239,f95c61a7e20e2510c9df132635e0b897,New,(<non-zero constant> && <expression>) always evaluates to the result of <expression>.  Did you intend to use the bitwise-and operator?
+edk2\ueficpupkg\pismmcpudxesmm\x64\smmfuncsarch.c,181,C6297,2cc42436a72925d3b7c4f7e5d6b9912e,New,"Arithmetic overflow:  32-bit value is shifted, then cast to 64-bit value.  Results might not be an expected value."
+edk2\ueficpupkg\pismmcpudxesmm\x64\smmprofilearch.c,82,C6387,ec3f4231b333bad5fe83a80cc9dc4657,New,"'mPFPageBuffer' could be '0':  this does not adhere to the specification for the function 'ZeroMem'. : Lines: 71, 76, 77, 80, 81, 82"
+edk2\ueficpupkg\seccore\secmain.c,390,C6011,ad816bc1a1d1c2ff923853726338a8fb,New,"Dereferencing NULL pointer 'PeiCoreEntryPoint'. : Lines: 260, 261, 262, 263, 264, 266, 267, 272, 277, 307, 311, 316, 317, 321, 367, 381, 390"
+insyde\insydesetuppkg\drivers\h2odisplayenginelocaltextdxe\ltdepanels\ltdehotkeypanel.c,499,C6326,667190d36d3082e18b84004d60aeaa8a,New,Potential comparison of a constant with another constant.
+insyde\insydesetuppkg\drivers\h2odisplayenginelocaltextdxe\ltdepanels\ltdehotkeypanel.c,553,C6240,667190d36d3082e18b84004d60aeaa8a,New,(<expression> && <non-zero constant>) always evaluates to the result of <expression>.  Did you intend to use the bitwise-and operator?
+insyde\insydesetuppkg\drivers\h2odisplayenginelocaltextdxe\ltdepanels\ltdequestionpanel.c,1006,C6387,5329990d0285fa302e38f332d6a82530,New,"'Control->Text.String' could be '0':  this does not adhere to the specification for the function 'AllocateCopyPool'. : Lines: 918, 919, 920, 921, 922, 923, 925, 929, 930, 935, 936, 940, 941, 945, 946, 947, 948, 950, 951, 952, 953, 971, 972, 973, 974, 975, 976, 977, 978, 985, 1004, 1005, 1006"
+insyde\insydesetuppkg\drivers\h2odisplayenginelocaltextdxe\ltdepanels\ltdequestionpanel.c,2029,C6387,5329990d0285fa302e38f332d6a82530,New,"'NewInputString' could be '0':  this does not adhere to the specification for the function 'CopyMem'. : Lines: 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1985, 1989, 1990, 1991, 1993, 2001, 2002, 2003, 2007, 2024, 2025, 2026, 2027, 2028, 2029"

@@ -1,0 +1,49 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = JedecNvdimmDxe
+  FILE_GUID                      = BAD7B58D-4C8A-22E9-6E92-C4B996AEAE59
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = JedecNvdimmDxe
+
+[sources]
+  JedecNvdimmDxe.c
+  JedecNvdimmDxe.h
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DebugLib
+  IdsLib
+  IoLib
+  BaseMemoryLib
+
+[Guids]
+  gEfiEventReadyToBootGuid
+  gJedecNvdimmClaimDsmRegionGuid
+
+
+[Pcd]
+
+[Protocols]
+  gAmdJedecNvdimmProtocolGuid  #Consume
+  gEfiSmmControl2ProtocolGuid  #Consume
+  gEfiSmmCommunicationProtocolGuid #Consume
+  gAmdApcbDxeServiceProtocolGuid #Consume
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaFamily17ModulePkg.dec
+
+[Depex]
+  gAmdMemSp3DxeSspDepexProtocolGuid
+

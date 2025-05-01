@@ -1,0 +1,28 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = NbioClkReqControlLibNull
+  FILE_GUID                      = 1D0C39A6-878E-41A2-8F6B-E8C51A5784C8
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OemClkReqControlLib
+
+[Sources]
+  NbioClkReqControlLibNull.c
+
+[Packages]
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+
+[Ppis]
+
+[Depex]
+  TRUE
+

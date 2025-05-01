@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NbioCommonPeiLib
+  FILE_GUID                      = 17AC71C0-D15E-4C56-A2DC-8E23B634E1A9
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NbioCommonPeiLib
+
+[Sources]
+  PcieComplexInit.c
+  PciePeiServices.c
+  DxioTopology.c
+  PeiLibFunctions.c
+  HideWrapper.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  PcdLib
+  PrintLib
+  IdsLib
+  BaseLib
+  DebugPrintErrorLevelLib
+  AmdBaseLib
+  GnbCommonLib
+
+[Pcd]
+

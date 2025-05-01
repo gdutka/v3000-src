@@ -1,0 +1,27 @@
+/** @file
+  Header file for SecureFlashEspFlagSmm driver.
+
+;*******************************************************************************
+;* Copyright (c) 2019, Insyde Software Corporation. All Rights Reserved.
+;*
+;* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+;* transmit, broadcast, present, recite, release, license or otherwise exploit
+;* any part of this publication in any form, by any means, without the prior
+;* written permission of Insyde Software Corporation.
+;*
+;*******************************************************************************
+*/
+
+#ifndef _SECURE_FLASH_ESP_FLAG_SMM_H_
+#define _SECURE_FLASH_ESP_FLAG_SMM_H_
+
+#include <Uefi.h>
+#include <Library/UefiBootServicesTableLib.h>
+#include <Library/DebugLib.h>
+#include <Library/SmmServicesTableLib.h>
+#include <Library/DebugLib.h>
+#include <Library/BaseLib.h>
+
+#include <Protocol/SecureFlashEspFlagProtocol.h>
+
+#endif

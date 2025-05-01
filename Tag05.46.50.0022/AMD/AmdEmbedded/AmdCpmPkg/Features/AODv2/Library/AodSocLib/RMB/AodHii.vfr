@@ -1,0 +1,2292 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ***************************************************************************/
+
+
+#include <Guid/HiiPlatformSetupFormset.h>
+#include "AodSocLib.h"
+formset
+  guid      = AOD_SETUP_FORMSET_GUID,
+  title     = STRING_TOKEN(STR_AOD_ACCEPT_SECTION),
+  help      = STRING_TOKEN(STR_AOD_ACCEPT_SECTION_HELP),
+  class     = AOD_SETUP_CLASS,
+  subclass  = AOD_SETUP_SUB_CLASS,
+
+  //
+  // Define a Buffer Storage (EFI_IFR_VARSTORE)
+  //
+  AOD_SETUP_VARSTORE
+
+  form formid = AOD_SETUP_FORM_ID,                    // Form ID
+    title  = STRING_TOKEN(STR_AOD_SETUP_FORM_TITLE);  // Form title
+    subtitle text = STRING_TOKEN (STR_LEGAL_DISCLAIMER);
+
+    goto SETUP_ACCEPT_LABLE,
+      prompt      = STRING_TOKEN (STR_ACCEPT_SECTION),
+      help        = STRING_TOKEN (STR_AOD_BLANK);
+
+    goto AOD_SETUP_DECLINE_FORM_ID,
+      prompt      = STRING_TOKEN (STR_DECLINE_SECTION),
+      help        = STRING_TOKEN (STR_AOD_BLANK);
+  endform;
+
+  //
+  // form - Decline
+  //
+  form
+
+    formid        = AOD_SETUP_DECLINE_FORM_ID,
+
+    title         = STRING_TOKEN (STR_DECLINE_SECTION);
+
+    subtitle text = STRING_TOKEN (STR_DECLINE_SECTION);
+    subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+  endform;
+    //
+  // form - ACCEPT
+  //
+  form
+
+    formid        = SETUP_ACCEPT_LABLE,
+
+    title         = STRING_TOKEN (STR_AOD_ACCEPT_SECTION);
+
+    subtitle text = STRING_TOKEN (STR_AOD_ACCEPT_SECTION);
+    subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+    goto SETUP_MANUAL_CPU_OVERCLOCKING_LABLE,
+      prompt      = STRING_TOKEN (STR_AOD_MANUAL_CPU_OVERCLOCKING_SECTION),
+      help        = STRING_TOKEN (STR_AOD_MANUAL_CPU_OVERCLOCKING_SECTION);
+
+    // Display Condition: GfxOverClocking=1,AodComboFlag=1
+    suppressif NOT ideqval AOD_CONFIG.Header.GfxOverClocking == 1
+            OR NOT ideqval AOD_CONFIG.Header.AodComboFlag == 1;
+      goto SETUP_MANUAL_IGPU_OVERCLOCKING_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_MANUAL_IGPU_OVERCLOCKING_SECTION),
+        help        = STRING_TOKEN (STR_AOD_MANUAL_IGPU_OVERCLOCKING_SECTION);
+    endif;
+
+    // Display Condition: AodComboFlag=2,MemOverClocking=1|AodComboFlag=1,MemOverClocking=1
+    suppressif NOT ideqval AOD_CONFIG.Header.MemOverClocking == 1
+            OR NOT ideqval AOD_CONFIG.Header.AodComboFlag == 2
+           AND NOT ideqval AOD_CONFIG.Header.AodComboFlag == 1;
+      goto SETUP_DDR_AND_INFINITY_FABRIC_FREQUENCY_TIMINGS_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_DDR_AND_INFINITY_FABRIC_FREQUENCY_TIMINGS_SECTION),
+        help        = STRING_TOKEN (STR_AOD_DDR_AND_INFINITY_FABRIC_FREQUENCY_TIMINGS_SECTION);
+    endif;
+
+    // Display Condition: MocOverClocking=1
+    suppressif NOT ideqval AOD_CONFIG.Header.MocOverClocking == 1;
+      goto SETUP_PRECISION_BOOST_OVERDRIVE_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_PRECISION_BOOST_OVERDRIVE_SECTION),
+        help        = STRING_TOKEN (STR_AOD_PRECISION_BOOST_OVERDRIVE_SECTION);
+    endif;
+
+    // Display Condition: MemOverClocking=1|GfxOverClocking=1
+    suppressif NOT ideqval AOD_CONFIG.Header.MemOverClocking == 1
+           AND NOT ideqval AOD_CONFIG.Header.GfxOverClocking == 1;
+      goto SETUP_SOC_UNCORE_OC_MODE_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_SOC_UNCORE_OC_MODE_SECTION),
+        help        = STRING_TOKEN (STR_AOD_SOC_UNCORE_OC_MODE_SECTION);
+    endif;
+
+    // Display Condition: MemOverClocking=1|GfxOverClocking=1
+    suppressif NOT ideqval AOD_CONFIG.Header.MemOverClocking == 1
+           AND NOT ideqval AOD_CONFIG.Header.GfxOverClocking == 1;
+      goto SETUP_SOC_VOLTAGE_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_SOC_VOLTAGE_SECTION),
+        help        = STRING_TOKEN (STR_AOD_SOC_VOLTAGE_SECTION);
+    endif;
+
+    // Display Condition: AodComboFlag=1
+    suppressif NOT ideqval AOD_CONFIG.Header.AodComboFlag == 1;
+      goto SETUP_LN2_MODE_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_LN2_MODE_SECTION),
+        help        = STRING_TOKEN (STR_AOD_LN2_MODE_SECTION);
+    endif;
+
+    // Display Condition: AodComboFlag=2,MemOverClocking=1|AodComboFlag=1,MemOverClocking=1
+    suppressif NOT ideqval AOD_CONFIG.Header.MemOverClocking == 1
+            OR NOT ideqval AOD_CONFIG.Header.AodComboFlag == 2
+           AND NOT ideqval AOD_CONFIG.Header.AodComboFlag == 1;
+      goto SETUP_ONBOARD_VOLTAGE_CONTROL_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_ONBOARD_VOLTAGE_CONTROL_SECTION),
+        help        = STRING_TOKEN (STR_AOD_ONBOARD_VOLTAGE_CONTROL_SECTION);
+    endif;
+
+    // Display Condition: AodComboFlag=2,MemOverClocking=1|AodComboFlag=1,MemOverClocking=1
+    suppressif NOT ideqval AOD_CONFIG.Header.MemOverClocking == 1
+            OR NOT ideqval AOD_CONFIG.Header.AodComboFlag == 2
+           AND NOT ideqval AOD_CONFIG.Header.AodComboFlag == 1;
+      goto SETUP_VDDP_VOLTAGE_CONTROL_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_VDDP_VOLTAGE_CONTROL_SECTION),
+        help        = STRING_TOKEN (STR_AOD_VDDP_VOLTAGE_CONTROL_SECTION);
+    endif;
+
+    goto SETUP_LCLK_FREQUENCY_CONTROL_LABLE,
+      prompt      = STRING_TOKEN (STR_AOD_LCLK_FREQUENCY_CONTROL_SECTION),
+      help        = STRING_TOKEN (STR_AOD_LCLK_FREQUENCY_CONTROL_SECTION);
+
+    // Display Condition: AodComboFlag=1,MemOverClocking=1
+    suppressif NOT ideqval AOD_CONFIG.Header.AodComboFlag == 1
+            OR NOT ideqval AOD_CONFIG.Header.MemOverClocking == 1;
+      goto SETUP_VDD_MISC_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_VDD_MISC_SECTION),
+        help        = STRING_TOKEN (STR_AOD_VDD_MISC_SECTION);
+    endif;
+
+  endform;
+
+
+    //
+    // form - Manual CPU Overclocking
+    //
+    form
+
+      formid        = SETUP_MANUAL_CPU_OVERCLOCKING_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_MANUAL_CPU_OVERCLOCKING_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_MANUAL_CPU_OVERCLOCKING_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      // Display Condition: AodComboFlag=1,CpuOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.Header.AodComboFlag == 1
+              OR NOT ideqval AOD_CONFIG.Header.CpuOverClocking == 1;
+        // CPU Frequency
+        // Specifies a custom CPU core frequency. Should be combined with a custom CPU voltage. Power saving features for idle cores (e.g. cc6 sleep) remain active.
+        numeric
+          varid       = AOD_CONFIG.AodCpuPst0Freq,
+          prompt      = STRING_TOKEN (STR_AOD_CPU_FREQUENCY),
+          help        = STRING_TOKEN (STR_AOD_CPU_FREQUENCY_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 0,
+          maximum     = 0xffffffff,
+          step        = 0,
+          default     = 0,
+        endnumeric;
+      endif;
+
+      // Display Condition: AodComboFlag=1,CpuOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.Header.AodComboFlag == 1
+              OR NOT ideqval AOD_CONFIG.Header.CpuOverClocking == 1;
+        // CPU Voltage
+        // Specifies a custom CPU core voltage (mV). Should be combined with a custom CPU core frequency. Power saving features for idle cores (e.g. cc6 sleep) remain active.
+        numeric
+          varid       = AOD_CONFIG.AodCpuPst0Voltage,
+          prompt      = STRING_TOKEN (STR_AOD_CPU_VOLTAGE),
+          help        = STRING_TOKEN (STR_AOD_CPU_VOLTAGE_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 0,
+          maximum     = 0xAF0,
+          step        = 0,
+          default     = 0,
+        endnumeric;
+      endif;
+
+      goto SETUP_CPU_CORE_COUNT_CONTROL_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_CPU_CORE_COUNT_CONTROL_SECTION),
+        help        = STRING_TOKEN (STR_AOD_CPU_CORE_COUNT_CONTROL_SECTION);
+
+    endform;
+      //
+      // form - CPU Core Count Control
+      //
+      form
+
+        formid        = SETUP_CPU_CORE_COUNT_CONTROL_LABLE,
+
+        title         = STRING_TOKEN (STR_AOD_CPU_CORE_COUNT_CONTROL_SECTION);
+
+        subtitle text = STRING_TOKEN (STR_AOD_CPU_CORE_COUNT_CONTROL_SECTION);
+        subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+        label LABEL_CBS_AOD_DOWN_CORE_DYNAMIC_START;
+        // Down Core Dynamic
+        // No help string
+        label LABEL_CBS_AOD_DOWN_CORE_DYNAMIC_END;
+
+        // Display Condition: AodComboFlag=1
+        suppressif NOT ideqval AOD_CONFIG.Header.AodComboFlag == 1;
+          // SMT Control
+          // Can be used to disable symmetric multithreading. To re-enable SMT, a POWER CYCLE is needed after selecting the 'Auto' option. WARNING - S3 is NOT SUPPORTED on systems where SMT is disabled.
+          oneof
+            varid       = AOD_CONFIG.AodCpuSmtCtrl,
+            prompt      = STRING_TOKEN (STR_AOD_SMT_CONTROL),
+            help        = STRING_TOKEN (STR_AOD_SMT_CONTROL_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 1,    flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_DISABLE),             value = 0,    flags = 0 | RESET_REQUIRED;
+          endoneof;
+        endif;
+
+        // Display Condition: AodComboFlag=0xff
+        suppressif NOT ideqval AOD_CONFIG.Header.AodComboFlag == 0xff;
+          // Dummy option used for sync down core APCB when save
+          oneof
+            varid       = AOD_CONFIG.AodCpuDownCoreMode,
+            prompt      = STRING_TOKEN (STR_AOD_DOWN_CORE_MODE),
+            help        = STRING_TOKEN (STR_AOD_DOWN_CORE_MODE_HELP),
+            option text = STRING_TOKEN (STR_AOD_ENABLE),              value = 1,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_DISABLE),             value = 0,    flags = DEFAULT | RESET_REQUIRED;
+          endoneof;
+        endif;
+      endform;
+    //
+    // form - Manual iGPU Overclocking
+    //
+    form
+
+      formid        = SETUP_MANUAL_IGPU_OVERCLOCKING_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_MANUAL_IGPU_OVERCLOCKING_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_MANUAL_IGPU_OVERCLOCKING_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      // GFX Clock Frequency
+      // Specifies a custom GFX core frequency. Must be combined with a custom GFX voltage. Power saving features (like GFX Pstates) remain active
+      numeric
+        varid       = AOD_CONFIG.AodGfxOverclockingFreq,
+        prompt      = STRING_TOKEN (STR_AOD_GFX_CLOCK_FREQUENCY),
+        help        = STRING_TOKEN (STR_AOD_GFX_CLOCK_FREQUENCY_HELP),
+        flags       = RESET_REQUIRED,
+        minimum     = 0,
+        maximum     = 0xffffffff,
+        step        = 0,
+        default     = 0,
+      endnumeric;
+
+      // GFX Voltage
+      // Specifies a custom GFX core voltage (mV). Must be combined with a custom GFX frequency. GFX voltage is derived from SOC / uncore voltage rail. Power saving features (like GFX Pstates) remain active.
+      numeric
+        varid       = AOD_CONFIG.AodGfxOverclockingVoltage,
+        prompt      = STRING_TOKEN (STR_AOD_GFX_VOLTAGE),
+        help        = STRING_TOKEN (STR_AOD_GFX_VOLTAGE_HELP),
+        flags       = RESET_REQUIRED,
+        minimum     = 0,
+        maximum     = 0xAF0,
+        step        = 0,
+        default     = 0,
+      endnumeric;
+
+    endform;
+    //
+    // form - DDR and Infinity Fabric Frequency/Timings
+    //
+    form
+
+      formid        = SETUP_DDR_AND_INFINITY_FABRIC_FREQUENCY_TIMINGS_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_DDR_AND_INFINITY_FABRIC_FREQUENCY_TIMINGS_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_DDR_AND_INFINITY_FABRIC_FREQUENCY_TIMINGS_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      goto SETUP_DDR_OPTIONS_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_DDR_OPTIONS_SECTION),
+        help        = STRING_TOKEN (STR_AOD_DDR_OPTIONS_SECTION);
+
+      goto SETUP_INFINITY_FABRIC_FREQUENCY_AND_DIVIDERS_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_INFINITY_FABRIC_FREQUENCY_AND_DIVIDERS_SECTION),
+        help        = STRING_TOKEN (STR_AOD_INFINITY_FABRIC_FREQUENCY_AND_DIVIDERS_SECTION);
+
+    endform;
+      //
+      // form - DDR Options
+      //
+      form
+
+        formid        = SETUP_DDR_OPTIONS_LABLE,
+
+        title         = STRING_TOKEN (STR_AOD_DDR_OPTIONS_SECTION);
+
+        subtitle text = STRING_TOKEN (STR_AOD_DDR_OPTIONS_SECTION);
+        subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+        goto SETUP_DDR_TIMING_CONFIGURATION_LABLE,
+          prompt      = STRING_TOKEN (STR_AOD_DDR_TIMING_CONFIGURATION_SECTION),
+          help        = STRING_TOKEN (STR_AOD_DDR_TIMING_CONFIGURATION_SECTION);
+
+        goto SETUP_DDR_BUS_CONFIGURATION_LABLE,
+          prompt      = STRING_TOKEN (STR_AOD_DDR_BUS_CONFIGURATION_SECTION),
+          help        = STRING_TOKEN (STR_AOD_DDR_BUS_CONFIGURATION_SECTION);
+
+        goto SETUP_DDR_CONTROLLER_CONFIGURATION_LABLE,
+          prompt      = STRING_TOKEN (STR_AOD_DDR_CONTROLLER_CONFIGURATION_SECTION),
+          help        = STRING_TOKEN (STR_AOD_DDR_CONTROLLER_CONFIGURATION_SECTION);
+
+      endform;
+        //
+        // form - DDR Timing Configuration
+        //
+        form
+
+          formid        = SETUP_DDR_TIMING_CONFIGURATION_LABLE,
+
+          title         = STRING_TOKEN (STR_AOD_DDR_TIMING_CONFIGURATION_SECTION);
+
+          subtitle text = STRING_TOKEN (STR_AOD_DDR_TIMING_CONFIGURATION_SECTION);
+          subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+          label LABEL_CBS_AOD_RMP_START;
+          // Rmp
+          // No help string
+          label LABEL_CBS_AOD_RMP_END;
+
+
+          // Active Memory Timing Settings
+          oneof
+            varid       = AOD_CONFIG.AodMemTimingSettingDdr,
+            prompt      = STRING_TOKEN (STR_AOD_ACTIVE_MEMORY_TIMING_SETTINGS),
+            help        = STRING_TOKEN (STR_AOD_ACTIVE_MEMORY_TIMING_SETTINGS_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xFF, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_ENABLED),             value = 1,    flags = 0 | RESET_REQUIRED;
+          endoneof;
+
+          // Display Condition: AodMemTimingSettingDdr=Enabled
+          suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+            grayoutif ideqval AOD_CONFIG.AodExpo == 1;
+            // Memory Target Speed
+            // Specifies the memory target speed in MT/s. The valid input is 2000 MT/s, 2400MT/s, and range of 3200MT/s ~ 12000 MT/s(stepping of 200 MT/s).\nThe user input value will be rounded down to align with the stepping of 200MT/s.
+            numeric
+              varid       = AOD_CONFIG.AodMemTargetSpeedDdr,
+              questionid  = KEY_AOD_MEMORY_TARGET_SPEED,
+              prompt      = STRING_TOKEN (STR_AOD_MEMORY_TARGET_SPEED),
+              help        = STRING_TOKEN (STR_AOD_MEMORY_TARGET_SPEED_HELP),
+              flags       = RESET_REQUIRED | INTERACTIVE,
+              minimum     = 2000,
+              maximum     = 12000,
+              step        = 200,
+              default     = 3200,
+            endnumeric;
+            endif;
+          endif;
+
+          // Active Condition: AodMemTimingSettingDdr=Enabled
+          grayoutif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+            goto SETUP_DDR_SPD_TIMING_LABLE,
+              prompt      = STRING_TOKEN (STR_AOD_DDR_SPD_TIMING_SECTION),
+              help        = STRING_TOKEN (STR_AOD_DDR_SPD_TIMING_SECTION);
+          endif;
+
+          // Active Condition: AodMemTimingSettingDdr=Enabled
+          grayoutif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+            goto SETUP_DDR_NON_SPD_TIMING_LABLE,
+              prompt      = STRING_TOKEN (STR_AOD_DDR_NON_SPD_TIMING_SECTION),
+              help        = STRING_TOKEN (STR_AOD_DDR_NON_SPD_TIMING_SECTION);
+          endif;
+
+        endform;
+          //
+          // form - DDR SPD Timing
+          //
+          form
+
+            formid        = SETUP_DDR_SPD_TIMING_LABLE,
+
+            title         = STRING_TOKEN (STR_AOD_DDR_SPD_TIMING_SECTION);
+
+            subtitle text = STRING_TOKEN (STR_AOD_DDR_SPD_TIMING_SECTION);
+            subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Tcl Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTclCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TCL_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TCL_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTclCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTclCtrlDdr == 1;
+              // Tcl
+              // Specifies the CAS Latency. Valid values: 0x16 ~ 0x40, stepping of 2. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTclDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TCL),
+                help        = STRING_TOKEN (STR_AOD_TCL_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x16,
+                maximum     = 0x40,
+                step        = 2,
+                default     = 22,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Trcd Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrcdCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRCD_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRCD_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrcdCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrcdCtrlDdr == 1;
+              // Trcd
+              // Specifies the RAS# Active to CAS# Read Delay Time. Valid values: 0x8 ~ 0x3E, stepping of 2. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrcdDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRCD),
+                help        = STRING_TOKEN (STR_AOD_TRCD_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x8,
+                maximum     = 0x3E,
+                step        = 1,
+                default     = 8,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Trp Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrpCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRP_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRP_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrpCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrpCtrlDdr == 1;
+              // Trp
+              // Specifies Row Precharge Delay Time. Valid values: 0x8 ~ 0x3E, stepping of 2. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrpDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRP),
+                help        = STRING_TOKEN (STR_AOD_TRP_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x8,
+                maximum     = 0x3E,
+                step        = 1,
+                default     = 8,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Tras Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrasCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRAS_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRAS_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrasCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrasCtrlDdr == 1;
+              // Tras
+              // Specifies the Active to Precharge Delay Time. Valid values: 0x1E ~ 0x7E stepping of 2
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrasDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRAS),
+                help        = STRING_TOKEN (STR_AOD_TRAS_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1E,
+                maximum     = 0x7E,
+                step        = 1,
+                default     = 30,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Trc Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrcCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRC_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRC_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrcCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrcCtrlDdr == 1;
+              // Trc
+              // Specifies Active to Active/Refresh Delay Time. Valid values: 0x20 ~ 0xFF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrcDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRC),
+                help        = STRING_TOKEN (STR_AOD_TRC_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x20,
+                maximum     = 0xFF,
+                step        = 0,
+                default     = 32,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Twr Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTwrCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWR_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TWR_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTwrCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTwrCtrlDdr == 1;
+              // Twr
+              // Specifies the Minimum Write Recovery Time. Valid values: 0x30 ~ 0x60, stepping of 2. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTwrDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWR),
+                help        = STRING_TOKEN (STR_AOD_TWR_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x30,
+                maximum     = 0x60,
+                step        = 1,
+                default     = 48,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Trfc1 Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrfc1CtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRFC1_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRFC1_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrfc1CtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrfc1CtrlDdr == 1;
+              // Trfc1
+              // Specifies the Refresh Recovery Delay Time (tRFC1). Valid values 0x32 ~ 0xFFF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrfc1Ddr,
+                prompt      = STRING_TOKEN (STR_AOD_TRFC1),
+                help        = STRING_TOKEN (STR_AOD_TRFC1_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x32,
+                maximum     = 0xFFF,
+                step        = 0,
+                default     = 50,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Trfc2 Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrfc2CtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRFC2_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRFC2_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrfc2CtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrfc2CtrlDdr == 1;
+              // Trfc2
+              // Specifies the Refresh Recovery Delay Time (tRFC2).  Valid values: 0x32 ~ 0xFFF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrfc2Ddr,
+                prompt      = STRING_TOKEN (STR_AOD_TRFC2),
+                help        = STRING_TOKEN (STR_AOD_TRFC2_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x32,
+                maximum     = 0xFFF,
+                step        = 0,
+                default     = 50,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TrfcSb Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrfcSbCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRFCSB_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRFCSB_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrfcSbCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrfcSbCtrlDdr == 1;
+              // TrfcSb
+              // Specifies the Refresh Recovery Delay Time (tRFCSb). Valid values 0x32 ~ 0x7FF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrfcSbDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRFCSB),
+                help        = STRING_TOKEN (STR_AOD_TRFCSB_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x32,
+                maximum     = 0x7FF,
+                step        = 0,
+                default     = 50,
+              endnumeric;
+            endif;
+
+          endform;
+          //
+          // form - DDR Non-SPD Timing
+          //
+          form
+
+            formid        = SETUP_DDR_NON_SPD_TIMING_LABLE,
+
+            title         = STRING_TOKEN (STR_AOD_DDR_NON_SPD_TIMING_SECTION);
+
+            subtitle text = STRING_TOKEN (STR_AOD_DDR_NON_SPD_TIMING_SECTION);
+            subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Trtp Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrtpCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRTP_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRTP_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrtpCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrtpCtrlDdr == 1;
+              // Trtp
+              // Specifies the Read CAS# to Precharge command delay time. Valid values: 0x5 ~ 0x1F. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrtpDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRTP),
+                help        = STRING_TOKEN (STR_AOD_TRTP_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x5,
+                maximum     = 0x1F,
+                step        = 0,
+                default     = 9,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TrrdL Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrrdLCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRRDL_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRRDL_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrrdLCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrrdLCtrlDdr == 1;
+              // TrrdL
+              // Specifies the Activate to Activate Delay Time, same bank group(tRRD_L). Valid values: 0x4 ~ 0x20. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrrdLDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRRDL),
+                help        = STRING_TOKEN (STR_AOD_TRRDL_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x4,
+                maximum     = 0x20,
+                step        = 0,
+                default     = 4,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TrrdS Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrrdSCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRRDS_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRRDS_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrrdSCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrrdSCtrlDdr == 1;
+              // TrrdS
+              // Specifies the Activate to Activate Delay Time, defferent bank group(tRRD_S). Valid values: 0x4 ~ 0xC. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrrdSDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRRDS),
+                help        = STRING_TOKEN (STR_AOD_TRRDS_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x4,
+                maximum     = 0x14,
+                step        = 0,
+                default     = 4,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Tfaw Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTfawCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TFAW_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TFAW_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTfawCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTfawCtrlDdr == 1;
+              // Tfaw
+              // Specifies the Four Activate Window Time. Valid values: 0x6 ~ 0x36. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTfawDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TFAW),
+                help        = STRING_TOKEN (STR_AOD_TFAW_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x14,
+                maximum     = 0x50,
+                step        = 0,
+                default     = 0x1A,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TwtrL Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTwtrLCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWTRL_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TWTRL_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTwtrLCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTwtrLCtrlDdr == 1;
+              // TwtrL
+              // Specifies the Minimum Write to Read Time, same bank group. Valid values: 0x2 ~ 0xE. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTwtrLDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWTRL),
+                help        = STRING_TOKEN (STR_AOD_TWTRL_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x8,
+                maximum     = 0x30,
+                step        = 0,
+                default     = 8,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TwtrS Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTwtrSCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWTRS_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TWTRS_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTwtrSCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTwtrSCtrlDdr == 1;
+              // TwtrS
+              // Specifies the Minimum Write to Read Time, different bank group. Valid values: 0x2 ~ 0x10. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTwtrSDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWTRS),
+                help        = STRING_TOKEN (STR_AOD_TWTRS_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x2,
+                maximum     = 0x10,
+                step        = 0,
+                default     = 3,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TrdrdScL Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrdrdScLCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRDRDSCL_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRDRDSCL_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrdrdScLCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrdrdScLCtrlDdr == 1;
+              // TrdrdScL
+              // Specifies the CAS to CAS delay time, same bank group. Valid values: 0x1 ~ 0xF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrdrdScLDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRDRDSCL),
+                help        = STRING_TOKEN (STR_AOD_TRDRDSCL_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1,
+                maximum     = 0xF,
+                step        = 0,
+                default     = 1,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TrdrdSc Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrdrdScCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRDRDSC_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRDRDSC_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrdrdScCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrdrdScCtrlDdr == 1;
+              // TrdrdSc
+              // Specifies the Read to Read turnaround timing in the same chipselect. Valid values: 0x1 ~ 0xF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrdrdScDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRDRDSC),
+                help        = STRING_TOKEN (STR_AOD_TRDRDSC_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1,
+                maximum     = 0xF,
+                step        = 0,
+                default     = 1,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TrdrdSd Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrdrdSdCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRDRDSD_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRDRDSD_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrdrdSdCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrdrdSdCtrlDdr == 1;
+              // TrdrdSd
+              // Specifies the Read to Read turnaround timing in the same DIMM. Valid values: 0x1 ~ 0xF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrdrdSdDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRDRDSD),
+                help        = STRING_TOKEN (STR_AOD_TRDRDSD_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1,
+                maximum     = 0xF,
+                step        = 0,
+                default     = 3,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TrdrdDd Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrdrdDdCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRDRDDD_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRDRDDD_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrdrdDdCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrdrdDdCtrlDdr == 1;
+              // TrdrdDd
+              // Specifies the Read and Read turnaround timing in a different DIMM. Valid values: 0x1 ~ 0xF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrdrdDdDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRDRDDD),
+                help        = STRING_TOKEN (STR_AOD_TRDRDDD_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1,
+                maximum     = 0xF,
+                step        = 0,
+                default     = 3,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TwrwrScL Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTwrwrScLCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWRWRSCL_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TWRWRSCL_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTwrwrScLCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTwrwrScLCtrlDdr == 1;
+              // TwrwrScL
+              // Specifies the CAS to CAS Delay Time, same bank group. Valide values: 0x1 ~ 0x3F. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTwrwrScLDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWRWRSCL),
+                help        = STRING_TOKEN (STR_AOD_TWRWRSCL_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1,
+                maximum     = 0x3F,
+                step        = 0,
+                default     = 1,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TwrwrSc Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTwrwrScCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWRWRSC_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TWRWRSC_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTwrwrScCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTwrwrScCtrlDdr == 1;
+              // TwrwrSc
+              // Specifies the Write to Write turnaround timing in the same chipselect. Valid values: 0x1 ~ 0xF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTwrwrScDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWRWRSC),
+                help        = STRING_TOKEN (STR_AOD_TWRWRSC_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1,
+                maximum     = 0xF,
+                step        = 0,
+                default     = 1,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TwrwrSd Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTwrwrSdCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWRWRSD_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TWRWRSD_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTwrwrSdCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTwrwrSdCtrlDdr == 1;
+              // TwrwrSd
+              // Specifies the Write to Write turnaround timing in the same DIMM. Valid values: 0x1 ~ 0xF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTwrwrSdDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWRWRSD),
+                help        = STRING_TOKEN (STR_AOD_TWRWRSD_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1,
+                maximum     = 0xF,
+                step        = 0,
+                default     = 3,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // TwrwrDd Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTwrwrDdCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWRWRDD_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TWRWRDD_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTwrwrDdCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTwrwrDdCtrlDdr == 1;
+              // TwrwrDd
+              // Specifies the Write to Write turnaround timing in a different DIMM. Valid values: 0x1 ~ 0xF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTwrwrDdDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWRWRDD),
+                help        = STRING_TOKEN (STR_AOD_TWRWRDD_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1,
+                maximum     = 0xF,
+                step        = 0,
+                default     = 3,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Twrrd Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTwrrdCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWRRD_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TWRRD_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTwrrdCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTwrrdCtrlDdr == 1;
+              // Twrrd
+              // Specifies the Write to Read turnaround timing. Valid values: 0x1 ~ 0xF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTwrrdDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TWRRD),
+                help        = STRING_TOKEN (STR_AOD_TWRRD_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1,
+                maximum     = 0xF,
+                step        = 0,
+                default     = 5,
+              endnumeric;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1;
+              // Trdwr Ctrl
+              // Auto: Follow default setting, Manual: Manually specify
+              oneof
+                varid       = AOD_CONFIG.AodMemTimingTrdwrCtrlDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRDWR_CTRL),
+                help        = STRING_TOKEN (STR_AOD_TRDWR_CTRL_HELP),
+                option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+                option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+              endoneof;
+            endif;
+
+            // Display Condition: AodMemTimingSettingDdr=Enabled,AodMemTimingTrdwrCtrlDdr=Manual
+            suppressif NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+                    OR NOT ideqval AOD_CONFIG.AodMemTimingTrdwrCtrlDdr == 1;
+              // Trdwr
+              // Specifies the Read to Write Trunaround Timing. Valid value: 0x1 ~ 0xF. The value is in hex.
+              numeric
+                varid       = AOD_CONFIG.AodMemTimingTrdwrDdr,
+                prompt      = STRING_TOKEN (STR_AOD_TRDWR),
+                help        = STRING_TOKEN (STR_AOD_TRDWR_HELP),
+                flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+                minimum     = 0x1,
+                maximum     = 0x1F,
+                step        = 0,
+                default     = 5,
+              endnumeric;
+            endif;
+
+          endform;
+        //
+        // form - DDR Bus Configuration
+        //
+        form
+
+          formid        = SETUP_DDR_BUS_CONFIGURATION_LABLE,
+
+          title         = STRING_TOKEN (STR_AOD_DDR_BUS_CONFIGURATION_SECTION);
+
+          subtitle text = STRING_TOKEN (STR_AOD_DDR_BUS_CONFIGURATION_SECTION);
+          subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+          // Processor CA drive strengths
+          // Select the drive strength for all CA0-13 IOs
+          oneof
+            varid       = AOD_CONFIG.AodMemDrvStrenCaDdr,
+            prompt      = STRING_TOKEN (STR_AOD_PROCESSOR_CA_DRIVE_STRENGTHS),
+            help        = STRING_TOKEN (STR_AOD_PROCESSOR_CA_DRIVE_STRENGTHS_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xFF, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_120_DOT_0_OHM),       value = 120,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_60_DOT_0_OHM),        value = 60,   flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_40_DOT_0_OHM),        value = 40,   flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_30_DOT_0_OHM),        value = 30,   flags = 0 | RESET_REQUIRED;
+          endoneof;
+
+          // Processor DQ drive strengths
+          // Select the drive strength for all DQ and DMI IOs
+          oneof
+            varid       = AOD_CONFIG.AodMemDrvStrenDqDdr,
+            prompt      = STRING_TOKEN (STR_AOD_PROCESSOR_DQ_DRIVE_STRENGTHS),
+            help        = STRING_TOKEN (STR_AOD_PROCESSOR_DQ_DRIVE_STRENGTHS_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xFF, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_HIGH_IMPEDANCE),      value = 0x0,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_240_OHM),             value = 0x2,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_120_OHM),             value = 0x4,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_80_OHM),              value = 0x6,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_60_OHM),              value = 0xC,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_48_OHM),              value = 0xE,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_40_OHM),              value = 0x1C, flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_34_DOT_3_OHM),        value = 0x1E, flags = 0 | RESET_REQUIRED;
+          endoneof;
+
+          // Processor ODT impedance
+          // Specifies the Processor ODT
+          oneof
+            varid       = AOD_CONFIG.AodMemDataBusCfgProcOdtDdr,
+            prompt      = STRING_TOKEN (STR_AOD_PROCESSOR_ODT_IMPEDANCE),
+            help        = STRING_TOKEN (STR_AOD_PROCESSOR_ODT_IMPEDANCE_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xFF, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_HIGH_IMPEDANCE),      value = 0,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_480_OHM),             value = 1,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_240_OHM),             value = 2,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_160_OHM),             value = 3,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_120_OHM),             value = 4,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_96_OHM),              value = 5,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_80_OHM),              value = 6,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_68_OHM),              value = 7,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_60_OHM),              value = 0xc,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_53_OHM),              value = 0xd,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_48_OHM),              value = 0xe,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_43_OHM),              value = 0xf,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_40_OHM),              value = 0x1c, flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_36_OHM),              value = 0x1d, flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_34_OHM),              value = 0x1e, flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_32_OHM),              value = 0x1f, flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_30_OHM),              value = 0x3c, flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_28_DOT_2_OHM),        value = 0x3d, flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_26_DOT_7_OHM),        value = 0x3e, flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_25_DOT_3_OHM),        value = 0x3f, flags = 0 | RESET_REQUIRED;
+          endoneof;
+
+          // Dram DQ drive strengths
+          // Selects the Dram Pull-up and Pull-Down Output Driver Impedance for all DQ and DMI IOs
+          oneof
+            varid       = AOD_CONFIG.AodMemDramDrvStrenDqDdr,
+            prompt      = STRING_TOKEN (STR_AOD_DRAM_DQ_DRIVE_STRENGTHS),
+            help        = STRING_TOKEN (STR_AOD_DRAM_DQ_DRIVE_STRENGTHS_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xFF, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_48_OHM),              value = 2,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_40_OHM),              value = 1,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_34_OHM),              value = 0,    flags = 0 | RESET_REQUIRED;
+          endoneof;
+
+          // Dram ODT impedance RTT_NOM_WR
+          // Select the DRAMs On-die Termination impedance for RTT_NOM_WR
+          oneof
+            varid       = AOD_CONFIG.AodMemDramOdtImpedRttNomWrDdr,
+            prompt      = STRING_TOKEN (STR_AOD_DRAM_ODT_IMPEDANCE_RTT_NOM_WR),
+            help        = STRING_TOKEN (STR_AOD_DRAM_ODT_IMPEDANCE_RTT_NOM_WR_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xFF, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RTT_OFF),             value = 0,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_240),             value = 1,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_2_120),           value = 0x2,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_3_80),            value = 0x3,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_4_60),            value = 0x4,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_5_48),            value = 0x5,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_6_40),            value = 0x6,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_7_34),            value = 0x7,  flags = 0 | RESET_REQUIRED;
+          endoneof;
+
+          // Dram ODT impedance RTT_NOM_RD
+          // Specifies the RTT_NOM_RD
+          oneof
+            varid       = AOD_CONFIG.AodMemDramOdtImpedRttNomRdDdr,
+            prompt      = STRING_TOKEN (STR_AOD_DRAM_ODT_IMPEDANCE_RTT_NOM_RD),
+            help        = STRING_TOKEN (STR_AOD_DRAM_ODT_IMPEDANCE_RTT_NOM_RD_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xff, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RTT_OFF),             value = 0x0,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_240),             value = 0x1,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_2_120),           value = 0x2,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_3_80),            value = 0x3,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_4_60),            value = 0x4,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_5_48),            value = 0x5,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_6_40),            value = 0x6,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_7_34),            value = 0x7,  flags = 0 | RESET_REQUIRED;
+          endoneof;
+
+          // Dram ODT impedance RTT_WR
+          // Select the DRAMs On-die Termination impedance for RTT_WR
+          oneof
+            varid       = AOD_CONFIG.AodMemDramOdtImpedRttWrDdr,
+            prompt      = STRING_TOKEN (STR_AOD_DRAM_ODT_IMPEDANCE_RTT_WR),
+            help        = STRING_TOKEN (STR_AOD_DRAM_ODT_IMPEDANCE_RTT_WR_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xFF, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RTT_OFF),             value = 0x0,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_240),             value = 0x1,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_2_120),           value = 0x2,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_3_80),            value = 0x3,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_4_60),            value = 0x4,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_5_48),            value = 0x5,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_6_40),            value = 0x6,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_7_34),            value = 0x7,  flags = 0 | RESET_REQUIRED;
+          endoneof;
+
+          // Dram ODT impedance RTT_PARK
+          // Select the DRAMs On-die Termination impedance for RTT_PARK
+          oneof
+            varid       = AOD_CONFIG.AodMemDramOdtImpedRttParkDdr,
+            prompt      = STRING_TOKEN (STR_AOD_DRAM_ODT_IMPEDANCE_RTT_PARK),
+            help        = STRING_TOKEN (STR_AOD_DRAM_ODT_IMPEDANCE_RTT_PARK_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xff, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RTT_OFF),             value = 0,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_240),             value = 1,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_2_120),           value = 2,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_3_80),            value = 3,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_4_60),            value = 4,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_5_48),            value = 0x5,  flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_6_40),            value = 6,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_7_34),            value = 7,    flags = 0 | RESET_REQUIRED;
+          endoneof;
+
+          // Dram ODT impedance DQS_RTT_PARK
+          // Specifies the RTT_PARK_DQS
+          oneof
+            varid       = AOD_CONFIG.AodMemDramOdtImpedRttParkDqsDdr,
+            prompt      = STRING_TOKEN (STR_AOD_DRAM_ODT_IMPEDANCE_DQS_RTT_PARK),
+            help        = STRING_TOKEN (STR_AOD_DRAM_ODT_IMPEDANCE_DQS_RTT_PARK_HELP),
+            option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xff, flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RTT_OFF),             value = 0,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_240),             value = 1,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_2_120),           value = 2,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_3_80),            value = 3,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_4_60),            value = 4,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_5_48),            value = 5,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_6_40),            value = 6,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_RZQ_7_34),            value = 7,    flags = 0 | RESET_REQUIRED;
+          endoneof;
+
+          endform;
+        //
+        // form - DDR Controller Configuration
+        //
+        form
+
+          formid        = SETUP_DDR_CONTROLLER_CONFIGURATION_LABLE,
+
+          title         = STRING_TOKEN (STR_AOD_DDR_CONTROLLER_CONFIGURATION_SECTION);
+
+          subtitle text = STRING_TOKEN (STR_AOD_DDR_CONTROLLER_CONFIGURATION_SECTION);
+          subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+          goto SETUP_DDR_POWER_OPTIONS_LABLE,
+            prompt      = STRING_TOKEN (STR_AOD_DDR_POWER_OPTIONS_SECTION),
+            help        = STRING_TOKEN (STR_AOD_DDR_POWER_OPTIONS_SECTION);
+
+        endform;
+          //
+          // form - DDR Power Options
+          //
+          form
+
+            formid        = SETUP_DDR_POWER_OPTIONS_LABLE,
+
+            title         = STRING_TOKEN (STR_AOD_DDR_POWER_OPTIONS_SECTION);
+
+            subtitle text = STRING_TOKEN (STR_AOD_DDR_POWER_OPTIONS_SECTION);
+            subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+            // Power Down Enable
+            // Enable or disable DDR power down mode
+            oneof
+              varid       = AOD_CONFIG.AodMemCtrllerPowerDownEnDdr,
+              prompt      = STRING_TOKEN (STR_AOD_POWER_DOWN_ENABLE),
+              help        = STRING_TOKEN (STR_AOD_POWER_DOWN_ENABLE_HELP),
+              option text = STRING_TOKEN (STR_AOD_DISABLED),            value = 0,    flags = 0 | RESET_REQUIRED;
+              option text = STRING_TOKEN (STR_AOD_ENABLED),             value = 1,    flags = 0 | RESET_REQUIRED;
+              option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xFF, flags = DEFAULT | RESET_REQUIRED;
+            endoneof;
+
+          endform;
+      //
+      // form - Infinity Fabric Frequency and Dividers
+      //
+      form
+
+        formid        = SETUP_INFINITY_FABRIC_FREQUENCY_AND_DIVIDERS_LABLE,
+
+        title         = STRING_TOKEN (STR_AOD_INFINITY_FABRIC_FREQUENCY_AND_DIVIDERS_SECTION);
+
+        subtitle text = STRING_TOKEN (STR_AOD_INFINITY_FABRIC_FREQUENCY_AND_DIVIDERS_SECTION);
+        subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+        // Infinity Fabric Frequency and Dividers
+        // Set Infinity Fabric frequency (FCLK) Auto: FCLK = MCLK. Manual: FCLK must be less than MCLK for best performance in most cases. Latency penalties are incurred if FCLK and MCLK are mismatched, but sufficiently high MCLK can negate or overcome this penalty.
+        oneof
+          varid       = AOD_CONFIG.AodFclkFrequency,
+          prompt      = STRING_TOKEN (STR_AOD_INFINITY_FABRIC_FREQUENCY_AND_DIVIDERS_1),
+          help        = STRING_TOKEN (STR_AOD_INFINITY_FABRIC_FREQUENCY_AND_DIVIDERS_HELP),
+          option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xFFFF, flags = DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_800_MHZ),             value = 800,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_933_MHZ),             value = 933,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1067_MHZ),            value = 1067, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1200_MHZ),            value = 1200, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1333_MHZ),            value = 1333, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1367_MHZ),            value = 1367, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1400_MHZ),            value = 1400, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1433_MHZ),            value = 1433, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1467_MHZ),            value = 1467, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1500_MHZ),            value = 1500, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1533_MHZ),            value = 1533, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1567_MHZ),            value = 1567, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1600_MHZ),            value = 1600, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1633_MHZ),            value = 1633, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1667_MHZ),            value = 1667, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1700_MHZ),            value = 1700, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1733_MHZ),            value = 1733, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1767_MHZ),            value = 1767, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1800_MHZ),            value = 1800, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1833_MHZ),            value = 1833, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1867_MHZ),            value = 1867, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1900_MHZ),            value = 1900, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1933_MHZ),            value = 1933, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_1967_MHZ),            value = 1967, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2000_MHZ),            value = 2000, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2033_MHZ),            value = 2033, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2067_MHZ),            value = 2067, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2100_MHZ),            value = 2100, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2133_MHZ),            value = 2133, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2167_MHZ),            value = 2167, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2200_MHZ),            value = 2200, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2233_MHZ),            value = 2233, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2267_MHZ),            value = 2267, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2300_MHZ),            value = 2300, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2333_MHZ),            value = 2333, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2367_MHZ),            value = 2367, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2400_MHZ),            value = 2400, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2433_MHZ),            value = 2433, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2467_MHZ),            value = 2467, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2500_MHZ),            value = 2500, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2550_MHZ),            value = 2550, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2600_MHZ),            value = 2600, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2650_MHZ),            value = 2650, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2700_MHZ),            value = 2700, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2750_MHZ),            value = 2750, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2800_MHZ),            value = 2800, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2850_MHZ),            value = 2850, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2900_MHZ),            value = 2900, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2950_MHZ),            value = 2950, flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_3000_MHZ),            value = 3000, flags = 0 | RESET_REQUIRED;
+        endoneof;
+
+        // UCLK DIV1 MODE
+        // Set UCLK DIV mode
+        oneof
+          varid       = AOD_CONFIG.AodUclkDiv1Mode,
+          prompt      = STRING_TOKEN (STR_AOD_UCLK_DIV1_MODE),
+          help        = STRING_TOKEN (STR_AOD_UCLK_DIV1_MODE_HELP),
+          option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xff, flags = DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_UCLK_MEMCLK),         value = 1,    flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_UCLK_MEMCLK_2),       value = 0,    flags = 0 | RESET_REQUIRED;
+        endoneof;
+      endform;
+    //
+    // form - Precision Boost Overdrive
+    //
+    form
+
+      formid        = SETUP_PRECISION_BOOST_OVERDRIVE_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_PRECISION_BOOST_OVERDRIVE_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_PRECISION_BOOST_OVERDRIVE_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      // Precision Boost Overdrive
+      // Precision Boost Overdrive:\n  Enabled: Allows Processor to run beyond defined values for PPT, VDD_CPU EDC, VDD_CPU TDC, VDD_SOC EDC, VDD_SOC TDC to the limits of the board, and allows it to boost at higher voltages for longer durations than default operation.\n
+      oneof
+        varid       = AOD_CONFIG.AodNbioPBOCtl,
+        prompt      = STRING_TOKEN (STR_AOD_PRECISION_BOOST_OVERDRIVE),
+        help        = STRING_TOKEN (STR_AOD_PRECISION_BOOST_OVERDRIVE_HELP),
+        option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xff, flags = DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_DISABLE),             value = 0,    flags = 0 | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_ENABLED),             value = 1,    flags = 0 | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_ADVANCED),            value = 2,    flags = 0 | RESET_REQUIRED;
+      endoneof;
+
+      // Display Condition: AodNbioPBOCtl=Advanced
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2;
+        // PBO Limits
+        // Default: Loads AMD default socket power (PPT), electrically-limited VRM current (EDC), and thermally-limited VRM current (TDC) limits. Motherboard: Allows the processor to run according to increased PPT, EDC, and TDC limits defined by your motherboard. Manual: Allows the processor to ignore AMD default limits for PPT, EDC, and TDC and instead use manual values (up to the maximum capabilities of the of the motherboard).
+        oneof
+          varid       = AOD_CONFIG.AodNbioPBOAdvancedCtrl,
+          prompt      = STRING_TOKEN (STR_AOD_PBO_LIMITS),
+          help        = STRING_TOKEN (STR_AOD_PBO_LIMITS_HELP),
+          option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xff, flags = DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_DISABLE),             value = 0,    flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_MOTHERBOARD),         value = 1,    flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 2,    flags = 0 | RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,AodNbioPBOAdvancedCtrl=Manual
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.AodNbioPBOAdvancedCtrl == 2;
+        // PPT Limit [mW]
+        // Adjust total CPU socket power delivery capability. Adjustable up to the limit supported by your motherboard.
+        numeric
+          varid       = AOD_CONFIG.AodNbioSocketPPTLimit,
+          prompt      = STRING_TOKEN (STR_AOD_PPT_LIMIT_MW),
+          help        = STRING_TOKEN (STR_AOD_PPT_LIMIT_MW_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 0,
+          maximum     = 0xffffffff,
+          step        = 0,
+          default     = 0,
+        endnumeric;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,AodNbioPBOAdvancedCtrl=Manual
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.AodNbioPBOAdvancedCtrl == 2;
+        // TDC Limit [mA]
+        // Adjust peak current from your motherboard's CPU core VRM phases in thermally-limited scenarios. Adjustable up to the limit supported by your motherboard.
+        numeric
+          varid       = AOD_CONFIG.AodNbioTDCVDDLimit,
+          prompt      = STRING_TOKEN (STR_AOD_TDC_LIMIT_MA),
+          help        = STRING_TOKEN (STR_AOD_TDC_LIMIT_MA_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 0,
+          maximum     = 0xffffffff,
+          step        = 0,
+          default     = 0,
+        endnumeric;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,AodNbioPBOAdvancedCtrl=Manual
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.AodNbioPBOAdvancedCtrl == 2;
+        // EDC Limit [mA]
+        // Adjust peak current from your motherboard CPU core VRM phases in electrically-limited scenarios. Adjustable up to the limit supported by your motherboard.
+        numeric
+          varid       = AOD_CONFIG.AodNbioEDCVDDLimit,
+          prompt      = STRING_TOKEN (STR_AOD_EDC_LIMIT_MA),
+          help        = STRING_TOKEN (STR_AOD_EDC_LIMIT_MA_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 0,
+          maximum     = 0xffffffff,
+          step        = 0,
+          default     = 0,
+        endnumeric;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,AodNbioPBOAdvancedCtrl=Manual
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.AodNbioPBOAdvancedCtrl == 2;
+        // SOC TDC Limit [mA]
+        // Adjust peak current from your motherboard SoC/Uncore VRM phases in thermally-limited scenarios. Adjustable up to the limit supported by your motherboard.
+        numeric
+          varid       = AOD_CONFIG.AodNbioTDCSOCLimit,
+          prompt      = STRING_TOKEN (STR_AOD_SOC_TDC_LIMIT_MA),
+          help        = STRING_TOKEN (STR_AOD_SOC_TDC_LIMIT_MA_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 0,
+          maximum     = 0xffffffff,
+          step        = 0,
+          default     = 0,
+        endnumeric;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,AodNbioPBOAdvancedCtrl=Manual
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.AodNbioPBOAdvancedCtrl == 2;
+        // SOC EDC Limit [mA]
+        // Adjust peak current from your motherboard's SoC/uncore VRM phases in electrically-limited scenarios. Adjustable up to the limit supported by your motherboard.
+        numeric
+          varid       = AOD_CONFIG.AodNbioEDCSOCLimit,
+          prompt      = STRING_TOKEN (STR_AOD_SOC_EDC_LIMIT_MA),
+          help        = STRING_TOKEN (STR_AOD_SOC_EDC_LIMIT_MA_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 0,
+          maximum     = 0xffffffff,
+          step        = 0,
+          default     = 0,
+        endnumeric;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,PBOAdvancedOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.Header.PBOAdvancedOverClocking == 1;
+        // Precision Boost Overdrive Scalar Ctrl
+        oneof
+          varid       = AOD_CONFIG.AodNbioPBOScalarCtl,
+          prompt      = STRING_TOKEN (STR_AOD_PRECISION_BOOST_OVERDRIVE_SCALAR_CTRL),
+          help        = STRING_TOKEN (STR_AOD_PRECISION_BOOST_OVERDRIVE_SCALAR_CTRL_HELP),
+          option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xff, flags = DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,AodNbioPBOScalarCtl=Manual,PBOAdvancedOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.AodNbioPBOScalarCtl == 1
+              OR NOT ideqval AOD_CONFIG.Header.PBOAdvancedOverClocking == 1;
+        // Precision Boost Overdrive Scalar
+        // Overrides the AMD default silicon health management to potentially achieve higher sustained frequencies under CPU load.
+        oneof
+          varid       = AOD_CONFIG.AodNbioPBOScalar,
+          prompt      = STRING_TOKEN (STR_AOD_PRECISION_BOOST_OVERDRIVE_SCALAR),
+          help        = STRING_TOKEN (STR_AOD_PRECISION_BOOST_OVERDRIVE_SCALAR_HELP),
+          option text = STRING_TOKEN (STR_AOD_1X),                  value = 100,  flags = DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_2X),                  value = 200,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_3X),                  value = 300,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_4X),                  value = 400,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_5X),                  value = 500,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_6X),                  value = 600,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_7X),                  value = 700,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_8X),                  value = 800,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_9X),                  value = 900,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_10X),                 value = 1000, flags = 0 | RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,PBOAdvancedOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.Header.PBOAdvancedOverClocking == 1;
+        goto SETUP_CURVE_OPTIMIZER_LABLE,
+          prompt      = STRING_TOKEN (STR_AOD_CURVE_OPTIMIZER_SECTION),
+          help        = STRING_TOKEN (STR_AOD_CURVE_OPTIMIZER_SECTION);
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,PBOAdvancedOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.Header.PBOAdvancedOverClocking == 1;
+        goto SETUP_GFX_CURVE_OPTIMIZER_LABLE,
+          prompt      = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER_SECTION),
+          help        = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER_SECTION);
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,PBOAdvancedOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.Header.PBOAdvancedOverClocking == 1;
+        // CPU Boost Clock Override
+        // Increases (Positive) or Decreases (Negative) the maximum CPU frequency that may be automatically achieved by the CPU Boost Algorithm
+        oneof
+          varid       = AOD_CONFIG.AodCpuBoostClock,
+          prompt      = STRING_TOKEN (STR_AOD_CPU_BOOST_CLOCK_OVERRIDE),
+          help        = STRING_TOKEN (STR_AOD_CPU_BOOST_CLOCK_OVERRIDE_HELP),
+          option text = STRING_TOKEN (STR_AOD_DISABLED),            value = 0,    flags = DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_ENABLED_POSITIVE),    value = 1,    flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_ENABLED_NEGATIVE),    value = 2,    flags = 0 | RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,AodCpuBoostClock=Enabled (Positive),PBOAdvancedOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.AodCpuBoostClock == 1
+              OR NOT ideqval AOD_CONFIG.Header.PBOAdvancedOverClocking == 1;
+        // Max CPU Boost Clock Override(+)
+        // Increases the maximum CPU frequency that may be automatically achieved by the Precision Boost 2 algorithm.
+        numeric
+          varid       = AOD_CONFIG.AodFMaxFreqIncrease,
+          prompt      = STRING_TOKEN (STR_AOD_MAX_CPU_BOOST_CLOCK_OVERRIDE),
+          help        = STRING_TOKEN (STR_AOD_MAX_CPU_BOOST_CLOCK_OVERRIDE_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 25,
+          maximum     = 200,
+          step        = 25,
+          default     = 25,
+        endnumeric;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,AodCpuBoostClock=Enabled (Negative),PBOAdvancedOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.AodCpuBoostClock == 2
+              OR NOT ideqval AOD_CONFIG.Header.PBOAdvancedOverClocking == 1;
+        // Max CPU Boost Clock Override(-)
+        // Decreases the maximum CPU frequency that may be automatically achieved by the Precision Boost 2 algorithm.
+        numeric
+          varid       = AOD_CONFIG.AodFMaxFreqDecrease,
+          prompt      = STRING_TOKEN (STR_AOD_MAX_CPU_BOOST_CLOCK_OVERRIDE_1),
+          help        = STRING_TOKEN (STR_AOD_MAX_CPU_BOOST_CLOCK_OVERRIDE_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 25,
+          maximum     = 1000,
+          step        = 25,
+          default     = 25,
+        endnumeric;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,PBOAdvancedOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.Header.PBOAdvancedOverClocking == 1;
+        // GPU Boost Clock Override
+        // Increases the maximum GPU frequency that may be automatically achieved by the GPU boost algorithm
+        oneof
+          varid       = AOD_CONFIG.AodGpuBoostClock,
+          prompt      = STRING_TOKEN (STR_AOD_GPU_BOOST_CLOCK_OVERRIDE),
+          help        = STRING_TOKEN (STR_AOD_GPU_BOOST_CLOCK_OVERRIDE_HELP),
+          option text = STRING_TOKEN (STR_AOD_ENABLED),             value = 1,    flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_DISABLED),            value = 0,    flags = DEFAULT | RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,AodGpuBoostClock=Enabled,PBOAdvancedOverClocking=1
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.AodGpuBoostClock == 1
+              OR NOT ideqval AOD_CONFIG.Header.PBOAdvancedOverClocking == 1;
+        // Max GPU Boost Clock Override
+        // Increases the maximum GPU frequency that may be automatically achieved by the GPU boost algorithm.
+        oneof
+          varid       = AOD_CONFIG.AodGfxFMaxFreq,
+          prompt      = STRING_TOKEN (STR_AOD_MAX_GPU_BOOST_CLOCK_OVERRIDE),
+          help        = STRING_TOKEN (STR_AOD_MAX_GPU_BOOST_CLOCK_OVERRIDE_HELP),
+          option text = STRING_TOKEN (STR_AOD_0_MHZ),               value = 0,    flags = DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_25_MHZ),              value = 25,   flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_50_MHZ),              value = 50,   flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_75_MHZ),              value = 75,   flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_100_MHZ),             value = 100,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_125_MHZ),             value = 125,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_150_MHZ),             value = 150,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_175_MHZ),             value = 175,  flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_200_MHZ),             value = 200,  flags = 0 | RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2;
+        // Platform Thermal Throttle Ctrl
+        // Allows the user to decrease the maximum allowed processor temperature (celsius).
+        oneof
+          varid       = AOD_CONFIG.AodNbiocHTCCtl,
+          prompt      = STRING_TOKEN (STR_AOD_PLATFORM_THERMAL_THROTTLE_CTRL),
+          help        = STRING_TOKEN (STR_AOD_PLATFORM_THERMAL_THROTTLE_CTRL_HELP),
+          option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      // Display Condition: AodNbioPBOCtl=Advanced,AodNbiocHTCCtl=Manual
+      suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+              OR NOT ideqval AOD_CONFIG.AodNbiocHTCCtl == 1;
+        // Platform Thermal Throttle Limit
+        // Allows the user to decrease the maximum allowed processor temperature (celsius).
+        numeric
+          varid       = AOD_CONFIG.AodNbiocHTC,
+          prompt      = STRING_TOKEN (STR_AOD_PLATFORM_THERMAL_THROTTLE_LIMIT),
+          help        = STRING_TOKEN (STR_AOD_PLATFORM_THERMAL_THROTTLE_LIMIT_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 0,
+          maximum     = 0xff,
+          step        = 0,
+          default     = 0,
+        endnumeric;
+      endif;
+
+    endform;
+      //
+      // form - Curve Optimizer
+      //
+      form
+
+        formid        = SETUP_CURVE_OPTIMIZER_LABLE,
+
+        title         = STRING_TOKEN (STR_AOD_CURVE_OPTIMIZER_SECTION);
+
+        subtitle text = STRING_TOKEN (STR_AOD_CURVE_OPTIMIZER_SECTION);
+        subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+        // Display Condition: AodNbioPBOCtl=Advanced
+        suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2;
+          // Curve Optimizer
+          // Allows the user to shift the Voltage / Frequency (AVFS) curve to include higher voltages (positive values) or lower voltages (negative values). The larger the value entered the larger the magnitude of the voltage shift
+          oneof
+            varid       = AOD_CONFIG.AodCurveOptimizer,
+            prompt      = STRING_TOKEN (STR_AOD_CURVE_OPTIMIZER_1),
+            help        = STRING_TOKEN (STR_AOD_CURVE_OPTIMIZER_HELP),
+            option text = STRING_TOKEN (STR_AOD_DISABLE),             value = 0,    flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_ALL_CORES),           value = 1,    flags = 0 | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_PER_CORE),            value = 2,    flags = 0 | RESET_REQUIRED;
+          endoneof;
+        endif;
+
+        // Display Condition: AodNbioPBOCtl=Advanced,AodCurveOptimizer=All Cores
+        suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+                OR NOT ideqval AOD_CONFIG.AodCurveOptimizer == 1;
+          // All Core Curve Optimizer Sign
+          // Determines the direction of the curve shift on all cores. Positive shifts the curve up to use higher voltages. Negative shifts the curve down to use lower voltages
+          oneof
+            varid       = AOD_CONFIG.AodAllCoreCurveOptimizerSign,
+            prompt      = STRING_TOKEN (STR_AOD_ALL_CORE_CURVE_OPTIMIZER_SIGN),
+            help        = STRING_TOKEN (STR_AOD_ALL_CORE_CURVE_OPTIMIZER_SIGN_HELP),
+            option text = STRING_TOKEN (STR_AOD_POSITIVE),            value = 0,    flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_NEGATIVE),            value = 1,    flags = 0 | RESET_REQUIRED;
+          endoneof;
+        endif;
+
+        // Display Condition: AodNbioPBOCtl=Advanced,AodCurveOptimizer=All Cores
+        suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+                OR NOT ideqval AOD_CONFIG.AodCurveOptimizer == 1;
+          // All Core Curve Optimizer Magnitude
+          // Determines the magnitude of the curve shift to be made (entered in whole numbers) the larger the value entered the larger the magnitude of the shift
+          numeric
+            varid       = AOD_CONFIG.AodAllCoreCurveOptimizerMagnitude,
+            prompt      = STRING_TOKEN (STR_AOD_ALL_CORE_CURVE_OPTIMIZER_MAGNITUDE),
+            help        = STRING_TOKEN (STR_AOD_ALL_CORE_CURVE_OPTIMIZER_MAGNITUDE_HELP),
+            flags       = RESET_REQUIRED,
+            minimum     = 0,
+            maximum     = 0x1E,
+            step        = 0,
+            default     = 0,
+          endnumeric;
+        endif;
+
+        // Display Condition: AodNbioPBOCtl=Advanced,AodCurveOptimizer=Per Core
+        suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+                OR NOT ideqval AOD_CONFIG.AodCurveOptimizer == 2;
+          label LABEL_CBS_AOD_PER_CORE_CURVE_OPTIMIZER_DYNAMIC_START;
+          // Per Core Curve Optimizer Dynamic
+          // No help string
+          label LABEL_CBS_AOD_PER_CORE_CURVE_OPTIMIZER_DYNAMIC_END;
+        endif;
+
+      endform;
+      //
+      // form - GFX Curve Optimizer
+      //
+      form
+
+        formid        = SETUP_GFX_CURVE_OPTIMIZER_LABLE,
+
+        title         = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER_SECTION);
+
+        subtitle text = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER_SECTION);
+        subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+        // Display Condition: AodNbioPBOCtl=Advanced
+        suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2;
+          // GFX Curve Optimizer
+          // Allows the user to shift the GFX Voltage / Frequency (AVFS) curve to include higher voltages (positive values) or lower voltages (negative values). The larger the value entered the larger the magnitude of the voltage shift.
+          oneof
+            varid       = AOD_CONFIG.AodGfxCurveOptimizer,
+            prompt      = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER_1),
+            help        = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER_HELP),
+            option text = STRING_TOKEN (STR_AOD_DISABLE),             value = 0,    flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER), value = 1,    flags = 0 | RESET_REQUIRED;
+          endoneof;
+        endif;
+
+        // Display Condition: AodNbioPBOCtl=Advanced,AodGfxCurveOptimizer=GFX Curve Optimizer
+        suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+                OR NOT ideqval AOD_CONFIG.AodGfxCurveOptimizer == 1;
+          // GFX Curve Optimizer Sign
+          // Determines the direction of the curve shift for GFX. Positive shifts the curve up to use higher voltages. Negative shifts the curve down to use lower voltages
+          oneof
+            varid       = AOD_CONFIG.AodGfxCurveOptimizerSign,
+            prompt      = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER_SIGN),
+            help        = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER_SIGN_HELP),
+            option text = STRING_TOKEN (STR_AOD_POSITIVE),            value = 0,    flags = DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_AOD_NEGATIVE),            value = 1,    flags = 0 | RESET_REQUIRED;
+          endoneof;
+        endif;
+
+        // Display Condition: AodNbioPBOCtl=Advanced,AodGfxCurveOptimizer=GFX Curve Optimizer
+        suppressif NOT ideqval AOD_CONFIG.AodNbioPBOCtl == 2
+                OR NOT ideqval AOD_CONFIG.AodGfxCurveOptimizer == 1;
+          // GFX Curve Optimizer Magnitude
+          // Determines the magnitude of the GFX curve shift to be made (entered in whole numbers) the larger the value entered the larger the magnitude of the shift.Field Defaults to 0 and is user enterable in whole integer numbers. Value entered, combined with the sign above, is the used to send the SMU an GFX Curve Optimizer offset messages.
+          numeric
+            varid       = AOD_CONFIG.AodGfxCurveOptimizerMagnitude,
+            prompt      = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER_MAGNITUDE),
+            help        = STRING_TOKEN (STR_AOD_GFX_CURVE_OPTIMIZER_MAGNITUDE_HELP),
+            flags       = RESET_REQUIRED,
+            minimum     = 0,
+            maximum     = 0x1E,
+            step        = 0,
+            default     = 0,
+          endnumeric;
+        endif;
+
+      endform;
+    //
+    // form - SoC/Uncore OC Mode
+    //
+    form
+
+      formid        = SETUP_SOC_UNCORE_OC_MODE_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_SOC_UNCORE_OC_MODE_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_SOC_UNCORE_OC_MODE_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      // SoC/Uncore OC Mode
+      // Forces CPU SoC/uncore components (e.g. Infinity Fabric, memory, and integrated graphics) to run at their maximum specified frequency at all times. May improve performance at the expense of idle power savings
+      oneof
+        varid       = AOD_CONFIG.AodGnbFclkOcFlag,
+        prompt      = STRING_TOKEN (STR_AOD_SOC_UNCORE_OC_MODE),
+        help        = STRING_TOKEN (STR_AOD_SOC_UNCORE_OC_MODE_HELP),
+        option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xff, flags = DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_ENABLED),             value = 1,    flags = 0 | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_DISABLED),            value = 0,    flags = 0 | RESET_REQUIRED;
+      endoneof;
+
+    endform;
+    //
+    // form - SoC Voltage
+    //
+    form
+
+      formid        = SETUP_SOC_VOLTAGE_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_SOC_VOLTAGE_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_SOC_VOLTAGE_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      // Soc Voltage Help Text
+      // Specifies the SoC/uncore voltage (VDD_SOC) in mV to support memory and Infinity Fabric overclocking. VDD_SOC also determines the GPU voltage on processors with integrated graphics. \nThis voltage only can change when one of below items'SoC/Uncore OC Mode' 'UCLK','Active Memory Timing Settings,'Infinity Fabric Frequency and Dividers'' changed
+      subtitle text = STRING_TOKEN (STR_AOD_SOC_VOLTAGE_HELP_TEXT_HELP);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+      // Active Condition: AodGnbFclkOcFlag=Enabled|AodMemTimingSettingDdr=Enabled|AodUclkDiv1Mode!=Auto|AodFclkFrequency!=Auto
+      grayoutif NOT ideqval AOD_CONFIG.AodGnbFclkOcFlag == 1
+            AND NOT ideqval AOD_CONFIG.AodMemTimingSettingDdr == 1
+            AND ideqval AOD_CONFIG.AodUclkDiv1Mode == 0xff
+            AND ideqval AOD_CONFIG.AodFclkFrequency == 0xFFFF;
+        // SoC Voltage
+        // Specifies the SoC/uncore voltage (VDD_SOC) in mV to support memory and Infinity Fabric overclocking. VDD_SOC also determines the GPU voltage on processors with integrated graphics. 'SoC/Uncore OC Mode' needs to be enabled to force this voltage.
+        numeric
+          varid       = AOD_CONFIG.AodSocOverclockingVoltage,
+          prompt      = STRING_TOKEN (STR_AOD_SOC_VOLTAGE),
+          help        = STRING_TOKEN (STR_AOD_SOC_VOLTAGE_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 0,
+          maximum     = 2800,
+          step        = 0,
+          default     = 0,
+        endnumeric;
+      endif;
+
+    endform;
+    //
+    // form - LN2 Mode
+    //
+    form
+
+      formid        = SETUP_LN2_MODE_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_LN2_MODE_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_LN2_MODE_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      // LN2 Mode
+      // Enables settings that provide additional stability at extreme cold operating temperatures
+      oneof
+        varid       = AOD_CONFIG.AodLN2Mode,
+        prompt      = STRING_TOKEN (STR_AOD_LN2_MODE),
+        help        = STRING_TOKEN (STR_AOD_LN2_MODE_HELP),
+        option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xff, flags = DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_DISABLED),            value = 0,    flags = 0 | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_ENABLED),             value = 1,    flags = 0 | RESET_REQUIRED;
+      endoneof;
+
+    endform;
+    //
+    // form - Onboard Voltage Control
+    //
+    form
+
+      formid        = SETUP_ONBOARD_VOLTAGE_CONTROL_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_ONBOARD_VOLTAGE_CONTROL_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_ONBOARD_VOLTAGE_CONTROL_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      goto SETUP_VDDIO_VOLTAGE_CONTROL_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_VDDIO_VOLTAGE_CONTROL_SECTION),
+        help        = STRING_TOKEN (STR_AOD_VDDIO_VOLTAGE_CONTROL_SECTION);
+
+      goto SETUP_VPP_VOLTAGE_CONTROL_LABLE,
+        prompt      = STRING_TOKEN (STR_AOD_VPP_VOLTAGE_CONTROL_SECTION),
+        help        = STRING_TOKEN (STR_AOD_VPP_VOLTAGE_CONTROL_SECTION);
+
+      // Display Condition: AodComboFlag=2
+      suppressif NOT ideqval AOD_CONFIG.Header.AodComboFlag == 2;
+        goto SETUP_VDD_MEM_VOLTAGE_CONTROL_LABLE,
+          prompt      = STRING_TOKEN (STR_AOD_VDD_MEM_VOLTAGE_CONTROL_SECTION),
+          help        = STRING_TOKEN (STR_AOD_VDD_MEM_VOLTAGE_CONTROL_SECTION);
+      endif;
+    endform;
+      //
+      // form - VDDIO Voltage Control
+      //
+      form
+
+        formid        = SETUP_VDDIO_VOLTAGE_CONTROL_LABLE,
+
+        title         = STRING_TOKEN (STR_AOD_VDDIO_VOLTAGE_CONTROL_SECTION);
+
+        subtitle text = STRING_TOKEN (STR_AOD_VDDIO_VOLTAGE_CONTROL_SECTION);
+        subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+        // Current DIMM VDD Voltage
+        text
+          help        = STRING_TOKEN(STR_AOD_BLANK),
+          text        = STRING_TOKEN(STR_AOD_CURRENT_VDD_VOLTAGE_STRING),
+          text        = STRING_TOKEN(STR_AOD_CURRENT_VDD_VOLTAGE),
+          flags       = 0,
+          key         = 0;
+
+        // Current DIMM VDDQ Voltage
+        text
+          help        = STRING_TOKEN(STR_AOD_BLANK),
+          text        = STRING_TOKEN(STR_AOD_CURRENT_VDDQ_VOLTAGE_STRING),
+          text        = STRING_TOKEN(STR_AOD_CURRENT_VDDQ_VOLTAGE),
+          flags       = 0,
+          key         = 0;
+
+        // Current APU VDDIO Value (mV)
+        text
+          help        = STRING_TOKEN(STR_AOD_BLANK),
+          text        = STRING_TOKEN(STR_AOD_CURRENT_APU_VDDIO_VOLTAGE_STRING),
+          text        = STRING_TOKEN(STR_AOD_CURRENT_APU_VDDIO_VOLTAGE),
+          flags       = 0,
+          key         = 0;
+
+
+
+      // VDDIO Ctrl
+      // Allows the user to adjust the VDDIO voltage."Manual" means control both of APU VDDIO and DIMM VDDIO. "Separate" means  independent control of APU/DIMM VDDIO.
+      oneof
+        varid       = AOD_CONFIG.AodVddIoCtrl,
+        questionid  = KEY_AOD_VDDIO_CTRL,
+        prompt      = STRING_TOKEN (STR_AOD_VDDIO_CTRL),
+        help        = STRING_TOKEN (STR_AOD_VDDIO_CTRL_HELP),
+        option text = STRING_TOKEN (STR_AOD_AUTO),          value = 0,    flags = DEFAULT | INTERACTIVE |RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_MANUAL),        value = 1,    flags = 0 | INTERACTIVE | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_SEPARATE),      value = 2,    flags = 0 | INTERACTIVE | RESET_REQUIRED;
+      endoneof;
+
+      // Display Condition: AodVddIoCtrl=Manual|AodVddIoCtrl=Separate
+      suppressif NOT ideqval AOD_CONFIG.AodVddIoCtrl == 1
+             AND NOT ideqval AOD_CONFIG.AodVddIoCtrl == 2;
+        // VDDIO Adjust
+        // Adjust MEM VDDIO, stepping is 10mV. Range is from 800mV to 1435mV
+        numeric
+          varid       = AOD_CONFIG.AodDimmVdd,
+          questionid  = KEY_AOD_DIMM_VDDIO,
+          prompt      = STRING_TOKEN (STR_AOD_DIMM_VDD_ADJUST),
+          help        = STRING_TOKEN (STR_AOD_DIMM_VDD_ADJUST_HELP),
+          flags       = RESET_REQUIRED | INTERACTIVE,
+          minimum     = 800,
+          maximum     = 1430,
+          step        = 10,
+          default     = 1100,
+        endnumeric;
+      endif;
+        // Display Condition: AodVddIoCtrl=Separate
+        suppressif NOT ideqval AOD_CONFIG.AodVddIoCtrl == 2;
+          // DIMM VDDQ Adjust
+          // Adjust DIMM DQ Power Supply, stepping is 10mV. Range is from 800mV to 1430mV
+          numeric
+            varid       = AOD_CONFIG.AodDimmVddq,
+            prompt      = STRING_TOKEN (STR_AOD_DIMM_VDDQ_ADJUST),
+            help        = STRING_TOKEN (STR_AOD_DIMM_VDDQ_ADJUST_HELP),
+            flags       = RESET_REQUIRED,
+            minimum     = 800,
+            maximum     = 1430,
+            step        = 0,
+            default     = 1100,
+          endnumeric;
+        endif;
+      // Display Condition: AodVddIoCtrl=Separate
+      suppressif NOT ideqval AOD_CONFIG.AodVddIoCtrl == 2;
+        label LABEL_CBS_AOD_APU_VDD_IO_DYNAMIC_START;
+        // APU VDDIO Adjust
+        // No help string
+        label LABEL_CBS_AOD_APU_VDD_IO_DYNAMIC_END;
+      endif;
+
+      endform;
+      //
+      // form - VPP Voltage Control
+      //
+      form
+
+        formid        = SETUP_VPP_VOLTAGE_CONTROL_LABLE,
+
+        title         = STRING_TOKEN (STR_AOD_VPP_VOLTAGE_CONTROL_SECTION);
+
+        subtitle text = STRING_TOKEN (STR_AOD_VPP_VOLTAGE_CONTROL_SECTION);
+        subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+        // Current  VPP Voltage
+        text
+          help        = STRING_TOKEN(STR_AOD_BLANK),
+          text        = STRING_TOKEN(STR_AOD_CURRENT_VPP_VOLTAGE_STRING),
+          text        = STRING_TOKEN(STR_AOD_CURRENT_VPP_VOLTAGE),
+          flags       = 0,
+          key         = 0;
+
+        // VPP Ctrl
+        // No help string
+        oneof
+          varid       = AOD_CONFIG.AodVppCtrl,
+          prompt      = STRING_TOKEN (STR_AOD_VPP_CTRL),
+          help        = STRING_TOKEN (STR_AOD_VPP_CTRL_HELP),
+          option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+        endoneof;
+      // Display Condition: AodVddIoCtrl=Manual|AodVddIoCtrl=Separate
+      // VPP Adjust
+      // Adjust MEM VPP, stepping is 10mV. Range is from 1500mV to 2135mV
+    suppressif NOT ideqval AOD_CONFIG.AodVppCtrl == 1;
+      numeric
+        varid       = AOD_CONFIG.AodVppVoltage,
+        prompt      = STRING_TOKEN (STR_AOD_VPP_ADJUST),
+        help        = STRING_TOKEN (STR_AOD_VPP_ADJUST_HELP),
+        flags       = RESET_REQUIRED,
+        minimum     = 1500,
+        maximum     = 2130,
+        step        = 10,
+        default     = 1800,
+      endnumeric;
+    endif;
+
+
+      endform;
+
+      //
+      // form - VDD_MEM Voltage Control
+      //
+      form
+
+        formid        = SETUP_VDD_MEM_VOLTAGE_CONTROL_LABLE,
+
+        title         = STRING_TOKEN (STR_AOD_VDD_MEM_VOLTAGE_CONTROL_SECTION);
+
+        subtitle text = STRING_TOKEN (STR_AOD_VDD_MEM_VOLTAGE_CONTROL_SECTION);
+        subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+        // Current  VDD_MEM Voltage
+        // Current  VPP Voltage
+        text
+          help        = STRING_TOKEN(STR_AOD_BLANK),
+          text        = STRING_TOKEN(STR_AOD_CURRENT_VDD_MEM_VOLTAGE_STRING),
+          text        = STRING_TOKEN(STR_AOD_CURRENT_VDD_MEM_VOLTAGE),
+          flags       = 0,
+          key         = 0;
+
+        // VDD_MEM Control
+        // Auto: Follow default setting, Manual: Manually specify the VDD_MEM Voltage since VDDP_DDR is source from it.VDD_MEM must greater 100mv than VDDP_DDR
+        oneof
+          varid       = AOD_CONFIG.AodVddMemCtrl,
+          prompt      = STRING_TOKEN (STR_AOD_VDD_MEM_CONTROL),
+          help        = STRING_TOKEN (STR_AOD_VDD_MEM_CONTROL_HELP),
+          option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+        endoneof;
+        // Display Condition: AodVddIoCtrl=Separate
+        suppressif NOT ideqval AOD_CONFIG.AodVddMemCtrl == 1;
+          label LABEL_CBS_AOD_VDD_MEM_ADJUST_START;
+          // VDD_MEM Adjust
+          // No help string
+          label LABEL_CBS_AOD_VDD_MEM_ADJUST_END;
+        endif;
+      endform;
+    //
+    // form - VDDP Voltage Control
+    //
+    form
+
+      formid        = SETUP_VDDP_VOLTAGE_CONTROL_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_VDDP_VOLTAGE_CONTROL_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_VDDP_VOLTAGE_CONTROL_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      // VDDP Voltage Control
+      // Allows the user to adjust the VDDP voltage."Manual" means set voltage for the DDR bus signaling (PHY),. "Auto" means VDDP is system default.
+      oneof
+        varid       = AOD_CONFIG.AodVddpVoltageCtrl,
+        prompt      = STRING_TOKEN (STR_AOD_VDDP_VOLTAGE_CONTROL),
+        help        = STRING_TOKEN (STR_AOD_VDDP_VOLTAGE_CONTROL_HELP),
+        option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0xff, flags = DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+      endoneof;
+
+      // Display Condition: AodVddpVoltageCtrl=Manual
+      suppressif NOT ideqval AOD_CONFIG.AodVddpVoltageCtrl == 1;
+        // VDDP Voltage Adjust
+        // VDDP is a voltage for the DDR bus signaling (PHY), and it is derived from your DRAM Voltage (VDDIO_Mem). As a result, VDDP voltage in mV can approach but not exceed your DRAM Voltage
+        numeric
+          varid       = AOD_CONFIG.AodVddpVoltage,
+          prompt      = STRING_TOKEN (STR_AOD_VDDP_VOLTAGE_ADJUST),
+          help        = STRING_TOKEN (STR_AOD_VDDP_VOLTAGE_ADJUST_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 0,
+          maximum     = 0x7d0,
+          step        = 0,
+          default     = 0,
+        endnumeric;
+      endif;
+
+    endform;
+    //
+    // form - LCLK Frequency Control
+    //
+    form
+
+      formid        = SETUP_LCLK_FREQUENCY_CONTROL_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_LCLK_FREQUENCY_CONTROL_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_LCLK_FREQUENCY_CONTROL_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      // LCLK Frequency Control
+      // AUTO: Default Settings. Manual: manually configure LCLK frequency
+      oneof
+        varid       = AOD_CONFIG.AodLclkCtrl,
+        prompt      = STRING_TOKEN (STR_AOD_LCLK_FREQUENCY_CONTROL),
+        help        = STRING_TOKEN (STR_AOD_LCLK_FREQUENCY_CONTROL_HELP),
+        option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+      endoneof;
+
+      // Display Condition: AodLclkCtrl=Manual
+      suppressif NOT ideqval AOD_CONFIG.AodLclkCtrl == 1;
+        // Minimun Frequency
+        // Minimum LCLK Frequency. Set minimum and maximun to the same value for fixed frequency operation.Range:150MHz ~ 2500MHz
+        numeric
+          varid       = AOD_CONFIG.AodMinLclkFreq,
+          questionid  = KEY_AOD_MIN_LCLK_FREQ,
+          prompt      = STRING_TOKEN (STR_AOD_MINIMUN_FREQUENCY),
+          help        = STRING_TOKEN (STR_AOD_MINIMUN_FREQUENCY_HELP),
+          flags       =  RESET_REQUIRED | INTERACTIVE,
+          minimum     = 150,
+          maximum     = 2500,
+          step        = 0,
+          default     = 150,
+        endnumeric;
+      endif;
+
+      // Display Condition: AodLclkCtrl=Manual
+      suppressif NOT ideqval AOD_CONFIG.AodLclkCtrl == 1;
+        // Maximum Frequency
+        // Maximum LCLK Frequency. Set minimum and maximun to the same value for fixed frequency operation.Range:150MHz ~ 2500MHz
+        numeric
+          varid       = AOD_CONFIG.AodMaxLclkFreq,
+          questionid  = KEY_AOD_MAX_LCLK_FREQ,
+          prompt      = STRING_TOKEN (STR_AOD_MAXIMUM_FREQUENCY),
+          help        = STRING_TOKEN (STR_AOD_MAXIMUM_FREQUENCY_HELP),
+          flags       = RESET_REQUIRED | INTERACTIVE,
+          minimum     = 150,
+          maximum     = 2500,
+          step        = 0,
+          default     = 2500,
+        endnumeric;
+      endif;
+
+    endform;
+    //
+    // form - VDD Misc
+    //
+    form
+
+      formid        = SETUP_VDD_MISC_LABLE,
+
+      title         = STRING_TOKEN (STR_AOD_VDD_MISC_SECTION);
+
+      subtitle text = STRING_TOKEN (STR_AOD_VDD_MISC_SECTION);
+      subtitle text = STRING_TOKEN (STR_AOD_BLANK);
+
+      // VDD Misc Control
+      // Allows the user to adjust the VDD Misc voltage."Manual" means set voltage for the GMI PHY,. "Auto" means VDD MISC is system default.
+      oneof
+        varid       = AOD_CONFIG.AodVddMiscCtrl,
+        prompt      = STRING_TOKEN (STR_AOD_VDD_MISC_CONTROL),
+        help        = STRING_TOKEN (STR_AOD_VDD_MISC_CONTROL_HELP),
+        option text = STRING_TOKEN (STR_AOD_AUTO),                value = 0,    flags = DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AOD_MANUAL),              value = 1,    flags = 0 | RESET_REQUIRED;
+      endoneof;
+
+      // Display Condition: AodVddMiscCtrl=Manual
+      suppressif NOT ideqval AOD_CONFIG.AodVddMiscCtrl == 1;
+        // VDD Misc Voltage
+        // specific the VDD Misc Voltage in mV, definitely follow SVI3 type 2 Slave VID(500~5600mV step 10mV)
+        numeric
+          varid       = AOD_CONFIG.AodVddMiscVoltage,
+          prompt      = STRING_TOKEN (STR_AOD_VDD_MISC_VOLTAGE),
+          help        = STRING_TOKEN (STR_AOD_VDD_MISC_VOLTAGE_HELP),
+          flags       = RESET_REQUIRED,
+          minimum     = 500,
+          maximum     = 5600,
+          step        = 10,
+          default     = 800,
+        endnumeric;
+      endif;
+
+    endform;
+endformset;

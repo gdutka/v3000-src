@@ -1,0 +1,90 @@
+## @file
+#  Component file for module TcmDxe.
+#
+#******************************************************************************
+#* Copyright (c) 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = TcmDxe
+  FILE_GUID                      = F0D65400-8C8D-4c0a-B82A-0BBA4184632E
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = DriverEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  TcmDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SecurityPkg/SecurityPkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  MemoryAllocationLib
+  BaseLib
+  UefiBootServicesTableLib
+  HobLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  TcmDeviceLib
+  TcmCommandLib
+  PrintLib
+  UefiLib
+  PostCodeLib
+  BaseCryptLib
+  H2OCpLib
+
+[Guids]
+  gEfiSmbiosTableGuid                           # ALWAYS_CONSUMED
+  gEfiGlobalVariableGuid                        # ALWAYS_CONSUMED
+  gTcgEventEntryHobGuid
+  gEfiEventReadyToBootGuid
+  gEfiEventExitBootServicesGuid
+  gEventExitBootServicesFailedGuid              # ALWAYS_CONSUMED
+  gEfiTpmDeviceInstanceTpm12Guid
+  gEfiTpmDeviceInstanceTcmGuid
+  gEfiImageSecurityDatabaseGuid
+  gH2OBdsCpBootBeforeGuid
+  gH2OBdsCpBootAfterGuid
+
+[Protocols]
+  gEfiTcgProtocolGuid                           ## PRODUCES
+  gEfiAcpiTableProtocolGuid                     # PROTOCOL ALWAYS_CONSUMED
+  gEfiDevicePathProtocolGuid                    # PROTOCOL ALWAYS_CONSUMED
+  gEfiLegacyBiosProtocolGuid
+  gEfiMpServiceProtocolGuid                     ## SOMETIMES_CONSUMES
+  gEfiSmbiosProtocolGuid
+
+[Pcd]
+  gEfiSecurityPkgTokenSpaceGuid.PcdTpmPlatformClass
+  gEfiSecurityPkgTokenSpaceGuid.PcdTpmInstanceGuid
+  gEfiSecurityPkgTokenSpaceGuid.PcdFirmwareDebuggerInitialized
+  gInsydeTokenSpaceGuid.PcdH2ODdtSupported
+  gInsydeTokenSpaceGuid.PcdStatusCodeUseDdt
+  gInsydeTokenSpaceGuid.PcdStatusCodeUseUsb
+  gInsydeTokenSpaceGuid.PcdDxeTpmPolicy  
+  gInsydeTokenSpaceGuid.PcdTpmHide
+  gEfiMdeModulePkgTokenSpaceGuid.PcdStatusCodeUseSerial
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpBootBeforeSupported
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpBootAfterSupported
+
+[Depex]
+  TRUE

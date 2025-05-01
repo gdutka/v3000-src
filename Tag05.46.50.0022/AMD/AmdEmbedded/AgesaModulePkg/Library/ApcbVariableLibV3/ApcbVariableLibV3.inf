@@ -1,0 +1,45 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = ApcbVariableLibV3
+  FILE_GUID                      = 88E59718-2F61-465d-B0B8-93C000C34925
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ApcbVariableLibV3 | DXE_DRIVER DXE_SMM_DRIVER DXE_RUNTIME_DRIVER DXE_CORE SMM_CORE UEFI_DRIVER
+  CONSTRUCTOR                    = ApcbVariableLibV3Constructor
+
+[Sources.common]
+  ApcbVariableLibV3.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  BaseMemoryLib
+  UefiBootServicesTableLib
+
+[Guids]
+
+
+[Protocols]
+
+
+[Ppis]
+
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdApcbVariableStructAddress
+
+[Depex]
+
+

@@ -1,0 +1,50 @@
+## @file
+#  Component description file
+#
+#******************************************************************************
+#* Copyright (c) 2017, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DriverHealthSampleDxe
+  FILE_GUID                      = AD291DF9-4DB4-42f8-BE35-067B09B8FC84
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = DriverHealthSampleDxeEntry
+
+[Sources]
+  DriverHealthSampleVfr.Vfr
+  DriverHealthSampleStrings.uni
+  DriverHealthSampleDxe.h
+  DriverHealthSampleDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiLib
+  BaseLib
+  MemoryAllocationLib
+  HiiLib
+  DevicePathLib
+
+[Protocols]
+  gEfiComponentName2ProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiDriverHealthProtocolGuid
+  gEfiHiiConfigAccessProtocolGuid
+
+[Depex]
+  gEfiHiiDatabaseProtocolGuid
+

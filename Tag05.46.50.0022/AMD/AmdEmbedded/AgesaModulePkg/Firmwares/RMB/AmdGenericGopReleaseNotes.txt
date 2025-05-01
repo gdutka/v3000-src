@@ -1,0 +1,577 @@
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.8.8
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei Gop & signed Dxe Gop driver for pre-OS iGPU/dGPU use.             |
+| 2. Source code is in git repo 'Gop_Phx' branch:                                                     |
+|    commit ed80775917da1f8d24bf0b089b6a5b37f536ae3f                                                  |
+| 3. Binary: amd-gop-Bld775-202401120435.zip                                                          |
+| 4. Bug Fix:                                                                                         |
+|    FWDEV-3 - [Gop 3.8.8] fix vulnerability issue of CVE-2023-20594                                  |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.8.7
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei Gop & signed Dxe Gop driver for pre-OS iGPU/dGPU use.             |
+| 2. Source code is in git repo 'Gop_Phx' branch:                                                     |
+|    commit a00309dd631b56dd463a516260d178d010eda482                                                  |
+| 3. Binary: local build                                                                              |
+| 4. Bug Fix:                                                                                         |
+|    PLAT-149031 [HPT] GOP need to expand more entries for DFP device priority vector in              |
+|                 PlatformToDriverConfigurationProtocol                                               |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.8.6
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei Gop & signed Dxe Gop driver for pre-OS iGPU/dGPU use.             |
+| 2. Source code is in git repo 'Gop_Phx' branch:                                                     |
+|    commit 6fe9f181be1e81f1e2143c126cf23345e8186786                                                  |
+| 3. Binary: local build                                                                              |
+| 4. Bug Fix:                                                                                         |
+|    FWDEV-3 - [Gop 3.8.6] add check for APU only in gop support                                      |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.8.5
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei Gop & signed Dxe Gop driver for pre-OS iGPU/dGPU use.             |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit a746d7d1984fca7897c30ff32087c7f1f56f8b3d                                                  |
+| 3. Binary: amd-gop-Bld718-202309150856.zip                                                          |
+| 4. Bug Fix:                                                                                         |
+|    FWDEV-30938 - [NAVI4x] SPI ROM-Less Configuration                                                |
+|    FWDEV-58162 UEFI shell display mode be changed after updated GOP driver to 3.8.3                 |
+|    FWDEV-59546 S780Air Panel Bright can't meet OLED spec pre-os stage                               |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.8.4
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei Gop & signed Dxe Gop driver for pre-OS iGPU/dGPU use.             |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 2c380bb3941e6d812b4207bc52073ed5c046d659                                                  |
+| 3. Binary: amd-gop-Bld707-202308160235.zip                                                          |
+| 4. Bug Fix:                                                                                         |
+|    FWDEV-56545 [HPT1/PHX] Pre OS no display with edp panel                                          |
+|    FWDEV-56482 [STX] boot to bios setup no display with eDP after updating GOP to v3.8.3            |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.8.3
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei Gop & signed Dxe Gop driver for pre-OS iGPU/dGPU use.             |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 26579dd05fb0cd297e949e149ed7554a7ad580e3                                                  |
+| 3. Binary: amd-gop-Bld705-202308080818.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    PLAT-138748 PHX] System background color is green on some HDMI monitors when boot to UEFI Shell. |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.8.2
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei Gop & signed Dxe Gop driver for pre-OS iGPU/dGPU use.             |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit d3addb19fff6ecb979a8c378eb58c355a8bb9c84                                                  |
+| 3. Binary: amd-gop-Bld700-202307110729.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    PLAT-136958 [PHX2 AM5][Splinter] System Hang @ Black Screen, PC:B20220A0 during Reboot with      |
+|      default HDMI mode                                                                              |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.8.1
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei Gop & signed Dxe Gop driver for pre-OS iGPU/dGPU use.             |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit b3a873827f82947de670a64f6273fe0ae876b535                                                  |
+| 3. Binary: amd-gop-Bld696-202306300326.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    FWDEV-53067 reduce Bpc and skip set mode when no edp in pei gop                                  |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.7.11
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei Gop & signed Dxe Gop driver for pre-OS iGPU/dGPU use.             |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit c99fe5aeda8859c461e653bacad7dd4fdc69cc44                                                  |
+| 3. Binary: amd-gop-Bld690-202305080357.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    FWDEV-44038 speed up GOP BLT function                                                            |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.7.10
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit d0d1ddddfd54305e1a1f2962efb010a38d682e28                                                  |
+| 3. Binary: amd-gop-Bld689-202305041003.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    PNXCB-34 [PhoenixFP8/FP7FP7r2] The mouse will flicker in the BIOS interface by using USB mouse   |
+|    TIC-116741 [X13 Gen4 AMD] Password will Magnify several times on external monitor                |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.7.9
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 2da7fc4caf326739f47692e2c4fca0e49b791d12                                                  |
+| 3. Binary: amd-gop-Bld667-202304100648.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    FWDEV-41705 DUT can't display in DXE phase if install AMDGop PPI in PEI phase                    |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.7.8
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 164d4d02779665226ed7d24864cd5c3c0b07ba04                                                  |
+| 3. Binary: amd-gop-Bld663-202303270316.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - add flag to control phy table and collect cea native timing                            |
+|    SWDEV-3 - Gop 3.7.8 modify mode list filter rule to align with select timing                     |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.7.6
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 0fae64d91c670289e9d7e26be004084f276d12ee                                                  |
+| 3. Binary: amd-gop-Bld656-202303130846.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    PLAT-127695 - fix issue of OS installation halt at WinPE with dGPU connected                     |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.7.5
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit ac9b6dfbe61c599191a0a8e16bb9931859028bbb                                                  |
+| 3. Binary: amd-gop-Bld645-202302270546.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - [Gop 3.7.5] fix display id descriptor parse issue                                      |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.7.4
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 8855865cfbb309a70af9422d8329b3ee1a824d0e                                                  |
+| 3. Binary: amd-gop-Bld644-202302171530.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - adjust system info table offset for pei gop                                            |
+|    SWDEV-3 - Gop 3.7.4 add preferred mode bit check when select timing                              |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.7.2
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 1c1bd1d0b68809e2f742b135d0c0e4e9688e2991                                                  |
+| 3. Binary: amd-gop-Bld628-202301310853.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - add dce info verion 4.5 check for new fileds consumed                                  |
+|    SWDEV-377964 - [3.7.2]Blind boot to UEFI not working with Navi33                                 |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.7.0
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 6817a862fd3fd7f25652731944869004e7aeb363                                                  |
+| 3. Binary: amd-gop-Bld617-202301050435.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - fix garbage issue on bottom of phx platform bios setup menu                            |
+|    SWDEV-3 - use AsmWbinvd only when data mismatch to improve boot performance                      |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.6.3
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 16af9d79f5ca58f10381e06517a70351ab8b63a4                                                  |
+| 3. Binary: amd-gop-Bld593-202211040544.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - update atomfirmware.h for new bios token                                               |
+|    SWDEV-3 - Add fw_write_protect_region_size for Phx to increase TMR size for DMUB.                |
+|    SWDEV-3 - use fw_write_protect_region_size field for increase TMR size                           |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.6.2
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 714cf15f475ee121b9cd2cd7b6a487bb5ca8dd14                                                  |
+| 3. Binary: amd-gop-Bld587-202210180942.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - fix reconnect -r issue by invoke HWResetDisplay                                        |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.6.1
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 3ff96858155e54c30db928385223219e540df233                                                  |
+| 3. Binary: amd-gop-Bld586-202210120315.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - gop support oem config timing                                                          |
+|    SWDEV-3 - add object_info_table version check when search MXM_OPM flag                           |
+|    SWDEV-3 - gop 3.5.0 PLAT-116173 PEI GOP driver fails in Coreboot MDN FSP                         |
+|    SWDEV-3 - close oem TCON IOL event when disconnect gop driver                                    |
+|    SWDEV-3 - Gop 3.6.0 disable HDMI 4K 60Hz for DP to HDMI passive dongle                           |
+|    SWDEV-3 - Gop 3.6.1 optimize customized DPDispPhyTuning override logic                           |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.4.8
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit c2cdcc49233b8e289854c2e6f94381fe328b3278                                                  |
+| 3. Binary: amd-gop-Bld574-202208240855.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - fix reconnect -r issue in uefi shell also need psp fix for reload lsdma                |
+|    SWDEV-3 - fix pxe install OS hang issue on dGPU                                                  |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.4.7
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit 32143c64e3653691aea21d5d4af8ed6b7dfef13a                                                  |
+| 3. Binary: amd-gop-Bld572-202208151508.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - Allow SBIOS override edp phy tuningSet only when upgrade table                         |
+|    SWDEV-3 - Add OEM TCON Instant On Logo feature support                                           |
+|    SWDEV-3 - fix issue when SBIOS switch edp lid status                                             |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.4.6
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo 'master' branch:                                                      |
+|    commit f389715ce196e1b0321895e017ca4044b36b7a71                                                  |
+| 3. Binary: amd-gop-Bld554-202207281532.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - remove VFR HII of Repair function in DriverHealthRepair                                |
+|    SWDEV-3 - add DMA access way in case of pci index data way fail                                  |
+|    SWDEV-3 - add ExtDispConnInfo dump support in debug build                                        |
+|    SWDEV-3 - switch use system memory as lsdma ring buffer when dmar disabled                       |
+|    SWDEV-3 - GOP support oem panel detection (remove memory allocation)                             |
+|    SWDEV-3 - add workaround for pei gop pci indxe data access issue                                 |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.4.5
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit c57fd01b8b63ddfdc456e7c4f45bde9003bee570                                                  |
+| 3. Binary: amd-gop-Bld530-202207050425.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - use visible FB as LSDMA RB to fix DMAr issue                                           |
+|    SWDEV-3 - use flexible way to caculate visible FB offset for ring buffer                         |
+|    SWDEV-3 - add max 2s delay if cannot detect HPD for some monitors                                |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.4.4
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit 3b5c6d4f808dc6a8c53293e0f0254e06526454bb                                                  |
+| 3. Binary: amd-gop-Bld527-202206210741.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - [Gop 3.4.4] fix incorrect lane number issue when use 2K panel                          |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.4.3
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit ce0c5adf5d0bed2471bf4c2b762f84ba350282ec                                                  |
+| 3. Binary: amd-gop-Bld526-202206200321.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - add WBINVD instruction for pciio memory write                                          |
+|    SWDEV-3 - add seamless feature support                                                           |
+|    SWDEV-3 - update Gop mode info for seamless                                                      |
+|    SWDEV-3 - fix blt performance issue for videofill case                                           |
+|    SWDEV-3 - HDMI 4K 60Hz Support                                                                   |
+|    SWDEV-3 - remove AsmWbinvd to fix Blt performance issue                                          |
+|    SWDEV-3 - use khz unit for pixel clock to align with dmcub                                       |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.4.2
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit 6fb278488dd52a660c955f942848fd2af5720dcd                                                  |
+| 3. Binary: amd-gop-Bld511-202205201021.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - remove unused macro for free lsdma memory buffer                                       |
+|    SWDEV-3 - add atom flag for round up display ID pixclk                                           |
+|    SWDEV-3 - add ring buffer address mapping for lsdma when dmar enabled                            |
+|    SWDEV-3 - add timeout when do lsdma copy in blt                                                  |
+|    SWDEV-3 - add lsdma copy status check and force pio mode if failure                              |
+|    SWDEV-3 - adjust BL off and Power off edp in CoreInitDisplay function                            |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.4.1
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit a2b4ff2da894da08c85e71388c3d0a9f3c117482                                                  |
+| 3. Binary: amd-gop-Bld502-202205070421.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - increase version for MSFT signed Gop 3.4.0                                             |
+|    SWDEV-3 - [3.4.1] use RuntimeServicesData type to support dump messages in OS                    |
+|    SWDEV-3 - add flush to fix frame buffer read random failure                                      |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.3.6
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-signed Pei/Dxe Gop driver for pre-OS iGPU/dGPU use.                          |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit ab809f50228dd6f9ee59d1ff3fa0f666974baf6f                                                  |
+| 3. Binary: amd-gop-Bld496-202204081403.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - add reminder in DTD filed for accurate DID2.0 pixel clock in khz unit                  |
+|    SWDEV-3 - disable FMP for iGPU                                                                   |
+|    SWDEV-3 - optimze CoreInitDisplay                                                                |
+|    SWDEV-3 - [Gop 3.3.6] Fix shift and corruption issue in setup in Blt                             |
+|    SWDEV-3 - Fix setup display shift issue part2                                                    |
+|    SWDEV-3 - Consume Blt Delta Parameter for setup shift issue                                      |
+|    SWDEV-3 - update StatusCode bitmap for lsdma                                                     |
++-----------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.3.5
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-sign Pei/Dxe Gop driver for pre-OS use.                                      |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit af10964b0a87d5ecf5acac165cc4943eebeb39f1                                                  |
+| 3. Binary: amd-gop-Bld480-202203220541.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - [Gop 3.3.5] fix Display ID high pixel clock issue and Blt lag issue                    |
++-----------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.3.4
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-sign Pei/Dxe Gop driver for pre-OS use.                                      |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit 47d2ed9c08cc32be851c0ae37ea76030de8c4025                                                  |
+| 3. Binary: amd-gop-Bld478-202203161036.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - fix blt function issue for lsdma and use system memory as RB by default                |
+|    SWDEV-3 - update OPM_PatchEncoderObjCapRecord logic to allow SBIOS modify encoder cap            |
+|    SWDEV-3 - switch lsdma ring buffer mode in all blt cases                                         |
+|    SWDEV-3 - Use DeviceContext to save/restore support display device from Object_InfoTable         |
+|    SWDEV-3 - add DisplayPhyTuningInfo table dump support                                            |
+|    SWDEV-3 - update mode collecting logic and OPM_PatchEncoderObjCapRecord function for PBS         |
+|    SWDEV-3 - revert to previous mode resolution logic                                               |
+|    SWDEV-3 - restore blt Workaround for garbage issue                                               |
+|    SWDEV-3 - fix duplicate resolution issue                                                         |
++-----------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.3.3
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-sign Pei/Dxe Gop driver for pre-OS use.                                      |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit e28a4cb67bc70d194794fad59b8d0bf71c72a54a                                                  |
+| 3. Binary: amd-gop-Bld457-202202170918.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - Gop 3.3.3: optimize DuplicateModeFilter and modify lsdma rb start address              |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.3.2
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-sign Pei/Dxe Gop driver for pre-OS use.                                      |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit fa5701fbf06c7866ddb0b4dfa2f7c6eb3127c31d                                                  |
+| 3. Binary: amd-gop-Bld456-202202110814.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - enhance zero UMA case and add more debug message                                       |
+|    SWDEV-3 - sync new atomfirmware.h and power off edp in InitDisplay                               |
+|    SWDEV-3 - [Gop 3.3.2] add FORCE_EXT_VBIOS flag for oprom load issue                              |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.3.1
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-sign Pei/Dxe Gop driver for pre-OS use.                                      |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit 44c7dfff43f7f2e92f927544d1fe9b94d063e012                                                  |
+| 3. Binary: amd-gop-Bld451-202201200324.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - enhance gop for zero UMA size case                                                     |
+|    SWDEV-3 - fix potential issue when no objectinfo table and add more debug messages               |
+|    SWDEV-3 - PLAT-99117 Junk display observed in BIOS and Windows with connected OLED display       |
+|    SWDEV-3 - [Gop 3.3.1] filter duplicate resolution in mode list                                   |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.3.0
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-sign Pei/Dxe Gop driver for pre-OS use.                                      |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit 62e5e89bf322b579e42dd29016964edea5f65c60                                                  |
+| 3. Binary: amd-gop-Bld446-202112240936.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - PLAT-93779 - Reduced Lane Count for Display at Boot up from VBIOS                      |
+|    SWDEV-3 - add support for dmcub trace buffer dump                                                |
+|    SWDEV-3 - add adk2018 goptest tool compile support                                               |
+|    SWDEV-3 - fix CI cov-build issue                                                                 |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.2.10
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-sign Pei/Dxe Gop driver for pre-OS use.                                      |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit 9ddc7e16c64d6b82d914dc3d218ebf88d2ce6182                                                  |
+| 3. Binary: amd-gop-Bld434-202111170428.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - TIC-64121 select DTD0 when PTM bit set for external monitor                            |
+|    SWDEV-3 - add new scratch register 9 for record gop version                                      |
+|    SWDEV-3 - add interface for dmcub region3 CW3 dump                                               |
+|    SWDEV-3 - optimize CoreSetDevicesIdInPriorityOrder function                                      |
+|    SWDEV-3 - optimize GetNextDfpInPriorityOrder function                                            |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.2.9
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-sign Pei/Dxe Gop driver for pre-OS use.                                      |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit b95f07c0ab835d3839eb63704e5548f31a50c003                                                  |
+| 3. Binary: amd-gop-Bld424-202110132019.zip                                                          |
+| 4. Changes list:                                                                                    |
+|    SWDEV-3 - PLAT-92751 [Gop3.2.9] round up refresh rate                                            |
+|    SWDEV-3 - [gop]Support Object_InfoTable v1.5 for NV3x.                                           |
+|    - update logic for CR88 feauter, compare pixclk instead of refresh rate.                         |
+|    SWDEV-3 - Support DisplayID timing from second block EDID                                        |
++-----------------------------------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------------------------------+
+| AMD Generic Gop Release Notes                                                                       |
++-----------------------------------------------------------------------------------------------------+
+| Version 3.2.8
++-----------------------------------------------------------------------------------------------------+
+| 1. This is internal un-sign Pei/Dxe Gop driver for pre-OS use.                                      |
+| 2. Source code is in git repo master branch:                                                        |
+|    commit 7a624416d611684afbad83999d16382222cb2f9b                                                  |
+| 3. Binary: amd-gop-Bld417-202109300615.zip                                                          |
+| 4. Changes list:                                                                                    |
+|   SWDEV-3 - add more debug messages in gop for display issue tracking                               |
+|   SWDEV-3 - add gpu pci device ID debug message output                                              |
+|   SWDEV-3 - optimize DPIA instance detect logic                                                     |
+|   SWDEV-3 - add dump atom tables support                                                            |
+|   SWDEV-3 - add extend EDID block support part 1                                                    |
+|   SWDEV-3 - Support both USB4 and DP-Alt mode per USB-C connector                                   |
+|   SWDEV-3 - Support both USB4 and DP-Alt mode per USB-C connector part2                             |
+|   SWDEV-3 - support extend EDID blocks for edp panel                                                |
+|   SWDEV-3 - support extend EDID blocks for edp panel part2                                          |
+|   SWDEV-3 - add RequestDMCUBService debug messages                                                  |
+|   SWDEV-3 - fix display ID EDID edp panel shift issue                                               |
+|   SWDEV-3 - Adding DisplayID different detail timing type support                                   |
+|   SWDEV-3 - trigger udk2018 jenkins CI for Gop 3.2.8 release                                        |
++-----------------------------------------------------------------------------------------------------+

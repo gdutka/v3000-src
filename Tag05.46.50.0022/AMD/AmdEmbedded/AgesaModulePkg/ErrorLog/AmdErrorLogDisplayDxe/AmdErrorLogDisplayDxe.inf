@@ -1,0 +1,52 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdErrorLogDisplayDxe
+  FILE_GUID                      = AC38DBC2-8525-48F8-9607-FD9C917BE42E
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdErrorLogDisplayDxeInit
+
+[sources]
+  AmdErrorLogDisplayDxe.c
+  AmdErrorLogDisplayDxe.h
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DebugLib
+  AmdErrorLogLib
+  HobLib
+  PcdLib
+  AmdSocBaseLib
+
+[Guids]
+  gErrorLogHobGuid
+  gAmdMemPmuTrainingFailureHobGuid
+
+[Protocols]
+  gAmdErrorLogReadyProtocolGuid          #CONSUMED
+  gAmdErrorLogProtocolGuid               #PRODUCED
+  gAmdErrorLogServiceProtocolGuid        #PRODUCED
+  gAmdErrorLogFullProtocolGuid           #PRODUCED
+  gAmdErrorLogAvailableProtocolGuid      #PRODUCED
+  gAmdErrorLogDepexProtocolGuid          #CONSUMED
+  gAmdNbioIommuProtocolGuid              #CONSUMED
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAgesaPrintEventLogToConsole
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintEnable
+
+[Depex]
+  gAmdErrorLogDepexProtocolGuid AND
+  gAmdErrorLogReadyProtocolGuid
+

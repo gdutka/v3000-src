@@ -1,0 +1,56 @@
+## @file
+# 
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdMcmRbUpdateLib
+  FILE_GUID                      = A904D7D5-2031-485f-A7FF-A6AC9DB6A69C
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdMcmRbUpdateLib
+
+[Sources]
+  AmdMcmRbUpdate.c
+  AmdMcmRbUpdate.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  $(AGESA_PKG_PATH)/AgesaModuleDfPkg.dec
+  $(AGESA_PKG_PATH)/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AmdCommonChipsetPkg/AmdCommonChipsetPkg.dec
+
+[LibraryClasses]
+  IoLib
+  PciLib
+  PciSegmentLib
+  DebugLib
+  BaseLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  S3BootScriptLib
+
+[Guids]
+  gEfiGenericVariableGuid
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgGnbIoapicId
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdCfgFchIoapicId
+
+[Protocols]
+  gAmdFabricResourceManagerServicesProtocolGuid
+  gAmdFabricTopologyServices2ProtocolGuid
+

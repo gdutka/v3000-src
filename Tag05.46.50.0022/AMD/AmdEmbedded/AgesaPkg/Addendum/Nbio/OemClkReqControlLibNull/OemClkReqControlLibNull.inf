@@ -1,0 +1,28 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = OemClkReqControlLibNull
+  FILE_GUID                      = E1EF822F-F931-413F-91F8-21B3AB01B006
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OemClkReqControlLib
+
+[Sources]
+  OemClkReqControlLibNull.c
+
+[Packages]
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+
+[Ppis]
+
+[Depex]
+  TRUE
+

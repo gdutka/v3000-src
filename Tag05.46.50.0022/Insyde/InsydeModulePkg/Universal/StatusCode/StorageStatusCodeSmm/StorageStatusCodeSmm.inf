@@ -1,0 +1,55 @@
+## @file
+#  SMM driver for Storage Status Code Handler.
+#
+#******************************************************************************
+#* Copyright (c) 2023, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = StorageStatusCodeSmm
+  FILE_GUID                 = 212B91BC-8159-4828-97EC-2F707B80C8CD
+  MODULE_TYPE               = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION  = 0x0001000A
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = StatusCodeHandlerSmmEntryPoint
+
+[Sources]
+  StorageStatusCodeSmm.c
+  StorageStatusCodeSmm.h
+
+[Packages]
+  InsydeModulePkg/InsydeModulePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  SmmServicesTableLib
+  UefiLib
+  ReportStatusCodeLib
+  PrintLib
+  BaseMemoryLib
+  PcdLib
+
+[Guids]
+  gEfiStatusCodeDataTypeStringGuid
+
+[Protocols]
+  gEfiSmmRscHandlerProtocolGuid
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdStatusCodeStorageMemorySize
+  gInsydeTokenSpaceGuid.PcdStatusCodeStorageMemoryBase
+
+[Depex]
+  TRUE
+

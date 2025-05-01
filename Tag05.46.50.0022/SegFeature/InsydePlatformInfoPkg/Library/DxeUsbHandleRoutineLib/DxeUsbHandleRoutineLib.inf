@@ -1,0 +1,45 @@
+## @file
+#
+#******************************************************************************
+#* Copyright 2020 Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = DxeUsbHandleRoutineLib
+  FILE_GUID      = 651159c0-967d-492a-b95c-a4d6787b773f
+  MODULE_TYPE    = DXE_DRIVER
+  VERSION_STRING = 1.0
+  LIBRARY_CLASS  = UsbHandleRoutineLib
+
+[Sources]
+  DxeUsbHandleRoutineLib.c
+  UsbHandleRoutineLibInternal.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  MemoryAllocationLib
+  PcdLib
+  UefiBootServicesTableLib
+  DeviceInfoLookupDataLib
+
+[Protocols]
+  gEfiDevicePathProtocolGuid  ## SOMETIMES_CONSUMES
+  gEfiUsbIoProtocolGuid       ## SOMETIMES_CONSUMES
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdUsbTransferTimeoutValue  ## SOMETIMES_CONSUMES

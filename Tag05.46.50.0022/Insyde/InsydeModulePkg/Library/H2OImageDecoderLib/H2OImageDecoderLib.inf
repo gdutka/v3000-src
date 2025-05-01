@@ -1,0 +1,66 @@
+## @file
+#  Component description file for H2OImageDecoderLib library.
+#
+#******************************************************************************
+#* Copyright (c) 2020, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = H2OImageDecoderLib
+  FILE_GUID                      = f7442e2f-6530-4238-b7b1-9f5bd57c311b
+  MODULE_TYPE                    = BASE
+  LIBRARY_CLASS                  = H2OImageDecoderLib
+
+[Sources]
+  H2OBmpDecoder/H2OBmpDecoder.c
+  H2OGifDecoder/Gif.c
+  H2OGifDecoder/Gif.h
+  H2OGifDecoder/H2OGifDecoder.c
+  H2OImageDecoderLibAllocateMem.c
+  H2OImageDecoderLibCommon.h
+  H2OJpegDecoder/H2OJpegDecoder.c
+  H2OJpegDecoder/JfifDecode.h
+  H2OJpegDecoder/McuDecode.c
+  H2OJpegDecoder/McuDecode.h
+  H2OPcxDecoder/H2OPcxDecoder.c
+  H2OTgaDecoder/H2OTgaDecoder.c
+
+[Binaries.Ia32]
+!if $(GCC)==Gcc
+  LIB|H2OPngDecoder/Ia32/GccH2OPngDecoderLib.lib
+!else
+  LIB|H2OPngDecoder/Ia32/H2OPngDecoderLib.lib
+!endif
+
+[Binaries.X64]
+!if $(GCC)==Gcc
+  LIB|H2OPngDecoder/X64/GccH2OPngDecoderLib.lib
+!else
+  LIB|H2OPngDecoder/X64/H2OPngDecoderLib.lib
+!endif
+
+[Binaries.Arm]
+  LIB|H2OPngDecoder/Arm/H2OPngDecoderLib.lib
+
+[Binaries.AArch64]
+  LIB|H2OPngDecoder/AArch64/H2OPngDecoderLib.lib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  MemoryAllocationLib
+  BaseLib
+  DebugLib
+  StdLib
+  TimerLib

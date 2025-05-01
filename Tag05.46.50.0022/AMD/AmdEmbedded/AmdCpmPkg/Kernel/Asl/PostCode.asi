@@ -1,0 +1,372 @@
+/*****************************************************************************
+ *
+ * Copyright (C) 2014-2022 Advanced Micro Devices, Inc. All rights reserved.
+ *
+ ******************************************************************************
+ */
+
+/// <PostCodePrefix> 0xB0000000
+
+#define CpmTpBaseValue                            0xB0000000
+
+// CPM Post Code for ACPI ASL - Region 0x0D00 ~ 0x0DFF
+// CPM Features DisplayFeature Common ATCS Post Code
+#define CpmTpAtcsAtc0Begin                        0x0D60
+#define CpmTpAtcsAtc1Begin                        0x0D61
+#define CpmTpAtcsAtc2Begin                        0x0D62
+#define CpmTpAtcsAtc3Begin                        0x0D63
+#define CpmTpAtcsAtc4Begin                        0x0D64
+#define CpmTpAtcsAtc5Begin                        0x0D65
+#define CpmTpAtcsAtc6Begin                        0x0D66
+#define CpmTpAtcsAtc7Begin                        0x0D67
+#define CpmTpAtcsAtc8Begin                        0x0D68
+#define CpmTpAtcsAtc9Begin                        0x0D69
+#define CpmTpAtcsAtcABegin                        0x0D6A
+
+#define CpmTpAtcsAtc0End                          0x0D70
+#define CpmTpAtcsAtc1End                          0x0D71
+#define CpmTpAtcsAtc2End                          0x0D72
+#define CpmTpAtcsAtc3End                          0x0D73
+#define CpmTpAtcsAtc4End                          0x0D74
+#define CpmTpAtcsAtc5End                          0x0D75
+#define CpmTpAtcsAtc6End                          0x0D76
+#define CpmTpAtcsAtc7End                          0x0D77
+#define CpmTpAtcsAtc8End                          0x0D78
+#define CpmTpAtcsAtc9End                          0x0D79
+#define CpmTpAtcsAtcAEnd                          0x0D7A
+
+// CPM Features ZeroPowerOdd Post Code
+#define CpmTpZeroPowerOddRemoveEvent_ODD_DA       0x0D80
+#define CpmTpZeroPowerOddInsertEvent_ODD_DA       0x0D81
+#define CpmTpZeroPowerOddRemoveEvent_ODD_PLUGIN   0x0D82
+#define CpmTpZeroPowerOddInsertEvent_ODD_PLUGIN   0x0D83
+#define CpmTpZeroPowerOdd_PS0                     0x0D84
+#define CpmTpZeroPowerOdd_PS3                     0x0D85
+
+// CPM Features DisplayFeature Common ATPX Post Code
+#define CpmTpMxmPowerOnBegin                      0x0D86
+#define CpmTpMxmPowerOnBeforePcieTraining         0x0D87
+#define CpmTpMxmPowerOnPcieTrainingFailed         0x0D88
+#define CpmTpMxmPowerOnEnd                        0x0D89
+#define CpmTpMxmPowerOffBegin                     0x0D8A
+#define CpmTpMxmPowerOffBeforePowerOff            0x0D8B
+#define CpmTpMxmPowerOffEnd                       0x0D8C
+
+// CPM Features PcieInit ExpressCard Post Code
+#define CpmTpExpressCardRemoveEventBegin          0x0D8D
+#define CpmTpExpressCardRemoveEventEnd            0x0D8E
+#define CpmTpExpressCardInsertEventBegin          0x0D8F
+#define CpmTpExpressCardInsertEventEnd            0x0D90
+
+// CPM Features PcieInit OtherHotplug Post Code
+#define CpmTpOtherHotplugCard0RemoveEventBegin    0x0D91
+#define CpmTpOtherHotplugCard0RemoveEventEnd      0x0D92
+#define CpmTpOtherHotplugCard0InsertEventBegin    0x0D93
+#define CpmTpOtherHotplugCard0InsertEventEnd      0x0D94
+#define CpmTpOtherHotplugCard1RemoveEventBegin    0x0D95
+#define CpmTpOtherHotplugCard1RemoveEventEnd      0x0D96
+#define CpmTpOtherHotplugCard1InsertEventBegin    0x0D97
+#define CpmTpOtherHotplugCard1InsertEventEnd      0x0D98
+
+// CPM Features PcieInit WirelessButton Post Code
+#define CpmTpWirelessButtonEventPowerOffBegin     0x0D99
+#define CpmTpWirelessButtonEventPowerOffDevice    0x0D9A
+#define CpmTpWirelessButtonEventPowerOnBegin      0x0D9B
+#define CpmTpWirelessButtonEventPowerOnDevice     0x0D9C
+
+// CPM Features DisplayFeature DGpuD3Cold Post Code
+#define CpmTpDgpuPowerOnBegin                     0x0D9D
+#define CpmTpDgpuPowerOnBeforePcieTraining        0x0D9E
+#define CpmTpDgpuPowerOnPcieTrainingFailed        0x0D9F
+#define CpmTpDgpuPowerOnEnd                       0x0DA0
+#define CpmTpDgpuPowerOffBegin                    0x0DA1
+#define CpmTpDgpuPowerOffBeforePowerOff           0x0DA2
+#define CpmTpDgpuPowerOffEnd                      0x0DA3
+
+// CPM Features ZeroPowerOdd Post Code
+#define CpmTpZeroPowerOddRemoveQEvent_ODD_DA      0x0DA4
+#define CpmTpZeroPowerOddInsertQEvent_ODD_DA      0x0DA5
+#define CpmTpZeroPowerOddRemoveQEvent_ODD_PLUGIN  0x0DA6
+#define CpmTpZeroPowerOddInsertQEvent_ODD_PLUGIN  0x0DA7
+
+// CPM Features Ucsi Post Code
+#define CpmTpUcsiDsmF1Start                       0x0DA8
+#define CpmTpUcsiDsmF1End                         0x0DA9
+#define CpmTpUcsiDsmF2Start                       0x0DAA
+#define CpmTpUcsiDsmF2End                         0x0DAB
+#define CpmTpUcsiXQ50Start                        0x0DAC
+#define CpmTpUcsiXQ50End                          0x0DAD
+
+// CPM Features PcieInit OtherHotplug Post Code
+#define CpmTpOtherHotplugCardPTSStart             0x0DAE
+#define CpmTpOtherHotplugCardPTSEnd               0x0DAF
+#define CpmTpOtherHotplugCardWAKStart             0x0DB0
+#define CpmTpOtherHotplugCardWAKEnd               0x0DB1
+
+// CPM Features DisplayFeature DisplayConnectEvent Post Code
+#define CpmTpMxmHpdEventIn                        0x0DB2
+#define CpmTpMxmHpdEventOut                       0x0DB3
+
+// CPM Features AcpPowerGating Post Code
+#define CpmTpAcpAzaliaPowerGateOnStart            0x0DB4
+#define CpmTpAcpAzaliaPowerGateOnEnd              0x0DB5
+#define CpmTpAcpAzaliaPowerGateOffStart           0x0DB6
+#define CpmTpAcpAzaliaPowerGateOffEnd             0x0DB7
+
+// CPM Features PcieInit LowPowerEthernet Post Code
+#define CpmTpLowPowerEthernetCablePlugOutBegin    0x0DB8
+#define CpmTpLowPowerEthernetCablePlugOutEnd      0x0DB9
+#define CpmTpLowPowerEthernetCablePlugInBegin     0x0DBA
+#define CpmTpLowPowerEthernetCablePlugInEnd       0x0DBB
+#define CpmTpLowPowerEthernetEJ0Begin             0x0DBC
+#define CpmTpLowPowerEthernetEJ0End               0x0DBD
+#define CpmTpLowPowerEthernetWAKStart             0x0DBE
+#define CpmTpLowPowerEthernetWAKEnd               0x0DBF
+
+// CPM Features DisplayFeature DGpuD3Cold Post Code
+#define CpmTpDgpuPowerOnUnderPcieTraining         0x0DC0
+#define CpmTpDgpuPowerOnAfterPcieTraining         0x0DC1
+
+// CPM Features PcieInit WirelessLanRecovery Post Code
+#define CpmTpWirelessLanRecoveryResetStart        0x0DC2
+#define CpmTpWirelessLanRecoveryResetEnd          0x0DC3
+
+// CPM Features Thunderbolt Post Code
+#define CpmTpThunderbolt_TBFP_ON                  0x0DC4
+#define CpmTpThunderbolt_TBFP_OFF                 0x0DC5
+#define CpmTpThunderbolt_INI_Start                0x0DC6
+#define CpmTpThunderbolt_INI_End                  0x0DC7
+#define CpmTpThunderbolt_IPTS_Start               0x0DC8
+#define CpmTpThunderbolt_IPTS_End                 0x0DC9
+#define CpmTpThunderbolt_IWAK_Start               0x0DCA
+#define CpmTpThunderbolt_IWAK_End                 0x0DCB
+#define CpmTpThunderbolt_EE1B_Start               0x0DCC
+#define CpmTpThunderbolt_EE1B_End1                0x0DCD
+#define CpmTpThunderbolt_EE1B_End2                0x0DCE
+#define CpmTpThunderbolt_EE1B_End3                0x0DCF
+#define CpmTpThunderbolt_EE1B_End4                0x0DD0
+#define CpmTpThunderboltPowerOnBegin              0x0DD1
+#define CpmTpThunderboltPowerOnEnd                0x0DD2
+#define CpmTpThunderboltPowerOffBegin             0x0DD3
+#define CpmTpThunderboltPowerOffEnd               0x0DD4
+
+#define CpmTpSetDeviceResetAssertAfterGpioSet     0x0DD5
+#define CpmTpSetDeviceResetDeassertAfterGpioSet   0x0DD6
+#define CpmTpSetDeviceResetDelayAfterGpioSet      0x0DD7
+
+#define CpmTpSetDevicePowerOffAfterGpioSet        0x0DD8
+#define CpmTpSetDevicePowerOffAfterGpioWait       0x0DD9
+#define CpmTpSetDevicePowerOffAfterGpioDelay      0x0DDA
+#define CpmTpSetDevicePowerOnAfterGpioSet         0x0DDB
+#define CpmTpSetDevicePowerOnAfterGpioWait        0x0DDC
+#define CpmTpSetDevicePowerOnAfterGpioDelay       0x0DDD
+
+#define CpmTpBluetoothRecoveryResetStart          0x0DDE
+#define CpmTpBluetoothRecoveryResetEnd            0x0DDF
+
+#define CpmTpSetDeviceClockOffAfterClockSet       0x0DE0
+#define CpmTpSetDeviceClockOnAfterClockSet        0x0DE1
+#define CpmTpSetDeviceClockRequestAfterClockSet   0x0DE2
+
+// CPM HID Wireless Button
+#define CpmTpWirelessButtonHidDevXQ28Start        0x0DE3
+#define CpmTpWirelessButtonHidDevXQ28End          0x0DE4
+
+// SMBus
+#define CpmSmbusExecutorEnter                     0x0DE5
+#define CpmSmbusExecutorExit                      0x0DE6
+
+// _PTS and _WAK
+#define CpmTp_PTS_Start                           0x0DE7
+#define CpmTp_PTS_End                             0x0DE8
+#define CpmTp_WAK_Start                           0x0DE9
+#define CpmTp_WAK_End                             0x0DEA
+
+//Modern Standby Post Code
+//NVME D3 sequence
+#define CpmTpMsNvmePs0Method                      0x3050
+#define CpmTpMsNvmePs3Method                      0x3053
+#define CpmTpMsNvmeStaMethod                      0x30AA
+#define CpmTpMsNvmeOnMethodEntry                  0x30D0
+#define CpmTpMsNvmeOnMethodExit                   0x30D1
+#define CpmTpMsNvmeOffMethodEntry                 0x30D3
+#define CpmTpMsNvmeOffMethodExit                  0x30D5
+
+//XHCI0, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsXhci0Ps0Method                     0x3C01
+#define CpmTpMsXhci0Ps3Method                     0x3C03
+#define CpmTpMsXhci0S0wMethod                     0x3C04
+#define CpmTpMsXhci0Pr0StaMethod                  0x3C05
+#define CpmTpMsXhci0Pr0OnMethod                   0x3C06
+#define CpmTpMsXhci0Pr0OffMethod                  0x3C08
+#define CpmTpMsXhci0Pr3StaMethod                  0x3C0A
+#define CpmTpMsXhci0Pr3OnMethod                   0x3C0B
+#define CpmTpMsXhci0Pr3OffMethod                  0x3C0D
+
+//XHCI1, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsXhci1Ps0Method                     0x3D01
+#define CpmTpMsXhci1Ps3Method                     0x3D03
+#define CpmTpMsXhci1S0wMethod                     0x3D04
+#define CpmTpMsXhci1Pr0StaMethod                  0x3D05
+#define CpmTpMsXhci1Pr0OnMethod                   0x3D06
+#define CpmTpMsXhci1Pr0OffMethod                  0x3D08
+#define CpmTpMsXhci1Pr3StaMethod                  0x3D0A
+#define CpmTpMsXhci1Pr3OnMethod                   0x3D0B
+#define CpmTpMsXhci1Pr3OffMethod                  0x3D0D
+
+//XHCI2, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsXhci2Ps0Method                     0x3F01
+#define CpmTpMsXhci2Ps3Method                     0x3F03
+#define CpmTpMsXhci2S0wMethod                     0x3F04
+#define CpmTpMsXhci2Pr0StaMethod                  0x3F05
+#define CpmTpMsXhci2Pr0OnMethod                   0x3F06
+#define CpmTpMsXhci2Pr0OffMethod                  0x3F08
+#define CpmTpMsXhci2Pr3StaMethod                  0x3F0A
+#define CpmTpMsXhci2Pr3OnMethod                   0x3F0B
+#define CpmTpMsXhci2Pr3OffMethod                  0x3F0D
+
+//XHCI3, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsXhci3Ps0Method                     0x3F31
+#define CpmTpMsXhci3Ps3Method                     0x3F33
+#define CpmTpMsXhci3S0wMethod                     0x3F34
+#define CpmTpMsXhci3PrStaMethod                   0x3F35
+#define CpmTpMsXhci3PrOnMethod                    0x3F36
+#define CpmTpMsXhci3PrOffMethod                   0x3F38
+
+//XHCI4, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsXhci4Ps0Method                     0x3F41
+#define CpmTpMsXhci4Ps3Method                     0x3F43
+#define CpmTpMsXhci4S0wMethod                     0x3F44
+#define CpmTpMsXhci4PrStaMethod                   0x3F45
+#define CpmTpMsXhci4PrOnMethod                    0x3F46
+#define CpmTpMsXhci4PrOffMethod                   0x3F48
+
+//USB4 RT0, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsUsb4Rt0Ps0Method                   0x3F51
+#define CpmTpMsUsb4Rt0Ps3Method                   0x3F53
+#define CpmTpMsUsb4Rt0S0wMethod                   0x3F54
+#define CpmTpMsUsb4Rt0PrStaMethod                 0x3F55
+#define CpmTpMsUsb4Rt0PrOnMethod                  0x3F56
+#define CpmTpMsUsb4Rt0PrOffMethod                 0x3F58
+
+//USB4 RT1, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsUsb4Rt1Ps0Method                   0x3F61
+#define CpmTpMsUsb4Rt1Ps3Method                   0x3F63
+#define CpmTpMsUsb4Rt1S0wMethod                   0x3F64
+#define CpmTpMsUsb4Rt1PrStaMethod                 0x3F65
+#define CpmTpMsUsb4Rt1PrOnMethod                  0x3F66
+#define CpmTpMsUsb4Rt1PrOffMethod                 0x3F68
+
+//USB4 PCIe Tunneling 0, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsUsb4Pcie0Ps0Method                 0x3F71
+#define CpmTpMsUsb4Pcie0Ps3Method                 0x3F73
+#define CpmTpMsUsb4Pcie0S0wMethod                 0x3F74
+#define CpmTpMsUsb4Pcie0PrStaMethod               0x3F75
+#define CpmTpMsUsb4Pcie0PrOnMethod                0x3F76
+#define CpmTpMsUsb4Pcie0PrOffMethod               0x3F78
+
+//USB4 PCIe Tunneling 1, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsUsb4Pcie1Ps0Method                 0x3F81
+#define CpmTpMsUsb4Pcie1Ps3Method                 0x3F83
+#define CpmTpMsUsb4Pcie1S0wMethod                 0x3F84
+#define CpmTpMsUsb4Pcie1PrStaMethod               0x3F85
+#define CpmTpMsUsb4Pcie1PrOnMethod                0x3F86
+#define CpmTpMsUsb4Pcie1PrOffMethod               0x3F88
+
+//USB4 PCIe Endpoint 0, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsUsb4Pcie0EpPs0Method               0x3F91
+#define CpmTpMsUsb4Pcie0EpPs3Method               0x3F93
+#define CpmTpMsUsb4Pcie0EpS0wMethod               0x3F94
+#define CpmTpMsUsb4Pcie0EpPrStaMethod             0x3F95
+#define CpmTpMsUsb4Pcie0EpPrOnMethod              0x3F96
+#define CpmTpMsUsb4Pcie0EpPrOffMethod             0x3F98
+
+//USB4 PCIe Endpoint 1, These are dummy methods. the postcode means the methods are called by OS/Driver.
+#define CpmTpMsUsb4Pcie1EpPs0Method               0x3FA1
+#define CpmTpMsUsb4Pcie1EpPs3Method               0x3FA3
+#define CpmTpMsUsb4Pcie1EpS0wMethod               0x3FA4
+#define CpmTpMsUsb4Pcie1EpPrStaMethod             0x3FA5
+#define CpmTpMsUsb4Pcie1EpPrOnMethod              0x3FA6
+#define CpmTpMsUsb4Pcie1EpPrOffMethod             0x3FA8
+
+//GPIO INTERRUPT
+#define CpmTpMsGpio00InterruptEvent               0x3900
+#define CpmTpMsGpio01InterruptEvent               0x3901
+#define CpmTpMsGpio02InterruptEvent               0x3902
+#define CpmTpMsGpio03InterruptEvent               0x3903
+#define CpmTpMsGpio04InterruptEvent               0x3904
+#define CpmTpMsGpio05InterruptEvent               0x3905
+#define CpmTpMsGpio06InterruptEvent               0x3906
+#define CpmTpMsGpio07InterruptEvent               0x3907
+#define CpmTpMsGpio08InterruptEvent               0x3908
+#define CpmTpMsGpio09InterruptEvent               0x3909
+#define CpmTpMsGpio10InterruptEvent               0x390A
+#define CpmTpMsGpio11InterruptEvent               0x390B
+#define CpmTpMsGpio12InterruptEvent               0x390C
+#define CpmTpMsGpio13InterruptEvent               0x390D
+#define CpmTpMsGpio14InterruptEvent               0x390E
+#define CpmTpMsGpio15InterruptEvent               0x390F
+#define CpmTpMsGpio16InterruptEvent               0x3910
+#define CpmTpMsGpio17InterruptEvent               0x3911
+#define CpmTpMsGpio18InterruptEvent               0x3912
+#define CpmTpMsGpio19InterruptEvent               0x3913
+#define CpmTpMsGpio20InterruptEvent               0x3914
+#define CpmTpMsGpio21InterruptEvent               0x3915
+#define CpmTpMsGpio22InterruptEvent               0x3916
+#define CpmTpMsGpio23InterruptEvent               0x3917
+#define CpmTpMsGpio24InterruptEvent               0x3918
+#define CpmTpMsGpio25InterruptEvent               0x3919
+#define CpmTpMsGpio26InterruptEvent               0x391A
+#define CpmTpMsGpio27InterruptEvent               0x391B
+#define CpmTpMsGpio28InterruptEvent               0x391C
+#define CpmTpMsGpio29InterruptEvent               0x391D
+#define CpmTpMsGpio30InterruptEvent               0x391E
+#define CpmTpMsGpio31InterruptEvent               0x391F
+#define CpmTpMsGpio32InterruptEvent               0x3920
+#define CpmTpMsGpio33InterruptEvent               0x3921
+#define CpmTpMsGpio34InterruptEvent               0x3922
+#define CpmTpMsGpio35InterruptEvent               0x3923
+#define CpmTpMsGpio36InterruptEvent               0x3924
+#define CpmTpMsGpio37InterruptEvent               0x3925
+#define CpmTpMsGpio38InterruptEvent               0x3926
+#define CpmTpMsGpio39InterruptEvent               0x3927
+#define CpmTpMsGpio40InterruptEvent               0x3928
+#define CpmTpMsGpio41InterruptEvent               0x3929
+#define CpmTpMsGpio42InterruptEvent               0x392A
+#define CpmTpMsGpio43InterruptEvent               0x392B
+
+#define CpmTpMsGpio44InterruptEvent               0x392C
+#define CpmTpMsGpio45InterruptEvent               0x392D
+#define CpmTpMsGpio46InterruptEvent               0x392E
+#define CpmTpMsGpio47InterruptEvent               0x392F
+#define CpmTpMsGpio48InterruptEvent               0x3930
+#define CpmTpMsGpio49InterruptEvent               0x3931
+#define CpmTpMsGpio50InterruptEvent               0x3932
+#define CpmTpMsGpio51InterruptEvent               0x3933
+#define CpmTpMsGpio52InterruptEvent               0x3934
+#define CpmTpMsGpio53InterruptEvent               0x3935
+#define CpmTpMsGpio54InterruptEvent               0x3936
+#define CpmTpMsGpio55InterruptEvent               0x3937
+#define CpmTpMsGpio56InterruptEvent               0x3938
+#define CpmTpMsGpio57InterruptEvent               0x3939
+#define CpmTpMsGpio58InterruptEvent               0x393A
+#define CpmTpMsGpio59InterruptEvent               0x393B
+#define CpmTpMsGpio60InterruptEvent               0x393C
+#define CpmTpMsGpio61InterruptEvent               0x393D
+#define CpmTpMsGpio62InterruptEvent               0x393E
+#define CpmTpMsGpio68InterruptEvent               0x393F
+
+//uPEP
+#define CpmTpMsuPEPFuntion1Notification           0x3E01
+#define CpmTpMsuPEPFuntion2Notification           0x3E02
+#define CpmTpMsuPEPDisplayOffNotification         0x3E03
+#define CpmTpMsuPEPDisplayOnNotification          0x3E04
+#define CpmTpMsuPEPLPSEntryNotification           0x3E05
+#define CpmTpMsuPEPLPSExitNotification            0x3E06
+#define CpmTpMsuPEPMoStEntryNotification          0x3E07
+#define CpmTpMsuPEPMoStExitNotification           0x3E08
+//uPEP Legacy postcode
+#define CpmTpMsuPEPDripsEntryHook                 0x3E02
+#define CpmTpMsuPEPDripsExitHook                  0x3E03
+#define CpmTpMsuPEPDisplayOffHook                 0x3E04
+#define CpmTpMsuPEPDisplayOnHook                  0x3E05

@@ -1,0 +1,46 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  VERSION_STRING          = 1.0
+  BASE_NAME               = DashPldmSmbios
+  MODULE_TYPE             = DXE_DRIVER
+  FILE_GUID               = ba2ef68e-3f4f-4532-909d-5c23220df84b
+  ENTRY_POINT             = DashPldmSmbiosEntry
+
+[Sources]
+  DashPldmSmbios.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AmdCommonPkg/AmdCommonPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  DebugLib
+  PrintLib
+  ApcbLibV3
+  CommonSetupLib
+
+[Protocols]
+  gAmdDashPldmProtocolGuid
+  gEfiSmbiosProtocolGuid
+  gAmdApcbDxeServiceProtocolGuid
+  gEfiVariableArchProtocolGuid
+
+[Guids]
+  gEfiSmbiosTableGuid
+  gEfiEventReadyToBootGuid
+
+[Depex]
+  gAmdDashPldmProtocolGuid AND
+  gEfiVariableArchProtocolGuid

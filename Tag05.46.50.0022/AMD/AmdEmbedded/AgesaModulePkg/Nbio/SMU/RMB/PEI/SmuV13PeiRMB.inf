@@ -1,0 +1,60 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmuV13Pei
+  FILE_GUID                      = 2ED8BC59-0671-49ED-A86F-1B6760B380A8
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = SmuV13PeiEntry
+
+[Sources]
+  SmuDriverEntry.c
+  EarlyInitFeature.c
+  SmuServicesPpi.c
+  CcxTopologyPpi.c
+  SmuV13Pei.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  AmdBaseLib
+  IdsLib
+  HobLib
+  PeimEntryPoint
+  PeiServicesLib
+  NbioHandleLib
+  SmnAccessLib
+  NbioSmuV13Lib
+  AmdIdsHookLib
+  NbioIdsHookRmbLibPei
+  AmdPspApobLib
+  BaseMemoryLib
+
+[Guids]
+  gGnbPcieHobInfoGuid
+
+[Ppis]
+  gAmdCoreTopologyServicesV2PpiGuid
+  gAmdNbioSmuServicesPpiGuid
+  gAmdNbioBaseServicesRmbPpiGuid
+  gAmdNbioPcieServicesPpiGuid
+
+[Pcd]
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdPreSilCtrl1
+
+[Depex]
+  gAmdNbioSmuV13PeiDepexPpiGuid AND
+  gAmdNbioPcieServicesPpiGuid AND #Consumed
+  gAmdNbioBaseServicesRmbPpiGuid
+
+
+

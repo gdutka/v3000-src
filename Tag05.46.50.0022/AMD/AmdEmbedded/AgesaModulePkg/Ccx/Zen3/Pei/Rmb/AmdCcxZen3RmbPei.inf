@@ -1,0 +1,136 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdCcxZen3RmbPei
+  FILE_GUID                      = 7A3FA48C-12F2-4B0E-9E74-2977711F598B
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdCcxZen3RmbPeiInit
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleCcxPkg.dec
+  AgesaModulePkg/AgesaModuleDfPkg.dec
+  AgesaModulePkg/AgesaModuleNbioPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AgesaModulePkg/AgesaFamily19ModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  PeiServicesLib
+  AmdBaseLib
+  IdsLib
+  CcxBaseX86Lib
+  CcxRolesLib
+  CcxResetTablesLib
+  CcxApicZen3Lib
+  CcxPeiSmmAccessLib
+  AmdIdsHookLib
+  CcxZen3RmbIdsHookLibPei
+  FchBaseLib
+  AmdCapsuleLib
+  AmdPspApobLib
+  BaseMemoryLib
+  AmdErrorLogLib
+  ApobCommonServiceLib
+  MemRestoreLib
+  CcxSetMcaLib
+  CcxHaltLib
+  MemoryAllocationLib
+  CcxMicrocodePatchLib
+  FabricWdtLib
+
+[sources]
+  AmdCcxZen3RmbPei.c
+  AmdCcxZen3RmbPei.h
+  ../CcxZen3BrandString.c
+  ../CcxZen3BrandString.h
+  ../CcxZen3CacheInit.c
+  ../CcxZen3CacheInit.h
+  ../CcxZen3DownCoreInit.c
+  ../CcxZen3DownCoreInit.h
+
+[Sources.Ia32]
+  ../Ia32/ApAsm.nasm
+
+[Guids]
+  gApSyncFlagNvVariableGuid
+  gEfiAmdAgesaSpecificWarmResetGuid
+
+[Protocols]
+
+[Ppis]
+  gAmdFabricTopologyServices2PpiGuid #CONSUMED
+  gAmdCcxPeiInitCompletePpiGuid      #PRODUCED
+  gAmdCoreTopologyServicesV2PpiGuid  #CONSUMED
+  gAmdNbioSmuServicesPpiGuid         #CONSUMED
+  gAmdErrorLogPpiGuid                #CONSUMED
+  gAmdSocZen3ServicesPpiGuid         #CONSUMED
+  gEfiPeiReset2PpiGuid               #CONSUMED
+  gEfiPeiReadOnlyVariable2PpiGuid    #CONSUMED
+  gEfiPeiMpServicesPpiGuid           #CONSUMED
+  gEfiEndOfPeiSignalPpiGuid          #CONSUMED
+  gPeiSmmAccessPpiGuid               #CONSUMED
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCcdMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdDownCoreMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmtMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdAcpiS3Support
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSmee
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdApicMode
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd0
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd1
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd2
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd4
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd5
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd6
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCoreDisCcd7
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdGameMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCpuWdtEn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCpuWdtTimeout
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdL1StreamPrefetcher
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdL2StreamPrefetcher
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdCpuWdtSeverity
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspS3WakeFromSmm
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdNewDownCoreSequence
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdRedirectForReturnDis
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdOpcacheCtrl
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdStreamingStoresCtrl
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnableFSRM
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnableERMS
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdEnableRMSS
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdIbsHardwareEn
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdL1StreamPrefetcher
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdL2StreamPrefetcher
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdL1StridePrefetcher
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdL1RegionPrefetcher
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdL2StreamPrefetcher
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdL2UpDownPrefetcher
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCStateMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCStateIoBaseAddress
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCc6Ctrl
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdCpbMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdHardwarePrefetchMode
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdSoftwarePrefetchMode
+
+[Depex]
+  gAmdCcxZen3RmbDepexPpiGuid AND
+  gAmdFabricTopologyServices2PpiGuid AND
+  gAmdCoreTopologyServicesV2PpiGuid AND
+  gAmdNbioSmuServicesPpiGuid AND
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gAmdPspCommonServicePpiGuid AND
+  gApobCommonServicePpiGuid

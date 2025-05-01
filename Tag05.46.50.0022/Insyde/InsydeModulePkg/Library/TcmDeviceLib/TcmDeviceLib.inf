@@ -1,0 +1,49 @@
+## @file
+#  Provides TCM TIS functions
+#  
+#  This library implements TIS (TPM/TCM Interface Specification) functions which is 
+#  used for every TCM command. Choosing this library means platform uses and 
+#  only uses TCM device.
+#
+#******************************************************************************
+#* Copyright (c) 2012 - 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = TcmDeviceLib
+  FILE_GUID                      = 9E9BA8D4-1F84-4e9e-A04B-C32BD2A49996
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = TcmDeviceLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  TcmTis.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SecurityPkg/SecurityPkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  IoLib
+  TimerLib
+  DebugLib
+
+[Pcd]
+  gEfiSecurityPkgTokenSpaceGuid.PcdTpmBaseAddress               ## CONSUMES

@@ -1,0 +1,55 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdUsb4Pei
+  FILE_GUID                      = 617362EF-CAFF-47D4-A131-E95E4A345751
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdUsb4PeiEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleUsb4Pkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  FchBaseLib
+  AmdCapsuleLib
+  FabricResourceManagerLib
+  AmdUsb4BaseLib
+  PeiServicesTablePointerLib
+
+[Sources]
+  AmdUsb4Pei.c
+  ../AmdUsb4Common/AmdUsb4Common.c
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+  gEfiPeiMemoryDiscoveredPpiGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdUsb4CmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4Gen3RsFec
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4Gen2RsFec
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4Gen3Support
+
+[Depex]
+  gEfiPeiMemoryDiscoveredPpiGuid AND
+  gAmdFchInitPpiGuid
+
+[BuildOptions]
+
+

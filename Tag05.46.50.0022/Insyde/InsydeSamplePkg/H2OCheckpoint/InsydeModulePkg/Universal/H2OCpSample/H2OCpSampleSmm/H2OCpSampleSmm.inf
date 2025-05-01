@@ -1,0 +1,57 @@
+## @file
+#  Component description file for H2OCpSampleSmm Driver.
+#
+#******************************************************************************
+#* Copyright (c) 2017, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = H2OCpSampleSmm
+  FILE_GUID                      = B0E4D3B5-F37E-4657-A3AE-001742E72FCA
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = H2OCpSampleSmmEntryPoint
+
+[Sources]
+  H2OCpSampleSmm.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  BaseLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  DebugLib
+#[-start-H2OCpSampleSmm-add]#
+  H2OCpLib
+#[-end-H2OCpSampleSmm-add]#
+
+[Guids]
+#[-start-H2OCpSampleSmm-add]#
+  gH2OSmmCpXxxYyyZzzGuid
+#[-end-H2OCpSampleSmm-add]#
+
+
+[FeaturePcd]
+#[-start-H2OCpSampleSmm-add]#
+  gInsydeTokenSpaceGuid.PcdH2OSmmCpXxxYyyZzzSupported
+#[-end-H2OCpSampleSmm-add]#
+
+[Depex]
+  TRUE
+
+

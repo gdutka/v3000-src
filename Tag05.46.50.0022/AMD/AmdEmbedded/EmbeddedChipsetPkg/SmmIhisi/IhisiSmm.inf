@@ -1,0 +1,99 @@
+## @file
+#  Component description file for IhisiSmm module
+#
+#******************************************************************************
+#* Copyright (c) 2015 - 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+INF_VERSION                    = 0x00010005
+BASE_NAME                      = IhisiSmm
+FILE_GUID                      = 7B7B65B6-E350-4139-8FE4-665772D32A47
+MODULE_TYPE                    = DXE_SMM_DRIVER
+PI_SPECIFICATION_VERSION       = 0x0001000A
+VERSION_STRING                 = 1.0
+ENTRY_POINT                    = IhisiEntryPoint
+
+[Sources]
+  IhisiSmm.h
+  IhisiSmm.c
+  Fbts.h
+  Fbts.c
+  ChipsetSecureFlash.h
+  ChipsetSecureFlash.c
+  ChipsetUpdateFlashSequence.c
+  ChipsetUpdateFlashSequence.h
+
+[Packages]
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  $(PROJECT_PKG)/Project.dec
+  InsydeOemServicesPkg/InsydeOemServicesPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  AgesaModulePkg/AgesaModuleFchPkg.dec
+  AmdPspFeaturePkg/AmdPspFeaturePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  UefiDriverEntryPoint
+  DebugLib
+  SpiAccessLib
+  FchDxeLibV9
+  FdSupportLib
+  BaseOemSvcKernelLibDefault
+  SmmServicesTableLib
+  BaseLib
+  BaseMemoryLib
+  SmmOemSvcKernelLibDefault
+  VariableLib
+  H2OLib
+  BvdtLib
+  SeamlessRecoveryLib
+
+[Protocols]
+  gH2OIhisiProtocolGuid
+  gEfiSmmFwBlockServiceProtocolGuid
+  gH2OIhisiFbtsToolVersionProtocolGuid
+  gEfiSecureFlashEspFlagProtocolGuid
+  
+[Guids]
+  gSystemConfigurationGuid
+  gPreventFlashPowerLossGuid
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdH2OIhisiFbtsSupported
+  gInsydeTokenSpaceGuid.PcdH2OIhisiFbts2Supported
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.PcdH2OEcSharedFlashSupported
+  gChipsetPkgTokenSpaceGuid.PcdH2OEcReInitAfterFlash
+  gChipsetPkgTokenSpaceGuid.PcdH2OEcIdlePerWriteBlockSupported
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEcBase
+  gChipsetPkgTokenSpaceGuid.PcdH2OFlashFvEcSize
+  gInsydeTokenSpaceGuid.PcdIhisiRegisterTable
+  gInsydeTokenSpaceGuid.PcdSecureFlashSupported
+  gChipsetPkgTokenSpaceGuid.PcdH2OBiosUpdateFlashSequenceEnabled
+  gInsydeTokenSpaceGuid.PcdFlashAreaBaseAddress
+  gInsydeTokenSpaceGuid.PcdFlashAreaSize
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPSPL1HdrBase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashBackupPSPL1HdrBase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashImageSlot1HdrBase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspDirABase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspDirBBase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPeiFlashBBase
+  gInsydeTokenSpaceGuid.PcdFlashFvMainBase
+  gInsydeTokenSpaceGuid.PcdFlashFvRecoveryBase
+  gAmdPspFeaturePkgTokenSpaceGuid.PcdFlashPspNvRamBase
+
+[Depex]
+  gH2OIhisiProtocolGuid AND
+  gEfiSmmFwBlockServiceProtocolGuid
+

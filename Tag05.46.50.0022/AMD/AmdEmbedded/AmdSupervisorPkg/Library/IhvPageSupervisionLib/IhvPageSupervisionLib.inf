@@ -1,0 +1,31 @@
+##
+#  Instance of AMD DRTM page supervision layer. This library provides
+#  supervision over pages covering PSP MMIO, etc.
+#
+#  Copyright (c) Microsoft Corporation.
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = IhvPageSupervisionLib
+  FILE_GUID                      = 041E686B-D43A-4104-9495-62E5F2AAA2E1
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = IhvPageSupervisionLib
+
+[Sources]
+  IhvPageSupervisionLib.c
+
+[LibraryClasses]
+  DebugLib
+  MemoryAllocationLib
+  SmmSupvPspMmioLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SmmSupervisorPkg/SmmSupervisorPkg.dec
+  AmdSupervisorPkg/AmdSupervisorPkg.dec
+

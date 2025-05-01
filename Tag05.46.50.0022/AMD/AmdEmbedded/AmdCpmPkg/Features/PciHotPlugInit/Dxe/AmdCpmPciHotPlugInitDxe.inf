@@ -1,0 +1,48 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2020-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION           = 0x00010006
+  BASE_NAME             = AmdCpmPciHotPlugInitDxe
+  FILE_GUID             = E59BCFD8-6887-4724-84DC-FEE2EDE230D0
+  MODULE_TYPE           = DXE_DRIVER
+  VERSION_STRING        = 1.0
+  ENTRY_POINT           = AmdCpmPciHotPlugInitEntryPoint
+
+[Sources.common]
+  AmdCpmPciHotPlugInitDxe.c
+  AmdCpmPciHotPlugInitDxe.h
+
+[Sources.ia32]
+
+[Sources.x64]
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  UefiDriverEntryPoint
+  AmdCpmBaseLib
+
+[Guids]
+
+[Protocols]
+  gAmdCpmTableProtocolGuid
+  gEfiPciHotPlugInitProtocolGuid
+
+[Ppis]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdCpmPciHotPlugSupport
+
+[Depex]
+  gAmdCpmTableProtocolGuid
+

@@ -1,0 +1,176 @@
+## @file
+#  Common Makefile for project build
+#
+#******************************************************************************
+#* Copyright (c) 2022, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+#
+# Build options for build targets
+#
+DDT_BUILD      = "-D INSYDE_DEBUGGER=YES"
+EFI_DEBUG      = "-D EFI_DEBUG=YES"
+DDT_DEBUG      = "-D INSYDE_DEBUGGER=YES -D EFI_DEBUG=YES"
+EFI_DEBUG_DDT  = "-D INSYDE_DEBUGGER=YES -D EFI_DEBUG=YES"
+PERF_BUILD     = "-D SYMBOLIC_DEBUG=YES -D INSYDE_DEBUGGER=NO -D EFI_DEBUG=NO -D FIRMWARE_PERFORMANCE=YES"
+EFI_DEBUG_USB  = "-D EFI_DEBUG=YES -D USB_DEBUG_SUPPORT=YES"
+CBT_DEBUG      = "-D SYMBOLIC_DEBUG=YES -D H2OCBT_SUPPORT=YES"
+
+QEMU_NVME_DIR   = $(WORKSPACE)\Build\$(PROJECT_PKG)\DEBUG_$(TOOL_CHAIN)\VirtualDrive_NVME
+QEMU_USB_DIR    = $(WORKSPACE)\Build\$(PROJECT_PKG)\DEBUG_$(TOOL_CHAIN)\VirtualDrive_USB
+QEMU_NVME_DRIVE = -drive file=fat:rw:$(QEMU_NVME_DIR),format=raw,media=disk,if=none,id=nvm -device nvme,serial=NVME00,drive=nvm
+QEMU_USB_DRIVE  = -drive file=fat:rw:$(QEMU_USB_DIR),format=raw,media=disk,if=none,id=usb -device usb-storage,serial=USB00,drive=usb
+QEMU_OPTIONS    = -M virt -m 1024 -serial stdio -device virtio-gpu-pci -device usb-ehci -device usb-kbd -device usb-mouse $(QEMU_USB_DRIVE) $(QEMU_NVME_DRIVE) -bios $(WORKSPACE)\Build\$(PROJECT_PKG)\DEBUG_$(TOOL_CHAIN)\FV\QEMU_EFI.fd
+
+ifndef BUILD_MODE
+#
+# Available build modes
+# -q: Quiet mode - disable all messages except fatal errors, module based messages
+# -s: Silent mode - file based messages
+# -v: Turn on verbose output with informational messages printed
+#
+BUILD_MODE     = -q --Dynamic-to-DynamicEx
+endif
+
+ifndef BUILD_REPORT
+BUILD_REPORT = -Y PCD -Y DEPEX -Y LIBRARY -y $(WORKSPACE)/Build/$(PROJECT_PKG)/BuildReport.txt
+endif
+
+## @BuildTarget "AARCH64", RELEASE, Release build for ARM 64-bit CPU Arch.
+arm:
+	$(MAKE) release BUILD_TARGET=$@
+
+## @BuildTarget "AARCH64", RELEASE, Release build for ARM 64-bit CPU Arch.
+arm64:
+	@$(MAKE) debug BUILD_TARGET=$@ BUILD_TARGET_OPTIONS=$(EFI_DEBUG)
+
+## @BuildTarget "AARCH64", RELEASE, Release build for ARM 64-bit CPU Arch.
+aarch64:
+	$(MAKE) release BUILD_TARGET=$@
+
+## @BuildTarget "AARCH64", RELEASE, Release build for ARM 64-bit CPU Arch.
+aarch64dbg:
+	@$(MAKE) debug BUILD_TARGET=$@ BUILD_TARGET_OPTIONS=$(EFI_DEBUG)
+
+## @BuildTarget "Common", RELEASE, Release package build for InsydeModulePkg package
+kernel: cleancache
+	set PROJECT_PKG=InsydeModulePkg
+	nmake genfont
+	nmake genlayout
+	set PROJECT_PKG=
+	@build -p InsydeModulePkg\InsydeModulePkg.dsc -N -s -b RELEASE --Dynamic-to-DynamicEx
+
+qemu: cleancache gen_debug_target genfont genlayout clean_debug_var clean_debug_vfr gen_build_pcd_value
+ifeq ($(PROJECT_PKG), )
+	@for /f %%i in ('GetProjectEnv PROJECT_PKG') do $(MAKE) /nologo $@ BUILD_TARGET=$@ %i
+else
+ifeq ($(BUILD_PCD_VALUE), )
+	@for /f "tokens=*" %%a in ($(WORKSPACE)\Build\BuildPcdValue.txt) do $(MAKE) $@ BUILD_PCD_VALUE="%%a"
+else
+	@if exist ProjectPreBuild.bat call ProjectPreBuild.bat $(ARCH)
+	@build -N -q -s -a $(ARCH) -b DEBUG $(BUILD_TARGET_OPTIONS) $(BUILD_PCD_VALUE) -D PROJECT_REL_PATH=$(PROJECT_REL_PATH)
+	@if exist ProjectPostBuild.bat call ProjectPostBuild.bat $(ARCH)
+endif
+endif
+
+runqemu: cleancache
+	@if not exist "$(QEMU_PATH)" @echo !!! ERROR !!!  QEMU is not found in $(QEMU_PATH). Please install QEMU or define correct path to QEMU_PATH in ProjectSetup.bat. && @exit /b 1
+ifeq ($(PROJECT_PKG), )
+	@GetProjectEnv PROJECT_PKG > NUL
+	@for /f %%i in ('GetProjectEnv PROJECT_PKG') do $(MAKE) $@ %i
+else
+#
+# Add a fake OS loader file in virtual storage drives.
+#
+	@if not exist $(QEMU_USB_DIR)\EFI\Boot mkdir $(QEMU_USB_DIR)\EFI\Boot
+	@if not exist $(QEMU_NVME_DIR)\EFI\Microsoft\Boot mkdir $(QEMU_NVME_DIR)\EFI\Microsoft\Boot
+ifeq ("$(ARCH)", "ARM")
+	@copy /y $(WORKSPACE)\EDK2\ShellBinPkg\UefiShell\Arm\Shell.efi $(QEMU_USB_DIR)\EFI\Boot\BOOTARM.efi
+	@copy /y $(WORKSPACE)\EDK2\ShellBinPkg\UefiShell\Arm\Shell.efi $(QEMU_NVME_DIR)\EFI\Microsoft\Boot\bootmgfw.efi
+	"$(QEMU_PATH)\qemu-system-arm.exe" -cpu cortex-a15 $(QEMU_OPTIONS)
+else
+	@copy /y $(WORKSPACE)\EDK2\ShellBinPkg\UefiShell\AArch64\Shell.efi $(QEMU_USB_DIR)\EFI\Boot\BOOTAA64.efi
+	@copy /y $(WORKSPACE)\EDK2\ShellBinPkg\UefiShell\AArch64\Shell.efi $(QEMU_NVME_DIR)\EFI\Microsoft\Boot\bootmgfw.efi
+	"$(QEMU_PATH)\qemu-system-aarch64.exe" -cpu cortex-a57 $(QEMU_OPTIONS)
+endif
+endif
+
+cleancache:
+	@if exist $(WORKSPACE)\Conf\.cache rmdir $(WORKSPACE)\Conf\.cache /s /q
+
+clean: cleancache
+	@if exist $(WORKSPACE)\Build rmdir $(WORKSPACE)\Build /s /q
+
+release: cleancache gen_release_target genfont genlayout
+ifeq ("$(PROJECT_PKG)","")
+	@GetProjectEnv PROJECT_PKG > NUL 
+	@for /f %%i in ('GetProjectEnv PROJECT_PKG') do $(MAKE) $@ %i
+else
+	if exist ProjectPreBuild.bat call ProjectPreBuild.bat $(BUILD_TARGET)
+	build -N $(BUILD_MODE) $(BUILD_TARGET_OPTIONS) $(BUILD_REPORT) $(PROJECT_BUILD_OPTIONS)
+	if exist ProjectPostBuild.bat call ProjectPostBuild.bat $(BUILD_TARGET)
+endif	
+
+debug: cleancache gen_debug_target genfont genlayout
+ifeq ("$(PROJECT_PKG)","")
+	@GetProjectEnv PROJECT_PKG > NUL 
+	@for /f %%i in ('GetProjectEnv PROJECT_PKG') do $(MAKE) $@ %i
+else
+	if exist ProjectPreBuild.bat call ProjectPreBuild.bat $(BUILD_TARGET)
+	build -N $(BUILD_MODE) $(BUILD_TARGET_OPTIONS) $(BUILD_REPORT) $(PROJECT_BUILD_OPTIONS)
+	if exist ProjectPostBuild.bat call ProjectPostBuild.bat $(BUILD_TARGET)
+endif
+
+genfont:
+ifneq ("$(PROJECT_PKG)","")
+	@create_temporary_font_hpk.bat
+endif
+
+genlayout:
+ifneq ("$(PROJECT_PKG)","")
+	@create_temporary_layout_hpk.bat
+endif
+
+gen_build_pcd_value:
+ifeq ($(BUILD_PCD_VALUE), )
+	create_temporary_build_pcd.bat
+else
+	@if exist $(WORKSPACE)\Build\BuildPcdValue.txt del $(WORKSPACE)\Build\BuildPcdValue.txt
+endif
+
+clean_release_var:
+	@if exist $(WORKSPACE)\Build\$(PROJECT_PKG)\RELEASE_$(TOOL_CHAIN)\FV\VarFile rmdir $(WORKSPACE)\Build\$(PROJECT_PKG)\RELEASE_$(TOOL_CHAIN)\FV\VarFile /s /q
+
+clean_debug_var:
+	@if exist $(WORKSPACE)\Build\$(PROJECT_PKG)\DEBUG_$(TOOL_CHAIN)\FV\VarFile rmdir $(WORKSPACE)\Build\$(PROJECT_PKG)\DEBUG_$(TOOL_CHAIN)\FV\VarFile /s /q
+
+clean_release_vfr:
+	@if exist $(WORKSPACE)\Build\$(PROJECT_PKG)\RELEASE_$(TOOL_CHAIN)\FV\VfrFile rmdir $(WORKSPACE)\Build\$(PROJECT_PKG)\RELEASE_$(TOOL_CHAIN)\FV\VfrFile /s /q
+
+clean_debug_vfr:
+	@if exist $(WORKSPACE)\Build\$(PROJECT_PKG)\DEBUG_$(TOOL_CHAIN)\FV\VfrFile rmdir $(WORKSPACE)\Build\$(PROJECT_PKG)\DEBUG_$(TOOL_CHAIN)\FV\VfrFile /s /q
+
+gen_release_target:
+	@echo ACTIVE_PLATFORM              = Build\$(PROJECT_PKG)\Project.dsc >  $(WORKSPACE)\Conf\target.txt
+	@echo TARGET_ARCH                  = $(ARCH)                          >> $(WORKSPACE)\Conf\target.txt
+	@echo TARGET                       = RELEASE                          >> $(WORKSPACE)\Conf\target.txt
+	@echo TOOL_CHAIN_CONF              = Conf\tools_def.txt               >> $(WORKSPACE)\Conf\target.txt
+	@echo TOOL_CHAIN_TAG               = $(TOOL_CHAIN)                    >> $(WORKSPACE)\Conf\target.txt
+	@echo MAX_CONCURRENT_THREAD_NUMBER = $(NUMBER_OF_PROCESSORS)          >> $(WORKSPACE)\Conf\target.txt
+	@echo BUILD_RULE_CONF              = Conf\build_rule.txt              >> $(WORKSPACE)\Conf\target.txt
+
+gen_debug_target:
+	@echo ACTIVE_PLATFORM              = Build\$(PROJECT_PKG)\Project.dsc >  $(WORKSPACE)\Conf\target.txt
+	@echo TARGET_ARCH                  = $(ARCH)                          >> $(WORKSPACE)\Conf\target.txt
+	@echo TARGET                       = DEBUG                            >> $(WORKSPACE)\Conf\target.txt
+	@echo TOOL_CHAIN_CONF              = Conf\tools_def.txt               >> $(WORKSPACE)\Conf\target.txt
+	@echo TOOL_CHAIN_TAG               = $(TOOL_CHAIN)                    >> $(WORKSPACE)\Conf\target.txt
+	@echo MAX_CONCURRENT_THREAD_NUMBER = $(NUMBER_OF_PROCESSORS)          >> $(WORKSPACE)\Conf\target.txt
+	@echo BUILD_RULE_CONF              = Conf\build_rule.txt              >> $(WORKSPACE)\Conf\target.txt
+

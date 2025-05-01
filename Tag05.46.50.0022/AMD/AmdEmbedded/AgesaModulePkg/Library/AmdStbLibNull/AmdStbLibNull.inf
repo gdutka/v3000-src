@@ -1,0 +1,40 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdStbLibNull
+  FILE_GUID                      = 953a872e-8aab-470a-a13e-f2d45f2cc76e
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmdStbLib
+
+[Sources.common]
+  AmdStbLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+
+[LibraryClasses]
+
+
+[Guids]
+
+[Protocols]
+
+[Ppis]
+
+
+[Pcd]
+
+
+[Depex]
+  TRUE
+
+[BuildOptions]
+
+

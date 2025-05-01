@@ -1,0 +1,47 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2022-2023 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;*****************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = AmdVariableProtection
+  FILE_GUID                      = 0F411BE5-B10C-4DDA-B28C-868FC24789F8
+  MODULE_TYPE                    = DXE_RUNTIME_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdVariableProtectionEntry
+
+[Sources]
+  AmdVariableProtection.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmdCpmPkg/AmdCpmPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  BaseMemoryLib
+  DebugLib
+  PcdLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  HobLib
+  AmdVariableProtectionLib
+
+[Guids]
+  gEfiEventReadyToBootGuid
+[Protocols]
+  gEfiHiiConfigRoutingProtocolGuid
+
+[Pcd]
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdVariableProtection
+  gAmdCpmPkgTokenSpaceGuid.PcdAmdVariableProtectionTable
+
+[Depex]
+  gEfiVariableWriteArchProtocolGuid
+

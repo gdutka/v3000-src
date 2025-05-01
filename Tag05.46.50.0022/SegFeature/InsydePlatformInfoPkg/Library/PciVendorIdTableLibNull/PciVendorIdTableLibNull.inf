@@ -1,0 +1,32 @@
+## @file
+#  Component description file of PciVendorIdTableLib.
+#
+#******************************************************************************
+#* Copyright (c) 2021, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PciVendorIdTableLibNull
+  FILE_GUID                      = E7227AAC-9B28-4B11-B155-F3607B46B3F0
+  MODULE_TYPE                    = UEFI_DRIVER
+  LIBRARY_CLASS                  = PciVendorIdTableLib
+
+[Sources]
+  PciVendorIdTableLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+

@@ -1,0 +1,10 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+  INF AgesaModulePkg/Fch/Prom21/Pei/FchProm21Pei.inf
+  INF AgesaModulePkg/Fch/Prom21/Pei/FchProm21GpioPei.inf
+  INF AgesaModulePkg/Fch/Prom21/Pei/FchProm21CbsPei.inf
+

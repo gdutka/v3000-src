@@ -1,0 +1,282 @@
+## @file
+#  PlatformBdsLib
+#
+#******************************************************************************
+#* Copyright (c) 2014 - 2020, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+##
+#
+#  Provide NULL implementation for PlatformBdsLib library class interfaces which
+#  should be implemented by OEM.
+#
+#  Copyright (c) 2007 - 2010, Intel Corporation. All rights reserved.<BR>
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PlatformBdsLib
+  FILE_GUID                      = 143B5044-7C1B-4904-9778-EA16F1F3D554
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PlatformBdsLib|DXE_DRIVER
+  CONSTRUCTOR                    = PlatformBdsLibConstructor
+
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 EBC
+#
+[Sources.IA32]
+  Ia32/CallSmmIhisiBiosGuard.asm    |MSFT
+  Ia32/CallSmmIhisiBiosGuard.jwasm  |GCC
+
+[Sources.X64]
+  X64/CallSmmIhisiBiosGuard.asm     |MSFT
+  X64/CallSmmIhisiBiosGuard.jwasm   |GCC
+  X64/CallSmmAsfSecureBoot.asm      |MSFT
+
+[Sources]
+  Isvt.asm    |MSFT
+  Isvt.jwasm  |GCC
+
+  Strings.uni
+  BootDevicesDisplayStrings.uni
+  BdsPlatform.h
+
+  BdsPlatform.c
+  PlatformData.c
+  OemHotKey.c
+  BootDevicesDisplay.c
+  VideoOutputPortSelection.c
+  String.c
+
+  AsfSupport.c
+  AsfSupport.h
+  WaitForMePlatformReadyToBootEvent.c
+  WaitForMePlatformReadyToBootEvent.h
+
+  IntelRemapPwd.c
+  IntelRemapPwd.h
+  IntelTgHddPwd.c
+  IntelTgHddPwd.h
+
+[Packages]
+  $(CHIPSET_REF_CODE_PKG)/$(CHIPSET_REF_CODE_DEC_NAME).dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeOemServicesPkg/InsydeOemServicesPkg.dec
+  IntelSiliconPkg/IntelSiliconPkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  $(PROJECT_PKG)/Project.dec
+  ClientSiliconPkg/ClientSiliconPkg.dec
+  InsydeCrPkg/InsydeCrPkg.dec
+  ClientCommonPkg/ClientCommonPkg.dec
+  SecurityPkg/SecurityPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  DxeServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  PcdLib
+  GenericBdsLib
+  GenericUtilityLib
+  UefiLib
+  HiiLib
+  ReportStatusCodeLib
+  PrintLib
+  PerformanceLib
+  HobLib
+  DevicePathLib
+  OemGraphicsLib
+  PostCodeLib
+  IoLib
+  DxeAmtHeciLib
+  DxeServicesLib
+  DxeOemSvcKernelLibDefault
+  FlashDevicesLib
+  DxeOemSvcChipsetLibDefault
+  DxeInsydeChipsetLib
+  PchInfoLib
+  H2OCpLib
+  UefiBootManagerLib
+  VariableLib
+  ConfigBlockLib
+  PchPcieRpLib
+  DxeAsfLib
+  PciSegmentLib
+  UefiBootManagerLib
+  ChipsetCapsuleRecoveryLib
+
+[Guids]
+  gFrontPageFormSetGuid
+  gEfiIfrTianoGuid
+  gBootMaintFormSetGuid
+  gFileExploreFormSetGuid
+  gEfiGlobalVariableGuid
+  gEfiGenericVariableGuid
+  gEfiCapsuleVendorGuid
+  gEfiRecoveryFileAddressGuid
+  gEfiEndOfDxeEventGroupGuid
+  gMeBiosPayloadHobGuid
+  gH2OBdsCpDisplayBeforeGuid
+  gH2OBdsCpReadyToBootBeforeGuid
+  gSystemConfigurationGuid
+#  gConsoleRedirectionSupportGuid
+  gAmtDxeConfigGuid
+  gChassisIntrudeDetHobGuid
+  gSaSetupVariableGuid
+  gPchSetupVariableGuid
+  gHaloMd2VariableGuid
+  gMePlatformReadyToBootGuid
+  gMeBiosExtensionSetupGuid
+#[-start-180412-IB11270199-add]#
+  gAmtMebxDataGuid
+#[-end-180412-IB11270199-add]#
+  gSecureFlashInfoGuid
+#[-start-181022-IB11270211-add]#
+  gEfiPciEnumerationCompleteProtocolAfterGuid
+#[-end-181022-IB11270211-add]#
+  gH2OBdsCpConOutConnectAfterGuid
+  gH2OBdsCpBootDeviceEnumBeforeGuid
+  gSaveIntelRemapDevInfoGuid
+  gH2OBdsCpBootDeviceEnumAfterGuid
+  gEfiDiskInfoNvmeInterfaceGuid
+  gAmtPolicyHobGuid
+  gMeBiosPayloadHobGuid
+
+[Protocols]
+  gEfiLegacyRegion2ProtocolGuid
+  gEfiLegacyBiosProtocolGuid
+  gEfiHiiConfigAccessProtocolGuid
+  gEfiSmbiosProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gEfiBootLogoProtocolGuid
+  gConOutDevStartedProtocolGuid
+  gEfiPciIoProtocolGuid
+  gGopPolicyProtocolGuid
+  gEfiOEMBadgingSupportProtocolGuid
+  gEfiUgaSplashProtocolGuid
+  gEfiConsoleControlProtocolGuid
+  gEfiSimpleTextInputExProtocolGuid
+  gH2ODialogProtocolGuid
+  gEfiSkipScanRemovableDevProtocolGuid
+  gEfiSimpleFileSystemProtocolGuid
+  gEfiIsaAcpiProtocolGuid
+  gEfiMsioIsaAcpiProtocolGuid
+  gEfiSerialIoProtocolGuid
+  gTerminalEscCodeProtocolGuid
+  gAlertStandardFormatProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+  gEfiSimpleNetworkProtocolGuid
+  gEfiLoadFileProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiDiskInfoProtocolGuid
+  gEfiAcpiS3SaveProtocolGuid
+  gEfiCRPolicyProtocolGuid
+  gConsoleRedirectionServiceProtocolGuid
+  gCRBdsHookProtocolGuid
+  gDxeAmtPolicyGuid
+  gEfiFirmwareVolume2ProtocolGuid
+#  gMeBiosPayloadDataProtocolGuid
+#[-start-180419-IB11270199-add]#
+  gAmtWrapperProtocolGuid
+#[-end-180419-IB11270199-add]#
+  gAmtReadyToBootProtocolGuid
+  gEfiAtaPassThruProtocolGuid
+
+  gDxeMePolicyGuid
+  gH2OHybridGraphicsEventProtocolGuid
+  gBdsAllDriversConnectedProtocolGuid
+  gEfiInstallExitPmAuthAndEndOfDxeProtocolGuid
+  gEfiDxeSmmReadyToLockProtocolGuid
+  gEndOfBdsBootSelectionProtocolGuid
+  gEfiSmmAccess2ProtocolGuid
+  gEfiSmmLockEnablePointProtocolGuid ## CONSUMES
+  gEfiDeferredImageLoadProtocolGuid
+#[-start-181022-IB11270211-add]#
+  gEfiPciEnumerationCompleteProtocolGuid
+#[-end-181022-IB11270211-add]#
+  gEfiStorageSecurityCommandProtocolGuid
+  gUefiRaidOpromReadyGuid
+  gTrustedDeviceSetupMainProtocolGuid           ## CONSUMES
+#[-start-200504-IB16270183-add]#
+  gEfiHddPasswordDialogProtocolGuid
+#[-end-200504-IB16270183-add]#
+
+[FeaturePcd]
+  gInsydeTokenSpaceGuid.PcdBootLogoOnlyEnable
+  gInsydeTokenSpaceGuid.PcdFrontPageSupported
+  gInsydeCrTokenSpaceGuid.PcdH2OConsoleRedirectionSupported
+  gInsydeTokenSpaceGuid.PcdUseFastCrisisRecovery
+  gChipsetPkgTokenSpaceGuid.PcdHybridGraphicsSupported
+  gInsydeTokenSpaceGuid.PcdH2OQ2LServiceSupported
+  gInsydeTokenSpaceGuid.PcdGraphicsSetupSupported
+  gInsydeTokenSpaceGuid.PcdH2OFormBrowserSupported
+  gInsydeTokenSpaceGuid.PcdH2OFormBrowserLocalMetroDESupported
+  gInsydeTokenSpaceGuid.PcdH2OSecureBootSupported
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpDisplayBeforeSupported
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpConOutConnectAfterSupported
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpBootDeviceEnumBeforeSupported
+  gInsydeTokenSpaceGuid.PcdH2OBdsCpBootDeviceEnumAfterSupported
+  
+[FixedPcd]
+
+#[-start-181004-IB11270211-add]#
+[FeaturePcd]
+#[-end-181004-IB11270211-add]#
+  gSiPkgTokenSpaceGuid.PcdAmtEnable
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLangCodes
+  gEfiMdePkgTokenSpaceGuid.PcdUefiVariableDefaultPlatformLang
+  gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdShellFile
+  gInsydeTokenSpaceGuid.PcdPortNumberMapTable
+  gChipsetPkgTokenSpaceGuid.PcdSetupConfigSize
+  gChipsetPkgTokenSpaceGuid.PcdBiosGuardAcmSupport
+  gChipsetPkgTokenSpaceGuid.PcdIsvtCheckPointIoReadPort
+  gChipsetPkgTokenSpaceGuid.PcdIsvtCheckPoint1AhPreloadValue
+  gChipsetPkgTokenSpaceGuid.PcdIsvtCheckPoint2AhPreloadValue
+  gChipsetPkgTokenSpaceGuid.PcdIsvtCheckPoint3AhPreloadValue
+  gInsydeTokenSpaceGuid.PcdSoftwareSmiPort
+  gClientCommonModuleTokenSpaceGuid.PcdSkipHddPasswordPrompt        ## PRODUCES
+  gInsydeTokenSpaceGuid.PcdH2OSataIgnoredDeviceList
+  gChipsetPkgTokenSpaceGuid.PcdTetonGlacierTable
+  gChipsetPkgTokenSpaceGuid.PcdPrepareRstController
+  gInsydeTokenSpaceGuid.PcdH2OHddPasswordSupported
+  gEfiSecurityPkgTokenSpaceGuid.PcdSkipOpalPasswordPrompt
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoHorizontalResolution       ## PRODUCES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoVerticalResolution         ## PRODUCES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutRow                       ## PRODUCES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutColumn                    ## PRODUCES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupConOutColumn               ## CONSUMES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupConOutRow                  ## CONSUMES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupVideoHorizontalResolution  ## CONSUMES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupVideoVerticalResolution    ## CONSUMES
+# TDS App is in [FV.Main]. use PcdFvMain instead.
+#  gPlatformModuleTokenSpaceGuid.PcdFlashFvTrustedDeviceSetupBase    ## CONSUMES
+#  gPlatformModuleTokenSpaceGuid.PcdFlashFvTrustedDeviceSetupSize    ## CONSUMES
+  gInsydeTokenSpaceGuid.PcdFlashFvMainBase
+  gInsydeTokenSpaceGuid.PcdFlashFvMainSize
+  gChipsetPkgTokenSpaceGuid.PcdTDSBlockConInEnable                   ## CONSUMES
+

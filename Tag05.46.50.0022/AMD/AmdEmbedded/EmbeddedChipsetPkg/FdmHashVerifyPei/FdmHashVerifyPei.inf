@@ -1,0 +1,54 @@
+## @file
+#
+#
+#******************************************************************************
+#* Copyright 2023 Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+
+[Defines]
+  INF_VERSION       = 0x00010005
+  BASE_NAME         = FdmHashVerifyPei
+  FILE_GUID         = 89DC9F92-950F-4fce-86D8-A900D93E3915
+  MODULE_TYPE       = PEIM
+  VERSION_STRING    = 1.0
+  ENTRY_POINT       = FdmHashVerifyPeimEntry
+
+[Sources]
+  FdmHashVerifyPei.c
+
+[Packages]
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  DebugLib
+  PostCodeLib
+  PeimEntryPoint
+  PeiServicesLib
+  BaseMemoryLib
+  BaseCryptLib
+  PrintLib
+  HobLib
+
+[Ppis]
+  gEfiEndOfPeiSignalPpiGuid
+
+[Guids]
+
+[Pcd]
+  gChipsetPkgTokenSpaceGuid.PcdFdmHash
+  gInsydeTokenSpaceGuid.PcdH2OFlashDeviceMapStart
+#[-start-241030-IB20840101-add]#
+  gInsydeTokenSpaceGuid.PcdH2OFlashDeviceMapSize
+#[-end-241030-IB20840101-add]#
+
+[Depex]
+  TRUE

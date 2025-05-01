@@ -1,0 +1,50 @@
+## @file
+#  Component description file for SecureFlashEspFlagSmm driver
+#
+#******************************************************************************
+#* Copyright (c) 2019, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+[Defines]
+INF_VERSION                    = 0x00010005
+BASE_NAME                      = SecureFlashEspFlagSmm
+FILE_GUID                      = 53AD0657-8A74-4358-9F32-04AB4B5A0B92
+MODULE_TYPE                    = DXE_SMM_DRIVER
+PI_SPECIFICATION_VERSION       = 0x0001000A
+VERSION_STRING                 = 1.0
+ENTRY_POINT                    = SecureFlashEspFlagEntryPoint
+
+[Sources]
+  SecureFlashEspFlagSmm.c
+
+[Packages]
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  UefiDriverEntryPoint
+  DebugLib
+  SmmServicesTableLib
+  BaseLib 
+  H2OLib
+
+[Protocols]
+  gEfiSecureFlashEspFlagProtocolGuid
+  
+[Guids]
+
+[FeaturePcd]
+
+[Pcd]
+
+[Depex]
+  gEfiSmmBase2ProtocolGuid

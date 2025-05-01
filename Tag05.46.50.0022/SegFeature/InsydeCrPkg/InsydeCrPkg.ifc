@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  @file 
+    Introduces a collection of unique Feature's versions.
+    A Version is considered unique if it has a different Version from all other Features
+    Feature's name must be consistent.
+
+    Copyright (c) 2023, Insyde Software Corp. All Rights Reserved.
+
+    You may not reproduce, distribute, publish, display, perform, modify, adapt,
+    transmit, broadcast, present, recite, release, license or otherwise exploit
+    any part of this publication in any form, by any means, without the prior
+    written permission of Insyde Software Corporation.
+-->
+<Features>
+  <!-- Tag 01.02.04.0023 feature -->
+  <Feature>
+    <Name>InsydeCrPkg</Name>
+    <Root>SegFeature/InsydeCrPkg</Root>
+    <Version>01.02.04.0023</Version>
+    <Revision>4</Revision>
+    <Repository>
+      <Type>Svn</Type>
+      <Url>http://svn-tc.insydesw.com/H2O-SEG-Feature/InsydeCrPkg</Url>
+	  <Tag>01.02.04.0023</Tag>
+    </Repository>
+    <Package>
+      <Dsc>Package</Dsc>
+      <Fdf>Package</Fdf>
+      <SourceDir>.</SourceDir>
+    </Package>
+  </Feature>
+  <!-- Tag 01.02.04.0022 feature -->
+  <Feature>
+    <Name>InsydeCrPkg</Name>
+    <Root>SegFeature/InsydeCrPkg</Root>
+    <Version>01.02.04.0022</Version>
+    <Revision>4</Revision>
+    <Repository>
+      <Type>Svn</Type>
+      <Url>http://svn-tc.insydesw.com/H2O-SEG-Feature/InsydeCrPkg</Url>
+	  <Tag>01.02.04.0022</Tag>
+    </Repository>
+    <Package>
+      <Dsc>Package</Dsc>
+      <Fdf>Package</Fdf>
+      <SourceDir>.</SourceDir>
+    </Package>
+  </Feature>
+  <!-- Tag 01.02.04.0021 feature -->
+  <Feature>
+    <Name>InsydeCrPkg</Name>
+    <Root>SegFeature/InsydeCrPkg</Root>
+    <Version>01.02.04.0021</Version>
+    <Revision>4</Revision>
+    <Repository>
+      <Type>Svn</Type>
+      <Url>http://svn-tc.insydesw.com/H2O-SEG-Feature/InsydeCrPkg</Url>
+	  <Tag>01.02.04.0021</Tag>
+    </Repository>
+    <Package>
+      <Dsc>Package</Dsc>
+      <Fdf>Package</Fdf>
+      <SourceDir>.</SourceDir>
+    </Package>
+  </Feature>
+  <!-- Tag 01.02.04.0020 feature -->
+  <Feature>
+    <Name>InsydeCrPkg</Name>
+    <Root>SegFeature/InsydeCrPkg</Root>
+    <Version>01.02.04.0020</Version>
+    <Revision>4</Revision>
+    <Repository>
+      <Type>Svn</Type>
+      <Url>http://svn-tc.insydesw.com/H2O-SEG-Feature/InsydeCrPkg</Url>
+	  <Tag>01.02.04.0020</Tag>
+    </Repository>
+    <Package>
+      <Dsc>Package</Dsc>
+      <Fdf>Package</Fdf>
+      <SourceDir>.</SourceDir>
+    </Package>
+  </Feature>
+  <!-- Tag 01.02.04.0019 feature -->
+  <Feature>
+    <Name>InsydeCrPkg</Name>
+    <Root>SegFeature/InsydeCrPkg</Root>
+    <Version>01.02.04.0019</Version>
+    <Revision>4</Revision>
+    <Repository>
+      <Type>Svn</Type>
+      <Url>http://svn-tc.insydesw.com/H2O-SEG-Feature/InsydeCrPkg</Url>
+	  <Tag>01.02.04.0019</Tag>
+    </Repository>
+    <Package>
+      <Dsc>Package</Dsc>
+      <Fdf>Package</Fdf>
+      <SourceDir>.</SourceDir>
+    </Package>
+  </Feature>
+  <!-- Tag 01.02.04.0018 feature -->
+  <Feature>
+    <Name>InsydeCrPkg</Name>
+    <Root>SegFeature/InsydeCrPkg</Root>
+    <Version>01.02.04.0018</Version>
+    <Revision>4</Revision>
+    <Repository>
+      <Type>Svn</Type>
+      <Url>http://svn-tc.insydesw.com/H2O-SEG-Feature/InsydeCrPkg</Url>
+	  <Tag>01.02.04.0018</Tag>
+    </Repository>
+    <Package>
+      <Dsc>Package</Dsc>
+      <Fdf>Package</Fdf>
+      <SourceDir>.</SourceDir>
+    </Package>
+  </Feature>
+</Features>

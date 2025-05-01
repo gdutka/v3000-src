@@ -1,0 +1,111 @@
+Release Notes for RPMC Tool
+
+
+Version:	1.6.1.0
+Release Date:	August 12, 2021
+
+About RPMC Tool:
+
+     RPMC is designed to set RPMC address. 
+
+Important Notes:
+
+·	To set RPMC address is a dangerous operation, CPU might get useless permanently and cannot be recovered. Please do NOT run this tool if you don’t know how to use it.
+Configuration Requirements:
+CPU:
+·	AMD Ryzen 4000 series
+
+BIOS:
+·	Please make sure the BIOS includes the PSP firmware with RPMC support.
+Motherboard:
+·	Please make sure the motherboard has RPMC SPI ROM.
+
+Operating Systems:
+·	RHEL 7.5
+Note: RPMC tool was validated with these Operating Systems. Other Operating Systems may work, but aren’t supported since they have not been validated. RPMC tool is a built against x64, any 32 bit OS is not supported.
+Installation Notes:
+·	Just unzip the RPMC_xx.tar.gz file.
+RPMC Usage:
+Note: Please run RPMC tool with administrator privileges, otherwise the driver cannot be loaded correctly. 
+
+rpmctool.exe <function> <option> 
+Functions:
+-- help                    Show tool version and usage 
+-- check                  Check RPMC is enabled or not 
+-- bes                      Check if each bit is enabled for “--check -n” command 
+-- set [RPMC_ADDR] (-r)     Set RPMC to RPMC_ADDR, -r to force restart
+Options
+-n                        Return a number of string
+Meaning of each bit when set:
+BIT0: Command succeeded
+BIT1: RPMC is enabled
+BIT2: SPI-ROM: RPMC counter address 0 is available to set
+BIT3: SPI-ROM: RPMC counter address 1 is available to set
+BIT4: SPI-ROM: RPMC counter address 2 is available to set
+BIT5: SPI-ROM: RPMC counter address 3 is available to set
+BIT6: PSP/fTPM: RPMC counter address 0 is in use
+BIT7: PSP/fTPM: RPMC counter address 1 is in use
+BIT8: PSP/fTPM: RPMC counter address 2 is in use
+BIT9: PSP/fTPM: RPMC counter address 3 is in use
+BIT10: Fuse bit was set for RPMC Root Key Provision done at Manufacturing (Production Key)
+BIT11: RPMC SPIROM is available
+BIT12*: ASIC: RPMC slot 0 is available to use
+BIT13*: ASIC: RPMC slot 1 is available to use
+BIT14*: ASIC: RPMC slot 2 is available to use
+BIT15*: ASIC: RPMC slot 3 is available to use
+BIT16*: ASIC: RPMC slot 4 is available to use
+BIT17*: ASIC: RPMC slot 5 is available to use
+BIT18*: ASIC: RPMC slot 6 is available to use
+BIT19*: ASIC: RPMC slot is full
+BIT20*: ASIC: RPMC slot availability version bit 0
+BIT21*: ASIC: RPMC slot availability version bit 1
+
+
+*: Currently we have two method to get RPMC slot availability. If BIT21 BIT20 = 0x0, then BIT12~BIT15 means if slot 0~3 available. If BIT21 BIT20 = 0x1, then if BIT19 is set, then all slots are used; else, calculate BIT18~BIT12 = X, slot 0 ~ (X-1) is used, and slot X ~ slot 15 is available.
+
+
+
+
+
+Known Issues and Workaround:
+·	
+
+
+Revision History:
+·RPMC tool 1.6.1.0
+Release Date: August 12, 2021
+Description: Add bit enable status check
+
+·RPMC tool 1.5.1.0
+Release Date: August 4, 2021
+Description: Fix cannot set RPMC address.
+
+·RPMC tool 1.0.0.0
+Release Date: July 19, 2021
+Description: Initial version.
+
+
+Trademarks, Copyright, and Disclaimers 
+
+AMD, the AMD Arrow logo, and combinations thereof, are trademarks of Advanced Micro Devices, Inc. 
+Product names used in this publication are for identification purposes only and may be trademarks of their respective companies.
+ 
+Copyright 2019-2020 ADVANCED MICRO DEVICES, INC.  All Rights Reserved.
+
+AMD is granting you permission to use this software (the “Materials”) pursuant to the terms and conditions of your Software License Agreement with AMD.  This header does NOT give you permission to use the Materials or any rights under AMD’s intellectual property.  Your use of any portion of these Materials shall constitute your acceptance of those terms and conditions.  If you do not agree to the terms and conditions of the Software License Agreement, you do not have permission to use any portion of these Materials.  
+
+CONFIDENTIALITY:  The Materials and all other information, identified as confidential and provided to you by AMD shall be kept confidential in accordance with the terms and conditions of the Software License Agreement.  If no Software License Agreement exists between you and AMD, you agree to keep this software confidential and to not disclose it to any third party.
+
+LIMITATION OF LIABILITY: The materials are provided "as is" with no warranties.  namely, no warranties, express or implied, are made with respect to the materials including but not limited to, merchantability or fitness for a particular purpose, any warranties that may arise from usage of trade or course of dealing, and any implied warranties of title or non-infringement.  furthermore, in no event shall AMD be liable for any special, direct, indirect, incidental, exemplary, or consequential damages, expenses, lost profits, lost savings, business interruption, lost business information, or any other damages arising out of the use or inability to use the materials, even if AMD has been advised of the possibility of such damages.  You acknowledge that your use of the Materials without charge reflects this allocation of risk.  Some states or jurisdictions do not allow the exclusion or limitation of incidental, consequential or special damages, or the exclusion of implied warranties, and therefore, the above limitations might not apply.
+  
+AMD does not assume any responsibility for any errors which may appear in the Materials or any other related information provided to you by AMD, or result from use of the Materials or any related information.  
+
+You agree that you will not reverse engineer or decompile the Materials.
+
+NO SUPPORT OBLIGATION: AMD is not obligated to furnish, support, or make any further information, software, technical information, know-how, or show-how available to you.  Additionally, AMD retains the right to modify the Materials at any time, without notice, and is not obligated to provide such modified Materials to you.
+
+U.S. GOVERNMENT RESTRICTED RIGHTS: The Materials are provided with "RESTRICTED RIGHTS." Use, duplication, or disclosure by the Government is subject to the restrictions as set forth in FAR 52.227-14 and DFAR252.227-7013, et seq., or its successor.  Use of the Materials by the Government constitutes acknowledgement of AMD's proprietary rights in them.
+
+COMPLIANCE WITH LAWS:  
+a.	You acknowledge that you must comply with all applicable rules and laws in the performance of your respective duties and obligations including, but not limited to, those relating to restrictions on export and to approval of agreements.  You will be responsible for obtaining and maintaining all approvals and licenses, including export licenses, permits and governmental authorizations from the appropriate governmental authorities as may be required, to enable you to fulfill your obligations under this Agreement.  
+b.	Without limiting the foregoing, you agree that you shall adhere to the U.S. Export Administration Regulations (EAR), currently found at 15 C.F.R. Sections 730 through 744, and, unless properly authorized by the U.S. Government, shall not (1) export, re-export or release restricted technology, software, or source code to a national of a country in Country Groups D:1 or E:1, or (2) export to Country Groups D:1 or E:1 the direct product of such technology or software, if such foreign produced direct product is subject to national security controls as identified on the Commerce Control List (currently found in Supplement 1 to Section 774 of EAR).

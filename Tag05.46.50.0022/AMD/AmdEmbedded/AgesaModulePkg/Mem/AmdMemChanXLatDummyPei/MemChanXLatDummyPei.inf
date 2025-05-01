@@ -1,0 +1,34 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdMemChanXLatDummyPei
+  FILE_GUID                      = 03A8E402-2AB7-46B3-B591-740383796B82
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdMemChanXLatPeiEntry
+
+[sources.common]
+  MemChanXLatDummyPei.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaModulePkg/AgesaFamily17ModulePkg.dec
+  AgesaModulePkg/AgesaModuleMemPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PeimEntryPoint
+
+[Ppis]
+  gAmdMemChanXLatPpiGuid               #Produce
+
+[Pcd]
+
+[Depex]
+  gAmdMemChanXLatDummyDepexPpiGuid
+
+

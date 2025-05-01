@@ -1,0 +1,8 @@
+
+#image IMG_BKG                            "Images/Background.png"
+#image IMG_LOGO                           "Images/Insyde.png"
+#image IMG_LOGO_BIG                       "Images/InsydeH2O.png"
+#image IMG_TEMPERATURE                    "Images/Temperature.png"
+#image IMG_CLOCK                          "Images/Time.png"
+#image IMG_SEPARATOR                      "Images/Separator.png"
+

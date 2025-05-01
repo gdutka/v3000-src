@@ -1,0 +1,96 @@
+## @file
+#  Capsule library instance for DXE_DRIVER, DXE_RUNTIME_DRIVER
+
+#
+#******************************************************************************
+#* Copyright (c) 2012 - 2020, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corporation.
+#*
+#******************************************************************************
+
+## 
+# Capsule library instance for DXE_DRIVER, DXE_RUNTIME_DRIVER
+#
+# Copyright (c) 2007 - 2011, Intel Corporation. All rights reserved.<BR>
+#
+# This program and the accompanying materials
+# are licensed and made available under the terms and conditions of the BSD License
+# which accompanies this distribution.  The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php
+#
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ChipsetCapsuleLib
+  FILE_GUID                      = ED33C5FD-B1B5-C5AD-A3CC-5BE7D1F9B2A9
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ChipsetCapsuleLib|DXE_DRIVER DXE_RUNTIME_DRIVER UEFI_APPLICATION
+
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 EBC
+#
+
+[Sources]
+  ChipsetCapsuleLib.c
+
+#[-start-190613-IB16990069-add]#
+[Sources.IA32]
+  Ia32/CallSmmIhisi.nasm
+
+[Sources.X64]
+  X64/CallSmmIhisi.nasm
+
+[Sources.Arm, Sources.AArch64]
+  Arm/CallSmmIhisi.c
+#[-end-190613-IB16990069-add]#
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+  SioDummyPkg/SioDummyPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  FlashRegionLib
+  FlashDevicesLib
+  PrintLib
+  FwUpdateLib
+  VariableLib
+
+[Pcd]
+  gInsydeTokenSpaceGuid.PcdFlashAreaSize
+  gChipsetPkgTokenSpaceGuid.PcdWindowsEcFirmwareCapsuleGuid
+
+
+[FixedPcd]
+  gInsydeTokenSpaceGuid.PcdFirmwareResourceMaximum
+#[-start-190613-IB16990069-add]#
+  gInsydeTokenSpaceGuid.PcdSoftwareSmiPort
+#[-end-190613-IB16990069-add]#
+
+[Guids]
+  gEfiSystemResourceTableGuid
+  gH2OFlashMapRegionFtwBackupGuid
+
+[Protocols]
+  gEfiFirmwareManagementProtocolGuid
+

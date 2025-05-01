@@ -1,0 +1,72 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION               = 0x00010006
+  BASE_NAME                 = AmdPspIntrusionDetectionSmm
+  FILE_GUID                 = 18DA03A8-FAE4-410A-A8C2-34C91913F515
+  MODULE_TYPE               = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION  = 0x0001000A
+  VERSION_STRING            = 1.0
+  ENTRY_POINT               = AmdPspIntrusionDetectionSmmEntry
+
+[Sources]
+  AmdPspIntrusionDetectionSmm.c
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  IoLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  SmmMemLib
+  SmmServicesTableLib
+  BaseLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  AmdPspMboxLibV2
+  IdsLib
+  PcdLib
+  HobLib
+  FchSpiAccessLib
+  S3BootScriptLib
+  AmdHeapLib
+  TimerLib
+  ResetSystemLib
+
+[Guids]
+
+
+[Protocols]
+  gEfiSmmBase2ProtocolGuid
+  gFchSmmMiscDispatchProtocolGuid
+  gEfiSmmVariableProtocolGuid            #CONSUMED
+  gEdkiiSmmReadyToBootProtocolGuid
+  gPspMboxSmmBufferAddressProtocolGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspIntrusionDetectionEnabled
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspLogEventIfIntrusionDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspClearTpmIfIntrusionDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspPowerOffSystemIfIntrusionDetected
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspSystemTpmConfig
+
+[Depex]
+  gFchSmmMiscDispatchProtocolGuid AND
+  gPspMboxSmmBufferAddressProtocolGuid AND
+  gEfiSmmVariableProtocolGuid AND
+  gEfiVariableArchProtocolGuid AND
+  gEfiVariableWriteArchProtocolGuid AND
+  gAmdPspIntrusionLogProtocolGuid      #make sure Intrusion SMM driver is executed after Intrusion DXE driver

@@ -1,0 +1,38 @@
+## @file
+#  Component description file of MemoryDeviceInfoLib.
+#
+#******************************************************************************
+#* Copyright (c) 2020, Insyde Software Corp. All Rights Reserved.
+#*
+#* You may not reproduce, distribute, publish, display, perform, modify, adapt,
+#* transmit, broadcast, present, recite, release, license or otherwise exploit
+#* any part of this publication in any form, by any means, without the prior
+#* written permission of Insyde Software Corp.
+#*
+#******************************************************************************
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MemoryDeviceInfoLib
+  FILE_GUID                      = 87490D01-43D1-478c-BBF2-3DC412222DB0
+  MODULE_TYPE                    = UEFI_DRIVER
+  LIBRARY_CLASS                  = MemoryDeviceInfoLib
+
+[Sources]
+  MemoryDeviceInfoLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  InsydeModulePkg/InsydeModulePkg.dec
+  InsydePlatformInfoPkg/InsydePlatformInfoPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  PrintLib
+
+[Protocols]

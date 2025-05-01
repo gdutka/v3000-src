@@ -1,0 +1,20 @@
+--------------------------------------------------------------------------------
+APPB Delivery Release Notes
+
+Copyright 2022, Advanced Micro Devices, Inc.
+
+Version: PMU Rev 0x216A for Rembrandt
+--------------------------------------------------------------------------------
+Content:
+  Filename                                 AGESA V9 Destination Folder       Description
+  AppbLpddrReleaseNotes.txt                AgesaModulePkg\Firmwares\RMB\     This Release notes file
+  TypeId0x64_Appb_RMB_Lpddr5Imem1.csbin    AgesaModulePkg\Firmwares\RMB\     Agesa PSP PMU Block instruction image 1
+  TypeId0x64_Appb_RMB_Lpddr5Imem2.csbin    AgesaModulePkg\Firmwares\RMB\     Agesa PSP PMU Block instruction image 2
+  TypeId0x65_Appb_RMB_Lpddr5Dmem1.csbin    AgesaModulePkg\Firmwares\RMB\     Agesa PSP PMU Block data image 1
+  TypeId0x65_Appb_RMB_Lpddr5Dmem2.csbin    AgesaModulePkg\Firmwares\RMB\     Agesa PSP PMU Block data image 2
+
+Version String:
+  0x216A
+
+Submit Information:
+  PLAT-104461 [RMB][LPDDR5] Test PMU F/W release for DCA improvement from SNPS

@@ -1,0 +1,14 @@
+<DIRS AddressMode="1">
+  <PSP_DIR  Base= "0x0" Size="0x10000" SpiBlockSize="0x1000">
+    <!-- SMM Supervisor signature -->
+    <IMAGE_ENTRY Type="0xC0" File="SmmSupvSig.bin"/>
+    <!--  SMM entry binary, which will be load to SMMBASE+0x8000 -->
+    <IMAGE_ENTRY Type="0xC1" File="SmmSupvEntry.bin"/>
+    <!-- Signature of  SMM entry binary -->
+    <IMAGE_ENTRY Type="0xC2" File="SmmSupvEntrySig.bin"/>
+    <!-- Public Key -->
+    <IMAGE_ENTRY Type="0xC3" File="SmmSupvPubKey.bin"/>
+    <!-- OEM Secure policy -->
+    <IMAGE_ENTRY Type="0xC4" File="SmmSupvOemSecurePolicy.bin"/>
+  </PSP_DIR>
+</DIRS>

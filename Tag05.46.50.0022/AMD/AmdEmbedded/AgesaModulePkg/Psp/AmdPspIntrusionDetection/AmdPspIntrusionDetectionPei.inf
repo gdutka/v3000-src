@@ -1,0 +1,46 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdPspIntrusionDetectionPei
+  FILE_GUID                      = 6C77FAE1-A934-457A-982E-BCC12F9717AD
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+
+  ENTRY_POINT                    = AmdPspIntrusionDetectionPeiEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  PeimEntryPoint
+  TimerLib
+  IdsLib
+
+[Sources]
+  AmdPspIntrusionDetectionPei.c
+
+[Guids]
+
+
+[Protocols]
+
+[Ppis]
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspIntrusionDetectionEnabled
+
+[Depex]
+  gEfiPeiMemoryDiscoveredPpiGuid
+
+[BuildOptions]
+
+

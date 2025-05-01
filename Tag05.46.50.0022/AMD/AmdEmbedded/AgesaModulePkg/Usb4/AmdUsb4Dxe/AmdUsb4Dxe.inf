@@ -1,0 +1,60 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2008-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmdUsb4Dxe
+  FILE_GUID                      = 051274F4-A724-4732-BE00-82793A3D499A
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmdUsb4DxeEntry
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModuleUsb4Pkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  IoLib
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  UefiDriverEntryPoint
+  FabricResourceManagerLib
+  AmdUsb4BaseLib
+
+[Sources]
+  AmdUsb4Dxe.c
+  ../AmdUsb4Common/AmdUsb4Common.c
+
+[Protocols]
+  gAmdUsb4ProtocolGuid                          ## PUBLICS
+  gEfiPciIoProtocolGuid                         ## CONSUMES
+  gEfiPciEnumerationCompleteProtocolGuid        ## CONSUMES
+  gFchInitDonePolicyProtocolGuid                ## CONSUMES
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdUsb4CmEnable
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4Gen3RsFec
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4Gen2RsFec
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdUsb4Gen3Support
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintEnable
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdUsb4DelayBeforePreOSCM
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdUsb4WaitCL0TBT3
+  gEfiAmdAgesaModulePkgTokenSpaceGuid.PcdAmdUsb4WaitCL0USB4
+
+[Guids]
+  gEfiEventReadyToBootGuid                      ## CONSUMES
+  gEfiEventLegacyBootGuid                       ## CONSUMES
+  gEfiEventExitBootServicesGuid                 ## CONSUMES
+  gEfiEndOfDxeEventGroupGuid                    ## CONSUMES
+
+[Depex]
+  TRUE
+

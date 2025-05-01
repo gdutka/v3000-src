@@ -1,0 +1,46 @@
+#;*****************************************************************************
+#;
+#; Copyright (C) 2021-2022 Advanced Micro Devices, Inc. All rights reserved.
+#;
+#;******************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MpmPldmBase
+  FILE_GUID                      = 4e23d5b5-bf03-4ce1-b295-13e615d13a61
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MpmPldmBaseEntry
+
+[Sources]
+  MpmPldmBase.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AgesaPkg/AgesaPkg.dec
+  AgesaModulePkg/AgesaCommonModulePkg.dec
+  AgesaModulePkg/AgesaModulePspPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  MpmLib
+
+[Guids]
+  gEfiSmbiosTableGuid
+
+[Protocols]
+  gAmdPldmProtocolGuid
+  gEfiSmbiosProtocolGuid
+
+[Pcd]
+  gEfiAmdAgesaPkgTokenSpaceGuid.PcdMpmWirelessManageability
+
+[FeaturePcd]
+
+[Depex]
+  gAmdMpmDepexProtocolGuid          AND
+  gEfiRealTimeClockArchProtocolGuid
+
