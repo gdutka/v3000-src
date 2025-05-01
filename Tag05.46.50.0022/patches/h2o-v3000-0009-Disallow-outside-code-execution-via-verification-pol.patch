@@ -1,0 +1,51 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: roberth <roberth@arista.com>
+Date: Wed, 24 Apr 2024 12:26:57 -0500
+Subject: [PATCH] Disallow outside code execution via verification policies
+
+These verification policy PCDs disallow unauthorized code execution in the BIOS
+context, as well as booting of untrusted OSes/applications. We set the various
+verification policies to `NEVER_EXECUTE` (0x1), which bypasses any UEFI secure
+boot signature checks and unconditionally denies execution of binaries stored
+on removable/non-removable storage media and PCI option ROMs.
+
+These verification policies are effective even with UEFI secure boot disabled.
+There appears to be no advantage to enable UEFI secure boot, so we keep it
+disabled. UEFI secure boot does not fit our use-case well.
+
+OSes/applications (including the Aboot EFI image) included in the SPI flash
+(firmware volumes) are allowed execution without signature checks. These
+applications should already be authenticated by the FDM hash mechanism and PSB,
+so an additional authentication mechanism is not required.
+
+If load of an OS from storage media is attempted, it would be denied due to the
+corresponding verification policy PCD. The system would then be stuck in BIOS
+context, and would be essentially bricked with no easy way to recover. However,
+the previous patch ensures that we never attempt to boot anything other than
+the included Aboot EFI image, avoiding this issue.
+
+See Insyde/InsydeModulePkg/Library/DxeImageVerificationLib/DxeImageVerificationLib.c
+function DxeImageVerificationHandler()
+---
+ Board/AMD/FoxBoardPkg/Project.dsc | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/Board/AMD/FoxBoardPkg/Project.dsc b/Board/AMD/FoxBoardPkg/Project.dsc
+index 27fbd036..bbe243dc 100644
+--- a/Board/AMD/FoxBoardPkg/Project.dsc
++++ b/Board/AMD/FoxBoardPkg/Project.dsc
+@@ -796,6 +796,11 @@ gInsydeTokenSpaceGuid.PcdIhisiRegisterTable|{ \
+   gSmmSupervisorPkgTokenSpaceGuid.PcdTurnOnSmmIsolationEvent|1
+ !endif
+ 
++  # Arista: Set all image verification policies to NEVER_EXECUTE (0x01)
++  gEfiSecurityPkgTokenSpaceGuid.PcdRemovableMediaImageVerificationPolicy|0x01
++  gEfiSecurityPkgTokenSpaceGuid.PcdFixedMediaImageVerificationPolicy|0x01
++  gEfiSecurityPkgTokenSpaceGuid.PcdOptionRomImageVerificationPolicy|0x01
++
+ #[-start-240308-IB20840052-modify]#
+ [PcdsFixedAtBuild.X64]
+ #[-start-210827-IB19520013-add]#
+-- 
+2.41.0
+

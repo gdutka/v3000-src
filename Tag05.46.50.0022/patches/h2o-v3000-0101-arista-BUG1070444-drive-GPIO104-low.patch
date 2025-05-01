@@ -1,0 +1,45 @@
+From 1a35f28d3c7818ad96b9a1975d93486a041622b4 Mon Sep 17 00:00:00 2001
+From: Ravi Rama <rrama@arista.com>
+Date: Tue, 8 Apr 2025 10:14:31 -0700
+Subject: [PATCH] BUG1070444: Workaround for CPU hang issue.
+
+Redstart CPU hangs once in a while during bootup, at the time of CPU
+root port init.
+Workaround for this issue is to issue an additional powercycle when hang
+is suspected. CPLD implements an watchdog functionality where CPLD
+expects CPU GPIO104 to LOW(default is HIGH) within 60s. 
+
+This patch drives GPIO104 LOW after CPU root port initialization is completed
+successfully.
+
+---
+ AMD/AmdEmbedded/AgesaModulePkg/Nbio/PCIe/RMB/PEI/DxioInit.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/AMD/AmdEmbedded/AgesaModulePkg/Nbio/PCIe/RMB/PEI/DxioInit.c b/AMD/AmdEmbedded/AgesaModulePkg/Nbio/PCIe/RMB/PEI/DxioInit.c
+index 888c4af2..d43c702b 100644
+--- a/AMD/AmdEmbedded/AgesaModulePkg/Nbio/PCIe/RMB/PEI/DxioInit.c
++++ b/AMD/AmdEmbedded/AgesaModulePkg/Nbio/PCIe/RMB/PEI/DxioInit.c
+@@ -56,6 +56,7 @@
+ 
+ #define FILECODE        NBIO_PCIE_RMB_PEI_DXIOINIT_FILECODE
+ 
++#define GPIO_104        0xfed816a0
+ /*----------------------------------------------------------------------------------------
+  *                         E X T E R N   D E F I N I T I O N S
+  *----------------------------------------------------------------------------------------
+@@ -458,6 +459,11 @@ DxioInitializationCallbackPpi (
+           }
+         }
+ 
++        /* Arista BUG1070444: drive GPIO104 LOW to indicate root port init completed. */
++        LibAmdMemRead32(GPIO_104,&Value, NULL);
++        Value &= 0xFFBFFFFF;
++        LibAmdMemWrite32(GPIO_104,&Value, NULL);
++
+         if (PcdGetBool (PcdBixbyLinkFound)) {
+ 
+           // restore IOMMU
+-- 
+2.47.0
+

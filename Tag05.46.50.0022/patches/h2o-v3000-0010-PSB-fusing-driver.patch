@@ -1,0 +1,381 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: roberth <roberth@arista.com>
+Date: Mon, 12 Aug 2024 15:56:10 -0500
+Subject: [PATCH] PSB fusing driver
+
+This patch adds the PsbFusingDxe driver to be used for configuring PSB
+fuses in manufacturing. See AID13979 for details.
+---
+ .../AgesaModulePkg/AgesaModulePspPkg.dec      |   1 +
+ Arista/AristaModulePkg/AristaModulePkg.dec    |  12 +
+ Arista/AristaModulePkg/Package.dsc            |   4 +
+ Arista/AristaModulePkg/Package.fdf            |   2 +
+ .../PsbFusingDxe/PsbFusingDxe.c               | 228 ++++++++++++++++++
+ .../PsbFusingDxe/PsbFusingDxe.inf             |  34 +++
+ Board/AMD/FoxBoardPkg/Project.dsc             |   3 +
+ Board/AMD/FoxBoardPkg/Project.fdf             |   1 +
+ 8 files changed, 285 insertions(+)
+ create mode 100644 Arista/AristaModulePkg/AristaModulePkg.dec
+ create mode 100644 Arista/AristaModulePkg/Package.dsc
+ create mode 100644 Arista/AristaModulePkg/Package.fdf
+ create mode 100644 Arista/AristaModulePkg/PsbFusingDxe/PsbFusingDxe.c
+ create mode 100644 Arista/AristaModulePkg/PsbFusingDxe/PsbFusingDxe.inf
+
+diff --git a/AMD/AmdEmbedded/AgesaModulePkg/AgesaModulePspPkg.dec b/AMD/AmdEmbedded/AgesaModulePkg/AgesaModulePspPkg.dec
+index 5c565521..3f6325f7 100644
+--- a/AMD/AmdEmbedded/AgesaModulePkg/AgesaModulePspPkg.dec
++++ b/AMD/AmdEmbedded/AgesaModulePkg/AgesaModulePspPkg.dec
+@@ -11,6 +11,7 @@
+   PACKAGE_VERSION       = 0.1
+ 
+ [Includes]
++  Include
+   Firmwares
+ 
+ [LibraryClasses]
+diff --git a/Arista/AristaModulePkg/AristaModulePkg.dec b/Arista/AristaModulePkg/AristaModulePkg.dec
+new file mode 100644
+index 00000000..a67546dd
+--- /dev/null
++++ b/Arista/AristaModulePkg/AristaModulePkg.dec
+@@ -0,0 +1,12 @@
++# Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
++# Arista Networks, Inc. Confidential and Proprietary.
++
++[Defines]
++   DEC_SPECIFICATION = 0x00010005
++   PACKAGE_NAME      = AristaModulePkg
++   PACKAGE_GUID      = 6B114453-E948-4586-ADB5-E2A7EF4AC887
++   PACKAGE_VERSION   = 0.1
++
++[Guids]
++   # f64c554f-d43b-4c82-9e1e-c261e17f7a01
++   gAristaVariableGuid = {0xF64C554F, 0xD43B, 0x4C82, {0x9E, 0x1E, 0xC2, 0x61, 0xE1, 0x7F, 0x7A, 0x01}}
+diff --git a/Arista/AristaModulePkg/Package.dsc b/Arista/AristaModulePkg/Package.dsc
+new file mode 100644
+index 00000000..7bb76652
+--- /dev/null
++++ b/Arista/AristaModulePkg/Package.dsc
+@@ -0,0 +1,4 @@
++[Defines]
++
++[Components.$(DXE_ARCH)]
++   AristaModulePkg/PsbFusingDxe/PsbFusingDxe.inf
+diff --git a/Arista/AristaModulePkg/Package.fdf b/Arista/AristaModulePkg/Package.fdf
+new file mode 100644
+index 00000000..3ecde7f3
+--- /dev/null
++++ b/Arista/AristaModulePkg/Package.fdf
+@@ -0,0 +1,2 @@
++[FV.DXEFV]
++   INF AristaModulePkg/PsbFusingDxe/PsbFusingDxe.inf
+diff --git a/Arista/AristaModulePkg/PsbFusingDxe/PsbFusingDxe.c b/Arista/AristaModulePkg/PsbFusingDxe/PsbFusingDxe.c
+new file mode 100644
+index 00000000..e73260d3
+--- /dev/null
++++ b/Arista/AristaModulePkg/PsbFusingDxe/PsbFusingDxe.c
+@@ -0,0 +1,228 @@
++// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
++// Arista Networks, Inc. Confidential and Proprietary.
++
++
++#include <Uefi.h>
++
++#include <Library/AmdPspBaseLibV2.h>
++#include <Library/AmdPspPsbFusingLib.h>
++#include <Library/BaseLib.h>
++#include <Library/BaseMemoryLib.h>
++#include <Library/DebugLib.h>
++#include <Library/UefiBootServicesTableLib.h>
++#include <Library/UefiDriverEntryPoint.h>
++#include <Library/UefiRuntimeLib.h>
++#include <Library/UefiRuntimeServicesTableLib.h>
++
++typedef struct {
++   UINT32 VersionId;
++   UINT8 ThisKeyId[ 16 ];
++   UINT8 CertifyingKeyId[ 16 ];
++   UINT32 KeyUsage;
++   UINT8 VendorId;
++   // RevisionId : 4;
++   // ModelId : 4;
++   UINT8 ModelRevisionId;
++   // DisableBiosKeyAntiRollback : 1;
++   // DisableAmdKeyUsage : 1;
++   // DisableSecureDebugUnlock : 1;
++   UINT16 SecurityFeatures;
++   UINT8 _reserved[12];
++   UINT32 ExponentSize;
++   UINT32 ModulusSize;
++} PSB_PUBLIC_KEY_HEADER;
++
++typedef struct {
++   UINT32 Version;
++   PSB_PUBLIC_KEY_HEADER PubKeyHeader;
++   UINT8 VendorId;
++   // RevisionId : 4;
++   // ModelId : 4;
++   UINT8 ModelRevisionId;
++   UINT8 RootKeySelect;
++   // PlatformSecureBootEn : 1;
++   // DisableBiosKeyAntiRollback : 1;
++   // DisableAmdKeyUsage : 1;
++   // DisableSecureDebugUnlock : 1;
++   // CustomerKeyLock : 1;
++   UINT8 FuseBits;
++   UINT8 TestModeStatus;
++   // PsbFusingReadiness : 1;
++   // SplFuseReq : 1;
++   // SplFuseError : 1;
++   // SplEntryError : 1;
++   // SplTableIsMissing : 1;
++   UINT8 Flags;
++   UINT8 HstiState;
++} ARISTA_PSB_STATUS_V0;
++
++enum {
++   FuseBits_PLATFORM_SECURE_BOOT_EN,
++   FuseBits_DISABLE_BIOS_KEY_ANTI_ROLLBACK,
++   FuseBits_DISABLE_AMD_KEY_USAGE,
++   FuseBits_DISABLE_SECURE_DEBUG_UNLOCK,
++   FuseBits_CUSTOMER_KEY_LOCK,
++};
++
++enum {
++   Flags_PSB_FUSING_READINESS,
++   Flags_SPL_FUSE_REQ,
++   Flags_SPL_FUSE_ERROR,
++   Flags_SPL_ENTRY_ERROR,
++   Flags_SPL_TABLE_IS_MISSING,
++};
++
++enum {
++  FUSE_REQUESTED_NONE = 0,
++  FUSE_REQUESTED_PRODUCTION,
++  FUSE_REQUESTED_DEVELOPMENT,
++};
++
++#define PLATFORM_MODEL_ID_SHIFT 4
++
++BOOLEAN
++ReadPubKeyHeader (
++  OUT PSB_PUBLIC_KEY_HEADER *Header
++  )
++{
++  TYPE_ATTRIB TypeAttrib;
++  UINT64      EntryAddress;
++  UINT32      EntrySize;
++  UINT64      EntryDest;
++  BOOLEAN     Success;
++
++  DEBUG ((DEBUG_INFO, "PsbFusingDxe: Getting PubKey BIOS entry\n"));
++  
++  Success = BIOSEntryInfo (
++   BIOS_PUBLIC_KEY, INSTANCE_IGNORED, &TypeAttrib, &EntryAddress, &EntrySize,
++   &EntryDest);
++
++  if (!Success) {
++     return FALSE;
++  }
++
++  DEBUG ((DEBUG_INFO, "PsbFusingDxe: Reading PubKey from SPI flash\n"));
++
++  return MapSpiDataToBuffer (
++   (UINT32) (EntryAddress & 0xffffffff), Header, sizeof *Header);
++}
++
++EFI_STATUS
++EFIAPI
++PsbFusingDxeEntry (
++  IN EFI_HANDLE       ImageHandle,
++  IN EFI_SYSTEM_TABLE *SystemTable
++  )
++{
++  EFI_STATUS           Status;
++  PSB_STATUS_2         PsbStatus2        = {0};
++  PSB_HSTI_STATUS_1    PsbHstiStatus1    = {0};
++  ARISTA_PSB_STATUS_V0 APsb;
++  UINT8                FuseRequested     = FUSE_REQUESTED_NONE;
++  UINTN                FuseRequestedSize = sizeof FuseRequested;
++  BOOLEAN              ClearFuseRequested = TRUE;
++  UINT8                RevisionId        = 0;
++  BOOLEAN              Success;
++
++  DEBUG ((DEBUG_INFO, "PsbFusingDxe Entry\n"));
++
++  // Use `ZeroMem` instead of `= {0}` to ensure padding bits are initialized, since
++  // we are storing the whole struct in the PsbStatus UEFI variable
++  ZeroMem(&APsb, sizeof APsb);
++
++  DEBUG ((DEBUG_INFO, "PsbFusingDxe: Reading public key header\n"));
++
++  Success = ReadPubKeyHeader (&APsb.PubKeyHeader);
++
++  if (Success) {
++    RevisionId = APsb.PubKeyHeader.ModelRevisionId & 0xf;
++
++    DEBUG ((DEBUG_INFO, "PsbFusingDxe: Getting PsbFuseRequested value\n"));
++    Status = EfiGetVariable(
++      L"PsbFuseRequested", &gAristaVariableGuid, NULL, &FuseRequestedSize,
++      &FuseRequested);
++    if (Status == EFI_NOT_FOUND) {
++      Status = EfiSetVariable (
++        L"PsbFuseRequested", &gAristaVariableGuid,
++        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS
++          | EFI_VARIABLE_NON_VOLATILE,
++        sizeof FuseRequested, &FuseRequested);
++      ASSERT_EFI_ERROR (Status);
++      DEBUG ((DEBUG_INFO, "PsbFusingDxe: FuseRequested: %x\n", FuseRequested));
++    } else if (Status != EFI_SUCCESS || FuseRequestedSize != sizeof FuseRequested) {
++      FuseRequested = FUSE_REQUESTED_NONE;
++      DEBUG ((DEBUG_ERROR, "PsbFusingDxe: Failed to get PsbFuseRequested value\n"));
++    }
++  } else {
++    DEBUG ((DEBUG_ERROR, "PsbFusingDxe: Failed to read OEM key header\n"));
++  }
++
++  switch (FuseRequested) {
++    case FUSE_REQUESTED_NONE:
++      ClearFuseRequested = FALSE;
++      break;
++    case FUSE_REQUESTED_PRODUCTION:
++      if (RevisionId == 0) {
++        DEBUG ((DEBUG_ERROR, "PsbFusingDxe: Expected production image\n"));
++        FuseRequested = FUSE_REQUESTED_NONE;
++      }
++      break;
++    case FUSE_REQUESTED_DEVELOPMENT:
++      if (RevisionId > 0) {
++        DEBUG ((DEBUG_ERROR, "PsbFusingDxe: Expected development image\n"));
++        FuseRequested = FUSE_REQUESTED_NONE;
++      }
++      break;
++    default:
++      DEBUG ((DEBUG_ERROR, "PsbFusingDxe: unexpected PsbFuseRequested value\n"));
++      FuseRequested = FUSE_REQUESTED_NONE;
++  }
++
++  if (FuseRequested && IsPsbFusingRequired ()) {
++    DEBUG ((DEBUG_INFO, "PsbFusingDxe: Sending PSB Fusing command\n"));
++    DoPsbFusing ();
++  }
++
++  if (ClearFuseRequested) {
++    FuseRequested = FUSE_REQUESTED_NONE;
++    Status = EfiSetVariable (
++      L"PsbFuseRequested", &gAristaVariableGuid,
++      EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS
++        | EFI_VARIABLE_NON_VOLATILE,
++      sizeof FuseRequested, &FuseRequested);
++    ASSERT_EFI_ERROR (Status);
++  }
++
++  Success = GetPsbStatus2 (&PsbStatus2);
++  ASSERT (Success);
++
++  Success = GetPsbHstiStatus1 (&PsbHstiStatus1);
++  ASSERT (Success);
++
++  APsb.Version = 0; // Update this on any changes to the ARISTA_PSB_STATUS_V0 structure
++  APsb.VendorId = PsbStatus2.PlatformVendorId;
++  APsb.ModelRevisionId |= PsbStatus2.BiosKeyRevisionId;
++  APsb.ModelRevisionId |= PsbStatus2.PlatformModelId << PLATFORM_MODEL_ID_SHIFT;
++  APsb.RootKeySelect = PsbStatus2.RootKeySelect;
++  APsb.FuseBits |= PsbStatus2.PlatformSecureBootEn << FuseBits_PLATFORM_SECURE_BOOT_EN;
++  APsb.FuseBits |= PsbStatus2.DisableBiosKeyAntiRollback << FuseBits_DISABLE_BIOS_KEY_ANTI_ROLLBACK;
++  APsb.FuseBits |= PsbStatus2.DisableAmdKeyUsage << FuseBits_DISABLE_AMD_KEY_USAGE;
++  APsb.FuseBits |= PsbStatus2.DisableSecureDebugUnlock << FuseBits_DISABLE_SECURE_DEBUG_UNLOCK;
++  APsb.FuseBits |= PsbStatus2.CustomerKeyLock << FuseBits_CUSTOMER_KEY_LOCK;
++  APsb.TestModeStatus = PsbHstiStatus1.PsbTestStatus;
++  APsb.Flags |= PsbHstiStatus1.PsbFusingReadiness << Flags_PSB_FUSING_READINESS;
++  APsb.Flags |= PsbHstiStatus1.SplFuseReq << Flags_SPL_FUSE_REQ;
++  APsb.Flags |= PsbHstiStatus1.SplFuseError << Flags_SPL_FUSE_ERROR;
++  APsb.Flags |= PsbHstiStatus1.SplEntryError << Flags_SPL_ENTRY_ERROR;
++  APsb.Flags |= PsbHstiStatus1.SplTableIsMissing << Flags_SPL_TABLE_IS_MISSING;
++  APsb.HstiState = PsbHstiStatus1.HstiState;
++
++  Status = EfiSetVariable (
++    L"PsbStatus", &gAristaVariableGuid,
++    EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS,
++    sizeof APsb, &APsb);
++  ASSERT_EFI_ERROR (Status);
++
++  DEBUG ((DEBUG_INFO, "PsbFusingDxe Exit\n"));
++  return EFI_SUCCESS;
++}
+diff --git a/Arista/AristaModulePkg/PsbFusingDxe/PsbFusingDxe.inf b/Arista/AristaModulePkg/PsbFusingDxe/PsbFusingDxe.inf
+new file mode 100644
+index 00000000..90099874
+--- /dev/null
++++ b/Arista/AristaModulePkg/PsbFusingDxe/PsbFusingDxe.inf
+@@ -0,0 +1,34 @@
++[Defines]
++   INF_VERSION    = 0x00010006
++   BASE_NAME      = PsbFusingDxe
++   FILE_GUID      = BB2647A0-E47F-420C-B8AE-4C9C0C6B5B29
++   VERSION_STRING = 0.1
++   MODULE_TYPE    = DXE_RUNTIME_DRIVER
++   ENTRY_POINT    = PsbFusingDxeEntry
++
++[Sources]
++   PsbFusingDxe.c
++
++[Packages]
++   AgesaModulePkg/AgesaModulePspPkg.dec
++   AgesaPkg/AgesaPkg.dec
++   AristaModulePkg/AristaModulePkg.dec
++   MdePkg/MdePkg.dec
++
++[LibraryClasses]
++   AmdDirectoryBaseLib
++   AmdPspBaseLibV2
++   AmdPspPsbFusingLib
++   BaseLib
++   BaseMemoryLib
++   DebugLib
++   UefiBootServicesTableLib
++   UefiDriverEntryPoint
++   UefiRuntimeLib
++   UefiRuntimeServicesTableLib
++
++[Guids]
++   gAristaVariableGuid
++
++[Depex]
++   gEfiVariableArchProtocolGuid AND gEfiVariableWriteArchProtocolGuid
+diff --git a/Board/AMD/FoxBoardPkg/Project.dsc b/Board/AMD/FoxBoardPkg/Project.dsc
+index bbe243dc..69e46b5b 100644
+--- a/Board/AMD/FoxBoardPkg/Project.dsc
++++ b/Board/AMD/FoxBoardPkg/Project.dsc
+@@ -43,6 +43,8 @@
+ !import EmbeddedChipsetPkg/Package.dsc
+ #[-end-220221-IB14740215-modify]#
+ 
++!import AristaModulePkg/Package.dsc
++
+ ################################################################################
+ #
+ # Defines Section - statements that will be processed to create a Makefile.
+@@ -1320,6 +1322,7 @@ gInsydeTokenSpaceGuid.PcdIhisiRegisterTable|{ \
+ [LibraryClasses.common.DXE_RUNTIME_DRIVER]
+   DxeOemSvcKernelLib|$(PROJECT_PKG)/Library/DxeOemSvcKernelLib/DxeOemSvcKernelLib.inf
+   DebugPrintErrorLevelLib|MdePkg/Library/BaseDebugPrintErrorLevelLib/BaseDebugPrintErrorLevelLib.inf
++  FchSpiAccessLib|AgesaModulePkg/Library/FchSpiAccessLib/FchSpiAccessRom3Lib.inf
+ 
+ [LibraryClasses.common.UEFI_DRIVER]
+   DxeOemSvcKernelLib|$(PROJECT_PKG)/Library/DxeOemSvcKernelLib/DxeOemSvcKernelLib.inf
+diff --git a/Board/AMD/FoxBoardPkg/Project.fdf b/Board/AMD/FoxBoardPkg/Project.fdf
+index f4397d8c..5e5c63ab 100644
+--- a/Board/AMD/FoxBoardPkg/Project.fdf
++++ b/Board/AMD/FoxBoardPkg/Project.fdf
+@@ -45,6 +45,7 @@
+ !import AmdPspFeaturePkg/Package.fdf
+ !import AmdCommonChipsetPkg/Package.fdf
+ !import AbootBinPkg/Package.fdf
++!import AristaModulePkg/Package.fdf
+ 
+ [Defines]
+ #
+-- 
+2.41.0
+

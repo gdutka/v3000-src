@@ -1,0 +1,47 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: roberth <roberth@arista.com>
+Date: Thu, 11 Jan 2024 19:52:26 -0600
+Subject: [PATCH] chmod
+
+Change the permissions on the scripts extracted from the zip archive.
+---
+ AMD/AmdEmbedded/EmbeddedChipsetPkg/ChipsetPostBuild.sh | 0
+ AMD/AmdEmbedded/EmbeddedChipsetPkg/ChipsetPreBuild.sh  | 0
+ BaseTools/Conf/GetGccVer.sh                            | 0
+ Board/AMD/FoxBoardPkg/GenApcbV3BinaryRMB_DDR5.sh       | 0
+ Board/AMD/FoxBoardPkg/GetWorkspace.sh                  | 0
+ Board/AMD/FoxBoardPkg/PspBuild.sh                      | 0
+ Board/AMD/FoxBoardPkg/SmmSupvBuild.sh                  | 0
+ 7 files changed, 0 insertions(+), 0 deletions(-)
+ mode change 100644 => 100755 AMD/AmdEmbedded/EmbeddedChipsetPkg/ChipsetPostBuild.sh
+ mode change 100644 => 100755 AMD/AmdEmbedded/EmbeddedChipsetPkg/ChipsetPreBuild.sh
+ mode change 100644 => 100755 BaseTools/Conf/GetGccVer.sh
+ mode change 100644 => 100755 Board/AMD/FoxBoardPkg/GenApcbV3BinaryRMB_DDR5.sh
+ mode change 100644 => 100755 Board/AMD/FoxBoardPkg/GetWorkspace.sh
+ mode change 100644 => 100755 Board/AMD/FoxBoardPkg/PspBuild.sh
+ mode change 100644 => 100755 Board/AMD/FoxBoardPkg/SmmSupvBuild.sh
+
+diff --git a/AMD/AmdEmbedded/EmbeddedChipsetPkg/ChipsetPostBuild.sh b/AMD/AmdEmbedded/EmbeddedChipsetPkg/ChipsetPostBuild.sh
+old mode 100644
+new mode 100755
+diff --git a/AMD/AmdEmbedded/EmbeddedChipsetPkg/ChipsetPreBuild.sh b/AMD/AmdEmbedded/EmbeddedChipsetPkg/ChipsetPreBuild.sh
+old mode 100644
+new mode 100755
+diff --git a/BaseTools/Conf/GetGccVer.sh b/BaseTools/Conf/GetGccVer.sh
+old mode 100644
+new mode 100755
+diff --git a/Board/AMD/FoxBoardPkg/GenApcbV3BinaryRMB_DDR5.sh b/Board/AMD/FoxBoardPkg/GenApcbV3BinaryRMB_DDR5.sh
+old mode 100644
+new mode 100755
+diff --git a/Board/AMD/FoxBoardPkg/GetWorkspace.sh b/Board/AMD/FoxBoardPkg/GetWorkspace.sh
+old mode 100644
+new mode 100755
+diff --git a/Board/AMD/FoxBoardPkg/PspBuild.sh b/Board/AMD/FoxBoardPkg/PspBuild.sh
+old mode 100644
+new mode 100755
+diff --git a/Board/AMD/FoxBoardPkg/SmmSupvBuild.sh b/Board/AMD/FoxBoardPkg/SmmSupvBuild.sh
+old mode 100644
+new mode 100755
+-- 
+2.41.0
+

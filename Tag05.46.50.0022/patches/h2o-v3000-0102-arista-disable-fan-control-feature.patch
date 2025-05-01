@@ -1,0 +1,25 @@
+From 8bc308ee6d594c66960d7386972fef67993f9343 Mon Sep 17 00:00:00 2001
+From: Ravi Rama <rrama@arista.com>
+Date: Tue, 8 Apr 2025 10:41:27 -0700
+Subject: [PATCH] disable fan control bit
+
+---
+ .../AgesaModulePkg/Nbio/SMU/RMB/DXE/Smu13FeaturesEnable.h       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/AMD/AmdEmbedded/AgesaModulePkg/Nbio/SMU/RMB/DXE/Smu13FeaturesEnable.h b/AMD/AmdEmbedded/AgesaModulePkg/Nbio/SMU/RMB/DXE/Smu13FeaturesEnable.h
+index cfa98974..d230047f 100644
+--- a/AMD/AmdEmbedded/AgesaModulePkg/Nbio/SMU/RMB/DXE/Smu13FeaturesEnable.h
++++ b/AMD/AmdEmbedded/AgesaModulePkg/Nbio/SMU/RMB/DXE/Smu13FeaturesEnable.h
+@@ -24,7 +24,7 @@
+ 
+ #define FP7_SMU_FEATURES_ENABLE_DEFAULT ( \
+   (1 << (FEATURE_CCLK_DPM_BIT            %32)) | \
+-  (1 << (FEATURE_FAN_CONTROLLER_BIT      %32)) | \
++  (0 << (FEATURE_FAN_CONTROLLER_BIT      %32)) | \
+   (1 << (FEATURE_DATA_CALCULATION_BIT    %32)) | \
+   (1 << (FEATURE_PPT_BIT                 %32)) | \
+   (1 << (FEATURE_TDC_BIT                 %32)) | \
+-- 
+2.47.0
+

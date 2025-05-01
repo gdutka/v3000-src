@@ -1,0 +1,29 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Robert Hrusecky <roberth@arista.com>
+Date: Fri, 4 Oct 2024 14:25:09 -0500
+Subject: [PATCH] Fox board flash layout
+
+Tweak the Flash layout for the fox board image.
+
+Currently, the only change is to shrink the uefi variable defaults. This
+makes room at the end of the image for secureboot info.
+---
+ Board/AMD/FoxBoardPkg/Project.fdf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Board/AMD/FoxBoardPkg/Project.fdf b/Board/AMD/FoxBoardPkg/Project.fdf
+index 5e5c63ab..b14d5bd5 100644
+--- a/Board/AMD/FoxBoardPkg/Project.fdf
++++ b/Board/AMD/FoxBoardPkg/Project.fdf
+@@ -355,7 +355,7 @@ DEFINE FLASH_REGION_NVSTORAGE_SUBREGION_NV_FACTORY_COPY_SIZE        = 0x00004000
+ #
+ #[-start-220125-IB14740205-modify]#
+ DEFINE FLASH_REGION_FV_VARIABLE_DEFAULTS_OFFSET                     = $(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FACTORY_COPY_OFFSET)+$(FLASH_REGION_NVSTORAGE_SUBREGION_NV_FACTORY_COPY_SIZE)
+-DEFINE FLASH_REGION_FV_VARIABLE_DEFAULTS_SIZE                       = 0x00020000
++DEFINE FLASH_REGION_FV_VARIABLE_DEFAULTS_SIZE                       = 0x00003000
+ #[-end-220125-IB14740205-modify]#
+ 
+ DEFINE FLASH_REGION_FVMAIN_HASH_OFFSET                              = $(FLASH_REGION_FV_VARIABLE_DEFAULTS_OFFSET)+$(FLASH_REGION_FV_VARIABLE_DEFAULTS_SIZE)
+-- 
+2.41.0
+

@@ -1,0 +1,58 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: roberth <roberth@arista.com>
+Date: Fri, 15 Dec 2023 11:17:15 -0600
+Subject: [PATCH] Replace pathlib2 with pathlib
+
+pathlib2 is a backport of pathlib from the python3 standard library to python2.
+We don't need python2 support, so just replace this with pathlib. This should
+be simpler than needing to maintain an extra RPM for pathlib2.
+---
+ AMD/AmdEmbedded/EmbeddedChipsetPkg/Tools/CalculateFileHash.py | 2 +-
+ AMD/AmdEmbedded/EmbeddedChipsetPkg/Tools/PatchBios.py         | 2 +-
+ Board/AMD/FoxBoardPkg/PlatformConfig/Tools/PatchPspDir.py     | 4 +---
+ 3 files changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/AMD/AmdEmbedded/EmbeddedChipsetPkg/Tools/CalculateFileHash.py b/AMD/AmdEmbedded/EmbeddedChipsetPkg/Tools/CalculateFileHash.py
+index c6e937d3..5dcc53a2 100644
+--- a/AMD/AmdEmbedded/EmbeddedChipsetPkg/Tools/CalculateFileHash.py
++++ b/AMD/AmdEmbedded/EmbeddedChipsetPkg/Tools/CalculateFileHash.py
+@@ -5,7 +5,7 @@ import os
+ import traceback
+ import argparse
+ import hashlib
+-from pathlib2 import Path
++from pathlib import Path
+ 
+ args = None
+ def main():
+diff --git a/AMD/AmdEmbedded/EmbeddedChipsetPkg/Tools/PatchBios.py b/AMD/AmdEmbedded/EmbeddedChipsetPkg/Tools/PatchBios.py
+index b93dd282..c5b5f2ba 100644
+--- a/AMD/AmdEmbedded/EmbeddedChipsetPkg/Tools/PatchBios.py
++++ b/AMD/AmdEmbedded/EmbeddedChipsetPkg/Tools/PatchBios.py
+@@ -4,7 +4,7 @@ import sys
+ import os
+ import traceback
+ import argparse
+-from pathlib2 import Path 
++from pathlib import Path
+ 
+ args = None
+ def main():
+diff --git a/Board/AMD/FoxBoardPkg/PlatformConfig/Tools/PatchPspDir.py b/Board/AMD/FoxBoardPkg/PlatformConfig/Tools/PatchPspDir.py
+index e0f4d600..e9edef95 100644
+--- a/Board/AMD/FoxBoardPkg/PlatformConfig/Tools/PatchPspDir.py
++++ b/Board/AMD/FoxBoardPkg/PlatformConfig/Tools/PatchPspDir.py
+@@ -4,9 +4,7 @@ import sys
+ import os
+ import traceback
+ import argparse
+-# Python 3.4 above support pathlib, so Python 2.7 will fail 
+-# use pathlib2 to compatiable 2.7/3.7
+-from pathlib2 import Path 
++from pathlib import Path
+ 
+ def StrToNum (Str):
+   if (Str != None):
+-- 
+2.41.0
+

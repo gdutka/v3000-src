@@ -1,0 +1,64 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: roberth <roberth@arista.com>
+Date: Fri, 16 Feb 2024 15:23:07 -0600
+Subject: [PATCH] Enable FDM chain of trust
+
+This enables PcdH2OFdmChainOfTrustSupported, which causes the sha256 hashes of
+code loaded to be verified against hashes in the FDM. The hash of the FDM
+itself is verified early on against a static value covered by PSB root of
+trust.
+
+Just enabling the PCD was not enough and led to a runtime failure to verify the
+FDM root hash. There is a one-character bug in the makefile that causes the
+root hash not to be updated correctly. My best guess is that file names are
+case-insensitve on Windows, so the Windows version of the root hash updating
+script works with "RECOVERYFV.fv" instead of "RECOVERYFV.Fv". GNUMakefile was
+probably ported from the Windows version and not tested very well.
+---
+ Board/AMD/FoxBoardPkg/GNUmakefile          | 2 +-
+ Board/AMD/FoxBoardPkg/Project.dsc          | 2 ++
+ Board/AMD/FoxBoardPkg/ProjectPostBuild.bat | 2 +-
+ 3 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/Board/AMD/FoxBoardPkg/GNUmakefile b/Board/AMD/FoxBoardPkg/GNUmakefile
+index bfec79c7..7474f775 100644
+--- a/Board/AMD/FoxBoardPkg/GNUmakefile
++++ b/Board/AMD/FoxBoardPkg/GNUmakefile
+@@ -70,7 +70,7 @@ project_postbuild:
+ 	python3 $(WORKSPACE)/$(CHIPSET_REL_PATH)/$(CHIPSET_PKG)/Tools/CalculateFileHash.py -i $(FV_OUTPUT_PATH)/$(PLATFORM_NAME).fdm -o $(FV_OUTPUT_PATH)/FdmHash.bin; \
+ 	$(WORKSPACE)/BaseTools/Bin/Linux/GenSec -s EFI_SECTION_RAW -o $(FV_OUTPUT_PATH)/Ffs/$(PcdFdmHash)RECOVERYFV/$(PcdFdmHash)SEC1.raw $(FV_OUTPUT_PATH)/FdmHash.bin; \
+ 	$(WORKSPACE)/BaseTools/Bin/Linux/GenFfs -t EFI_FV_FILETYPE_FREEFORM -g $(PcdFdmHash) -o $(FV_OUTPUT_PATH)/Ffs/$(PcdFdmHash)RECOVERYFV/$(PcdFdmHash).ffs -i $(FV_OUTPUT_PATH)/Ffs/$(PcdFdmHash)RECOVERYFV/$(PcdFdmHash)SEC1.raw; \
+-	$(WORKSPACE)/BaseTools/Bin/Linux/GenFv -i $(FV_OUTPUT_PATH)/RECOVERYFV.inf -o $(FV_OUTPUT_PATH)/RECOVERYFV.fv; \
++	$(WORKSPACE)/BaseTools/Bin/Linux/GenFv -i $(FV_OUTPUT_PATH)/RECOVERYFV.inf -o $(FV_OUTPUT_PATH)/RECOVERYFV.Fv; \
+ 	fi;
+ 	perl $(COMPRESS_TOOL_PATH)/CompressBios.pl $(PEI_FD) $(PEI_COMPRESS_FD) $(PcdFlashFvRecoverySize)
+ 	python3 $(WORKSPACE)/$(CHIPSET_REL_PATH)/$(CHIPSET_PKG)/Tools/PatchBios.py -b $(FV_OUTPUT_PATH)/$(PLATFORM_NAME).fd -p $(PEI_COMPRESS_FD) -a $(FlashFvRecoveryBase)
+diff --git a/Board/AMD/FoxBoardPkg/Project.dsc b/Board/AMD/FoxBoardPkg/Project.dsc
+index 7050b70f..7f9fb701 100644
+--- a/Board/AMD/FoxBoardPkg/Project.dsc
++++ b/Board/AMD/FoxBoardPkg/Project.dsc
+@@ -215,6 +215,8 @@
+   gInsydeTokenSpaceGuid.PcdShellBinSupported|TRUE
+   gInsydeTokenSpaceGuid.PcdShellBuildSupported|FALSE
+ 
++  gInsydeTokenSpaceGuid.PcdH2OFdmChainOfTrustSupported|TRUE
++
+   gChipsetPkgTokenSpaceGuid.PcdH2OLegacyFreeSupported|$(LEGACY_FREE_SUPPORT)
+ #[-start-220902-IB14740260-add]#
+   gInsydeTokenSpaceGuid.PcdH2OCsmSupported|$(LEGACY_FREE_SUPPORT)
+diff --git a/Board/AMD/FoxBoardPkg/ProjectPostBuild.bat b/Board/AMD/FoxBoardPkg/ProjectPostBuild.bat
+index 5f4c00ef..6f25ef24 100644
+--- a/Board/AMD/FoxBoardPkg/ProjectPostBuild.bat
++++ b/Board/AMD/FoxBoardPkg/ProjectPostBuild.bat
+@@ -48,7 +48,7 @@ FvAlignChecker.exe --PCD-report-file %WORKSPACE%/Build/%PROJECT_PKG%/BuildReport
+   @%PYTHON_PATH%/python.exe %WORKSPACE%/%CHIPSET_REL_PATH%/%CHIPSET_PKG%/Tools/CalculateFileHash.py -i %FV_OUTPUT_PATH%/%PLATFORM_NAME%.fdm -o %FV_OUTPUT_PATH%/FdmHash.bin
+   @%WORKSPACE%/BaseTools/Bin/%TOOL_BIN_PATH%/GenSec -s EFI_SECTION_RAW -o %FV_OUTPUT_PATH%/Ffs/%PcdFdmHash%RECOVERYFV/%PcdFdmHash%SEC1.raw %FV_OUTPUT_PATH%/FdmHash.bin
+   @%WORKSPACE%/BaseTools/Bin/%TOOL_BIN_PATH%/GenFfs -t EFI_FV_FILETYPE_FREEFORM -g %PcdFdmHash% -o %FV_OUTPUT_PATH%/Ffs/%PcdFdmHash%RECOVERYFV/%PcdFdmHash%.ffs -i %FV_OUTPUT_PATH%/Ffs/%PcdFdmHash%RECOVERYFV/%PcdFdmHash%SEC1.raw
+-  @%WORKSPACE%/BaseTools/Bin/%TOOL_BIN_PATH%/GenFv -i %FV_OUTPUT_PATH%/RECOVERYFV.inf -o %FV_OUTPUT_PATH%/RECOVERYFV.fv
++  @%WORKSPACE%/BaseTools/Bin/%TOOL_BIN_PATH%/GenFv -i %FV_OUTPUT_PATH%/RECOVERYFV.inf -o %FV_OUTPUT_PATH%/RECOVERYFV.Fv
+ )
+ 
+ @set PEI_FD=%FV_OUTPUT_PATH%/RECOVERYFV.Fv
+-- 
+2.41.0
+

@@ -1,0 +1,48 @@
+From 250a3bae9ca8e541cecefd8155690ab88e97464e Mon Sep 17 00:00:00 2001
+From: Ravi Rama <rrama@arista.com>
+Date: Wed, 16 Apr 2025 13:21:15 -0700
+Subject: [PATCH] dont modify gpios in PlatformCustomizePei
+
+---
+ .../Oem/Fox/Pei/PlatformCustomizePei/PlatformCustomizePei.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/Pei/PlatformCustomizePei/PlatformCustomizePei.c b/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/Pei/PlatformCustomizePei/PlatformCustomizePei.c
+index 3496c6b2..be6da575 100644
+--- a/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/Pei/PlatformCustomizePei/PlatformCustomizePei.c
++++ b/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/Pei/PlatformCustomizePei/PlatformCustomizePei.c
+@@ -277,7 +277,7 @@ PlatformCustomizePeiEntryPoint (
+   EFI_STATUS                          Status;
+   FABRIC_RESOURCE_FOR_EACH_RB        *pFabricResource;
+   UINT32                              CpuidFamilyModelStepping;
+-  UINT32                              Data;
++  //UINT32                              Data;
+   AMD_PBS_SETUP_OPTION               AmdPbsConfiguration;
+ 
+   CpuidFamilyModelStepping = 0;
+@@ -304,6 +304,7 @@ PlatformCustomizePeiEntryPoint (
+   PcdSet32S   (PcdCpmPcieDevUnCorrectedErrorMask,     (UINT32)  AmdPbsConfiguration.AmdCpmPcieDevUnCorrErrMask);
+   PcdSet32S   (PcdCpmPcieDevUnCorrectedErrorSeverity, (UINT32)  AmdPbsConfiguration.AmdCpmPcieDevUnCorrErrorSev);
+ 
++#if 0
+   GetPdFwVersion();
+ 
+   //
+@@ -325,6 +326,7 @@ PlatformCustomizePeiEntryPoint (
+     RwMem (ACPI_MMIO_BASE + IOMUX_BASE + GPIO_PIN_38, AccessWidth8, 0, 0x0);
+     RwMem (ACPI_MMIO_BASE + IOMUX_BASE + GPIO_PIN_39, AccessWidth8, 0, 0x0);
+   }
++#endif
+ 
+   Status = (*PeiServices)->AllocatePool (
+                               PeiServices,
+@@ -476,4 +478,4 @@ ProgramAICPCA9555APWR (
+   RwMem (ACPI_MMIO_BASE + IOMUX_BASE + GPIO_PIN_114, AccessWidth8, 0, Egpio114_value);
+   return Status;
+ 
+-}
+\ No newline at end of file
++}
+-- 
+2.47.0
+

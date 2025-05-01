@@ -1,0 +1,39 @@
+From fabce0879699a2155ddd3e61985420ec19b26905 Mon Sep 17 00:00:00 2001
+From: Ravi Rama <rrama@arista.com>
+Date: Fri, 25 Apr 2025 09:31:59 -0700
+Subject: [PATCH] disable Random platform Auth
+
+---
+ .../PeiDxeTpmPlatformHierarchyLib.c                             | 2 +-
+ .../PeiTpmPlatformHierarchyLib/PeiTpmPlatformHierarchyLib.c     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/EDK2/SecurityPkg/Library/PeiDxeTpmPlatformHierarchyLib/PeiDxeTpmPlatformHierarchyLib.c b/EDK2/SecurityPkg/Library/PeiDxeTpmPlatformHierarchyLib/PeiDxeTpmPlatformHierarchyLib.c
+index b8838766..43dfe096 100644
+--- a/EDK2/SecurityPkg/Library/PeiDxeTpmPlatformHierarchyLib/PeiDxeTpmPlatformHierarchyLib.c
++++ b/EDK2/SecurityPkg/Library/PeiDxeTpmPlatformHierarchyLib/PeiDxeTpmPlatformHierarchyLib.c
+@@ -247,7 +247,7 @@ ConfigureTpmPlatformHierarchy (
+     //
+     // Send Tpm2HierarchyChange Auth with random value to avoid PlatformAuth being null
+     //
+-    RandomizePlatformAuth ();
++    //RandomizePlatformAuth ();
+   } else {
+     //
+     // Disable the hierarchy entirely (do not randomize it)
+diff --git a/Insyde/InsydeModulePkg/Library/PeiTpmPlatformHierarchyLib/PeiTpmPlatformHierarchyLib.c b/Insyde/InsydeModulePkg/Library/PeiTpmPlatformHierarchyLib/PeiTpmPlatformHierarchyLib.c
+index 1cd4bdda..1630cdb9 100644
+--- a/Insyde/InsydeModulePkg/Library/PeiTpmPlatformHierarchyLib/PeiTpmPlatformHierarchyLib.c
++++ b/Insyde/InsydeModulePkg/Library/PeiTpmPlatformHierarchyLib/PeiTpmPlatformHierarchyLib.c
+@@ -273,7 +273,7 @@ ConfigureTpmPlatformHierarchy (
+     //
+     // Send Tpm2HierarchyChange Auth with random value to avoid PlatformAuth being null
+     //
+-    RandomizePlatformAuth ();
++    //RandomizePlatformAuth ();
+   } else {
+     //
+     // Disable the hierarchy entirely (do not randomize it)
+-- 
+2.47.0
+

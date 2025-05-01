@@ -1,0 +1,39 @@
+From 7d3330fa16702dbaaac562b157a2955439079745 Mon Sep 17 00:00:00 2001
+From: Ravi Rama <rrama@arista.com>
+Date: Fri, 25 Apr 2025 08:34:35 -0700
+Subject: [PATCH] dont log PCRs
+
+---
+ AMD/AmdEmbedded/AgesaModulePkg/Psp/AmdPspDxeV2Rmb/AmdPspDxeV2.c | 2 +-
+ AMD/AmdEmbedded/AmdCommonChipsetPkg/TcgDmarDxe/TcgDmarDxe.c     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/AMD/AmdEmbedded/AgesaModulePkg/Psp/AmdPspDxeV2Rmb/AmdPspDxeV2.c b/AMD/AmdEmbedded/AgesaModulePkg/Psp/AmdPspDxeV2Rmb/AmdPspDxeV2.c
+index 70e35254..1c42539c 100644
+--- a/AMD/AmdEmbedded/AgesaModulePkg/Psp/AmdPspDxeV2Rmb/AmdPspDxeV2.c
++++ b/AMD/AmdEmbedded/AgesaModulePkg/Psp/AmdPspDxeV2Rmb/AmdPspDxeV2.c
+@@ -1428,7 +1428,7 @@ PspDxeReadyToBoot (
+   }
+ 
+   // Tpm measure Dma Protection status
+-  TpmMeasureDmaProtectionStatus ();
++  //TpmMeasureDmaProtectionStatus ();
+ 
+   //Notify PSP Driver about RTB, PSP SMM driver will save the Core register to S3 Save region
+   //BSP and AP will wake inside of SMM
+diff --git a/AMD/AmdEmbedded/AmdCommonChipsetPkg/TcgDmarDxe/TcgDmarDxe.c b/AMD/AmdEmbedded/AmdCommonChipsetPkg/TcgDmarDxe/TcgDmarDxe.c
+index 71c509ae..dee5593d 100644
+--- a/AMD/AmdEmbedded/AmdCommonChipsetPkg/TcgDmarDxe/TcgDmarDxe.c
++++ b/AMD/AmdEmbedded/AmdCommonChipsetPkg/TcgDmarDxe/TcgDmarDxe.c
+@@ -81,7 +81,7 @@ TcgDmarDxeEntryPoint (
+ 
+   Status      = EFI_SUCCESS;
+ 
+-  if (!PcdGetBool (PcdDmaProtection)) {
++  if (0 && !PcdGetBool (PcdDmaProtection)) {
+     Status = gBS->CreateEventEx (
+                     EVT_NOTIFY_SIGNAL,
+                     TPL_CALLBACK,
+-- 
+2.47.0
+

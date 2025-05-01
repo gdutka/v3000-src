@@ -1,0 +1,442 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: roberth <roberth@arista.com>
+Date: Mon, 18 Mar 2024 12:32:50 -0500
+Subject: [PATCH] Inject Aboot initrd and kernel
+
+This patch adds the Aboot initrd and kernel to the BIOS. A new package
+(AbootBinPkg) is created to manage the build of the binary image. This image is
+built into the DXE firmware volume on SPI flash. The DXE firmware volume has a
+hash included in the FDM and is authenticated by FdmVerify; therefore the chain
+of trust is maintained. The Aboot image is identified in the DXE FV by a fixed
+GUID (gAbootFileGuid) that I've generated.
+
+In the past (Aboot11), this has been done by replacing the UEFI shell binary
+with the Aboot image. Creating a separate package has the advantage that it
+avoids the CRC calculation that is performed over the UEFI shell binary. This
+check is not necessary for the Aboot image. The method also gives us slightly
+more control over the locations that the BIOS searches for the image.
+
+Code is added to enumerate the Aboot boot option in the boot option list.
+
+Normally, in the BDS phase, H2O  will loop over the list of boot options,
+trying each one until a boot option is launched successfully. In our case, for
+security reasons, we want to *always* boot the Aboot image and *only* that
+image. Therefore this patch replaces the normal boot option loop with code that
+locates the Aboot boot option in the list and only tries that option. If boot
+fails, the system will enter a CpuDeadLoop.
+---
+ Arista/AbootBinPkg/Aboot/Aboot.inf            | 12 +++
+ Arista/AbootBinPkg/AbootBinPkg.dec            |  9 +++
+ Arista/AbootBinPkg/Package.dsc                | 37 +++++++++
+ Arista/AbootBinPkg/Package.fdf                |  6 ++
+ Board/AMD/FoxBoardPkg/GNUmakefile             |  2 +-
+ Board/AMD/FoxBoardPkg/Project.dsc             |  1 +
+ Board/AMD/FoxBoardPkg/Project.env             |  2 +-
+ Board/AMD/FoxBoardPkg/Project.fdf             |  5 +-
+ .../Library/GenericBdsLib/BdsBoot.c           |  3 +
+ .../Library/GenericBdsLib/BdsBootOption.c     | 77 +++++++++++++++++++
+ .../Library/GenericBdsLib/BdsBootOption.h     | 10 +++
+ .../Library/GenericBdsLib/GenericBdsLib.inf   |  2 +
+ .../Universal/BdsDxe/BdsEntry.c               | 71 +++++++++++++++++
+ 13 files changed, 233 insertions(+), 4 deletions(-)
+ create mode 100644 Arista/AbootBinPkg/Aboot/Aboot.inf
+ create mode 100644 Arista/AbootBinPkg/AbootBinPkg.dec
+ create mode 100644 Arista/AbootBinPkg/Package.dsc
+ create mode 100644 Arista/AbootBinPkg/Package.fdf
+
+diff --git a/Arista/AbootBinPkg/Aboot/Aboot.inf b/Arista/AbootBinPkg/Aboot/Aboot.inf
+new file mode 100644
+index 00000000..d5ec56af
+--- /dev/null
++++ b/Arista/AbootBinPkg/Aboot/Aboot.inf
+@@ -0,0 +1,12 @@
++[Defines]
++  INF_VERSION                    = 0x00010006
++  BASE_NAME                      = Aboot
++  FILE_GUID                      = 2DB7180A-0F5D-410A-B869-94D5AE92936D # Keep in sync with AbootBinPkg.dec
++  MODULE_TYPE                    = UEFI_APPLICATION
++  VERSION_STRING                 = 1.0
++
++[Binaries.Ia32]
++  PE32|Aboot.efi|*
++
++[Binaries.X64]
++  PE32|Aboot.efi|*
+diff --git a/Arista/AbootBinPkg/AbootBinPkg.dec b/Arista/AbootBinPkg/AbootBinPkg.dec
+new file mode 100644
+index 00000000..6f4e1f02
+--- /dev/null
++++ b/Arista/AbootBinPkg/AbootBinPkg.dec
+@@ -0,0 +1,9 @@
++[Defines]
++  DEC_SPECIFICATION              = 0x00010005
++  PACKAGE_NAME                   = AbootBinPkg
++  PACKAGE_GUID                   = E8B16E1E-CBF4-4D73-9DB2-6A40705B8C2E
++  PACKAGE_VERSION                = 0.1
++
++[Guids]
++  # Keep in sync with Aboot/Aboot.inf
++  gAbootFileGuid = {0x2DB7180A, 0x0F5D, 0x410A, {0xB8, 0x69, 0x94, 0xD5, 0xAE, 0x92, 0x93, 0x6D}}
+diff --git a/Arista/AbootBinPkg/Package.dsc b/Arista/AbootBinPkg/Package.dsc
+new file mode 100644
+index 00000000..b8c64968
+--- /dev/null
++++ b/Arista/AbootBinPkg/Package.dsc
+@@ -0,0 +1,37 @@
++[Defines]
++
++[LibraryClasses]
++
++[LibraryClasses.common.SEC]
++
++[LibraryClasses.common.PEI_CORE]
++
++[LibraryClasses.common.PEIM]
++
++[LibraryClasses.common.DXE_CORE]
++
++[LibraryClasses.common.DXE_RUNTIME_DRIVER]
++
++[LibraryClasses.common.UEFI_DRIVER]
++
++[LibraryClasses.common.DXE_DRIVER]
++
++[LibraryClasses.common.DXE_SMM_DRIVER]
++
++[LibraryClasses.common.COMBINED_SMM_DXE]
++
++[LibraryClasses.common.SMM_CORE]
++
++[LibraryClasses.common.UEFI_APPLICATION]
++
++[PcdsFeatureFlag]
++
++[PcdsFixedAtBuild]
++
++[PcdsDynamicExDefault]
++
++[Components.$(PEI_ARCH)]
++
++[Components.$(DXE_ARCH)]
++  AbootBinPkg/Aboot/Aboot.inf
++
+diff --git a/Arista/AbootBinPkg/Package.fdf b/Arista/AbootBinPkg/Package.fdf
+new file mode 100644
+index 00000000..84b81f54
+--- /dev/null
++++ b/Arista/AbootBinPkg/Package.fdf
+@@ -0,0 +1,6 @@
++[FV.RECOVERYFV]
++
++[FV.DXEFV]
++INF RuleOverride = BINARY USE = $(DXE_ARCH) AbootBinPkg/Aboot/Aboot.inf
++
++
+diff --git a/Board/AMD/FoxBoardPkg/GNUmakefile b/Board/AMD/FoxBoardPkg/GNUmakefile
+index 7474f775..227dcde4 100644
+--- a/Board/AMD/FoxBoardPkg/GNUmakefile
++++ b/Board/AMD/FoxBoardPkg/GNUmakefile
+@@ -16,7 +16,7 @@
+ #
+ $(shell chmod a+x GetWorkspace.sh)
+ export WORKSPACE = $(shell ./GetWorkspace.sh)
+-export PACKAGES_PATH=$(WORKSPACE)/Board/AMD:$(WORKSPACE)/AMD/AmdEmbedded:$(WORKSPACE)/Insyde:$(WORKSPACE)/EDK2:$(WORKSPACE)/SegFeature
++export PACKAGES_PATH=$(WORKSPACE)/Board/AMD:$(WORKSPACE)/AMD/AmdEmbedded:$(WORKSPACE)/Insyde:$(WORKSPACE)/EDK2:$(WORKSPACE)/SegFeature:$(WORKSPACE)/Arista
+ 
+ getenv2 = $(shell  export PACKAGES_PATH=$(PACKAGES_PATH) ; $(WORKSPACE)/BaseTools/Bin/Linux/GetProjectEnv $(1))
+ getenv = $(word 2, $(subst =, ,$(call getenv2, $1)))
+diff --git a/Board/AMD/FoxBoardPkg/Project.dsc b/Board/AMD/FoxBoardPkg/Project.dsc
+index 7f9fb701..27fbd036 100644
+--- a/Board/AMD/FoxBoardPkg/Project.dsc
++++ b/Board/AMD/FoxBoardPkg/Project.dsc
+@@ -216,6 +216,7 @@
+   gInsydeTokenSpaceGuid.PcdShellBuildSupported|FALSE
+ 
+   gInsydeTokenSpaceGuid.PcdH2OFdmChainOfTrustSupported|TRUE
++  gInsydeTokenSpaceGuid.PcdH2OBdsDefaultBootListGenericOsSupported|FALSE
+ 
+   gChipsetPkgTokenSpaceGuid.PcdH2OLegacyFreeSupported|$(LEGACY_FREE_SUPPORT)
+ #[-start-220902-IB14740260-add]#
+diff --git a/Board/AMD/FoxBoardPkg/Project.env b/Board/AMD/FoxBoardPkg/Project.env
+index 815e5161..b598b85e 100644
+--- a/Board/AMD/FoxBoardPkg/Project.env
++++ b/Board/AMD/FoxBoardPkg/Project.env
+@@ -32,7 +32,7 @@
+   DEFINE  SUPPORT_USER_PASSWORD                   = NO
+   DEFINE  RETURN_DIALOG_CYCLE                     = NO
+   DEFINE  SEAMLESS_AHCI_SUPPORT                   = YES
+-  DEFINE  FRONTPAGE_SUPPORT                       = YES
++  DEFINE  FRONTPAGE_SUPPORT                       = NO
+   DEFINE  SNAPSCREEN_SUPPORT                      = NO
+   DEFINE  UEFI_PAUSE_KEY_FUNCTION_SUPPORT         = NO
+   DEFINE  UNSIGNED_FV_SUPPORT                     = NO
+diff --git a/Board/AMD/FoxBoardPkg/Project.fdf b/Board/AMD/FoxBoardPkg/Project.fdf
+index cc43a25d..f4397d8c 100644
+--- a/Board/AMD/FoxBoardPkg/Project.fdf
++++ b/Board/AMD/FoxBoardPkg/Project.fdf
+@@ -44,6 +44,7 @@
+ !import SioDummyPkg/Package.fdf
+ !import AmdPspFeaturePkg/Package.fdf
+ !import AmdCommonChipsetPkg/Package.fdf
++!import AbootBinPkg/Package.fdf
+ 
+ [Defines]
+ #
+@@ -294,7 +295,7 @@ DEFINE FLASH_REGION_FVMAIN_SIZE                                     = 0x00380000
+ !else
+ DEFINE FLASH_REGION_FVMAIN_OFFSET                                   = $(FLASH_REGION_PEI_FLASH_B_OFFSET)+$(FLASH_REGION_PEI_FLASH_B_SIZE)
+ !if $(VN_32M_AB_COMBO_CFG) == YES
+-DEFINE FLASH_REGION_FVMAIN_SIZE                                     = 0x00600000
++DEFINE FLASH_REGION_FVMAIN_SIZE                                     = 0x00800000
+ !else
+ DEFINE FLASH_REGION_FVMAIN_SIZE                                     = 0x003A0000
+ !endif
+@@ -1012,4 +1013,4 @@ INF RuleOverride = ACPITABLE $(PROJECT_PKG)/AcpiTables/AcpiTables.inf
+     VERSION   STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+     RAW ACPI  Optional                |.acpi
+     RAW ASL   Optional                |.aml
+-  }
+\ No newline at end of file
++  }
+diff --git a/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBoot.c b/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBoot.c
+index 52e02aff..cbba8859 100644
+--- a/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBoot.c
++++ b/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBoot.c
+@@ -2001,6 +2001,7 @@ BdsLibEnumerateAllBootOption (
+   EFI_STATUS                    Status;
+   KERNEL_CONFIGURATION          SystemConfiguration;
+   EFI_STATUS                    SystemConfigStatus;
++  EFI_STATUS                    AbootStatus;
+   BOOLEAN                       WindowsToGoBootVarExist;
+   CHAR8                         *PlatLang;
+   CHAR8                         *LastLang;
+@@ -2127,6 +2128,8 @@ BdsLibEnumerateAllBootOption (
+     EnumerateAllNetworkBootOption ();
+   }
+   EnumerateAllShellBootOption ();
++  AbootStatus = EnumerateAbootBootOption ();
++  ASSERT_EFI_ERROR(AbootStatus);
+ 
+   //
+   // Make sure every boot only have one time boot device enumerate
+diff --git a/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBootOption.c b/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBootOption.c
+index d4e2b7f2..b3523419 100644
+--- a/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBootOption.c
++++ b/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBootOption.c
+@@ -1194,6 +1194,83 @@ Exit:
+   }
+ }
+ 
++/**
++  Create a device path to the Aboot file.
++
++  This device path must be freed with the FreePool () function.
++
++  @retval EFI_SUCCESS           The operation was successful.
++  @retval EFI_OUT_OF_RESOURCES  Memory allocation failed.
++  @retval Other                 Failed to locate the load image device path.
++
++**/
++EFI_STATUS
++GetAbootFileDevicePath (
++  OUT EFI_DEVICE_PATH_PROTOCOL **DevicePath
++  )
++{
++  EFI_LOADED_IMAGE_PROTOCOL         *LoadedImage;
++  MEDIA_FW_VOL_FILEPATH_DEVICE_PATH FileNode;
++  EFI_STATUS                        Status;
++
++  Status = gBS->HandleProtocol (
++                  gImageHandle,
++                  &gEfiLoadedImageProtocolGuid,
++                  (VOID **)&LoadedImage
++                  );
++
++  if (EFI_ERROR (Status)) {
++    *DevicePath = NULL;
++    return Status;
++  }
++
++  *DevicePath = DevicePathFromHandle (LoadedImage->DeviceHandle);
++  EfiInitializeFwVolDevicepathNode (&FileNode, &gAbootFileGuid);
++  *DevicePath = AppendDevicePathNode (*DevicePath, (EFI_DEVICE_PATH_PROTOCOL *) &FileNode);
++
++  if (*DevicePath == NULL) {
++    Status = EFI_OUT_OF_RESOURCES;
++  }
++
++  return Status;
++}
++
++/**
++  Enumerate the Aboot boot option.
++
++  @retval EFI_SUCCESS           The operation was successful, or Aboot was already present in the boot order.
++  @retval EFI_OUT_OF_RESOURCES  Memory allocation failed.
++  @retval Other                 Failed to locate the load image device path.
++
++**/
++EFI_STATUS
++EnumerateAbootBootOption (
++  VOID
++  )
++{
++  EFI_STATUS                        Status;
++  EFI_DEVICE_PATH_PROTOCOL          *DevicePath;
++
++  Status = GetAbootFileDevicePath (&DevicePath);
++  if (EFI_ERROR (Status)) {
++    return Status;
++  }
++
++  if (IsAlreadyInBootOrder (DevicePath)) {
++    goto Exit;
++  }
++
++  //
++  // Create and register the Aboot boot option
++  //
++  Status = BdsLibRegisterNewOption (NULL, DevicePath, L"Aboot bootloader", L"BootOrder", NULL, 0);
++
++Exit:
++  FreePool (DevicePath);
++
++  return Status;
++}
++
+ /**
+  Enumerate all shell boot options.
+ 
+diff --git a/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBootOption.h b/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBootOption.h
+index c1565b00..92d213c8 100644
+--- a/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBootOption.h
++++ b/Insyde/InsydeModulePkg/Library/GenericBdsLib/BdsBootOption.h
+@@ -23,6 +23,16 @@ EnumerateAllNetworkBootOption (
+   VOID
+   );
+ 
++EFI_STATUS
++GetAbootFileDevicePath (
++  OUT EFI_DEVICE_PATH_PROTOCOL **DevicePath
++  );
++
++EFI_STATUS
++EnumerateAbootBootOption (
++  VOID
++  );
++
+ EFI_STATUS
+ EnumerateAllShellBootOption (
+   VOID
+diff --git a/Insyde/InsydeModulePkg/Library/GenericBdsLib/GenericBdsLib.inf b/Insyde/InsydeModulePkg/Library/GenericBdsLib/GenericBdsLib.inf
+index ae65496d..7ca6d870 100644
+--- a/Insyde/InsydeModulePkg/Library/GenericBdsLib/GenericBdsLib.inf
++++ b/Insyde/InsydeModulePkg/Library/GenericBdsLib/GenericBdsLib.inf
+@@ -67,6 +67,7 @@
+   InsydeNetworkPkg/InsydeNetworkPkg.dec
+   InsydeOemServicesPkg/InsydeOemServicesPkg.dec
+   PerformancePkg/PerformancePkg.dec
++  AbootBinPkg/AbootBinPkg.dec
+ 
+ [LibraryClasses]
+   DevicePathLib
+@@ -162,6 +163,7 @@
+   gH2OBdsCpRecoveryCompleteGuid
+   gH2OBdsCpDxeSmmReadyToLockBeforeGuid
+   gH2OBdsCpDxeSmmReadyToLockAfterGuid
++  gAbootFileGuid
+ 
+ [Protocols]
+   gEfiSimpleFileSystemProtocolGuid              # PROTOCOL CONSUMES
+diff --git a/Insyde/InsydeModulePkg/Universal/BdsDxe/BdsEntry.c b/Insyde/InsydeModulePkg/Universal/BdsDxe/BdsEntry.c
+index e9d3129a..840912c1 100644
+--- a/Insyde/InsydeModulePkg/Universal/BdsDxe/BdsEntry.c
++++ b/Insyde/InsydeModulePkg/Universal/BdsDxe/BdsEntry.c
+@@ -1399,6 +1399,69 @@ IsNoActiveBootOption (
+    return TRUE;
+ }
+ 
++/**
++  Internal function to find the Aboot boot option in the boot option list.
++
++  @param[out] BootLists    Pointer to boot list
++
++  @retval BootOption       The Aboot boot option was located successfully.
++  @return NULL             An error occurred.
++**/
++STATIC
++H2O_BDS_LOAD_OPTION *
++FindAbootBootOption (
++  LIST_ENTRY                    *BootLists
++  )
++{
++  EFI_STATUS                Status;
++  LIST_ENTRY                *Link;
++  H2O_BDS_LOAD_OPTION       *BootOption;
++  H2O_BDS_LOAD_OPTION       *ExpandedBootOption;
++  EFI_DEVICE_PATH_PROTOCOL  *AbootFileDevicePath;
++  UINTN                     AbootFileDevicePathSize;
++  EFI_DEVICE_PATH_PROTOCOL  *DevicePath;
++
++  if (BootLists == NULL) {
++    return NULL;
++  }
++  
++  Status = GetAbootFileDevicePath (&AbootFileDevicePath);
++  if (EFI_ERROR (Status)) {
++    return NULL;
++  }
++  AbootFileDevicePathSize = GetDevicePathSize (AbootFileDevicePath);
++
++  for (Link = GetFirstNode (BootLists); Link != BootLists; Link = GetNextNode (BootLists, Link)) {
++    BootOption = BDS_OPTION_FROM_LINK (Link);
++
++    // Skip inactive boot options
++    if (!IS_LOAD_OPTION_TYPE (BootOption->Attributes, LOAD_OPTION_ACTIVE)) {
++      continue;
++    }
++
++    // Obtain the boot option's device path
++    if (BootOption->Expanded && !IsListEmpty (&BootOption->ExpandedLoadOptions)) {
++      ExpandedBootOption = BDS_OPTION_FROM_LINK (BootOption->ExpandedLoadOptions.ForwardLink);
++      DevicePath = ExpandedBootOption->DevicePath;
++    } else {
++      DevicePath = BootOption->DevicePath;
++    }
++
++
++    // Skip boot options whose device path does not match the Aboot file path
++    if (GetDevicePathSize (DevicePath) != AbootFileDevicePathSize ||
++        CompareMem (DevicePath, AbootFileDevicePath, AbootFileDevicePathSize) != 0) {
++      continue;
++    }
++
++    FreePool (AbootFileDevicePath);
++    return BootOption;
++  }
++
++  FreePool (AbootFileDevicePath);
++  return NULL;
++}
++
+ /**
+  Dump boot option list.
+ **/
+@@ -1677,6 +1740,14 @@ BdsBootDeviceSelect (
+   Link = GetFirstNode (BootLists);
+   SystemConfigStatus = GetKernelConfiguration (&SystemConfiguration);
+ 
++  // ARISTA: Find the Aboot boot option and boot into that unconditionally
++  DEBUG_CODE (DumpBootOptionList (BootLists, BootOption););
++  BootOption = FindAbootBootOption (BootLists);
++  ASSERT (BootOption != NULL);
++  Status = gBdsServices->LaunchLoadOption (gBdsServices, BootOption, &ExitDataSize, &ExitData);
++  ASSERT (FALSE);
++  CpuDeadLoop();
++
+   // Here we make the boot in a loop, every boot success will
+   // return to the front page
+   //
+-- 
+2.41.0
+

@@ -1,0 +1,67 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: roberth <roberth@arista.com>
+Date: Fri, 26 Jan 2024 17:01:57 -0600
+Subject: [PATCH] Disable sse2
+
+The eos-trunk version of GCC has an Arista patch
+(https://github.com/arista-eos-external/gcc11/blob/main/sources/arista-gcc6-msse2-default.patch)
+that enables generation SSE2 instructions by default for 32-bit targets. This
+causes a fault at runtime.
+
+This patch passes the necessary command-line flags to disable SSE2 by default.
+---
+ BaseTools/Conf/tools_def.template | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/BaseTools/Conf/tools_def.template b/BaseTools/Conf/tools_def.template
+index e594b090..94eed1c4 100644
+--- a/BaseTools/Conf/tools_def.template
++++ b/BaseTools/Conf/tools_def.template
+@@ -2742,7 +2742,7 @@ NOOPT_*_*_OBJCOPY_ADDDEBUGFLAG     = --add-gnu-debuglink=$(DEBUG_DIR)/$(MODULE_N
+ *_*_*_DTC_PATH                     = DEF(DTC_BIN)
+ 
+ DEFINE GCC_ALL_CC_FLAGS            = -g -Os -fshort-wchar -fno-builtin -fno-strict-aliasing -Wall -Werror -Wno-array-bounds -include AutoGen.h -fno-common
+-DEFINE GCC_IA32_CC_FLAGS           = DEF(GCC_ALL_CC_FLAGS) -m32 -malign-double -freorder-blocks -freorder-blocks-and-partition -O2 -mno-stack-arg-probe
++DEFINE GCC_IA32_CC_FLAGS           = DEF(GCC_ALL_CC_FLAGS) -m32  -mno-sse2 -mno-sse -mno-mmx -malign-double -freorder-blocks -freorder-blocks-and-partition -O2 -mno-stack-arg-probe
+ DEFINE GCC_X64_CC_FLAGS            = DEF(GCC_ALL_CC_FLAGS) -mno-red-zone -Wno-address -mno-stack-arg-probe
+ DEFINE GCC_ARM_CC_FLAGS            = DEF(GCC_ALL_CC_FLAGS) -mlittle-endian -mabi=aapcs -fno-short-enums -funsigned-char -ffunction-sections -fdata-sections -fomit-frame-pointer -Wno-address -mthumb -mfloat-abi=soft -fno-pic -fno-pie
+ DEFINE GCC_ARM_CC_XIPFLAGS         = -mno-unaligned-access
+@@ -2784,7 +2784,7 @@ DEFINE GCC_DEPS_FLAGS              = -MMD -MF $@.deps
+ 
+ DEFINE GCC48_ALL_CC_FLAGS            = DEF(GCC_ALL_CC_FLAGS) -ffunction-sections -fdata-sections -DSTRING_ARRAY_NAME=$(BASE_NAME)Strings
+ DEFINE GCC48_IA32_X64_DLINK_COMMON   = -nostdlib -Wl,-n,-q,--gc-sections -z common-page-size=0x20
+-DEFINE GCC48_IA32_CC_FLAGS           = DEF(GCC48_ALL_CC_FLAGS) -m32 -march=i586 -malign-double -fno-stack-protector -D EFI32 -fno-asynchronous-unwind-tables -Wno-address
++DEFINE GCC48_IA32_CC_FLAGS           = DEF(GCC48_ALL_CC_FLAGS) -m32  -mno-sse2 -mno-sse -mno-mmx -march=i586 -malign-double -fno-stack-protector -D EFI32 -fno-asynchronous-unwind-tables -Wno-address
+ DEFINE GCC48_X64_CC_FLAGS            = DEF(GCC48_ALL_CC_FLAGS) -m64 -fno-stack-protector -mabi=ms "-DEFIAPI=__attribute__((ms_abi))" -maccumulate-outgoing-args -mno-red-zone -Wno-address -mcmodel=small -fpie -fno-asynchronous-unwind-tables -Wno-address
+ DEFINE GCC48_IA32_X64_ASLDLINK_FLAGS = DEF(GCC48_IA32_X64_DLINK_COMMON) -Wl,--defsym=PECOFF_HEADER_SIZE=0 DEF(GCC_DLINK2_FLAGS_COMMON) -Wl,--entry,ReferenceAcpiTable -u ReferenceAcpiTable
+ DEFINE GCC48_IA32_X64_DLINK_FLAGS    = DEF(GCC48_IA32_X64_DLINK_COMMON) -Wl,--entry,$(IMAGE_ENTRY_POINT) -u $(IMAGE_ENTRY_POINT) -Wl,-Map,$(DEST_DIR_DEBUG)/$(BASE_NAME).map
+@@ -2909,7 +2909,7 @@ DEFINE GCC_PP_FLAGS                        = -E -x assembler-with-cpp -include A
+ 
+ *_GCC48_IA32_ASLCC_FLAGS          = DEF(GCC48_ASLCC_FLAGS) -m32
+ *_GCC48_IA32_ASLDLINK_FLAGS       = DEF(GCC48_IA32_X64_ASLDLINK_FLAGS) -Wl,-m,elf_i386
+-*_GCC48_IA32_ASM_FLAGS            = DEF(GCC48_ASM_FLAGS) -m32 -march=i386
++*_GCC48_IA32_ASM_FLAGS            = DEF(GCC48_ASM_FLAGS) -m32  -mno-sse2 -mno-sse -mno-mmx -march=i386
+ *_GCC48_IA32_DLINK_FLAGS          = DEF(GCC48_IA32_X64_DLINK_FLAGS) -Wl,-m,elf_i386,--oformat=elf32-i386
+ *_GCC48_IA32_DLINK2_FLAGS         = DEF(GCC48_IA32_DLINK2_FLAGS)
+ *_GCC48_IA32_RC_FLAGS             = DEF(GCC_IA32_RC_FLAGS)
+@@ -3056,7 +3056,7 @@ RELEASE_GCC48_AARCH64_CC_FLAGS   = DEF(GCC48_AARCH64_CC_FLAGS) -Wno-unused-but-s
+ 
+ *_GCC49_IA32_ASLCC_FLAGS          = DEF(GCC49_ASLCC_FLAGS) -m32
+ *_GCC49_IA32_ASLDLINK_FLAGS       = DEF(GCC49_IA32_X64_ASLDLINK_FLAGS) -Wl,-m,elf_i386
+-*_GCC49_IA32_ASM_FLAGS            = DEF(GCC49_ASM_FLAGS) -m32 -march=i386
++*_GCC49_IA32_ASM_FLAGS            = DEF(GCC49_ASM_FLAGS) -m32  -mno-sse2 -mno-sse -mno-mmx -march=i386
+ *_GCC49_IA32_DLINK_FLAGS          = DEF(GCC49_IA32_X64_DLINK_FLAGS) -Wl,-m,elf_i386,--oformat=elf32-i386
+ *_GCC49_IA32_DLINK2_FLAGS         = DEF(GCC49_IA32_DLINK2_FLAGS)
+ *_GCC49_IA32_RC_FLAGS             = DEF(GCC_IA32_RC_FLAGS)
+@@ -3210,7 +3210,7 @@ RELEASE_GCC49_AARCH64_DLINK_XIPFLAGS = -z common-page-size=0x20
+ 
+ *_GCC5_IA32_ASLCC_FLAGS          = DEF(GCC5_ASLCC_FLAGS) -m32
+ *_GCC5_IA32_ASLDLINK_FLAGS       = DEF(GCC5_IA32_X64_ASLDLINK_FLAGS) -Wl,-m,elf_i386 -no-pie
+-*_GCC5_IA32_ASM_FLAGS            = DEF(GCC5_ASM_FLAGS) -m32 -march=i386
++*_GCC5_IA32_ASM_FLAGS            = DEF(GCC5_ASM_FLAGS) -m32  -mno-sse2 -mno-sse -mno-mmx -march=i386
+ *_GCC5_IA32_DLINK2_FLAGS         = DEF(GCC5_IA32_DLINK2_FLAGS) -no-pie
+ *_GCC5_IA32_RC_FLAGS             = DEF(GCC_IA32_RC_FLAGS)
+ *_GCC5_IA32_OBJCOPY_FLAGS        =
+-- 
+2.41.0
+

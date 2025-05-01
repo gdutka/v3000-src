@@ -1,0 +1,108 @@
+From c0bc0c5ec0763d2b77afb2ee19de66174cacca3d Mon Sep 17 00:00:00 2001
+From: Ravi Rama <rrama@arista.com>
+Date: Fri, 25 Apr 2025 08:05:37 -0700
+Subject: [PATCH] Dump CPU reset register and MCA registers if valid.
+
+---
+ .../Ras/AmdRasRmbApeiDxe/AmdRasRmbApeiDxe.c   | 53 +++++++++++++++++--
+ 1 file changed, 48 insertions(+), 5 deletions(-)
+
+diff --git a/AMD/AmdEmbedded/AgesaModulePkg/Ras/AmdRasRmbApeiDxe/AmdRasRmbApeiDxe.c b/AMD/AmdEmbedded/AgesaModulePkg/Ras/AmdRasRmbApeiDxe/AmdRasRmbApeiDxe.c
+index 07b6fd94..ae035b16 100644
+--- a/AMD/AmdEmbedded/AgesaModulePkg/Ras/AmdRasRmbApeiDxe/AmdRasRmbApeiDxe.c
++++ b/AMD/AmdEmbedded/AgesaModulePkg/Ras/AmdRasRmbApeiDxe/AmdRasRmbApeiDxe.c
+@@ -287,6 +287,46 @@ AmdSearchMcaError (
+   return EFI_SUCCESS;
+ }
+ 
++VOID
++DumpMcaErrorInfo ()
++{
++  UINT32 i;
++  UINT8 BankNum;
++  UINT64 MsrData;
++  MCA_STATUS_MSR McaStatusMsr;
++  UINT32 RasValue = 0;
++
++  MsrData = AsmReadMsr64 (MSR_MCG_CAP); // MCG_CAP
++  BankNum = (UINT8)(MsrData & 0xFF);
++  DEBUG((EFI_D_ERROR, "\n[RAS] PMxc0 = 0x%08x\n", MmioRead32(0xfed803c0)));
++
++  RasSmnRead(0, RAS_GLOBAL_STATUS_LO, &RasValue);
++  if (RasValue)
++    DEBUG((EFI_D_ERROR, "[RAS]  RAS_GLOBAL_STATUS_LO = 0x%08x\n", RasValue));
++
++  RasSmnRead(0, RAS_GLOBAL_STATUS_HI, &RasValue);
++  if (RasValue)
++    DEBUG((EFI_D_ERROR, "[RAS]  RAS_GLOBAL_STATUS_HI = 0x%08x\n", RasValue));
++
++  for (i = 0; i < BankNum; i++) {
++    if (i == MCA_EMPTY0_BANK)
++      continue;
++    McaStatusMsr.Value = AsmReadMsr64((MCA_EXTENSION_BASE + (i * 0x10) | MCA_STATUS_OFFSET));
++    if (McaStatusMsr.Field.Val) {
++      DEBUG((EFI_D_ERROR, "[RAS] McaCtlMsr reg[%d] = 0x%lx\n", i,AsmReadMsr64((MCA_EXTENSION_BASE + (i * 0x10) | MCA_CTL_OFFSET))));
++      DEBUG((EFI_D_ERROR, "[RAS] McaStatusMsr reg[%d] = 0x%lx\n", i,McaStatusMsr.Value));  
++      DEBUG((EFI_D_ERROR, "[RAS] McaAddrMsr reg[%d] = 0x%lx\n", i,AsmReadMsr64((MCA_EXTENSION_BASE + (i * 0x10) | MCA_ADDR_OFFSET))));
++      DEBUG((EFI_D_ERROR, "[RAS] McaConfigMsr reg[%d] = 0x%lx\n",i, AsmReadMsr64((MCA_EXTENSION_BASE + (i * 0x10) | MCA_CONFIG_OFFSET))));
++      DEBUG((EFI_D_ERROR, "[RAS] McaIpidMsr reg[%d] = 0x%lx\n", i, AsmReadMsr64((MCA_EXTENSION_BASE + (i * 0x10) | MCA_IPID_OFFSET))));
++      DEBUG((EFI_D_ERROR, "[RAS] McaSyndMsr reg[%d] = 0x%lx\n", i, AsmReadMsr64((MCA_EXTENSION_BASE + (i * 0x10) | MCA_SYND_OFFSET))));
++      DEBUG((EFI_D_ERROR, "[RAS] McaMisc0Msr reg[%d] = 0x%lx\n", i, AsmReadMsr64((MCA_EXTENSION_BASE + (i * 0x10) | MCA_MISC0_OFFSET))));
++      DEBUG((EFI_D_ERROR, "[RAS] McaMisc1Msr reg[%d] = 0x%lx\n", i, AsmReadMsr64((MCA_EXTENSION_BASE + (i * 0x10) | MCA_MISC1_OFFSET))));
++      DEBUG((EFI_D_ERROR, "[RAS] McaDeStatMsr reg[%d] = 0x%lx\n", i, AsmReadMsr64((MCA_EXTENSION_BASE + (i * 0x10) | MCA_DESTAT_OFFSET))));  
++      DEBUG((EFI_D_ERROR, "[RAS] McaDeAddrMsr reg[%d] = 0x%lx\n", i, AsmReadMsr64((MCA_EXTENSION_BASE + (i * 0x10) | MCA_DEADDR_OFFSET))));
++    }
++  }
++}
++
+ /*********************************************************************************
+  * Name: AmdRasRmbApeiDxeInit
+  *
+@@ -316,7 +356,7 @@ AmdRasRmbApeiDxeInit (
+   UINTN                      NumberOfEnabledProcessors;
+   UINTN                      NumberOfLogicProcessors = 0;
+ 
+-  DEBUG((EFI_D_ERROR, "[RAS] RMB AGESA RAS APEI driver entry\n"));
++  DEBUG((EFI_D_INFO, "[RAS] RMB AGESA RAS APEI driver entry\n"));
+ 
+   // Allocate Memory for the the AMD_RAS_APEI_PROTOCOL protocol.
+   Status = gBS->AllocatePool (
+@@ -351,12 +391,15 @@ AmdRasRmbApeiDxeInit (
+   // Get StartThisApFrom, StartThisApTo, StartThisApSteps
+   mMpServices->GetNumberOfProcessors (mMpServices, &NumberOfLogicProcessors, &NumberOfEnabledProcessors);
+ 
+-  DEBUG((EFI_D_ERROR, "[RAS] TotalNumberOfProcessor = %d\n", mAmdRasPolicy->TotalNumberOfProcessors));
+-  DEBUG((EFI_D_ERROR, "[RAS] MP Service NumberOfProcessor = %d\n", NumberOfEnabledProcessors));
++  DEBUG((EFI_D_INFO, "[RAS] TotalNumberOfProcessor = %d\n", mAmdRasPolicy->TotalNumberOfProcessors));
++  DEBUG((EFI_D_INFO, "[RAS] MP Service NumberOfProcessor = %d\n", NumberOfEnabledProcessors));
+ 
+   //The logical processors number should match to the avaliable processors reported from AGESA.
+   ASSERT (NumberOfLogicProcessors == mAmdRasPolicy->TotalNumberOfProcessors);
+ 
++  // Dump CPU reset register and MCA registers when valid.
++  DumpMcaErrorInfo();
++
+   // Initialize function pointers to protocol interfaces
+   AmdRasApeiRmbProtocol->McaErrorAddrTranslate = &AmdMcaErrorAddrTranslate;
+   AmdRasApeiRmbProtocol->TranslateSysAddrToCS = &AmdTranslateSysAddrToCS;
+@@ -867,7 +910,7 @@ CoreMcaIpIdInstanceIdInit (
+   VOID
+   )
+ {
+-  DEBUG ((EFI_D_ERROR, "[RAS] CoreMcaIpIdInstanceIdInit - Entry\n"));
++  DEBUG ((EFI_D_INFO, "[RAS] CoreMcaIpIdInstanceIdInit - Entry\n"));
+ 
+   // Execute on running APs
+   mMpServices->StartupAllAPs (
+@@ -882,7 +925,7 @@ CoreMcaIpIdInstanceIdInit (
+   // For BSP
+   ProgramCoreMcaIpIdInstanceId(NULL);
+ 
+-  DEBUG ((EFI_D_ERROR, "[RAS] CoreMcaIpIdInstanceIdInit - Exit\n"));
++  DEBUG ((EFI_D_INFO, "[RAS] CoreMcaIpIdInstanceIdInit - Exit\n"));
+ 
+   return;
+ }
+-- 
+2.47.0
+

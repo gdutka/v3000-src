@@ -1,0 +1,28 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: roberth <roberth@arista.com>
+Date: Thu, 15 Feb 2024 16:19:00 -0600
+Subject: [PATCH] Disable AutoPSB
+
+Disable automatic fuse-on-first-boot of the PSB fuses. Without this patch, any
+properly signed image automatically fuses by default. This is not currently
+desired, so disable this behavior.
+---
+ Board/AMD/FoxBoardPkg/Project.dsc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Board/AMD/FoxBoardPkg/Project.dsc b/Board/AMD/FoxBoardPkg/Project.dsc
+index 9d6fd757..7050b70f 100644
+--- a/Board/AMD/FoxBoardPkg/Project.dsc
++++ b/Board/AMD/FoxBoardPkg/Project.dsc
+@@ -331,7 +331,7 @@
+   gEfiMdePkgTokenSpaceGuid.PcdPort80DataWidth|32
+ 
+   gEfiAmdAgesaPkgTokenSpaceGuid.PcdPspDirUsing16MAddress|FALSE
+-  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAutoPsb|TRUE
++  gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdPspAutoPsb|FALSE
+ 
+   gEfiAmdAgesaPkgTokenSpaceGuid.PcdAmdIdsDebugPrintEnable|$(EFI_DEBUG)
+ 
+-- 
+2.41.0
+

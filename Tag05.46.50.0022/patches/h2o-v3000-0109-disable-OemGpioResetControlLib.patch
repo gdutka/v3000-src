@@ -1,0 +1,39 @@
+From be2ccf5ba6b377323e4715ad9b2fb08cc9f54be5 Mon Sep 17 00:00:00 2001
+From: Ravi Rama <rrama@arista.com>
+Date: Sun, 27 Apr 2025 11:13:18 -0700
+Subject: [PATCH] disable OemGpioResetControlLib
+
+---
+ AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/AmdCpmPkg.inc.dsc | 2 +-
+ AMD/AmdEmbedded/AmdCpmPkg/Package.dsc                        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/AmdCpmPkg.inc.dsc b/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/AmdCpmPkg.inc.dsc
+index 66c75435..ee751d8b 100644
+--- a/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/AmdCpmPkg.inc.dsc
++++ b/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/AmdCpmPkg.inc.dsc
+@@ -25,7 +25,7 @@
+   FchInitHookLibPei|AmdCpmPkg/Addendum/Oem/Fox/Library/FchInitHookLib/FchInitHookPeiLib.inf
+   AmdCalloutLib|AmdCpmPkg/Addendum/Oem/Fox/Library/AmdCalloutLib/AmdCalloutPeiLib.inf
+   AmdPbsConfigLib|AmdCpmPkg/Addendum/Oem/Fox/Library/AmdPbsConfigLib/AmdPbsConfigPeiLib.inf
+-  OemGpioResetControlLib|AmdCpmPkg/Addendum/Oem/Fox/Library/GpioResetControlLib/GpioResetControlLib.inf
++  OemGpioResetControlLib|AgesaPkg/Addendum/Nbio/OemGpioResetControlLibNull/OemGpioResetControlLibNull.inf
+   AodBaseLib|AmdCpmPkg/Features/AODv2/Library/AodBaseLib/AodBasePeiLib.inf
+ 
+ [LibraryClasses.common.DXE_DRIVER]
+diff --git a/AMD/AmdEmbedded/AmdCpmPkg/Package.dsc b/AMD/AmdEmbedded/AmdCpmPkg/Package.dsc
+index 98dc2e8a..9cc424d8 100644
+--- a/AMD/AmdEmbedded/AmdCpmPkg/Package.dsc
++++ b/AMD/AmdEmbedded/AmdCpmPkg/Package.dsc
+@@ -31,7 +31,7 @@
+   FchInitHookLibPei|AmdCpmPkg/Addendum/Oem/Fox/Library/FchInitHookLib/FchInitHookPeiLib.inf
+   AmdCalloutLib|AmdCpmPkg/Addendum/Oem/Fox/Library/AmdCalloutLib/AmdCalloutPeiLib.inf
+   AmdPbsConfigLib|AmdCpmPkg/Addendum/Oem/Fox/Library/AmdPbsConfigLib/AmdPbsConfigPeiLib.inf
+-  OemGpioResetControlLib|AmdCpmPkg/Addendum/Oem/Fox/Library/GpioResetControlLib/GpioResetControlLib.inf
++  OemGpioResetControlLib|AgesaPkg/Addendum/Nbio/OemGpioResetControlLibNull/OemGpioResetControlLibNull.inf
+   AodBaseLib|AmdCpmPkg/Features/AODv2/Library/AodBaseLib/AodBasePeiLib.inf
+ 
+ [LibraryClasses.common.DXE_DRIVER]
+-- 
+2.47.0
+

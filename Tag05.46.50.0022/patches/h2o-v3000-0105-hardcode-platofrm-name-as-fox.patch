@@ -1,0 +1,77 @@
+From 92c0424b8397414db4ff77b9fc2cf02f2a4afdbe Mon Sep 17 00:00:00 2001
+From: Ravi Rama <rrama@arista.com>
+Date: Wed, 16 Apr 2025 12:27:08 -0700
+Subject: [PATCH] hardcode platofrm name as fox
+
+---
+ .../Pei/AmdCpmManageabilityBoardPei.inf                     | 6 +++---
+ .../EmbeddedChipsetPkg/PlatformDxe/PlatformDxe.inf          | 2 +-
+ .../EmbeddedChipsetPkg/PlatformSmm/PlatformSmm.inf          | 2 +-
+ .../UefiSetupUtilityDxe/SetupUtilityDxe.inf                 | 2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmManageabilityBoard/Pei/AmdCpmManageabilityBoardPei.inf b/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmManageabilityBoard/Pei/AmdCpmManageabilityBoardPei.inf
+index 52ff262e..e1170dfe 100644
+--- a/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmManageabilityBoard/Pei/AmdCpmManageabilityBoardPei.inf
++++ b/AMD/AmdEmbedded/AmdCpmPkg/Addendum/Oem/Fox/Features/AmdCpmManageabilityBoard/Pei/AmdCpmManageabilityBoardPei.inf
+@@ -39,9 +39,9 @@
+   AgesaPkg/AgesaPkg.dec                                     # PcdCfgAzaliaEnable
+   AgesaModulePkg/AgesaCommonModulePkg.dec
+   AgesaModulePkg/AgesaModuleNbioPkg.dec                     # PcdCfgIgpuContorl
+-  AmdCpmPkg/Addendum/Oem/$(PLATFORM_NAME)/AmdCpmOemPkg.dec           # AmdPbsConfig.h
++  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec           # AmdPbsConfig.h
+   AgesaModulePkg/AgesaModuleFchPkg.dec                      # PcdXhci0Enable/PcdXhci1Enable/PcdSataEnable/PcdSataEnable2/FchRTDeviceEnableMap/PcdLpcEnable/PcdEspiEnable
+-  AmdCpmPkg/Addendum/Oem/$(PLATFORM_NAME)/AmdCpmOemPkg.dec
++  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+ 
+ [Pcd]
+   gAmdCpmPkgTokenSpaceGuid.EcRamBaseAddr
+@@ -49,4 +49,4 @@
+ [Depex]
+   gAmdCpmTablePpiGuid
+ 
+-[BuildOptions]
+\ No newline at end of file
++[BuildOptions]
+diff --git a/AMD/AmdEmbedded/EmbeddedChipsetPkg/PlatformDxe/PlatformDxe.inf b/AMD/AmdEmbedded/EmbeddedChipsetPkg/PlatformDxe/PlatformDxe.inf
+index ccd7d40c..8497fe5f 100644
+--- a/AMD/AmdEmbedded/EmbeddedChipsetPkg/PlatformDxe/PlatformDxe.inf
++++ b/AMD/AmdEmbedded/EmbeddedChipsetPkg/PlatformDxe/PlatformDxe.inf
+@@ -37,7 +37,7 @@
+   UefiCpuPkg/UefiCpuPkg.dec
+   AgesaModulePkg/AgesaCommonModulePkg.dec
+   AgesaModulePkg/AgesaModuleFchPkg.dec
+-  AmdCpmPkg/Addendum/Oem/$(PLATFORM_NAME)/AmdCpmOemPkg.dec
++  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+   AmdCpmPkg/AmdCpmPkg.dec
+   AgesaPkg/AgesaPkg.dec
+   AmdCbsPkg/AmdCbsPkg.dec
+diff --git a/AMD/AmdEmbedded/EmbeddedChipsetPkg/PlatformSmm/PlatformSmm.inf b/AMD/AmdEmbedded/EmbeddedChipsetPkg/PlatformSmm/PlatformSmm.inf
+index f6f4ad1e..c88d5fc2 100644
+--- a/AMD/AmdEmbedded/EmbeddedChipsetPkg/PlatformSmm/PlatformSmm.inf
++++ b/AMD/AmdEmbedded/EmbeddedChipsetPkg/PlatformSmm/PlatformSmm.inf
+@@ -38,7 +38,7 @@
+   AgesaPkg/AgesaPkg.dec
+   $(PROJECT_PKG)/Project.dec
+   AmdCpmPkg/AmdCpmPkg.dec
+-  AmdCpmPkg/Addendum/Oem/$(PLATFORM_NAME)/AmdCpmOemPkg.dec
++  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+   SmmSupervisorPkg/SmmSupervisorPkg.dec
+ 
+ [LibraryClasses]
+diff --git a/AMD/AmdEmbedded/EmbeddedChipsetPkg/UefiSetupUtilityDxe/SetupUtilityDxe.inf b/AMD/AmdEmbedded/EmbeddedChipsetPkg/UefiSetupUtilityDxe/SetupUtilityDxe.inf
+index b52ece7f..e9d18eed 100644
+--- a/AMD/AmdEmbedded/EmbeddedChipsetPkg/UefiSetupUtilityDxe/SetupUtilityDxe.inf
++++ b/AMD/AmdEmbedded/EmbeddedChipsetPkg/UefiSetupUtilityDxe/SetupUtilityDxe.inf
+@@ -62,7 +62,7 @@
+   $(CHIPSET_PKG)/$(CHIPSET_PKG).dec
+   $(PROJECT_PKG)/Project.dec
+   AmdCpmPkg/AmdCpmPkg.dec
+-  AmdCpmPkg/Addendum/Oem/$(PLATFORM_NAME)/AmdCpmOemPkg.dec
++  AmdCpmPkg/Addendum/Oem/Fox/AmdCpmOemPkg.dec
+   AmdCbsPkg/AmdCbsPkg.dec
+   AgesaModulePkg/AgesaModuleFchPkg.dec
+   AgesaModulePkg/AgesaCommonModulePkg.dec
+-- 
+2.47.0
+
